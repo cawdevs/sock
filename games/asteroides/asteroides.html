@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego en Canvas</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            background-color: white;
+            border: 1px solid black;
+        }
+    </style>
+     <style>
+              #canvas {
+               background: url('https://marclopezavila.github.io/planet-defense-game/img/space.jpg') no-repeat;
+              width: 100%;
+              height: 100%;
+              background-size: cover;
+              }
+
+              #canvas.playing {
+              cursor: url('https://marclopezavila.github.io/planet-defense-game/img/aim_red.png') 17.5 17.5,auto !important;
+              }
+         </style> 
+
+    <script src="asteroides.js"></script>
+</head>
+
+
+<body>
+    <canvas id="canvas"></canvas>
+
+</body>
+
+</html>

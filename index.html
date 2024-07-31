@@ -1,0 +1,3395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOCK PUPPETS</title>
+
+     <style>
+      html {
+           background: linear-gradient(45deg, lime,darkgreen);
+             }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(0deg, lime,darkgreen);
+        }
+   
+        .container {
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .boton-conectar {
+            background-color: silver;
+            color: black;
+            border: 2px solid silver;
+            border-radius: 20px;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display:inline-block;
+            margin-left: 40px;
+        }
+
+        .boton-conectar:hover {
+            background-color: lime;
+            border-color: lime;
+            display:inline-block;
+
+        }
+     
+    </style>
+
+     <style>
+.gallery_toolbar {
+  padding: 1rem;
+  display: flex;
+  grid-template-columns: repeat(20, 25vw);
+  grid-template-rows: 1fr;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  overflow: scroll;
+
+ 
+  scroll-snap-type: both mandatory;
+  scroll-padding: 1rem;
+
+  background-color: white;
+}
+
+.active {
+  scroll-snap-type: unset;
+}
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- Agrega el siguiente script para cargar la biblioteca desde un CDN -->
+<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+
+
+</head>
+
+
+<body>
+<script src="messageDirect.js"></script>
+<script src="stakingpool.js"></script>
+<script src="responses.js"></script>
+
+<br>
+ 
+ <center>  <div>
+    <img src="images/sock_logo.svg" alt="My svg_logo" width="45" class="img-circle" style="transform: rotate(0deg); display: inline-block; margin-left: 10px;border: 2px solid white;">
+   
+    <h3 style="display: inline-block; margin: 0; vertical-align: middle; margin-left: 10px;"><font color="white"><i> Sock Puppets </i></font> </h3>
+<i class="fa-brands fa-github" style="color: #FFD43B;"></i>
+
+     <a  href="whiteDocument.html" target="_blank" ><img src="images/icons/document_icon.SVG" alt="My svg_logo" width="25"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; "></a>
+
+    
+
+     <a href="https://github.com/cawdevs" target="_blank" rel="noopener noreferrer"> <img src="images/logoG.SVG" alt="My svg_logo" width="25"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">
+     </a>
+
+     <a href="https://x.com/puppets_token" target="_blank" rel="noopener noreferrer"> <img src="images/logoX.svg" alt="My svg_logo" width="25"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">
+     </a>
+
+      	
+    <button class="boton-conectar" id="btn-conectar" onclick="conectarMetaMask()" style="display: inline-block; margin-left: 20px;">Conect</button>
+
+
+
+
+
+
+ </div></center>
+
+
+    <center><div>   
+   <h5>
+    <div style="display:inline-block;" id= "addres-wallet"><font color="white"></font></div>
+
+
+    <div style="display:inline-block;" > </div>
+    <div style="display:inline-block;" > </div>
+
+    <a href="#" data-toggle="modal" data-target="#myModalQR"style="display:inline-block;" onclick="generarCodigoQR()"><font color="white"><span class="glyphicon glyphicon-qrcode"></span></font></a>
+
+  
+   <div style="display:inline-block;" > </div>
+   <div style="display:inline-block;" > </div>
+     <a href="#" style="display:inline-block;" id="btn-copy-key"><font color="white"><span class="glyphicon glyphicon-duplicate" onclick="myFunctionbtc()"></span></font></a>
+
+
+
+    <!-- <a class="btn btn-primary  btn-xs" role="button" onclick="myFunctionbtc()" onmouseout="outFuncbtc()" ><font color="white" size="5"> <span class="tooltiptext" id="myTooltipbtc">Copiar btc wallet</span></font></a>
+     -->    
+
+   </h5>
+ </div></center> 
+
+
+<br>
+
+<div class="container-fluid">
+<div class="row">
+
+   <div class="col-sm-1"> 
+   </div>
+          
+ <div class="col-sm-6">   
+
+<nav class="navbar navbar-inverse" role="navigation" style="border: 2px solid white; border-radius: 20px; background:black;">
+  <div class="container-fluid">
+     <div class="container-fluid">
+          
+          <div class="navbar-header">
+               <button type="button" class="navbar-toggle navbar-right" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+
+          
+  <a class="navbar-brand" style="display:inline-block; margin-bottom: 30px;">            
+   <img  id="image-perfil" src="images/sock_logo.svg" alt="My svg_logo" width="75" class="img-circle" style="border: 4px solid white; display:inline-block; margin-left: 5px;">
+   </a>
+  
+   <div class="navbar-brand">
+        <select id="selector_NFTs" class="form-control" placeholder="Username@CAW" style="border: 2px solid lime; border-radius: 10px; margin-left: 10px; font-size: 16px; height: auto;"></select>
+      
+   </div>    
+
+        <div class="navbar-brand">
+        <a href="#" data-toggle="modal" data-target="#myModal_publication"><font color="lime"><span class=" glyphicon glyphicon-plus-sign" style="font-size: 30px; vertical-align: middle; margin-left: 5px"></span></font></a> 
+       </div>
+       
+   </div>
+         
+       
+    <div class="collapse navbar-collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+         
+         <li><a href="#" data-toggle="modal" data-target="#myModal">NFT-Username</a></li>
+          <li><a id="profile-create" href="#" data-toggle="modal" data-target="#myModalprofile">Profile</a></li>
+          <!--<li><a href="#" id="btn-aprobar-contrato">Aprobar Contrato</a></li>-->
+    </ul>
+
+    
+
+</div>
+     </div>
+</nav>
+
+
+
+
+                  
+       <!--   
+       <div class="well" style="border: 2px solid lime; background: black; border-radius: 20px;">  -->
+                    <!--<div style="background: red; width:90px; height: 50px; display: inline-block; margin-top: 50px;"></div>  -->
+
+                    <h4> 
+                      <p style="display:inline-block;"><img src="images/icons/sock_coin.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; "></p>
+     <div style="display:inline-block;" id="saldo_CAW"><font color="lime"></font></div>
+
+     <div style="display:inline-block;" > </div>
+     <div style="display:inline-block;" > </div>
+     <p style="display:inline-block;"><img src="images/icons/matic_coin.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; "></p>
+     <div style="display:inline-block;" id="saldo_ETH"><font color="Magenta "></font></div>
+     <div style="display:inline-block;" > </div>
+     <div style="display:inline-block;" > </div>
+     <a href="#" style="display:inline-block;" id="btn-obtener-saldo"><font color="black"><span class="glyphicon glyphicon-refresh"></span></font></a>
+     <div style="display:inline-block;" > </div>
+
+          <button class="boton-conectar" id="btn-caw-free" onclick="tokensFree('CAW')" style="display: inline-block; margin-left: 10px;">Claim 1,500,000 SOCK FREE</button>      
+
+  
+ 
+
+     
+    </h4>
+
+
+
+
+ 
+
+<div class="container-fluid" style="background-color: lightgray; border: 2px solid lime; border-radius: 20px;">
+  
+ 
+  <ul class="gallery_toolbar">     
+     
+       <a data-toggle="tab" href="#home" style=" margin-left: 15px;">  <img  id="image-home" src="images/icons/home_icon.SVG" alt="home" width="45"></a> 
+       
+       <a data-toggle="tab" href="#menu1" style=" margin-left: 15px;">  <img  id="image-home" src="images/icons/profile_icon.SVG" alt="home" width="45"> </a>
+       
+       <a data-toggle="tab" href="#menu2" style=" margin-left: 15px;">  <img  id="image-cars" src="images/icons/publication_icon.SVG" alt="home" width="45"> </a>
+       
+       <a data-toggle="tab" href="#menu_mensaje" style=" margin-left: 15px;">  <img  id="image-food" src="images/icons/message_icon.SVG" alt="home" width="45"> </a>
+       
+       <a data-toggle="tab" href="#gomarkets" style=" margin-left: 15px;">  <img  id="image-market" src="images/icons/game_icon.SVG" alt="home" width="45"> </a>
+                          
+       <a data-toggle="tab" href="#mymarket" style=" margin-left: 15px;">  <img  id="image-mymarket" src="images/icons/gamefi_icon.SVG" alt="mymarket" width="45"> </a>
+
+       <a data-toggle="tab" href="#goservice" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/swapp_icon.SVG" alt="home" width="45"> </a>
+
+        <a data-toggle="tab" href="#goservice" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/staking_icon.SVG" alt="home" width="45"> </a>
+
+       <a data-toggle="tab" href="#goservice" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/config_icon.SVG" alt="home" width="45"> </a>
+       
+       
+</ul>
+ 
+
+
+ <style>
+  /* Estilos para los caracteres @ y # */
+span.atSymbol {
+    color: blue; /* Color azul para @ */
+}
+
+span.hashtag {
+    color: red; /* Color rojo para # */
+}
+
+/* Estilos para la imagen o el video */
+#mediaContent img,
+#mediaContent video {
+    max-width: 100%; /* Ajuste para el ancho */
+    height: auto;
+}
+</style>
+
+
+
+
+
+
+  <div class="tab-content" style="border: 2px solid lime; border-radius: 0px; background:white;">
+    
+
+
+
+    <div id="home" class="tab-pane fade in active" >
+         <div class="user-following-publication-container"  >
+           <br>
+            <br>
+             <br>
+              <br>
+               <br>
+
+
+         </div> 
+    
+
+    </div>
+<!--#################################################-->    
+
+
+
+
+
+    <div id="menu1" class="tab-pane fade">
+   <!--****************************************************-->
+                                <!--****************************************************-->
+  
+
+
+
+  <style>
+    /* Estilos CSS para el perfil */
+    .profile-container {
+    }
+    
+    .profile-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      position: relative;
+      left: 40px;
+      top: -20px;
+      border: 5px solid #fff;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .profile-cover {
+      width: 100%;
+      height: 200px;
+      
+    }
+    
+    .profile-name {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 0px;
+    }
+
+    .profile-acount {
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 10px;
+     }
+
+     .profile-username {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .profile-bio {
+      margin-bottom: 18px;
+    }
+    
+    .profile-location {
+      margin-bottom: 10px;
+    }
+    
+    .profile-website {
+      margin-bottom: 20px;
+    }
+
+    .profile-preferences {
+      margin-bottom: 20px;
+    }
+
+     .profile-update {
+      margin-bottom: 20px;
+    }
+  </style>
+
+                     <div class="profile-container" style= "display: none;">
+                           
+                             <div>
+                                <img class="profile-cover" src="" alt="Foto de portada">
+                                <img class="profile-photo" src="" alt="Foto de perfil">
+                             </div>                        
+
+
+
+                                <div class="profile-acount"></div>
+
+                                <div style="display:inline-block;" class="profile-name"></div>
+                                
+                                <div style="display:inline-block; margin-left: 20px;" class="profile-time"></div>
+                               
+                                 
+                                 <button style="display:inline-block;" class="profile-update" id="btn-load-profile"><font color="black"><span class="glyphicon glyphicon-pencil"></span></font></button>
+                                <div class="profile-username"></div>
+
+                                <div class="profile-bio"></div>
+                              
+                                <div style="display:inline-block;"><span class="glyphicon glyphicon-link" ></span></div>
+                                <div style="display:inline-block;" class="profile-location"></div>
+                                <div style="display:inline-block;" > </div>
+                                <div style="display:inline-block;" > </div>
+                                <div style="display:inline-block;"><span class="glyphicon glyphicon-globe"></span></div>
+                                <div style="display:inline-block;" class="profile-website"></div>
+                                <div class="profile-preferences"></div>
+                                <center>
+                                <div style="display:inline-block; margin-left: 20px;" class="following-count"></div>
+                                <div style="display:inline-block; margin-left: 20px;" class="follower-count"></div>
+                                </center>
+                                </div> 
+                                <!--****************************************************-->
+                                <!--****************************************************-->
+                         
+
+    </div>  
+
+
+
+
+    <div id="menu2" class="tab-pane fade">    
+        <div class="user-publication-container">
+
+          <br>
+            <br>
+              <br>  
+             <a href="games/asteroides/asteroides.html" target="_blank">Jugar Asteroides</a>
+             <br>
+          
+              <br>
+               <br>
+
+        </div> 
+    </div>
+    
+
+
+    <!--/////////////////////////////////////////////////////////////-->
+    <!--/////////////////////////////////////////////////////////////-->
+    <div id="menu_mensaje" class="tab-pane fade">
+      
+      <div class="container-fluid"> 
+          <h4><div id="nft-username-list-direct-message"></div></h4>   
+      </div>
+
+
+
+    </div>
+    <!--/////////////////////////////////////////////////////////////-->
+    <!--/////////////////////////////////////////////////////////////-->
+
+    <div id="menu_staking" class="tab-pane fade" style="display:none; ">
+       
+         <div class="container-fluid" style = "width:80%; align-items: center;">
+              
+          
+                <h4>Staking Pool</h4>   
+
+                 
+                  <div id="staking-container" style="display: flex; align-items: center;  justify-content: center;">
+                        <input type="text" id="mount-staking" class="form-control" placeholder="CAW Mount to staking" style="border: 2px solid black; border-radius: 20px; width: 200px; height: 40px; margin-right: 10px;">
+                            
+                       <button id="btn-staking" class="btn btn-default" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;" >
+                               Staking
+                      </button>                             
+                  </div> 
+                 
+                 <br>
+
+                            
+
+             <div class="container-fluid" style="border: 4px solid black; border-radius: 20px; width:80%;">
+                <div id ="user-amount-staked" style=" display:inline-block; margin-top: 10px; margin-bottom: 10px; font-size: 18px;"></div>
+                <div id ="user-last-claim-rewards" style=" display:inline-block; margin-bottom: 10px; font-size: 18px;"></div>
+                <div id ="user-total-rewards-earned" style=" display:inline-block; margin-bottom: 10px; font-size: 18px;"></div>             
+                 <button id="btn-claim-rewards" class="btn btn-default" text="hola" onclick="claim" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px; margin-bottom: 10px;">Claim rewards
+                 </button>  
+             </div>
+
+                  <br>
+              <div class="container-fluid" style="border: 4px solid black; border-radius: 20px; width:80%">
+                <div id ="total-staked" style=" display:inline-block; margin-top: 10px; margin-bottom: 10px; font-size: 18px;"></div>
+                <div id ="total-rewards" style=" display:inline-block; margin-bottom: 10px; font-size: 18px;"></div>               
+              </div>  
+         
+               <br>
+              
+
+
+              <div id="unstaking-container" style="display: flex; align-items: center;  justify-content: center;">
+              
+
+                    <input type="text" id="mount-unstaking" class="form-control" placeholder="CAW Amount to UNSTAKE" style="border: 2px solid black; border-radius: 20px; width: 200px; height: 40px; margin-right: 10px;">
+
+                    <button id="btn-unstaking" class="btn btn-default" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
+                      Unstaking
+                    </button>
+
+              </div>
+         
+
+
+
+         </div>
+          
+    </div> 
+
+    
+<!--/////////////////////////////////////////////////////////////-->
+    <!--/////////////////////////////////////////////////////////////-->
+    <div id="menu_NFTusername" class="tab-pane fade">
+      
+      <div class="container-fluid"> 
+          <br>
+          <h4><div id="NFT-market-place"></div></h4>  
+          
+          <center><h1><p>"Market place Soon.....!"</p></h1></center> 
+          <br>
+            <br>
+             <br>
+              <br>
+               <br>
+
+      </div>
+
+    </div>
+    <!--/////////////////////////////////////////////////////////////-->
+    <!--/////////////////////////////////////////////////////////////-->
+
+
+
+
+
+
+
+
+
+    
+
+  </div>
+</div>
+                    
+  
+     
+
+
+
+
+
+                </div>
+<br>
+
+            
+<style>
+.col-sm-4 {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 100vh; /* Establece la altura máxima del contenido pegajoso */
+    overflow-y: auto; /* Agrega un desplazamiento vertical si es necesario */
+    /* Otros estilos para la columna sm-3 */
+}
+
+</style>
+
+
+
+            <div class="col-sm-4">
+               
+                <div class="well" style="border: 2px solid lime; background: black; border-radius: 20px;">
+
+                     
+                          <div class="input-group">
+                            <input type="text" id="text-address-wallet" class="form-control" placeholder="Search 0x.. or NftUsername" style="border: 2px solid black; border-radius: 20px; width: 100%; height: 40px; margin-right: 10px;">
+                            <div class="input-group-btn">
+                              <button id="btn-find-nft" class="btn btn-default" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
+                                <span class="glyphicon glyphicon-search"></span>
+                              </button>                             
+                            </div>
+                          </div> 
+                           <br>
+
+
+
+
+                           <button id="btn-find-followin"  style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">Following</button> 
+
+                           <button id="btn-find-nft-for-you"  style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
+                                </span>For you. 
+                              </button> 
+
+                              <button id="btn-find-nft-for-you-rand"  style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
+                               For you rand. 
+                              </button> 
+
+                              <button id="btn-find-nft-for-you-last"   style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
+                                For you last. 
+                              </button>                              
+
+                        
+                       
+                           
+                           <br>
+                          <h4><div id="nft-username-list"></div></h4>
+
+                           <h4><div id="nft-username-list-for-you"></div></h4>
+                                                                 
+           
+                    
+                </div>     
+
+                   
+
+                  <div class="well" style="border: 2px solid lime;  border-radius: 20px;">
+                                             
+                                                 
+                           <div id="success-message"></div>
+                           <div id="error-message"></div>   
+                                         
+                </div>               
+
+
+
+            </div>
+
+            <div class="col-sm-1"> 
+            </div>
+
+            
+        </div>
+    </div>
+
+
+
+
+<!-- ############## ventana emergente Publicaciones ###########################-->
+<!-- #################################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+
+<div class="container">
+  
+  <!-- Modal -->
+  <div class="modal fade" id="myModal_publication" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+                    
+                   <div style="display: flex; align-items: center; justify-content: flex-start; ">
+         
+          <img id="image-perfil-publication" src="static/images/caw_logo_2.svg" alt="My svg_logo" width="60" class="img-circle" style="border: 4px solid white;">
+          <h3><p style="display:inline-block; margin-left: 20px;" id="nftUsername-publication"></p></h3> 
+     
+          
+          </div>
+        </div>
+        <div class="modal-body">
+         
+
+     <!--//////////////////////////////////////////////////////////////-->   
+      <!--//////////////////////////////////////////////////////////////-->  
+       <!--//////////////////////////////////////////////////////////////-->  
+                   <form>
+    <div class="form-group">
+      <textarea class="form-control" id="publicacion" rows="3" placeholder="¡¿What are you dreaming about?!" required style=" display:inline-block; border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 160px; font-size: 18px; "></textarea>
+    </div>
+
+
+   <div style="display: flex; align-items: center; ">
+    <div style="display: flex; align-items: center; justify-content: flex-start; ">
+        
+        <div style=" display:inline-block; margin-bottom: 10px;" class="form-group">
+            <select class="form-control" id="filter-privacidad" style="border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px;">
+                <option>*</option>
+                <option>+12</option>
+                <option>+18</option>
+            </select>
+        </div>
+
+        <button data-toggle="collapse" data-target="#demo" style="display:inline-block; margin-left: 20px;  margin-bottom: 10px; ">
+            <span class="glyphicon glyphicon-picture"></span>
+        </button>
+
+        <h4><font color="red"><p style="display:inline-block; margin-left: 30px;" id="char-count"></p></font></h4>
+    
+    </div>
+
+    <a href="#" style = " margin-left: auto;  margin-bottom: 10px;" id="btn-publication">
+        <img src="static/images/caw_enviar.svg" alt="Publicar CAW" width="75">
+    </a>
+
+
+</div>
+
+ 
+      <div id="demo" class="collapse">    
+           <input type="text" id="media-publication" placeholder=" Link to media publication" style="border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px;">
+      </div>
+ 
+       
+  </form>
+
+
+
+  <center>
+       
+       <div id="loadingAnimation-publication" style="display: none;">
+              <div class="spinner"></div>               
+       </div>
+
+   </center> 
+
+ <!--//////////////////////////////////////////////////////////////-->  
+  <!--//////////////////////////////////////////////////////////////-->  
+   <!--//////////////////////////////////////////////////////////////-->  
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+
+<!-- ############## ventana emergente RESPONSES ###########################-->
+<!-- #################################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<style>
+.spinner {
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #FFD700; /* Amarillo */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+
+
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal-responses" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">
+        <div class="modal-header">
+          <div class="profile-form">
+            
+
+          </div>
+        </div>
+        <div class="modal-body">
+         
+          <center>
+
+            <div id= "responses" > </div>
+
+                       
+          </center>
+
+
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+
+<!-- ############## ventana emergente Mintear NFTusernameCAW ###########################-->
+<!-- #################################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<style>
+.spinner {
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #FFD700; /* Amarillo */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+
+
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">
+        <div class="modal-header">
+          <div class="profile-form">
+            <center>
+              <h3>NFTUsername</h3>
+            </center>
+          </div>
+        </div>
+        <div class="modal-body">
+          <p id="mount-minteo"></p>
+          <center>
+
+          <div id="loadingAnimation-mint" style="display: none;">
+            <div class="spinner"></div>              
+          </div>
+
+            <h3><font color="darkgreen"><p id="Minted_username"></p></font></h3>
+            <h4><font color="darkred"><p id="Error_Minted_username"></p></font></h4>
+
+            <input type="text" id="text-mintear-nft" placeholder=" username " required required style="border: 2px solid black; border-radius: 20px; width: 75%; margin-bottom: 10px; height: 40px;  font-size: 24px;"/> 
+            <br>           
+
+            <button id="btn-verify-nft" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">check username before</button>
+
+            <button id="btn-mintear-nft" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px; display:none;">Mint NFT Username</button>
+          </center>
+
+
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+
+<!-- ############## ventana emergente crear un perfil ###########################-->
+<!-- #################################################################################-->
+<div class="container" > 
+  <!-- Modal -->
+  <div class="modal fade" id="myModalprofile" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     
+        <div class="modal-body">    
+        
+         <div class="profile-form">
+           <center> <h2><font color="black ">User Profile</h2></font> </center>     
+
+           <center>
+    <div style="width: 80%;">
+        <input type="text" id="nombre" placeholder=" Nombre" required style="border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px;">                      
+        <textarea id="bio" placeholder=" Biografía" required style="border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 120px;"></textarea>
+        <input type="text" id="ubicacion" placeholder=" Ubicación" style="border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px;">
+        <input type="text" id="pagina-web" placeholder=" Página Web" style="border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px;">
+        <input type="text" id="foto-perfil" placeholder=" Link to profile picture" style="border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px;">
+        <input type="text" id="foto-portada" placeholder=" Link to cover picture" style="border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px;">
+    </div>
+</center>
+             
+               <br>  
+
+ <center><div style="display: flex; width: 80%;">
+    <select id="selector_key1" class="form-control" placeholder="select key" style="border: 2px solid black; border-radius: 20px;"></select>
+    <select id="selector_key2" class="form-control" placeholder="select key" style="border: 2px solid black; border-radius: 20px;"></select>
+    <select id="selector_key3" class="form-control" placeholder="select key" style="border: 2px solid black; border-radius: 20px;"></select>    
+</div></center>
+
+<center> <div style="display: flex; width: 80%;">
+   
+    <select id="selector_key4" class="form-control" placeholder="select key" style="border: 2px solid black; border-radius: 20px;"></select>
+    <select id="selector_key5" class="form-control" placeholder="select key" style="border: 2px solid black; border-radius: 20px;"></select>
+</div></center>
+
+<br>
+
+
+<center>
+       
+       <div id="loadingAnimation-profile" style="display: none;">
+              <div class="spinner"></div>               
+       </div>
+
+   </center> 
+
+
+
+               <br> 
+          <center>      
+              <button id="btn-create-profile" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;"> Guardar Perfil </button>
+<button id="btn-update-profile" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;"> Editar Perfil </button>
+          </center> 
+
+       </div>
+
+        </div>
+       
+                      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>      
+    </div>
+  </div>  
+</div>
+
+<!-- ############## ventana emergente recibir tokesn ###########################-->
+<!-- #################################################################################-->
+<div class="container"> 
+  <!-- Modal -->
+ <!-- Modal -->
+<div class="modal fade" id="myModalQR" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <center><h5><a href="/pagina_principal/0/"><font color="black"> My Public Address   </a></font></h5></center>
+         <center><div id="addres-wallet-QR"></div></center>
+
+       
+      </div>
+      <!--<div class="modal-body">       
+      </div>-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+
+<!-- ############## ventana emergente mensajes directos ###########################-->
+<!-- #################################################################################-->
+
+
+<style>
+    #conversation {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 300px;
+      overflow-y: scroll;
+    }
+
+    #messageInput {
+      margin-top: 10px;
+    }
+  </style>
+
+
+
+
+<div class="container"> 
+  <!-- Modal -->
+ <!-- Modal -->
+<div class="modal fade" id="myModal-msg-direct" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+
+    <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      
+
+<style>
+ 
+.left-section {
+    text-align: left;
+} 
+.right-section {
+    text-align: right;
+} 
+</style>
+
+
+<center>
+ <div class="container-fluid">
+
+
+    <div class="left-section" style="display:inline-block; ">
+        <img id="profile-photo-sender" src="" width="60" class="img-circle" style="border: 4px solid white;">
+        <div id="NFTsender-direct-message"></div>
+    </div>
+
+    <div class="right-section" style="display:inline-block; margin-left: 60px;">
+        <img id="profile-photo-reciever" src="" width="60" class="img-circle" style="border: 4px solid white;">
+        <div id="NFTreceiver-direct-message"></div>
+    </div>
+</div>
+
+</center>
+
+ 
+<br>
+  <div class="container-fluid">
+ 
+ <center>
+  
+<!--
+  <a href="#"  data-toggle="collapse" data-target="#demo2"style="display:inline-block; margin-left: 0px;"><font color="black">ETH <span class="glyphicon glyphicon-arrow-right"></span></font></a>
+
+  <div style="display:inline-block; margin-left: 50px;" > </div>
+  <div style="display:inline-block; margin-left: 50px;" > </div>
+    <div style="display:inline-block; margin-left: 50px;" > </div>
+  <div style="display:inline-block; margin-left: 50px;" > </div>
+  <div style="display:inline-block; margin-left: 50px;" > </div>
+ 
+  
+  <a href="#"  data-toggle="collapse" data-target="#demo3" style="display:inline-block; margin-left: 30px;"><font color="black">CAW <span class="glyphicon glyphicon-arrow-right"></span></font></a>
+  
+
+
+  <div id="demo2" class="collapse" >
+                          
+
+
+                          <div class="input-group" style="margin-top: 10px; margin-bottom: 10px; width: 90%;">
+                            <input type="text" id="text-mount-ETH-send" class="form-control" placeholder="ETH mount to send" style="border: 2px solid black; border-radius: 20px; width: 80%; height: 40px; ">
+                           
+                            <div class="input-group-btn">
+                              <button id="btn-send-ETH" class="btn btn-default"  style="background-color: black; color: white; border: 2px solid gold; border-radius: 20px; height: 40px;">
+                                <span class="glyphicon glyphicon-send"></span>
+                              </button>                             
+                            </div>                          
+
+                           </div> 
+                           
+                           
+  
+  <div id="demo3" class="collapse">
+
+                         <div class="input-group" style=" margin-top: 10px; margin-bottom: 10px; width: 90%;">
+                            <input type="text" id="text-mount-CAW-send" class="form-control" placeholder="CAW mount to send" style="border: 2px solid black; border-radius: 20px; width: 80%; height: 40px; ">
+                            <div class="input-group-btn">
+                              <button id="btn-send-CAW" class="btn btn-default" style="background-color: black; color: white; border: 2px solid gold; border-radius: 20px; height: 40px;">
+                                <span class="glyphicon glyphicon-send"></span>
+                              </button>                             
+                            </div>
+                          </div> 
+
+  </div>
+-->
+
+
+</center>
+</div>
+
+
+<center><div id="conversation" style="background-color: black; width: 90%; border: 2px solid black; border-radius: 20px; height: 400px;"></div></center>
+
+
+<center>
+ <div class="input-group" style=" margin-top: 10px; margin-bottom: 10px; width: 90%;">
+
+                           <input type="text" id="messageInput" class="form-control" placeholder="Direct Message" style="border: 2px solid black; border-radius: 20px; width: 80%; height: 40px; ">
+                            <div class="input-group-btn">
+                              <button class="btn btn-default" onclick="enviarMensaje()" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
+                                <span class="glyphicon glyphicon-send"></span>
+                              </button>                             
+                            </div>
+                          </div> 
+</center>
+   
+
+      <!--<div class="modal-body">       
+      </div>-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- #####################################################################-->
+<!-- #####################################################################-->
+
+        <!-- Puedes agregar más elementos según sea necesario -->
+  
+   
+<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+
+<script>
+    // Definir las palabras clave
+    const palabrasClave = ['Tecnología', 'Arte', 'Ciencia', 'Deportes', 'Música'];
+
+    // Función para llenar los selects
+    function llenarSelects() {
+      for (let i = 1; i <= 5; i++) {
+        // Obtener el select actual
+        const select = document.getElementById(`selector_key${i}`);
+
+        // Limpiar cualquier opción existente
+        select.innerHTML = '';
+
+        // Agregar las opciones
+        palabrasClave.forEach(palabra => {
+          const opcion = document.createElement('option');
+          opcion.value = palabra;
+          opcion.text = palabra;
+          select.add(opcion);
+        });
+      }
+    }
+
+    // Llenar los selects al cargar la página
+    llenarSelects();
+  </script>
+
+
+<script>  
+
+
+
+          const CAW_tokenABI =[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"spender","type":"address"},{"name":"owner","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"contractAddress","type":"address"}],"name":"authorizeContract","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"},{"name":"user","type":"address"}],"name":"burn","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"spender","type":"address"},{"name":"value","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"amount","type":"uint256"}],"name":"approveCAWTransfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"revokeAuthorization","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"contractAddress","type":"address"}],"name":"authorizeContract","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"amount","type":"uint256"}],"name":"approveCAWTransfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"contractAddress","type":"address"}],"name":"onlyAuthorizedContract","outputs":[],"payable":false,"stateMutability":"view","type":"function"}]
+
+const tokenContractAddress = '0x8f78976a0fdf8f66ad81bb7d7c9b8d4a695022e3';//Sock -polygon  
+
+
+
+
+const NFT_ContractABI=[{"constant":true,"inputs":[{"name":"user","type":"address"}],"name":"getCawBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"}],"name":"isMinted","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"},{"name":"nftUsername","type":"string"},{"name":"caller","type":"address"}],"name":"isNFTOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"walletAddress","type":"address"}],"name":"getMintedUsernames","outputs":[{"name":"","type":"string[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"}],"name":"getNFTOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"username","type":"string"}],"name":"validateUsername","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[{"name":"username","type":"string"}],"name":"getMintingCost","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":false,"inputs":[{"name":"username","type":"string"}],"name":"mintNFT","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"username","type":"string"}],"name":"transferNFT","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"username","type":"string"},{"name":"price","type":"uint256"}],"name":"sellNFT","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"username","type":"string"}],"name":"cancelNFTSale","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"username","type":"string"}],"name":"buyNFT","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"user","type":"address"}],"name":"getEtherBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"walletAddress","type":"address"}],"name":"getNFTUsername","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"username","type":"string"}],"name":"getHashFromUsername","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"}],"name":"getUsernameFromHash","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"startIndex","type":"uint256"},{"name":"endIndex","type":"uint256"}],"name":"getUsernamesInRange","outputs":[{"name":"","type":"string[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenId","type":"uint256"}],"name":"getUsernameByTokenId","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTotalMintedNFTs","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"username","type":"string"}],"name":"isNFTForSale","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getNftIsForSaleCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenId","type":"uint256"}],"name":"getNFTInfoById","outputs":[{"components":[{"name":"tokenId","type":"uint256"},{"name":"username","type":"string"},{"name":"isMinted","type":"bool"},{"name":"isForSale","type":"bool"},{"name":"price","type":"uint256"},{"name":"usernameHash","type":"bytes32"},{"name":"timestamp","type":"uint256"}],"name":"","type":"tuple"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"username","type":"string"}],"name":"getNFTInfoByUsername","outputs":[{"components":[{"name":"tokenId","type":"uint256"},{"name":"username","type":"string"},{"name":"isMinted","type":"bool"},{"name":"isForSale","type":"bool"},{"name":"price","type":"uint256"},{"name":"usernameHash","type":"bytes32"},{"name":"timestamp","type":"uint256"}],"name":"","type":"tuple"}],"payable":false,"stateMutability":"view","type":"function"}];
+
+
+
+const nftContractAddress = '0xc9c20fb801af6940b35f0d12cc489da2cdc647d1';//polygon  
+
+
+
+
+const Transfer_ContractABI=[{"constant":false,"inputs":[{"name":"senderNFTUsername","type":"string"},{"name":"receiverNFTUsername","type":"string"},{"name":"userTimestamp","type":"uint256"},{"name":"signatureToUser","type":"bytes32"},{"name":"typeAction","type":"string"}],"name":"actionTransfer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"nftUsername","type":"string"}],"name":"checkNFTOwnership","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"cawTokenAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"cawContractStaking","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"nftContractAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"}],"name":"isNFTMinted","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getNFTUsername","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"cawTokenAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"user","type":"address"}],"name":"getCawBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}];
+
+const transferContractAddress = '0x9582dacf43aa2bf143ac909faa5a718cbca92333';//polygon
+
+
+
+
+
+const Profile_ContractABI = [{"constant":false,"inputs":[{"name":"username","type":"string"},{"name":"profileJson","type":"string"}],"name":"createProfile","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"follower","type":"string"},{"name":"following","type":"string"},{"name":"userTimestamp","type":"uint256"},{"name":"signatureToUser","type":"bytes32"}],"name":"follow","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"nftusername","type":"string"}],"name":"getFollowing","outputs":[{"name":"","type":"string[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"follower","type":"string"},{"name":"following","type":"string"}],"name":"unfollow","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"nftusername","type":"string"}],"name":"getProfile","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"follower","type":"string"},{"name":"following","type":"string"}],"name":"isFollowing","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProfileCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"follower","type":"string"},{"name":"following","type":"string"}],"name":"getFollowingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftusername","type":"string"}],"name":"getFollowingCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftusername","type":"string"}],"name":"getProfileTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftusername","type":"string"}],"name":"getFollowerCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"startIndex","type":"uint256"},{"name":"endIndex","type":"uint256"}],"name":"getProfilesInRange","outputs":[{"name":"","type":"tuple[]","components":[{"name":"id","type":"uint256"},{"name":"name","type":"string"},{"name":"age","type":"uint256"}]}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"username","type":"string"},{"name":"profileJson","type":"string"}],"name":"updateProfile","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}];
+
+
+
+
+
+const profileContractAddress = '0xa569895d95Eec6F96939c4988e9f0E0e095BbB70'; //polygon
+
+
+
+
+const Publisher_ContractABI=[{"constant":false,"inputs":[{"name":"senderNFTUsername","type":"string"},{"name":"userTimestamp","type":"uint256"},{"name":"signatureToUser","type":"bytes32"},{"name":"content","type":"string"},{"name":"jsonMetadata","type":"string"},{"name":"publicationType","type":"uint8"},{"name":"parentPublicationId","type":"uint256"}],"name":"createPublication","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"nftUsername","type":"string"},{"name":"id","type":"uint256"}],"name":"deletePublication","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"senderNFTUsername","type":"string"},{"name":"receiverNFTUsername","type":"string"},{"name":"userTimestamp","type":"uint256"},{"name":"signatureToUser","type":"bytes32"},{"name":"id","type":"uint256"}],"name":"addReaction","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"senderNFTUsername","type":"string"},{"name":"receiverNFTUsername","type":"string"},{"name":"userTimestamp","type":"uint256"},{"name":"signatureToUser","type":"bytes32"},{"name":"id","type":"uint256"}],"name":"sharePublication","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"}],"name":"getPublicationCounts","outputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"publicationId","type":"uint256"}],"name":"getLikesCountByPublication","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"publicationId","type":"uint256"}],"name":"getSharesCountByPublication","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"},{"name":"id","type":"uint256"}],"name":"getUserPublication","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTotalPublications","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"}],"name":"getUserTotalPublicationsCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"},{"name":"id","type":"uint256"}],"name":"getSmartUserPublication","outputs":[{"name":"","type":"tuple","components":[{"name":"id","type":"uint256"},{"name":"content","type":"string"},{"name":"jsonMetadata","type":"string"},{"name":"nftUsername","type":"string"},{"name":"publicationType","type":"tuple","components":[{"name":"0","type":"uint8"}]},{"name":"parentPublicationId","type":"uint256"},{"name":"timestamp","type":"uint256"}],"internalType":"struct CawPublisher.Publication[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"},{"name":"id","type":"uint256"}],"name":"getUserMainPost","outputs":[{"name":"","type":"tuple","components":[{"name":"id","type":"uint256"},{"name":"content","type":"string"},{"name":"jsonMetadata","type":"string"},{"name":"nftUsername","type":"string"},{"name":"publicationType","type":"uint8"},{"name":"parentPublicationId","type":"uint256"},{"name":"timestamp","type":"uint256"}]}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"},{"name":"publicationId","type":"uint256"}],"name":"getUserShareStatusByPublication","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"},{"name":"publicationId","type":"uint256"}],"name":"getUserLikeStatusByPublication","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"publicationId","type":"uint256"}],"name":"getCommentCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"publicationId","type":"uint256"}],"name":"getResponsesToPublication","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"},{"name":"publicationId","type":"uint256"}],"name":"getUserCommentStatusByPublication","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"senderNFTUsername","type":"string"},{"name":"content","type":"string"},{"name":"jsonMetadata","type":"string"},{"name":"parentPublicationId","type":"uint256"}],"name":"createPublicationResponse","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"publicationIndex","type":"uint256"}],"name":"getIndexPublication","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"uint8"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}];
+
+
+//0x54cdc95d8e45b9bde89556ded5fa38a5856a253c
+const publisherContractAddress = '0xA9233F5a7e5b5503EE0E2C98050C138Ae9408bF9';//polygon
+
+
+
+
+
+
+const DirectMessage_ContractABI=[{"constant":false,"inputs":[{"name":"senderNFTHash","type":"bytes32"},{"name":"receiverNFTHash","type":"bytes32"},{"name":"encryptedMessage","type":"bytes"},{"name":"jsonMetadataEncrypted","type":"string"},{"name":"signature","type":"bytes32"}],"name":"sendDirectMessage","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"senderNFTHash","type":"bytes32"},{"name":"receiverNFTHash","type":"bytes32"},{"name":"messageId","type":"uint256"}],"name":"markMessageAsDeleted","outputs":[],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"senderNFTHash","type":"bytes32"},{"name":"receiverNFTHash","type":"bytes32"},{"name":"messageId","type":"uint256"}],"name":"markMessageAsNotDeleted","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"senderNFTHash","type":"bytes32"},{"name":"receiverNFTHash","type":"bytes32"},{"name":"messageId","type":"uint256"}],"name":"undeleteAllSenderMessages","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"senderNFTHash","type":"bytes32"},{"name":"receiverNFTHash","type":"bytes32"},{"name":"messageId","type":"uint256"}],"name":"markMessageAsDeleted","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"senderNFTHash","type":"bytes32"},{"name":"receiverNFTHash","type":"bytes32"}],"name":"getConversation","outputs":[{"name":"","type":"bytes[][]"},{"name":"","type":"bytes[][]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"senderNFTHash","type":"bytes32"},{"name":"receiverNFTHash","type":"bytes32"}],"name":"deleteAllSenderMessages","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"senderNFTHash","type":"bytes32"},{"name":"receiverNFTHash","type":"bytes32"},{"name":"messageId","type":"uint256"}],"name":"markMessageAsNotDeleted","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"senderNFTHash","type":"bytes32"},{"name":"receiverNFTHash","type":"bytes32"}],"name":"deleteAllSenderMessages","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"senderNFTHash","type":"bytes32"},{"name":"receiverNFTHash","type":"bytes32"},{"name":"messageId","type":"uint256"}],"name":"undeleteAllSenderMessages","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"}],"name":"checkNFTOwnership","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"}],"name":"isNFTMinted","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"walletAddress","type":"address"}],"name":"getNFTUsername","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"signer","type":"address"},{"name":"message","type":"bytes"},{"name":"signature","type":"bytes32"}],"name":"verifySignature","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"pure","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"senderNFTHash","type":"bytes32"},{"indexed":true,"name":"receiverNFTHash","type":"bytes32"}],"name":"DirectMessageSent","type":"event"}];
+
+  
+  
+const directMessageContractAddress = '0x721ae299de508da89b4f68e28098ff60fde98065'; //polygon
+  
+    
+      
+const StakingPool_ContractABI = [{"constant":true,"inputs":[],"name":"getTotalStaked","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTotalRewards","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"stakers","outputs":[{"name":"amountStaked","type":"uint256"},{"name":"lastClaimTimestamp","type":"uint256"},{"name":"totalRewardsEarned","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"stake","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"unstake","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"claimRewards","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"staker","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Staked","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"staker","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Unstaked","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"staker","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"RewardsClaimed","type":"event"},{"constant":true,"inputs":[{"name":"stakerAddress","type":"address"}],"name":"calculatePendingRewards","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"stakerAddress","type":"address"}],"name":"getStaker","outputs":[{"name":"amountStaked","type":"uint256"},{"name":"lastClaimTimestamp","type":"uint256"},{"name":"totalRewardsEarned","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]; 
+
+
+const stakingPoolContractAddress = '0xC6284bBEA6E993Ccf60add9DB1F7AEC644f9aCEa';    //polygon  
+
+FreeTokens_ContractABI = [{"constant":false,"inputs":[],"name":"conectar","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"requestTokensCaw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"constant":false,"inputs":[],"name":"receiveTokensCaw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"obtenerSaldoEtherContrato","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"obtenerSaldoCawContrato","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_receiver","type":"address payable"}],"name":"sendEtherToAddress","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}];
+
+
+const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';//polygon  
+
+
+
+
+          const web3 = new Web3(window.ethereum);     
+          const tokenContract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
+           
+           showSuccess('The development will not stop! The team is working on the development of the CAW protocol also in a FrontEnd (html, CSS, Js).');
+            
+
+
+
+
+          // Función para conectar con MetaMask
+          async function conectarMetaMask() {
+            if (typeof window.ethereum === 'undefined') {
+              showError('MetaMask no está instalado. Por favor, instala MetaMask.');
+              return;
+            }
+
+            try {
+              
+
+              await window.ethereum.enable();// esta linea va
+              // Crear una instancia de web3 con MetaMask como proveedor
+
+
+               //////////////////////////////////////////////////////////////////////
+               // Solicitar la cuenta del usuario
+        		//await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+        		// Definir los parámetros de la red de Polygon (Matic)
+       // 		const polygonNetwork = {
+       //     		chainId: '0x89', // ID de cadena en hexadecimal (137 en decimal)
+       //     		chainName: 'Polygon Mainnet',
+       //     		nativeCurrency: {
+       //         		name: 'MATIC',
+       //         		symbol: 'MATIC',
+       //         		decimals: 18
+       //     		},
+       //     		rpcUrls: ['https://rpc-mainnet.maticvigil.com/'],
+       //     		blockExplorerUrls: ['https://polygonscan.com/']
+       // 		};
+
+        		// Intentar agregar la red de Polygon a MetaMask
+       // 		await window.ethereum.request({
+       //    		method: 'wallet_addEthereumChain',
+       //     		params: [polygonNetwork]
+       // 		});
+
+                ////////////////////////////////////////////////////////////////
+
+
+
+              const web3 = new Web3(window.ethereum);
+              const accounts = await web3.eth.getAccounts();
+              const myAddress = accounts[0];
+
+              showSuccess('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
+
+              // Obtener el saldo automáticamente al conectarse
+              obtenerSaldo();
+              //obtienen los nft minteados
+              getmintedNFT();
+
+              
+
+
+             const btnCreatePublication = document.getElementById('btn-publication');
+             btnCreatePublication.addEventListener('click',() => createActionPublication("",0,"publication"));
+
+                            
+              const btnStakinpool = document.getElementById('btn-staking');
+              btnStakinpool.addEventListener('click',() => stake_unstake(0));
+
+              const btnUnstakinpool = document.getElementById('btn-unstaking');
+              btnUnstakinpool.addEventListener('click',() => stake_unstake(1));
+
+              // Otros botones y acciones
+              const btnObtenerSaldo = document.getElementById('btn-obtener-saldo');
+              btnObtenerSaldo.addEventListener('click', obtenerSaldo);
+
+     //const btnAprobarContrato = document.getElementById('btn-aprobar-contrato');
+     //btnAprobarContrato.addEventListener('click', aprobarContrato);
+
+              const btnMintearNFT = document.getElementById('btn-mintear-nft');
+              btnMintearNFT.addEventListener('click', mintearNFT);
+
+              const btnVerifyMintearNFT = document.getElementById('btn-verify-nft');
+             btnVerifyMintearNFT.addEventListener('click', verifymintearNFT);
+
+              //const btngetNFT = document.getElementById('btn-get-nft');
+              //btngetNFT.addEventListener('click', getmintedNFT);
+
+              ///////////////////////profile user//////////////////////////////////
+              const btnCreateProfile = document.getElementById('btn-create-profile');
+              btnCreateProfile.addEventListener('click', () => createProfile(0));
+
+              
+              const btnLoadProfile = document.getElementById('btn-load-profile');
+              btnLoadProfile.addEventListener('click', loadProfile);
+
+              
+              //const btnUpdateProfile = document.getElementById('btn-update-profile');
+              //btnUpdateProfile.addEventListener('click', createProfile);
+
+              const btnUpdateProfile = document.getElementById('btn-update-profile');
+              btnUpdateProfile.addEventListener('click', () => createProfile(1));
+
+              const btnFindfollowin = document.getElementById('btn-find-followin');
+              btnFindfollowin.addEventListener('click', () => findNftWallet("following"));
+
+              const btnFindNftWallet = document.getElementById('btn-find-nft');
+              btnFindNftWallet.addEventListener('click', () => findNftWallet("user"));
+
+              const btnFindNftForYou = document.getElementById('btn-find-nft-for-you');
+              btnFindNftForYou.addEventListener('click', () => findNftWallet("foryou"));
+
+              const btnFindNftForYouRand = document.getElementById('btn-find-nft-for-you-rand');
+              btnFindNftForYouRand.addEventListener('click', () => findNftWallet("foryourand"));
+
+              const btnFindNftForYouLast = document.getElementById('btn-find-nft-for-you-last');
+              btnFindNftForYouLast.addEventListener('click', () => findNftWallet("foryoulast"));
+               
+              
+              //const btnSendETHWallet = document.getElementById('btn-send-ETH');
+              //btnSendETHWallet.addEventListener('click', sendDirectETHtowallet ); 
+
+
+
+              //const btngetProfile = document.getElementById('btn-get-profile');
+              //btnEditProfile.addEventListener('click', getProfile);
+             
+              ////////////////////////////////////////////////////////////////////////////
+              
+              //const btnFindNftForYou = document.getElementById('btn-find-nft-for-you');
+              //btnFindNftForYou.addEventListener('click', findNftForYou);
+             
+            
+
+
+              // ...
+            } catch (error) {
+              showError('Hubo un error al conectar con MetaMask1: ' + error.message);
+            }
+          }
+
+
+
+
+          // Función para obtener el saldo del token
+          async function obtenerSaldo() {
+            // Obtener la dirección de la cuenta conectada
+            const accounts = await web3.eth.getAccounts();
+            const myAddress = accounts[0];
+            //alert('Conectado con éxito a MetaMask.' + myAddress);
+
+
+            //obtiene el saldo en ether de la cuenta
+            // Obtener el saldo en Wei (la unidad más pequeña de Ethereum)
+            const balanceWei = await web3.eth.getBalance(myAddress);
+            // Convertir el saldo de Wei a Ether
+            const balanceEther = web3.utils.fromWei(balanceWei, 'ether');
+            // Truncar los últimos decimales (dejar solo dos decimales, por ejemplo)
+            const truncatedBalanceEther = parseFloat(balanceEther).toFixed(6);
+            // Mostrar el saldo en la página web
+            const saldoElementETH = document.getElementById('saldo_ETH');
+            saldoElementETH.innerText = truncatedBalanceEther;
+            saldoElementETH.style.color = 'Magenta';
+      
+
+            // Crear una instancia del contrato del token
+            const tokenContract = new web3.eth.Contract(CAW_tokenABI,tokenContractAddress);
+            // Obtener el saldo del token para la dirección de la cuenta conectada
+            const accountBalance = await tokenContract.methods.balanceOf(myAddress).call();
+            // Convertir el saldo a una cadena
+            const balanceString = accountBalance.toString();
+            // Obtener los primeros dígitos (de 0 a longitud - 18)
+            const truncatedBalance = balanceString.slice(0, -18);
+            // Mostrar el saldo en la página web
+            const saldoElement = document.getElementById('saldo_CAW');
+            saldoElement.innerText = truncatedBalance;
+            saldoElement.style.color = 'lime';
+      
+            
+            const addres_walletElement = document.getElementById('addres-wallet');
+            addres_walletElement.innerText = '' + myAddress;  // Puedes personalizar el valor
+            addres_walletElement.style.color = 'white';
+            
+            
+          }
+
+
+           // Función para aprobar un contrato
+          async function aprobarContrato() {
+            // Obtener la dirección de la cuenta conectada
+            const accounts = await web3.eth.getAccounts();
+            const myAddress = accounts[0];
+            //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
+
+            const contract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
+
+            try {
+              //await contract.methods.authorizeContract(nftContractAddress).send({ from: myAddress });
+  await contract.methods.authorizeContract(nftContractAddress).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+
+              //alert('Contrato aprobado exitosamente:');
+              console.log('Contrato aprobado exitosamente.');
+            } catch (error) {
+              //alert('Error al aprobar el contrato');
+              console.error('Error al aprobar el contrato:', error);
+            }
+           
+          }
+
+
+
+          // Función para mintear un NFT
+          async function mintearNFT() {
+
+            const loadingAnimation = document.getElementById('loadingAnimation-mint');
+            loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la función
+
+            // Obtener la dirección de la cuenta conectada
+            const accounts = await web3.eth.getAccounts();
+            const myAddress = accounts[0];
+            //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
+            
+            const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+            // Mintear el NFT
+            const nftusername = document.getElementById('text-mintear-nft').value;
+            // ...
+            try {
+              await contract.methods.mintNFT(nftusername).send({from: myAddress, gas: 400000, gasPrice: web3.utils.toWei('50', 'gwei') });
+              //alert('NFT Minteado exitosamente:');
+              loadingAnimation.style.display = 'none'; // Oculta la animación
+              $('#myModal').modal('hide'); 
+
+              getProfile(); 
+
+                // Mostrar mensaje de éxito
+              showSuccess('NFT minteado correctamente.');
+            } catch (error) {
+
+                  loadingAnimation.style.display = 'none'; // Oculta la animación
+                 
+                  if (error.message.includes("Invalid username")) {
+                    showSuccess('Invalid username.');
+                  }else if (error.message.includes("Invalid username")){
+                    showSuccess('Invalid username.'); 
+                  }else if (error.message.includes("Insufficient Sock balance")){
+                    showSuccess('Insufficient CAW balance.');
+                  }else  {
+                    //alert('Error al mintear el NFT');
+                    console.error('Error al mintear el NFT:', error);
+
+                  }                  
+
+              
+            }
+
+          
+          }
+
+
+          // Función para mintear un NFT
+          async function getmintedNFT() {
+            // Obtener la dirección de la cuenta conectada
+            const accounts = await web3.eth.getAccounts();
+            const myAddress = accounts[0];
+            //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
+            
+            const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+            // Mintear el NFT
+            // ...
+            
+
+            try {
+              const list_username = await contract.methods.getMintedUsernames(myAddress).call();  
+
+              
+              const selector = document.getElementById('selector_NFTs');
+              // Limpiar las opciones existentes
+              selector.innerHTML = '';
+              // Agregar las opciones de NFTs
+              for (const nft of list_username) {
+                const option = document.createElement('option');
+                option.text = nft;
+                selector.add(option);
+              }
+
+              getProfile();
+             
+              
+              showSuccess('List NFT username OK!.');
+ //             console.log('Funcion list NFTs OK.');
+               // Mostrar mensaje de éxito
+ //             showSuccess('Funcion list NFTs OK.');
+            } catch (error) {
+              showSuccess('No List NFT username.');
+              //alert('Error list NFT');
+//              console.error('Error list NFT:', error);
+            }
+
+          
+          }
+
+
+         
+
+
+
+
+
+
+
+
+
+         
+
+          // Función para crear un perfil
+          // Función para mintear un NFT
+   async function createProfile(value) {
+  // Obtener la dirección de la cuenta conectada
+  const accounts = await web3.eth.getAccounts();
+  const myAddress = accounts[0];
+
+  const contract = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
+  
+ 
+  const loadingAnimation = document.getElementById('loadingAnimation-profile');
+  loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la función
+
+  
+
+  try {
+    // Obtener los valores de los campos del formulario
+    const nombre = document.getElementById('nombre').value;
+    const bio = document.getElementById('bio').value;
+    const ubicacion = document.getElementById('ubicacion').value;
+    const paginaWeb = document.getElementById('pagina-web').value;
+    const selectorNFTs = document.getElementById('selector_NFTs').value;
+    const nftusername = selectorNFTs.replace('@CAW', '');
+
+    const fotoPerfil = document.getElementById('foto-perfil').value;
+    const fotoPortada = document.getElementById('foto-portada').value;
+
+    const key1 = document.getElementById('selector_key1').value;
+    const key2 = document.getElementById('selector_key2').value;
+    const key3 = document.getElementById('selector_key3').value;
+    const key4 = document.getElementById('selector_key4').value;
+    const key5 = document.getElementById('selector_key5').value;
+
+    // Crear un array con los valores de los selectores
+    const preferenciasArray = [key1, key2, key3, key4, key5];
+   
+
+    // Crear un objeto FormData para enviar los datos y las imágenes
+    const formData = new FormData();
+    formData.append('nombre', nombre);
+    formData.append('bio', bio);
+    formData.append('ubicacion', ubicacion);
+    formData.append('paginaWeb', paginaWeb);
+    formData.append('fotoPerfil', fotoPerfil);
+    formData.append('fotoPortada', fotoPortada);
+    formData.append('preferencias', JSON.stringify(preferenciasArray));
+
+    // Convertir el objeto FormData a un objeto JSON
+    const perfil = {};
+    for (let [key, value] of formData.entries()) {
+      perfil[key] = value;
+    }
+
+    // Convertir el objeto JSON a una cadena
+    const perfilJSON = JSON.stringify(perfil);
+    showSuccess('Create/update profile: ' + perfilJSON);
+    console.log(`Creando nuevo perfil para ${perfilJSON}`); 
+    if (value === 0) {
+    // Lógica para crear un nuevo perfil
+        
+        await contract.methods.createProfile(nftusername, perfilJSON).send({from: myAddress, gas: 600000, gasPrice: web3.utils.toWei('50', 'gwei') });
+        console.log('Creando nuevo perfil...');
+    } else {
+        // Lógica para actualizar el perfil existente
+        await contract.methods.updateProfile(nftusername, perfilJSON).send({from: myAddress, gas: 600000, gasPrice: web3.utils.toWei('50', 'gwei') });
+        console.log('Actualizando perfil existente...');
+    }
+    
+
+    loadingAnimation.style.display = 'none'; // Oculta la animación
+    $('#myModalprofile').modal('hide');  
+
+    //alert('Funcion create or update profile OK :');
+  } catch (error) {
+    loadingAnimation.style.display = 'none'; // Muestra la animación al ejecutar la función
+
+
+    //alert('Error Create profile');
+    console.error('Error:', error);
+  }
+}
+
+
+
+
+          // Obtener el selector de NFTs
+          const selectorNFTs = document.getElementById('selector_NFTs');
+          // Agregar evento 'change' al selector
+          selectorNFTs.addEventListener('change', () => {
+                   getProfile();
+          });
+
+
+
+
+
+          // Función para poner los datos de un perfil
+         async function getProfile() {
+  // Obtener la dirección de la cuenta conectada
+  const accounts = await web3.eth.getAccounts();
+  const myAddress = accounts[0];
+
+  const contract = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
+
+  const selectorNFTs = document.getElementById('selector_NFTs').value;
+  const nftusername = selectorNFTs.replace('@CAW', '');
+
+
+  
+
+
+
+
+  try {
+
+    //alert('getSmartUserPublications(nftusername,"user");' + nftusername); 
+    getSmartUserPublications(nftusername,"user");
+    
+
+    ////////////////////////////////////////////////////////
+    const listFollowingUser= await findNftWallet("following");
+    getNFTusernameDirectMessage();
+    updateStakingPool();    
+   
+   // alert('Publication X '+ nftusername);
+   // alert('Publication VX '+ listFollowingUser);
+     
+    
+    ////////////////////////////////////////////////////////   
+    
+    const count1 = await contract.methods.getFollowerCount(nftusername).call(); 
+    const follower_count= 'Following: ' + count1;
+
+    const count2 = await contract.methods.getFollowingCount(nftusername).call(); 
+    const following_count= 'Follower: ' + count2;
+
+    const thetime = await contract.methods.getProfileTime(nftusername).call();
+    // Crear una nueva instancia de Date con el timestamp
+    const fecha = new Date(thetime * 1000); // Multiplicado por 1000 ya que el timestamp está en segundos
+    // Formatear la fecha a un formato legible
+    const opcionesFecha = { year: 'numeric', month: 'long', day: 'numeric' };
+    const opcionesHora = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    const profiletime = fecha.toLocaleDateString('es-ES', opcionesFecha) + ' a las ' + fecha.toLocaleTimeString('es-ES', opcionesHora);
+
+
+    //profile-time
+    //profile-count
+    
+    const profileText = await contract.methods.getProfile(nftusername).call();
+    
+    const elementProfileCreate = document.getElementById('profile-create');
+    
+    if (profileText) {
+        elementProfileCreate.style.display = "none";
+    }
+
+
+
+ 
+    const profile = JSON.parse(profileText);
+
+    // Actualizar los elementos del perfil con los datos obtenidos
+    const profileContainer = document.querySelector('.profile-container');
+    profileContainer.style.display = 'block'; // Cambiar a 'inline' si es un elemento de línea en lugar de bloque
+    const profilePhoto = profileContainer.querySelector('.profile-photo');
+    const profileCover = profileContainer.querySelector('.profile-cover');
+    const profileName = profileContainer.querySelector('.profile-name');
+    const profileBio = profileContainer.querySelector('.profile-bio');
+    const profileLocation = profileContainer.querySelector('.profile-location');
+    const profileWebsite = profileContainer.querySelector('.profile-website');
+    const profileUsername = profileContainer.querySelector('.profile-username');
+
+
+    const profileTime = profileContainer.querySelector('.profile-time');
+    const followingCount = profileContainer.querySelector('.following-count');
+    const followerCount = profileContainer.querySelector('.follower-count');
+
+  
+
+
+    // const profileAcount = profileContainer.querySelector('.profile-acount'); // No estás usando profileAcount
+    // Obtener la lista de preferencias desde el objeto profile
+    const profilePreferences = profileContainer.querySelector('.profile-preferences');
+    // Parsear la cadena JSON para obtener el objeto de preferencias
+    const preferencesObject = JSON.parse(profile.preferencias);
+    // Obtener un array de las preferencias
+    const preferenciasArray = Object.values(preferencesObject);
+    // Convierte el array a una cadena separada por comas
+    const preferenciasText = preferenciasArray.join(', ');
+    // Actualizar el elemento en el HTML con la lista de preferencias
+    profilePreferences.textContent = preferenciasText;
+    // Obtén el elemento de la imagen por su ID
+    const imagePerfil = document.getElementById('image-perfil');
+    imagePerfil.style.display = 'block'; // Otra configuración, como 'inline-block' si es necesario
+    imagePerfil.style.inline = 'inline-block'; // Otra configuración, como 'inline-block' si es necesario
+
+
+  
+
+
+    const imagePerfilPublication = document.getElementById('image-perfil-publication');
+    imagePerfilPublication.style.display = 'block'; // Otra configuración, como 'inline-block' si es necesario
+
+    const nftUsernamePublication = document.getElementById('nftUsername-publication');
+    nftUsernamePublication.style.display = 'block'; // Otra configuración, como 'inline-block' si es necesario
+
+ 
+
+   
+
+    // Verifica si el perfil tiene una foto y actualiza la imagen
+    if (profile.fotoPerfil) {
+      imagePerfil.src = profile.fotoPerfil;
+      imagePerfil.style.inline = 'inline-block';
+      imagePerfilPublication.src=profile.fotoPerfil;
+
+      nftUsernamePublication.textContent=nftusername;
+
+
+
+    } else {
+      // Si no hay foto, puedes establecer una imagen predeterminada o hacer algo más
+      imagePerfil.src = 'static/images/caw_logo_2.svg'; // Cambia esto por la ruta de tu imagen predeterminada
+      imagePerfil.style.inline = 'inline-block';
+      imagePerfilPublication.src = 'static/images/caw_logo_2.svg';
+      nftUsernamePublication.textContent=nftusername;
+    }
+
+    profilePhoto.src = profile.fotoPerfil;
+    profileCover.src = profile.fotoPortada;
+    profileName.textContent = profile.nombre;
+    profileBio.textContent = profile.bio;
+    profileLocation.textContent = profile.ubicacion;
+    profileWebsite.textContent = profile.paginaWeb;
+    profileUsername.textContent = selectorNFTs + "@Xcaw";
+
+    profileTime.textContent=profiletime;
+    followingCount.textContent=following_count;
+    followerCount.textContent=follower_count;
+    //alert('getSmartUserPublications(listFollowingUser,followings_user);'+listFollowingUser); 
+    getSmartUserPublications(listFollowingUser,"followings_user");
+   
+    //alert('Funcion get profile OK :');
+    showSuccess('Create profile is OK!.');
+    
+
+
+  } catch (error) {
+
+    
+
+    if (error.message.includes("Profile does not exist for this username")) {
+        const profileContainer = document.querySelector('.profile-container');
+        const imagePerfil = document.getElementById('image-perfil');
+
+        profileContainer.style.display = 'none';
+        imagePerfil.style.display = 'none';
+       
+      
+    } else {
+      // Otro manejo de errores si es necesario
+      showSuccess('Error to create profile.');
+      //alert('Error get profile');
+      //console.error('Error:', error);
+      
+    }  
+    
+  }
+}
+
+
+
+
+
+
+async function findNftWallet(value) {
+  // Obtener la dirección de la cuenta conectada
+  const accounts = await web3.eth.getAccounts();
+  const myAddress = accounts[0];
+
+  const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+
+  const contractPROFILE = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
+
+  const addressUserNfts = document.getElementById('text-address-wallet').value;
+
+  const selectorNFTs = document.getElementById('selector_NFTs').value;
+  const nft_username_selected = selectorNFTs.replace('@CAW', '');
+  
+
+  try {
+      
+        
+        let nftUsernames, totalNFTs,limit;
+
+        if (value==="following"){
+         
+            nftUsernames = await contractPROFILE.methods.getFollowing(nft_username_selected).call();
+        
+        }else if (value==="foryou"){
+           let totalNFTs,limit;
+           totalNFTs= await contractNFT.methods.getTotalMintedNFTs().call()-1;   
+           nftUsernames= await contractNFT.methods. getUsernamesInRange(1,totalNFTs).call();  
+           
+           let preferenciasTextSelected;
+           try {                
+                const profileTextSelected = await contractPROFILE.methods.getProfile(nft_username_selected).call();
+                const profileSelected = JSON.parse(profileTextSelected); 
+                const preferencesObjectSelected = JSON.parse(profileSelected.preferencias);
+                const preferenciasArraySelected = Object.values(preferencesObjectSelected);
+                preferenciasTextSelected = preferenciasArraySelected.join(', ');
+                
+                console.log("preferenciasTextSelected: " +nft_username_selected+"  "+ preferenciasTextSelected);
+         
+            } catch (error) {
+                console.error("Error fetching profile for " + nft_username_selected + ": ", error);
+            }
+
+
+
+          const nftUsernamesX = [];
+          for (let i = 0; i < nftUsernames.length; i++) {
+            
+            try {                
+                const profileText = await contractPROFILE.methods.getProfile(nftUsernames[i]).call();
+                const profile = JSON.parse(profileText); 
+                const preferencesObject = JSON.parse(profile.preferencias);
+                const preferenciasArray = Object.values(preferencesObject);
+                const preferenciasText = preferenciasArray.join(', ');
+                
+                console.log("Preferences Text: " +nftUsernames[i]+"  "+ preferenciasText);
+                 
+                
+                // Bucle para comparar los elementos
+                for (let x = 0; x < preferenciasTextSelected.length; x++) {
+                    for (let y = 0; y < preferenciasText.length; y++) {
+                        if (preferenciasTextSelected[x] === preferenciasText[y]) {
+                        // Si hay coincidencia, almacena la palabra clave y termina la comparación
+                        coincidencia = preferenciasTextSelected[x];
+                        break;
+                        }
+                    }
+
+                    // Si ya se encontró una coincidencia, termina la comparación externa
+                    if (coincidencia) {
+                        nftUsernamesX.push(nftUsernames[i]);
+                        break;
+                    }
+                }
+
+                
+            } catch (error) {
+                console.error("Error fetching profile for " + nftUsernames[i] + ": ", error);
+            }
+         }
+
+         nftUsernames=nftUsernamesX;
+             
+
+
+
+           
+
+        
+
+
+
+
+
+
+
+
+
+        }else if (value==="foryourand"){
+           
+            totalNFTs= await contractNFT.methods.getTotalMintedNFTs().call()-1;
+            limit=totalNFTs;
+            const randomNumbers = [];
+            if( totalNFTs > 10 ){
+              
+              for (let i = 0; i < 10; i++) {
+                   const randomNumber = Math.floor(Math.random() * limit) + 1;
+                   randomNumbers.push(randomNumber);
+              }
+
+            } else{
+
+              for (let i = 0; i < totalNFTs ; i++) {
+                   const randomNumber = Math.floor(Math.random() * limit) + 1;
+                   randomNumbers.push(randomNumber);
+              }
+            }
+ 
+            const nftUsernames2 = [];
+            for (let i = 0; i < randomNumbers.length; i++) {
+                
+                index=randomNumbers[i];
+                username= await contractNFT.methods.getUsernameByTokenId(index).call();                
+                nftUsernames2.push(username);
+                console.log("username " + (i + 1) + ": " +username );
+            }
+            nftUsernames=nftUsernames2;
+ 
+            
+
+        }else if (value==="foryoulast"){
+
+          totalNFTs= await contractNFT.methods.getTotalMintedNFTs().call()-1;   
+          nftUsernames= await contractNFT.methods. getUsernamesInRange(0,totalNFTs).call();    
+            
+                 
+
+        } else{
+
+               // Expresión regular para verificar el formato de una dirección Ethereum
+              const ethAddressRegex = /^(0x)?[0-9a-fA-F]{40}$/;
+              // Verificar si la dirección tiene el formato correcto
+              if (ethAddressRegex.test(addressUserNfts)) {
+                  // La dirección tiene el formato correcto (es una dirección Ethereum válida)
+                  console.log("La dirección es válida:", addressUserNfts);
+                  // Aquí puedes realizar acciones relacionadas con una dirección Ethereum válida
+                  nftUsernames = await contractNFT.methods.getMintedUsernames(addressUserNfts).call();
+ 
+              } else {
+
+                  const isMintedNFT = await contractNFT.methods.isMinted(addressUserNfts).call();
+
+    
+                  if (isMintedNFT) {
+                      // Si está minteado, crear un arreglo nftUsernames con un solo elemento
+                      nftUsernames = [addressUserNfts];
+                      console.log("NFT minteado:", nftUsernames);
+
+                      // Aquí puedes realizar acciones adicionales para el caso de un NFT minteado
+                  } else {
+                      // Si no está minteado, puedes no hacer nada o realizar acciones adicionales según sea necesario
+                      console.log("El NFT no está minteado.");                 
+                      nftUsernames = [];
+                      // Aquí puedes realizar acciones relacionadas con una dirección no válida
+                  }
+         
+
+           
+            }
+
+        }       
+
+        const nftUsernameList = document.getElementById('nft-username-list');
+        //nftUsernameList.style.display="none";
+
+        // Limpia el contenido actual del contenedor
+        nftUsernameList.innerHTML = "";
+ 
+        
+        const listaNFTUsernames = [];
+        //nftUsernames.forEach(function (username) {
+    for (const username of nftUsernames) {
+      listaNFTUsernames.push(username);
+    
+    
+try{
+    const following = await contractPROFILE.methods.isFollowing(nft_username_selected, username).call();
+
+    const following_following = await contractPROFILE.methods.isFollowing(username, nft_username_selected).call();
+
+
+    const container = document.createElement("div");
+
+
+    const profileText = await contractPROFILE.methods.getProfile(username).call();
+    const profile = JSON.parse(profileText);
+    const img_profile = profile.fotoPerfil;
+
+    const userButton = document.createElement("span");
+userButton.innerHTML = `<img src="${img_profile}" style="width: 50px; height: 50px; border-radius: 50%; vertical-align: middle; display: inline-block; " >`;
+userButton.classList.add("clickable-button");
+userButton.addEventListener("click", function () {
+    //alert("Clickeaste el botón de usuario para " + username);
+});
+userButton.style.marginLeft = "0px"; // Añadir un margen izquierdo para separar los elementos     
+
+    
+
+    const nameButton = document.createElement("span");
+    nameButton.innerHTML = '<span style="font-size: 14px; vertical-align: middle; display: inline-block;"></span>';
+    nameButton.textContent = username;
+    nameButton.classList.add("clickable-button");
+    nameButton.addEventListener("click", function () {
+        //alert("Clickeaste el botón de usuario para " + username);
+    });
+    nameButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
+
+    container.appendChild(userButton);
+    container.appendChild(nameButton);
+
+    // Verifica si el usuario sigue a 'username'
+    if (following) {
+
+     
+        const chekcButton = document.createElement("span");
+        chekcButton.innerHTML = '<span class="glyphicon glyphicon-ok" style="font-size: 14px; vertical-align: middle; display: inline-block;" ></span>';
+        chekcButton.classList.add("clickable-button");
+        chekcButton.addEventListener("click", function () {
+          //alert("Clickeaste el botón de usuario para " + username);
+             
+        }); 
+        chekcButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
+        chekcButton.style.color = "green";
+        container.appendChild(chekcButton);   
+
+        if (following_following){
+             const chekc2Button = document.createElement("span");
+             chekc2Button.innerHTML = '<span class="glyphicon glyphicon-ok" style="font-size: 14px; vertical-align: middle; display: inline-block; " ></span>';
+             chekc2Button.classList.add("clickable-button");
+             chekc2Button.addEventListener("click", function () {
+                   //alert("Clickeaste el botón de usuario para " + username);
+             
+              }); 
+              chekc2Button.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
+              chekc2Button.style.color = "blue";
+              container.appendChild(chekc2Button); 
+        }    
+
+
+        const removeButton = document.createElement("span");
+        removeButton.innerHTML = '<span class="glyphicon glyphicon-remove-circle" style="font-size: 24px; vertical-align: middle; display: inline-block; " ></span>';
+        removeButton.classList.add("clickable-button");
+        removeButton.addEventListener("click", function () {
+        //alert("Clickeaste el botón de usuario para " + username);
+
+
+             approveAndAction(nft_username_selected, username,"unfollow");   
+        }); 
+        removeButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
+        removeButton.style.color = "red";
+        container.appendChild(removeButton);
+
+        
+        
+
+        console.log('El usuario está siguiendo a ' + username);
+        // Otras acciones si es verdadero
+    } else {
+      
+        const followButton = document.createElement("button");
+        followButton.textContent = "follow";
+        followButton.classList.add("follow-button", "clickable-button");
+        followButton.addEventListener("click", function () {
+        //alert("Clickeaste el botón de seguir para " +nft_username_selected +username);
+
+                            
+              //approveAndFollow(nftusernameselected, username)
+              approveAndAction(nft_username_selected, username,"follow");
+
+        });
+        followButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
+        followButton.style.backgroundColor = "lime"; // Establecer el color de fondo
+        followButton.style.color = "black"; // Establecer el color del texto
+        followButton.style.borderRadius = "15px"; // Redondear las esquinas
+        container.appendChild(followButton);
+                       
+        console.log('El usuario no está siguiendo a ' + username);
+        // Otras acciones si es falso
+    }
+
+    nftUsernameList.appendChild(container);
+
+    
+} catch (error){
+
+  if (error.message.includes("Profiles do not exist")) {
+      const container = document.createElement("div");
+      const nameButton = document.createElement("span");
+      nameButton.innerHTML = '<span style="font-size: 14px; vertical-align: middle; display: inline-block; margin-left: 10px;"></span>';
+      nameButton.textContent = username;
+      nameButton.classList.add("clickable-button");
+      nameButton.addEventListener("click", function () {
+        //alert("Clickeaste el botón de usuario para " + username);
+      });
+      container.appendChild(nameButton);
+      nftUsernameList.appendChild(container);
+    } else {
+      // Otro manejo de errores si es necesario
+      console.error("Errorx:", error);
+      
+    }
+}
+
+
+// Crear un espacio entre las iteraciones
+    const spacer = document.createElement("div");
+    spacer.style.height = '20px'; // Ajusta la altura a tu preferencia
+    nftUsernameList.appendChild(spacer);
+
+
+}
+    //nftUsernameList.style.display="block";
+ return listaNFTUsernames;
+
+    //showSuccess('Show mensage amigos: ' + nftUsernames);      
+    //alert('Funcion lista NFTS OK :');
+
+
+  } catch (error) {
+
+
+    // Otro manejo de errores si es necesario
+      console.error("Error al buscar NFTs:", error);
+      ///alert('Error lista NFTS'); 
+   
+  }
+}
+
+
+
+
+async function getNFTusernameDirectMessage() {
+  // Obtener la dirección de la cuenta conectada
+  const accounts = await web3.eth.getAccounts();
+  const myAddress = accounts[0];
+
+  const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+  const contractPROFILE = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
+
+  const selectorNFTs = document.getElementById('selector_NFTs').value;
+  const nft_username_selected = selectorNFTs.replace('@CAW', '');
+  
+  try {
+        //showSuccess('Show mensage amigos: ' + addressUserNfts);
+                
+        const nftUsernames = await contractPROFILE.methods.getFollowing(nft_username_selected).call();
+              
+        const nftUsernameList = document.getElementById('nft-username-list-direct-message');
+                                                        
+        // Limpia el contenido actual del contenedor
+        nftUsernameList.innerHTML = "";
+
+        //obtiene el nombre de usuario del selector
+       
+        //nftUsernames.forEach(function (username) {
+    for (const username of nftUsernames) {
+    
+   
+    
+try{
+    const following = await contractPROFILE.methods.isFollowing(nft_username_selected, username).call();
+
+    const following_following = await contractPROFILE.methods.isFollowing(username, nft_username_selected).call();
+
+    const container = document.createElement("div");
+
+
+    const profileText = await contractPROFILE.methods.getProfile(username).call();
+    const profile = JSON.parse(profileText);
+    const img_profile = profile.fotoPerfil;  
+
+    
+
+    if (following) {
+               
+       if (following_following) {   
+
+            const userButton = document.createElement("span");
+            userButton.innerHTML = `<img src="${img_profile}" style="width: 50px; height: 50px; border-radius: 50%; vertical-align: middle; display: inline-block; margin-left: 10px;" >`;
+            userButton.classList.add("clickable-button");
+            userButton.addEventListener("click", function () {
+            //alert("Clickeaste el botón de usuario para " + username);
+            });
+            userButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos     
+
+            const nameButton = document.createElement("span");
+            nameButton.innerHTML = '<span style="font-size: 16px; vertical-align: middle; display: inline-block; margin-left: 10px;"></span>';
+            nameButton.textContent = username;
+            nameButton.classList.add("clickable-button");
+            nameButton.addEventListener("click", function () {
+                 
+                 readConversation(username);
+                 $('#myModal-msg-direct').modal('show');
+            
+            
+
+            });
+            nameButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
+
+
+            const msgButton = document.createElement("span");
+            msgButton.innerHTML = '<span class="glyphicon glyphicon-envelope" style="font-size: 24px; vertical-align: middle; display: inline-block; margin-left: 10px;" ></span>';
+            msgButton.classList.add("clickable-button");
+            msgButton.addEventListener("click", function () {
+                    //alert("Clickeaste el botón de usuario para " + username);
+                    readConversation(username);
+                    $('#myModal-msg-direct').modal('show');
+
+            }); 
+            msgButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
+            msgButton.style.color = "blue";
+        
+
+
+            
+            container.appendChild(userButton);
+            container.appendChild(nameButton);
+            container.appendChild(msgButton);
+
+
+       }
+
+
+
+    }    else { 
+        //userButton.style.color = "black";
+    }     
+
+
+    nftUsernameList.appendChild(container);
+} catch (error){
+
+  if (error.message.includes("Profiles do not exist")) {
+      const container = document.createElement("div");
+      const nameButton = document.createElement("span");
+      nameButton.innerHTML = '<span style="font-size: 24px; vertical-align: middle; display: inline-block; margin-left: 10px;"></span>';
+      nameButton.textContent = username;
+      nameButton.classList.add("clickable-button");
+      nameButton.addEventListener("click", function () {
+      //alert("Clickeaste el botón de usuario para " + username);
+      });
+      container.appendChild(nameButton);
+      nftUsernameList.appendChild(container);
+    } else {
+      // Otro manejo de errores si es necesario
+      console.error("Errorx:", error);
+      
+    }
+}
+
+
+// Crear un espacio entre las iteraciones
+    const spacer = document.createElement("div");
+    spacer.style.height = '20px'; // Ajusta la altura a tu preferencia
+    nftUsernameList.appendChild(spacer);
+
+
+}
+   
+ 
+
+    showSuccess('Show mensage amigos: ' + nftUsernames);      
+    //alert('Funcion lista NFTS OK :');
+
+
+  } catch (error) {
+
+
+    // Otro manejo de errores si es necesario
+      console.error("Error al buscar NFTs:", error);
+      //alert('Error lista NFTS'); 
+   
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Suponiendo que ya has definido la instancia del contrato como `contractPROFILE`
+
+async function approveAndAction(nftusernameselected, username,action) {
+
+  try {  
+
+      if (action !== 'unfollow') {
+        // Aprobar el gasto de CAW por el contrato de perfil
+        await approveCAWSpending(action);
+        // Esperar un tiempo (puedes ajustar este tiempo según lo que necesites)
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        // Seguir al usuario
+      }
+        
+
+        await actionUser(nftusernameselected, username,action);
+  
+  } catch (error) {
+        console.error('Error en el proceso de aprobación y seguimiento:', error);
+        // Realiza acciones adicionales en caso de error
+  }
+       
+}
+      
+
+
+
+async function actionUser(follower, following, action) {
+  try {
+    const accounts = await web3.eth.getAccounts();
+    const myAddress = accounts[0];
+
+    const contract = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
+
+    const signatureToUser = '0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321';
+    //const timestamp = Date.now();
+    const timestamp = 0;
+  
+    let result;
+  
+    if (action === 'like') {
+      // Realizar acciones para 'like' si es necesario
+      console.log('Acción like realizada si es necesario');
+    } else if (action === 'follow') {
+      result = await contract.methods.follow(follower, following, timestamp, signatureToUser).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });
+    } else if (action === 'unfollow') {
+      
+      result = await contract.methods.unfollow(follower, following).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });
+    } else if (action === 'publisher') {
+      // Realizar acciones para 'publisher' o 'share' si es necesario
+      console.log('Acción publisher o share realizada si es necesario');
+    } else if (action === 'share') {
+      // Realizar acciones para 'publisher' o 'share' si es necesario
+      console.log('Acción publisher o share realizada si es necesario');
+    } 
+    else {
+      console.error('Tipo no válido');
+      return;
+    }
+
+    console.log('Transacción exitosa:', result);
+    // Realizar acciones adicionales si es necesario después de seguir al usuario
+  } catch (error) {
+    console.error('Error al seguir al usuario:', error);
+    // Realizar acciones en caso de error
+  }
+}
+
+   
+
+async function approveCAWSpending(action) {
+  try {
+    const accounts = await web3.eth.getAccounts();
+    const myAddress = accounts[0];
+           
+    let amountToApprove = 0;
+
+    // Asignar el monto a aprobar según el tipo
+    if (action === 'like') {
+      amountToApprove = web3.utils.toWei('2000', 'ether');
+    } else if (action === 'follow') {
+      amountToApprove = web3.utils.toWei('30000', 'ether');
+    } else if (action === 'unfollow') {
+      amountToApprove = web3.utils.toWei('0', 'ether');
+    } else if (action === 'publisher') {
+      amountToApprove = web3.utils.toWei('5000', 'ether');
+    } else if (action === 'share') {
+      amountToApprove = web3.utils.toWei('4000', 'ether');
+    } else {
+      // Manejar un tipo desconocido o incorrecto
+      console.error('Tipo no válido');
+      return;
+    }
+
+
+    // Crear instancia del contrato del token CAW
+    const tokenContract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
+    showSuccess('aprobacion: ' +action+amountToApprove);      
+    // Aprobar al contrato del perfil para gastar el CAW
+    await tokenContract.methods.approve(transferContractAddress, amountToApprove).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });
+          
+    console.log('Aprobación de gasto de CAW realizada con éxito');
+    // Realiza acciones adicionales si la aprobación es exitosa
+  } catch (error) {
+    console.error('Error al aprobar el gasto de CAW:', error);
+    // Realiza acciones en caso de error
+  }
+}
+
+
+
+
+
+
+
+
+
+async function loadProfile() {
+  // Obtener la dirección de la cuenta conectada
+  const accounts = await web3.eth.getAccounts();
+  const myAddress = accounts[0];
+
+  const contract = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
+
+  
+  try {
+    
+
+    const selectorNFTs = document.getElementById('selector_NFTs').value;
+    const nftusername = selectorNFTs.replace('@CAW', '');
+
+    const profileText = await contract.methods.getProfile(nftusername).call();
+
+    const profile = JSON.parse(profileText);
+
+    // Actualizar los elementos del formulario con los datos del perfil
+  document.getElementById('nombre').value = profile.nombre;
+  document.getElementById('bio').value = profile.bio;
+  document.getElementById('ubicacion').value = profile.ubicacion;
+  document.getElementById('pagina-web').value = profile.paginaWeb;
+  document.getElementById('foto-perfil').value = profile.fotoPerfil;
+  document.getElementById('foto-portada').value = profile.fotoPortada;
+
+  // Actualizar los selects con las preferencias
+  const preferenciasSelects = document.querySelectorAll('.preferencias-selector');
+  const preferenciasArray = JSON.parse(profile.preferencias);
+
+  preferenciasSelects.forEach((select, index) => {
+    select.value = preferenciasArray[index];
+  });
+
+  // Mostrar el modal
+  $('#myModalprofile').modal('show');
+
+  //alert('Funcion update profile OK :');
+  } catch (error) {
+    //alert('Error update profile');
+    console.error('Error:', error);
+  }
+}
+                    
+   
+
+
+
+
+async function createActionPublication(receiverNFTUsername,publication_id,type_action){
+
+ 
+  console.error('createActionPublication');
+  // Obtener la dirección de la cuenta conectada
+  const accounts = await web3.eth.getAccounts();
+  const myAddress = accounts[0];
+
+  const contract = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
+
+  const selectorNFTs = document.getElementById('selector_NFTs').value;
+  const nftusername = selectorNFTs.replace('@CAW', '');
+   
+  const loadingAnimationPublication = document.getElementById('loadingAnimation-publication');
+  loadingAnimationPublication.style.display = 'block'; // Oculta la animación
+
+  try {         
+
+     
+    
+    let amountToApprove = 0;
+    if(type_action==="publication"){     
+               
+        amountToApprove = web3.utils.toWei('5000', 'ether');
+    }
+    else if (type_action==="like") {
+          amountToApprove = web3.utils.toWei('2000', 'ether');
+    }
+    else if (type_action==="share") {
+           amountToApprove = web3.utils.toWei('4000', 'ether');
+    }else{
+
+    }
+
+   
+    // Crear instancia del contrato del token CAW
+    //loadingAnimationPublication.style.display = 'none'; // Oculta la animación
+    
+
+    const tokenContract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
+        
+    // Aprobar al contrato del perfil para gastar el CAW
+    await tokenContract.methods.approve(transferContractAddress, amountToApprove).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });          
+    
+    
+    // Realiza acciones adicionales si la aprobación es exitosa
+  } catch (error) {
+    console.error('Error al aprobar el gasto de CAW:', error);
+    loadingAnimationPublication.style.display = 'none'; // Oculta la animación
+    
+    // Realiza acciones en caso de error
+  }
+
+    await new Promise(resolve => setTimeout(resolve, 1000)); 
+
+  try {
+    
+    const contractPUBLICATION = new web3.eth.Contract(Publisher_ContractABI, publisherContractAddress);
+    const signatureToUser = '0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321';
+    const timestamp = 0;    
+
+     const type_post = 0;//m,ainpost
+     const parentPublicationId=0;     
+     const content = document.getElementById('publicacion').value;
+     const linkToMedia = document.getElementById('media-publication').value;
+     const filterPrivacidad = document.getElementById('filter-privacidad').value;
+    
+     const jsonMetadata = {
+            "linkToMedia": linkToMedia,
+            "filterPrivacidad": filterPrivacidad
+         };
+
+     const jsonString = JSON.stringify(jsonMetadata);
+
+
+    if(type_action==="publication"){
+       
+        loadingAnimationPublication.style.display = 'block'; // Muestra la animación al e    
+        alert("alerta publicacion "+nftusername+timestamp+signatureToUser+content+
+          jsonString+type_post+parentPublicationId);
+        await contractPUBLICATION.methods.createPublication(nftusername,timestamp,signatureToUser,content,
+          jsonString,type_post,parentPublicationId).send({from: myAddress, gas: 600000, gasPrice: web3.utils.toWei('50', 'gwei') });
+   
+       
+    }
+    else if (type_action==="like") {
+
+      await contractPUBLICATION.methods.addReaction(nftusername, receiverNFTUsername,timestamp, signatureToUser,publication_id ).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') }); 
+
+    
+    }
+    else if (type_action==="share") {
+         await contractPUBLICATION.methods.sharePublication(nftusername, receiverNFTUsername,timestamp, signatureToUser,publication_id ).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });
+
+    }else{
+
+      showSuccess('Error to Action .');
+
+    }
+
+    
+   
+   
+   
+   loadingAnimationPublication.style.display = 'none'; // Oculta la animación
+   $('#myModal_publication').modal('hide');
+
+   getProfile();
+
+
+
+  } catch (error) {
+    loadingAnimationPublication.style.display = 'none'; // Oculta la animación
+    showSuccess('Error to crearte Publication .');
+  
+  }  
+
+}
+
+async function createActionResponse(content_response,publication_id){
+
+ 
+  const accounts = await web3.eth.getAccounts();
+  const myAddress = accounts[0];
+  
+  const selectorNFTs = document.getElementById('selector_NFTs').value;
+  const nftusername = selectorNFTs.replace('@CAW', '');
+      
+  const contractPUBLICATION = new web3.eth.Contract(Publisher_ContractABI, publisherContractAddress);
+     
+  const parentPublicationId=publication_id;
+
+  const content = content_response;
+  const linkToMedia = "";
+  const filterPrivacidad = "";
+    
+  const jsonMetadata = {
+            "linkToMedia": linkToMedia,
+            "filterPrivacidad": filterPrivacidad
+  };
+
+  const jsonString = JSON.stringify(jsonMetadata);
+  
+
+
+       
+  //alert('createPublicationResponse.' + jsonString+"    "+jsonMetadata);
+  try {
+     await contractPUBLICATION.methods.createPublicationResponse(nftusername,content,jsonMetadata,parentPublicationId).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });
+   
+  } catch (error) {    
+    showSuccess('Error to crearte Publication.');
+  
+  }  
+
+}
+
+
+async function getSmartUserPublications(username, type_user) {
+
+  const selectorNFTs = document.getElementById('selector_NFTs').value;
+  const nftUsername = selectorNFTs.replace('@CAW', '');
+  //alert("nftusername  "+ nftusername);
+
+  let userPublicationContainer=""
+  let vectorNftUsername=[];
+
+  if(type_user==="user"){
+    userPublicationContainer = document.querySelector('.user-publication-container');
+    userPublicationContainer.innerHTML = "";
+    //alert('Publication X '+ username);
+    vectorNftUsername.push(username);
+    //alert('getSmartUserPublications(nftusername,"user");' + vectorNftUsername); 
+    
+
+  } else{
+    userPublicationContainer = document.querySelector('.user-following-publication-container');
+    //alert('Publication Xxx '+ username);
+    userPublicationContainer.innerHTML = "";
+    vectorNftUsername=username;
+  }
+
+ 
+
+
+
+  const accounts = await web3.eth.getAccounts();
+  const myAddress = accounts[0];
+  
+
+for (let user of vectorNftUsername) {
+  //alert('Publication For user X '+ user);
+
+  //const selectorNFTs = document.getElementById('selector_NFTs').value;
+  //const nftUsername = selectorNFTs.replace('@CAW', '');
+
+  //////nftUsername=user;
+
+  try {
+    
+    const contractPROFILE = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
+    //const profileText = await contractPROFILE.methods.getProfile(user).call();
+    //const profile = JSON.parse(profileText);
+    //profile_picture_publication=profile.fotoPerfil;
+    //profile_name=profile.nombre;
+    //alert('getSmartUserPublications(nftusername,"user");' + user+profile.nombre); 
+    
+    
+
+    const contractPUBLICATION = new web3.eth.Contract(Publisher_ContractABI, publisherContractAddress);
+    const count = await contractPUBLICATION.methods.getUserTotalPublicationsCount(user).call();
+
+    let count_like,count_share,count_comment,user_like,user_share,user_comment;
+
+    for (let i = 0; i < count; i++) {
+     const result = await contractPUBLICATION.methods.getUserPublication(user, i).call();
+
+     const profileText = await contractPROFILE.methods.getProfile(result[0]).call();
+     const profile = JSON.parse(profileText);
+     profile_picture_publication=profile.fotoPerfil;
+     profile_name=profile.nombre;
+     //alert('getSmartUserPublications(nftusername,"user");' + user+profile.nombre); 
+     
+
+
+       //llama a las funciones que ponen los likes y los shares
+      count_like = await contractPUBLICATION.methods.getLikesCountByPublication(result[1]).call();
+      count_share = await contractPUBLICATION.methods.getSharesCountByPublication(result[1]).call(); 
+      count_comment = await contractPUBLICATION.methods. getCommentCount(result[1]).call(); 
+     
+
+      user_like = await contractPUBLICATION.methods.getUserLikeStatusByPublication(nftUsername,result[1]).call();
+      user_share = await contractPUBLICATION.methods.getUserShareStatusByPublication(nftUsername,result[1]).call(); 
+      user_comment = await contractPUBLICATION.methods.getUserCommentStatusByPublication(nftUsername,result[1]).call(); 
+      
+     
+     
+
+       try{
+      //Convierte la cadena JSON a un objeto JavaScript
+      let linkToMedia; 
+      let filterPrivacidad;
+
+       
+       //const jsonMetadata = JSON.parse(result[3]);
+       //let  linkToMedia=""
+       //let filterPrivacidad=""
+      
+       let jsonMetadata;
+       try{      
+        jsonMetadata = JSON.parse(result[3]);
+        linkToMedia = jsonMetadata.linkToMedia;
+        filterPrivacidad = jsonMetadata.filterPrivacidad;
+      }catch{
+         linkToMedia = '';
+         filterPrivacidad = '';
+      }
+
+    
+       
+      
+
+      const publication_username =result[0];
+      const publication_ID =result[1];
+      const content_publication = result[2];      
+      const timestamp = result[4];
+      const publication_Type=result[5];
+
+      const publication_date = tiempoTranscurrido(timestamp);                                                  
+
+     //alert('Publication:g '+ publication_Type);
+      //alert('Publication:g '+publication_ID+ publication_username+content_publication+ timestamp+filterPrivacidad+linkToMedia);
+      
+      
+      const userPublicationGroup = document.createElement('div');
+      userPublicationGroup.classList.add('user-publication-group');
+      userPublicationGroup.addEventListener('click', () => {
+        // Acción al hacer clic en la publicación completa
+        // Por ejemplo, ver más detalles o redireccionar a una página
+      });
+      userPublicationGroup.style.width = '100%'; // Ocupar el ancho completo del contenedor principal
+      userPublicationGroup.style.border = '2px solid #ccc'; // Ejemplo de borde para mostrar el contenedor
+      userPublicationGroup.style.display= "inline-block";
+      userPublicationGroup.style.marginTop = '10px';
+      userPublicationGroup.style.borderRadius="20px"
+      
+       const userPublicationId = document.createElement('div');
+       userPublicationId.classList.add('user-publication-id');
+       userPublicationId.innerHTML = `ID: ${publication_ID}`;
+       userPublicationId.style.display= "inline-block";
+
+
+       const imageLink = document.createElement('a');
+       imageLink.href = 'URL_DE_DESTINO'; // Coloca la URL a la que quieres redirigir al hacer clic en la imagen
+
+
+
+       const roundImage = document.createElement('img');
+       roundImage.src = profile_picture_publication; // Inserta la URL de la imagen que deseas mostrar
+       roundImage.style.borderRadius = '50%'; // Para crear una imagen redonda
+       roundImage.style.width = '60px'; // Establece el ancho de la imagen
+       roundImage.style.height = '60px'; // Establece la altura de la imagen
+       roundImage.style.marginRight = '15px'; // Añade margen derecho
+       roundImage.style.marginLeft = '15px';
+       roundImage.style.display= "inline-block";
+       roundImage.style.marginTop= "10px";
+       roundImage.style.marginBottom= "20px";
+       // Agrega la imagen redonda al enlace
+       imageLink.appendChild(roundImage);
+
+      // Agrega el enlace con la imagen redonda al contenedor 'userPublicationId'
+      
+
+
+      const usernamePublication = document.createElement('div');
+      usernamePublication.classList.add('user-publication-id');
+      usernamePublication.innerHTML = profile_name;
+      usernamePublication.style.marginRight = '15px'; // Añade margen derecho
+      usernamePublication.style.fontSize = '1.5em'; // Tamaño de letra más grande
+      usernamePublication.style.display= "inline-block";
+
+      
+      const nftusernamePublication = document.createElement('div');
+      nftusernamePublication.classList.add('user-publication-id');
+      nftusernamePublication.innerHTML ="@"+publication_username;
+      nftusernamePublication.style.marginRight = '15px'; // Añade margen derecho
+      nftusernamePublication.style.display= "inline-block";
+
+
+      const userPublicationDate = document.createElement('div');
+      userPublicationDate.classList.add('user-publication-id');
+      userPublicationDate.innerHTML =publication_date;
+      userPublicationDate.style.display= "inline-block";
+   
+  
+      
+
+const userPublication = document.createElement('div');
+userPublication.classList.add('user-publication');
+userPublication.style.width = '100%'; // Ocupar el ancho completo del contenedor principal
+userPublication.style.fontSize = '1.2em'; // Tamaño de letra más grande
+userPublication.style.marginBottom = "20px";
+userPublication.style.wordWrap = 'break-word'; // Envolver el texto si es demasiado largo
+userPublication.style.whiteSpace = 'pre-line'; // Mantener los saltos de línea del texto original  
+
+const words = content_publication.split(/(P\S+|r\S+|\s+)/); // Divide el contenido
+
+
+words.forEach(word => {
+  const span = document.createElement('span');
+
+  if (word.startsWith('@')) {
+    span.style.color = 'blue'; // Colorear las palabras que comienzan con @
+    span.innerText = word;
+    span.style.fontWeight = 'bold'; // Hacer la letra más gruesa (negrita)
+    span.addEventListener('click', () => {
+      // Acción al hacer clic en una palabra que comienza con @
+    });
+  } else if (word.startsWith('#')) {
+    span.style.color = 'green'; // Colorear las palabras que comienzan con #
+    span.style.fontWeight = 'bold'; // Hacer la letra más gruesa (negrita)
+    span.innerText = word;
+    span.addEventListener('click', () => {
+      // Acción al hacer clic en una palabra que comienza con #
+    });
+  } else if (word === ' ') {
+    // Preserva el espacio entre las palabras
+    span.innerHTML = '&nbsp;';
+  } else {
+    span.innerText = word;
+  }
+
+  userPublication.appendChild(span);
+});
+    
+
+      const userPublicationImage = document.createElement('img');
+      userPublicationImage.classList.add('user-publication-image');
+      userPublicationImage.src = linkToMedia;
+      userPublicationImage.style.borderRadius = '15px'; // Redondear las esquinas
+      userPublicationImage.style.width = '100%'; // Expandir la imagen al ancho del contenedor
+     
+      // ... Crear y configurar otros elementos para mostrar la información
+
+      const publicationIconsGroup = document.createElement('div');
+      publicationIconsGroup.classList.add('publication-icons-group');
+      publicationIconsGroup.style.width = '100%'; // Ocupar el ancho completo del contenedor principal
+      publicationIconsGroup.style.textAlign = 'center'; // Alinear elementos al centro
+      publicationIconsGroup.style.marginTop = "10px";
+ 
+  const comentPublicationGroup = document.createElement('div');
+       comentPublicationGroup.classList.add('publication-icons-group');
+       comentPublicationGroup.style.width = '100%'; // Ocupar el ancho completo del contenedor principal
+       comentPublicationGroup.style.textAlign = 'center'; // Alinear elementos al centro
+       comentPublicationGroup.style.marginTop = "10px";
+
+
+
+// Crear el enlace (<a>) con HTML directamente
+const retweetIcon = document.createElement('a');
+retweetIcon.href = '#'; // Puedes establecer el enlace que desees
+if (user_share){
+   retweetIcon.innerHTML = `<span class="glyphicon glyphicon-retweet" style="font-size: 2em; color: green; margin-left: 20px;"></span>&nbsp; ${count_share}`;
+}else{
+  retweetIcon.innerHTML = `<span class="glyphicon glyphicon-retweet" style="font-size: 2em; color: black; margin-left: 20px;"></span>&nbsp; ${count_share}`;
+
+}
+// Agregar el evento de clic al enlace
+retweetIcon.addEventListener('click', () => {
+  // Acción al hacer clic en el enlace
+  createActionPublication(publication_username,publication_ID,"share");
+  //alert('¡Hiciste clic en el enlace!');
+});
+
+
+
+
+
+
+
+// Crear el enlace (<a>) con HTML directamente
+const heartIcon = document.createElement('a');
+heartIcon.href = '#'; // Puedes establecer el enlace que desees
+
+if (user_like){
+   heartIcon.innerHTML = `<span class="glyphicon glyphicon-heart" style="font-size: 2em; color: red; margin-left: 50px;"></span>&nbsp; ${count_like}`;
+}else{
+  heartIcon.innerHTML = `<span class="glyphicon glyphicon-heart-empty" style="font-size: 2em; color: black; margin-left: 50px;"></span>&nbsp; ${count_like}`;
+}
+
+// Agregar el evento de clic al enlace
+heartIcon.addEventListener('click', () => {
+  // Acción al hacer clic en el enlace
+  createActionPublication(publication_username,publication_ID,"like");
+  //alert('¡Hiciste clic en el enlace!');
+});
+
+
+
+ //alert('comment XX '+user_comment+ " " + count_comment ); 
+// Crear el enlace (<a>) con HTML directamente
+const commentIcon = document.createElement('a');
+commentIcon.href = '#'; // Puedes establecer el enlace que desees
+
+if (user_comment){
+     commentIcon.innerHTML = `<span class="glyphicon glyphicon-comment" style="font-size: 2em; color: blue; margin-left: 50px;"></span>&nbsp; ${count_comment}`;
+}else{
+  commentIcon.innerHTML = `<span class="glyphicon glyphicon-comment" style="font-size: 2em; color: black; margin-left: 50px;"></span>&nbsp; ${count_comment}`;
+}
+
+// Agregar el evento de clic al enlace
+commentIcon.addEventListener('click', () => {
+  // Acción al hacer clic en el enlace
+  //alert('¡Hiciste clic en el enlace!');
+    getresponses(publication_ID); 
+    $('#myModal-responses').modal('show');
+});
+
+
+////////////comentarios///////////////////////////////////////////////////////
+// Crear la entrada de texto dinámicamente
+    
+    const commentTextArea = document.createElement('textarea');
+    commentTextArea.placeholder = 'Comment publication here';
+    commentTextArea.style = 'border: 2px solid black; border-radius: 10px; width: 100%; margin-bottom: 0px; height: 40px; resize: true;';      
+
+
+    // Crear el enlace (<a>) con HTML directamente
+const commentButtonIcon = document.createElement('a');
+commentButtonIcon.href = '#'; // Puedes establecer el enlace que desees
+commentButtonIcon.innerHTML = `<span class="glyphicon glyphicon-send" style="font-size: 2em; color: lime; margin-left: 50px;"></span>&nbsp; `;
+// Agregar el evento de clic al enlace
+commentButtonIcon.addEventListener('click', () => {
+  // Acción al hacer clic en el enlace
+      const textoIngresado =  commentTextArea.value;
+      //(`Texto ingresado: ${textoIngresado}`);
+      
+      createActionResponse(commentTextArea.value,publication_ID);
+
+      //createActionPublication(publication_username,publication_ID,"like");
+      // Otra lógica para procesar el texto según tus necesidades
+      // ...
+
+      // Limpiar la entrada de texto después de procesar
+      commentTextArea.value = '';
+});
+
+
+
+//////////////////////////////////////////////////////////////////   
+
+
+
+     
+      // Agregar elementos al contenedor de iconos
+
+      publicationIconsGroup.appendChild(retweetIcon);     
+      publicationIconsGroup.appendChild(heartIcon);
+      publicationIconsGroup.appendChild(commentIcon);
+      publicationIconsGroup.appendChild(commentButtonIcon);
+       
+
+      comentPublicationGroup.appendChild(commentTextArea);
+      
+
+
+
+
+      // Agregar todos los elementos al contenedor de la publicación
+      //userPublicationGroup.appendChild(userPublicationId);
+      userPublicationGroup.appendChild(imageLink);
+      userPublicationGroup.appendChild(usernamePublication);
+      userPublicationGroup.appendChild(nftusernamePublication);
+      userPublicationGroup.appendChild(userPublicationDate);  
+
+      userPublicationGroup.appendChild(userPublication);
+      userPublicationGroup.appendChild(userPublicationImage);
+       userPublicationGroup.appendChild(comentPublicationGroup);
+      userPublicationGroup.appendChild(publicationIconsGroup);
+      
+
+
+      // Agregar la publicación al contenedor principal
+      //solo se muestran las publicaciones, las respuestas no se muewstran
+      if (publication_Type==="0"){
+          userPublicationContainer.appendChild(userPublicationGroup);
+      }
+      // Agregar espacio entre publicaciones
+      userPublicationContainer.appendChild(document.createElement('br'));
+     
+///##     userPublicationContainer.style.display="block"; 
+
+
+
+      } catch (error) {
+          console.error('Error al obtener las publicaciones:', error.message);
+      }
+
+
+
+
+    }
+  } catch (error) {
+    console.error('Error al obtener las publicaciones:', error.message);
+  }
+
+
+
+}
+
+
+
+
+}
+
+
+ function tiempoTranscurrido(timestamp) {
+
+  timestamp=timestamp*1000;
+  const diferencia = Date.now() - timestamp;
+  const segundos = Math.floor(diferencia / 1000);
+  const minutos = Math.floor(segundos / 60);
+  const horas = Math.floor(minutos / 60);
+  const dias = Math.floor(horas / 24);
+
+  if (segundos < 60) {
+    return 'Hace unos segundos';
+  } else if (minutos < 60) {
+    return `Hace ${minutos} ${minutos === 1 ? 'minuto' : 'minutos'}`;
+  } else if (horas < 24) {
+    return `Hace ${horas} ${horas === 1 ? 'hora' : 'horas'}`;
+  } else {
+    const fecha = new Date(timestamp);
+    return fecha.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+}     
+         
+
+
+          // Funciones para mostrar mensajes en la página
+
+           function showSuccess(message) {
+            const successElement = document.getElementById('success-message');
+            successElement.innerText = message;
+          } 
+          function showSuccess(message) {
+            const successElement = document.getElementById('success-message');
+            successElement.innerText = message;
+          }
+
+          function showError(message) {
+            const errorElement = document.getElementById('error-message');
+            errorElement.innerText = message;
+          }
+
+          function showBalance(balance) {
+            const balanceElement = document.getElementById('saldo');
+            balanceElement.innerText = 'Saldo: ' + balance;
+          }
+
+ async function tokensFree(token) {
+  try {
+    const accounts = await web3.eth.getAccounts();
+    const myAddress = accounts[0];
+    const contractFREETOKENS = new web3.eth.Contract(FreeTokens_ContractABI, freeTokensContractAddress);
+
+
+
+    if (token === "CAW") {
+      //const balanceCAW = await contractFREETOKENS.methods.balanceOfCAW(myAddress).call();
+      //if (balanceCAW <= 2000) {
+        const transaction = await contractFREETOKENS.methods.requestTokensCaw().send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') }); 
+        
+        //console.log('Transacción exitosa:', transaction);
+      //} else {
+        //  console.log('El usuario ya tiene suficientes tokens CAW.');
+      
+    } else {
+      const balanceEther = await web3.eth.getBalance(myAddress);
+      if (balanceEther <= web3.utils.toWei('0.0001', 'ether')) {
+        const transaction = await contractFREETOKENS.methods.conectar().send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });       
+        console.log('Transacción exitosa:', transaction);
+      } else {
+        console.log('El usuario tiene Ether.');
+      }
+    }
+  } catch (error) {
+    console.error('Error al realizar la transacción:', error);
+    alert('Error al realizar la transacción: ' + error.message);
+  }
+}
+
+
+
+
+
+async function sendETHtowallet(){
+
+    const accounts = await web3.eth.getAccounts();
+    const myAddress = accounts[0];
+    const contractFREETOKENS = new web3.eth.Contract(FreeTokens_ContractABI, freeTokensContractAddress);
+    
+    const walletelement = document.getElementById('text-address-to-send-ETH');      
+    const friendAddress=walletelement.value;
+
+    alert('friendAddress  '+ friendAddress);
+
+    const balanceEther = await web3.eth.getBalance(friendAddress); 
+    
+    if (balanceEther <= web3.utils.toWei('0.0', 'ether')) {
+          try{
+             const transaction = await contractFREETOKENS.methods.send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });      
+          }catch{
+               console.error('Error al realizar la transacción:', error);
+          } 
+    }else{
+      alert('El usuario ya posee ETHER');
+
+      console.log('El usuario tiene Ether.');
+    }
+
+
+    walletelement.innerHTML = '';
+
+}
+
+ 
+    
+
+          // Otros botones y acciones
+          // ...
+
+//function getFollowing(string memory nftusername) public view returns (string[] memory) {
+//function getFollowingTime(string memory follower, string memory following) public view returns (uint256) {
+//function getFollowingCount(string memory nftusername) public view returns (uint256) {
+//function getProfileTime(string memory nftusername) public view returns (uint256) {
+//function getProfileCount() public view returns (uint256) {
+//function profileExists(string memory nftusername) private view returns (bool) {
+//function isFollowing(string memory follower, string memory following) public view returns (bool) {
+    
+async function verifymintearNFT(){
+
+    // Obtener la dirección de la cuenta conectada
+    const accounts = await web3.eth.getAccounts();
+    const myAddress = accounts[0];
+
+    const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+
+    const nftusername = document.getElementById('text-mintear-nft').value;
+    const bottonMint = document.getElementById('btn-mintear-nft');
+    const bottonVerifyMint = document.getElementById('btn-verify-nft');
+    const errorDisplay = document.getElementById('Error_Minted_username');
+    const readyDisplay = document.getElementById('Minted_username');
+    const isMintedNFT = await contractNFT.methods.isMinted(nftusername).call();    
+    
+    if(isMintedNFT){
+
+       errorDisplay.style.display = 'block';
+       readyDisplay.style.display = "none"
+       errorDisplay.textContent = 'The username is not available!.';
+             
+
+    }else{
+       errorDisplay.style.display = 'none';
+       readyDisplay.style.display = "block"
+       readyDisplay.textContent= "The username is For You! :) "
+       bottonMint.style.display = 'block';
+       bottonVerifyMint.style.display = 'none';
+    }
+
+
+
+}    
+   
+
+</script>
+
+<script>
+const inputField = document.getElementById('text-mintear-nft');
+const output = document.getElementById('mount-minteo');
+const errorDisplay = document.getElementById('Error_Minted_username');
+const bottonMint = document.getElementById('btn-mintear-nft');
+
+const bottonVerifyMint = document.getElementById('btn-verify-nft');
+
+
+
+function isValidNFTUsername(username) {
+  return /^[a-z0-9]+$/.test(username);
+}
+
+
+inputField.addEventListener('input', function() {
+  const enteredText = inputField.value.trim();
+  const count = enteredText.length;
+  const saldoCaw = parseFloat(document.getElementById('saldo_CAW').textContent);
+  bottonMint.style.display = 'none';
+  bottonVerifyMint.style.display = 'block';
+  
+  if (!isValidNFTUsername(enteredText)) {
+    errorDisplay.style.display = 'block';
+    errorDisplay.textContent = 'Only lowercase letters and numbers are valid.';
+    output.textContent = '';
+    //bottonMint.style.display = 'none';
+    
+  } else {
+    errorDisplay.style.display = 'none';
+    //bottonMint.style.display = 'block';
+
+
+
+    let cawNeeded = 0;
+    if (count >= 8) {
+      cawNeeded = 1000000;
+    } else if (count === 1) {
+      cawNeeded = 11000000000000;
+    } else {
+      switch (count) {
+        case 2:
+          cawNeeded = 240000000000;
+          break;
+        case 3:
+          cawNeeded = 60000000000;
+          break;
+        case 4:
+          cawNeeded = 6000000000;
+          break;
+        case 5:
+          cawNeeded = 200000000;
+          break;
+        case 6:
+          cawNeeded = 20000000;
+          break;
+        case 7:
+          cawNeeded = 10000000;
+          break;
+      }
+    }
+
+    if (saldoCaw < cawNeeded) {
+      output.textContent = `You need ${cawNeeded} Caw`;
+      //bottonMint.style.display = 'none';
+    } else {
+      output.textContent = `You need ${cawNeeded} Caw`;
+      errorDisplay.textContent="Insufficient CAW balance"
+      //bottonMint.style.display = 'block';
+    }
+  }
+});
+
+</script>
+  
+<script>
+const textArea = document.getElementById('publicacion');
+const charCount = document.getElementById('char-count');
+const butonPublication=document.getElementById('btn-publication')
+
+textArea.addEventListener('input', function() {
+    // Obtener el conteo de caracteres restantes
+    const maxLength = 420;
+    const remaining = maxLength - textArea.value.length;
+
+  
+    
+
+    // Mostrar el conteo solo cuando sea 21 o menos, o si se ha superado el límite
+    if (remaining <= 31 || remaining < 0) {
+        charCount.textContent = remaining < 0 ? '0' : remaining;
+    } else {
+        charCount.textContent = ''; // Si hay más de 21 caracteres restantes, oculta el conteo
+    }
+
+    
+
+    if (remaining < 0){
+        butonPublication.style.display='none';
+    }else{
+        butonPublication.style.display='block';
+    }
+    
+
+    
+});
+
+</script>  
+
+
+<script>
+  // Busca y colorea los caracteres @ y #
+const postText = document.getElementById('postText');
+const text = postText.innerHTML;
+const modifiedText = text
+    .replace(/@(\S+)/g, '<span class="atSymbol">@$1</span>')
+    .replace(/#(\S+)/g, '<span class="hashtag">#$1</span>');
+postText.innerHTML = modifiedText;
+
+// Revisar si hay un enlace de imagen o video
+const mediaContent = document.getElementById('mediaContent');
+const linkToMedia = 'https://pbs.twimg.com/profile_banners/3359503481/1691164787/1500x500'; // Ejemplo de enlace a imagen
+const linkToVideo = 'https://youtu.be/8DWeaY3EROE'; // Ejemplo de enlace a video
+
+// Verificar si es una imagen
+if (/\.(jpeg|jpg|gif|png)$/.test(linkToImage)) {
+    mediaContent.innerHTML = `<img src="${linkToImage}" alt="Imagen">`;
+} else {
+    mediaContent.innerHTML = 'No se encontró imagen';
+}
+
+//if (linkToMedia.endsWith('.jpg') || linkToMedia.endsWith('.png') || linkToMedia.endsWith('.gif')) {
+    // Muestra la imagen
+//    mediaContent.innerHTML = `<img src="${linkToMedia}" alt="Imagen">`;
+//} else if (linkToMedia.endsWith('.mp4') || linkToMedia.endsWith('.avi') || linkToMedia.endsWith('.mov')) {
+    // Muestra el video
+//    mediaContent.innerHTML = `<video controls><source src="${linkToVideo}" type="video/mp4"></video>`;
+//}
+</script>
+
+ <script>
+         function myFunctionbtc() {
+  var copyText = document.getElementById("addres-wallet");
+
+  // Crea un área de texto temporal para copiar el contenido
+  var areaDeTextoTemp = document.createElement("textarea");
+  areaDeTextoTemp.value = copyText.innerText; // o innerHTML si quieres copiar también el formato HTML
+
+  // Agrega el área de texto temporal al documento
+  document.body.appendChild(areaDeTextoTemp);
+
+  // Selecciona el contenido del área de texto
+  areaDeTextoTemp.select();
+  areaDeTextoTemp.setSelectionRange(0, 99999); // Para dispositivos móviles
+
+  // Intenta copiar el contenido al portapapeles
+  document.execCommand("copy");
+
+  // Elimina el área de texto temporal ya que ya no es necesaria
+  document.body.removeChild(areaDeTextoTemp);
+
+  // Puedes agregar alguna lógica adicional o mostrar un mensaje de éxito si lo deseas
+  //alert("¡Contenido copiado al portapapeles!");
+}
+          
+          
+          </script>
+
+<script>
+ 
+
+  function generarCodigoQR() {
+    var divElement = document.getElementById("addres-wallet");
+    var divElementQR = document.getElementById("addres-wallet-QR");
+    divElementQR.innerText="";
+
+    if (divElement) {
+      var walletAddress = divElement.textContent.trim();
+      var qrcode = new QRCode(divElementQR, {
+        text: walletAddress,
+        width: 256,
+        height: 256,
+      });
+    } else {
+      console.error("Elemento no encontrado: addres-wallet");
+    }
+  }
+
+
+</script>
+
+
+
+
+
+<script src="bootstrap/js/jquery.min.js" ></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="190mm" height="190mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 190 190">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#1F1A17;stroke-width:0.0762}
+    .str2 {stroke:#4D4948;stroke-width:1.4111}
+    .str1 {stroke:white;stroke-width:1.4111}
+    .fil0 {fill:#0A0B0C}
+    .fil1 {fill:white}
+    .fil2 {fill:#00CC00}
+    .fil3 {fill:lime}
+   ]]>
+  </style>
+ </defs>
+ <g id="Capa_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <circle class="fil0 str0" cx="93.9385" cy="95.669" r="90"/>
+  <g id="_215144904">
+   <path id="_217337176" class="fil1 str0" d="M94.4877 28.3574l0.0002 0.0236 3.6361 0.0779 -0.0849 13.1968 20.6025 -0.4367c7.9841,-2.7396 18.5602,-1.3553 23.9225,9.3974l16.5122 39.5662c1.7496,19.2474 -22.1383,29.7904 -35.4772,12.5469l-9.2953 -18.0553 -19.3515 0.2769 0.0002 0.0291 -1.014 -0.0145 -1.014 0.0145 0.0002 -0.0291 -19.3515 -0.2769 -9.2953 18.0553c-13.3389,17.2435 -37.2268,6.7005 -35.4772,-12.5469l16.5122 -39.5662c5.3623,-10.7527 15.9384,-12.137 23.9225,-9.3974l20.6025 0.4367 -0.0849 -13.1968 3.6361 -0.0779 0.0002 -0.0236 0.5492 0.0118 0.5492 -0.0118z"/>
+   <polygon id="_217336624" class="fil0 str0" points="49.9808,58.415 56.7604,58.415 56.7604,51.6673 63.4701,51.6673 63.4701,58.415 70.2497,58.415 70.2497,65.0932 63.4701,65.0932 63.4701,71.8409 56.7604,71.8409 56.7604,65.0932 49.9808,65.0932 "/>
+   <ellipse id="_217336504" class="fil0 str0" cx="114.26" cy="61.715" rx="5.01737" ry="4.99379"/>
+   <ellipse id="_217336480" class="fil0 str0" cx="134.651" cy="61.715" rx="5.01737" ry="4.99379"/>
+   <ellipse id="_217336384" class="fil0 str0" transform="matrix(2.61354E-014 -0.982179 1.01462 2.67453E-014 124.456 71.8626)" rx="5.0844" ry="4.9451"/>
+   <ellipse id="_215146512" class="fil0 str0" transform="matrix(2.61354E-014 -0.982179 1.01462 2.67453E-014 124.456 51.5676)" rx="5.0844" ry="4.9451"/>
+  </g>
+  <ellipse class="fil2 str1" cx="93.9384" cy="139.013" rx="31.9016" ry="31.7517"/>
+  <ellipse class="fil3 str2" cx="93.9384" cy="139.023" rx="25.2493" ry="25.1306"/>
+ </g>
+</svg>

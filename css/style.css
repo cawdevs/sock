@@ -1,0 +1,132 @@
+@charset "utf-8";
+/* CSS Document */
+
+.container {
+	max-width:900px;
+}
+
+.form-signin {
+	max-width:300px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top:100px;
+}
+/*@media (min-width: 768px) {
+  .navbar-brand {
+    display: none;
+  }
+}*/
+.footer {
+  bottom: 0;
+  margin-top:20px;
+  padding:20px;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 100px;
+ background:url(../images/pie.jpg);
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+#cargando{
+  display:none;
+  background:url(../images/loading.gif)no-repeat white;
+  background-position:50%25%;
+  opacity:0.6;
+  z-index:1000;
+  position:absolute;
+  height:200%;
+  width:100%;
+  top:0;
+  left:0;
+}
+
+.fondomenu{
+  bottom: 0;
+  margin-top:0px;
+  padding:20px;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 270px;
+background:url(../images/fondo-menu.jpg)no-repeat left top;  
+
+}
+
+
+
+/* port styling */
+.available-magnet {
+    fill: yellow;
+}
+
+/* element styling */
+.available-cell rect {
+    stroke-dasharray: 5, 2;
+}
+
+
+
+
+
+#MYholder-link {
+   left: 200px;    
+   height: 300px;
+   position: relative;
+}
+#myholder-link-out {
+   width: 200px;
+   height: 300px;
+   position: absolute;
+}
+
+.img-rounded {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+
+
+
+
+
+/* pone texto sobre imagen */
+
+.container {
+    position: relative; 
+    max-width: 800px; /* Maximum width */
+    margin: 0 auto; /* Center it */
+}
+
+.container .content {
+    position: absolute; /* Position the background text */
+    bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    color: #f1f1f1; /* Grey text */
+    width: 100%; /* Full width */
+    padding: 20px; /* Some padding */
+}
+
+
+.icone.lupa {
+  width: 50px;
+  height: 50px;
+  border: 10px solid black;
+  border-radius: 50%;
+  position: relative;
+}
+
+.icone.lupa:after {
+  position: absolute;
+  width: 100%;
+  height: 12px;
+  background-color: black;
+  display: block;
+  content: "";
+  top: 50%;
+  left: 50%;
+  
+  transform: rotate(45deg);
+  transform-origin: -10px 40px;
+  
+}

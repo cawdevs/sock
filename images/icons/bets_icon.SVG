@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="190mm" height="190mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 190 190">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#1F1A17;stroke-width:0.0762}
+    .str2 {stroke:#4D4948;stroke-width:1.4111}
+    .str1 {stroke:white;stroke-width:1.4111}
+    .fil0 {fill:#0A0B0C}
+    .fil3 {fill:white}
+    .fil1 {fill:#00CC00}
+    .fil2 {fill:lime}
+   ]]>
+  </style>
+ </defs>
+ <g id="Capa_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <circle class="fil0 str0" cx="95.2898" cy="95.3792" r="90"/>
+  <ellipse class="fil1 str1" cx="93.435" cy="76.6494" rx="59.9827" ry="59.7008"/>
+  <ellipse class="fil2 str2" cx="93.4174" cy="76.6671" rx="47.4748" ry="47.2517"/>
+  <g id="_217337344">
+   <rect id="_278231448" class="fil3 str0" x="37.9361" y="102.499" width="56.9704" height="56.7027" rx="8.3904" ry="8.3904"/>
+   <rect id="_278232048" class="fil3 str0" transform="matrix(0.383473 -1.04707 1.07799 0.391095 97.166 139.137)" width="50.879" height="49.653" rx="8.3904" ry="8.3904"/>
+   <ellipse id="_278231592" class="fil0 str0" cx="53.7233" cy="113.631" rx="6.83645" ry="6.80428"/>
+   <ellipse id="_278231424" class="fil0 str0" cx="53.7233" cy="130.589" rx="6.83645" ry="6.80428"/>
+   <ellipse id="_278231640" class="fil0 str0" cx="53.7233" cy="147.547" rx="6.83645" ry="6.80428"/>
+   <ellipse id="_278231952" class="fil0 str0" cx="79.7702" cy="113.631" rx="6.83645" ry="6.80428"/>
+   <ellipse id="_278231568" class="fil0 str0" cx="79.7702" cy="130.589" rx="6.83645" ry="6.80428"/>
+   <ellipse id="_278231160" class="fil0 str0" cx="79.7702" cy="147.547" rx="6.83645" ry="6.80428"/>
+   <ellipse id="_216467360" class="fil0 str0" transform="matrix(0.777678 -0.36048 0.355349 0.759418 125.195 104.068)" rx="7.969" ry="8.1222"/>
+   <ellipse id="_278789312" class="fil0 str0" transform="matrix(0.777678 -0.36048 0.355349 0.759418 133.61 122.052)" rx="7.969" ry="8.1222"/>
+   <ellipse id="_216458656" class="fil0 str0" transform="matrix(0.777678 -0.36048 0.355349 0.759418 142.025 140.035)" rx="7.969" ry="8.1222"/>
+  </g>
+ </g>
+</svg>

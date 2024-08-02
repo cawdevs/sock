@@ -90,7 +90,7 @@
  <center>  <div>
     <img src="images/sock_logo.SVG" alt="My svg_logo" width="45" class="img-circle" style="transform: rotate(0deg); display: inline-block; margin-left: 10px;border: 2px solid white;">
    
-    <h5 style="display: inline-block; margin: 0; vertical-align: middle; margin-left: 10px;"><font color="white"><i> SockPuppets </i></font> </h5>
+    <h3 style="display: inline-block; margin: 0; vertical-align: middle; margin-left: 10px;"><font color="white"><i> SockPuppets </i></font> </h3>
 <i class="fa-brands fa-github" style="color: #FFD43B;"></i>
 
      <a  href="whiteDocument.html" target="_blank" ><img src="images/icons/document_icon.SVG" alt="My svg_logo" width="25"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; "></a>
@@ -128,6 +128,9 @@
    <div style="display:inline-block;" > </div>
    <div style="display:inline-block;" > </div>
      <a href="#" style="display:inline-block;" id="btn-copy-key"><font color="white"><span class="glyphicon glyphicon-duplicate" onclick="myFunctionbtc()"></span></font></a>
+
+
+
 
 
 
@@ -212,7 +215,7 @@
      <a href="#" style="display:inline-block;" id="btn-obtener-saldo"><font color="black"><span class="glyphicon glyphicon-refresh"></span></font></a>
      <div style="display:inline-block;" > </div>
 
-          <button class="boton-conectar" id="btn-caw-free" onclick="tokensFree('CAW')" style="display: inline-block; margin-left: 10px;">1,500,000 SOCK FREE</button>      
+          <button class="boton-conectar" id="btn-caw-free" onclick="tokensFree('CAW')" style="display: inline-block; margin-left: 10px;">1.5M SOCK FREE</button>      
 
   
  
@@ -1145,8 +1148,7 @@ span.hashtag {
   </script>
 
 
-<script>  
-
+<script> 
 
 
           const CAW_tokenABI =[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"spender","type":"address"},{"name":"owner","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"contractAddress","type":"address"}],"name":"authorizeContract","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"},{"name":"user","type":"address"}],"name":"burn","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"spender","type":"address"},{"name":"value","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"amount","type":"uint256"}],"name":"approveCAWTransfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"revokeAuthorization","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"contractAddress","type":"address"}],"name":"authorizeContract","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"amount","type":"uint256"}],"name":"approveCAWTransfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"contractAddress","type":"address"}],"name":"onlyAuthorizedContract","outputs":[],"payable":false,"stateMutability":"view","type":"function"}]
@@ -1214,7 +1216,7 @@ FreeTokens_ContractABI = [{"constant":false,"inputs":[],"name":"conectar","outpu
 const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';//polygon  
 
 
-
+           let globalWalletKey = ""; 
 
           const web3 = new Web3(window.ethereum);     
           const tokenContract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
@@ -1269,6 +1271,18 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
               const web3 = new Web3(window.ethereum);
               const accounts = await web3.eth.getAccounts();
               const myAddress = accounts[0];
+
+              globalWalletKey=accounts[0];
+              const start = accounts[0].slice(0, 6);
+              const end = accounts[0].slice(-4);                              
+         
+              //document.getElementById('addres-wallet').innerText = `Cuenta: ${accounts[0]}`;
+              const addressElement = document.getElementById('addres-wallet');
+              addressElement.innerText = `${start}...${end}`;
+              addressElement.style.color = 'white'; // Cambia el color del texto a blanco
+
+
+
 
               showSuccess('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
 
@@ -1397,9 +1411,9 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
             saldoElement.style.color = 'lime';
       
             
-            const addres_walletElement = document.getElementById('addres-wallet');
-            addres_walletElement.innerText = '' + myAddress;  // Puedes personalizar el valor
-            addres_walletElement.style.color = 'white';
+            //const addres_walletElement = document.getElementById('addres-wallet');
+            //addres_walletElement.innerText = '' + myAddress;  // Puedes personalizar el valor
+            //addres_walletElement.style.color = 'white';
             
             
           }
@@ -3334,29 +3348,34 @@ if (/\.(jpeg|jpg|gif|png)$/.test(linkToImage)) {
 </script>
 
  <script>
-         function myFunctionbtc() {
-  var copyText = document.getElementById("addres-wallet");
+          function myFunctionbtc() {
+            // Crea un área de texto temporal para copiar el contenido
+            var areaDeTextoTemp = document.createElement("textarea");
+            areaDeTextoTemp.value = globalWalletKey;
 
-  // Crea un área de texto temporal para copiar el contenido
-  var areaDeTextoTemp = document.createElement("textarea");
-  areaDeTextoTemp.value = copyText.innerText; // o innerHTML si quieres copiar también el formato HTML
+            // Agrega el área de texto temporal al documento
+            document.body.appendChild(areaDeTextoTemp);
 
-  // Agrega el área de texto temporal al documento
-  document.body.appendChild(areaDeTextoTemp);
+            // Selecciona el contenido del área de texto
+            areaDeTextoTemp.select();
+            areaDeTextoTemp.setSelectionRange(0, 99999); // Para dispositivos móviles
 
-  // Selecciona el contenido del área de texto
-  areaDeTextoTemp.select();
-  areaDeTextoTemp.setSelectionRange(0, 99999); // Para dispositivos móviles
+            // Intenta copiar el contenido al portapapeles
+            document.execCommand("copy");
 
-  // Intenta copiar el contenido al portapapeles
-  document.execCommand("copy");
+            // Elimina el área de texto temporal ya que ya no es necesaria
+            document.body.removeChild(areaDeTextoTemp);
 
-  // Elimina el área de texto temporal ya que ya no es necesaria
-  document.body.removeChild(areaDeTextoTemp);
+            // Muestra el mensaje de "Copiado!" en el botón
+            var btnCopyKey = document.getElementById("btn-copy-key");
+            var originalContent = btnCopyKey.innerHTML;
+            btnCopyKey.innerHTML = "<font color='white'>¡Copiado!</font>";
 
-  // Puedes agregar alguna lógica adicional o mostrar un mensaje de éxito si lo deseas
-  //alert("¡Contenido copiado al portapapeles!");
-}
+            // Vuelve al estado original después de 2 segundos
+            setTimeout(function() {
+                btnCopyKey.innerHTML = originalContent;
+            }, 2000);
+        }
           
           
           </script>
@@ -3364,23 +3383,23 @@ if (/\.(jpeg|jpg|gif|png)$/.test(linkToImage)) {
 <script>
  
 
-  function generarCodigoQR() {
-    var divElement = document.getElementById("addres-wallet");
-    var divElementQR = document.getElementById("addres-wallet-QR");
-    divElementQR.innerText="";
+  
+ function generarCodigoQR() {
+        var divElement = document.getElementById("addres-wallet");
+        var divElementQR = document.getElementById("addres-wallet-QR");
+        divElementQR.innerText="";
 
-    if (divElement) {
-      var walletAddress = divElement.textContent.trim();
-      var qrcode = new QRCode(divElementQR, {
-        text: walletAddress,
-        width: 256,
-        height: 256,
-      });
-    } else {
-      console.error("Elemento no encontrado: addres-wallet");
-    }
+        if (divElement) {
+          var walletAddress = globalWalletKey.trim();
+          var qrcode = new QRCode(divElementQR, {
+            text: walletAddress,
+            width: 256,
+            height: 256,
+          });
+        } else {
+          console.error("Elemento no encontrado: addres-wallet");
+        }
   }
-
 
 </script>
 

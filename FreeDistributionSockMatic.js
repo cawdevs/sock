@@ -19,13 +19,13 @@ async function tokensFree(token) {
 	    const contractFREETOKENS = new web3.eth.Contract(FreeTokens_ContractABI, freeTokensContractAddress);
 
 	    if (token === "SOCK") {
-	      
-	             try{   
-	                  const transaction = await contractFREETOKENS.methods.requestTokensSock().send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') }); 
-	              }catch(error){
-	                   console.error('Error al realizar la transacción:', error);
-	                   alert('Error al realizar la transacción: ' + error.message);
-                  }	    
+	      //const balanceSock = await contractFREETOKENS.methods.balanceOfSOCK(myAddress).call();
+	      //if (balanceCAW <= 2000) {
+	        const transaction = await contractFREETOKENS.methods.requestTokensSock().send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') }); 
+	        
+	        //console.log('Transacción exitosa:', transaction);
+	      //} else {
+	        //  console.log('El usuario ya tiene suficientes tokens CAW.');
 	      
 	    } else {
 	      const balanceEther = await web3.eth.getBalance(myAddress);
@@ -55,23 +55,25 @@ async function sendETHtowallet(){
 	    
 	    const walletelement = document.getElementById('text-address-to-send-ETH');      
 	    const friendAddress=walletelement.value;
-    
+
+	    
+
 	    const balanceEther = await web3.eth.getBalance(friendAddress); 
 	    
 	    if (balanceEther <= web3.utils.toWei('0.0', 'ether')) {
 	          try{
 	          	 alert('friendAddress  '+ friendAddress);
 	             const transaction = await contractFREETOKENS.methods.sendEtherToAddress(friendAddress).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });      
-                                                 
-	          }catch(error){
+	            
+	          }catch{
 	               console.error('Error al realizar la transacción:', error);
-	               alert('Error al realizar la transacción: ' + error.message);
-	          }
-
+	          } 
 	    }else{
-		      alert('El usuario ya posee ETHER');
-		      console.log('El usuario tiene Ether.');
+	      alert('El usuario ya posee ETHER');
+
+	      console.log('El usuario tiene Ether.');
 	    }
 
 	    walletelement.innerHTML = '';
-} 
+
+}

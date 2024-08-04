@@ -24,27 +24,34 @@ async function tokensFree(token) {
 	         
 
 	         try{ 
-	         	 	alert(' accountBalanceSOCK  ');	 
+	         	 	 
 	         		const accountBalanceSOCK = await tokenContract.methods.balanceOf(myAddress).call();
 	                alert(' accountBalanceSOCK  '+accountBalanceSOCK);	 
+
+
 	         }catch (error) {
 				    console.error('Error al realizar la transacción:', error);
 				    alert('Error al realizar la transacción: ' + error.message);
 			 }
 	         
              
-          
+             if (accountBalanceSOCK <= 0) {
 
+                 try{
+		          	  alert('2M tokens free  ');        	 
+		          	  const transaction = await contractFREETOKENS.methods.requestTokensSock().send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') }); 
+		          }catch (error) {
+					    console.error('Error al realizar la transacción:', error);
+					    alert('Error al realizar la transacción: ' + error.message);
+				  }
 
+             }else{            
 
-	          try{
-	          	 alert('2M tokens free  '+ friendAddress);	         	 
-	          	 
-	          	  const transaction = await contractFREETOKENS.methods.requestTokensSock().send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') }); 
-	          }catch (error) {
-				    console.error('Error al realizar la transacción:', error);
-				    alert('Error al realizar la transacción: ' + error.message);
-			  }
+                 alert('El usuario tiene Tokens SOCK' );
+
+             }
+               
+             
 	        
 	       
 	      

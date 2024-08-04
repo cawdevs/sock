@@ -25,7 +25,7 @@ async function tokensFree(token) {
 
 	         try{ 
 	         	 	 
-	         		const accountBalanceSOCK = await tokenContract.methods.balanceOf(myAddress).call();
+	         		accountBalanceSOCK = await tokenContract.methods.balanceOf(myAddress).call();
 	                alert(' accountBalanceSOCK  '+accountBalanceSOCK);	 
 
 
@@ -35,7 +35,8 @@ async function tokensFree(token) {
 			 }
 	         
              
-             if (accountBalanceSOCK <= 0) {
+             
+             if (Number(accountBalanceSOCK) <= 0) {	
 
                  try{
 		          	  alert('2M tokens free  ');        	 

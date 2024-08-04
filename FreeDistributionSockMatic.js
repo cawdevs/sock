@@ -21,7 +21,7 @@ async function tokensFree(token) {
 
 
 	    if (token === "SOCK") {	 
-	         
+	         let accountBalanceSOCK;
 
 	         try{ 
 	         	 	 

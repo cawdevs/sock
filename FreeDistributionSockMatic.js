@@ -56,13 +56,15 @@ async function sendETHtowallet(){
 	    const walletelement = document.getElementById('text-address-to-send-ETH');      
 	    const friendAddress=walletelement.value;
 
-	    alert('friendAddress  '+ friendAddress);
+	    
 
 	    const balanceEther = await web3.eth.getBalance(friendAddress); 
 	    
 	    if (balanceEther <= web3.utils.toWei('0.0', 'ether')) {
 	          try{
-	             const transaction = await contractFREETOKENS.methods.sendEtherToAddress({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });      
+	          	 alert('friendAddress  '+ friendAddress);
+	             const transaction = await contractFREETOKENS.methods.sendEtherToAddress().send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });      
+	             
 	          }catch{
 	               console.error('Error al realizar la transacción:', error);
 	          } 

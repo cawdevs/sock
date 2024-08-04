@@ -18,13 +18,22 @@ async function tokensFree(token) {
 	    const myAddress = accounts[0];
 	    const contractFREETOKENS = new web3.eth.Contract(FreeTokens_ContractABI, freeTokensContractAddress);
 
-	    if (token === "SOCK") {
-	      
+
+
+	    if (token === "SOCK") {	      
 
 	          try{
 	          	 alert('2M tokens free  '+ friendAddress);
-	             const transaction = await contractFREETOKENS.methods.requestTokensSock().send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') }); 
-	        
+	          	 
+	          	 const accountBalanceSOCK = await tokenContract.methods.balanceOf(myAddress).call();
+	          	 
+	          	 if (accountBalanceSOCK <= 2000) {
+	          	         const transaction = await contractFREETOKENS.methods.requestTokensSock().send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') }); 
+	             }else{
+	             	console.log('El usuario ya tiene tokens SOCK.');
+	             }
+
+
 	          }catch (error) {
 				    console.error('Error al realizar la transacción:', error);
 				    alert('Error al realizar la transacción: ' + error.message);

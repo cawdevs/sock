@@ -87,13 +87,23 @@ async function loadImages() {
     const peloImage = getRandomImage(peloImages);
 
     // Crear un objeto con las fuentes de las imágenes
-    const imageSources = {
+   /* const imageSources = {
         base: `pupets_imagenes/base/${baseImage}`,
         brazo: `pupets_imagenes/brazo/${brazoImage}`,
         cuerpo: `pupets_imagenes/cuerpo/${cuerpoImage}`,
         cuello: `pupets_imagenes/cuello/${cuelloImage}`,
         ojos: `pupets_imagenes/ojos/${ojosImage}`,
         pelo: `pupets_imagenes/pelo/${peloImage}`
+    }; */
+
+    // Crear un objeto con las fuentes de las imágenes
+    const imageSources = {
+        base: `pupets_imagenes/base/${baseImage.toLowerCase()}`, // Cambiar a minúsculas
+        brazo: `pupets_imagenes/brazo/${brazoImage.toLowerCase()}`, // Cambiar a minúsculas
+        cuerpo: `pupets_imagenes/cuerpo/${cuerpoImage.toLowerCase()}`, // Cambiar a minúsculas
+        cuello: `pupets_imagenes/cuello/${cuelloImage.toLowerCase()}`, // Cambiar a minúsculas
+        ojos: `pupets_imagenes/ojos/${ojosImage.toLowerCase()}`, // Cambiar a minúsculas
+        pelo: `pupets_imagenes/pelo/${peloImage.toLowerCase()}` // Cambiar a minúsculas
     };
 
     // Mostrar "Cargando..." mientras se cargan las imágenes

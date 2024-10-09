@@ -4,7 +4,7 @@
  const baseImages = [
     '00.SVG', '01.SVG', '02.SVG', '03.SVG', '04.SVG', 
     '05.SVG', '06.SVG', '07.SVG', '08.SVG', '09.SVG', 
-    '0A.SVG', '0B.SVG', '0C.SVG', '0D.SVG', '0E.SVG', '0F.SVG'
+    '0a.SVG', '0b.SVG', '0c.SVG', '0d.SVG', '0e.SVG', '0f.SVG'
 ];
 
 //const fondoImages = [
@@ -19,11 +19,11 @@ const brazoImages = [
 const cuerpoImages = [
     '00.SVG', '01.SVG', '02.SVG', '03.SVG', '04.SVG', 
     '05.SVG', '06.SVG', '07.SVG', '08.SVG', '09.SVG', 
-    '0A.SVG', '0B.SVG', '0C.SVG', '0D.SVG', '0E.SVG', 
-    '0F.SVG', '10.SVG', '11.SVG', '12.SVG', '13.SVG', 
+    '0a.SVG', '0b.SVG', '0c.SVG', '0d.SVG', '0e.SVG', 
+    '0f.SVG', '10.SVG', '11.SVG', '12.SVG', '13.SVG', 
     '14.SVG', '15.SVG', '16.SVG', '17.SVG', '18.SVG', 
-    '19.SVG', '1A.SVG', '1B.SVG', '1C.SVG', '1D.SVG', 
-    '1E.SVG', '1F.SVG', '20.SVG', '21.SVG'
+    '19.SVG', '1a.SVG', '1b.SVG', '1c.SVG', '1d.SVG', 
+    '1e.SVG', '1f.SVG', '20.SVG', '21.SVG'
 ];
 
 const cuelloImages = [
@@ -34,8 +34,8 @@ const cuelloImages = [
  const ojosImages = [
     '00.SVG', '01.SVG', '02.SVG', '03.SVG', '04.SVG',
     '05.SVG', '06.SVG', '07.SVG', '08.SVG', '09.SVG',
-    '0A.SVG', '0B.SVG', '0C.SVG', '0D.SVG', '0E.SVG',
-    '0F.SVG', '10.SVG', '11.SVG', '12.SVG', '13.SVG',
+    '0a.SVG', '0b.SVG', '0c.SVG', '0d.SVG', '0e.SVG',
+    '0f.SVG', '10.SVG', '11.SVG', '12.SVG', '13.SVG',
     '14.SVG', '15.SVG', '16.SVG', '17.SVG', '18.SVG',
     '19.SVG'
 ];
@@ -43,8 +43,8 @@ const cuelloImages = [
 const peloImages = [
     '00.SVG', '01.SVG', '02.SVG', '03.SVG', '04.SVG',
     '05.SVG', '06.SVG', '07.SVG', '08.SVG', '09.SVG',
-    '0A.SVG', '0B.SVG', '0C.SVG', '0D.SVG', '0E.SVG',
-    '0F.SVG','10.SVG','11.SVG','12.SVG','13.SVG','14.SVG'
+    '0a.SVG', '0b.SVG', '0c.SVG', '0d.SVG', '0e.SVG',
+    '0f.SVG','10.SVG','11.SVG','12.SVG','13.SVG','14.SVG'
 ];
 
 //const bocaImages = [

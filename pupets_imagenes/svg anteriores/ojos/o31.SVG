@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="215.9mm" height="279.4mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 215.9 279.4">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#1F1A17;stroke-width:0.0762}
+    .fil1 {fill:#0093DD}
+    .fil0 {fill:#0A0B0C}
+    .fil3 {fill:#DA251D}
+    .fil4 {fill:#E87877}
+    .fil2 {fill:#66CCFF}
+   ]]>
+  </style>
+ </defs>
+ <g id="ojos">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_384442800">
+   <path id="_384443400" class="fil0 str0" d="M50.3642 77.9139l59.4803 0 0.0065 0 59.4803 0 0 37.938 -46.8962 -0.2377 -2.1097 -2.4454c-1.8619,-4.8658 -3.858,-11.108 -10.4776,-13.169 -6.6197,2.061 -8.6157,8.3032 -10.4777,13.169l-2.1097 2.4454 -46.8962 0.2377 0 -37.938z"/>
+   <path id="_384442920" class="fil1" d="M60.6953 84.5026l41.6105 0 0 13.4973c-6.0439,-0.755 -4.8237,5.6239 -7.3719,8.5177l-34.2386 0.1449 0 -22.1599z"/>
+   <polygon id="_384443136" class="fil2" points="65.1743,106.562 73.8345,84.5026 78.2608,84.5026 69.3689,106.626 "/>
+   <polygon id="_384443160" class="fil2" points="75.9889,106.562 84.6491,84.5026 90.9037,84.6052 82.8208,106.562 "/>
+   <polygon id="_384443520" class="fil2" points="85.0011,106.562 93.6613,84.5026 99.9159,84.6052 91.833,106.562 "/>
+   <path id="_384442752" class="fil3" d="M159 84.5026l-41.6105 0 0 13.4973c6.0439,-0.755 4.8237,5.6239 7.3719,8.5177l34.2386 0.1449 0 -22.1599z"/>
+   <polygon id="_384442464" class="fil4" points="154.521,106.562 145.861,84.5026 141.435,84.5026 150.327,106.626 "/>
+   <polygon id="_384442224" class="fil4" points="143.707,106.562 135.046,84.5026 128.792,84.6052 136.875,106.562 "/>
+   <polygon id="_384442128" class="fil4" points="134.694,106.562 126.034,84.5026 119.78,84.6052 127.863,106.562 "/>
+  </g>
+ </g>
+</svg>

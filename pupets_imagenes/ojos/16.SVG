@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="420mm" height="420mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 420 420">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str1 {stroke:#1F1A17;stroke-width:0.0762}
+    .str2 {stroke:#0A0B0C;stroke-width:1.4111}
+    .str0 {stroke:#1F1A17;stroke-width:1.4111}
+    .fil0 {fill:none}
+    .fil3 {fill:#0A0B0C}
+    .fil4 {fill:white}
+    .fil2 {fill:#66CC00}
+    .fil1 {fill:#66FF00}
+    .fil6 {fill:#995426}
+    .fil5 {fill:#B35408}
+    .fil7 {fill:#EDBA8F}
+   ]]>
+  </style>
+ </defs>
+ <g id="Capa_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <circle class="fil0 str0" cx="175.574" cy="110.459" r="26.8849"/>
+  <circle class="fil1" cx="175.295" cy="111.016" r="19.0841"/>
+  <path class="fil2" d="M175.295 111.016l-1.6799 19.0095c-5.5521,-0.4892 -10.6219,-3.39 -13.8581,-7.9286l15.538 -11.0809z"/>
+  <circle class="fil3 str1" cx="174.527" cy="110.248" r="13.3407"/>
+  <circle class="fil4 str1" cx="179.765" cy="108.948" r="3.52625"/>
+  <path class="fil2 str2" d="M148.689 110.459c17.415,-9.6757 35.5296,-9.0312 53.7698,0 0.3323,-11.9206 -8.3765,-26.1149 -27.7749,-26.8704 -15.787,0.144 -27.1308,14.3585 -25.9949,26.8704z"/>
+  <circle class="fil0 str0" cx="244.154" cy="110.459" r="26.8849"/>
+  <circle class="fil5" cx="243.875" cy="111.016" r="19.0841"/>
+  <path class="fil6" d="M243.875 111.016l-1.6799 19.0095c-5.5521,-0.4892 -10.6219,-3.39 -13.8581,-7.9286l15.538 -11.0809z"/>
+  <circle class="fil3 str1" cx="243.107" cy="110.248" r="13.3407"/>
+  <circle class="fil4 str1" cx="248.345" cy="108.948" r="3.52625"/>
+  <path class="fil7 str2" d="M217.269 110.459c17.415,-9.6757 35.5296,-9.0312 53.7698,0 0.3323,-11.9206 -8.3765,-26.1149 -27.7749,-26.8704 -15.787,0.144 -27.1308,14.3585 -25.9949,26.8704z"/>
+ </g>
+</svg>

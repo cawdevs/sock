@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="215.9mm" height="279.4mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 215.9 279.4">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#1F1A17;stroke-width:0.0762}
+    .fil1 {fill:#0A0B0C}
+    .fil0 {fill:#FFF500}
+    .fil2 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="cuerpo">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_381828792">
+   <path id="_226254432" class="fil0 str0" d="M76.7796 103.47l26.1234 4.139c-3.0962,7.2804 -8.2086,10.6988 -15.8986,9.1803 -9.0468,-3.2839 -13.0607,-9.9229 -10.2248,-13.3193z"/>
+   <path id="_226253784" class="fil1 str0" d="M76.7796 103.47c-5.1186,6.5943 16.1561,24.1639 26.1234,4.139l-26.1234 -4.139zm27.1341 4.2991c-3.5216,15.7873 -26.9796,13.8246 -33.0788,-5.241l-12.4353 -1.9703 8.151 -10.0035 39.273 14.82 0.1235 2.717 -2.0334 -0.3222z"/>
+   <path id="_226098984" class="fil1 str0" d="M84.152 104.638c-2.0464,5.7042 10.0392,10.6671 11.425,1.8102l-11.425 -1.8102z"/>
+   <ellipse id="_226098720" class="fil2 str0" cx="85.5083" cy="105.986" rx="1.1096" ry="1.0804"/>
+   <path id="_226102320" class="fil0 str0" d="M143.447 103.47l-26.1234 4.139c3.0962,7.2804 8.2086,10.6988 15.8986,9.1803 9.0468,-3.2839 13.0607,-9.9229 10.2248,-13.3193z"/>
+   <path id="_226100424" class="fil1 str0" d="M143.447 103.47c5.1186,6.5943 -16.1561,24.1639 -26.1234,4.139l26.1234 -4.139zm-27.1341 4.2991c3.5216,15.7873 26.9796,13.8246 33.0788,-5.241l12.4353 -1.9703 -8.151 -10.0035 -39.273 14.82 -0.1235 2.717 2.0334 -0.3222z"/>
+   <path id="_381824184" class="fil1 str0" d="M136.075 104.638c2.0464,5.7042 -10.0392,10.6671 -11.425,1.8102l11.425 -1.8102z"/>
+   <ellipse id="_381828816" class="fil2 str0" cx="134.719" cy="105.986" rx="1.1096" ry="1.0804"/>
+  </g>
+ </g>
+</svg>

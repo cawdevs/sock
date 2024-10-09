@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="215.9mm" height="279.4mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 215.9 279.4">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#1F1A17;stroke-width:1.4111}
+    .str1 {stroke:#1F1A17;stroke-width:1.4111;stroke-linejoin:bevel}
+    .fil1 {fill:none}
+    .fil0 {fill:#996640}
+   ]]>
+  </style>
+ </defs>
+ <g id="brazo">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_382262816">
+   <path id="_382263320" class="fil0 str0" d="M70.919 234.284c25.702,4.9426 50.8507,5.7824 75.8014,0l4.0057 34.6912c-28.8691,4.036 -56.8668,4.2963 -83.8128,0l4.0057 -34.6912z"/>
+   <polyline id="_382262960" class="fil1 str1" points="70.791,266.241 94.3462,264.318 72.2332,259.751 95.0673,258.069 73.1946,253.502 95.3077,251.339 73.1946,247.493 95.7884,245.81 "/>
+  </g>
+ </g>
+</svg>

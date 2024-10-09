@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="215.9mm" height="279.4mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 215.9 279.4">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str1 {stroke:#1F1A17;stroke-width:0.0762}
+    .str0 {stroke:#66CCFF;stroke-width:1.4111}
+    .fil2 {fill:#0A0B0C}
+    .fil0 {fill:white}
+    .fil1 {fill:#008CCC}
+   ]]>
+  </style>
+ </defs>
+ <g id="cuerpo">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0 str0" d="M108.702 57.0526c18.3959,0 33.3141,14.918 33.3141,33.3137 0,18.3959 -14.9182,33.3141 -33.3141,33.3141 -18.3955,0 -33.3137,-14.9182 -33.3137,-33.3141 0,-18.3957 14.9182,-33.3137 33.3137,-33.3137z"/>
+  <path class="fil1" d="M78.3035 104.013c-14.4096,-33.0637 30.1792,-68.5941 58.6026,-31.382 -24.9592,2.8023 -47.2591,9.3588 -58.6026,31.382z"/>
+  <circle class="fil2 str1" cx="105.15" cy="93.3112" r="15.4984"/>
+  <path class="fil0 str1" d="M99.8317 87.1664l-1.1884 4.8482c-0.1006,-0.0252 -0.203,-0.0534 -0.3025,-0.0845 -2.6304,-0.8231 -4.0962,-3.624 -3.2729,-6.2545 0.8232,-2.6305 3.6241,-4.0963 6.2546,-3.2731 0.9044,0.283 1.7104,0.8187 2.3219,1.5421l-3.8127 3.2218z"/>
+ </g>
+</svg>

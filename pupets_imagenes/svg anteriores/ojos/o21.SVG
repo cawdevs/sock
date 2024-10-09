@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="215.9mm" height="279.4mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 215.9 279.4">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#1F1A17;stroke-width:0.0762}
+    .str3 {stroke:#BA1FB5;stroke-width:0.0762}
+    .str1 {stroke:#BA1FB5;stroke-width:1.4111}
+    .str2 {stroke:#1F1A17;stroke-width:2.8222}
+    .fil3 {fill:none}
+    .fil4 {fill:#0A0B0C}
+    .fil0 {fill:white}
+    .fil1 {fill:#6600A1}
+    .fil2 {fill:#BA1FB5}
+   ]]>
+  </style>
+ </defs>
+ <g id="cuerpo">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0 str0" d="M87.6447 121.691c13.9977,-6.4844 28.5112,-6.9312 43.5911,-0.7464 12.4965,-15.7015 12.423,-31.0689 -0.2203,-46.1024 -14.2313,4.6493 -29.2753,4.4 -45.0591,-0.3096 -11.84,15.4231 -13.8433,31.0815 1.6883,47.1584z"/>
+  <circle class="fil1 str0" cx="109.419" cy="97.3045" r="19.0877"/>
+  <circle class="fil2 str1" cx="109.419" cy="97.3045" r="12.3314"/>
+  <path class="fil3 str2" d="M131.016 74.8423c6.0632,5.997 9.4789,14.1775 9.4789,22.7089 0,8.7615 -3.6067,17.1487 -9.9624,23.1768"/>
+  <path class="fil4 str0" d="M75.7546 68.2025c18.9827,15.5802 49.2919,14.0976 67.3294,-0.4933 -24.1953,10.9956 -46.7515,11.8588 -67.3294,0.4933z"/>
+  <path class="fil4 str0" d="M89.1992 64.6211c11.12,9.1269 28.8751,8.2584 39.4415,-0.2889 -14.1736,6.4412 -27.387,6.9469 -39.4415,0.2889z"/>
+  <path class="fil4 str0" d="M84.1511 124.213c14.8119,-12.157 38.4617,-11.0002 52.5361,0.3849 -18.8792,-8.5797 -36.4795,-9.2533 -52.5361,-0.3849z"/>
+  <path class="fil3 str2" d="M87.6447 121.691c-6.999,-6.0632 -11.0269,-14.8754 -11.0269,-24.1399 0,-8.3599 3.2831,-16.3961 9.1357,-22.3619"/>
+  <circle class="fil2" cx="118.923" cy="102.715" r="7.39951"/>
+  <circle class="fil4 str3" cx="109.419" cy="97.3045" r="11.4065"/>
+  <circle class="fil0 str0" cx="98.8711" cy="92.5034" r="4.5058"/>
+  <path class="fil3 str2" d="M131.016 74.8423c6.0632,5.997 9.4789,14.1775 9.4789,22.7089 0,8.7615 -3.6067,17.1487 -9.9624,23.1768"/>
+ </g>
+</svg>

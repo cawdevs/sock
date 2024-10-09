@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="420mm" height="420mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 420 420">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:white;stroke-width:0.7056}
+    .str1 {stroke:#1F1A17;stroke-width:2.8222;stroke-linecap:round}
+    .fil4 {fill:none}
+    .fil0 {fill:#00923F}
+    .fil3 {fill:white}
+    .fil2 {fill:#66CC00}
+    .fil1 {fill:#66FF00}
+   ]]>
+  </style>
+ </defs>
+ <g id="Capa_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <circle class="fil0" cx="173.736" cy="111.088" r="27.6834"/>
+  <circle class="fil1" cx="173.736" cy="111.088" r="18.4696"/>
+  <circle class="fil2" cx="173.736" cy="111.088" r="13.7891"/>
+  <path class="fil3 str0" d="M181.83 86.5232c7.1065,2.1092 12.4831,6.1515 14.7766,13.64 -3.8727,-5.449 -8.9222,-9.8896 -14.7766,-13.64z"/>
+  <path class="fil3 str0" d="M160.712 115.6c-0.3447,3.2792 2.1527,6.4193 5.8976,7.4747 -2.2331,-2.2222 -4.2233,-4.6982 -5.8976,-7.4747z"/>
+  <g id="_275225432">
+   <ellipse id="_275224256" class="fil3" cx="169.913" cy="107.264" rx="2.50853" ry="2.50849"/>
+   <ellipse id="_274134408" class="fil3" cx="177.559" cy="107.264" rx="2.50853" ry="2.50849"/>
+   <ellipse id="_275227064" class="fil3" cx="169.913" cy="114.91" rx="2.50853" ry="2.50849"/>
+   <ellipse id="_273789104" class="fil3" cx="177.559" cy="114.91" rx="2.50853" ry="2.50849"/>
+  </g>
+  <line class="fil4 str1" x1="169.913" y1="107.265" x2="177.559" y2= "114.911" />
+  <line class="fil4 str1" x1="169.913" y1="114.911" x2="177.559" y2= "107.265" />
+  <circle class="fil0" cx="244.819" cy="111.088" r="27.6834"/>
+  <circle class="fil1" cx="244.819" cy="111.088" r="18.4696"/>
+  <circle class="fil2" cx="244.819" cy="111.088" r="13.7891"/>
+  <path class="fil3 str0" d="M252.913 86.5232c7.1064,2.1092 12.4831,6.1515 14.7766,13.64 -3.8728,-5.449 -8.9222,-9.8896 -14.7766,-13.64z"/>
+  <path class="fil3 str0" d="M231.796 115.6c-0.3446,3.2792 2.1528,6.4193 5.8977,7.4747 -2.2331,-2.2222 -4.2234,-4.6982 -5.8977,-7.4747z"/>
+  <g id="_274125312">
+   <ellipse id="_274133064" class="fil3" cx="240.996" cy="107.264" rx="2.50853" ry="2.50849"/>
+   <ellipse id="_274126080" class="fil3" cx="248.642" cy="107.264" rx="2.50853" ry="2.50849"/>
+   <ellipse id="_274125288" class="fil3" cx="240.996" cy="114.91" rx="2.50853" ry="2.50849"/>
+   <ellipse id="_274124736" class="fil3" cx="248.642" cy="114.91" rx="2.50853" ry="2.50849"/>
+  </g>
+  <line class="fil4 str1" x1="240.996" y1="107.265" x2="248.642" y2= "114.911" />
+  <line class="fil4 str1" x1="240.996" y1="114.911" x2="248.642" y2= "107.265" />
+ </g>
+</svg>

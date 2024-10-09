@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="215.9mm" height="279.4mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 215.9 279.4">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str1 {stroke:#1F1A17;stroke-width:0.0762}
+    .str0 {stroke:#1F1A17;stroke-width:2.8222}
+    .fil2 {fill:#0A0B0C}
+    .fil0 {fill:white}
+    .fil1 {fill:#6633FF}
+   ]]>
+  </style>
+ </defs>
+ <g id="cuerpo">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <circle class="fil0 str0" cx="81.288" cy="97.7704" r="25.7074"/>
+  <circle class="fil1" cx="83.7836" cy="100.266" r="23.2117"/>
+  <circle class="fil2 str1" cx="85.2579" cy="101.74" r="21.7374"/>
+  <ellipse class="fil0 str1" transform="matrix(0.659791 0.412613 -0.412613 0.659791 77.3759 91.945)" rx="6.5209" ry="11.2245"/>
+  <ellipse class="fil0 str1" transform="matrix(0.239102 0.149527 -0.149527 0.239102 71.0988 107.446)" rx="6.5209" ry="11.2245"/>
+  <path class="fil2 str1" d="M57.8151 87.2739c-5.3645,-1.185 -7.7736,-4.3922 -8.8396,-8.5187 3.0657,1.9678 6.6971,3.4407 11.5727,3.8246l-2.7331 4.6941z"/>
+  <path class="fil2 str1" d="M63.1651 79.1866c-4.3077,-2.5303 -5.4916,-5.9805 -5.2557,-9.849 2.0996,2.5624 4.8274,4.8554 8.9371,6.5556l-3.6814 3.2934z"/>
+  <path class="fil2 str1" d="M73.4359 73.2849c-3.2047,-3.8327 -4.0023,-6.6908 -2.478,-10.2542 0.2045,4.1125 3.939,6.9064 8.4067,8.6142l-5.9287 1.64z"/>
+  <path class="fil2 str1" d="M61.0533 58.6945c-2.3169,1.8187 -1.3886,3.3633 0.9272,2.241 4.044,-2.3183 8.6031,-3.4001 13.6775,-3.2455 2.6024,-0.777 3.1392,-3.622 0.0773,-4.3274 -5.0872,-0.4443 -10.007,1.0368 -14.682,5.3319z"/>
+  <circle class="fil0 str0" cx="139.91" cy="97.7704" r="25.7074"/>
+  <circle class="fil1" cx="137.415" cy="100.266" r="23.2117"/>
+  <circle class="fil2 str1" cx="135.94" cy="101.74" r="21.7374"/>
+  <ellipse class="fil0 str1" transform="matrix(0.659791 0.412613 -0.412613 0.659791 128.28 89.9684)" rx="6.5209" ry="11.2245"/>
+  <ellipse class="fil0 str1" transform="matrix(0.239102 0.149527 -0.149527 0.239102 122.003 105.469)" rx="6.5209" ry="11.2245"/>
+  <path class="fil2 str1" d="M147.762 73.2849c3.2047,-3.8327 4.0023,-6.6908 2.478,-10.2542 -0.2045,4.1125 -3.939,6.9064 -8.4067,8.6142l5.9287 1.64z"/>
+  <path class="fil2 str1" d="M160.145 58.6945c2.3169,1.8187 1.3885,3.3633 -0.9273,2.241 -4.0439,-2.3183 -8.603,-3.4001 -13.6774,-3.2455 -2.6025,-0.777 -3.1392,-3.622 -0.0773,-4.3274 5.0872,-0.4443 10.007,1.0368 14.682,5.3319z"/>
+  <path class="fil2 str1" d="M164.743 87.2739c5.3646,-1.185 7.7737,-4.3922 8.8396,-8.5187 -3.0657,1.9678 -6.6971,3.4407 -11.5727,3.8246l2.7331 4.6941z"/>
+  <path class="fil2 str1" d="M159.393 79.1866c4.3078,-2.5303 5.4917,-5.9805 5.2558,-9.849 -2.0997,2.5624 -4.8275,4.8554 -8.9372,6.5556l3.6814 3.2934z"/>
+ </g>
+</svg>

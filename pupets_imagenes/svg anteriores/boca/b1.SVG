@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="215.9mm" height="279.4mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 215.9 279.4">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#1F1A17;stroke-width:0.0762}
+    .fil1 {fill:#0A0B0C}
+    .fil0 {fill:#DA251D}
+    .fil2 {fill:#DA251D;fill-rule:nonzero}
+   ]]>
+  </style>
+ </defs>
+ <g id="cuerpo">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_384440280">
+   <ellipse id="_384440568" class="fil0" cx="108.445" cy="135.109" rx="19.0068" ry="13.5519"/>
+   <path id="_384440016" class="fil1 str0" d="M143.24 140.056c7.7373,24.9469 -24.5486,25.357 -29.9166,7.7628l-4.215 0.8343 -4.2032 -0.8443c-5.368,17.5942 -37.6539,17.1841 -29.9165,-7.7627 0.7517,-2.9679 -2.0368,-3.8377 -4.2354,-2.216 -6.5453,10.7106 -7.9885,21.3827 9.664,27.1301 10.3911,22.7259 12.3725,35.1981 28.682,37.5848l0 0.0147c16.3375,-2.3756 18.3145,-14.8495 28.712,-37.5895 17.6526,-5.7474 16.2093,-16.4196 9.6641,-27.1302 -2.1986,-1.6217 -4.9872,-0.7519 -4.2354,2.216z"/>
+   <path id="_384439800" class="fil2 str0" d="M109.461 181.702c1.746,-2.7305 3.4921,-4.0957 6.9845,-4.0957 3.8553,0 6.9844,2.4466 6.9844,5.4611 0,5.4615 -6.9844,10.9228 -13.9689,16.3843 -6.9845,-5.4615 -13.969,-10.9228 -13.969,-16.3843 0,-3.0145 3.1291,-5.4611 6.9845,-5.4611 3.4923,0 5.2385,1.3652 6.9845,4.0957zm2.8372 -3.072m9.0852 0.5763m-2.3189 12.0532m-19.2072 0m-2.3188 -12.0532m9.0851 -0.5763"/>
+  </g>
+ </g>
+</svg>

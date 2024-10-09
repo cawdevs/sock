@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="215.9mm" height="279.4mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 215.9 279.4">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str1 {stroke:#1F1A17;stroke-width:0.0762}
+    .str0 {stroke:#1F1A17;stroke-width:0.3528}
+    .fil1 {fill:#0A0B0C}
+    .fil0 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="cuerpo">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <circle class="fil0 str0" cx="92.1872" cy="97.5745" r="17.9056"/>
+  <circle class="fil1 str1" cx="100.305" cy="96.8142" r="6.62225"/>
+  <circle class="fil0 str1" cx="97.8367" cy="97.6842" r="1.94449"/>
+  <circle class="fil0 str0" cx="130.652" cy="97.9229" r="15.0963"/>
+  <circle class="fil1 str1" cx="126.354" cy="96.6007" r="7.28149"/>
+  <circle class="fil0 str1" cx="124.153" cy="98.1067" r="2.13807"/>
+ </g>
+</svg>

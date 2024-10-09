@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="215.9mm" height="279.4mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 215.9 279.4">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:white;stroke-width:5.6444}
+    .fil3 {fill:none}
+    .fil1 {fill:#0A0B0C}
+    .fil0 {fill:#383431}
+    .fil2 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="cuerpo">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <ellipse class="fil0" cx="82.8242" cy="101.411" rx="21.7781" ry="21.778"/>
+  <ellipse class="fil1" cx="82.9356" cy="101.3" rx="18.427" ry="18.427"/>
+  <ellipse class="fil0" cx="82.9356" cy="101.3" rx="14.1814" ry="14.1814"/>
+  <g id="_384422688">
+   <circle id="_384422568" class="fil2" cx="79.4241" cy="97.7883" r="2.38141"/>
+   <circle id="_384422544" class="fil2" cx="86.4471" cy="97.7883" r="2.38141"/>
+   <circle id="_384422304" class="fil2" cx="79.4241" cy="104.811" r="2.38141"/>
+   <circle id="_384422352" class="fil2" cx="86.4471" cy="104.811" r="2.38141"/>
+  </g>
+  <g id="_384422736">
+   <line id="_384422232" class="fil3 str0" x1="79.1676" y1="97.8019" x2="86.5752" y2= "104.886" />
+   <line id="_384422496" class="fil3 str0" x1="79.3292" y1="105.048" x2="86.4137" y2= "97.6403" />
+  </g>
+  <ellipse class="fil0" cx="137.942" cy="101.411" rx="21.7781" ry="21.778"/>
+  <ellipse class="fil1" cx="138.053" cy="101.3" rx="18.427" ry="18.427"/>
+  <ellipse class="fil0" cx="138.053" cy="101.3" rx="14.1814" ry="14.1814"/>
+  <g id="_226176296">
+   <circle id="_384422616" class="fil2" cx="134.542" cy="97.7883" r="2.38141"/>
+   <circle id="_456818080" class="fil2" cx="141.565" cy="97.7883" r="2.38141"/>
+   <circle id="_226487720" class="fil2" cx="134.542" cy="104.811" r="2.38141"/>
+   <circle id="_226176392" class="fil2" cx="141.565" cy="104.811" r="2.38141"/>
+  </g>
+  <g id="_226252776">
+   <line id="_226466240" class="fil3 str0" x1="134.285" y1="97.8019" x2="141.693" y2= "104.886" />
+   <line id="_226253064" class="fil3 str0" x1="134.447" y1="105.048" x2="141.531" y2= "97.6403" />
+  </g>
+ </g>
+</svg>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="215.9mm" height="279.4mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 215.9 279.4">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#1F1A17;stroke-width:1.4111;stroke-linejoin:bevel}
+    .fil0 {fill:#E77817}
+    .fil1 {fill:#FFF500}
+   ]]>
+  </style>
+ </defs>
+ <g id="ojos">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_388317640">
+   <path id="_388318432" class="fil0 str0" d="M88.6655 48.7274c-1.0239,-14.9142 -17.4687,-24.1007 -38.2315,-31.6836 -11.2829,25.2241 -10.8957,45.1844 6.5479,57.4529 9.0034,-11.4458 19.3007,-20.5197 31.6836,-25.7693z"/>
+   <path id="_388318864" class="fil1 str0" d="M50.434 17.0438c2.9227,13.4723 10.8978,26.2228 27.0185,37.8099l11.213 -6.1263c-0.5739,-14.3511 -16.8877,-23.8007 -38.2315,-31.6836z"/>
+   <path id="_388318504" class="fil0 str0" d="M132.35 48.7274c1.0239,-14.9142 17.4687,-24.1007 38.2315,-31.6836 11.2829,25.2241 10.8957,45.1844 -6.5479,57.4529 -9.0034,-11.4458 -19.3007,-20.5197 -31.6836,-25.7693z"/>
+   <path id="_388318168" class="fil1 str0" d="M170.582 17.0438c-2.9227,13.4723 -10.8978,26.2228 -27.0185,37.8099l-11.213 -6.1263c0.5739,-14.3511 16.8877,-23.8007 38.2315,-31.6836z"/>
+   <path id="_388317832" class="fil1 str0" d="M109.928 45.2521c36.8736,-1.378 60.3527,27.3802 61.5461,58.3959 -10.6687,-28.7839 -29.8877,-46.1678 -61.5461,-46.9649 -31.6584,0.7971 -50.8772,18.181 -61.5459,46.9649 1.1934,-31.0157 24.6722,-59.7739 61.5459,-58.3959z"/>
+  </g>
+ </g>
+</svg>

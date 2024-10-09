@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="215.9mm" height="279.4mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 215.9 279.4">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str1 {stroke:#1F1A17;stroke-width:0.0762}
+    .str0 {stroke:#DA251D;stroke-width:2.8222}
+    .fil3 {fill:#0A0B0C}
+    .fil2 {fill:#DEDEDD}
+    .fil1 {fill:#F19ABE}
+    .fil0 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="cuerpo">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0 str0" d="M108.616 72.3491c-15.635,0 -28.3141,12.679 -28.3141,28.3137 0,15.6349 12.6791,28.314 28.3141,28.314 15.6345,0 28.3136,-12.6791 28.3136,-28.314 0,-15.6347 -12.6791,-28.3137 -28.3136,-28.3137z"/>
+  <circle class="fil1" cx="108.88" cy="96.8791" r="14.8244"/>
+  <path class="fil2" d="M86.3692 86.1844c-18.7071,31.4745 25.8537,59.2978 45.9096,26.6894 -28.0614,13.7664 -44.3027,-0.1129 -45.9096,-26.6894z"/>
+  <circle class="fil3 str1" cx="108.975" cy="97.0672" r="8.24256"/>
+  <ellipse class="fil0 str1" transform="matrix(0.345124 0.108006 -0.114949 0.367311 111.826 94.6922)" rx="6.0345" ry="5.67"/>
+ </g>
+</svg>

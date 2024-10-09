@@ -854,8 +854,12 @@ span.hashtag {
           </div>
         </div>
         <div class="modal-body">
+
+
+        <div style="display: flex; align-items: center; justify-content: flex-start; gap: 0;"> 
+          <p>Matic required is: </p>>
           <p id="mount-minteo"></p>
-         
+        </div>
 
      <center>
 
@@ -897,8 +901,8 @@ span.hashtag {
 
 <!-- *******************************************************-->
 
-            <h3><font color="darkgreen"><p id="Minted_username"></p></font></h3>
-            <h4><font color="darkred"><p id="Error_Minted_username"></p></font></h4>
+            <h3><font color="white"><p id="Minted_username"></p></font></h3>
+            <h4><font color="orange"><p id="Error_Minted_username"></p></font></h4>
       
             <input type="text" id="text-mintear-nft" placeholder=" 2- Enter a username " required required style="border: 2px solid black; border-radius: 20px; width: 75%; margin-bottom: 10px; height: 40px;  font-size: 24px;"/> 
             <br>           
@@ -3341,12 +3345,12 @@ inputField.addEventListener('input', function() {
     }
 
     if (saldoCaw < maticNeeded) {
-      output.textContent = `You need ${maticNeeded} MATIC to mint NFTUsername`;
+      output.textContent = ${maticNeeded};
       output.style.fontSize = '24px'; // Cambia el tamaño de fuente
       output.style.color = 'white'; // Cambia el color
       //bottonMint.style.display = 'none';
     } else {
-      output.textContent = `You need ${maticNeeded} MATIC to mint NFTUsername`;
+      output.textContent = `${maticNeeded}`;
       output.style.fontSize = '24px'; // Cambia el tamaño de fuente
       output.style.color = 'red'; // Cambia el color
       errorDisplay.textContent="Insufficient MATIC balance"

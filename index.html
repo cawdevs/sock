@@ -86,6 +86,7 @@
 <script src="responses.js"></script>
 
 <script src="FreeDistributionSockMatic.js"></script>
+<script src="MintNFTUsernameandPuppet.js"></script>
 
 <br>
  
@@ -182,7 +183,7 @@
     <div class="collapse navbar-collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
          
-         <li><a href="#" data-toggle="modal" data-target="#myModal">NFT-Username</a></li>
+         <li><a href="#" data-toggle="modal" data-target="#myModal" onclick="loadImages()">NFT-Username</a></li>
           <li><a id="profile-create" href="#" data-toggle="modal" data-target="#myModalprofile">Profile</a></li>
           <!--<li><a href="#" id="btn-aprobar-contrato">Aprobar Contrato</a></li>-->
     </ul>
@@ -845,6 +846,7 @@ span.hashtag {
       <!-- Modal content-->
       <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">
         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <div class="profile-form">
             <center>
               <h3>NFTUsername</h3>
@@ -853,17 +855,54 @@ span.hashtag {
         </div>
         <div class="modal-body">
           <p id="mount-minteo"></p>
-          <center>
+         
+
+     <center>
 
           <div id="loadingAnimation-mint" style="display: none;">
             <div class="spinner"></div>              
           </div>
 
+          <!--*******************************************************   -->
+
+
+    <style>
+        #image-container {
+            position: relative;
+            width: 250px; /* Ajusta según sea necesario */
+            height: 250px; /* Ajusta según sea necesario */
+            border: 8px solid white;
+            /*border: 1px solid #ccc; /* Opcional, solo para visualizar el contenedor */
+        }
+        .layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+    </style>
+ 
+    <div class="img-circle" id="image-container"></div>
+    <p id="codeimageHexa">    </p>
+    <br>
+    
+ 
+
+  <div style="display: flex; align-items: center; justify-content: flex-start; gap: 0;">
+    <p style = "font-size: 18px; color: white;" ><i>1- Select image for you NFTUsername</i></p>
+    <button onclick="loadImages()" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px; margin-left: 30px">Next > </button>
+ </div>      
+
+<!-- *******************************************************-->
+
             <h3><font color="darkgreen"><p id="Minted_username"></p></font></h3>
             <h4><font color="darkred"><p id="Error_Minted_username"></p></font></h4>
-
-            <input type="text" id="text-mintear-nft" placeholder=" username " required required style="border: 2px solid black; border-radius: 20px; width: 75%; margin-bottom: 10px; height: 40px;  font-size: 24px;"/> 
+      
+            <input type="text" id="text-mintear-nft" placeholder=" 2- Enter a username " required required style="border: 2px solid black; border-radius: 20px; width: 75%; margin-bottom: 10px; height: 40px;  font-size: 24px;"/> 
             <br>           
+            <br>
 
             <button id="btn-verify-nft" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">check username before</button>
 
@@ -1176,12 +1215,9 @@ const tokenContractAddress = '0x8f78976a0fdf8f66ad81bb7d7c9b8d4a695022e3';//Sock
 
 
 
-const NFT_ContractABI=[{"constant":true,"inputs":[{"name":"user","type":"address"}],"name":"getCawBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"}],"name":"isMinted","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"},{"name":"nftUsername","type":"string"},{"name":"caller","type":"address"}],"name":"isNFTOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"walletAddress","type":"address"}],"name":"getMintedUsernames","outputs":[{"name":"","type":"string[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftUsername","type":"string"}],"name":"getNFTOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"username","type":"string"}],"name":"validateUsername","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[{"name":"username","type":"string"}],"name":"getMintingCost","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":false,"inputs":[{"name":"username","type":"string"}],"name":"mintNFT","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"username","type":"string"}],"name":"transferNFT","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"username","type":"string"},{"name":"price","type":"uint256"}],"name":"sellNFT","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"username","type":"string"}],"name":"cancelNFTSale","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"username","type":"string"}],"name":"buyNFT","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"user","type":"address"}],"name":"getEtherBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"walletAddress","type":"address"}],"name":"getNFTUsername","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"username","type":"string"}],"name":"getHashFromUsername","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"}],"name":"getUsernameFromHash","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"startIndex","type":"uint256"},{"name":"endIndex","type":"uint256"}],"name":"getUsernamesInRange","outputs":[{"name":"","type":"string[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenId","type":"uint256"}],"name":"getUsernameByTokenId","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTotalMintedNFTs","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"username","type":"string"}],"name":"isNFTForSale","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getNftIsForSaleCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenId","type":"uint256"}],"name":"getNFTInfoById","outputs":[{"components":[{"name":"tokenId","type":"uint256"},{"name":"username","type":"string"},{"name":"isMinted","type":"bool"},{"name":"isForSale","type":"bool"},{"name":"price","type":"uint256"},{"name":"usernameHash","type":"bytes32"},{"name":"timestamp","type":"uint256"}],"name":"","type":"tuple"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"username","type":"string"}],"name":"getNFTInfoByUsername","outputs":[{"components":[{"name":"tokenId","type":"uint256"},{"name":"username","type":"string"},{"name":"isMinted","type":"bool"},{"name":"isForSale","type":"bool"},{"name":"price","type":"uint256"},{"name":"usernameHash","type":"bytes32"},{"name":"timestamp","type":"uint256"}],"name":"","type":"tuple"}],"payable":false,"stateMutability":"view","type":"function"}];
-
-
-
-const nftContractAddress = '0xc9c20fb801af6940b35f0d12cc489da2cdc647d1';//polygon  
-
+const NFT_ContractABI=[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"FundsWithdrawn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"string","name":"username","type":"string"},{"indexed":false,"internalType":"uint256","name":"price","type":"uint256"}],"name":"NFTForSale","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":true,"internalType":"string","name":"username","type":"string"}],"name":"NFTMinted","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"string","name":"username","type":"string"}],"name":"NFTSaleCancelled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"string","name":"username","type":"string"},{"indexed":true,"internalType":"address","name":"buyer","type":"address"},{"indexed":false,"internalType":"uint256","name":"price","type":"uint256"}],"name":"NFTSold","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"string","name":"username","type":"string"},{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"NFTTransferred","type":"event"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"buyNFT","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"cancelNFTSale","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getEtherBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"getHashFromUsername","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"walletAddress","type":"address"}],"name":"getMintedUsernames","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getNFTInfoById","outputs":[{"components":[{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"string","name":"username","type":"string"},{"internalType":"bool","name":"isMinted","type":"bool"},{"internalType":"bool","name":"isForSale","type":"bool"},{"internalType":"uint256","name":"price","type":"uint256"},{"internalType":"bytes32","name":"usernameHash","type":"bytes32"},{"internalType":"bytes32","name":"imagecodeHexa","type":"bytes32"},{"internalType":"uint256","name":"timestamp","type":"uint256"}],"internalType":"struct NFTUsernameContract.NFT","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"getNFTInfoByUsername","outputs":[{"components":[{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"string","name":"username","type":"string"},{"internalType":"bool","name":"isMinted","type":"bool"},{"internalType":"bool","name":"isForSale","type":"bool"},{"internalType":"uint256","name":"price","type":"uint256"},{"internalType":"bytes32","name":"usernameHash","type":"bytes32"},{"internalType":"bytes32","name":"imagecodeHexa","type":"bytes32"},{"internalType":"uint256","name":"timestamp","type":"uint256"}],"internalType":"struct NFTUsernameContract.NFT","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"nftUsername","type":"string"}],"name":"getNFTOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"nftUsername","type":"string"}],"name":"getNFTTokenId","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"nftUsername","type":"string"}],"name":"getNFTTokenTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"walletAddress","type":"address"}],"name":"getNFTUsername","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getNftIsForSaleCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getTotalMintedNFTs","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getUsernameByTokenId","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"hash","type":"bytes32"}],"name":"getUsernameFromHash","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"startIndex","type":"uint256"},{"internalType":"uint256","name":"endIndex","type":"uint256"}],"name":"getUsernamesInRange","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"getimagecodeHexaFromUsername","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"nftUsername","type":"string"}],"name":"isCallerNFTOwner","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"nftUsername","type":"string"}],"name":"isMinted","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"isNFTForSale","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"nftOwner","type":"address"},{"internalType":"string","name":"nftUsername","type":"string"},{"internalType":"address","name":"caller","type":"address"}],"name":"isNFTOwner","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"},{"internalType":"bytes32","name":"imagecodeHexa","type":"bytes32"}],"name":"mintNFT","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"},{"internalType":"uint256","name":"price","type":"uint256"}],"name":"sellNFT","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"string","name":"username","type":"string"}],"name":"transferNFT","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+ 
+const nftContractAddress = '0xac6f27b3b55b96d7f6bfc4b905257bed6758922e';//polygon verificado 
 
 
 
@@ -1241,7 +1277,7 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
           const web3 = new Web3(window.ethereum);     
           const tokenContract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
            
-           showSuccess('The development will not stop! The team is working on the development of the CAW protocol also in a FrontEnd (html, CSS, Js).');
+           showSuccess('The development will not stop! The team is working on the development of the Sock protocol also in a FrontEnd (html, CSS, Js).');
             
 
 
@@ -1477,9 +1513,26 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
             const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
             // Mintear el NFT
             const nftusername = document.getElementById('text-mintear-nft').value;
+            const codeimageHexa = document.getElementById("codeimageHexa").textContent;
+            const maticrequired = document.getElementById("mount-minteo").textContent;
             // ...
-            try {
-              await contract.methods.mintNFT(nftusername).send({from: myAddress, gas: 400000, gasPrice: web3.utils.toWei('50', 'gwei') });
+            
+            try {              
+              //await contract.methods.mintNFT(nftusername,).send({from: myAddress, gas: 400000, gasPrice: web3.utils.toWei('50', 'gwei') });
+              // Calcular el valor de 10 MATIC en Wei
+             
+              const maticAmount = web3.utils.toWei(maticrequired, 'ether'); // 10 MATIC
+
+              // Ejecutar la función mintNFT
+              await contract.methods.mintNFT(nftusername, codeimageHexa).send({
+                  from: myAddress,
+                  gas: 400000,
+                  gasPrice: web3.utils.toWei('50', 'gwei'),
+                  value: maticAmount // Especificar el valor de 10 MATIC
+              });
+
+
+
               //alert('NFT Minteado exitosamente:');
               loadingAnimation.style.display = 'none'; // Oculta la animación
               $('#myModal').modal('hide'); 
@@ -3259,42 +3312,44 @@ inputField.addEventListener('input', function() {
     errorDisplay.style.display = 'none';
     //bottonMint.style.display = 'block';
 
-
-
-    let cawNeeded = 0;
+    let maticNeeded = 0;
     if (count >= 8) {
-      cawNeeded = 1000000;
+      maticNeeded = 8;
     } else if (count === 1) {
-      cawNeeded = 11000000000000;
+      maticNeeded = 36;
     } else {
       switch (count) {
         case 2:
-          cawNeeded = 240000000000;
+          maticNeeded = 29;
           break;
         case 3:
-          cawNeeded = 60000000000;
+          maticNeeded = 23;
           break;
         case 4:
-          cawNeeded = 6000000000;
+          maticNeeded = 18;
           break;
         case 5:
-          cawNeeded = 200000000;
+          maticNeeded = 14;
           break;
         case 6:
-          cawNeeded = 20000000;
+          maticNeeded = 11;
           break;
         case 7:
-          cawNeeded = 10000000;
+          maticNeeded = 9;
           break;
       }
     }
 
-    if (saldoCaw < cawNeeded) {
-      output.textContent = `You need ${cawNeeded} Caw`;
+    if (saldoCaw < maticNeeded) {
+      output.textContent = `You need ${maticNeeded} MATIC to mint NFTUsername`;
+      output.style.fontSize = '24px'; // Cambia el tamaño de fuente
+      output.style.color = 'white'; // Cambia el color
       //bottonMint.style.display = 'none';
     } else {
-      output.textContent = `You need ${cawNeeded} Caw`;
-      errorDisplay.textContent="Insufficient CAW balance"
+      output.textContent = `You need ${maticNeeded} MATIC to mint NFTUsername`;
+      output.style.fontSize = '24px'; // Cambia el tamaño de fuente
+      output.style.color = 'red'; // Cambia el color
+      errorDisplay.textContent="Insufficient MATIC balance"
       //bottonMint.style.display = 'block';
     }
   }

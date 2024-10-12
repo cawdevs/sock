@@ -118,7 +118,8 @@ async function loadImages() {
         for (const image of Object.keys(imageSources)) {
             const fileName = imageSources[image].split('/').pop(); // Obtener solo el nombre del archivo
             const fileWithoutExtension = fileName.split('.')[0]; // Eliminar la extensión
-            hexString += fileWithoutExtension; // Concatenar a la cadena
+            hexString += fileWithoutExtension+"0000000000000000000000000000000000000000000000000000"; // Concatenar a la cadena
+            
         }
        //console.log(hexString); // Mostrar la cadena hexadecimal en la consola
        //alert('Hexa: ' +hexString);

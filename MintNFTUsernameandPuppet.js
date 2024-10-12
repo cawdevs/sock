@@ -132,3 +132,70 @@ async function loadImages() {
         container.innerHTML = '<p>Error al cargar las imágenes.</p>';
     }
 }
+
+function getImageFromHex(hexCode, imagesArray) {
+    // Convierte el valor hexadecimal en un número decimal
+    const index = parseInt(hexCode, 16);
+
+    // Verifica si el índice está dentro de los límites del array
+    if (index >= 0 && index < imagesArray.length) {
+        return imagesArray[index];
+    } else {
+        console.error("Índice fuera de rango para el array de imágenes.");
+        return imagesArray[0]; // Retorna una imagen por defecto si el índice es inválido
+    }
+}
+
+async function loadImagesFromHex(hexString) {
+    const container = document.getElementById('NFT_image-container');
+    container.innerHTML = ''; // Limpiar el contenedor
+
+    // Eliminar el prefijo '0x' del código hexadecimal si está presente
+    hexString = hexString.startsWith('0x') ? hexString.slice(2) : hexString;
+
+    // Tomar los primeros dos caracteres hexadecimales para cada categoría
+    const baseHex = hexString.slice(0, 2);
+    const brazoHex = hexString.slice(2, 4);
+    const cuerpoHex = hexString.slice(4, 6);
+    const cuelloHex = hexString.slice(6, 8);
+    const ojosHex = hexString.slice(8, 10);
+    const peloHex = hexString.slice(10, 12);
+
+    // Obtener las imágenes correspondientes a cada capa usando el código hexadecimal
+    const baseImage = getImageFromHex(baseHex, baseImages);
+    const brazoImage = getImageFromHex(brazoHex, brazoImages);
+    const cuerpoImage = getImageFromHex(cuerpoHex, cuerpoImages);
+    const cuelloImage = getImageFromHex(cuelloHex, cuelloImages);
+    const ojosImage = getImageFromHex(ojosHex, ojosImages);
+    const peloImage = getImageFromHex(peloHex, peloImages);
+
+    // Crear un objeto con las fuentes de las imágenes
+    const imageSources = {
+        base: `pupets_imagenes/base/${baseImage}`,
+        brazo: `pupets_imagenes/brazo/${brazoImage}`,
+        cuerpo: `pupets_imagenes/cuerpo/${cuerpoImage}`,
+        cuello: `pupets_imagenes/cuello/${cuelloImage}`,
+        ojos: `pupets_imagenes/ojos/${ojosImage}`,
+        pelo: `pupets_imagenes/pelo/${peloImage}`
+    };
+
+    // Mostrar "Cargando..." mientras se cargan las imágenes
+    const loadingText = document.createElement('div');
+    loadingText.textContent = 'Cargando...';
+    container.appendChild(loadingText);
+
+    try {
+        // Cargar y mostrar las imágenes
+        const promises = Object.values(imageSources).map(src => loadImage(src));
+        const images = await Promise.all(promises);
+
+        // Limpiar "Cargando..." y agregar las imágenes al contenedor
+        container.innerHTML = ''; 
+        images.forEach(img => container.appendChild(img));
+
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = '<p>Error al cargar las imágenes.</p>';
+    }
+}
+

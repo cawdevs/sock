@@ -165,8 +165,11 @@
 
           
   <a class="navbar-brand" style="display:inline-block; margin-bottom: 30px;">            
-   <img  id="image-perfil" src="images/sock_logo.SVG" alt="My svg_logo" width="75" class="img-circle" style="border: 4px solid white; display:inline-block; margin-left: 5px;">
+   <img  id="NFT_image-container" src="images/sock_logo.SVG" alt="My svg_logo" width="75" class="img-circle" style="border: 4px solid white; display:inline-block; margin-left: 5px;">
    </a>
+
+   
+   
   
    <div class="navbar-brand">
         <select id="selector_NFTs" class="form-control" placeholder="Username@CAW" style="border: 2px solid lime; border-radius: 10px; margin-left: 10px; font-size: 16px; height: auto;"></select>
@@ -626,6 +629,11 @@ span.hashtag {
                    
 
                   <div class="well" style="border: 2px solid lime;  border-radius: 20px;">
+
+                    <button class="boton-conectar"  onclick="getImageNFTUsername()" style="display: inline-block; margin-left: 10px;">load image</button>   
+                           
+                  </div>
+
                                              
                                                  
                            <div id="success-message"></div>
@@ -643,6 +651,7 @@ span.hashtag {
             
         </div>
     </div>
+
 
 
 
@@ -1284,7 +1293,7 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
            showSuccess('The development will not stop! The team is working on the development of the Sock protocol also in a FrontEnd (html, CSS, Js).');
             
 
-
+          
 
 
           // Función para conectar con MetaMask
@@ -1596,6 +1605,9 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
                 selector.add(option);
               }
 
+
+              getImageNFTUsername();
+
               getProfile();
              
               
@@ -1615,9 +1627,31 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
 
          
 
+async function getImageNFTUsername(){
+    
+    const selectorNFTs = document.getElementById('selector_NFTs').value;
 
+    const accounts = await web3.eth.getAccounts();
+    const myAddress = accounts[0];
+    //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
+            
+    const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+    
+    //const codeHexaImage = "0x0d01140005080000000000000000000000000000000000000000000000000000" 
+    //loadImagesFromHex(codeHexaImage)  
 
+    try {
+       const codeHexaImage = await contract.methods.getimagecodeHexaFromUsername(selectorNFTs).call();     
 
+       loadImagesFromHex(codeHexaImage)                           
+
+    }catch (error) {
+    
+    //alert('Error Create profile');
+    console.error('Error:', error);
+  }
+
+}
 
 
 
@@ -1716,6 +1750,8 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
           selectorNFTs.addEventListener('change', () => {
                    getProfile();
           });
+
+
 
 
 

@@ -123,7 +123,7 @@ async function loadImages() {
         }
        //console.log(hexString); // Mostrar la cadena hexadecimal en la consola
        //alert('Hexa: ' +hexString);
-       hexString += "0000000000000000000000000000000000000000000000000000"
+       hexString += "0000000000000000000000000000000000000000000000000000";
        
        document.getElementById("codeimageHexa").textContent = hexString;
             

@@ -143,19 +143,28 @@
 
 
 
- <style>
+
+<style>
         #NFT_image-container {
-            display: flex; /* Para alinear las imágenes */
-            flex-wrap: wrap; /* Para ajustar las imágenes en varias filas */
-            justify-content: center; /* Centrar las imágenes en el contenedor */
-            margin: 20px; /* Espaciado alrededor del contenedor */
-        }
-        .nft-image {
-            margin: 5px; /* Espaciado entre imágenes */
-            max-width: 100px; /* Ancho máximo para las imágenes */
-            
+            position: relative;
+            border: 8px solid white;
+                    }
+        .layer2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
     </style>
+ 
+    
+
+
+
+
+
 
 
 
@@ -183,8 +192,8 @@
 
           
   <div class="navbar-brand" style="display:inline-block; margin-bottom: 30px;">            
-   <div id="NFT_image-container"></div> <!-- Contenedor para las imágenes -->    
-  
+         
+        <div class="img-circle" id="NFT_image-container"></div>
 
    </div>
 

@@ -1643,7 +1643,7 @@ async function getImageNFTUsername(){
     try {
        const codeHexaImage = await contract.methods.getimagecodeHexaFromUsername(selectorNFTs).call();     
 
-       loadImagesFromHex(codeHexaImage)                           
+       loadImagesFromHex(codeHexaImage);                           
 
     }catch (error) {
     

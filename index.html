@@ -857,7 +857,7 @@ span.hashtag {
 
 
         <div style="display: flex; align-items: center; justify-content: flex-start; gap: 0;"> 
-          <p>Matic required is: </p>>
+          <p><h2>Matic required is: </h2></p>
           <p id="mount-minteo"></p>
         </div>
 
@@ -1520,6 +1520,8 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
             const codeimageHexa = document.getElementById("codeimageHexa").textContent;
             const maticrequired = document.getElementById("mount-minteo").textContent;
             // ...
+
+             alert('Hexa: ' + codeimageHexa);
             
             try {              
               //await contract.methods.mintNFT(nftusername,).send({from: myAddress, gas: 400000, gasPrice: web3.utils.toWei('50', 'gwei') });
@@ -1530,8 +1532,8 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
               // Ejecutar la función mintNFT
               await contract.methods.mintNFT(nftusername, codeimageHexa).send({
                   from: myAddress,
-                  gas: 400000,
-                  gasPrice: web3.utils.toWei('50', 'gwei'),
+                  gas: 800000,
+                  gasPrice: web3.utils.toWei('60', 'gwei'),
                   value: maticAmount // Especificar el valor de 10 MATIC
               });
 

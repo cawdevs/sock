@@ -144,29 +144,20 @@
 
 
  <style>
-    #NFT_image-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin: 20px;
-        border: 2px solid white;
-        width: 150px; /* Ajusta el ancho según sea necesario */
-    }
+        #NFT_image-container {
+            display: flex; /* Para alinear las imágenes */
+            flex-wrap: wrap; /* Para ajustar las imágenes en varias filas */
+            justify-content: center; /* Centrar las imágenes en el contenedor */
+            margin: 20px; /* Espaciado alrededor del contenedor */
+            border: 2px solid white;
+        }
+        .layer {
+            margin: 5px; /* Espaciado entre imágenes */
+            max-width: 100px; /* Ancho máximo para las imágenes */
+            
+        }
+    </style>
 
-    .layer2 {
-        margin: 5px;
-        max-width: 100px;
-        border-radius: 50%; /* Contorno circular */
-        border: 4px solid white; /* Contorno de 4px blanco */
-    }
-
-    .navbar-brand {
-        display: flex;
-        align-items: center; /* Alinear verticalmente */
-        justify-content: flex-start; /* Alinear a la izquierda */
-        margin-bottom: 30px;
-    }
-</style>
 
 
 
@@ -188,39 +179,54 @@
  <div class="col-sm-6">   
 
 <nav class="navbar navbar-inverse" role="navigation" style="border: 2px solid white; border-radius: 20px; background:black;">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle navbar-right" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+  
+     <div class="container-fluid">
+          
+          <div class="navbar-header">
+               <button type="button" class="navbar-toggle navbar-right" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
 
-            <div class="navbar-brand" style="display:inline-block; margin-bottom: 30px;">            
-                <div id="NFT_image-container"></div> <!-- Contenedor para las imágenes -->    
-            </div>
+          
+  <div class="navbar-brand" style="display:inline-block; margin-bottom: 30px;">            
+        <div  id="NFT_image-container"></div> <!-- Contenedor para las imágenes -->    
+        
+   
 
-            <div class="navbar-brand">
-                <select id="selector_NFTs" class="form-control" placeholder="Username@CAW" style="border: 2px solid lime; border-radius: 10px; margin-left: 10px; font-size: 16px; height: auto;"></select>
-            </div>    
+   </div>
 
-            <div class="navbar-brand">
-                <a href="#" data-toggle="modal" data-target="#myModal_publication">
-                    <font color="lime">
-                        <span class="glyphicon glyphicon-plus-sign" style="font-size: 30px; vertical-align: middle; margin-left: 5px"></span>
-                    </font>
-                </a> 
-            </div>
-        </div>
+
+
+   
+   
+  
+   <div class="navbar-brand">
+        <select id="selector_NFTs" class="form-control" placeholder="Username@CAW" style="border: 2px solid lime; border-radius: 10px; margin-left: 10px; font-size: 16px; height: auto;"></select>
+      
+   </div>    
+
+        <div class="navbar-brand">
+        <a href="#" data-toggle="modal" data-target="#myModal_publication"><font color="lime"><span class=" glyphicon glyphicon-plus-sign" style="font-size: 30px; vertical-align: middle; margin-left: 5px"></span></font></a> 
+       </div>
+       
+   </div>
          
-        <div class="collapse navbar-collapse navbar-responsive-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" data-toggle="modal" data-target="#myModal" onclick="loadImages()">NFT-Username</a></li>
-                <li><a id="profile-create" href="#" data-toggle="modal" data-target="#myModalprofile">Profile</a></li>
-            </ul>
-        </div>
-    </div>
+       
+    <div class="collapse navbar-collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+         
+         <li><a href="#" data-toggle="modal" data-target="#myModal" onclick="loadImages()">NFT-Username</a></li>
+          <li><a id="profile-create" href="#" data-toggle="modal" data-target="#myModalprofile">Profile</a></li>
+          <!--<li><a href="#" id="btn-aprobar-contrato">Aprobar Contrato</a></li>-->
+    </ul>
+
+    
+
+</div>
+     </div>
 </nav>
 
 
@@ -913,14 +919,7 @@ span.hashtag {
             border: 8px solid white;
             /*border: 1px solid #ccc; /* Opcional, solo para visualizar el contenedor */
         }
-        .layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
+      
     </style>
  
     <div class="img-circle" id="image-container"></div>

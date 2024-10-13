@@ -1780,6 +1780,7 @@ async function getImageNFTUsername(){
           const selectorNFTs = document.getElementById('selector_NFTs');
           // Agregar evento 'change' al selector
           selectorNFTs.addEventListener('change', () => {
+                   getImageNFTUsername();
                    getProfile();
           });
 

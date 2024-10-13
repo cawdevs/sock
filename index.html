@@ -194,8 +194,6 @@
   <div class="navbar-brand" style="display:inline-block; margin-bottom: 30px;">            
         <div  id="NFT_image-container"></div> <!-- Contenedor para las imágenes -->    
         
-   
-
    </div>
 
 
@@ -1338,62 +1336,28 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
             try {
               
 
-              await window.ethereum.enable();// esta linea va
+             await window.ethereum.enable();// esta linea va
               // Crear una instancia de web3 con MetaMask como proveedor
 
+             const web3 = new Web3(window.ethereum);
+             const accounts = await web3.eth.getAccounts();
+             const myAddress = accounts[0];
 
-               //////////////////////////////////////////////////////////////////////
-               // Solicitar la cuenta del usuario
-        		//await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-        		// Definir los parámetros de la red de Polygon (Matic)
-       // 		const polygonNetwork = {
-       //     		chainId: '0x89', // ID de cadena en hexadecimal (137 en decimal)
-       //     		chainName: 'Polygon Mainnet',
-       //     		nativeCurrency: {
-       //         		name: 'MATIC',
-       //         		symbol: 'MATIC',
-       //         		decimals: 18
-       //     		},
-       //     		rpcUrls: ['https://rpc-mainnet.maticvigil.com/'],
-       //     		blockExplorerUrls: ['https://polygonscan.com/']
-       // 		};
-
-        		// Intentar agregar la red de Polygon a MetaMask
-       // 		await window.ethereum.request({
-       //    		method: 'wallet_addEthereumChain',
-       //     		params: [polygonNetwork]
-       // 		});
-
-                ////////////////////////////////////////////////////////////////
-
-
-
-              const web3 = new Web3(window.ethereum);
-              const accounts = await web3.eth.getAccounts();
-              const myAddress = accounts[0];
-
-              globalWalletKey=accounts[0];
-              const start = accounts[0].slice(0, 6);
-              const end = accounts[0].slice(-4);                              
+             globalWalletKey=accounts[0];
+             const start = accounts[0].slice(0, 6);
+             const end = accounts[0].slice(-4);                              
          
               //document.getElementById('addres-wallet').innerText = `Cuenta: ${accounts[0]}`;
-              const addressElement = document.getElementById('addres-wallet');
-              addressElement.innerText = `${start}...${end}`;
-              addressElement.style.color = 'white'; // Cambia el color del texto a blanco
+             const addressElement = document.getElementById('addres-wallet');
+             addressElement.innerText = `${start}...${end}`;
+             addressElement.style.color = 'white'; // Cambia el color del texto a blanco
 
-
-
-
-              showSuccess('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
+             showSuccess('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
 
               // Obtener el saldo automáticamente al conectarse
-              obtenerSaldo();
+             obtenerSaldo();
               //obtienen los nft minteados
-              getmintedNFT();
-
-              
-
+             getmintedNFT();              
 
              const btnCreatePublication = document.getElementById('btn-publication');
              btnCreatePublication.addEventListener('click',() => createActionPublication("",0,"publication"));
@@ -1416,7 +1380,7 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
               btnMintearNFT.addEventListener('click', mintearNFT);
 
               const btnVerifyMintearNFT = document.getElementById('btn-verify-nft');
-             btnVerifyMintearNFT.addEventListener('click', verifymintearNFT);
+              btnVerifyMintearNFT.addEventListener('click', verifymintearNFT);
 
               //const btngetNFT = document.getElementById('btn-get-nft');
               //btngetNFT.addEventListener('click', getmintedNFT);
@@ -1544,8 +1508,8 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
 
 
 
-          // Función para mintear un NFT
-          async function mintearNFT() {
+      // Función para mintear un NFT
+      async function mintearNFT() {
 
             const loadingAnimation = document.getElementById('loadingAnimation-mint');
             loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la función
@@ -1638,7 +1602,7 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
               }
 
 
-              getImageNFTUsername();
+              getImageNFTUsername("NFT_image-container");
 
               getProfile();
              
@@ -1659,31 +1623,7 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
 
          
 
-async function getImageNFTUsername(){
-    
-    const selectorNFTs = document.getElementById('selector_NFTs').value;
 
-    const accounts = await web3.eth.getAccounts();
-    const myAddress = accounts[0];
-    //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
-            
-    const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
-    
-    //const codeHexaImage = "0x0d01140005080000000000000000000000000000000000000000000000000000" 
-    //loadImagesFromHex(codeHexaImage);  
-    
-    try {
-       const codeHexaImage = await contract.methods.getimagecodeHexaFromUsername(selectorNFTs).call();     
-
-       loadImagesFromHex(codeHexaImage);                           
-
-    }catch (error) {
-    
-    //alert('Error Create profile');
-    console.error('Error:', error);
-  }
-
-}
 
 
 
@@ -1693,7 +1633,7 @@ async function getImageNFTUsername(){
 
           // Función para crear un perfil
           // Función para mintear un NFT
-   async function createProfile(value) {
+  async function createProfile(value) {
   // Obtener la dirección de la cuenta conectada
   const accounts = await web3.eth.getAccounts();
   const myAddress = accounts[0];
@@ -1703,7 +1643,6 @@ async function getImageNFTUsername(){
  
   const loadingAnimation = document.getElementById('loadingAnimation-profile');
   loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la función
-
   
 
   try {
@@ -1725,8 +1664,7 @@ async function getImageNFTUsername(){
     const key5 = document.getElementById('selector_key5').value;
 
     // Crear un array con los valores de los selectores
-    const preferenciasArray = [key1, key2, key3, key4, key5];
-   
+    const preferenciasArray = [key1, key2, key3, key4, key5];   
 
     // Crear un objeto FormData para enviar los datos y las imágenes
     const formData = new FormData();
@@ -1780,8 +1718,8 @@ async function getImageNFTUsername(){
           const selectorNFTs = document.getElementById('selector_NFTs');
           // Agregar evento 'change' al selector
           selectorNFTs.addEventListener('change', () => {
-                   getImageNFTUsername();
-                   getProfile();
+                   getImageNFTUsername("NFT_image-container");
+                   //getProfile();
           });
 
 
@@ -1889,7 +1827,6 @@ async function getImageNFTUsername(){
     const imagePerfil = document.getElementById('image-perfil');
     imagePerfil.style.display = 'block'; // Otra configuración, como 'inline-block' si es necesario
     imagePerfil.style.inline = 'inline-block'; // Otra configuración, como 'inline-block' si es necesario
-
 
   
 
@@ -2050,14 +1987,9 @@ async function findNftWallet(value) {
             }
          }
 
-         nftUsernames=nftUsernamesX;
-             
-
-
-
-           
-
+         nftUsernames=nftUsernamesX;           
         
+      
 
 
 

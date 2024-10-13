@@ -146,6 +146,39 @@ function getImageFromHex(hexCode, imagesArray) {
     }
 }
 
+
+
+async function getImageNFTUsername(image_contenedor){
+    
+        const selectorNFTs = document.getElementById('selector_NFTs').value;
+
+        const container = document.getElementById(image_contenedor);
+        container.innerHTML = ''; // Limpiar el contenedor
+
+        const accounts = await web3.eth.getAccounts();
+        const myAddress = accounts[0];
+        //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
+            
+        const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+    
+        //const codeHexaImage = "0x0d01140005080000000000000000000000000000000000000000000000000000" 
+        //loadImagesFromHex(codeHexaImage);  
+    
+        try {
+            const codeHexaImage = await contract.methods.getimagecodeHexaFromUsername(selectorNFTs).call();     
+
+            loadImagesFromHex(codeHexaImage);                           
+
+        }catch (error) {
+    
+            //alert('Error Create profile');
+            console.error('Error:', error);
+        }
+
+}
+
+
+
 async function loadImagesFromHex(hexString) {
     const container = document.getElementById('NFT_image-container');
     container.innerHTML = ''; // Limpiar el contenedor

@@ -95,7 +95,6 @@ async function loadImages() {
         ojos: `pupets_imagenes/ojos/${ojosImage}`,
         pelo: `pupets_imagenes/pelo/${peloImage}`
     }; 
-
    
 
     // Mostrar "Cargando..." mientras se cargan las imágenes
@@ -151,36 +150,42 @@ function getImageFromHex(hexCode, imagesArray) {
 async function getImageNFTUsername(image_contenedor){
     
         const selectorNFTs = document.getElementById('selector_NFTs').value;
-
-        const container = document.getElementById(image_contenedor);
-        container.innerHTML = ''; // Limpiar el contenedor
-
+        
         const accounts = await web3.eth.getAccounts();
         const myAddress = accounts[0];
         //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
             
         const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
     
-        //const codeHexaImage = "0x0d01140005080000000000000000000000000000000000000000000000000000" 
-        //loadImagesFromHex(codeHexaImage);  
+        // Define las opciones en un array
+//const codeHexaOptions = [
+//    "0x0d01140005080000000000000000000000000000000000000000000000000000",
+//    "0x0d02130005080000000000000000000000000000000000000000000000000000"
+//];
+
+// Selecciona aleatoriamente una opción
+//const selectedCodeHexaImage = codeHexaOptions[Math.floor(Math.random() * codeHexaOptions.length)];
+
+// Llama a la función con la opción seleccionada
+//loadImagesFromHex(selectedCodeHexaImage,image_contenedor);
     
         try {
             const codeHexaImage = await contract.methods.getimagecodeHexaFromUsername(selectorNFTs).call();     
 
-            loadImagesFromHex(codeHexaImage);                           
+            loadImagesFromHex(codeHexaImage,image_contenedor);                           
 
         }catch (error) {
     
             //alert('Error Create profile');
             console.error('Error:', error);
         }
-
+    
 }
 
 
 
-async function loadImagesFromHex(hexString) {
-    const container = document.getElementById('NFT_image-container');
+async function loadImagesFromHex(hexString,image_contenedor) {
+    const container = document.getElementById(image_contenedor);
     container.innerHTML = ''; // Limpiar el contenedor
 
     // Eliminar el prefijo '0x' del código hexadecimal si está presente

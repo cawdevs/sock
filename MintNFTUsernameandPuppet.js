@@ -230,8 +230,13 @@ async function loadImagesFromHex(hexString, image_contenedor) {
         const promises = Object.values(imageSources).map(src => loadImage(src));
         const images = await Promise.all(promises);
 
+        alert('images: ' + images);
+
+
         // Limpiar "Cargando..." y agregar las imágenes al contenedor
         container.innerHTML = ''; 
+
+
         images.forEach(img => container.appendChild(img));
 
     } catch (error) {

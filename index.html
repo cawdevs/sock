@@ -87,9 +87,6 @@
 
 <script src="FreeDistributionSockMatic.js"></script>
 <script src="MintNFTUsernameandPuppet.js"></script>
-<script src="FindAndFiiter.js"></script>
-
- 
 
 <br>
  
@@ -146,6 +143,20 @@
 
 
 
+ <style>
+        #NFT_image-container {
+            display: flex; /* Para alinear las imágenes */
+            flex-wrap: wrap; /* Para ajustar las imágenes en varias filas */
+            justify-content: center; /* Centrar las imágenes en el contenedor */
+            margin: 20px; /* Espaciado alrededor del contenedor */
+            border: 2px solid white;
+        }
+        .layer2 {
+            margin: 5px; /* Espaciado entre imágenes */
+            max-width: 100px; /* Ancho máximo para las imágenes */
+            
+        }
+    </style>
 
 
 
@@ -1895,7 +1906,7 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
 
 
 
-async function findNftWallet2(value) {
+async function findNftWallet(value) {
   // Obtener la dirección de la cuenta conectada
   const accounts = await web3.eth.getAccounts();
   const myAddress = accounts[0];

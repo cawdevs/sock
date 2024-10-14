@@ -185,7 +185,6 @@ async function getImageNFTUsername(image_contenedor){
 
 async function loadImagesFromHex(hexString, image_contenedor) {
     const container = document.getElementById(image_contenedor);
-    const hexString ="0x07041b040a0c"
 
     // Limpiar el contenedor removiendo todos los nodos hijos
     while (container.firstChild) {

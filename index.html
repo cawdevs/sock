@@ -88,9 +88,6 @@
 <script src="FreeDistributionSockMatic.js"></script>
 <script src="MintNFTUsernameandPuppet.js"></script>
 <script src="FindAndFilter.js"></script>
-<script src="InfoProfileSock.js"></script>
-
-
 
 <br>
  
@@ -299,7 +296,7 @@
        
        <a data-toggle="tab" href="#staking" style=" margin-left: 15px;">  <img  id="image-market" src="images/icons/game_icon.SVG" alt="home" width="45"> </a>
                           
-       <a data-toggle="tab" href="#market" style=" margin-left: 15px;">  <img  id="image-mymarket" src="images/icons/gamefi_icon.SVG" alt="mymarket" width="45"> </a>
+       <a data-toggle="tab" href="#mymarket" style=" margin-left: 15px;">  <img  id="image-mymarket" src="images/icons/gamefi_icon.SVG" alt="mymarket" width="45"> </a>
 
        <a data-toggle="tab" href="#goservice" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/swapp_icon.SVG" alt="home" width="45"> </a>
 
@@ -335,7 +332,7 @@ span.hashtag {
 
 
 
-<div class="tab-content" style="border: 2px solid lime; border-radius: 20px; background:white;">
+  <div class="tab-content" style="border: 2px solid lime; border-radius: 20px; background:white;">
     
 
 
@@ -356,7 +353,7 @@ span.hashtag {
    <!--****************************************************-->
          <br>
          <h1><p> menu 1 </p></h1>
-         
+         </div>
                      
                          
 
@@ -391,7 +388,7 @@ span.hashtag {
     <!--/////////////////////////////////////////////////////////////-->
     <!--/////////////////////////////////////////////////////////////-->
 
-    <div id="staking" class="tab-pane fade" style="display:none; ">
+    <div id="menu_staking" class="tab-pane fade" style="display:none; ">
        
          <div class="container-fluid" style = "width:80%; align-items: center;">
               
@@ -449,7 +446,7 @@ span.hashtag {
     
 <!--/////////////////////////////////////////////////////////////-->
     <!--/////////////////////////////////////////////////////////////-->
-    <div id="market" class="tab-pane fade">
+    <div id="menu_NFTusername" class="tab-pane fade">
       
       <div class="container-fluid"> 
           <br>
@@ -469,19 +466,24 @@ span.hashtag {
     <!--/////////////////////////////////////////////////////////////-->
 
 
-<div id="infosocks" class="tab-pane fade">
-      
-      <br>   
-      <center><h1><p>"Info Socks"</p></h1></center> 
-      <br>   
-
-      <div id =info-socks>  </div>
-
-</div>
 
 
-                 
-   
+
+
+
+
+
+    
+
+  </div>
+
+                    
+  
+     
+
+
+
+
 
                 </div>
 <br>
@@ -1437,9 +1439,7 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
               loadingAnimation.style.display = 'none'; // Oculta la animación
               $('#myModal').modal('hide'); 
 
-              //getProfile(); 
-             
-              info_profile_sock("info-socks");
+              getProfile(); 
 
                 // Mostrar mensaje de éxito
               showSuccess('NFT minteado correctamente.');
@@ -1610,7 +1610,6 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
           // Agregar evento 'change' al selector
           selectorNFTs.addEventListener('change', () => {
                    getImageNFTUsername("NFT_image-container");
-                   info_profile_sock("info-socks");
                    //getProfile();
           });
 

@@ -128,6 +128,8 @@ async function findNftWallet(value) {
         userRowContainer.style.display = "flex";
         userRowContainer.style.alignItems = "center"; // Centrar verticalmente la imagen y el nombre
         userRowContainer.style.marginBottom = "10px"; // Espacio entre filas
+        userRowContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor
+        userRowContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
 
               // Crear un contenedor para la imagen
               const imageUserContainer = document.createElement("div");
@@ -138,7 +140,9 @@ async function findNftWallet(value) {
                   imageUserContainer.style.justifyContent = "center"; // Centrar horizontalmente
                   imageUserContainer.style.alignItems = "center"; // Centrar verticalmente
                   imageUserContainer.style.marginRight = "10px"; // Espacio entre imagen y nombre
-
+                  imageUserContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor de la imagen
+                  imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
+ 
                  
               userRowContainer.appendChild(imageUserContainer);
                                                    

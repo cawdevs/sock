@@ -150,8 +150,9 @@ async function findNftWallet(value) {
                                                    
 
               const nameButton = document.createElement("span");
-                  nameButton.innerHTML = '<span style="font-size: 14px; vertical-align: middle; display: inline-block;"></span>';
+                  nameButton.innerHTML = '<span style="font-size: 18px; vertical-align: middle; display: inline-block;"></span>';
                   nameButton.textContent = username;
+                  nameButton.style.color = "white";
                   nameButton.classList.add("clickable-button");
                   nameButton.addEventListener("click", function () {
                       //alert("Clickeaste el botón de usuario para " + username);

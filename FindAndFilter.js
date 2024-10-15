@@ -110,7 +110,7 @@ async function findNftWallet(value) {
         //nftUsernames.forEach(function (username) {
     
 
-    console.log("Lista usernames:", nftUsernames);
+    console.log("Lista usernames2:", nftUsernames);
     for (const username of nftUsernames) {
 
           listaNFTUsernames.push(username);
@@ -119,7 +119,9 @@ async function findNftWallet(value) {
           try{
               
               const codeHexaImage = await contract.methods.getimagecodeHexaFromUsername(username).call();     
-                              
+              
+              console.log("codeHexaImage:", codeHexaImage);
+
               const container = document.createElement("div");
 
 
@@ -151,12 +153,14 @@ async function findNftWallet(value) {
               container.appendChild(imageUserContainer);           
               container.appendChild(nameButton);
 
-              // Verifica si el usuario sigue a 'username'
-              
+              // Verifica si el usuario sigue a 'username'              
 
               nftUsernameList.appendChild(container);
 
               
+
+
+
           } catch (error){
 
             console.error("Error en find (images)  :", error);

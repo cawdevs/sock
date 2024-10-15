@@ -173,7 +173,7 @@ async function getImageNFTUsername(image_contenedor){
         try {
             const codeHexaImage = await contract.methods.getimagecodeHexaFromUsername(selectorNFTs).call();     
             alert('Error Create profile' +" "+ selectorNFTs+ " " + codeHexaImage);
-            loadImagesFromHex(codeHexaImage,image_contenedor,"big");                           
+            await loadImagesFromHex(codeHexaImage,image_contenedor,"big");                           
 
         }catch (error) {
     

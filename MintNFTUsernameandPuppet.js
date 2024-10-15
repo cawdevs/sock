@@ -186,7 +186,7 @@ async function getImageNFTUsername(image_contenedor){
 async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
 
     //const container = document.getElementById(image_contenedor);
-    imageContainer.innerHTML = ''; // Limpiar el contenedor
+    image_contenedor.innerHTML = ''; // Limpiar el contenedor
 
     // Limpiar el contenedor removiendo todos los nodos hijos
     //while (container.firstChild) {
@@ -259,7 +259,7 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
             img.style.width = width;
             img.style.height = height;
             img.style.objectFit = "cover";
-            container.appendChild(img);
+            image_contenedor.appendChild(img);
         });
 
 
@@ -268,6 +268,6 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
 
     } catch (error) {
         console.error(error);
-        container.innerHTML = '<p>Error al cargar las imágenes.</p>';
+        image_contenedor.innerHTML = '<p>Error al cargar las imágenes.</p>';
     }
 }

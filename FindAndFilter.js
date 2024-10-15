@@ -129,14 +129,16 @@ async function findNftWallet(value) {
                   
                   imageUserContainer.id = `imageContainerId_${username}`; // ID único por usuario
                   // Estilos para el contenedor de imágenes
-                  loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar
+                  
                   imageUserContainer.style.display = "inline-block"; // Para que se muestre como un botón
                   imageUserContainer.style.marginLeft = "10px"; // Margen izquierdo similar al userButton
                   imageUserContainer.style.cursor = "pointer"; // Para indicar que es clickeable
                    
                   imageUserContainer.style.width = "80px"; // Ancho del contenedor
                   imageUserContainer.style.height = "80px"; // Alto del contenedor 
-
+                  
+                  await loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar
+                  
               container.appendChild(imageUserContainer);
 
                                                    

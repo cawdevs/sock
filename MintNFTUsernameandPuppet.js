@@ -222,9 +222,9 @@ async function loadImagesFromHex(hexString, image_contenedor) {
     };
 
     // Mostrar "Cargando..." mientras se cargan las imágenes
-    const loadingText = document.createElement('div');
-    loadingText.textContent = 'Cargando...';
-    container.appendChild(loadingText);
+    //const loadingText = document.createElement('div');
+    //loadingText.textContent = 'Cargando...';
+    //container.appendChild(loadingText);
 
     try {
         // Cargar y mostrar las imágenes

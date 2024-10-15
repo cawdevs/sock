@@ -184,12 +184,13 @@ async function getImageNFTUsername(image_contenedor){
 
 
 async function loadImagesFromHex(hexString, image_contenedor) {
+
     const container = document.getElementById(image_contenedor);
 
     // Limpiar el contenedor removiendo todos los nodos hijos
-    while (container.firstChild) {
-        container.removeChild(container.firstChild);
-    }
+    //while (container.firstChild) {
+    //    container.removeChild(container.firstChild);
+    //}
 
     // Eliminar el prefijo '0x' del código hexadecimal si está presente
     hexString = hexString.startsWith('0x') ? hexString.slice(2) : hexString;

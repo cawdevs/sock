@@ -186,7 +186,7 @@ async function getImageNFTUsername(image_contenedor){
 async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
 
     //const container = document.getElementById(image_contenedor);
-    image_contenedor.innerHTML = ''; // Limpiar el contenedor
+    imageContainer.innerHTML = ''; // Limpiar el contenedor
 
     // Limpiar el contenedor removiendo todos los nodos hijos
     //while (container.firstChild) {
@@ -232,8 +232,12 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
         const promises = Object.values(imageSources).map(src => loadImage(src));
         const images = await Promise.all(promises);
 
-        
-      
+     
+
+
+        // Limpiar "Cargando..." y agregar las imágenes al contenedor
+        container.innerHTML = ''; 
+
         
 
         // Configuración de tamaño según la variable `size`
@@ -259,7 +263,7 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
             img.style.width = width;
             img.style.height = height;
             img.style.objectFit = "cover";
-            image_contenedor.appendChild(img);
+            container.appendChild(img);
         });
 
 
@@ -268,6 +272,6 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
 
     } catch (error) {
         console.error(error);
-        image_contenedor.innerHTML = '<p>Error al cargar las imágenes.</p>';
+        container.innerHTML = '<p>Error al cargar las imágenes.</p>';
     }
 }

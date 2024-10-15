@@ -91,6 +91,9 @@
 
 <br>
  
+
+
+
  <center>  <div>
     <img src="images/sock_logo.SVG" alt="My svg_logo" width="45" class="img-circle" style="transform: rotate(0deg); display: inline-block; margin-left: 10px;border: 2px solid white;">
    
@@ -115,6 +118,13 @@
  </div></center>
 
 
+
+
+
+
+
+
+
     <center><div>   
    <h5>
     <div style="display:inline-block;" id= "addres-wallet"><font color="white"></font></div>
@@ -129,17 +139,23 @@
    <div style="display:inline-block;" > </div>
    <div style="display:inline-block;" > </div>
      <a href="#" style="display:inline-block;" id="btn-copy-key"><font color="white"><span class="glyphicon glyphicon-duplicate" onclick="myFunctionbtc()"></span></font></a>
-
-
-
-
-
-
     <!-- <a class="btn btn-primary  btn-xs" role="button" onclick="myFunctionbtc()" onmouseout="outFuncbtc()" ><font color="white" size="5"> <span class="tooltiptext" id="myTooltipbtc">Copiar btc wallet</span></font></a>
      -->    
 
    </h5>
  </div></center> 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -157,10 +173,7 @@
             max-width: 100px; /* Ancho máximo para las imágenes */
             
         }
-    </style>
-
-
-
+</style>
 
 
 
@@ -176,6 +189,7 @@
 
    <div class="col-sm-1"> 
    </div>
+
           
  <div class="col-sm-6">   
 
@@ -302,7 +316,7 @@
 
         <a data-toggle="tab" href="#goservice" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/staking_icon.SVG" alt="home" width="45"> </a>
 
-       <a data-toggle="tab" href="#goservice" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/config_icon.SVG" alt="home" width="45"> </a>
+       <a data-toggle="tab" href="#menu_info_sock" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/config_icon.SVG" alt="home" width="45"> </a>
        
        
 </ul>
@@ -575,7 +589,17 @@ span.hashtag {
     <!--/////////////////////////////////////////////////////////////-->
     <!--/////////////////////////////////////////////////////////////-->
 
+ <div id="menu_info_sock" class="tab-pane fade">
+      
+      <div class="container-fluid"> 
+          
+               <div id="info-sock"></div>  
+                    
+      </div>
 
+    </div>
+    <!--/////////////////////////////////////////////////////////////-->
+    <!--/////////////////////////////////////////////////////////////-->
 
 
 
@@ -1549,7 +1573,8 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
               loadingAnimation.style.display = 'none'; // Oculta la animación
               $('#myModal').modal('hide'); 
 
-              getProfile(); 
+              //getProfile(); 
+              info_profile_sock("info-sock");
 
                 // Mostrar mensaje de éxito
               showSuccess('NFT minteado correctamente.');
@@ -1606,6 +1631,8 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
               getImageNFTUsername("NFT_image-container");
 
               //getProfile();
+               
+              info_profile_sock("info-sock");
              
               
               showSuccess('List NFT username OK!.');
@@ -1720,6 +1747,7 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
           // Agregar evento 'change' al selector
           selectorNFTs.addEventListener('change', () => {
                    getImageNFTUsername("NFT_image-container");
+                   info_profile_sock("info-sock");
                    //getProfile();
           });
 

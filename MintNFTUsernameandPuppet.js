@@ -186,7 +186,16 @@ async function getImageNFTUsername(image_contenedor){
 async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
 
     const container = document.getElementById(image_contenedor);
-     
+    container.style.border = "1px solid blue"; // Borde blanco alrededor del contenedor
+    container.style.padding = "5px"; // Espacio interno para separar el contenido del borde
+    container.style.position = "relative"; // Posicionamiento para las imágenes
+    container.style.overflow = "hidden"; // Asegura que no se salga del borde
+   
+  
+    // Limpiar el contenedor
+    container.innerHTML = "";
+
+
     // Limpiar el contenedor removiendo todos los nodos hijos
     //while (container.firstChild) {
     //    container.removeChild(container.firstChild);
@@ -231,11 +240,10 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
         const promises = Object.values(imageSources).map(src => loadImage(src));
         const images = await Promise.all(promises);
 
-        alert('images: ' + hexString);
+        //alert('images: ' + hexString);
 
 
-        // Limpiar "Cargando..." y agregar las imágenes al contenedor
-        container.innerHTML = ''; 
+      
 
         
 

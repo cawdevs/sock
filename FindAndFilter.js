@@ -112,7 +112,7 @@ async function findNftWallet(value) {
     
 
     console.log("Lista usernames2:", nftUsernames);
-    
+
     
     for (const username of nftUsernames) {
 
@@ -122,7 +122,7 @@ async function findNftWallet(value) {
               
             const codeHexaImage = await contractNFT.methods.getimagecodeHexaFromUsername(username).call();     
               
-            console.log("codeHexaImage:", codeHexaImage);
+            //console.log("codeHexaImage:", codeHexaImage);
              
           
             // Crear un contenedor para la fila de usuario
@@ -191,3 +191,4 @@ async function findNftWallet(value) {
 
 
 }
+

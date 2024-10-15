@@ -159,6 +159,8 @@ async function findNftWallet(value) {
               
           } catch (error){
 
+            console.error("Error en find (images)  :", error);
+
            
           }
 

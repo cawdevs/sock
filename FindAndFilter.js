@@ -100,7 +100,7 @@ async function findNftWallet(value) {
         }       
 
         const nftUsernameList = document.getElementById('nft-username-list');
-        
+
         //nftUsernameList.style.display="none";
 
         // Limpia el contenido actual del contenedor
@@ -112,6 +112,7 @@ async function findNftWallet(value) {
     
 
     console.log("Lista usernames2:", nftUsernames);
+    nftUsernames=["aaaaaa","bbbbbb","cccccc"]
     
     for (const username of nftUsernames) {
 
@@ -119,8 +120,22 @@ async function findNftWallet(value) {
          
           try{
               
-            const codeHexaImage = await contractNFT.methods.getimagecodeHexaFromUsername(username).call();     
+            //const codeHexaImage = await contractNFT.methods.getimagecodeHexaFromUsername(username).call();     
               
+            
+           const hexValues = [
+    "0x0101010201020000000000000000000000000000000000000000000000000000",
+    "0x0202020202030000000000000000000000000000000000000000000000000000",
+    "0x0303020303010000000000000000000000000000000000000000000000000000"
+];
+
+// Seleccionar un valor aleatorio
+const randomIndex = Math.floor(Math.random() * hexValues.length);
+const codeHexaImage = hexValues[randomIndex];
+
+
+
+
             console.log("codeHexaImage:", codeHexaImage);
              
           

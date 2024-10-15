@@ -100,6 +100,7 @@ async function findNftWallet(value) {
         }       
 
         const nftUsernameList = document.getElementById('nft-username-list');
+
         //nftUsernameList.style.display="none";
 
         // Limpia el contenido actual del contenedor
@@ -161,7 +162,7 @@ async function findNftWallet(value) {
              
               nftUsernameList.appendChild(userRowContainer);
               
-              await loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar
+              await loadImagesFromHex(codeHexaImage, imageUserContainer); // Cargar la imagen al iniciar
               
 
 

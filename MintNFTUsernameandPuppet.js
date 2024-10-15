@@ -185,7 +185,8 @@ async function getImageNFTUsername(image_contenedor){
 
 async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
 
-    const container = document.getElementById(image_contenedor);
+    //const container = document.getElementById(image_contenedor);
+    imageContainer.innerHTML = ''; // Limpiar el contenedor
 
     // Limpiar el contenedor removiendo todos los nodos hijos
     //while (container.firstChild) {
@@ -231,12 +232,8 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
         const promises = Object.values(imageSources).map(src => loadImage(src));
         const images = await Promise.all(promises);
 
-        alert('images: ' + hexString);
-
-
-        // Limpiar "Cargando..." y agregar las imágenes al contenedor
-        container.innerHTML = ''; 
-
+        
+      
         
 
         // Configuración de tamaño según la variable `size`

@@ -122,41 +122,39 @@ async function findNftWallet(value) {
               
               console.log("codeHexaImage:", codeHexaImage);
 
-              const container = document.createElement("div");
-
+             
+            const container = document.createElement("div");
 
               // Crea un contenedor para las imágenes
               const imageUserContainer = document.createElement("div");
-              imageUserContainer.id = "imageContainerId"; // Este ID se usará en la función
-              // Estilos para el contenedor de imágenes
-              imageUserContainer.style.display = "inline-block"; // Para que se muestre como un botón
-              imageUserContainer.style.marginLeft = "10px"; // Margen izquierdo similar al userButton
-              imageUserContainer.style.cursor = "pointer"; // Para indicar que es clickeable
-               
-              imageUserContainer.style.width = "80px"; // Ancho del contenedor
-              imageUserContainer.style.height = "80px"; // Alto del contenedor 
+                  imageUserContainer.id = "imageContainerId"; // Este ID se usará en la función
+                  // Estilos para el contenedor de imágenes
+                  loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar
+                  imageUserContainer.style.display = "inline-block"; // Para que se muestre como un botón
+                  imageUserContainer.style.marginLeft = "10px"; // Margen izquierdo similar al userButton
+                  imageUserContainer.style.cursor = "pointer"; // Para indicar que es clickeable
+                   
+                  imageUserContainer.style.width = "80px"; // Ancho del contenedor
+                  imageUserContainer.style.height = "80px"; // Alto del contenedor 
 
               container.appendChild(imageUserContainer);
 
-              // Cargar la imagen automáticamente
-              // Define tu hexString aquí
-              loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar
-            
-                          
+                                                   
 
               const nameButton = document.createElement("span");
-              nameButton.innerHTML = '<span style="font-size: 14px; vertical-align: middle; display: inline-block;"></span>';
-              nameButton.textContent = username;
-              nameButton.classList.add("clickable-button");
-              nameButton.addEventListener("click", function () {
-                  //alert("Clickeaste el botón de usuario para " + username);
-              });
-              nameButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
-              
-                   
+                  nameButton.innerHTML = '<span style="font-size: 14px; vertical-align: middle; display: inline-block;"></span>';
+                  nameButton.textContent = username;
+                  nameButton.classList.add("clickable-button");
+                  nameButton.addEventListener("click", function () {
+                      //alert("Clickeaste el botón de usuario para " + username);
+                  });
+                  nameButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
+                                    
               container.appendChild(nameButton);
 
               // Verifica si el usuario sigue a 'username'              
+
+
 
               nftUsernameList.appendChild(container);
 

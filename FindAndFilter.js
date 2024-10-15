@@ -111,23 +111,23 @@ async function findNftWallet(value) {
     
 
     console.log("Lista usernames2:", nftUsernames);
+    
     for (const username of nftUsernames) {
 
           listaNFTUsernames.push(username);
-          
-
+         
           try{
               
-              const codeHexaImage = await contractNFT.methods.getimagecodeHexaFromUsername(username).call();     
+            const codeHexaImage = await contractNFT.methods.getimagecodeHexaFromUsername(username).call();     
               
-              console.log("codeHexaImage:", codeHexaImage);
-
+            console.log("codeHexaImage:", codeHexaImage);
              
             const container = document.createElement("div");
 
               // Crea un contenedor para las imágenes
               const imageUserContainer = document.createElement("div");
-                  imageUserContainer.id = "imageContainerId"; // Este ID se usará en la función
+                  
+                  imageUserContainer.id = `imageContainerId_${username}`; // ID único por usuario
                   // Estilos para el contenedor de imágenes
                   loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar
                   imageUserContainer.style.display = "inline-block"; // Para que se muestre como un botón
@@ -152,10 +152,7 @@ async function findNftWallet(value) {
                                     
               container.appendChild(nameButton);
 
-              // Verifica si el usuario sigue a 'username'              
-
-
-
+             
               nftUsernameList.appendChild(container);
 
               

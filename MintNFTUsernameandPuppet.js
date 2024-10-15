@@ -183,7 +183,7 @@ async function getImageNFTUsername(image_contenedor){
 }
 
 
-async function loadImagesFromHex(hexString, image_contenedor) {
+async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
 
     const container = document.getElementById(image_contenedor);
 
@@ -237,8 +237,37 @@ async function loadImagesFromHex(hexString, image_contenedor) {
         // Limpiar "Cargando..." y agregar las imágenes al contenedor
         container.innerHTML = ''; 
 
+        
 
-        images.forEach(img => container.appendChild(img));
+        // Configuración de tamaño según la variable `size`
+    let width, height;
+    if (size === "small") {
+        width = "60px";
+        height = "60px";
+    } else if (size === "medium") {
+        width = "80px";
+        height = "80px";
+    } else if (size === "big") {
+        width = "100px";
+        height = "100px";
+    } else {
+        // Valor por defecto si no se proporciona `size` válido
+        width = "80px";
+        height = "80px";
+    }
+
+      
+
+        images.forEach(img => {
+            img.style.width = width;
+            img.style.height = height;
+            img.style.objectFit = "cover";
+            container.appendChild(img);
+        });
+
+
+
+       
 
     } catch (error) {
         console.error(error);

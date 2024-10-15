@@ -118,7 +118,7 @@ async function findNftWallet(value) {
 
           try{
               
-              const codeHexaImage = await contract.methods.getimagecodeHexaFromUsername(username).call();     
+              const codeHexaImage = await contractNFT.methods.getimagecodeHexaFromUsername(username).call();     
               
               console.log("codeHexaImage:", codeHexaImage);
 

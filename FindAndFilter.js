@@ -122,7 +122,12 @@ async function findNftWallet(value) {
               
             console.log("codeHexaImage:", codeHexaImage);
              
-            const container = document.createElement("div");
+          
+            // Crear un contenedor para la fila de usuario
+        const userRowContainer = document.createElement("div");
+        userRowContainer.style.display = "flex";
+        userRowContainer.style.alignItems = "center"; // Centrar verticalmente la imagen y el nombre
+        userRowContainer.style.marginBottom = "10px"; // Espacio entre filas
 
               // Crea un contenedor para las imágenes
               const imageUserContainer = document.createElement("div");
@@ -136,10 +141,11 @@ async function findNftWallet(value) {
                    
                   imageUserContainer.style.width = "80px"; // Ancho del contenedor
                   imageUserContainer.style.height = "80px"; // Alto del contenedor 
-                  
+                  imageUserContainer.style.marginRight = "10px"; // Espacio entre imagen y nombre
+
 
                   
-              container.appendChild(imageUserContainer);
+              userRowContainer.appendChild(imageUserContainer);
 
                                                    
 
@@ -152,10 +158,10 @@ async function findNftWallet(value) {
                   });
                   nameButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
                                     
-              container.appendChild(nameButton);
+              userRowContainer.appendChild(nameButton);
 
              
-              nftUsernameList.appendChild(container);
+              nftUsernameList.appendChild(userRowContainer);
               
               await loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar
               

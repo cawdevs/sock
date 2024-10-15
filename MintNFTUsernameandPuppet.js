@@ -156,7 +156,8 @@ async function getImageNFTUsername(image_contenedor){
         //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
             
         const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
-    
+        
+
         // Define las opciones en un array
 //const codeHexaOptions = [
 //    "0x0d01140005080000000000000000000000000000000000000000000000000000",
@@ -171,12 +172,12 @@ async function getImageNFTUsername(image_contenedor){
     
         try {
             const codeHexaImage = await contract.methods.getimagecodeHexaFromUsername(selectorNFTs).call();     
-
+            alert('Error Create profile' + selectorNFTs+ " " + codeHexaImage);
             loadImagesFromHex(codeHexaImage,image_contenedor);                           
 
         }catch (error) {
     
-            //alert('Error Create profile');
+            
             console.error('Error:', error);
         }
     
@@ -186,7 +187,7 @@ async function getImageNFTUsername(image_contenedor){
 async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
 
     const container = document.getElementById(image_contenedor);
-    container.style.border = "1px solid blue"; // Borde blanco alrededor del contenedor
+    //container.style.border = "1px solid blue"; // Borde blanco alrededor del contenedor
     container.style.padding = "5px"; // Espacio interno para separar el contenido del borde
     container.style.position = "relative"; // Posicionamiento para las imágenes
     container.style.overflow = "hidden"; // Asegura que no se salga del borde

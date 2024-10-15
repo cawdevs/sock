@@ -108,6 +108,9 @@ async function findNftWallet(value) {
         
         const listaNFTUsernames = [];
         //nftUsernames.forEach(function (username) {
+    
+
+    console.log("Lista usernames:", nftUsernames);
     for (const username of nftUsernames) {
 
           listaNFTUsernames.push(username);

@@ -132,6 +132,10 @@ async function findNftWallet(value) {
               imageUserContainer.style.display = "inline-block"; // Para que se muestre como un botón
               imageUserContainer.style.marginLeft = "10px"; // Margen izquierdo similar al userButton
               imageUserContainer.style.cursor = "pointer"; // Para indicar que es clickeable
+               
+              imageUserContainer.style.width = "80px"; // Ancho del contenedor
+              imageUserContainer.style.height = "80px"; // Alto del contenedor 
+
               container.appendChild(imageUserContainer);
 
               // Cargar la imagen automáticamente
@@ -148,9 +152,8 @@ async function findNftWallet(value) {
                   //alert("Clickeaste el botón de usuario para " + username);
               });
               nameButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
-
               
-              container.appendChild(imageUserContainer);           
+                   
               container.appendChild(nameButton);
 
               // Verifica si el usuario sigue a 'username'              

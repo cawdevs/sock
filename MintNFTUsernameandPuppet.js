@@ -412,7 +412,7 @@ containner_info_sock.appendChild(infoContainer);
                                 
                           
               
-              await loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar
+              await loadImagesFromHex(codeHexaImage_info,imageUserContainer.id,"big"); // Cargar la imagen al iniciar
               
                
 

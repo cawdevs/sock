@@ -257,8 +257,8 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
         width = "80px";
         height = "80px";
     } else if (size === "big") {
-        width = "200px";
-        height = "200px";
+        width = "150px";
+        height = "150px";
     } else {
         // Valor por defecto si no se proporciona `size` válido
         width = "150px";

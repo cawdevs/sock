@@ -323,20 +323,10 @@ async function info_profile_sock(){
              usernameHash_info = info_username[5];
              codeHexaImage_info = info_username[6];
              
+             const username_date = tiempoTranscurrido(info_username[7]);
 
-// Convertir el timestamp a una fecha
-const date = new Date(info_username[7]);
-// Formatear la fecha en un formato legible
-const  time_info = date.toLocaleDateString("es-ES", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit"
-});
 
-             
+          
                       
 
 
@@ -344,8 +334,8 @@ const  time_info = date.toLocaleDateString("es-ES", {
               // Crear un contenedor para la imagen
               const imageUserContainer = document.createElement("div");
                   imageUserContainer.id = `imageContainerId`; // ID único por usuario
-                  imageUserContainer.style.width = "200px"; // Ancho del contenedor
-                  imageUserContainer.style.height = "200px"; // Alto del contenedor
+                  imageUserContainer.style.width = "250px"; // Ancho del contenedor
+                  imageUserContainer.style.height = "250px"; // Alto del contenedor
                   imageUserContainer.style.display = "flex"; // Para centrar la imagen en el contenedor
                   imageUserContainer.style.justifyContent = "center"; // Centrar horizontalmente
                   imageUserContainer.style.alignItems = "center"; // Centrar verticalmente
@@ -401,7 +391,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         infoContainer.appendChild(paragraph6);
 
         const paragraph7 = document.createElement("p");
-        paragraph7.textContent = `Date: ${time_info}`;
+        paragraph7.textContent = `Date: ${username_date}`;
         paragraph7.style.color = "darkgreen";
         infoContainer.appendChild(paragraph7);
                 
@@ -434,3 +424,25 @@ containner_info_sock.appendChild(infoContainer);
         }
     
 }
+
+
+ function tiempoTranscurrido(timestamp) {
+
+          timestamp=timestamp*1000;
+          const diferencia = Date.now() - timestamp;
+          const segundos = Math.floor(diferencia / 1000);
+          const minutos = Math.floor(segundos / 60);
+          const horas = Math.floor(minutos / 60);
+          const dias = Math.floor(horas / 24);
+
+          if (segundos < 60) {
+            return 'Hace unos segundos';
+          } else if (minutos < 60) {
+            return `Hace ${minutos} ${minutos === 1 ? 'minuto' : 'minutos'}`;
+          } else if (horas < 24) {
+            return `Hace ${horas} ${horas === 1 ? 'hora' : 'horas'}`;
+          } else {
+            const fecha = new Date(timestamp);
+            return fecha.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+          }
+}  

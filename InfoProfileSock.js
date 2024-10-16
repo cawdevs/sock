@@ -1,5 +1,5 @@
 
-
+  
 async function info_profile_sock(image_contenedor){
     
         const selectorNFTs = document.getElementById('selector_NFTs').value;
@@ -18,7 +18,7 @@ async function info_profile_sock(image_contenedor){
             const info_username = await contract.methods.getNFTInfoByUsername(selectorNFTs).call();
             const total_minted_NFT = await contract.methods.getTotalMintedNFTs().call();
             
-             alert('info' +" "+ info_username+ "*/* " + total_minted_NFT;
+             alert('info' +" "+ info_username+ "*/* " + total_minted_NFT);
 
              //function transferNFT(address to, string memory username)
 

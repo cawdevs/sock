@@ -315,7 +315,16 @@ async function info_profile_sock(){
 
              //function transferNFT(address to, string memory username)
 
-             codeHexaImage=info_username[6];
+             id_info = info_username[0];
+             username_info = info_username[1];
+             is_minted = info_username[2];
+             forsale_info = info_username[3];
+             precio_info = info_username[4];
+             usernameHash_info = info_username[5];
+             codeHexaImage_info = info_username[6];
+             time_info = info_username[7];
+
+             
                                
 
             try{
@@ -343,30 +352,47 @@ infoContainer.style.color = "white"; // Color de texto blanco
 infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 
         // Agregar cada párrafo con contenido
+        const paragraph0 = document.createElement("p");
+        paragraph0.textContent = `ID: ${id_info}`;
+        paragraph0.style.color = "black";
+        infoContainer.appendChild(paragraph0);
+
         const paragraph1 = document.createElement("p");
-        paragraph1.textContent = `Id: ${codeHexaImage}`;
+        paragraph1.textContent = `Username: ${username_info}`;
         paragraph1.style.color = "black";
         infoContainer.appendChild(paragraph1);
 
         const paragraph2 = document.createElement("p");
-        paragraph2.textContent = `Username: ${codeHexaImage}`;
+        paragraph2.textContent = `Minteado: ${is_minted}`;
         paragraph2.style.color = "black";
         infoContainer.appendChild(paragraph2);
 
         const paragraph3 = document.createElement("p");
-        paragraph3.textContent = `Hexa Image: ${codeHexaImage}`;
+        paragraph3.textContent = `Forsale: ${forsale_info}`;
         paragraph3.style.color = "lime";
         infoContainer.appendChild(paragraph3);
 
         const paragraph4 = document.createElement("p");
-        paragraph4.textContent = `Hash username: ${codeHexaImage}`;
+        paragraph4.textContent = `Hash username: ${precio_info}`;
         paragraph4.style.color = "green";
         infoContainer.appendChild(paragraph4);
 
         const paragraph5 = document.createElement("p");
-        paragraph5.textContent = `Date: ${codeHexaImage}`;
+        paragraph5.textContent = `Date: ${usernameHash_info}`;
         paragraph5.style.color = "darkgreen";
         infoContainer.appendChild(paragraph5);
+
+        const paragraph6 = document.createElement("p");
+        paragraph6.textContent = `Date: ${codeHexaImage_info}`;
+        paragraph6.style.color = "darkgreen";
+        infoContainer.appendChild(paragraph6);
+
+        const paragraph7 = document.createElement("p");
+        paragraph7.textContent = `Date: ${time_info}`;
+        paragraph7.style.color = "darkgreen";
+        infoContainer.appendChild(paragraph7);
+                
+             
 
 // Agregar el contenedor al elemento principal
 containner_info_sock.appendChild(infoContainer);                                                

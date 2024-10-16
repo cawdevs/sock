@@ -286,7 +286,7 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
 
 
 
-async function info_profile_sock(image_contenedor){
+async function info_profile_sock(){
     
         const selectorNFTs = document.getElementById('selector_NFTs').value;
         
@@ -295,8 +295,17 @@ async function info_profile_sock(image_contenedor){
         //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
             
         const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
-       
-    
+     
+        const containner_info_sock = document.getElementById('info-sock');
+        containner_info_sock.innerHTML = "";   
+        containner_info_sock.style.display = "flex";
+        containner_info_sock.style.alignItems = "center"; // Centrar verticalmente la imagen y el nombre
+        containner_info_sock.style.marginBottom = "10px"; // Espacio entre filas
+        containner_info_sock.style.border = "1px solid white"; // Borde blanco alrededor del contenedor
+        containner_info_sock.style.padding = "5px"; // Espacio interno para separar el contenido del borde
+ 
+        
+
         try {
             
             
@@ -317,13 +326,6 @@ async function info_profile_sock(image_contenedor){
               
                        
           
-            // Crear un contenedor para la fila de usuario
-        const userRowContainer = document.createElement("div");
-        userRowContainer.style.display = "flex";
-        userRowContainer.style.alignItems = "center"; // Centrar verticalmente la imagen y el nombre
-        userRowContainer.style.marginBottom = "10px"; // Espacio entre filas
-        userRowContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor
-        userRowContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
 
               // Crear un contenedor para la imagen
               const imageUserContainer = document.createElement("div");
@@ -338,7 +340,7 @@ async function info_profile_sock(image_contenedor){
                   imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
  
                  
-              userRowContainer.appendChild(imageUserContainer);
+              containner_info_sock.appendChild(imageUserContainer);
                                                    
 
               const nameButton = document.createElement("span");
@@ -351,10 +353,9 @@ async function info_profile_sock(image_contenedor){
                   });
                   nameButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
                                     
-              userRowContainer.appendChild(nameButton);
+              containner_info_sock.appendChild(nameButton);
 
-             
-              nftUsernameList.appendChild(userRowContainer);
+                          
               
               await loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar
               

@@ -299,8 +299,7 @@ async function info_profile_sock(image_contenedor){
     
         try {
             
-            const codeHexaImage = await contract.methods.getimagecodeHexaFromUsername(selectorNFTs).call();     
-          
+            
             const info_username = await contract.methods.getNFTInfoByUsername(selectorNFTs).call();
             const total_minted_NFT = await contract.methods.getTotalMintedNFTs().call();
             
@@ -308,7 +307,70 @@ async function info_profile_sock(image_contenedor){
 
              //function transferNFT(address to, string memory username)
 
-            await loadImagesFromHex(codeHexaImage,image_contenedor,"big");                           
+             codeHexaImage=info_username[6];
+             
+
+                     
+
+
+            try{
+              
+                       
+          
+            // Crear un contenedor para la fila de usuario
+        const userRowContainer = document.createElement("div");
+        userRowContainer.style.display = "flex";
+        userRowContainer.style.alignItems = "center"; // Centrar verticalmente la imagen y el nombre
+        userRowContainer.style.marginBottom = "10px"; // Espacio entre filas
+        userRowContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor
+        userRowContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
+
+              // Crear un contenedor para la imagen
+              const imageUserContainer = document.createElement("div");
+                  imageUserContainer.id = `imageContainerId`; // ID único por usuario
+                  imageUserContainer.style.width = "80px"; // Ancho del contenedor
+                  imageUserContainer.style.height = "80px"; // Alto del contenedor
+                  imageUserContainer.style.display = "flex"; // Para centrar la imagen en el contenedor
+                  imageUserContainer.style.justifyContent = "center"; // Centrar horizontalmente
+                  imageUserContainer.style.alignItems = "center"; // Centrar verticalmente
+                  imageUserContainer.style.marginRight = "10px"; // Espacio entre imagen y nombre
+                  imageUserContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor de la imagen
+                  imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
+ 
+                 
+              userRowContainer.appendChild(imageUserContainer);
+                                                   
+
+              const nameButton = document.createElement("span");
+                  nameButton.innerHTML = '<span style="font-size: 18px; vertical-align: middle; display: inline-block;"></span>';
+                  nameButton.textContent = codeHexaImage;
+                  nameButton.style.color = "white";
+                  nameButton.classList.add("clickable-button");
+                  nameButton.addEventListener("click", function () {
+                      //alert("Clickeaste el botón de usuario para " + username);
+                  });
+                  nameButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
+                                    
+              userRowContainer.appendChild(nameButton);
+
+             
+              nftUsernameList.appendChild(userRowContainer);
+              
+              await loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar
+              
+               
+
+
+          } catch (error){
+
+            console.error("Error en find (images)  :", error);
+
+           
+          }
+
+
+
+
 
         }catch (error) {   
             

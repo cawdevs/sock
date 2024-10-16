@@ -242,9 +242,7 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
         const images = await Promise.all(promises);
 
         //alert('images: ' + hexString);
-
-
-      
+     
 
         
 
@@ -298,7 +296,7 @@ async function info_profile_sock(){
      
         const containner_info_sock = document.getElementById('info-sock');
         containner_info_sock.innerHTML = "";   
-        containner_info_sock.style.display = "flex";
+        //containner_info_sock.style.display = "flex";
         containner_info_sock.style.alignItems = "center"; // Centrar verticalmente la imagen y el nombre
         containner_info_sock.style.marginBottom = "10px"; // Espacio entre filas
         containner_info_sock.style.border = "1px solid white"; // Borde blanco alrededor del contenedor
@@ -394,13 +392,11 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         paragraph7.textContent = `Date: ${username_date}`;
         paragraph7.style.color = "darkgreen";
         infoContainer.appendChild(paragraph7);
-                
-             
-
+                            
 // Agregar el contenedor al elemento principal
 containner_info_sock.appendChild(infoContainer);                                                
-                                
-                          
+                             
+                      
               
               await loadImagesFromHex(codeHexaImage_info,imageUserContainer.id,"big"); // Cargar la imagen al iniciar
               

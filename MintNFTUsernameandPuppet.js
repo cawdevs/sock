@@ -331,8 +331,8 @@ async function info_profile_sock(){
               // Crear un contenedor para la imagen
               const imageUserContainer = document.createElement("div");
                   imageUserContainer.id = `imageContainerId`; // ID único por usuario
-                  //imageUserContainer.style.width = "80px"; // Ancho del contenedor
-                  //imageUserContainer.style.height = "80px"; // Alto del contenedor
+                  imageUserContainer.style.width = "200px"; // Ancho del contenedor
+                  imageUserContainer.style.height = "200px"; // Alto del contenedor
                   imageUserContainer.style.display = "flex"; // Para centrar la imagen en el contenedor
                   imageUserContainer.style.justifyContent = "center"; // Centrar horizontalmente
                   imageUserContainer.style.alignItems = "center"; // Centrar verticalmente
@@ -373,17 +373,17 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         infoContainer.appendChild(paragraph3);
 
         const paragraph4 = document.createElement("p");
-        paragraph4.textContent = `Hash username: ${precio_info}`;
+        paragraph4.textContent = `Price: ${precio_info}`;
         paragraph4.style.color = "green";
         infoContainer.appendChild(paragraph4);
 
         const paragraph5 = document.createElement("p");
-        paragraph5.textContent = `Date: ${usernameHash_info}`;
+        paragraph5.textContent = `HashUsername: ${usernameHash_info}`;
         paragraph5.style.color = "darkgreen";
         infoContainer.appendChild(paragraph5);
 
         const paragraph6 = document.createElement("p");
-        paragraph6.textContent = `Date: ${codeHexaImage_info}`;
+        paragraph6.textContent = `CodeHexaImage: ${codeHexaImage_info}`;
         paragraph6.style.color = "darkgreen";
         infoContainer.appendChild(paragraph6);
 

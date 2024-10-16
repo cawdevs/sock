@@ -307,8 +307,7 @@ async function info_profile_sock(){
         
 
         try {
-            
-            
+                        
             const info_username = await contract.methods.getNFTInfoByUsername(selectorNFTs).call();
             const total_minted_NFT = await contract.methods.getTotalMintedNFTs().call();
             
@@ -318,13 +317,11 @@ async function info_profile_sock(){
 
              codeHexaImage=info_username[6];
              
-
-                     
+                    
 
 
             try{
-              
-                       
+                                     
           
 
               // Crear un contenedor para la imagen
@@ -338,23 +335,49 @@ async function info_profile_sock(){
                   imageUserContainer.style.marginRight = "10px"; // Espacio entre imagen y nombre
                   imageUserContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor de la imagen
                   imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
- 
-                 
+                  
               containner_info_sock.appendChild(imageUserContainer);
-                                                   
 
-              const nameButton = document.createElement("span");
-                  nameButton.innerHTML = '<span style="font-size: 18px; vertical-align: middle; display: inline-block;"></span>';
-                  nameButton.textContent = codeHexaImage;
-                  nameButton.style.color = "white";
-                  nameButton.classList.add("clickable-button");
-                  nameButton.addEventListener("click", function () {
-                      //alert("Clickeaste el botón de usuario para " + username);
-                  });
-                  nameButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
-                                    
-              containner_info_sock.appendChild(nameButton);
 
+
+
+// Crear el contenedor principal
+const infoContainer = document.createElement("div");
+infoContainer.style.marginLeft = "10px"; // Margen izquierdo para el contenedor
+infoContainer.style.color = "white"; // Color de texto blanco
+infoContainer.classList.add("info-container"); // Clase para aplicar estilos
+
+        // Agregar cada párrafo con contenido
+        const paragraph1 = document.createElement("p");
+        paragraph1.textContent = `Id: ${codeHexaImage}`;
+        paragraph1.style.color = "black";
+        infoContainer.appendChild(paragraph1);
+
+        const paragraph2 = document.createElement("p");
+        paragraph2.textContent = `Username: ${codeHexaImage}`;
+        paragraph2.style.color = "black";
+        infoContainer.appendChild(paragraph2);
+
+        const paragraph3 = document.createElement("p");
+        paragraph3.textContent = `Hexa Image: ${codeHexaImage}`;
+        paragraph3.style.color = "lime";
+        infoContainer.appendChild(paragraph3);
+
+        const paragraph4 = document.createElement("p");
+        paragraph4.textContent = `Hash username: ${codeHexaImage}`;
+        paragraph4.style.color = "green";
+        infoContainer.appendChild(paragraph4);
+
+        const paragraph5 = document.createElement("p");
+        paragraph5.textContent = `Date: ${codeHexaImage}`;
+        paragraph5.style.color = "darkgreen";
+        infoContainer.appendChild(paragraph5);
+
+// Agregar el contenedor al elemento principal
+containner_info_sock.appendChild(infoContainer);                                                
+                      
+          
+          
                           
               
               await loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar

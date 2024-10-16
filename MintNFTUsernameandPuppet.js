@@ -173,7 +173,7 @@ async function getImageNFTUsername(image_contenedor){
         try {
             const codeHexaImage = await contract.methods.getimagecodeHexaFromUsername(selectorNFTs).call();     
             alert('Error Create profile' +" "+ selectorNFTs+ " " + codeHexaImage);
-            await loadImagesFromHex(codeHexaImage,image_contenedor,"big");                           
+            await loadImagesFromHex(codeHexaImage,image_contenedor);                           
 
         }catch (error) {
     
@@ -261,8 +261,8 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
         height = "200px";
     } else {
         // Valor por defecto si no se proporciona `size` válido
-        width = "80px";
-        height = "80px";
+        width = "150px";
+        height = "150px";
     }
 
       
@@ -373,7 +373,7 @@ containner_info_sock.appendChild(infoContainer);
                                 
                           
               
-              await loadImagesFromHex(codeHexaImage, imageUserContainer.id,"big" ); // Cargar la imagen al iniciar
+              await loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar
               
                
 

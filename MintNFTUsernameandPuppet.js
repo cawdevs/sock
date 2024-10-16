@@ -322,10 +322,23 @@ async function info_profile_sock(){
              precio_info = info_username[4];
              usernameHash_info = info_username[5];
              codeHexaImage_info = info_username[6];
-             time_info = info_username[7];
+             
+
+// Convertir el timestamp a una fecha
+const date = new Date(info_username[7]);
+// Formatear la fecha en un formato legible
+const  time_info = date.toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+});
 
              
-                               
+                      
+
 
             try{
               // Crear un contenedor para la imagen

@@ -257,8 +257,8 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
         width = "80px";
         height = "80px";
     } else if (size === "big") {
-        width = "100px";
-        height = "100px";
+        width = "200px";
+        height = "200px";
     } else {
         // Valor por defecto si no se proporciona `size` válido
         width = "80px";
@@ -316,19 +316,14 @@ async function info_profile_sock(){
              //function transferNFT(address to, string memory username)
 
              codeHexaImage=info_username[6];
-             
-                    
-
+                               
 
             try{
-                                     
-          
-
               // Crear un contenedor para la imagen
               const imageUserContainer = document.createElement("div");
                   imageUserContainer.id = `imageContainerId`; // ID único por usuario
-                  imageUserContainer.style.width = "80px"; // Ancho del contenedor
-                  imageUserContainer.style.height = "80px"; // Alto del contenedor
+                  //imageUserContainer.style.width = "80px"; // Ancho del contenedor
+                  //imageUserContainer.style.height = "80px"; // Alto del contenedor
                   imageUserContainer.style.display = "flex"; // Para centrar la imagen en el contenedor
                   imageUserContainer.style.justifyContent = "center"; // Centrar horizontalmente
                   imageUserContainer.style.alignItems = "center"; // Centrar verticalmente
@@ -375,12 +370,10 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 
 // Agregar el contenedor al elemento principal
 containner_info_sock.appendChild(infoContainer);                                                
-                      
-          
-          
+                                
                           
               
-              await loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar
+              await loadImagesFromHex(codeHexaImage, imageUserContainer.id,"big" ); // Cargar la imagen al iniciar
               
                
 

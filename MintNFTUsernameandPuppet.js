@@ -392,13 +392,78 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         paragraph7.textContent = `Date: ${username_date}`;
         paragraph7.style.color = "darkgreen";
         infoContainer.appendChild(paragraph7);
-                            
+
+
+
+        / Crear el contenedor de botones y entrada de texto
+const controlsContainer = document.createElement("div");
+controlsContainer.style.display = "flex";
+controlsContainer.style.justifyContent = "space-around"; // Espacio entre elementos
+controlsContainer.style.alignItems = "center"; // Centra los elementos verticalmente
+controlsContainer.style.marginTop = "10px"; // Espacio entre el último <p> y el contenedor
+
+// Función para crear botones
+function createButton(text, color, onClick) {
+    const button = document.createElement("button");
+    button.textContent = text;
+    button.style.padding = "10px 20px";
+    button.style.margin = "0 5px"; // Espacio entre elementos
+    button.style.backgroundColor = color;
+    button.style.color = "white";
+    button.style.border = "none";
+    button.style.borderRadius = "20px"; // Bordes redondeados
+    button.style.cursor = "pointer";
+    button.addEventListener("click", onClick);
+    return button;
+}
+
+// Función para crear la entrada de texto redondeada
+function createTextInput(placeholder) {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = placeholder;
+    input.style.padding = "10px";
+    input.style.margin = "0 5px"; // Espacio entre elementos
+    input.style.borderRadius = "20px"; // Bordes redondeados
+    input.style.border = "1px solid #ccc"; // Borde gris claro
+    input.style.outline = "none"; // Remover borde de enfoque por defecto
+    return input;
+}
+
+// Define las funciones que llamarán cada botón
+function handleButton1Click() {
+    alert("Has clickeado el Botón 1");
+}
+
+function handleButton2Click() {
+    alert("Has clickeado el Botón 2");
+}
+
+// Crear dos botones y una entrada de texto
+const button1 = createButton("Botón 1", "blue", handleButton1Click);
+const button2 = createButton("Botón 2", "green", handleButton2Click);
+const textInput = createTextInput("Escribe aquí...");
+
+// Agregar los botones y la entrada de texto al contenedor
+controlsContainer.appendChild(button1);
+controlsContainer.appendChild(textInput);
+controlsContainer.appendChild(button2);
+
+// Agregar el contenedor de controles al infoContainer
+infoContainer.appendChild(controlsContainer);
+
+
+
+                           
 // Agregar el contenedor al elemento principal
 containner_info_sock.appendChild(infoContainer);                                                
                              
-                      
+await loadImagesFromHex(codeHexaImage_info,imageUserContainer.id,"big"); // Cargar la imagen al iniciar
               
-              await loadImagesFromHex(codeHexaImage_info,imageUserContainer.id,"big"); // Cargar la imagen al iniciar
+
+
+                    
+              
               
                
 

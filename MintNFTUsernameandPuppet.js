@@ -395,7 +395,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 
 
 
-        / Crear el contenedor de botones y entrada de texto
+        // Crear el contenedor de botones y entrada de texto
 const controlsContainer = document.createElement("div");
 controlsContainer.style.display = "flex";
 controlsContainer.style.justifyContent = "space-around"; // Espacio entre elementos

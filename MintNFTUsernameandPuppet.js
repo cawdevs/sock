@@ -486,7 +486,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 }
 
 
-                if forsale_info = "False"{
+               if (forsale_info === "False") { // Comparar usando '==='
                     // Crear dos botones y una entrada de texto
                     const button_sell = createButton("List for Sale", "green", handleButtonSellClick);
                     const textInput_sell = createTextInput("Price in Matic");
@@ -494,11 +494,10 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                     sellContainer.appendChild(button_sell);
                     sellContainer.appendChild(textInput_sell);
 
-                }else{
-                   const button_cancel_sell = createButton("Cancel Listing", "orange", handleButtonCancelSellClick);
-                   // Agregar los boton al contenedor
-                   sellContainer.appendChild(button_cancel_sell);
-
+                } else {
+                    const button_cancel_sell = createButton("Cancel Listing", "orange", handleButtonCancelSellClick);
+                    // Agregar el botón al contenedor
+                    sellContainer.appendChild(button_cancel_sell);
                 }
               
                 

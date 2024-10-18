@@ -468,7 +468,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 }
 
                 // Define las funciones que llamarán cada botón
-                function handleButtonTransferClick() {
+                async function handleButtonTransferClick() {
                     alert("Has clickeado el Botón 3");
                     const address_to = textInput_transfer.value; // Accede al valor de la entrada de texto
                     // Verificar si la dirección es válida
@@ -478,27 +478,27 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                     }
                     
                     try {
-                        await contract.methods.transferNFT(address to,username_info).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                        await contract.methods.transferNFT(address_to , username_info).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
                         console.log('NFT transferido.');
                      }catch (error) {
                         console.error('Error al transferir NFT Username:', error);
                      }
                 }
 
+                
+                let textInput_sell, textInput_transfer;
 
-               if (forsale_info === "False") { // Comparar usando '==='
-                    // Crear dos botones y una entrada de texto
+                if (forsale_info === "False") {
                     const button_sell = createButton("List for Sale", "green", handleButtonSellClick);
-                    const textInput_sell = createTextInput("Price in Matic");
-                    // Agregar los botones y la entrada de texto al contenedor
+                    textInput_sell = createTextInput("Price in Matic");
                     sellContainer.appendChild(button_sell);
                     sellContainer.appendChild(textInput_sell);
-
                 } else {
                     const button_cancel_sell = createButton("Cancel Listing", "orange", handleButtonCancelSellClick);
-                    // Agregar el botón al contenedor
                     sellContainer.appendChild(button_cancel_sell);
-                }
+                }  
+
+             
               
                 
 

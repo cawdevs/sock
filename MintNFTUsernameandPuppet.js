@@ -396,61 +396,94 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 
 
         // Crear el contenedor de botones y entrada de texto
-const controlsContainer = document.createElement("div");
-controlsContainer.style.display = "flex";
-controlsContainer.style.justifyContent = "space-around"; // Espacio entre elementos
-controlsContainer.style.alignItems = "center"; // Centra los elementos verticalmente
-controlsContainer.style.marginTop = "10px"; // Espacio entre el último <p> y el contenedor
+        const sellContainer = document.createElement("div");
+        sellContainer.style.display = "flex";
+        sellContainer.style.justifyContent = "space-around"; // Espacio entre elementos
+        sellContainer.style.alignItems = "center"; // Centra los elementos verticalmente
+        sellContainer.style.marginTop = "10px"; // Espacio entre el último <p> y el contenedor
 
-// Función para crear botones
-function createButton(text, color, onClick) {
-    const button = document.createElement("button");
-    button.textContent = text;
-    button.style.padding = "10px 20px";
-    button.style.margin = "0 5px"; // Espacio entre elementos
-    button.style.backgroundColor = color;
-    button.style.color = "white";
-    button.style.border = "none";
-    button.style.borderRadius = "20px"; // Bordes redondeados
-    button.style.cursor = "pointer";
-    button.addEventListener("click", onClick);
-    return button;
-}
+                // Función para crear botones
+                function createButton(text, color, onClick) {
+                    const button = document.createElement("button");
+                    button.textContent = text;
+                    button.style.padding = "10px 20px";
+                    button.style.margin = "0 5px"; // Espacio entre elementos
+                    button.style.backgroundColor = color;
+                    button.style.color = "white";
+                    button.style.border = "none";
+                    button.style.borderRadius = "20px"; // Bordes redondeados
+                    button.style.cursor = "pointer";
+                    button.addEventListener("click", onClick);
+                    return button;
+                }
 
-// Función para crear la entrada de texto redondeada
-function createTextInput(placeholder) {
-    const input = document.createElement("input");
-    input.type = "text";
-    input.placeholder = placeholder;
-    input.style.padding = "10px";
-    input.style.margin = "0 5px"; // Espacio entre elementos
-    input.style.borderRadius = "20px"; // Bordes redondeados
-    input.style.border = "1px solid #ccc"; // Borde gris claro
-    input.style.outline = "none"; // Remover borde de enfoque por defecto
-    return input;
-}
+                // Función para crear la entrada de texto redondeada
+                function createTextInput(placeholder) {
+                    const input = document.createElement("input");
+                    input.type = "text";
+                    input.placeholder = placeholder;
+                    input.style.padding = "10px";
+                    input.style.margin = "0 5px"; // Espacio entre elementos
+                    input.style.borderRadius = "20px"; // Bordes redondeados
+                    input.style.border = "1px solid #ccc"; // Borde gris claro
+                    input.style.outline = "none"; // Remover borde de enfoque por defecto
+                    
+                    // Asegura que el placeholder y el texto ingresado tengan colores visibles
+                    input.style.color = "black"; // Texto ingresado en negro
+                    input.style.fontSize = "14px"; // Tamaño de texto
+                    input.style.placeholderColor = "#888"; // Color del placeholder (dependiendo del navegador)
+    
+                    return input;
+                }
 
-// Define las funciones que llamarán cada botón
-function handleButton1Click() {
-    alert("Has clickeado el Botón 1");
-}
+                // Define las funciones que llamarán cada botón
+                function handleButton1Click() {
+                    alert("Has clickeado el Botón 1");
+                }
 
-function handleButton2Click() {
-    alert("Has clickeado el Botón 2");
-}
+                function handleButton2Click() {
+                    alert("Has clickeado el Botón 2");
+                }
 
-// Crear dos botones y una entrada de texto
-const button1 = createButton("Botón 1", "blue", handleButton1Click);
-const button2 = createButton("Botón 2", "green", handleButton2Click);
-const textInput = createTextInput("Escribe aquí...");
+                // Define las funciones que llamarán cada botón
+                function handleButton3Click() {
+                    alert("Has clickeado el Botón 3");
+                }
 
-// Agregar los botones y la entrada de texto al contenedor
-controlsContainer.appendChild(button1);
-controlsContainer.appendChild(textInput);
-controlsContainer.appendChild(button2);
+                // Crear dos botones y una entrada de texto
+                const button_sell = createButton("List for Sale", "lime", handleButton1Click);
+                const textInput_sell = createTextInput("Price in Matic");
 
-// Agregar el contenedor de controles al infoContainer
-infoContainer.appendChild(controlsContainer);
+                // Agregar los botones y la entrada de texto al contenedor
+                sellsContainer.appendChild(button_sell);
+                sellContainer.appendChild(textInput_sell);
+                
+
+                // Agregar el contenedor de controles al infoContainer
+        infoContainer.appendChild(sellContainer);
+
+
+        // Crear el contenedor de botones y entrada de texto
+        const transferContainer = document.createElement("div");
+        transferContainer.style.display = "flex";
+        transfersContainer.style.justifyContent = "space-around"; // Espacio entre elementos
+        transfersContainer.style.alignItems = "center"; // Centra los elementos verticalmente
+        transfersContainer.style.marginTop = "10px"; // Espacio entre el último <p> y el contenedor
+
+                
+                             
+                // Crear dos botones y una entrada de texto
+                const button_transfer= createButton("Transfer to:", "lime", handleButton1Click);
+                const textInput_transfer = createTextInput("0x........");
+
+                // Agregar los botones y la entrada de texto al contenedor
+                controlsContainer.appendChild(button_transfer);
+                controlsContainer.appendChild(textInput_transfer);
+                
+
+
+                // Agregar el contenedor de controles al infoContainer
+        infoContainer.appendChild(transfersContainer);
 
 
 

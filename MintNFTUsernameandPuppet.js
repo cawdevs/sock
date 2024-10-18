@@ -457,7 +457,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                      }
                 }
 
-                function handleButtonCancelSellClick() {
+                async function handleButtonCancelSellClick() {
                     alert("Has clickeado el Botón 2");
                     try {
                         await contract.methods.cancelNFTSale(username_info,).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
@@ -486,19 +486,19 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 }
 
                 
-                let textInput_sell, textInput_transfer;
 
-                if (forsale_info === "False") {
+
+                let textInput_sell; 
+
+                if (forsale_info === false) {
                     const button_sell = createButton("List for Sale", "green", handleButtonSellClick);
-                    textInput_sell = createTextInput("Price in Matic");
+                    textInput_sell = createTextInput("Price in Matic"); // Solo asignación
                     sellContainer.appendChild(button_sell);
                     sellContainer.appendChild(textInput_sell);
                 } else {
                     const button_cancel_sell = createButton("Cancel Listing", "orange", handleButtonCancelSellClick);
                     sellContainer.appendChild(button_cancel_sell);
-                }  
-
-             
+                }
               
                 
 

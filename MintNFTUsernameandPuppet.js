@@ -438,7 +438,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 
                 // Define las funciones que llamarán cada botón
                 // Define las funciones que llamarán cada botón
-                async function handleButton1Click() {
+                async function handleButtonSellClick() {
                     alert("Has clickeado el Botón 1");
                     // Obtén el valor del input
                     const price = textInput_sell.value; // Accede al valor de la entrada de texto
@@ -457,22 +457,50 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                      }
                 }
 
-                function handleButton2Click() {
+                function handleButtonCancelSellClick() {
                     alert("Has clickeado el Botón 2");
+                    try {
+                        await contract.methods.cancelNFTSale(username_info,).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                        console.log('NFT Username is Delisted.');
+                     }catch (error) {
+                        console.error('Error al deslistar el NFT Username:', error);
+                     }
                 }
 
                 // Define las funciones que llamarán cada botón
-                function handleButton3Click() {
+                function handleButtonTransferClick() {
                     alert("Has clickeado el Botón 3");
+                    const address_to = textInput_transfer.value; // Accede al valor de la entrada de texto
+                    // Verificar si la dirección es válida
+                    if (!web3.utils.isAddress(address_to)) {
+                        alert("Invalid  address.");
+                        return; // Detener la ejecución si la dirección no es válida
+                    }
+                    
+                    try {
+                        await contract.methods.transferNFT(address to,username_info).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                        console.log('NFT transferido.');
+                     }catch (error) {
+                        console.error('Error al transferir NFT Username:', error);
+                     }
                 }
 
-                // Crear dos botones y una entrada de texto
-                const button_sell = createButton("List for Sale", "green", handleButton1Click);
-                const textInput_sell = createTextInput("Price in Matic");
 
-                // Agregar los botones y la entrada de texto al contenedor
-                sellContainer.appendChild(button_sell);
-                sellContainer.appendChild(textInput_sell);
+                if forsale_info = "False"{
+                    // Crear dos botones y una entrada de texto
+                    const button_sell = createButton("List for Sale", "green", handleButtonSellClick);
+                    const textInput_sell = createTextInput("Price in Matic");
+                    // Agregar los botones y la entrada de texto al contenedor
+                    sellContainer.appendChild(button_sell);
+                    sellContainer.appendChild(textInput_sell);
+
+                }else{
+                   const button_cancel_sell = createButton("Cancel Listing", "orange", handleButtonCancelSellClick);
+                   // Agregar los boton al contenedor
+                   sellContainer.appendChild(button_cancel_sell);
+
+                }
+              
                 
 
                 // Agregar el contenedor de controles al infoContainer
@@ -489,7 +517,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 
                              
                 // Crear dos botones y una entrada de texto
-                const button_transfer= createButton("Transfer to:", "green", handleButton2Click);
+                const button_transfer= createButton("Transfer to:", "green", handleButtonTransferClick);
                 const textInput_transfer = createTextInput("0x........");
 
                 // Agregar los botones y la entrada de texto al contenedor

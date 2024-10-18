@@ -477,8 +477,8 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 const textInput_transfer = createTextInput("0x........");
 
                 // Agregar los botones y la entrada de texto al contenedor
-                controlsContainer.appendChild(button_transfer);
-                controlsContainer.appendChild(textInput_transfer);
+                transferContainer.appendChild(button_transfer);
+                transferContainer.appendChild(textInput_transfer);
                 
 
 

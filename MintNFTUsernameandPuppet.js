@@ -437,8 +437,24 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 }
 
                 // Define las funciones que llamarán cada botón
-                function handleButton1Click() {
+                // Define las funciones que llamarán cada botón
+                async function handleButton1Click() {
                     alert("Has clickeado el Botón 1");
+                    // Obtén el valor del input
+                    const price = textInput_sell.value; // Accede al valor de la entrada de texto
+
+                    // Verifica si el valor es válido
+                    if (!price || isNaN(price)) {
+                        alert("Invalid Price.");
+                        return;
+                    }
+
+                    try {
+                        await contract.methods.sellNFT(username_info,price).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                        console.log('NFT Username ready to Sell.');
+                     }catch (error) {
+                        console.error('Error al listar el NFT Username:', error);
+                     }
                 }
 
                 function handleButton2Click() {

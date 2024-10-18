@@ -455,7 +455,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 const textInput_sell = createTextInput("Price in Matic");
 
                 // Agregar los botones y la entrada de texto al contenedor
-                sellsContainer.appendChild(button_sell);
+                sellContainer.appendChild(button_sell);
                 sellContainer.appendChild(textInput_sell);
                 
 
@@ -466,9 +466,9 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         // Crear el contenedor de botones y entrada de texto
         const transferContainer = document.createElement("div");
         transferContainer.style.display = "flex";
-        transfersContainer.style.justifyContent = "space-around"; // Espacio entre elementos
-        transfersContainer.style.alignItems = "center"; // Centra los elementos verticalmente
-        transfersContainer.style.marginTop = "10px"; // Espacio entre el último <p> y el contenedor
+        transferContainer.style.justifyContent = "space-around"; // Espacio entre elementos
+        transferContainer.style.alignItems = "center"; // Centra los elementos verticalmente
+        transferContainer.style.marginTop = "10px"; // Espacio entre el último <p> y el contenedor
 
                 
                              
@@ -483,7 +483,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 
 
                 // Agregar el contenedor de controles al infoContainer
-        infoContainer.appendChild(transfersContainer);
+        infoContainer.appendChild(transferContainer);
 
 
 

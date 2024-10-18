@@ -332,8 +332,8 @@ async function info_profile_sock(){
               // Crear un contenedor para la imagen
               const imageUserContainer = document.createElement("div");
                   imageUserContainer.id = `imageContainerId`; // ID único por usuario
-                  imageUserContainer.style.width = "250px"; // Ancho del contenedor
-                  imageUserContainer.style.height = "250px"; // Alto del contenedor
+                  imageUserContainer.style.width = "160px"; // Ancho del contenedor
+                  imageUserContainer.style.height = "160px"; // Alto del contenedor
                   imageUserContainer.style.display = "flex"; // Para centrar la imagen en el contenedor
                   imageUserContainer.style.justifyContent = "center"; // Centrar horizontalmente
                   imageUserContainer.style.alignItems = "center"; // Centrar verticalmente
@@ -363,30 +363,30 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         paragraph1.style.color = "black";
         infoContainer.appendChild(paragraph1);
 
-        const paragraph2 = document.createElement("p");
-        paragraph2.textContent = `Minteado: ${is_minted}`;
-        paragraph2.style.color = "black";
-        infoContainer.appendChild(paragraph2);
+        //const paragraph2 = document.createElement("p");
+        //paragraph2.textContent = `Minteado: ${is_minted}`;
+        //paragraph2.style.color = "black";
+        //infoContainer.appendChild(paragraph2);
 
-        const paragraph3 = document.createElement("p");
-        paragraph3.textContent = `Forsale: ${forsale_info}`;
-        paragraph3.style.color = "lime";
-        infoContainer.appendChild(paragraph3);
+        //const paragraph3 = document.createElement("p");
+        //paragraph3.textContent = `Forsale: ${forsale_info}`;
+        //paragraph3.style.color = "lime";
+        //infoContainer.appendChild(paragraph3);
 
         const paragraph4 = document.createElement("p");
         paragraph4.textContent = `Price: ${precio_info}`;
         paragraph4.style.color = "green";
         infoContainer.appendChild(paragraph4);
 
-        const paragraph5 = document.createElement("p");
-        paragraph5.textContent = `HashUsername: ${usernameHash_info}`;
-        paragraph5.style.color = "darkgreen";
-        infoContainer.appendChild(paragraph5);
+        //const paragraph5 = document.createElement("p");
+        //paragraph5.textContent = `HashUsername: ${usernameHash_info}`;
+        //paragraph5.style.color = "darkgreen";
+        //infoContainer.appendChild(paragraph5);
 
-        const paragraph6 = document.createElement("p");
-        paragraph6.textContent = `CodeHexaImage: ${codeHexaImage_info}`;
-        paragraph6.style.color = "darkgreen";
-        infoContainer.appendChild(paragraph6);
+        //const paragraph6 = document.createElement("p");
+        //paragraph6.textContent = `CodeHexaImage: ${codeHexaImage_info}`;
+        //paragraph6.style.color = "darkgreen";
+        //infoContainer.appendChild(paragraph6);
 
         const paragraph7 = document.createElement("p");
         paragraph7.textContent = `Date: ${username_date}`;

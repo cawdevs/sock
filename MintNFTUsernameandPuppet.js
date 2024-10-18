@@ -406,7 +406,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 function createButton(text, color, onClick) {
                     const button = document.createElement("button");
                     button.textContent = text;
-                    button.style.padding = "5px 10px";
+                    button.style.padding = "10px 20px";
                     button.style.margin = "0 5px"; // Espacio entre elementos
                     button.style.backgroundColor = color;
                     button.style.color = "white";
@@ -422,7 +422,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                     const input = document.createElement("input");
                     input.type = "text";
                     input.placeholder = placeholder;
-                    input.style.padding = "5px";
+                    input.style.padding = "10px";
                     input.style.margin = "0 5px"; // Espacio entre elementos
                     input.style.borderRadius = "20px"; // Bordes redondeados
                     input.style.border = "1px solid #ccc"; // Borde gris claro
@@ -439,34 +439,11 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 // Define las funciones que llamarán cada botón
                 function handleButton1Click() {
                     alert("Has clickeado el Botón 1");
-                    // Obtén el valor del input
-                    const price = textInput_sell.value; // Accede al valor de la entrada de texto
-
-                    // Verifica si el valor es válido
-                    if (!price || isNaN(price)) {
-                        alert("Invalid Price.");
-                        return;
-                    }
-
-                    try {
-                        await contract.methods.sellNFT(username_info,price).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
-                        console.log('NFT Username ready to Sell.');
-                     }catch (error) {
-                        console.error('Error al listar el NFT Username:', error);
-                     }
                 }
 
                 function handleButton2Click() {
                     alert("Has clickeado el Botón 2");
-                    
-                    try {
-                        await contract.methods.cancelNFTSale(username_info,).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
-                        console.log('NFT Username is Delisted.');
-                     }catch (error) {
-                        console.error('Error al deslistar NFT Username:', error);
-                     }
                 }
-                
 
                 // Define las funciones que llamarán cada botón
                 function handleButton3Click() {
@@ -474,7 +451,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 }
 
                 // Crear dos botones y una entrada de texto
-                const button_sell = createButton("List for Sale", "green", handleButton1Click);
+                const button_sell = createButton("List for Sale", "lime", handleButton1Click);
                 const textInput_sell = createTextInput("Price in Matic");
 
                 // Agregar los botones y la entrada de texto al contenedor
@@ -496,7 +473,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 
                              
                 // Crear dos botones y una entrada de texto
-                const button_transfer= createButton("Transfer to:", "green", handleButton1Click);
+                const button_transfer= createButton("Transfer to:", "lime", handleButton1Click);
                 const textInput_transfer = createTextInput("0x........");
 
                 // Agregar los botones y la entrada de texto al contenedor

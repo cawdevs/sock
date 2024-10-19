@@ -119,7 +119,8 @@ async function findNftWallet(value) {
           listaNFTUsernames.push(username);
          
           try{
-              
+            
+            const for_sale = await contractNFT.methods.isNFTForSale(username).call();  
             const codeHexaImage = await contractNFT.methods.getimagecodeHexaFromUsername(username).call();     
               
             //console.log("codeHexaImage:", codeHexaImage);
@@ -160,7 +161,7 @@ async function findNftWallet(value) {
                                     
               userRowContainer.appendChild(nameButton);
 
-              const for_sale = await contractNFT.methods.isNFTForSale(username).call();     
+                   
             
 
               if ( for_sale === true ){ 

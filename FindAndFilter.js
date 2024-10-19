@@ -161,13 +161,14 @@ async function findNftWallet(value) {
                                     
               userRowContainer.appendChild(nameButton);
 
+              const for_sale = await contractNFT.methods.isNFTForSale(username).call();     
+            
 
-              if ( isNFTForSale(username) === true ){ 
+              if ( for_sale === true ){ 
 
                     const buyButton = document.createElement("button");
                     buyButton.textContent = "For Sale";
                     buyButton.addEventListener("click", function () {
-
                           
 
                     });

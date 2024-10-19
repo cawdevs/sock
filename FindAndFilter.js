@@ -145,9 +145,8 @@ async function findNftWallet(value) {
                   imageUserContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor de la imagen
                   imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
  
-                 
-              buy
-                                                   
+           
+                                                            
 
               const nameButton = document.createElement("span");
                   nameButton.innerHTML = '<span style="font-size: 18px; vertical-align: middle; display: inline-block;"></span>';

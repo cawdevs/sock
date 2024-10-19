@@ -364,7 +364,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         const paragraph1 = document.createElement("p");
         paragraph1.textContent = `Username: ${username_info}`;
         paragraph1.style.color = "black";
-        paragraph0.style.fontSize = "18px";
+        paragraph1.style.fontSize = "18px";
         infoContainer.appendChild(paragraph1);
 
         //const paragraph2 = document.createElement("p");
@@ -380,7 +380,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         const paragraph4 = document.createElement("p");
         paragraph4.textContent = `Price: ${precio_info}`;
         paragraph4.style.color = "green";
-        paragraph0.style.fontSize = "18px";
+        paragraph4.style.fontSize = "18px";
         infoContainer.appendChild(paragraph4);
 
         //const paragraph5 = document.createElement("p");
@@ -396,6 +396,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         const paragraph7 = document.createElement("p");
         paragraph7.textContent = `Date: ${username_date}`;
         paragraph7.style.color = "darkgreen";
+        paragraph7.style.fontSize = "18px";
         infoContainer.appendChild(paragraph7);
 
 

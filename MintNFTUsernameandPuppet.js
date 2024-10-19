@@ -296,12 +296,13 @@ async function info_profile_sock(){
      
         const containner_info_sock = document.getElementById('info-sock');
         containner_info_sock.innerHTML = "";   
-        //containner_info_sock.style.display = "flex";
-        containner_info_sock.style.alignItems = "center"; // Centrar verticalmente la imagen y el nombre
+        containner_info_sock.style.display = "flex";
+        containner_info_sock.style.flexDirection = "column"; // Por defecto, para dispositivos móviles
+        containner_info_sock.style.alignItems = "center"; // Centrar verticalmente en móviles
         containner_info_sock.style.marginBottom = "10px"; // Espacio entre filas
         containner_info_sock.style.border = "1px solid white"; // Borde blanco alrededor del contenedor
         containner_info_sock.style.padding = "5px"; // Espacio interno para separar el contenido del borde
- 
+        containner_info_sock.style.width = "100%"; // Ocupa todo el ancho disponible 
         
 
         try {
@@ -341,8 +342,9 @@ async function info_profile_sock(){
                   imageUserContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor de la imagen
                   imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
                   
-              containner_info_sock.appendChild(imageUserContainer);
+                  
 
+              containner_info_sock.appendChild(imageUserContainer);
 
 
 

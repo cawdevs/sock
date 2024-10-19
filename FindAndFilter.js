@@ -146,7 +146,7 @@ async function findNftWallet(value) {
                   imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
  
                  
-              userRowContainer.appendChild(imageUserContainer);
+              buy
                                                    
 
               const nameButton = document.createElement("span");
@@ -161,7 +161,25 @@ async function findNftWallet(value) {
                                     
               userRowContainer.appendChild(nameButton);
 
+
+              if ( isNFTForSale(username) === true ){ 
+
+                    const buyButton = document.createElement("button");
+                    buyButton.textContent = "For Sale";
+                    buyButton.addEventListener("click", function () {
+
+                          
+
+                    });
+                    buyButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
+                    buyButton.style.backgroundColor = "lime"; // Establecer el color de fondo
+                    buyButton.style.color = "black"; // Establecer el color del texto
+                    buyButton.style.borderRadius = "15px"; // Redondear las esquinas
+                    
+                    userRowContainer.appendChild(buyButton);
+              }  
              
+
               nftUsernameList.appendChild(userRowContainer);
               
               await loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar

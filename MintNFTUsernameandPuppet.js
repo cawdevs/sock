@@ -255,8 +255,8 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
         width = "80px";
         height = "80px";
     } else if (size === "big") {
-        width = "150px";
-        height = "150px";
+        width = "200px";
+        height = "200px";
     } else {
         // Valor por defecto si no se proporciona `size` válido
         width = "150px";
@@ -333,8 +333,8 @@ async function info_profile_sock(){
               // Crear un contenedor para la imagen
               const imageUserContainer = document.createElement("div");
                   imageUserContainer.id = `imageContainerId`; // ID único por usuario
-                  imageUserContainer.style.width = "160px"; // Ancho del contenedor
-                  imageUserContainer.style.height = "160px"; // Alto del contenedor
+                  imageUserContainer.style.width = "200px"; // Ancho del contenedor
+                  imageUserContainer.style.height = "200px"; // Alto del contenedor
                   imageUserContainer.style.display = "flex"; // Para centrar la imagen en el contenedor
                   imageUserContainer.style.justifyContent = "center"; // Centrar horizontalmente
                   imageUserContainer.style.alignItems = "center"; // Centrar verticalmente
@@ -358,11 +358,13 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         const paragraph0 = document.createElement("p");
         paragraph0.textContent = `ID: ${id_info}`;
         paragraph0.style.color = "black";
+        paragraph0.style.fontSize = "18px";
         infoContainer.appendChild(paragraph0);
 
         const paragraph1 = document.createElement("p");
         paragraph1.textContent = `Username: ${username_info}`;
         paragraph1.style.color = "black";
+        paragraph0.style.fontSize = "18px";
         infoContainer.appendChild(paragraph1);
 
         //const paragraph2 = document.createElement("p");
@@ -378,6 +380,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         const paragraph4 = document.createElement("p");
         paragraph4.textContent = `Price: ${precio_info}`;
         paragraph4.style.color = "green";
+        paragraph0.style.fontSize = "18px";
         infoContainer.appendChild(paragraph4);
 
         //const paragraph5 = document.createElement("p");

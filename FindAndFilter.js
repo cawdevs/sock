@@ -1,9 +1,5 @@
 
 
-
-
-
-
 async function findNftWallet(value) {
   // Obtener la dirección de la cuenta conectada
   const accounts = await web3.eth.getAccounts();
@@ -176,7 +172,7 @@ async function findNftWallet(value) {
                     buyButton.textContent = "For Sale";
                     buyButton.addEventListener("click", function () {
                             
-                         openSellModal();  
+                        alert("Quieres comprara este username " + username);  
 
                     });
                     buyButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos

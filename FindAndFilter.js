@@ -1,3 +1,14 @@
+
+
+function openSellModal() {
+  // Cambiar el contenido del modal dinámicamente si es necesario 
+
+  // Mostrar el modal
+  $('#sellNFTModal').modal('show');
+}
+
+
+
 async function findNftWallet(value) {
   // Obtener la dirección de la cuenta conectada
   const accounts = await web3.eth.getAccounts();
@@ -169,7 +180,7 @@ async function findNftWallet(value) {
                     const buyButton = document.createElement("button");
                     buyButton.textContent = "For Sale";
                     buyButton.addEventListener("click", function () {
-                            
+                         alert("Clickeaste el botón de comprar " + username);    
                          openSellModal();  
 
                     });
@@ -216,10 +227,5 @@ async function findNftWallet(value) {
 
 
 
-function openSellModal() {
-  // Cambiar el contenido del modal dinámicamente si es necesario 
 
-  // Mostrar el modal
-  $('#sellNFTModal').modal('show');
-}
 

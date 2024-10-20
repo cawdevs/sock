@@ -2,6 +2,7 @@
 
 async function findNftWallet(value) {
   // Obtener la dirección de la cuenta conectada
+  alert("Clickeaste el botón de find wallet ");
   const accounts = await web3.eth.getAccounts();
   const myAddress = accounts[0];
 
@@ -48,10 +49,12 @@ async function findNftWallet(value) {
             }
  
             const nftUsernames2 = [];
+
+
             for (let i = 0; i < randomNumbers.length; i++) {
                 
-                index=randomNumbers[i];
-                username= await contractNFT.methods.getUsernameByTokenId(index).call();                
+                let index=randomNumbers[i];
+                let username= await contractNFT.methods.getUsernameByTokenId(index).call();                
                 nftUsernames2.push(username);
                 console.log("username " + (i + 1) + ": " +username );
             }
@@ -166,13 +169,13 @@ async function findNftWallet(value) {
                    
             
 
-              if ( for_sale === true ){ 
+              if (for_sale){ 
 
                     const buyButton = document.createElement("button");
                     buyButton.textContent = "For Sale";
                     buyButton.addEventListener("click", function () {
                             
-                        alert("Quieres comprara este username " + username);  
+                         openSellModal();  
 
                     });
                     buyButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos

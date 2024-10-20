@@ -169,7 +169,8 @@ async function findNftWallet(value) {
                     const buyButton = document.createElement("button");
                     buyButton.textContent = "For Sale";
                     buyButton.addEventListener("click", function () {
-                          
+                            
+                         openSellModal()  
 
                     });
                     buyButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
@@ -210,5 +211,15 @@ async function findNftWallet(value) {
 
 
 
+}
+
+
+
+
+function openSellModal() {
+  // Cambiar el contenido del modal dinámicamente si es necesario 
+
+  // Mostrar el modal
+  $('#sellNFTModal').modal('show');
 }
 

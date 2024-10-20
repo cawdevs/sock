@@ -377,110 +377,9 @@ span.hashtag {
 
     <div id="menu1" class="tab-pane fade">
    <!--****************************************************-->
-                                <!--****************************************************-->
-  
-
-
-
-  <style>
-    /* Estilos CSS para el perfil */
-    .profile-container {
-    }
-    
-    .profile-photo {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      position: relative;
-      left: 40px;
-      top: -20px;
-      border: 5px solid #fff;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
-    
-    .profile-cover {
-      width: 100%;
-      height: 200px;
-      
-    }
-    
-    .profile-name {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 0px;
-    }
-
-    .profile-acount {
-      font-size: 12px;
-      font-weight: bold;
-      margin-bottom: 10px;
-     }
-
-     .profile-username {
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    
-    .profile-bio {
-      margin-bottom: 18px;
-    }
-    
-    .profile-location {
-      margin-bottom: 10px;
-    }
-    
-    .profile-website {
-      margin-bottom: 20px;
-    }
-
-    .profile-preferences {
-      margin-bottom: 20px;
-    }
-
-     .profile-update {
-      margin-bottom: 20px;
-    }
-  </style>
-
-                     <div class="profile-container" style= "display: none;">
-                           
-                             <div>
-                                <img class="profile-cover" src="" alt="Foto de portada">
-                                <img class="profile-photo" src="" alt="Foto de perfil">
-                             </div>                        
-
-
-
-                                <div class="profile-acount"></div>
-
-                                <div style="display:inline-block;" class="profile-name"></div>
-                                
-                                <div style="display:inline-block; margin-left: 20px;" class="profile-time"></div>
-                               
-                                 
-                                 <button style="display:inline-block;" class="profile-update" id="btn-load-profile"><font color="black"><span class="glyphicon glyphicon-pencil"></span></font></button>
-                                <div class="profile-username"></div>
-
-                                <div class="profile-bio"></div>
-                              
-                                <div style="display:inline-block;"><span class="glyphicon glyphicon-link" ></span></div>
-                                <div style="display:inline-block;" class="profile-location"></div>
-                                <div style="display:inline-block;" > </div>
-                                <div style="display:inline-block;" > </div>
-                                <div style="display:inline-block;"><span class="glyphicon glyphicon-globe"></span></div>
-                                <div style="display:inline-block;" class="profile-website"></div>
-                                <div class="profile-preferences"></div>
-                                <center>
-                                <div style="display:inline-block; margin-left: 20px;" class="following-count"></div>
-                                <div style="display:inline-block; margin-left: 20px;" class="follower-count"></div>
-                                </center>
-                                </div> 
-                                <!--****************************************************-->
-                                <!--****************************************************-->
-                         
-
-    </div>  
+   <!--****************************************************-->
+       
+   </div>  
 
 
 
@@ -575,22 +474,16 @@ span.hashtag {
     
 <!--/////////////////////////////////////////////////////////////-->
     <!--/////////////////////////////////////////////////////////////-->
-    <div id="menu_NFTusername" class="tab-pane fade">
-      
-      <div class="container-fluid"> 
-          <br>
-          <h4><div id="NFT-market-place"></div></h4>  
+    <div id="menu_market_place" class="tab-pane fade">
           
-          <center><h1><p>"Market place Soon.....!"</p></h1></center> 
           <br>
-            <br>
-             <br>
-              <br>
-               <br>
-
-      </div>
-
-    </div>
+          <center><h1><p>"Market place"</p></h1></center> 
+          <br>
+          <div id="NFT-market-place"></div>  
+    
+    </div>               
+                   
+   
     <!--/////////////////////////////////////////////////////////////-->
     <!--/////////////////////////////////////////////////////////////-->
 
@@ -599,7 +492,7 @@ span.hashtag {
                 <br>
                 <center><h3><p>Info Sock Puppet</p></h3></center>
                 <br>       
-                  <div id="info-sock"></div>  
+                <div id="info-sock"></div>  
                           
  </div>
  <!--/////////////////////////////////////////////////////////////-->
@@ -1099,6 +992,44 @@ span.hashtag {
 </div>
 <!-- #####################################################################-->
 <!-- #####################################################################-->
+
+
+
+<!-- ############## ventana emergente comprar NFT ###########################-->
+<!-- #################################################################################-->
+<div class="container"> 
+
+<!-- Modal predefinido en HTML -->
+<div class="modal fade" id="sellNFTModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Vender NFT</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Aquí va el contenido dinámico -->
+        <p>Precio: <span id="nftPrice"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Confirmar Venta</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 <!-- ############## ventana emergente mensajes directos ###########################-->
 <!-- #################################################################################-->

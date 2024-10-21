@@ -1,6 +1,6 @@
 
 
-function openBuyNftModal(username) {
+sync function openBuyNftModal(username) {
     
 
    const accounts = await web3.eth.getAccounts();
@@ -10,23 +10,31 @@ function openBuyNftModal(username) {
    
    try{
 
-             const info_username = await contract.methods.getNFTInfoByUsername(selectorNFTs).call();
-             
-             id_info = info_username[0];
-             username_info = info_username[1];
-             precio_info = info_username[4]; 
-                     
-             const username_date = tiempoTranscurrido(info_username[7]);
+         const info_username = await contract.methods.getNFTInfoByUsername(selectorNFTs).call();
+         
+         id_info = info_username[0];
+         username_info = info_username[1];
+         precio_info = info_username[4]; 
 
-             
-             const nftUsername = document.getElementById('nft-username');
-             const nftPrice = document.getElementById('nft-price');
-             const nftDate = document.getElementById('nft-date');
-             const nftId = document.getElementById('nft-Id');
-
+         codeHexaImage_info = info_username[6];
                  
-              nftUsername.textContent = username_info; // Mostrar el nombre del NFT
-              nftPrice.textContent = `Precio: ${precio_info} POL (Matic)`; // Mostrar el precio
+         const username_date = tiempoTranscurrido(info_username[7]);
+
+         
+         const nftUsername = document.getElementById('nft-username');
+         const nftPrice = document.getElementById('nft-price');
+         const nftDate = document.getElementById('nft-date');
+         const nftId = document.getElementById('nft-Id');
+
+         const image_container = document.getElementById('image-container_buy');
+
+
+         await loadImagesFromHex(codeHexaImage_info, image_container, size = "big")
+
+
+             
+          nftUsername.textContent = username_info; // Mostrar el nombre del NFT
+          nftPrice.textContent = `Precio: ${precio_info} POL (Matic)`; // Mostrar el precio
 
     } catch (error){
 

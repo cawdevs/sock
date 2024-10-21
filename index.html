@@ -542,7 +542,7 @@ span.hashtag {
                           <div class="input-group">
                             <input type="text" id="text-address-wallet" class="form-control" placeholder="Search 0x.. or NftUsername" style="border: 2px solid black; border-radius: 20px; width: 100%; height: 40px; margin-right: 10px;">
                             <div class="input-group-btn">
-                              <button id="btn-find-nft" class="btn btn-default" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
+                              <button id="btn-find-nft" class="btn btn-default"  onclick="findNftWallet('user')" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
                                 <span class="glyphicon glyphicon-search"></span>
                               </button>                             
                             </div>
@@ -562,7 +562,7 @@ span.hashtag {
                                For you rand. 
                               </button> 
 
-                              <button id="btn-find-nft-for-you-last" onclick="findNftWallet('foryoulast')""  style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
+                              <button id="btn-find-nft-for-you-last" onclick="findNftWallet('foryoulast')"  style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
                                 For you last. 
                               </button> 
 
@@ -1362,8 +1362,8 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
               //const btnFindfollowin = document.getElementById('btn-find-followin');
               //btnFindfollowin.addEventListener('click', () => findNftWallet("following"));
 
-              const btnFindNftWallet = document.getElementById('btn-find-nft');
-              btnFindNftWallet.addEventListener('click', () => findNftWallet("user"));
+              //const btnFindNftWallet = document.getElementById('btn-find-nft');
+              //btnFindNftWallet.addEventListener('click', () => findNftWallet("user"));
 
               //const btnFindNftForYou = document.getElementById('btn-find-nft-for-you');
               //btnFindNftForYou.addEventListener('click', () => findNftWallet("foryou"));

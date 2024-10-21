@@ -1,3 +1,4 @@
+/*
 async function openBuyNftModal(username) {  
     const accounts = await web3.eth.getAccounts();
     const myAddress = accounts[0];
@@ -107,7 +108,7 @@ async function openBuyNftModal(username) {
     }
 }
 
-
+*/
 
 
 

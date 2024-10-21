@@ -1,11 +1,39 @@
 
 
 function openBuyNftModal(username) {
-    const nftUsername = document.getElementById('nft-username');
-    const nftPrice = document.getElementById('nft-price');
-    const price=10;
-    nftUsername.textContent = username; // Mostrar el nombre del NFT
-    nftPrice.textContent = `Precio: ${price} ETH`; // Mostrar el precio
+    
+
+   const accounts = await web3.eth.getAccounts();
+   const myAddress = accounts[0];
+   const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress); 
+
+   
+   try{
+
+             const info_username = await contract.methods.getNFTInfoByUsername(selectorNFTs).call();
+             
+             id_info = info_username[0];
+             username_info = info_username[1];
+             precio_info = info_username[4]; 
+                     
+             const username_date = tiempoTranscurrido(info_username[7]);
+
+             
+             const nftUsername = document.getElementById('nft-username');
+             const nftPrice = document.getElementById('nft-price');
+             const nftDate = document.getElementById('nft-date');
+             const nftId = document.getElementById('nft-Id');
+
+                 
+              nftUsername.textContent = username_info; // Mostrar el nombre del NFT
+              nftPrice.textContent = `Precio: ${precio_info} POL (Matic)`; // Mostrar el precio
+
+    } catch (error){
+
+            console.error("Error en find (images)  :", error);
+         
+    }
+
 
     $('#buyNftModal').modal('show'); // Abrir el modal utilizando jQuery
 }

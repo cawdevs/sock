@@ -1,5 +1,7 @@
 
 async function openBuyNftModal(username) {  
+
+    console.log(`openBuyNftModal called with username: ${username}`);
     const accounts = await web3.eth.getAccounts();
     const myAddress = accounts[0];
 

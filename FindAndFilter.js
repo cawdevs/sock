@@ -112,6 +112,8 @@ async function openBuyNftModal(username) {
         containner_info_sock.appendChild(infoContainer);                                                
 
         await loadImagesFromHex(codeHexaImage_info, imageUserContainer.id, "big");
+    
+
     } catch (error) {
         console.error("Error al obtener información del NFT:", error);
     }
@@ -307,6 +309,9 @@ async function findNftWallet(value) {
                     buyButton.addEventListener("click", async function () {
                         alert("Has clickeado el Botón 1");    
                         await openBuyNftModal(username);  
+
+                        // Ahora muestra el modal
+                        $('#buyNftModal').modal('show');
 
                     });
                     buyButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos

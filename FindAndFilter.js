@@ -1,13 +1,16 @@
 
 async function openBuyNftModal(username) {  
 
+
     console.log(`openBuyNftModal called with username: ${username}`);
+
     const accounts = await web3.eth.getAccounts();
     const myAddress = accounts[0];
 
     const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
 
     const containner_info_sock = document.getElementById('info-sock-to-buy');
+    
     if (!containner_info_sock) {
         console.error("El contenedor no se encontró");
         return; // Salir si no se encuentra
@@ -23,8 +26,9 @@ async function openBuyNftModal(username) {
     containner_info_sock.style.width = "100%"; 
 
     try {
+        console.log(`try : ${username}`); 
         const info_username = await contract.methods.getNFTInfoByUsername(username).call();
-
+          
         // Declarar las variables
         let id_info = info_username[0];
         let username_info = info_username[1];
@@ -35,6 +39,9 @@ async function openBuyNftModal(username) {
         let codeHexaImage_info = info_username[6];
         const username_date = tiempoTranscurrido(info_username[7]);
 
+        console.log(`informacion :`); 
+
+     
         // Crear contenedor para la imagen
         const imageUserContainer = document.createElement("div");
         imageUserContainer.id = `imageContainerId`; 

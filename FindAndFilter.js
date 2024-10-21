@@ -1,6 +1,6 @@
 
 
-sync function openBuyNftModal(username) {
+async function openBuyNftModal(username) {
     
 
    const accounts = await web3.eth.getAccounts();
@@ -15,11 +15,8 @@ sync function openBuyNftModal(username) {
          id_info = info_username[0];
          username_info = info_username[1];
          precio_info = info_username[4]; 
-
-         codeHexaImage_info = info_username[6];
-                 
+         codeHexaImage_info = info_username[6];                 
          const username_date = tiempoTranscurrido(info_username[7]);
-
          
          const nftUsername = document.getElementById('nft-username');
          const nftPrice = document.getElementById('nft-price');

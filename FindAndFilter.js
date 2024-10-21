@@ -1,4 +1,4 @@
-async function openBuyNftModal((username){  
+async function openBuyNftModal(username){  
                
         const accounts = await web3.eth.getAccounts();
         const myAddress = accounts[0];
@@ -18,7 +18,7 @@ async function openBuyNftModal((username){
         
         try {
                         
-            const info_username = await contract.methods.getNFTInfoByUsername(usernme).call();
+            const info_username = await contract.methods.getNFTInfoByUsername(username).call();
           
 
              //function transferNFT(address to, string memory username)

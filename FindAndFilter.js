@@ -115,12 +115,12 @@ async function openBuyNftModal(username) {
 
 
 
-    // Lógica para procesar la compra
-    console.log('Compra confirmada');
-    // Aquí puedes agregar la lógica para realizar la compra del NFT
-    $('#buyNftModal').modal('hide'); // Cerrar el modal después de confirmar
-}
 
+//    // Lógica para procesar la compra
+//    console.log('Compra confirmada');
+    // Aquí puedes agregar la lógica para realizar la compra del NFT
+//    $('#buyNftModal').modal('hide'); // Cerrar el modal después de confirmar
+//}
 
 async function findNftWallet(value) {
   // Obtener la dirección de la cuenta conectada

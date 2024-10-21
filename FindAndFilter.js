@@ -1,4 +1,4 @@
-/*
+
 async function openBuyNftModal(username) {  
     const accounts = await web3.eth.getAccounts();
     const myAddress = accounts[0];
@@ -108,18 +108,18 @@ async function openBuyNftModal(username) {
     }
 }
 
-*/
 
 
 
 
 
 
-//    // Lógica para procesar la compra
-//    console.log('Compra confirmada');
+
+    // Lógica para procesar la compra
+    console.log('Compra confirmada');
     // Aquí puedes agregar la lógica para realizar la compra del NFT
-//    $('#buyNftModal').modal('hide'); // Cerrar el modal después de confirmar
-//}
+    $('#buyNftModal').modal('hide'); // Cerrar el modal después de confirmar
+}
 
 
 async function findNftWallet(value) {
@@ -297,7 +297,7 @@ async function findNftWallet(value) {
                     buyButton.textContent = "For Sale";
                     buyButton.addEventListener("click", function () {
                             
-                        await openBuyNftModal(username);  
+                        openBuyNftModal(username);  
 
                     });
                     buyButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos

@@ -26,7 +26,7 @@ async function openBuyNftModal(username) {
          const image_container = document.getElementById('image-container_buy');
 
 
-         await loadImagesFromHex(codeHexaImage_info, image_container, "big")
+         await loadImagesFromHex(codeHexaImage_info, image_container, "big");
 
 
           nftId.textContent = id_info;    

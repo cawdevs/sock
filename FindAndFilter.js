@@ -1,47 +1,197 @@
+async function openBuyNftModal((username){  
+               
+        const accounts = await web3.eth.getAccounts();
+        const myAddress = accounts[0];
+        //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
+            
+        const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+     
+        const containner_info_sock = document.getElementById('info-sock-to-buy');
+        containner_info_sock.innerHTML = "";   
+        containner_info_sock.style.display = "flex";
+        containner_info_sock.style.flexDirection = "column"; // Por defecto, para dispositivos móviles
+        containner_info_sock.style.alignItems = "center"; // Centrar verticalmente en móviles
+        containner_info_sock.style.marginBottom = "10px"; // Espacio entre filas
+        containner_info_sock.style.border = "1px solid white"; // Borde blanco alrededor del contenedor
+        containner_info_sock.style.padding = "5px"; // Espacio interno para separar el contenido del borde
+        containner_info_sock.style.width = "100%"; // Ocupa todo el ancho disponible 
+        
+        try {
+                        
+            const info_username = await contract.methods.getNFTInfoByUsername(usernme).call();
+          
 
+             //function transferNFT(address to, string memory username)
 
-async function openBuyNftModal(username) {
-    
-
-   const accounts = await web3.eth.getAccounts();
-   const myAddress = accounts[0];
-   const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress); 
+             id_info = info_username[0];
+             username_info = info_username[1];
+             is_minted = info_username[2];
+             forsale_info = info_username[3];
+             precio_info = info_username[4];
+             usernameHash_info = info_username[5];
+             codeHexaImage_info = info_username[6];
+             
+             const username_date = tiempoTranscurrido(info_username[7]);
 
    
-   try{
-
-         const info_username = await contractNFT.methods.getNFTInfoByUsername(username).call();
-         
-         id_info = info_username[0];
-         username_info = info_username[1];
-         precio_info = info_username[4]; 
-         codeHexaImage_info = info_username[6];                 
-         const username_date = tiempoTranscurrido(info_username[7]);
-         
-         const nftUsername = document.getElementById('nft-username');
-         const nftPrice = document.getElementById('nft-price');
-         const nftDate = document.getElementById('nft-date');
-         const nftId = document.getElementById('nft-Id');
-
-         const image_container = document.getElementById('image-container_buy');
 
 
-         await loadImagesFromHex(codeHexaImage_info, image_container.id, "big");
+            try{
+              // Crear un contenedor para la imagen
+              const imageUserContainer = document.createElement("div");
+                  imageUserContainer.id = `imageContainerId`; // ID único por usuario
+                  imageUserContainer.style.width = "200px"; // Ancho del contenedor
+                  imageUserContainer.style.height = "200px"; // Alto del contenedor
+                  imageUserContainer.style.display = "flex"; // Para centrar la imagen en el contenedor
+                  imageUserContainer.style.justifyContent = "center"; // Centrar horizontalmente
+                  imageUserContainer.style.alignItems = "center"; // Centrar verticalmente
+                  imageUserContainer.style.marginRight = "10px"; // Espacio entre imagen y nombre
+                  imageUserContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor de la imagen
+                  imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
+                  
+                  
+
+              containner_info_sock.appendChild(imageUserContainer);
 
 
-          nftId.textContent = id_info;    
-          nftUsername.textContent = username_info; // Mostrar el nombre del NFT
-          nftPrice.textContent = `Precio: ${precio_info} POL (Matic)`; // Mostrar el precio
-          
-    } catch (error){
+
+// Crear el contenedor principal
+const infoContainer = document.createElement("div");
+infoContainer.style.marginLeft = "10px"; // Margen izquierdo para el contenedor
+infoContainer.style.color = "white"; // Color de texto blanco
+infoContainer.classList.add("info-container"); // Clase para aplicar estilos
+
+        // Agregar cada párrafo con contenido
+        const paragraph0 = document.createElement("p");
+        paragraph0.textContent = `ID: ${id_info}`;
+        paragraph0.style.color = "black";
+        paragraph0.style.fontSize = "18px";
+        infoContainer.appendChild(paragraph0);
+
+        const paragraph1 = document.createElement("p");
+        paragraph1.textContent = `Username: ${username_info}`;
+        paragraph1.style.color = "black";
+        paragraph1.style.fontSize = "18px";
+        infoContainer.appendChild(paragraph1);
+
+        //const paragraph2 = document.createElement("p");
+        //paragraph2.textContent = `Minteado: ${is_minted}`;
+        //paragraph2.style.color = "black";
+        //infoContainer.appendChild(paragraph2);
+
+        //const paragraph3 = document.createElement("p");
+        //paragraph3.textContent = `Forsale: ${forsale_info}`;
+        //paragraph3.style.color = "lime";
+        //infoContainer.appendChild(paragraph3);
+
+        const paragraph4 = document.createElement("p");
+        paragraph4.textContent = `Price: ${precio_info}`;
+        paragraph4.style.color = "green";
+        paragraph4.style.fontSize = "18px";
+        infoContainer.appendChild(paragraph4);
+
+        //const paragraph5 = document.createElement("p");
+        //paragraph5.textContent = `HashUsername: ${usernameHash_info}`;
+        //paragraph5.style.color = "darkgreen";
+        //infoContainer.appendChild(paragraph5);
+
+        //const paragraph6 = document.createElement("p");
+        //paragraph6.textContent = `CodeHexaImage: ${codeHexaImage_info}`;
+        //paragraph6.style.color = "darkgreen";
+        //infoContainer.appendChild(paragraph6);
+
+        const paragraph7 = document.createElement("p");
+        paragraph7.textContent = `Date: ${username_date}`;
+        paragraph7.style.color = "darkgreen";
+        paragraph7.style.fontSize = "18px";
+        infoContainer.appendChild(paragraph7);
+
+
+
+        // Crear el contenedor de botones y entrada de texto
+        const sellContainer = document.createElement("div");
+        sellContainer.style.display = "flex";
+        sellContainer.style.justifyContent = "space-around"; // Espacio entre elementos
+        sellContainer.style.alignItems = "center"; // Centra los elementos verticalmente
+        sellContainer.style.marginTop = "10px"; // Espacio entre el último <p> y el contenedor
+
+                // Función para crear botones
+                function createButton(text, color, onClick) {
+                    const button = document.createElement("button");
+                    button.textContent = text;
+                    button.style.padding = "10px 20px";
+                    button.style.margin = "0 5px"; // Espacio entre elementos
+                    button.style.backgroundColor = color;
+                    button.style.color = "white";
+                    button.style.border = "none";
+                    button.style.borderRadius = "20px"; // Bordes redondeados
+                    button.style.cursor = "pointer";
+                    button.addEventListener("click", onClick);
+                    return button;
+                }
+
+                
+                // Define las funciones que llamarán cada botón
+                // Define las funciones que llamarán cada botón
+                async function handleButtonBuyNFTUsernameClick() {
+                    alert("Has clickeado el Botón 1");
+                    // Obtén el valor del input
+                    }
+
+                              
+               
+                    const button_buy_NFTUsername = createButton("Buy NFTUsername", "green", handleButtonBuyNFTUsernameClick);
+                    sellContainer.appendChild(button_buy_NFTUsername);
+                }
+              
+                
+
+                // Agregar el contenedor de controles al infoContainer
+        infoContainer.appendChild(sellContainer);
+
+
+        
+
+
+
+                           
+// Agregar el contenedor al elemento principal
+containner_info_sock.appendChild(infoContainer);                                                
+                             
+await loadImagesFromHex(codeHexaImage_info,imageUserContainer.id,"big"); // Cargar la imagen al iniciar
+              
+
+
+                    
+              
+              
+               
+
+
+          } catch (error){
 
             console.error("Error en find (images)  :", error);
-         
-    }
+
+           
+          }
 
 
-    $('#buyNftModal').modal('show'); // Abrir el modal utilizando jQuery
+
+
+
+        }catch (error) {   
+            
+            console.error('Error:', error);
+        }
+    
 }
+
+
+
+
+
+
+
 
 function confirmPurchase() {
     // Lógica para procesar la compra

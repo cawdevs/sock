@@ -142,7 +142,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                
                     const button_buy_NFTUsername = createButton("Buy NFTUsername", "green", handleButtonBuyNFTUsernameClick);
                     sellContainer.appendChild(button_buy_NFTUsername);
-                }
+                
               
                 
 
@@ -174,9 +174,6 @@ await loadImagesFromHex(codeHexaImage_info,imageUserContainer.id,"big"); // Carg
 
            
           }
-
-
-
 
 
         }catch (error) {   

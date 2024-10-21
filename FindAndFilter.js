@@ -10,7 +10,7 @@ async function openBuyNftModal(username) {
    
    try{
 
-         const info_username = await contract.methods.getNFTInfoByUsername(selectorNFTs).call();
+         const info_username = await contractNFT.methods.getNFTInfoByUsername(username).call();
          
          id_info = info_username[0];
          username_info = info_username[1];
@@ -26,13 +26,13 @@ async function openBuyNftModal(username) {
          const image_container = document.getElementById('image-container_buy');
 
 
-         await loadImagesFromHex(codeHexaImage_info, image_container, size = "big")
+         await loadImagesFromHex(codeHexaImage_info, image_container, "big")
 
 
-             
+          nftId.textContent = id_info;    
           nftUsername.textContent = username_info; // Mostrar el nombre del NFT
           nftPrice.textContent = `Precio: ${precio_info} POL (Matic)`; // Mostrar el precio
-
+          
     } catch (error){
 
             console.error("Error en find (images)  :", error);

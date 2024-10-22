@@ -591,8 +591,8 @@ span.hashtag {
 
                   <div class="well" style="border: 2px solid lime;  border-radius: 20px;">
 
-                    <button class="boton-conectar"  onclick="findNftWallet(`foryourand`)" style="display: inline-block; margin-left: 10px;">load image</button>   
-                           
+                    <button class="boton-conectar"  onclick="openBuyNftModal(`ernesto`)" style="display: inline-block; margin-left: 10px;">load image</button>   
+                          
                   </div>
 
                                              
@@ -1025,7 +1025,7 @@ span.hashtag {
         </div>
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-default" onclick="confirmPurchase()" style="background: lime; color: black;">Confirmar Compra</button>
+         
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>
       </div>
@@ -1054,7 +1054,7 @@ span.hashtag {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Confirmar Venta</button>
+        
       </div>
     </div>
   </div>
@@ -1521,7 +1521,7 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
             const maticrequired = document.getElementById("mount-minteo").textContent;
             // ...
 
-             alert('Hexa: ' + codeimageHexa);
+             //alert('Hexa: ' + codeimageHexa);
             
             try {              
               //await contract.methods.mintNFT(nftusername,).send({from: myAddress, gas: 400000, gasPrice: web3.utils.toWei('50', 'gwei') });
@@ -2637,8 +2637,8 @@ async function createActionPublication(receiverNFTUsername,publication_id,type_a
     if(type_action==="publication"){
        
         loadingAnimationPublication.style.display = 'block'; // Muestra la animación al e    
-        alert("alerta publicacion "+nftusername+timestamp+signatureToUser+content+
-          jsonString+type_post+parentPublicationId);
+        //alert("alerta publicacion "+nftusername+timestamp+signatureToUser+content+
+          //jsonString+type_post+parentPublicationId);
         await contractPUBLICATION.methods.createPublication(nftusername,timestamp,signatureToUser,content,
           jsonString,type_post,parentPublicationId).send({from: myAddress, gas: 600000, gasPrice: web3.utils.toWei('50', 'gwei') });
    

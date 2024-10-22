@@ -98,7 +98,7 @@ async function openBuyNftModal(username) {
         }
 
         async function handleButtonBuyNFTUsernameClick() {
-            alert("Has clickeado el Botón 1");
+            //alert("Has clickeado el Botón 1");
             // Lógica para la compra aquí
             
             const maticAmount = web3.utils.toWei(precio_info, 'ether'); // 10 MATIC
@@ -146,7 +146,7 @@ async function openBuyNftModal(username) {
 
 async function findNftWallet(value) {
   // Obtener la dirección de la cuenta conectada
-  alert("Clickeaste el botón de find wallet ");
+  //alert("Clickeaste el botón de find wallet ");
   const accounts = await web3.eth.getAccounts();
   const myAddress = accounts[0];
 
@@ -318,7 +318,7 @@ async function findNftWallet(value) {
                     const buyButton = document.createElement("button");
                     buyButton.textContent = "For Sale";
                     buyButton.addEventListener("click", async function () {
-                        alert("Has clickeado el Botón 1");    
+                        //alert("Has clickeado el Botón 1");    
                         await openBuyNftModal(username);  
 
                         // Ahora muestra el modal

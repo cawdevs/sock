@@ -172,7 +172,7 @@ async function getImageNFTUsername(image_contenedor){
     
         try {
             const codeHexaImage = await contract.methods.getimagecodeHexaFromUsername(selectorNFTs).call();     
-            alert('Error Create profile' +" "+ selectorNFTs+ " " + codeHexaImage);
+            //alert('Error Create profile' +" "+ selectorNFTs+ " " + codeHexaImage);
             await loadImagesFromHex(codeHexaImage,image_contenedor);                           
 
         }catch (error) {
@@ -310,7 +310,7 @@ async function info_profile_sock(){
             const info_username = await contract.methods.getNFTInfoByUsername(selectorNFTs).call();
             const total_minted_NFT = await contract.methods.getTotalMintedNFTs().call();
             
-             alert('info' +" "+ info_username+ "*/* " + total_minted_NFT);
+             //alert('info' +" "+ info_username+ "*/* " + total_minted_NFT);
 
              //function transferNFT(address to, string memory username)
 
@@ -445,7 +445,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 // Define las funciones que llamarán cada botón
                 // Define las funciones que llamarán cada botón
                 async function handleButtonSellClick() {
-                    alert("Has clickeado el Botón 1");
+                    //alert("Has clickeado el Botón 1");
                     // Obtén el valor del input
                     const price = textInput_sell.value; // Accede al valor de la entrada de texto
 
@@ -464,7 +464,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 }
 
                 async function handleButtonCancelSellClick() {
-                    alert("Has clickeado el Botón 2");
+                    //alert("Has clickeado el Botón 2");
                     try {
                         await contract.methods.cancelNFTSale(username_info,).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
                         console.log('NFT Username is Delisted.');
@@ -475,7 +475,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 
                 // Define las funciones que llamarán cada botón
                 async function handleButtonTransferClick() {
-                    alert("Has clickeado el Botón 3");
+                    //alert("Has clickeado el Botón 3");
                     const address_to = textInput_transfer.value; // Accede al valor de la entrada de texto
                     // Verificar si la dirección es válida
                     if (!web3.utils.isAddress(address_to)) {

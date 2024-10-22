@@ -450,17 +450,23 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                     const price = textInput_sell.value; // Accede al valor de la entrada de texto
 
                     // Verifica si el valor es válido
-                    if (!price || isNaN(price)) {
-                        alert("Invalid Price.");
+                    if (!price || isNaN(price) || parseFloat(price) <= 0) {
+                        alert("Invalid Price. Please enter a valid number greater than 0.");
                         return;
                     }
 
+                    const priceInWei = web3.utils.toWei(price.toString(), 'ether'); // Convertir a Wei
+
                     try {
-                        await contract.methods.sellNFT(username_info,price).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                        await contract.methods.sellNFT(username_info, priceInWei).send({
+                            from: myAddress,
+                            gas: 200000,
+                            gasPrice: web3.utils.toWei('50', 'gwei')
+                        });
                         console.log('NFT Username ready to Sell.');
-                     }catch (error) {
+                    } catch (error) {
                         console.error('Error al listar el NFT Username:', error);
-                     }
+                    }
                 }
 
                 async function handleButtonCancelSellClick() {

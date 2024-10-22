@@ -102,6 +102,17 @@ async function openBuyNftModal(username) {
         async function handleButtonBuyNFTUsernameClick() {
             alert("Has clickeado el Botón 1");
             // Lógica para la compra aquí
+            
+            const maticAmount = web3.utils.toWei(precio_info, 'ether'); // 10 MATIC
+
+              // Ejecutar la función mintNFT
+            await contract.methods.buyNFT(nftusername).send({
+                  from: myAddress,
+                  gas: 800000,
+                  gasPrice: web3.utils.toWei('60', 'gwei'),
+                  value: maticAmount // Especificar el valor de 10 MATIC
+              });
+
         }
 
         const button_buy_NFTUsername = createButton("Buy NFTUsername", "green", handleButtonBuyNFTUsernameClick);

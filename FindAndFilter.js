@@ -61,10 +61,14 @@ async function openBuyNftModal(username) {
         infoContainer.classList.add("info-container");
 
         // Agregar cada párrafo con contenido
+
+        // Convertir de wei a MATIC para mostrar al usuario
+        const maticAmount = web3.utils.fromWei(precio_info, 'ether'); 
+
         const paragraphs = [
             { text: `ID: ${id_info}`, color: "white" },
             { text: `Username: ${username_info}`, color: "white" },
-            { text: `Price: ${precio_info}`, color: "yellow" },
+            { text: `Price: ${maticAmount}`, color: "yellow" },
             { text: `Date: ${username_date}`, color: "white" }
         ];
 
@@ -100,8 +104,9 @@ async function openBuyNftModal(username) {
         async function handleButtonBuyNFTUsernameClick() {
             //alert("Has clickeado el Botón 1");
             // Lógica para la compra aquí
+            let precio_info = info_username[4];
             
-            const maticAmount = web3.utils.toWei(precio_info, 'ether'); // 10 MATIC
+            //const maticAmount = web3.utils.toWei(precio_info, 'ether'); // 10 MATIC
        
             console.log(`Precio del NFT: ${precio_info} MATIC`);
             console.log(`Cantidad en Wei: ${maticAmount}`);
@@ -111,7 +116,7 @@ async function openBuyNftModal(username) {
                   from: myAddress,
                   gas: 800000,
                   gasPrice: web3.utils.toWei('60', 'gwei'),
-                  value: maticAmount // Especificar el valor de 10 MATIC
+                  value: precio_info // Especificar el valor de 10 MATIC
               });
 
         }

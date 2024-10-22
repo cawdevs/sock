@@ -102,6 +102,9 @@ async function openBuyNftModal(username) {
             // Lógica para la compra aquí
             
             const maticAmount = web3.utils.toWei(precio_info, 'ether'); // 10 MATIC
+       
+            console.log(`Precio del NFT: ${precio_info} MATIC`);
+            console.log(`Cantidad en Wei: ${maticAmount}`);
 
               // Ejecutar la función mintNFT
             await contract.methods.buyNFT(username).send({

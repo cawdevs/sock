@@ -376,9 +376,11 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         //paragraph3.textContent = `Forsale: ${forsale_info}`;
         //paragraph3.style.color = "lime";
         //infoContainer.appendChild(paragraph3);
-
+        
+        // Convertir de wei a MATIC para mostrar al usuario
+        const maticAmount = web3.utils.fromWei(precio_info, 'ether');
         const paragraph4 = document.createElement("p");
-        paragraph4.textContent = `Price: ${precio_info}`;
+        paragraph4.textContent = `Price: ${maticAmount}`;
         paragraph4.style.color = "green";
         paragraph4.style.fontSize = "18px";
         infoContainer.appendChild(paragraph4);

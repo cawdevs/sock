@@ -21,7 +21,7 @@ async function openBuyNftModal(username) {
     containner_info_sock.style.flexDirection = "column"; 
     containner_info_sock.style.alignItems = "center"; 
     containner_info_sock.style.marginBottom = "10px"; 
-    containner_info_sock.style.border = "1px solid white"; 
+    //containner_info_sock.style.border = "1px solid white"; 
     containner_info_sock.style.padding = "5px"; 
     containner_info_sock.style.width = "100%"; 
 
@@ -51,7 +51,7 @@ async function openBuyNftModal(username) {
         imageUserContainer.style.justifyContent = "center"; 
         imageUserContainer.style.alignItems = "center"; 
         imageUserContainer.style.marginRight = "10px"; 
-        imageUserContainer.style.border = "1px solid white"; 
+        //imageUserContainer.style.border = "1px solid white"; 
         imageUserContainer.style.padding = "5px"; 
 
         containner_info_sock.appendChild(imageUserContainer);
@@ -64,17 +64,17 @@ async function openBuyNftModal(username) {
 
         // Agregar cada párrafo con contenido
         const paragraphs = [
-            { text: `ID: ${id_info}`, color: "black" },
-            { text: `Username: ${username_info}`, color: "black" },
-            { text: `Price: ${precio_info}`, color: "green" },
-            { text: `Date: ${username_date}`, color: "darkgreen" }
+            { text: `ID: ${id_info}`, color: "white" },
+            { text: `Username: ${username_info}`, color: "white" },
+            { text: `Price: ${precio_info}`, color: "yellow" },
+            { text: `Date: ${username_date}`, color: "white" }
         ];
 
         paragraphs.forEach(({ text, color }) => {
             const paragraph = document.createElement("p");
             paragraph.textContent = text;
             paragraph.style.color = color;
-            paragraph.style.fontSize = "18px";
+            paragraph.style.fontSize = "24px";
             infoContainer.appendChild(paragraph);
         });
 
@@ -282,7 +282,7 @@ async function findNftWallet(value) {
         userRowContainer.style.display = "flex";
         userRowContainer.style.alignItems = "center"; // Centrar verticalmente la imagen y el nombre
         userRowContainer.style.marginBottom = "10px"; // Espacio entre filas
-        userRowContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor
+        //userRowContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor
         userRowContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
 
               // Crear un contenedor para la imagen
@@ -294,7 +294,7 @@ async function findNftWallet(value) {
                   imageUserContainer.style.justifyContent = "center"; // Centrar horizontalmente
                   imageUserContainer.style.alignItems = "center"; // Centrar verticalmente
                   imageUserContainer.style.marginRight = "10px"; // Espacio entre imagen y nombre
-                  imageUserContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor de la imagen
+                  //imageUserContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor de la imagen
                   imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
               
                userRowContainer.appendChild(imageUserContainer);

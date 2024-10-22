@@ -1,7 +1,6 @@
 
 async function openBuyNftModal(username) {  
 
-
     console.log(`openBuyNftModal called with username: ${username}`);
 
     const accounts = await web3.eth.getAccounts();
@@ -40,7 +39,6 @@ async function openBuyNftModal(username) {
         const username_date = tiempoTranscurrido(info_username[7]);
 
         console.log(`informacion :`); 
-
      
         // Crear contenedor para la imagen
         const imageUserContainer = document.createElement("div");
@@ -106,7 +104,7 @@ async function openBuyNftModal(username) {
             const maticAmount = web3.utils.toWei(precio_info, 'ether'); // 10 MATIC
 
               // Ejecutar la función mintNFT
-            await contract.methods.buyNFT(nftusername).send({
+            await contract.methods.buyNFT(username).send({
                   from: myAddress,
                   gas: 800000,
                   gasPrice: web3.utils.toWei('60', 'gwei'),

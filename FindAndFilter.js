@@ -44,7 +44,7 @@ async function openBuyNftModal(username) {
      
         // Crear contenedor para la imagen
         const imageUserContainer = document.createElement("div");
-        imageUserContainer.id = `imageContainerId`; 
+        imageUserContainer.id = `imageContainerId_buy`; 
         imageUserContainer.style.width = "200px"; 
         imageUserContainer.style.height = "200px"; 
         imageUserContainer.style.display = "flex"; 
@@ -109,10 +109,12 @@ async function openBuyNftModal(username) {
 
         // Agregar el contenedor de controles al infoContainer
         infoContainer.appendChild(sellContainer);
+
+
         containner_info_sock.appendChild(infoContainer);                                                
 
         await loadImagesFromHex(codeHexaImage_info, imageUserContainer.id, "big");
-    
+                                                    
 
     } catch (error) {
         console.error("Error al obtener información del NFT:", error);

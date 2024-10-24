@@ -385,19 +385,19 @@ span.hashtag {
 
 
     <div id="menu2" class="tab-pane fade">    
-        <div class="user-publication-container">
+       <!-- <div class="user-publication-container">
+             <a href="games/asteroides/asteroides.html" target="_blank">Jugar Asteroides</a>            
+        </div> -->
 
-          <br>
-            <br>
-              <br>  
-             <a href="games/asteroides/asteroides.html" target="_blank">Jugar Asteroides</a>
-             <br>
-          
-              <br>
-               <br>
-
-        </div> 
+        <!-- Botón opcional para 2mcargar el juego -->
+         <button onclick="loadGame()">load game Cartas</button>
+          <div id="gameContainer"></div>
+         
     </div>
+
+  
+
+
     
 
 
@@ -1214,6 +1214,12 @@ span.hashtag {
   
    
 <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+<!-- Archivo JavaScript para cargar contenido dinámico del juego carta Mayor-->
+    <script src="games/cartaMayor/loadGameCartas.js"></script>
+    <!-- Lógica del juego -->
+    <script src="games/cartaMayor/scriptCartas.js"></script>
+
+
 
 <script>
     // Definir las palabras clave

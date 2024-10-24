@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Select a Card</h1>
+        <div class="cards">
+            <div class="card" id="card1" onclick="selectCard(1)">
+                <div class="back"></div>
+                <div class="front"></div>
+            </div>
+            <div class="card" id="card2" onclick="selectCard(2)">
+                <div class="back"></div>
+                <div class="front"></div>
+            </div>
+        </div>
+        <button id="revealButton" onclick="revealCards()">Reveal Cards</button>
+        <button id="resetButton" onclick="resetGame()" style="display: none;">Reset Game</button>
+        
+        <div class="scoreboard">
+            <p>Wins: <span id="winCount">0</span></p>
+            <p>Losses: <span id="lossCount">0</span></p>
+            <p>Total Attempts: <span id="attemptCount">0</span></p>
+        </div>
+
+        <p id="result"></p>
+
+        <button id="claimTokensButton" style="display: none;" onclick="claimTokens()">Claim Tokens</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

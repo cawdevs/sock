@@ -295,13 +295,13 @@
        
        <a data-toggle="tab" href="#menu_mensaje" style=" margin-left: 15px;">  <img  id="image-food" src="images/icons/message_icon.SVG" alt="home" width="45"> </a>
        
-       <a data-toggle="tab" href="#gomarkets" style=" margin-left: 15px;">  <img  id="image-market" src="images/icons/game_icon.SVG" alt="home" width="45"> </a>
+       <a data-toggle="tab" href="#menu_play" style=" margin-left: 15px;">  <img  id="image-market" src="images/icons/game_icon.SVG" alt="home" width="45"> </a>
                           
-       <a data-toggle="tab" href="#mymarket" style=" margin-left: 15px;">  <img  id="image-mymarket" src="images/icons/gamefi_icon.SVG" alt="mymarket" width="45"> </a>
+       <a data-toggle="tab" href="#menu_play_to_earn" style=" margin-left: 15px;">  <img  id="image-mymarket" src="images/icons/gamefi_icon.SVG" alt="mymarket" width="45"> </a>
 
-       <a data-toggle="tab" href="#goservice" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/swapp_icon.SVG" alt="home" width="45"> </a>
+       <a data-toggle="tab" href="#menu_transfer" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/swapp_icon.SVG" alt="home" width="45"> </a>
 
-        <a data-toggle="tab" href="#goservice" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/staking_icon.SVG" alt="home" width="45"> </a>
+        <a data-toggle="tab" href="#menu_staking" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/staking_icon.SVG" alt="home" width="45"> </a>
 
        <a data-toggle="tab" href="#menu_info_sock" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/config_icon.SVG" alt="home" width="45"> </a>
        
@@ -341,8 +341,8 @@ span.hashtag {
     <div id="home" class="tab-pane fade in active" >
          <div class="user-following-publication-container"  >
            <br>
-            <br>
-             <br>
+            
+             <center><h3>Follower and following publication</h3></center>
               <br>
                <br>
 
@@ -360,6 +360,12 @@ span.hashtag {
     <div id="menu1" class="tab-pane fade">
    <!--****************************************************-->
    <!--****************************************************-->
+   <br>
+            
+             <center><h3>Follower and following username</h3></center>
+              <br>
+               <br>
+
        
    </div>  
 
@@ -371,9 +377,13 @@ span.hashtag {
              <a href="games/asteroides/asteroides.html" target="_blank">Jugar Asteroides</a>            
         </div> -->
 
-        <!-- Botón opcional para 2mcargar el juego -->
-         <button onclick="loadGame()">load game Cartas</button>
-          <div id="gameContainer"></div>
+         <br>
+          
+             <center><h3>You Publications</h3></center>
+              <br>
+               <br>
+
+        
          
     </div>
 
@@ -389,81 +399,77 @@ span.hashtag {
       
       <div class="container-fluid"> 
           <h4><div id="nft-username-list-direct-message"></div></h4>   
+          <br>
+           
+             <center><h3>Direct Messages</h3></center>
+              <br>
+               <br>
       </div>
-
-
-
     </div>
     <!--/////////////////////////////////////////////////////////////-->
+     <!--/////////////////////////////////////////////////////////////-->
+    <!--/////////////////////////////////////////////////////////////-->
+    <div id="menu_play" class="tab-pane fade">
+      
+      <div class="container-fluid"> 
+          <h4><div id="nft-username-list-direct-message"></div></h4>   
+          <br>
+           
+             <center><h3>Games</h3></center>
+             <!-- Botón opcional para 2mcargar el juego -->
+         <button onclick="loadGame()">load game Cartas</button>
+          <div id="gameContainer"></div>
+              <br>
+               <br>
+      </div>
+    </div>
+  
+    <!--/////////////////////////////////////////////////////////////-->
+ <!--/////////////////////////////////////////////////////////////-->
+    <!--/////////////////////////////////////////////////////////////-->
+    <div id="menu_play_to_earn" class="tab-pane fade">
+      
+      <div class="container-fluid"> 
+          <h4><div id="nft-username-list-direct-message"></div></h4>   
+          <br>
+           
+             <center><h3>Game play to earn and Bets</h3></center>
+              <br>
+               <br>
+      </div>
+    </div>
+
+
+<!--/////////////////////////////////////////////////////////////-->
+    <!--/////////////////////////////////////////////////////////////-->
+    <div id="menu_transfer" class="tab-pane fade">
+          
+          <br>
+          <center><h3><p>Swap and transfer token</p></h3></center> 
+          
+          <br>
+          <br>
+           
+    
+    </div>     
+<!--/////////////////////////////////////////////////////////////-->
     <!--/////////////////////////////////////////////////////////////-->
 
-    <div id="menu_staking" class="tab-pane fade" style="display:none; ">
+    <div id="menu_staking" class="tab-pane fade" >
        
          <div class="container-fluid" style = "width:80%; align-items: center;">
-              
-          
-                <h4>Staking Pool</h4>   
+                       </div>
 
-                 
-                  <div id="staking-container" style="display: flex; align-items: center;  justify-content: center;">
-                        <input type="text" id="mount-staking" class="form-control" placeholder="CAW Mount to staking" style="border: 2px solid black; border-radius: 20px; width: 200px; height: 40px; margin-right: 10px;">
-                            
-                       <button id="btn-staking" class="btn btn-default" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;" >
-                               Staking
-                      </button>                             
-                  </div> 
-                 
-                 <br>
-
-                            
-
-             <div class="container-fluid" style="border: 4px solid black; border-radius: 20px; width:80%;">
-                <div id ="user-amount-staked" style=" display:inline-block; margin-top: 10px; margin-bottom: 10px; font-size: 18px;"></div>
-                <div id ="user-last-claim-rewards" style=" display:inline-block; margin-bottom: 10px; font-size: 18px;"></div>
-                <div id ="user-total-rewards-earned" style=" display:inline-block; margin-bottom: 10px; font-size: 18px;"></div>             
-                 <button id="btn-claim-rewards" class="btn btn-default" text="hola" onclick="claim" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px; margin-bottom: 10px;">Claim rewards
-                 </button>  
-             </div>
-
+          <br>   
+              <center>  <h3>Staking Pool</h3> </center>                   
                   <br>
-              <div class="container-fluid" style="border: 4px solid black; border-radius: 20px; width:80%">
-                <div id ="total-staked" style=" display:inline-block; margin-top: 10px; margin-bottom: 10px; font-size: 18px;"></div>
-                <div id ="total-rewards" style=" display:inline-block; margin-bottom: 10px; font-size: 18px;"></div>               
-              </div>  
-         
-               <br>
-              
-
-
-              <div id="unstaking-container" style="display: flex; align-items: center;  justify-content: center;">
-              
-
-                    <input type="text" id="mount-unstaking" class="form-control" placeholder="CAW Amount to UNSTAKE" style="border: 2px solid black; border-radius: 20px; width: 200px; height: 40px; margin-right: 10px;">
-
-                    <button id="btn-unstaking" class="btn btn-default" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
-                      Unstaking
-                    </button>
-
-              </div>
-         
-
-
-
-         </div>
+                 
+                 <br>  
           
     </div> 
 
     
-<!--/////////////////////////////////////////////////////////////-->
-    <!--/////////////////////////////////////////////////////////////-->
-    <div id="menu_market_place" class="tab-pane fade">
           
-          <br>
-          <center><h1><p>"Market place"</p></h1></center> 
-          <br>
-          <div id="NFT-market-place"></div>  
-    
-    </div>               
                    
    
     <!--/////////////////////////////////////////////////////////////-->
@@ -536,16 +542,16 @@ span.hashtag {
 
                            <button id="btn-find-followin"  onclick="findNftWallet('following')"style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">Following</button> 
 
-                           <button id="btn-find-nft-for-you" onclick="findNftWallet('foryou')" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
+                           <!--<button id="btn-find-nft-for-you" onclick="findNftWallet('foryou')" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
                                 </span>For you. 
-                              </button> 
+                              </button>--> 
 
                               <button id="btn-find-nft-for-you-rand" onclick="findNftWallet('foryourand')" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
-                               For you rand. 
+                               Rand. 
                               </button> 
 
                               <button id="btn-find-nft-for-you-last" onclick="findNftWallet('foryoulast')"  style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
-                                For you last. 
+                                Last. 
                               </button> 
 
                               
@@ -570,17 +576,19 @@ span.hashtag {
                 </div>     
 
                    
-
+              
                   <div class="well" style="border: 2px solid lime;  border-radius: 20px;">
 
-                    <button class="boton-conectar"  onclick="openBuyNftModal(`ernesto`)" style="display: inline-block; margin-left: 10px;">load image</button>   
+                    <!--<button class="boton-conectar"  onclick="openBuyNftModal(`ernesto`)" style="display: inline-block; margin-left: 10px;">load image</button>   
+                   -->
+                    <div id="success-message"></div>
+                           <div id="error-message"></div>  
                           
                   </div>
 
                                              
                                                  
-                           <div id="success-message"></div>
-                           <div id="error-message"></div>   
+                            
                                          
                 </div>               
 
@@ -1303,7 +1311,7 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
           const web3 = new Web3(window.ethereum);     
           const tokenContract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
            
-           showSuccess('The development will not stop! The team is working on the development of the Sock protocol also in a FrontEnd (html, CSS, Js).');
+           showSuccess('The development will not stop! The team is working on the development of the Sock protocol (Decentralized Finance Social Network).');
             
 
           

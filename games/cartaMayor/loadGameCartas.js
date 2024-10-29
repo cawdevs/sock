@@ -1,5 +1,6 @@
 // Función para cargar el contenido del juego dinámicamente
 function loadGame() {
+
     const gameContainer = document.getElementById('gameContainer');
 
      // Verificar si los estilos ya están cargados
@@ -39,7 +40,7 @@ function loadGame() {
         <p id="result"></p>
         
         <button id="claimTokensButton" style="display: none;" onclick="claimTokens()">Reclamar Tokens</button>
-    
+        
         
 
     `
@@ -48,4 +49,6 @@ function loadGame() {
 
     // Insertar el contenido dinámico en el contenedor
     gameContainer.innerHTML = gameHTML;
+
+    fullResetGame();
 }

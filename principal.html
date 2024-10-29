@@ -204,31 +204,39 @@
 
 
 
-<nav class="navbar navbar-inverse" role="navigation" style="border: 2px solid white; border-radius: 20px; background: black;">
-    <div class="container-fluid" style="display: flex; align-items: center;">
-        
-        <!-- Imagen NFT alineada -->
-        <div id="NFT_image-container" style="width: 80px; height: 80px; display: flex; justify-content: center; align-items: center; border: 2px solid white; border-radius: 50%; margin-right: 15px;">
-            <!-- Imagen u otros elementos internos aquí -->
+<nav class="navbar navbar-inverse" role="navigation" style="border: 2px solid white; border-radius: 20px; background: black; position: relative; height: 80px;"> <!-- Ajusta la altura de la barra aquí -->
+    <div class="container-fluid" style="display: flex; align-items: center; justify-content: flex-start; height: 100%;">
+
+        <!-- Selector de NFTs a 120px del borde izquierdo -->
+        <div style="margin-left: 110px; display: flex; align-items: center;">
+            <select id="selector_NFTs" class="form-control" placeholder="Username" style="border: 2px solid lime; border-radius: 10px; font-size: 24px; height: auto; width: 150px;"></select>
         </div>
-        
-        <!-- Selector de NFTs -->
-        <div>
-            <select id="selector_NFTs" class="form-control" placeholder="Username" style="border: 2px solid lime; border-radius: 10px; font-size: 16px; height: auto; width: 150px;"></select>
-        </div>
-        
+
         <!-- Icono de publicación -->
-        <div>
-            <a href="#" data-toggle="modal" data-target="#myModal" style="margin-left: 20px;">
+        <div style="display: flex; align-items: center; margin-left: 10px;">
+            <a href="#" data-toggle="modal" data-target="#myModal">
                 <span class="glyphicon glyphicon-plus-sign" style="color: lime; font-size: 30px; vertical-align: middle;"></span>
             </a>
         </div>
-        
-        <!-- Enlace de NFT-Username -->
-        <!-- <ul class="nav navbar-nav navbar-right" style="display: flex; align-items: center; margin-left: auto;">
-            <li><a href="#" data-toggle="modal" data-target="#myModal" onclick="loadImages()" style="color: white;">NFT-Username</a></li>
-        </ul>-->
-        
+
+    </div>
+
+    <!-- Imagen NFT sobrepuesta a la izquierda -->
+    <div id="NFT_image-container" style="
+        width: 90px; 
+        height: 90px; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        border: 2px solid white; 
+        border-radius: 50%; 
+        position: absolute; 
+        top: 0%; 
+        transform: translateY(-50%);
+        left: 5px; /* Alineación a la izquierda */
+        background: black;
+    ">
+        <!-- Imagen u otros elementos internos aquí -->
     </div>
 </nav>
 

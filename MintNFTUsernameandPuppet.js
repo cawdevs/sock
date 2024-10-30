@@ -350,7 +350,7 @@ async function info_profile_sock(){
                   imageUserContainer.style.marginRight = "10px"; // Espacio entre imagen y nombre
                   imageUserContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor de la imagen
                   imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
-                  imageUserContainer.style.position=" absolute";
+                  imageUserContainer.style.position="relative";
                   
                   
 

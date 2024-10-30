@@ -332,9 +332,22 @@ async function info_profile_sock(){
              
              const username_date = tiempoTranscurrido(info_username[7]);
 
-
+width: 90px; 
+        height: 90px; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        border: 2px solid white; 
+        border-radius: 50%; 
+        position: absolute; 
+        top: 0%; 
+        transform: translateY(-50%);
+        left: 5px; /* Alineación a la izquierda */
+        background: black;
           
-                      
+                
+     
+         
 
 
             try{
@@ -349,6 +362,7 @@ async function info_profile_sock(){
                   imageUserContainer.style.marginRight = "10px"; // Espacio entre imagen y nombre
                   imageUserContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor de la imagen
                   imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
+                  imageUserContainer.style.position=" absolute";
                   
                   
 

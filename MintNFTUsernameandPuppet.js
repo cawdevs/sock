@@ -189,7 +189,7 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
     const container = document.getElementById(image_contenedor);
     //container.style.border = "1px solid blue"; // Borde blanco alrededor del contenedor
     container.style.padding = "5px"; // Espacio interno para separar el contenido del borde
-    container.style.position = "relative"; // Posicionamiento para las imágenes
+    container.style.position = "absolute"; // Posicionamiento para las imágenes
     container.style.overflow = "hidden"; // Asegura que no se salga del borde
 
     // Limpiar el contenedor

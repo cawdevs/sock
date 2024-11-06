@@ -29,7 +29,7 @@ const provider = new ethers.providers.JsonRpcProvider("https://polygon-mainnet.g
             const myAddress = wallet.address;
 
 
-            alert(`Exito myAddress:`,myAddress);
+            alert(`Exito myAddress:xxxx ` + myAddress);
             
             globalWalletKey = myAddress;
             const start = myAddress.slice(0, 6);
@@ -50,6 +50,7 @@ const provider = new ethers.providers.JsonRpcProvider("https://polygon-mainnet.g
         async function obtenerSaldo(wallet) {
             
             const balanceWei = await provider.getBalance(wallet.address);
+            alert(`balanceWei: `+ balanceWei);
             const balanceEther = ethers.utils.formatEther(balanceWei);
             document.getElementById('saldo_ETH').innerText = `Saldo en ETH: ${balanceEther}`;
         }

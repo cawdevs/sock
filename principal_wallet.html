@@ -1342,8 +1342,8 @@ const provider = new ethers.providers.JsonRpcProvider("https://polygon-mainnet.g
             
             const balanceWei = await provider.getBalance(wallet.address);
             alert(`balanceWei: `+ balanceWei);
-            //const balanceEther = ethers.utils.formatEther(balanceWei);
-            document.getElementById('saldo_ETH').innerText = `Saldo en ETH: ${balanceWei}`;
+            const balanceEther = ethers.utils.formatEther(balanceWei);
+            document.getElementById('saldo_ETH').innerText = `POL: ${balanceEther}`;
         }
 
       

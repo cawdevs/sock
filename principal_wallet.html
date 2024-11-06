@@ -1337,8 +1337,33 @@ const provider = new ethers.providers.JsonRpcProvider("https://polygon-mainnet.g
             // Cualquier otra lógica necesaria se puede agregar aquí
         };
 
-        // Función para obtener el saldo
         async function obtenerSaldo(wallet) {
+    try {
+        // Obtener el saldo de MATIC
+        const balanceWei = await provider.getBalance(wallet.address);
+        const balanceEther = ethers.utils.formatEther(balanceWei);
+        document.getElementById('saldo_ETH').innerText = `POL: ${balanceEther}`;
+        document.getElementById('saldo_ETH').style.color = 'Magenta';
+
+        // Crear instancia del contrato CAW usando ethers.js
+        const tokenContract = new ethers.Contract(tokenContractAddress, CAW_tokenABI, provider);
+
+        // Obtener el saldo del token CAW
+        const accountBalance = await tokenContract.balanceOf(wallet.address);
+        const balanceString = ethers.utils.formatUnits(accountBalance, 18);
+        
+        // Mostrar saldo del token CAW en el elemento correspondiente
+        const saldoElement = document.getElementById('saldo_CAW');
+        saldoElement.innerText = balanceString;
+        saldoElement.style.color = 'lime';
+        
+    } catch (error) {
+        console.error("Error obteniendo saldo:", error);
+    }
+}
+
+        // Función para obtener el saldo
+        async function obtenerSaldo2(wallet) {
             
             const balanceWei = await provider.getBalance(wallet.address);
             alert(`balanceWei: `+ balanceWei);

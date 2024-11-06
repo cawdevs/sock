@@ -33,7 +33,9 @@
 
 <!-- Agrega el siguiente script para cargar la biblioteca desde un CDN -->
 <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
-
+  
+<!-- esta linea es para poder crear la billetera ethereum/poligon -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.umd.min.js"></script>
 
 </head>
 
@@ -368,7 +370,10 @@ input[type=text]:placeholder {
 
          
       
-      <input type="submit" class="fadeIn fourth" value="Enter" onclick="goToMainPage()">     
+      <input type="submit" class="fadeIn fourth" value="Enter" onclick="goToMainPage()"> 
+
+
+      <button id="createWalletButton" style="display: none;">Crear Billetera</button>    
          
       
     <!-- Remind Passowrd -->
@@ -389,8 +394,37 @@ function goToMainPage() {
 </script>
 
 
+<script>
+// Función para verificar si existe una billetera
 
 
+function checkWallet() {
+    const privateKey = localStorage.getItem('privateKey');
+    const createWalletButton = document.getElementById('createWalletButton');
+
+    // Si privateKey existe, oculta el botón de crear billetera
+    if (privateKey) {
+        createWalletButton.style.display = 'none'; // Ocultar botón
+    } else {
+        createWalletButton.style.display = 'block'; // Mostrar botón
+    }
+}
+
+// Llamar a la función al cargar la página
+window.onload = checkWallet;
+
+// Función para crear una billetera
+
+async function createWallet() {
+    const wallet = ethers.Wallet.createRandom();
+    localStorage.setItem('privateKey', wallet.privateKey); // Guardar clave privada
+    alert(`Nueva billetera creada:\nDirección: ${wallet.address}\nClave privada guardada en el navegador.`);
+    checkWallet(); // Llama a esta función para actualizar la visibilidad del botón
+}        
+
+// Asignar la función al botón
+document.getElementById('createWalletButton').onclick = createWallet;
+</script>
 
 
 

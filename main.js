@@ -52,7 +52,7 @@ const provider = new ethers.JsonRpcProvider("https://polygon-mainnet.g.alchemy.c
             const balanceWei = await provider.getBalance(wallet.address);
             alert(`balanceWei: `+ balanceWei);
             //const balanceEther = ethers.utils.formatEther(balanceWei);
-            document.getElementById('saldo_ETH').innerText = `Saldo en ETH: ${balanceEther}`;
+            document.getElementById('saldo_ETH').innerText = `Saldo en ETH: ${balanceWei}`;
         }
 
       

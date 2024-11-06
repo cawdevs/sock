@@ -1,492 +1,190 @@
-<!DOCTYPE html>
-<html lang="es">
+
+  <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOCK PUPPETS</title>
-
-     <style>
-      html {
-           background: linear-gradient(45deg, lime,darkgreen);
-             }
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(0deg, lime,darkgreen);
-        }
-   
-            
-    </style>
-
-
-
-
-
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.umd.min.js"></script>
     
-
-
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<!-- Agrega el siguiente script para cargar la biblioteca desde un CDN -->
-<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
-  
-<!-- esta linea es para poder crear la billetera ethereum/poligon -->
-  <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.umd.min.js"></script>
-
+    <style>
+       html, body {
+            height: 100%;
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(45deg, lime, darkgreen);
+        }
+        .wrapper {
+            display: flex;
+            align-items: center;
+            flex-direction: column; 
+            justify-content: center;
+            width: 100%;
+            min-height: 80%;
+            padding: 20px;
+        }
+        #formContent {
+            border-radius: 10px;
+            background: white;
+            padding: 30px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        h4 {
+            margin-bottom: 20px;
+            color: #cccccc;
+        }
+        .underlineHover:hover {
+            color: #0d0d0d;
+            border-bottom: 2px solid #5fbae9;
+        }
+        input[type=text], input[type=submit], button {
+            width: 85%;
+            padding: 15px;
+            margin: 5px 0;
+            font-size: 16px;
+            border: 2px solid #f6f6f6;
+            border-radius: 5px;
+            background-color: #f6f6f6;
+            text-align: center;
+        }
+        input[type=submit], button {
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        input[type=submit]:hover, button:hover {
+            background-color: lime;
+        }
+    </style>
 </head>
-
 
 <body>
 
-<br>
- 
-
-
-
- <center>  <div>
-  
-     <a  href="whiteDocument.html" target="_blank" ><img src="images/icons/document_icon.SVG" alt="My svg_logo" width="25"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; "></a>
-
-    
-     <a href="https://github.com/cawdevs" target="_blank" rel="noopener noreferrer"> <img src="images/logoG.SVG" alt="My svg_logo" width="25"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">
-     </a>
-
-     <a href="https://x.com/puppets_token" target="_blank" rel="noopener noreferrer"> <img src="images/logoX.svg" alt="My svg_logo" width="25"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">
-     </a>
-
-      	   
-
- </div></center>
-
-
-
-
-
-
-<style>
-  @import url('https://fonts.googleapis.com/css?family=Poppins');
-
-/* BASIC */
-
-html {
-  background-color: #56baed;
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-  height: 100vh;
-}
-
-a {
-  color: #92badd;
-  display:inline-block;
-  text-decoration: none;
-  font-weight: 400;
-}
-
-h2 {
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  display:inline-block;
-  margin: 40px 8px 10px 8px; 
-  color: #cccccc;
-}
-
-
-
-/* STRUCTURE */
-
-.wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column; 
-  justify-content: center;
-  width: 100%;
-  min-height: 80%;
-  padding: 20px;
-}
-
-#formContent {
-  -webkit-border-radius: 10px 10px 10px 10px;
-  border-radius: 10px 10px 10px 10px;
-  background: white;
-  padding: 30px;
-  width: 90%;
-  max-width: 450px;
-  position: relative;
-  padding: 0px;
-  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  text-align: center;
-}
-
-#formFooter {
-  background-color: #f6f6f6;
-  border-top: 1px solid #dce8f1;
-  padding: 25px;
-  text-align: center;
-  -webkit-border-radius: 0 0 10px 10px;
-  border-radius: 0 0 10px 10px;
-}
-
-
-
-/* TABS */
-
-h2.inactive {
-  color: #cccccc;
-}
-
-h2.active {
-  color: #0d0d0d;
-  border-bottom: 2px solid #5fbae9;
-}
-
-
-
-/* FORM TYPOGRAPHY*/
-
-input[type=button], input[type=submit], input[type=reset]  {
-  background-color: green;
-  border: none;
-  color: white;
-  padding: 15px 80px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  text-transform: uppercase;
-  font-size: 28px;
-  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
-  margin: 5px 20px 40px 20px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-  background-color: lime;
-}
-
-input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
-  -moz-transform: scale(0.95);
-  -webkit-transform: scale(0.95);
-  -o-transform: scale(0.95);
-  -ms-transform: scale(0.95);
-  transform: scale(0.95);
-}
-
-input[type=text] {
-  background-color: #f6f6f6;
-  border: none;
-  color: #0d0d0d;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 5px;
-  width: 85%;
-  border: 2px solid #f6f6f6;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
-}
-
-input[type=text]:focus {
-  background-color: #fff;
-  border-bottom: 2px solid #5fbae9;
-}
-
-input[type=text]:placeholder {
-  color: #cccccc;
-}
-
-
-
-/* ANIMATIONS */
-
-/* Simple CSS3 Fade-in-down Animation */
-.fadeInDown {
-  -webkit-animation-name: fadeInDown;
-  animation-name: fadeInDown;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-@-webkit-keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-/* Simple CSS3 Fade-in Animation */
-@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-
-.fadeIn {
-  opacity:0;
-  -webkit-animation:fadeIn ease-in 1;
-  -moz-animation:fadeIn ease-in 1;
-  animation:fadeIn ease-in 1;
-
-  -webkit-animation-fill-mode:forwards;
-  -moz-animation-fill-mode:forwards;
-  animation-fill-mode:forwards;
-
-  -webkit-animation-duration:1s;
-  -moz-animation-duration:1s;
-  animation-duration:1s;
-}
-
-.fadeIn.first {
-  -webkit-animation-delay: 0.4s;
-  -moz-animation-delay: 0.4s;
-  animation-delay: 0.4s;
-}
-
-.fadeIn.second {
-  -webkit-animation-delay: 0.6s;
-  -moz-animation-delay: 0.6s;
-  animation-delay: 0.6s;
-}
-
-.fadeIn.third {
-  -webkit-animation-delay: 0.8s;
-  -moz-animation-delay: 0.8s;
-  animation-delay: 0.8s;
-}
-
-.fadeIn.fourth {
-  -webkit-animation-delay: 1s;
-  -moz-animation-delay: 1s;
-  animation-delay: 1s;
-}
-
-/* Simple CSS3 Fade-in Animation */
-.underlineHover:after {
-  display: block;
-  left: 0;
-  bottom: -10px;
-  width: 0;
-  height: 4px;
-  background-color: lime;
-  content: "";
-  transition: width 0.2s;
-}
-
-.underlineHover:hover {
-  color: #0d0d0d;
-}
-
-.underlineHover:hover:after{
-  width: 100%;
-}
-
-
-
-/* OTHERS */
-
-*:focus {
-    outline: none;
-} 
-
-#icon {
-  width:60%;
-}
-
-* {
-  box-sizing: border-box;
-}
-</style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="wrapper fadeInDown">  
-
-    <a>  <img src ='images/logosock.SVG' alt="My svg_logo" width="300" > </a>
-  <br>
-  <br>
-  <div id="formContent">
-    <!-- Tabs Titles -->
- 
-    
-    <!-- Login Form -->
-    
-    
-    <h4 class="underlineHover" >Decentralized Finance Social Network </h4>
-
-         
-      
-      <input type="submit" class="fadeIn fourth" value="Enter" onclick="goToMainPage()"> 
-
-
-      <button id="createWalletButton" style="display: none;">Crear Billetera</button>    
-         
-      
-    <!-- Remind Passowrd -->
-   
-  </div>
-</div>
-
-
-
-
-
-
-
-<script>
-function goToMainPage() {
-    window.location.href = 'principal.html';
-}
-</script>
-
-
-<script>
-// Función para verificar si existe una billetera
-
-
-function checkWallet() {
-    const privateKey = localStorage.getItem('privateKey');
-    const createWalletButton = document.getElementById('createWalletButton');
-
-    // Si privateKey existe, oculta el botón de crear billetera
-    if (privateKey) {
-        createWalletButton.style.display = 'none'; // Ocultar botón
-    } else {
-        createWalletButton.style.display = 'block'; // Mostrar botón
-    }
-}
-
-// Llamar a la función al cargar la página
-window.onload = checkWallet;
-
-// Función para crear una billetera
-
-async function createWallet() {
-    const wallet = ethers.Wallet.createRandom();
-    localStorage.setItem('privateKey', wallet.privateKey); // Guardar clave privada
-    alert(`Nueva billetera creada:\nDirección: ${wallet.address}\nClave privada guardada en el navegador.`);
-    checkWallet(); // Llama a esta función para actualizar la visibilidad del botón
-}        
-
-// Asignar la función al botón
-document.getElementById('createWalletButton').onclick = createWallet;
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
- 
-
-
-
-
-
-
-
-
-<br>
+<center>
+    <div>
+        <a href="whiteDocument.html" target="_blank">
+            <img src="images/icons/document_icon.SVG" alt="Document Icon" width="25" style="margin-left: 20px;">
+        </a>
+        <a href="https://github.com/cawdevs" target="_blank" rel="noopener noreferrer">
+            <img src="images/logoG.SVG" alt="GitHub Logo" width="25" style="margin-left: 20px;">
+        </a>
+        <a href="https://x.com/puppets_token" target="_blank" rel="noopener noreferrer">
+            <img src="images/logoX.svg" alt="X Logo" width="25" style="margin-left: 20px;">
+        </a>
+    </div>
+</center>
 
 <div class="container-fluid">
-<div class="row">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div class="wrapper fadeInDown">
+                <img src='images/logosock.SVG' alt="Logo Sock" width="300">
+                <div id="formContent">
+                    <h4 class="underlineHover">Decentralized Finance Social Network</h4>
+                    <input type="text" id="password" class="fadeIn third" placeholder="Password" maxlength="8">
+                    <input id="actionButton" type="submit" value="Create wallet" onclick="handleWalletAction()">
+                    <br>
+                    <input type="submit" class="fadeIn fourth" value="Metamask Enter" onclick="goToSockMetamask()"> 
 
-   <div class="col-sm-3"> 
-   </div>
-
-          
-           <div class="col-sm-6"> 
-
-
-
-
-
-
-
-           </div>
-
-
-
-            <div class="col-sm-3"> 
+                </div>
             </div>
-
-            
         </div>
+        <div class="col-sm-3"></div>
     </div>
+</div>
+
+<script>
+    function goToMainPage() {
+        window.location.href = 'principal_wallet.html';
+    }
+    function goToSockMetamask() {
+       window.location.href = 'principal.html';
+    }
+
+    async function createWallet() {
+        const wallet = ethers.Wallet.createRandom();
+        await almacenarClaveEncriptada(wallet.privateKey);
+        alert(`Nueva billetera creada:\nDirección: ${wallet.address}\nClave privada guardada en el navegador.`);
+        checkWallet();
+    }
+    
+    // Función para encriptar y almacenar la clave privada
+async function almacenarClaveEncriptada(privateKey) {
+    const password = document.getElementById('password').value.trim(); // Asegúrate de eliminar espacios
+    const encryptedKey = CryptoJS.AES.encrypt(privateKey, password).toString();
+    localStorage.setItem("encryptedPrivateKey", encryptedKey);
+    localStorage.setItem("walletPassword", password); // Guarda la contraseña en localStorage
+    alert("Billetera creada y protegida exitosamente.");
+}
+
+    function checkWallet() {
+        const privateKey = localStorage.getItem('encryptedPrivateKey');
+
+        const actionButton = document.getElementById('actionButton');
+        alert(`xxxxxxxxxxxxClave encriptada obtenida: ${privateKey}`);
+        
+        if (privateKey) {
+            actionButton.value = 'Enter'; // Cambia el texto del botón a "Enter" si ya existe una billetera
+        } else {
+            actionButton.value = 'Create wallet';
+        }
+    }
 
 
 
 
+    async function handleWalletAction() {
+        const actionButton = document.getElementById('actionButton');
+        const password = document.getElementById('password').value.trim();
+        
+        if (!password) {
+            alert("La contraseña es necesaria.");
+            return;
+        }
+        
+        
+        
+        if (actionButton.value === 'Create wallet') {
+            await createWallet();
+        } else if (actionButton.value === 'Enter') {
+            const privateKey = obtenerClaveDesencriptada(password);
+            if (privateKey) {
+                alert(`Billetera conectada:\nClave privada: ${privateKey}`);
+                goToMainPage();
+            }
+        }
+    }
 
-  
-   
-<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
-<script src="bootstrap/js/jquery.min.js" ></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
+    function obtenerClaveDesencriptada(password) {
+        const encryptedKey = localStorage.getItem("encryptedPrivateKey");
+        if (encryptedKey) {
+            try {
+                const decryptedKey = CryptoJS.AES.decrypt(encryptedKey, password).toString(CryptoJS.enc.Utf8);
+                return decryptedKey || null;
+            } catch (error) {
+                alert("Error al desencriptar la clave privada. Asegúrate de ingresar la contraseña correcta.");
+                return null;
+            }
+        } else {
+            alert("No hay ninguna billetera almacenada.");
+            return null;
+        }
+    }
+
+    // Verifica la existencia de una billetera al cargar la página
+    window.onload = checkWallet;
+</script>
 
 </body>
 </html>

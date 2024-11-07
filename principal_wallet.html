@@ -1415,47 +1415,7 @@ function obtenerClaveDesencriptada() {
  <script>
 
           // Función para obtener el saldo del token
-          async function obtenerSaldo2() {
-            // Obtener la dirección de la cuenta conectada
-            const accounts = await web3.eth.getAccounts();
-            const myAddress = accounts[0];
-            //alert('Conectado con éxito a MetaMask.' + myAddress);
-
-
-            //obtiene el saldo en ether de la cuenta
-            // Obtener el saldo en Wei (la unidad más pequeña de Ethereum)
-            const balanceWei = await web3.eth.getBalance(myAddress);
-            // Convertir el saldo de Wei a Ether
-            const balanceEther = web3.utils.fromWei(balanceWei, 'ether');
-            // Truncar los últimos decimales (dejar solo dos decimales, por ejemplo)
-            const truncatedBalanceEther = parseFloat(balanceEther).toFixed(6);
-            // Mostrar el saldo en la página web
-            const saldoElementETH = document.getElementById('saldo_ETH');
-            saldoElementETH.innerText = truncatedBalanceEther;
-            saldoElementETH.style.color = 'Magenta';
-      
-
-            // Crear una instancia del contrato del token
-            const tokenContract = new web3.eth.Contract(CAW_tokenABI,tokenContractAddress);
-            // Obtener el saldo del token para la dirección de la cuenta conectada
-            const accountBalance = await tokenContract.methods.balanceOf(myAddress).call();
-            // Convertir el saldo a una cadena
-            const balanceString = accountBalance.toString();
-            // Obtener los primeros dígitos (de 0 a longitud - 18)
-            const truncatedBalance = balanceString.slice(0, -18);
-            // Mostrar el saldo en la página web
-            const saldoElement = document.getElementById('saldo_CAW');
-            saldoElement.innerText = truncatedBalance;
-            saldoElement.style.color = 'lime';
-      
-            
-            //const addres_walletElement = document.getElementById('addres-wallet');
-            //addres_walletElement.innerText = '' + myAddress;  // Puedes personalizar el valor
-            //addres_walletElement.style.color = 'white';
-            
-            
-          }
-
+     
 
            // Función para aprobar un contrato
           async function aprobarContrato() {
@@ -1481,403 +1441,83 @@ function obtenerClaveDesencriptada() {
 
 
 
-      // Función para mintear un NFT
-      async function mintearNFT() {
+     async function mintearNFT(wallet) {
+    const loadingAnimation = document.getElementById('loadingAnimation-mint');
+    loadingAnimation.style.display = 'block'; // Muestra la animación
 
-            const loadingAnimation = document.getElementById('loadingAnimation-mint');
-            loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la función
+    const nftusername = document.getElementById('text-mintear-nft').value;
+    const codeimageHexa = document.getElementById("codeimageHexa").textContent;
+    const maticrequired = document.getElementById("mount-minteo").textContent;
 
-            // Obtener la dirección de la cuenta conectada
-            const accounts = await web3.eth.getAccounts();
-            const myAddress = accounts[0];
-            //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
-            
-            const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
-            // Mintear el NFT
-            const nftusername = document.getElementById('text-mintear-nft').value;
-            const codeimageHexa = document.getElementById("codeimageHexa").textContent;
-            const maticrequired = document.getElementById("mount-minteo").textContent;
-            // ...
+    // Convertir MATIC requerido a Wei
+    const maticAmount = ethers.utils.parseEther(maticrequired); // Conversion a Wei
 
-             //alert('Hexa: ' + codeimageHexa);
-            
-            try {              
-              //await contract.methods.mintNFT(nftusername,).send({from: myAddress, gas: 400000, gasPrice: web3.utils.toWei('50', 'gwei') });
-              // Calcular el valor de 10 MATIC en Wei
-             
-              const maticAmount = web3.utils.toWei(maticrequired, 'ether'); // 10 MATIC
+    try {
+        // Crear una instancia del contrato
+        const contract = new ethers.Contract(nftContractAddress, NFT_ContractABI, wallet);
 
-              // Ejecutar la función mintNFT
-              await contract.methods.mintNFT(nftusername, codeimageHexa).send({
-                  from: myAddress,
-                  gas: 800000,
-                  gasPrice: web3.utils.toWei('60', 'gwei'),
-                  value: maticAmount // Especificar el valor de 10 MATIC
-              });
+        // Ejecutar mintNFT usando el método `mintNFT`
+        const tx = await contract.mintNFT(nftusername, codeimageHexa, {
+            gasLimit: 800000,
+            gasPrice: ethers.utils.parseUnits('60', 'gwei'), // Establece el gas price
+            value: maticAmount // Especifica el valor en MATIC
+        });
 
+        await tx.wait(); // Esperar a que se confirme la transacción
 
-
-              //alert('NFT Minteado exitosamente:');
-              loadingAnimation.style.display = 'none'; // Oculta la animación
-              $('#myModal').modal('hide'); 
-
-              //getProfile(); 
-              info_profile_sock();
-
-                // Mostrar mensaje de éxito
-              showSuccess('NFT minteado correctamente.');
-            } catch (error) {
-
-                  loadingAnimation.style.display = 'none'; // Oculta la animación
-                 
-                  if (error.message.includes("Invalid username")) {
-                    showSuccess('Invalid username.');
-                  }else if (error.message.includes("Invalid username")){
-                    showSuccess('Invalid username.'); 
-                  }else if (error.message.includes("Insufficient Sock balance")){
-                    showSuccess('Insufficient CAW balance.');
-                  }else  {
-                    //alert('Error al mintear el NFT');
-                    console.error('Error al mintear el NFT:', error);
-
-                  }                  
-
-              
-            }
-
-          
-          }
-
-
-          // Función para mintear un NFT
-          async function getmintedNFT() {
-            // Obtener la dirección de la cuenta conectada
-            const accounts = await web3.eth.getAccounts();
-            const myAddress = accounts[0];
-            //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
-            
-            const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
-            // Mintear el NFT
-            // ...
-            
-
-            try {
-              const list_username = await contract.methods.getMintedUsernames(myAddress).call();  
-
-              
-              const selector = document.getElementById('selector_NFTs');
-              // Limpiar las opciones existentes
-              selector.innerHTML = '';
-              // Agregar las opciones de NFTs
-              for (const nft of list_username) {
-                const option = document.createElement('option');
-                option.text = nft;
-                selector.add(option);
-              }
-
-
-              getImageNFTUsername("NFT_image-container");
-
-              //getProfile();
-               
-              info_profile_sock();
-             
-              
-              showSuccess('List NFT username OK!.');
- //             console.log('Funcion list NFTs OK.');
-               // Mostrar mensaje de éxito
- //             showSuccess('Funcion list NFTs OK.');
-            } catch (error) {
-              showSuccess('No List NFT username.');
-              //alert('Error list NFT');
-//              console.error('Error list NFT:', error);
-            }
-
-          
-          }
-
-
-         
-
-
-
-
-
-
-
-         
-
-          // Función para crear un perfil
-          // Función para mintear un NFT
-  async function createProfile(value) {
-  // Obtener la dirección de la cuenta conectada
-  const accounts = await web3.eth.getAccounts();
-  const myAddress = accounts[0];
-
-  const contract = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
-  
- 
-  const loadingAnimation = document.getElementById('loadingAnimation-profile');
-  loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la función
-  
-
-  try {
-    // Obtener los valores de los campos del formulario
-    const nombre = document.getElementById('nombre').value;
-    const bio = document.getElementById('bio').value;
-    const ubicacion = document.getElementById('ubicacion').value;
-    const paginaWeb = document.getElementById('pagina-web').value;
-    const selectorNFTs = document.getElementById('selector_NFTs').value;
-    const nftusername = selectorNFTs.replace('@CAW', '');
-
-    const fotoPerfil = document.getElementById('foto-perfil').value;
-    const fotoPortada = document.getElementById('foto-portada').value;
-
-    const key1 = document.getElementById('selector_key1').value;
-    const key2 = document.getElementById('selector_key2').value;
-    const key3 = document.getElementById('selector_key3').value;
-    const key4 = document.getElementById('selector_key4').value;
-    const key5 = document.getElementById('selector_key5').value;
-
-    // Crear un array con los valores de los selectores
-    const preferenciasArray = [key1, key2, key3, key4, key5];   
-
-    // Crear un objeto FormData para enviar los datos y las imágenes
-    const formData = new FormData();
-    formData.append('nombre', nombre);
-    formData.append('bio', bio);
-    formData.append('ubicacion', ubicacion);
-    formData.append('paginaWeb', paginaWeb);
-    formData.append('fotoPerfil', fotoPerfil);
-    formData.append('fotoPortada', fotoPortada);
-    formData.append('preferencias', JSON.stringify(preferenciasArray));
-
-    // Convertir el objeto FormData a un objeto JSON
-    const perfil = {};
-    for (let [key, value] of formData.entries()) {
-      perfil[key] = value;
-    }
-
-    // Convertir el objeto JSON a una cadena
-    const perfilJSON = JSON.stringify(perfil);
-    showSuccess('Create/update profile: ' + perfilJSON);
-    console.log(`Creando nuevo perfil para ${perfilJSON}`); 
-    if (value === 0) {
-    // Lógica para crear un nuevo perfil
+        loadingAnimation.style.display = 'none'; // Oculta la animación
+        $('#myModal').modal('hide'); 
+        info_profile_sock();
         
-        await contract.methods.createProfile(nftusername, perfilJSON).send({from: myAddress, gas: 600000, gasPrice: web3.utils.toWei('50', 'gwei') });
-        console.log('Creando nuevo perfil...');
-    } else {
-        // Lógica para actualizar el perfil existente
-        await contract.methods.updateProfile(nftusername, perfilJSON).send({from: myAddress, gas: 600000, gasPrice: web3.utils.toWei('50', 'gwei') });
-        console.log('Actualizando perfil existente...');
+        // Mostrar mensaje de éxito
+        showSuccess('NFT minteado correctamente.');
+    } catch (error) {
+        loadingAnimation.style.display = 'none'; // Oculta la animación
+
+        if (error.message.includes("Invalid username")) {
+            showSuccess('Invalid username.');
+        } else if (error.message.includes("Insufficient Sock balance")) {
+            showSuccess('Insufficient CAW balance.');
+        } else {
+            console.error('Error al mintear el NFT:', error);
+        }
     }
-    
+}
 
-    loadingAnimation.style.display = 'none'; // Oculta la animación
-    $('#myModalprofile').modal('hide');  
+         async function getmintedNFT(wallet) {
+    try {
+        const contract = new ethers.Contract(nftContractAddress, NFT_ContractABI, wallet);
 
-    //alert('Funcion create or update profile OK :');
-  } catch (error) {
-    loadingAnimation.style.display = 'none'; // Muestra la animación al ejecutar la función
+        // Obtener la lista de NFTs minteados
+        const list_username = await contract.getMintedUsernames(wallet.address);
 
+        // Seleccionar el elemento donde se mostrarán las opciones de NFTs
+        const selector = document.getElementById('selector_NFTs');
+        // Limpiar las opciones existentes
+        selector.innerHTML = '';
 
-    //alert('Error Create profile');
-    console.error('Error:', error);
-  }
+        // Agregar las opciones de NFTs
+        for (const nft of list_username) {
+            const option = document.createElement('option');
+            option.text = nft;
+            selector.add(option);
+        }
+
+        getImageNFTUsername("NFT_image-container");
+
+        info_profile_sock();
+        
+        // Mostrar mensaje de éxito
+        showSuccess('List NFT username OK!.');
+    } catch (error) {
+        showSuccess('No List NFT username.');
+        console.error('Error list NFT:', error);
+    }
 }
 
 
 
-
-          // Obtener el selector de NFTs
-          const selectorNFTs = document.getElementById('selector_NFTs');
-          // Agregar evento 'change' al selector
-          selectorNFTs.addEventListener('change', () => {
-                   getImageNFTUsername("NFT_image-container");
-                   info_profile_sock();
-                   //getProfile();
-          });
-
-
-
-
-
-
-
-          // Función para poner los datos de un perfil
-         async function getProfile() {
-  // Obtener la dirección de la cuenta conectada
-  const accounts = await web3.eth.getAccounts();
-  const myAddress = accounts[0];
-
-  const contract = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
-
-  const selectorNFTs = document.getElementById('selector_NFTs').value;
-  const nftusername = selectorNFTs.replace('@CAW', '');
-
-
-  
-
-
-
-
-  try {
-
-    //alert('getSmartUserPublications(nftusername,"user");' + nftusername); 
-    getSmartUserPublications(nftusername,"user");
-    
-
-    ////////////////////////////////////////////////////////
-    const listFollowingUser= await findNftWallet("following");
-    getNFTusernameDirectMessage();
-    updateStakingPool();    
-   
-   // alert('Publication X '+ nftusername);
-   // alert('Publication VX '+ listFollowingUser);
-     
-    
-    ////////////////////////////////////////////////////////   
-    
-    const count1 = await contract.methods.getFollowerCount(nftusername).call(); 
-    const follower_count= 'Following: ' + count1;
-
-    const count2 = await contract.methods.getFollowingCount(nftusername).call(); 
-    const following_count= 'Follower: ' + count2;
-
-    const thetime = await contract.methods.getProfileTime(nftusername).call();
-    // Crear una nueva instancia de Date con el timestamp
-    const fecha = new Date(thetime * 1000); // Multiplicado por 1000 ya que el timestamp está en segundos
-    // Formatear la fecha a un formato legible
-    const opcionesFecha = { year: 'numeric', month: 'long', day: 'numeric' };
-    const opcionesHora = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
-    const profiletime = fecha.toLocaleDateString('es-ES', opcionesFecha) + ' a las ' + fecha.toLocaleTimeString('es-ES', opcionesHora);
-
-
-    //profile-time
-    //profile-count
-    
-    const profileText = await contract.methods.getProfile(nftusername).call();
-    
-    const elementProfileCreate = document.getElementById('profile-create');
-    
-    if (profileText) {
-        elementProfileCreate.style.display = "none";
-    }
-
-
-
- 
-    const profile = JSON.parse(profileText);
-
-    // Actualizar los elementos del perfil con los datos obtenidos
-    const profileContainer = document.querySelector('.profile-container');
-    profileContainer.style.display = 'block'; // Cambiar a 'inline' si es un elemento de línea en lugar de bloque
-    const profilePhoto = profileContainer.querySelector('.profile-photo');
-    const profileCover = profileContainer.querySelector('.profile-cover');
-    const profileName = profileContainer.querySelector('.profile-name');
-    const profileBio = profileContainer.querySelector('.profile-bio');
-    const profileLocation = profileContainer.querySelector('.profile-location');
-    const profileWebsite = profileContainer.querySelector('.profile-website');
-    const profileUsername = profileContainer.querySelector('.profile-username');
-
-
-    const profileTime = profileContainer.querySelector('.profile-time');
-    const followingCount = profileContainer.querySelector('.following-count');
-    const followerCount = profileContainer.querySelector('.follower-count');
-
-  
-
-
-    // const profileAcount = profileContainer.querySelector('.profile-acount'); // No estás usando profileAcount
-    // Obtener la lista de preferencias desde el objeto profile
-    const profilePreferences = profileContainer.querySelector('.profile-preferences');
-    // Parsear la cadena JSON para obtener el objeto de preferencias
-    const preferencesObject = JSON.parse(profile.preferencias);
-    // Obtener un array de las preferencias
-    const preferenciasArray = Object.values(preferencesObject);
-    // Convierte el array a una cadena separada por comas
-    const preferenciasText = preferenciasArray.join(', ');
-    // Actualizar el elemento en el HTML con la lista de preferencias
-    profilePreferences.textContent = preferenciasText;
-    // Obtén el elemento de la imagen por su ID
-    const imagePerfil = document.getElementById('image-perfil');
-    imagePerfil.style.display = 'block'; // Otra configuración, como 'inline-block' si es necesario
-    imagePerfil.style.inline = 'inline-block'; // Otra configuración, como 'inline-block' si es necesario
-
-  
-
-
-    const imagePerfilPublication = document.getElementById('image-perfil-publication');
-    imagePerfilPublication.style.display = 'block'; // Otra configuración, como 'inline-block' si es necesario
-
-    const nftUsernamePublication = document.getElementById('nftUsername-publication');
-    nftUsernamePublication.style.display = 'block'; // Otra configuración, como 'inline-block' si es necesario
-
- 
-
-   
-
-    // Verifica si el perfil tiene una foto y actualiza la imagen
-    if (profile.fotoPerfil) {
-      imagePerfil.src = profile.fotoPerfil;
-      imagePerfil.style.inline = 'inline-block';
-      imagePerfilPublication.src=profile.fotoPerfil;
-
-      nftUsernamePublication.textContent=nftusername;
-
-
-
-    } else {
-      // Si no hay foto, puedes establecer una imagen predeterminada o hacer algo más
-      imagePerfil.src = 'static/images/caw_logo_2.svg'; // Cambia esto por la ruta de tu imagen predeterminada
-      imagePerfil.style.inline = 'inline-block';
-      imagePerfilPublication.src = 'static/images/caw_logo_2.svg';
-      nftUsernamePublication.textContent=nftusername;
-    }
-
-    profilePhoto.src = profile.fotoPerfil;
-    profileCover.src = profile.fotoPortada;
-    profileName.textContent = profile.nombre;
-    profileBio.textContent = profile.bio;
-    profileLocation.textContent = profile.ubicacion;
-    profileWebsite.textContent = profile.paginaWeb;
-    profileUsername.textContent = selectorNFTs + "@Xcaw";
-
-    profileTime.textContent=profiletime;
-    followingCount.textContent=following_count;
-    followerCount.textContent=follower_count;
-    //alert('getSmartUserPublications(listFollowingUser,followings_user);'+listFollowingUser); 
-    getSmartUserPublications(listFollowingUser,"followings_user");
-   
-    //alert('Funcion get profile OK :');
-    showSuccess('Create profile is OK!.');
-    
-
-
-  } catch (error) {
-
-    
-
-    if (error.message.includes("Profile does not exist for this username")) {
-        const profileContainer = document.querySelector('.profile-container');
-        const imagePerfil = document.getElementById('image-perfil');
-
-        profileContainer.style.display = 'none';
-        imagePerfil.style.display = 'none';
-       
-      
-    } else {
-      // Otro manejo de errores si es necesario
-      showSuccess('Error to create profile.');
-      //alert('Error get profile');
-      //console.error('Error:', error);
-      
-    }  
-    
-  }
-}
-
+         
 
 
 

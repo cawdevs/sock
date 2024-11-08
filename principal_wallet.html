@@ -2856,41 +2856,40 @@ async function sendETHtowallet(){
 //function getProfileCount() public view returns (uint256) {
 //function profileExists(string memory nftusername) private view returns (bool) {
 //function isFollowing(string memory follower, string memory following) public view returns (bool) {
-    
-async function verifymintearNFT(){
 
-    // Obtener la dirección de la cuenta conectada
-    const accounts = await web3.eth.getAccounts();
-    const myAddress = accounts[0];
+async function verifymintearNFT() {
+    try {
+        // Usamos la dirección guardada en globalWalletKey
+        const myAddress = globalWalletKey;
 
-    const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+        // Crear instancia del contrato NFT usando ethers.js
+        const contractNFT = new ethers.Contract(nftContractAddress, NFT_ContractABI, provider);
 
-    const nftusername = document.getElementById('text-mintear-nft').value;
-    const bottonMint = document.getElementById('btn-mintear-nft');
-    const bottonVerifyMint = document.getElementById('btn-verify-nft');
-    const errorDisplay = document.getElementById('Error_Minted_username');
-    const readyDisplay = document.getElementById('Minted_username');
-    const isMintedNFT = await contractNFT.methods.isMinted(nftusername).call();    
-    
-    if(isMintedNFT){
+        const nftusername = document.getElementById('text-mintear-nft').value;
+        const bottonMint = document.getElementById('btn-mintear-nft');
+        const bottonVerifyMint = document.getElementById('btn-verify-nft');
+        const errorDisplay = document.getElementById('Error_Minted_username');
+        const readyDisplay = document.getElementById('Minted_username');
 
-       errorDisplay.style.display = 'block';
-       readyDisplay.style.display = "none"
-       errorDisplay.textContent = 'The username is not available!.';
-             
+        // Llamada a isMinted usando ethers.js en lugar de web3
+        const isMintedNFT = await contractNFT.isMinted(nftusername);
 
-    }else{
-       errorDisplay.style.display = 'none';
-       readyDisplay.style.display = "block"
-       readyDisplay.textContent= "The username is For You! :) "
-       bottonMint.style.display = 'block';
-       bottonVerifyMint.style.display = 'none';
+        if (isMintedNFT) {
+            errorDisplay.style.display = 'block';
+            readyDisplay.style.display = 'none';
+            errorDisplay.textContent = 'The username is not available!';
+        } else {
+            errorDisplay.style.display = 'none';
+            readyDisplay.style.display = 'block';
+            readyDisplay.textContent = 'The username is For You! :)';
+            bottonMint.style.display = 'block';
+            bottonVerifyMint.style.display = 'none';
+        }
+    } catch (error) {
+        console.error("Error verificando minteo de NFT:", error);
     }
-
-
-
 }    
-   
+
 
 </script>
 

@@ -102,7 +102,6 @@
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
 
-
 <br>
  
 
@@ -1289,7 +1288,7 @@ FreeTokens_ContractABI = [{"constant":false,"inputs":[],"name":"conectar","outpu
 const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';//polygon  
 
 */
-
+alert(`Exito`);
 let globalWalletKey = "";
 
 const provider = new ethers.providers.JsonRpcProvider("https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICShTvPFy3oUu_zsA");
@@ -1302,9 +1301,7 @@ window.onload = async function() {
 const privateKey = obtenerClaveDesencriptada(); // Desencriptar la clave privada con la contraseña
     
 if (!privateKey) return;
-
-          
-             
+                       
             alert(`Exito se conecto la key privada:`);
 
             // Crear una instancia de web3 usando la clave privada
@@ -1328,6 +1325,12 @@ if (!privateKey) return;
             // Mostrar el saldo de ETH
             await obtenerSaldo(wallet);
 
+            const btnMintearNFT = document.getElementById('btn-mintear-nft');
+            btnMintearNFT.addEventListener('click', mintearNFT);
+
+            const btnVerifyMintearNFT = document.getElementById('btn-verify-nft');
+            btnVerifyMintearNFT.addEventListener('click', verifymintearNFT);
+  
             // Aquí puedes llamar a la función para conectar con MetaMask
             ///conectarMetaMask();
 
@@ -1524,6 +1527,8 @@ async function mintearNFT(wallet) {
 async function verifymintearNFT() {
 
     try {
+
+         console.error("Verificando minteo :");
         // Usamos la dirección guardada en globalWalletKey
         const myAddress = globalWalletKey;
 

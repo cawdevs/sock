@@ -1206,7 +1206,22 @@ span.hashtag {
 <script> 
 
 
-          const CAW_tokenABI =[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"spender","type":"address"},{"name":"owner","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"contractAddress","type":"address"}],"name":"authorizeContract","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"},{"name":"user","type":"address"}],"name":"burn","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"spender","type":"address"},{"name":"value","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"amount","type":"uint256"}],"name":"approveCAWTransfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"revokeAuthorization","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"contractAddress","type":"address"}],"name":"authorizeContract","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"amount","type":"uint256"}],"name":"approveCAWTransfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"contractAddress","type":"address"}],"name":"onlyAuthorizedContract","outputs":[],"payable":false,"stateMutability":"view","type":"function"}]
+const CAW_tokenABI = [
+    {"constant": true, "inputs": [], "name": "name", "outputs": [{"name": "", "type": "string"}], "payable": false, "stateMutability": "view", "type": "function"},
+    {"constant": true, "inputs": [{"name": "spender", "type": "address"}, {"name": "owner", "type": "address"}], "name": "allowance", "outputs": [{"name": "", "type": "uint256"}], "payable": false, "stateMutability": "view", "type": "function"},
+    {"constant": false, "inputs": [{"name": "contractAddress", "type": "address"}], "name": "authorizeContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function"},
+    {"constant": true, "inputs": [{"name": "owner", "type": "address"}], "name": "balanceOf", "outputs": [{"name": "", "type": "uint256"}], "payable": false, "stateMutability": "view", "type": "function"},
+    {"constant": false, "inputs": [{"name": "spender", "type": "address"}, {"name": "subtractedValue", "type": "uint256"}], "name": "decreaseAllowance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function"},
+    {"constant": true, "inputs": [], "name": "decimals", "outputs": [{"name": "", "type": "uint8"}], "payable": false, "stateMutability": "view", "type": "function"},
+    {"constant": false, "inputs": [{"name": "spender", "type": "address"}, {"name": "addedValue", "type": "uint256"}], "name": "increaseAllowance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function"},
+    {"constant": true, "inputs": [], "name": "totalSupply", "outputs": [{"name": "", "type": "uint256"}], "payable": false, "stateMutability": "view", "type": "function"},
+    {"constant": true, "inputs": [], "name": "symbol", "outputs": [{"name": "", "type": "string"}], "payable": false, "stateMutability": "view", "type": "function"},
+    {"constant": false, "inputs": [{"name": "amount", "type": "uint256"}, {"name": "user", "type": "address"}], "name": "burn", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function"},
+    {"constant": true, "inputs": [{"name": "spender", "type": "address"}, {"name": "value", "type": "uint256"}], "name": "approve", "outputs": [], "payable": false, "stateMutability": "view", "type": "function"},
+    {"constant": false, "inputs": [{"name": "spender", "type": "address"}, {"name": "amount", "type": "uint256"}], "name": "approveCAWTransfer", "outputs": [{"name": "", "type": "bool"}], "payable": false, "stateMutability": "nonpayable", "type": "function"},
+    {"constant": false, "inputs": [], "name": "revokeAuthorization", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function"},
+    {"constant": true, "inputs": [{"name": "contractAddress", "type": "address"}], "name": "onlyAuthorizedContract", "outputs": [], "payable": false, "stateMutability": "view", "type": "function"}
+];
 
 const tokenContractAddress = '0x8f78976a0fdf8f66ad81bb7d7c9b8d4a695022e3';//Sock -polygon  
 
@@ -1270,6 +1285,28 @@ FreeTokens_ContractABI = [{"constant":false,"inputs":[],"name":"conectar","outpu
 const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';//polygon  
 
 */
+
+
+/*
+//setting para la red MATIC sin usar metamask
+
+// Setup: npm install alchemy-sdk
+// Github: https://github.com/alchemyplatform/alchemy-sdk-js
+import { Network, Alchemy } from "alchemy-sdk";
+
+// Optional config object, but defaults to demo api-key and eth-mainnet.
+const settings = {
+  apiKey: "ur1NT06b5xJJs619w8MiC1jDWE2RXEH9", // Replace with your Alchemy API Key.
+  network: Network.MATIC_MAINNET, // Replace with your network.
+};
+const alchemy = new Alchemy(settings);
+
+alchemy.core.getBlock(15221026).then(console.log);
+*/
+
+
+
+
           let globalWalletKey = ""; 
 
           const web3 = new Web3(window.ethereum);     
@@ -1288,8 +1325,8 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
               return;
             }
 
-            try {
               
+            try {
 
              await window.ethereum.enable();// esta linea va
               // Crear una instancia de web3 con MetaMask como proveedor

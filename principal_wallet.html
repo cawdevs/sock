@@ -1220,7 +1220,6 @@ const CAW_tokenABI = [
     {"constant": true, "inputs": [], "name": "totalSupply", "outputs": [{"name": "", "type": "uint256"}], "payable": false, "stateMutability": "view", "type": "function"},
     {"constant": true, "inputs": [], "name": "symbol", "outputs": [{"name": "", "type": "string"}], "payable": false, "stateMutability": "view", "type": "function"},
     {"constant": false, "inputs": [{"name": "amount", "type": "uint256"}, {"name": "user", "type": "address"}], "name": "burn", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function"},
-    {"constant": true, "inputs": [{"name": "spender", "type": "address"}, {"name": "value", "type": "uint256"}], "name": "approve", "outputs": [], "payable": false, "stateMutability": "view", "type": "function"},
     {"constant": false, "inputs": [{"name": "spender", "type": "address"}, {"name": "amount", "type": "uint256"}], "name": "approveCAWTransfer", "outputs": [{"name": "", "type": "bool"}], "payable": false, "stateMutability": "nonpayable", "type": "function"},
     {"constant": false, "inputs": [], "name": "revokeAuthorization", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function"},
     {"constant": true, "inputs": [{"name": "contractAddress", "type": "address"}], "name": "onlyAuthorizedContract", "outputs": [], "payable": false, "stateMutability": "view", "type": "function"}
@@ -1291,24 +1290,6 @@ const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';/
 
 */
 
-
-/*
-//setting para la red MATIC sin usar metamask
-
-// Setup: npm install alchemy-sdk
-// Github: https://github.com/alchemyplatform/alchemy-sdk-js
-import { Network, Alchemy } from "alchemy-sdk";
-
-// Optional config object, but defaults to demo api-key and eth-mainnet.
-const settings = {
-  apiKey: "ur1NT06b5xJJs619w8MiC1jDWE2RXEH9", // Replace with your Alchemy API Key.
-  network: Network.MATIC_MAINNET, // Replace with your network.
-};
-const alchemy = new Alchemy(settings);
-
-alchemy.core.getBlock(15221026).then(console.log);
-*/ 
-
 let globalWalletKey = "";
 
 const provider = new ethers.providers.JsonRpcProvider("https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICShTvPFy3oUu_zsA");
@@ -1316,11 +1297,11 @@ const provider = new ethers.providers.JsonRpcProvider("https://polygon-mainnet.g
 // Otros códigos que quieras incluir...
 
 
-    window.onload = async function() {
+window.onload = async function() {
                          
-    const privateKey = obtenerClaveDesencriptada(); // Desencriptar la clave privada con la contraseña
+const privateKey = obtenerClaveDesencriptada(); // Desencriptar la clave privada con la contraseña
     
-    if (!privateKey) return;
+if (!privateKey) return;
 
           
              
@@ -1378,12 +1359,8 @@ const provider = new ethers.providers.JsonRpcProvider("https://polygon-mainnet.g
     }
 }
 
-             
-        // Función para obtener la clave privada desencriptada
-// Cambia la función de desencriptación para que use la contraseña pasada
 
-
-    // Función para desencriptar la clave privada
+// Función para desencriptar la clave privada
 function obtenerClaveDesencriptada() {
     const encryptedKey = localStorage.getItem("encryptedPrivateKey");
     const password = localStorage.getItem("walletPassword")?.trim(); // Asegúrate de limpiar espacios en blanco
@@ -1421,14 +1398,7 @@ function obtenerClaveDesencriptada() {
 
  <script>
 
-          // Función para obtener el saldo del token
-     
-
-           
-
-
-
-     async function mintearNFT(wallet) {
+async function mintearNFT(wallet) {
     const loadingAnimation = document.getElementById('loadingAnimation-mint');
     loadingAnimation.style.display = 'block'; // Muestra la animación
 
@@ -1595,7 +1565,6 @@ const errorDisplay = document.getElementById('Error_Minted_username');
 const bottonMint = document.getElementById('btn-mintear-nft');
 
 const bottonVerifyMint = document.getElementById('btn-verify-nft');
-
 
 
 function isValidNFTUsername(username) {

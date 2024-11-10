@@ -1401,34 +1401,46 @@ function obtenerClaveDesencriptada() {
 
  <script>
 
-async function mintearNFT(wallet) {
+// Función para mintear un NFT usando la billetera personalizada
+async function mintearNFT() {
     const loadingAnimation = document.getElementById('loadingAnimation-mint');
     loadingAnimation.style.display = 'block'; // Muestra la animación
+
+    // Obtener la clave privada desencriptada
+    const privateKey = obtenerClaveDesencriptada();
+    if (!privateKey) {
+        loadingAnimation.style.display = 'none';
+        return;
+    }
+
+    // Crear el signer a partir de la clave privada y el proveedor
+    const signer = new ethers.Wallet(privateKey, provider);
+
+    // Instanciar el contrato usando ethers.js
+    const contract = new ethers.Contract(nftContractAddress, NFT_ContractABI, signer);
 
     const nftusername = document.getElementById('text-mintear-nft').value;
     const codeimageHexa = document.getElementById("codeimageHexa").textContent;
     const maticrequired = document.getElementById("mount-minteo").textContent;
-
-    // Convertir MATIC requerido a Wei
-    const maticAmount = ethers.utils.parseEther(maticrequired); // Conversion a Wei
+    const maticAmount = ethers.utils.parseEther(maticrequired); // Convierte a Wei
 
     try {
-        // Crear una instancia del contrato
-        const contract = new ethers.Contract(nftContractAddress, NFT_ContractABI, wallet);
-
-        // Ejecutar mintNFT usando el método `mintNFT`
+        // Llamar a la función `mintNFT` en el contrato
         const tx = await contract.mintNFT(nftusername, codeimageHexa, {
             gasLimit: 800000,
-            gasPrice: ethers.utils.parseUnits('60', 'gwei'), // Establece el gas price
-            value: maticAmount // Especifica el valor en MATIC
+            gasPrice: ethers.utils.parseUnits('60', 'gwei'),
+            value: maticAmount
         });
 
-        await tx.wait(); // Esperar a que se confirme la transacción
+        // Espera a que la transacción sea minada
+        await tx.wait();
 
         loadingAnimation.style.display = 'none'; // Oculta la animación
-        $('#myModal').modal('hide'); 
+        $('#myModal').modal('hide');
+
+        // Llamar a la función de perfil después de mintear
         info_profile_sock();
-        
+
         // Mostrar mensaje de éxito
         showSuccess('NFT minteado correctamente.');
     } catch (error) {
@@ -1440,22 +1452,23 @@ async function mintearNFT(wallet) {
             showSuccess('Insufficient CAW balance.');
         } else {
             console.error('Error al mintear el NFT:', error);
+            showSuccess('Error al mintear el NFT.');
         }
     }
 }
 
-         async function getmintedNFT(wallet) {
+// Función para obtener los NFT usernames minteados usando la billetera personalizada (sin firmar)
+async function getmintedNFT() {
+    // Instanciar el contrato solo con el provider para realizar una consulta
+    const contract = new ethers.Contract(nftContractAddress, NFT_ContractABI, provider);
+
     try {
-        const contract = new ethers.Contract(nftContractAddress, NFT_ContractABI, wallet);
+        // Llamar a la función de solo lectura `getMintedUsernames`
+        const list_username = await contract.getMintedUsernames(globalWalletAddress);
 
-        // Obtener la lista de NFTs minteados
-        const list_username = await contract.getMintedUsernames(wallet.address);
-
-        // Seleccionar el elemento donde se mostrarán las opciones de NFTs
         const selector = document.getElementById('selector_NFTs');
         // Limpiar las opciones existentes
         selector.innerHTML = '';
-
         // Agregar las opciones de NFTs
         for (const nft of list_username) {
             const option = document.createElement('option');
@@ -1463,17 +1476,18 @@ async function mintearNFT(wallet) {
             selector.add(option);
         }
 
+        // Actualizar la imagen del NFT y el perfil
         getImageNFTUsername("NFT_image-container");
-
         info_profile_sock();
-        
+
         // Mostrar mensaje de éxito
-        showSuccess('List NFT username OK!.');
+        showSuccess('List NFT username OK!');
     } catch (error) {
         showSuccess('No List NFT username.');
         console.error('Error list NFT:', error);
     }
 }
+
 
   
 

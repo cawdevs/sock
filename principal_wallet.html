@@ -1426,6 +1426,7 @@ async function mintearNFT() {
 
     try {
         // Llamar a la función `mintNFT` en el contrato
+        console.log("El valor maticAmount:", maticAmount);
         const tx = await contract.mintNFT(nftusername, codeimageHexa, {
             gasLimit: 800000,
             gasPrice: ethers.utils.parseUnits('60', 'gwei'),

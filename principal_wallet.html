@@ -1469,7 +1469,7 @@ async function getmintedNFT() {
 
     try {
         // Llamar a la función de solo lectura `getMintedUsernames`
-        const list_username = await contract.getMintedUsernames(globalWalletAddress);
+        const list_username = await contract.getMintedUsernames(globalWalletKey);
 
         const selector = document.getElementById('selector_NFTs');
         // Limpiar las opciones existentes

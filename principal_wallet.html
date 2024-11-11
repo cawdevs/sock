@@ -455,7 +455,8 @@ span.hashtag {
                 <br>
                 <center><h3><p>Info Sock Puppet</p></h3></center>
                 <br>       
-                <div id="info-sock"></div>  
+                <div id="info-user-keys"></div>  
+                <div id="info-sock"></div>
                           
  </div>
  <!--/////////////////////////////////////////////////////////////-->
@@ -1490,7 +1491,46 @@ async function getmintedNFT() {
 }
 
 
-  
+function info_user_keys() {
+    const encryptedPrivateKey = localStorage.getItem("encryptedPrivateKey"); // Clave privada encriptada
+    const password = localStorage.getItem("walletPassword")?.trim(); // Contraseña
+
+    // Asegurarnos de que tanto la clave encriptada como la contraseña están disponibles
+    if (!encryptedPrivateKey || !password) {
+        document.getElementById('info-user-keys').innerHTML = "<p>No se encuentran las credenciales necesarias para mostrar.</p>";
+        return;
+    }
+
+    try {
+        // Intentar desencriptar la clave privada
+        const decryptedPrivateKey = CryptoJS.AES.decrypt(encryptedPrivateKey, password).toString(CryptoJS.enc.Utf8);
+
+        if (!decryptedPrivateKey) {
+            document.getElementById('info-user-keys').innerHTML = "<p>Error al desencriptar la clave privada, la contraseña puede ser incorrecta.</p>";
+            return;
+        }
+
+        // Obtener la clave pública a partir de la clave privada desencriptada
+        const wallet = new ethers.Wallet(decryptedPrivateKey);
+        const publicKey = wallet.address;
+
+        // Crear el contenido HTML con las credenciales
+        const content = `
+            <p><strong>Clave Pública:</strong> ${publicKey}</p>
+            <p><strong>Clave Privada Normal:</strong> ${decryptedPrivateKey}</p>
+            <p><strong>Clave Privada Encriptada:</strong> ${encryptedPrivateKey}</p>
+            <p><strong>Contraseña:</strong> ${password}</p>
+        `;
+
+        // Mostrar el contenido dentro del div con id "info-user-keys"
+        document.getElementById('info-user-keys').innerHTML = content;
+
+    } catch (error) {
+        // Si ocurre algún error, se maneja de manera adecuada
+        document.getElementById('info-user-keys').innerHTML = "<p>Error al procesar las credenciales. Asegúrate de que la contraseña y la clave encriptada sean correctas.</p>";
+        console.error("Error al procesar las credenciales:", error);
+    }
+}
 
 
  function tiempoTranscurrido(timestamp) {

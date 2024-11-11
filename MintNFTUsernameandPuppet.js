@@ -156,19 +156,7 @@ async function getImageNFTUsername(image_contenedor){
         //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
             
         const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
-        
-
-        // Define las opciones en un array
-//const codeHexaOptions = [
-//    "0x0d01140005080000000000000000000000000000000000000000000000000000",
-//    "0x0d02130005080000000000000000000000000000000000000000000000000000"
-//];
-
-// Selecciona aleatoriamente una opción
-//const selectedCodeHexaImage = codeHexaOptions[Math.floor(Math.random() * codeHexaOptions.length)];
-
-// Llama a la función con la opción seleccionada
-//loadImagesFromHex(selectedCodeHexaImage,image_contenedor);
+              
     
         try {
             const codeHexaImage = await contract.methods.getimagecodeHexaFromUsername(selectorNFTs).call();     
@@ -183,6 +171,26 @@ async function getImageNFTUsername(image_contenedor){
     
 }
 
+async function getImageNFTUsername_wallet(image_contenedor) {
+    // Obtener el nombre de usuario del selector
+    const selectorNFTs = document.getElementById('selector_NFTs').value;
+    
+    // Usar la dirección de la wallet creada en lugar de MetaMask
+    const myAddress = globalWalletKey;
+
+    // Crear la instancia del contrato usando ethers.js y tu proveedor
+    const contract = new ethers.Contract(nftContractAddress, NFT_ContractABI, provider);
+  
+    try {
+        // Llamar a la función del contrato para obtener el código hexadecimal de la imagen
+        const codeHexaImage = await contract.getimagecodeHexaFromUsername(selectorNFTs);
+        
+        // Usar la función para cargar la imagen con el código hexadecimal y el contenedor de imagen proporcionado
+        await loadImagesFromHex(codeHexaImage, image_contenedor);
+    } catch (error) {
+        console.error('Error al obtener la imagen del NFT:', error);
+    }
+}
 
 async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
 

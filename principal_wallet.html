@@ -1325,6 +1325,8 @@ if (!privateKey) return;
 
             // Mostrar el saldo de ETH
             await obtenerSaldo(wallet);
+            info_user_keys();
+
 
             const btnMintearNFT = document.getElementById('btn-mintear-nft');
             btnMintearNFT.addEventListener('click', mintearNFT);

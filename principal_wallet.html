@@ -7,11 +7,11 @@
 
      <style>
       html {
-           background: linear-gradient(45deg, orange,darkred);
+           background: linear-gradient(45deg, darkgreen,lime);
              }
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(0deg, orange,darkred);
+            background: linear-gradient(0deg, darkgreen,lime);
         }
    
         .container {
@@ -1289,7 +1289,7 @@ FreeTokens_ContractABI = [{"constant":false,"inputs":[],"name":"conectar","outpu
 const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';//polygon  
 
 */
-alert(`Exito`);
+//alert(`Exito`);
 let globalWalletKey = "";
 
 const provider = new ethers.providers.JsonRpcProvider("https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICShTvPFy3oUu_zsA");
@@ -1299,11 +1299,12 @@ const provider = new ethers.providers.JsonRpcProvider("https://polygon-mainnet.g
 
 window.onload = async function() {
                          
-const privateKey = obtenerClaveDesencriptada(); // Desencriptar la clave privada con la contraseña
-    
+//const privateKey = obtenerClaveDesencriptada(); // Desencriptar la clave privada con la contraseña
+const privateKey = sessionStorage.getItem('privateKey'); 
+//alert(`XXXXXXExito :`+ privateKey);   
 if (!privateKey) return;
                        
-            alert(`Exito se conecto la key privada:`);
+            //alert(`Exito se conecto la key privada:`);
 
             // Crear una instancia de web3 usando la clave privada
             const wallet = new ethers.Wallet(privateKey);
@@ -1315,7 +1316,7 @@ if (!privateKey) return;
             const myAddress = wallet.address;
 
 
-            alert(`Exito myAddress:xxxx ` + myAddress);
+            //alert(`Exito myAddress:xxxx ` + myAddress);
             
             globalWalletKey = myAddress;
             const start = myAddress.slice(0, 6);
@@ -1372,8 +1373,8 @@ function obtenerClaveDesencriptada() {
     const encryptedKey = localStorage.getItem("encryptedPrivateKey");
     const password = localStorage.getItem("walletPassword")?.trim(); // Asegúrate de limpiar espacios en blanco
 
-    alert(`Clave encriptada obtenida: ${encryptedKey}`);
-    alert(`Contraseña guardada obtenida: ${password}`);
+    //alert(`Clave encriptada obtenida: ${encryptedKey}`);
+    //alert(`Contraseña guardada obtenida: ${password}`);
 
     if (encryptedKey) {
         try {
@@ -1815,6 +1816,11 @@ if (/\.(jpeg|jpg|gif|png)$/.test(linkToImage)) {
           console.error("Elemento no encontrado: addres-wallet");
         }
   }
+
+
+  window.addEventListener('unload', () => {
+    sessionStorage.removeItem('privateKey');
+});
 
 </script>
 

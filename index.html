@@ -205,12 +205,17 @@ async function handleWalletAction() {
 function handleFileSelect(event) {
     const fileInput = event.target;
     const file = fileInput.files[0];
-    
-    if (file && file.name === 'file.key') {
-        alert('Archivo .key cargado correctamente.');       
-    } else {
-        alert('Por favor, selecciona un archivo válido.');
+
+    if (!file || !file.name.endsWith('.key')) {
+            alert("Por favor, carga un archivo con la extensión .key");
+            return null;
     }
+    
+    //if (file && file.name === 'file.key') {
+    //    alert('Archivo .key cargado correctamente.');       
+    //} else {
+    //    alert('Por favor, selecciona un archivo válido.');
+    //}
 }
 
 // En lugar de invocar la función `checkWallet` en el `window.onload`, puedes conectar la verificación a tu manejador de evento de selección de archivo:

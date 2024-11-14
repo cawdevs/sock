@@ -137,6 +137,11 @@
     // Función para encriptar y almacenar la clave privada en un archivo
     async function almacenarClaveEnArchivo(privateKey) {
         const password = document.getElementById('password').value.trim(); // Asegúrate de eliminar espacios
+        if (!password) {
+                alert("Una contraseña es necesaria.");
+        return;
+    }
+
         const encryptedKey = CryptoJS.AES.encrypt(privateKey, password).toString();
 
         // Crear un archivo .key con la clave encriptada

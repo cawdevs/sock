@@ -222,9 +222,14 @@ async function obtenerClaveDesencriptada(password) {
     const fileInput = document.getElementById('fileInput'); // Asegúrate de tener este input en tu HTML
     const file = fileInput.files[0]; // Obtén el archivo cargado previamente
 
-    if (!file || file.name !== 'file.key') {
-        alert("Por favor, carga un archivo válido ");
-        return null;
+    //if (!file || file.name !== 'file.key') {
+    //    alert("Por favor, carga un archivo válido ");
+    //    return null;
+    //}
+
+    if (!file || !file.name.endsWith('.key')) {
+            alert("Por favor, carga un archivo con la extensión .key");
+            return null;
     }
 
     const reader = new FileReader();

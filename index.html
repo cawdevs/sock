@@ -127,6 +127,12 @@
     }
 
     async function createWallet() {
+
+        if (!password) {
+                alert("La contraseña es necesaria.");
+        return;
+        }
+        
         const wallet = ethers.Wallet.createRandom();
         await almacenarClaveEnArchivo(wallet.privateKey); // Cambiado para guardar la clave en archivo
         alert(`Nueva billetera creada:\n ${wallet.address}`);

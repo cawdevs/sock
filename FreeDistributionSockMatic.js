@@ -25,7 +25,7 @@ async function tokensFree(token) {
 
 	         try{ 
 	         	 	 
-	         		accountBalanceSOCK = await tokenContract.methods.balanceOf(myAddress).call();
+	         		accountBalanceSOCK = await tokenContract.balanceOf(myAddress);
 	                alert(' accountBalanceSOCK  '+accountBalanceSOCK);	 
 
 
@@ -75,6 +75,58 @@ async function tokensFree(token) {
 
 }
 
+async function tokensFree_wallet(token) {
+    try {
+        const myAddress = globalWalletKey; // Define la dirección de tu billetera personalizada
+        const contractFREETOKENS = new ethers.Contract(nftContractAddress, NFT_ContractABI, provider); // Usando ethers.js con tu proveedor
+
+        if (token === "SOCK") {
+            let accountBalanceSOCK;
+
+            try {
+                // Usar ethers.js para obtener el balance del contrato de tokens SOCK
+                accountBalanceSOCK = await tokenContract.balanceOf(myAddress);
+                alert('Account Balance SOCK: ' + accountBalanceSOCK);
+            } catch (error) {
+                console.error('Error al obtener el balance de tokens:', error);
+                alert('Error al obtener el balance de tokens: ' + error.message);
+            }
+
+            if (Number(accountBalanceSOCK) <= 0) {
+                try {
+                    alert('2M tokens free');
+                    // Realizar transacción usando ethers.js
+                    const tx = await contractFREETOKENS.requestTokensSock({ from: myAddress, gasLimit: 300000, gasPrice: ethers.utils.parseUnits('50', 'gwei') });
+                    await tx.wait(); // Espera a que la transacción se complete
+                    alert('Transacción completada');
+                } catch (error) {
+                    console.error('Error al realizar la transacción:', error);
+                    alert('Error al realizar la transacción: ' + error.message);
+                }
+            } else {
+                alert('El usuario tiene Tokens SOCK');
+            }
+        } else {
+            const balanceEther = await provider.getBalance(myAddress); // Obtener el balance de Ether usando el proveedor
+            if (balanceEther.lte(ethers.utils.parseEther('0.0001'))) {
+                try {
+                    const tx = await contractFREETOKENS.conectar({ from: myAddress, gasLimit: 300000, gasPrice: ethers.utils.parseUnits('50', 'gwei') });
+                    await tx.wait();
+                    console.log('Transacción exitosa:', tx);
+                } catch (error) {
+                    console.error('Error al realizar la transacción:', error);
+                    alert('Error al realizar la transacción: ' + error.message);
+                }
+            } else {
+                console.log('El usuario tiene Ether.');
+            }
+        }
+
+    } catch (error) {
+        console.error('Error en la función tokensFree_wallet:', error);
+        alert('Error en la función tokensFree_wallet: ' + error.message);
+    }
+}
 
 async function sendETHtowallet(){
 

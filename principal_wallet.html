@@ -138,30 +138,40 @@
 
 
 
-    <center><div> 
-
+    <center>
     
 
 
-   <h5>
-    <div style="display:inline-block;" id= "addres-wallet"><font color="white"></font></div>
+   <h3>
+
+<div style="display: flex; justify-content: center; align-items: center; gap: 30px;">
+    <!-- Dirección de la billetera -->
+    <div id="addres-wallet" style="color: white;"></div>
+    
+    <!-- Generar código QR -->
+    <a href="#" data-toggle="modal" data-target="#myModalQR" onclick="generarCodigoQR()">
+        <span class="glyphicon glyphicon-qrcode" style="color: white;"></span>
+    </a>
+    
+    <!-- Copiar clave -->
+    <a href="#" id="btn-copy-key" onclick="myFunctionbtc()">
+        <span class="glyphicon glyphicon-duplicate" style="color: white;"></span>
+    </a>
+    
+    <!-- Cerrar sesión -->
+    <a href="#" onclick="logout()" style="color: white;">Close
+        <span class="glyphicon glyphicon-off"  title="Salir"> </span>
+    </a>
+</div>
 
 
-    <!--<div style="display:inline-block;" ><button class="boton-conectar" id="btn-conectar" onclick="conectarMetaMask()" style="display: inline-block; margin-left: 20px;">Connect</button> </div>-->
-   
-    <div style="display:inline-block;" > </div>
+      
+       
 
-    <a href="#" data-toggle="modal" data-target="#myModalQR"style="display:inline-block;" onclick="generarCodigoQR()"><font color="white"><span class="glyphicon glyphicon-qrcode"></span></font></a>
+   </h3>
 
-  
-   <div style="display:inline-block;" > </div>
-   <div style="display:inline-block;" > </div>
-     <a href="#" style="display:inline-block;" id="btn-copy-key"><font color="white"><span class="glyphicon glyphicon-duplicate" onclick="myFunctionbtc()"></span></font></a>
-    <!-- <a class="btn btn-primary  btn-xs" role="button" onclick="myFunctionbtc()" onmouseout="outFuncbtc()" ><font color="white" size="5"> <span class="tooltiptext" id="myTooltipbtc">Copiar btc wallet</span></font></a>
-     -->    
 
-   </h5>
- </div></center> 
+</center> 
 
  
 
@@ -224,7 +234,7 @@
      <div style="display:inline-block;" id="saldo_ETH"><font color="Magenta "></font></div>
      <div style="display:inline-block;" > </div>
      <div style="display:inline-block;" > </div>
-     <a href="#" style="display:inline-block;" id="btn-obtener-saldo"><font color="black"><span class="glyphicon glyphicon-refresh"></span></font></a>
+     <a href="#" style="display:inline-block;" id="btn-obtener-saldo" onclick="obtenerSaldo()"><font color="black"><span class="glyphicon glyphicon-refresh"></span></font></a>
      
      <div style="display:inline-block;" > </div>
 
@@ -1325,7 +1335,7 @@ if (!privateKey) return;
             document.getElementById('addres-wallet').style.color = 'white'; // Cambia el color del texto a blanco
 
             // Mostrar el saldo de ETH
-            await obtenerSaldo(wallet);
+            await obtenerSaldo();
             info_user_keys();
             getmintedNFT(); 
 
@@ -1342,10 +1352,10 @@ if (!privateKey) return;
             // Cualquier otra lógica necesaria se puede agregar aquí
         };
 
-        async function obtenerSaldo(wallet) {
+        async function obtenerSaldo() {
     try {
         // Obtener el saldo de MATIC
-        const balanceWei = await provider.getBalance(wallet.address);
+        const balanceWei = await provider.getBalance(globalWalletKey);
         const balanceEther = ethers.utils.formatEther(balanceWei);
         document.getElementById('saldo_ETH').innerText = `POL: ${balanceEther}`;
         document.getElementById('saldo_ETH').style.color = 'Magenta';
@@ -1354,7 +1364,7 @@ if (!privateKey) return;
         const tokenContract = new ethers.Contract(tokenContractAddress, CAW_tokenABI, provider);
 
         // Obtener el saldo del token CAW
-        const accountBalance = await tokenContract.balanceOf(wallet.address);
+        const accountBalance = await tokenContract.balanceOf(globalWalletKey);
         const balanceString = ethers.utils.formatUnits(accountBalance, 18);
         
         // Mostrar saldo del token CAW en el elemento correspondiente
@@ -1365,6 +1375,12 @@ if (!privateKey) return;
     } catch (error) {
         console.error("Error obteniendo saldo:", error);
     }
+}
+
+function logout() {
+    localStorage.removeItem("encryptedPrivateKey"); // Elimina la clave encriptada
+    alert("Sesión cerrada.");
+    window.location.href = 'index.html';
 }
 
 
@@ -1412,7 +1428,8 @@ async function mintearNFT() {
     loadingAnimation.style.display = 'block'; // Muestra la animación
 
     // Obtener la clave privada desencriptada
-    const privateKey = obtenerClaveDesencriptada();
+    //const privateKey = obtenerClaveDesencriptada();
+    const privateKey = sessionStorage.getItem('privateKey');
     if (!privateKey) {
         loadingAnimation.style.display = 'none';
         return;
@@ -1445,7 +1462,7 @@ async function mintearNFT() {
         $('#myModal').modal('hide');
 
         // Llamar a la función de perfil después de mintear
-        info_profile_sock();
+        info_profile_sock_wallet();
 
         // Mostrar mensaje de éxito
         showSuccess('NFT minteado correctamente.');
@@ -1484,7 +1501,7 @@ async function getmintedNFT() {
 
         // Actualizar la imagen del NFT y el perfil
         getImageNFTUsername_wallet("NFT_image-container");
-        info_profile_sock();
+        info_profile_sock_wallet();
 
         // Mostrar mensaje de éxito
         showSuccess('List NFT username OK!');

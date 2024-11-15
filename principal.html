@@ -127,30 +127,44 @@
 
 
 
-    <center><div> 
+    <center>
 
     
+ 
 
+  <h3>
 
-   <h5>
-    <div style="display:inline-block;" id= "addres-wallet"><font color="white"></font></div>
+<div style="display: flex; justify-content: center; align-items: center; gap: 30px;">
+     
+     <button class="boton-conectar" id="btn-conectar" onclick="conectarMetaMask()">Connect</button> 
 
-
-    <div style="display:inline-block;" ><button class="boton-conectar" id="btn-conectar" onclick="conectarMetaMask()" style="display: inline-block; margin-left: 20px;">Connect</button> </div>
+    <!-- Dirección de la billetera -->
+    <div id="addres-wallet" style="color: white;"></div>
+    
+    <!-- Generar código QR -->
+    <a href="#" data-toggle="modal" data-target="#myModalQR" onclick="generarCodigoQR()">
+        <span class="glyphicon glyphicon-qrcode" style="color: white;"></span>
+    </a>
+    
+    <!-- Copiar clave -->
+    <a href="#" id="btn-copy-key" onclick="myFunctionbtc()">
+        <span class="glyphicon glyphicon-duplicate" style="color: white;"></span>
+    </a>
+    
    
-    <div style="display:inline-block;" > </div>
+   
+</div>
 
-    <a href="#" data-toggle="modal" data-target="#myModalQR"style="display:inline-block;" onclick="generarCodigoQR()"><font color="white"><span class="glyphicon glyphicon-qrcode"></span></font></a>
 
-  
-   <div style="display:inline-block;" > </div>
-   <div style="display:inline-block;" > </div>
-     <a href="#" style="display:inline-block;" id="btn-copy-key"><font color="white"><span class="glyphicon glyphicon-duplicate" onclick="myFunctionbtc()"></span></font></a>
-    <!-- <a class="btn btn-primary  btn-xs" role="button" onclick="myFunctionbtc()" onmouseout="outFuncbtc()" ><font color="white" size="5"> <span class="tooltiptext" id="myTooltipbtc">Copiar btc wallet</span></font></a>
-     -->    
+      
+       
 
-   </h5>
- </div></center> 
+   </h3>
+
+
+
+
+ </center> 
 
  
 

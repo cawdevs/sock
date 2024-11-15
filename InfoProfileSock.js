@@ -30,3 +30,37 @@ async function info_profile_sock(image_contenedor){
         }
     
 }
+
+async function info_profile_sock_wallet(image_contenedor){
+    
+        const selectorNFTs = document.getElementById('selector_NFTs').value;
+        
+        // Usar la dirección de la wallet creada en lugar de MetaMask
+        const myAddress = globalWalletKey;
+
+        // Crear la instancia del contrato usando ethers.js y tu proveedor
+        const contract = new ethers.Contract(nftContractAddress, NFT_ContractABI, provider);
+                    
+    
+        try {
+            
+            const codeHexaImage = await contract.getimagecodeHexaFromUsername(selectorNFTs);     
+            const info_username = await contract.getNFTInfoByUsername(selectorNFTs);
+            const total_minted_NFT = await contract.getTotalMintedNFTs();
+            
+             alert('info' +" "+ info_username+ "*/* " + total_minted_NFT);
+
+             //function transferNFT(address to, string memory username)
+
+            await loadImagesFromHex(codeHexaImage,image_contenedor,"big");                           
+
+        }catch (error) {   
+            
+            console.error('Error:', error);
+        }
+    
+}
+   
+    
+  
+      

@@ -80,7 +80,7 @@ function checkResult() {
         }, 500); // Tiempo para que la transición de opacidad termine
     }, 2000);
 
-    if (winCount - lossCount >= 2 && !claimAvailable) {
+    if (winCount - lossCount >= 5 && !claimAvailable) {
         claimAvailable = true;
         document.getElementById('claimTokensButton').style.display = 'inline-block';
 

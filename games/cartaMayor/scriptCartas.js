@@ -164,6 +164,17 @@ function fullResetGame() {
 
 function claimTokens() {
     document.getElementById('claimTokensButton').style.display = 'none';
-    tokensFree('SOCK');
+    const privateKey = sessionStorage.getItem('privateKey'); 
+
+    if (!privateKey){
+        tokensFree('SOCK');
+    } else{
+        tokensFree_wallet('SOCK');
+    }
+       
+    
+    
+
+
     fullResetGame(); // Reiniciar el juego completamente después de reclamar
 }

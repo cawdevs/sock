@@ -78,8 +78,8 @@ async function tokensFree(token) {
 async function tokensFree_wallet(token) {
     try {
         const myAddress = globalWalletKey; // Define la dirección de tu billetera personalizada
-        const contractFREETOKENS = new ethers.Contract(nftContractAddress, NFT_ContractABI, provider); // Usando ethers.js con tu proveedor
-
+        const contractFREETOKENS = new ethers.Contract(freeTokensContractAddress, FreeTokens_ContractABI, provider); // Usando ethers.js con tu proveedor
+                                                       
          const tokenContract = new ethers.Contract(tokenContractAddress, CAW_tokenABI, provider);
 
         if (token === "SOCK") {

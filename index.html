@@ -195,9 +195,11 @@ async function handleWalletAction() {
         // Desencripta la clave privada del archivo cargado
         const privateKey = await obtenerClaveDesencriptada(password);
         if (privateKey) {
-            //alert(`Billetera cargada exitosamente. Clave privada: ${privateKey}`);
+            alert(`Billetera cargada exitosamente. Clave privada: ${privateKey}`);
             //sessionStorage.setItem('privateKey', privateKey);
             localStorage.setItem("privateKey", privateKey);
+            localStorage.setItem("password", password);
+
             goToMainPage();
         }
     }

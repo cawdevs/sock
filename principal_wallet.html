@@ -1501,7 +1501,7 @@ async function getmintedNFT() {
 
         // Actualizar la imagen del NFT y el perfil
         getImageNFTUsername_wallet("NFT_image-container");
-        info_profile_sock_wallet();
+        //info_profile_sock_wallet();
 
         // Mostrar mensaje de éxito
         showSuccess('List NFT username OK!');
@@ -1528,7 +1528,7 @@ function info_user_keys() {
         // Crear el contenido HTML con las credenciales
         const content = `
             <p><strong>Clave Pública:</strong> ${publicKey}</p>
-            <p><strong>Clave Privada Normal:</strong> ${privateKey}</p>
+            <p><strong>Clave Privada:</strong> ${privateKey}</p>
             <p><strong>Contraseña:</strong> ${password}</p>
         `;
 

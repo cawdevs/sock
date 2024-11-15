@@ -1378,39 +1378,13 @@ if (!privateKey) return;
 }
 
 function logout() {
-    localStorage.removeItem("encryptedPrivateKey"); // Elimina la clave encriptada
+    localStorage.removeItem("privateKey"); // Elimina la clave encriptada
     alert("Sesión cerrada.");
     window.location.href = 'index.html';
 }
 
 
-// Función para desencriptar la clave privada
-function obtenerClaveDesencriptada() {
-    const encryptedKey = localStorage.getItem("encryptedPrivateKey");
-    const password = localStorage.getItem("walletPassword")?.trim(); // Asegúrate de limpiar espacios en blanco
 
-    //alert(`Clave encriptada obtenida: ${encryptedKey}`);
-    //alert(`Contraseña guardada obtenida: ${password}`);
-
-    if (encryptedKey) {
-        try {
-            // Intenta desencriptar la clave
-            const decryptedKey = CryptoJS.AES.decrypt(encryptedKey, password).toString(CryptoJS.enc.Utf8);
-            if (!decryptedKey) {
-                alert("Error: la clave privada desencriptada está vacía.");
-                return null;
-            }
-            return decryptedKey;
-        } catch (error) {
-            alert("Error al desencriptar la clave privada. Asegúrate de ingresar la contraseña correcta.");
-            return null;
-        }
-    } else {
-        alert("No hay ninguna billetera almacenada.");
-        return null;
-    }
-}
-  
 
 
 
@@ -1429,7 +1403,7 @@ async function mintearNFT() {
 
     // Obtener la clave privada desencriptada
     //const privateKey = obtenerClaveDesencriptada();
-    const privateKey = sessionStorage.getItem('privateKey');
+    const privateKey = localStorage.getItem('privateKey');
     if (!privateKey) {
         loadingAnimation.style.display = 'none';
         return;
@@ -1513,7 +1487,7 @@ async function getmintedNFT() {
 
 
 function info_user_keys() {
-    const encryptedPrivateKey = localStorage.getItem("encryptedPrivateKey"); // Clave privada encriptada
+    //const encryptedPrivateKey = localStorage.getItem("encryptedPrivateKey"); // Clave privada encriptada
     
     const password = localStorage.getItem("password")?.trim(); // Contraseña
     const privateKey = localStorage.getItem("privateKey"); //
@@ -1819,9 +1793,7 @@ if (/\.(jpeg|jpg|gif|png)$/.test(linkToImage)) {
   }
 
 
-  window.addEventListener('unload', () => {
-    sessionStorage.removeItem('privateKey');
-});
+  
 
 </script>
 

@@ -164,7 +164,7 @@ function fullResetGame() {
 
 function claimTokens() {
     document.getElementById('claimTokensButton').style.display = 'none';
-    const privateKey = sessionStorage.getItem('privateKey'); 
+    const privateKey = localStorage.getItem('privateKey'); 
 
     if (!privateKey){
         tokensFree('SOCK');

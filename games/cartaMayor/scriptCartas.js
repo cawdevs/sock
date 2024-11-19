@@ -80,7 +80,7 @@ function checkResult() {
         }, 500); // Tiempo para que la transición de opacidad termine
     }, 2000);
 
-    if (winCount - lossCount >= 5 && !claimAvailable) {
+    if (winCount - lossCount >= 2 && !claimAvailable) {
         claimAvailable = true;
         document.getElementById('claimTokensButton').style.display = 'inline-block';
 
@@ -166,11 +166,9 @@ function claimTokens() {
     document.getElementById('claimTokensButton').style.display = 'none';
     const privateKey = localStorage.getItem('privateKey'); 
 
-    if (!privateKey){
-        tokensFree('SOCK');
-    } else{
-        tokensFree_wallet('SOCK');
-    }
+    
+    tokensFree_wallet('SOCK');
+    
        
     
     

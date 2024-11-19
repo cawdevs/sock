@@ -78,9 +78,13 @@ async function tokensFree(token) {
 async function tokensFree_wallet(token) {
     try {
         const myAddress = globalWalletKey; // Define la dirección de tu billetera personalizada
-        const contractFREETOKENS = new ethers.Contract(freeTokensContractAddress, FreeTokens_ContractABI, provider); // Usando ethers.js con tu proveedor
+        
+        const privateKey = localStorage.getItem('privateKey');
+                    // Crear el signer a partir de la clave privada y el proveedor
+        const signer = new ethers.Wallet(privateKey, provider);
+        const contractFREETOKENS = new ethers.Contract(freeTokensContractAddress, FreeTokens_ContractABI, signer); // Usando ethers.js con tu proveedor
                                                        
-         const tokenContract = new ethers.Contract(tokenContractAddress, CAW_tokenABI, provider);
+        const tokenContract = new ethers.Contract(tokenContractAddress, CAW_tokenABI, provider);
 
         if (token === "SOCK") {
             let accountBalanceSOCK;
@@ -98,6 +102,7 @@ async function tokensFree_wallet(token) {
                 try {
                     alert('2M tokens free');
                     // Realizar transacción usando ethers.js
+                    
                     const tx = await contractFREETOKENS.requestTokensSock({ from: myAddress, gasLimit: 300000, gasPrice: ethers.utils.parseUnits('50', 'gwei') });
                     await tx.wait(); // Espera a que la transacción se complete
                     alert('Transacción completada');

@@ -1342,11 +1342,6 @@ alchemy.core.getBlock(15221026).then(console.log);
 let globalWalletKey = "";
 let provider;
 let wallet;
-
-// Configurar el proveedor general (puede ser para Alchemy o cualquier otro nodo)
-const alchemyUrl = "https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICShTvPFy3oUu_zsA";
-const defaultProvider = new ethers.providers.JsonRpcProvider(alchemyUrl);
-
 //let web3;  // Definir web3 como global si necesitas usarlo en varias funciones
 let web3;  
 
@@ -1412,8 +1407,11 @@ function conectarWalletPropia() {
 
     wallet = new ethers.Wallet(privateKey, defaultProvider);
     globalWalletKey = wallet.address;
-    provider = defaultProvider;
 
+    // Configurar el proveedor general (puede ser para Alchemy o cualquier otro nodo)
+    const alchemyUrl = "https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICShTvPFy3oUu_zsA";
+    provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
+    
     tokenContract = new ethers.Contract(tokenContractAddress, CAW_tokenABI, provider);
     console.log("Conectado usando wallet propia:", globalWalletKey);
 }
@@ -1504,7 +1502,7 @@ async function initializeTransactionContext() {
       
 async function obtenerSaldo_SOCK() {
 
-  let accountBalance;
+    let accountBalance;
     if (tokenContract.methods) {
         console.log("Con MetaMask obtenerSaldo_SOCK().");
         // Usando web3.js
@@ -1524,6 +1522,8 @@ async function obtenerSaldo_SOCK() {
    const saldoElement = document.getElementById('saldo_CAW');
    saldoElement.innerText = truncatedBalance;
    saldoElement.style.color = 'lime';
+
+   console.log("Saldo Sock SOCK()." + truncatedBalance);    
 
 }  
 

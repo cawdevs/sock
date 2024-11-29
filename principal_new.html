@@ -1405,12 +1405,14 @@ function conectarWalletPropia() {
         return;
     }
 
-    wallet = new ethers.Wallet(privateKey, defaultProvider);
+    const alchemyUrl = "https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICShTvPFy3oUu_zsA";
+    provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
+
+    wallet = new ethers.Wallet(privateKey, provider);
     globalWalletKey = wallet.address;
 
     // Configurar el proveedor general (puede ser para Alchemy o cualquier otro nodo)
-    const alchemyUrl = "https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICShTvPFy3oUu_zsA";
-    provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
+    
     
     tokenContract = new ethers.Contract(tokenContractAddress, CAW_tokenABI, provider);
     console.log("Conectado usando wallet propia:", globalWalletKey);

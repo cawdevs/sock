@@ -1347,18 +1347,20 @@ let wallet;
 const alchemyUrl = "https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICShTvPFy3oUu_zsA";
 const defaultProvider = new ethers.providers.JsonRpcProvider(alchemyUrl);
 
-let web3;  // Definir web3 como global si necesitas usarlo en varias funciones
-
+//let web3;  // Definir web3 como global si necesitas usarlo en varias funciones
+const web3 = new Web3(window.ethereum);  
 
 async function iniciarApp() {
     try {
         // Primero, intenta conectar usando la wallet propia si hay una clave privada almacenada
+        const privateKey = localStorage.getItem("privateKey");
+        console.log("privateKey" + privateKey ); 
+
         if (localStorage.getItem("privateKey")) {
             console.log("Conectando usando la wallet propia...");
             conectarWalletPropia(); // Conexión con wallet propia
         } 
-
-       
+           
         // Luego, si no hay wallet propia, intenta conectar con MetaMask
         else if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask ) {
             console.log("MetaMask detectado. Intentando conectar...");

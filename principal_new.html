@@ -1348,7 +1348,7 @@ const alchemyUrl = "https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICSh
 const defaultProvider = new ethers.providers.JsonRpcProvider(alchemyUrl);
 
 //let web3;  // Definir web3 como global si necesitas usarlo en varias funciones
-const web3 = new Web3(window.ethereum);  
+let web3;  
 
 async function iniciarApp() {
     try {
@@ -1384,7 +1384,11 @@ async function conectarMetaMask() {
         // Solicitar acceso a la cuenta del usuario
         await window.ethereum.request({ method: "eth_requestAccounts" });
         // Inicializar web3 con MetaMask
-        web3 = new Web3(window.ethereum);
+         // Inicializar web3 si no está definido
+        if (!web3) {
+            web3 = new Web3(window.ethereum);
+        }
+        
         // Obtener las cuentas conectadas
         const accounts = await web3.eth.getAccounts();
         globalWalletKey = accounts[0]; // Guardar la dirección de la wallet

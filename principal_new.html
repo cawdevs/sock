@@ -1419,6 +1419,15 @@ function conectarWalletPropia() {
 
 
 async function logout() {
+
+    localStorage.removeItem("privateKey"); // Elimina la clave privada encriptada almacenada
+    globalWalletKey = null; // Limpia la variable global de la dirección
+    provider = null; // Limpia el proveedor    
+    wallet= null;
+    //let web3;  // Definir web3 como global si necesitas usarlo en varias funciones
+    web3= null;
+    alert("Sesión cerrada !!!");
+    /*
     if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
         console.log("MetaMask está instalado.");
         // Desconexión lógica (solo para limpiar en la app, MetaMask seguirá conectado)
@@ -1432,7 +1441,7 @@ async function logout() {
         globalWalletKey = null; // Limpia la variable global de la dirección
         provider = null; // Limpia el proveedor        
         alert("Sesión cerrada en tu wallet.");
-    }
+    }*/
 
     // Redirige o recarga la página
     window.location.href = 'index.html';

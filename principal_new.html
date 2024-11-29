@@ -147,7 +147,7 @@
 
 <div style="display: flex; justify-content: center; align-items: center; gap: 30px;">
      
-     <button class="boton-conectar" id="btn-conectar" onclick="conectarMetaMask()">Connect</button> 
+   
 
     <!-- Dirección de la billetera -->
     <div id="addres-wallet" style="color: white;"></div>
@@ -1357,8 +1357,10 @@ async function iniciarApp() {
             console.log("Conectando usando la wallet propia...");
             conectarWalletPropia(); // Conexión con wallet propia
         } 
+
+       
         // Luego, si no hay wallet propia, intenta conectar con MetaMask
-        else if (typeof window.ethereum !== "undefined") {
+        else if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask ) {
             console.log("MetaMask detectado. Intentando conectar...");
             await conectarMetaMask(); // Conexión con MetaMask
         } 

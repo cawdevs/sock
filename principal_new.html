@@ -1352,13 +1352,18 @@ let web3;  // Definir web3 como global si necesitas usarlo en varias funciones
 
 async function iniciarApp() {
     try {
-        if (typeof window.ethereum !== "undefined") {
-            console.log("MetaMask detectado. Intentando conectar...");
-            await conectarMetaMask(); // Conexión con MetaMask
-        } else if (localStorage.getItem("privateKey")) {
+        // Primero, intenta conectar usando la wallet propia si hay una clave privada almacenada
+        if (localStorage.getItem("privateKey")) {
             console.log("Conectando usando la wallet propia...");
             conectarWalletPropia(); // Conexión con wallet propia
-        } else {
+        } 
+        // Luego, si no hay wallet propia, intenta conectar con MetaMask
+        else if (typeof window.ethereum !== "undefined") {
+            console.log("MetaMask detectado. Intentando conectar...");
+            await conectarMetaMask(); // Conexión con MetaMask
+        } 
+        // Si no hay MetaMask ni una clave privada, muestra un error
+        else {
             console.error("No se detectó MetaMask ni una clave privada. Por favor, configura tu wallet.");
             return;
         }
@@ -1369,7 +1374,6 @@ async function iniciarApp() {
         console.error("Error en iniciarApp:", error);
     }
 }
-
 // Conectar con MetaMask
 async function conectarMetaMask() {
     try {

@@ -1655,17 +1655,17 @@ async function getmintedNFT() {
         const contract = NFTUsernameContract;
                      
         try {
-         
+             let list_username;
              if (contract.methods) {
                  console.log("Con MetaMask ");
                  // Usando web3.js
-                 const list_username = await contract.methods.getMintedUsernames(globalWalletKey).call(); 
+                 list_username = await contract.methods.getMintedUsernames(globalWalletKey).call(); 
              } else {
                  // Usando ethers.js
                  console.log("Con SockWallet "); 
-                 const list_username = await contract.getMintedUsernames(globalWalletKey).call();                                    
-              }
-          
+                 list_username = await contract.getMintedUsernames(globalWalletKey);                                    
+              }            
+                      
               const selector = document.getElementById('selector_NFTs');
               // Limpiar las opciones existentes
               selector.innerHTML = '';
@@ -1681,21 +1681,19 @@ async function getmintedNFT() {
 
               //getProfile();
                
-              info_profile_sock();
-             
+              info_profile_sock();            
               
               showSuccess('List NFT username OK!.');
  //             console.log('Funcion list NFTs OK.');
                // Mostrar mensaje de éxito
  //             showSuccess('Funcion list NFTs OK.');
-            } catch (error) {
+        } catch (error) {
               showSuccess('No List NFT username.');
               //alert('Error list NFT');
 //              console.error('Error list NFT:', error);
-            }
-
-          
-          }
+        }
+         
+}
 
 
          

@@ -157,17 +157,17 @@ async function getImageNFTUsername(image_contenedor){
                 console.log("Con MetaMask ");
                 // Usando web3.js
                 codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(selectorNFTs).call();     
-                await loadImagesFromHex(codeHexaImage,image_contenedor);    
-             
+                   
         } else {
                  // Usando ethers.js
                 console.log("Con SockWallet "); 
-                codeHexaImage = await contract.getimagecodeHexaFromUsername(selectorNFTs);
+                codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(selectorNFTs);
                 // Usar la función para cargar la imagen con el código hexadecimal y el contenedor de imagen proporcionado
-                await loadImagesFromHex(codeHexaImage, image_contenedor);
-                                             
+                                                             
         } 
-                                    
+
+        await loadImagesFromHex(codeHexaImage, image_contenedor);        
+
 
     }catch (error) {
                 

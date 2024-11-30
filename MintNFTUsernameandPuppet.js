@@ -294,14 +294,7 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
 async function info_profile_sock(){
     
         const selectorNFTs = document.getElementById('selector_NFTs').value;
-        
-        //const accounts = await web3.eth.getAccounts();
-        //const myAddress = accounts[0];
-        //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
-        //const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
-     
-
-
+                
         const containner_info_sock = document.getElementById('info-sock');
         containner_info_sock.innerHTML = "";   
         containner_info_sock.style.display = "flex";
@@ -330,8 +323,6 @@ async function info_profile_sock(){
                 total_minted_NFT = await nftUsernameContractgetTotalMintedNFTs();
                                               
               } 
-
-
                         
              
              //alert('info' +" "+ info_username+ "*/* " + total_minted_NFT);
@@ -347,12 +338,7 @@ async function info_profile_sock(){
              codeHexaImage_info = info_username[6];
              
              const username_date = tiempoTranscurrido(info_username[7]);
-
-        
-                
-     
-         
-
+      
 
             try{
               // Crear un contenedor para la imagen
@@ -366,13 +352,8 @@ async function info_profile_sock(){
                   imageUserContainer.style.marginRight = "10px"; // Espacio entre imagen y nombre
                   imageUserContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor de la imagen
                   imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
-                 
-                  
-                  
-
-              containner_info_sock.appendChild(imageUserContainer);
-
-
+               
+             containner_info_sock.appendChild(imageUserContainer);
 
 // Crear el contenedor principal
 const infoContainer = document.createElement("div");
@@ -490,7 +471,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                        if (nftUsernameContract.methods) {
                             console.log("Con MetaMask ");
                             await nftUsernameContract.methods.sellNFT(username_info, priceInWei).send({
-                            from: myAddress,
+                            from: globalWalletKey,
                             gas: 200000,
                             gasPrice: web3.utils.toWei('50', 'gwei')
                             });
@@ -524,7 +505,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                     try {
                         if (nftUsernameContract.methods) {
                             console.log("Con MetaMask ");
-                            await nftUsernameContract.methods.cancelNFTSale(username_info,).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                            await nftUsernameContract.methods.cancelNFTSale(username_info,).send({from: globalWalletKey, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
                             console.log('NFT Username is Delisted.');
                                                        
 
@@ -564,7 +545,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                     try {
                          if (nftUsernameContract.methods) {
                             console.log("Con MetaMask ");
-                            await nftUsernameContract.methods.transferNFT(address_to , username_info).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                            await nftUsernameContract.methods.transferNFT(address_to , username_info).send({from: globalWalletKey, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
                             console.log('NFT transferido.');
                                                       
                          } else {

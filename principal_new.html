@@ -1266,7 +1266,7 @@ let tokenContract;
 const NFT_ContractABI=[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"FundsWithdrawn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"string","name":"username","type":"string"},{"indexed":false,"internalType":"uint256","name":"price","type":"uint256"}],"name":"NFTForSale","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":true,"internalType":"string","name":"username","type":"string"}],"name":"NFTMinted","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"string","name":"username","type":"string"}],"name":"NFTSaleCancelled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"string","name":"username","type":"string"},{"indexed":true,"internalType":"address","name":"buyer","type":"address"},{"indexed":false,"internalType":"uint256","name":"price","type":"uint256"}],"name":"NFTSold","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"string","name":"username","type":"string"},{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"NFTTransferred","type":"event"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"buyNFT","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"cancelNFTSale","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getEtherBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"getHashFromUsername","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"walletAddress","type":"address"}],"name":"getMintedUsernames","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getNFTInfoById","outputs":[{"components":[{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"string","name":"username","type":"string"},{"internalType":"bool","name":"isMinted","type":"bool"},{"internalType":"bool","name":"isForSale","type":"bool"},{"internalType":"uint256","name":"price","type":"uint256"},{"internalType":"bytes32","name":"usernameHash","type":"bytes32"},{"internalType":"bytes32","name":"imagecodeHexa","type":"bytes32"},{"internalType":"uint256","name":"timestamp","type":"uint256"}],"internalType":"struct NFTUsernameContract.NFT","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"getNFTInfoByUsername","outputs":[{"components":[{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"string","name":"username","type":"string"},{"internalType":"bool","name":"isMinted","type":"bool"},{"internalType":"bool","name":"isForSale","type":"bool"},{"internalType":"uint256","name":"price","type":"uint256"},{"internalType":"bytes32","name":"usernameHash","type":"bytes32"},{"internalType":"bytes32","name":"imagecodeHexa","type":"bytes32"},{"internalType":"uint256","name":"timestamp","type":"uint256"}],"internalType":"struct NFTUsernameContract.NFT","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"nftUsername","type":"string"}],"name":"getNFTOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"nftUsername","type":"string"}],"name":"getNFTTokenId","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"nftUsername","type":"string"}],"name":"getNFTTokenTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"walletAddress","type":"address"}],"name":"getNFTUsername","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getNftIsForSaleCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getTotalMintedNFTs","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getUsernameByTokenId","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"hash","type":"bytes32"}],"name":"getUsernameFromHash","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"startIndex","type":"uint256"},{"internalType":"uint256","name":"endIndex","type":"uint256"}],"name":"getUsernamesInRange","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"getimagecodeHexaFromUsername","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"nftUsername","type":"string"}],"name":"isCallerNFTOwner","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"nftUsername","type":"string"}],"name":"isMinted","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"isNFTForSale","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"nftOwner","type":"address"},{"internalType":"string","name":"nftUsername","type":"string"},{"internalType":"address","name":"caller","type":"address"}],"name":"isNFTOwner","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"},{"internalType":"bytes32","name":"imagecodeHexa","type":"bytes32"}],"name":"mintNFT","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"},{"internalType":"uint256","name":"price","type":"uint256"}],"name":"sellNFT","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"string","name":"username","type":"string"}],"name":"transferNFT","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}];
  
 const nftContractAddress = '0xac6f27b3b55b96d7f6bfc4b905257bed6758922e';//polygon verificado 
-let NFTUsernameContract;
+let nftUsernameContract;
 
 
 
@@ -1393,7 +1393,7 @@ async function conectarMetaMask() {
         console.log("Conectado con MetaMask:", globalWalletKey);
 
         tokenContract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
-        NFTUsernameContract= new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+        nftUsernameContract= new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
     } catch (error) {
         console.error("Error al conectar con MetaMask:", error);
     }
@@ -1415,9 +1415,10 @@ function conectarWalletPropia() {
 
     // Configurar el proveedor general (puede ser para Alchemy o cualquier otro nodo)
     
+    const signer = new ethers.Wallet(privateKey, provider);
     
-    tokenContract = new ethers.Contract(tokenContractAddress, CAW_tokenABI, provider);
-    NFTUsernameContract = new ethers.Contract(nftContractAddress, NFT_ContractABI, provider);
+    tokenContract = new ethers.Contract(tokenContractAddress, CAW_tokenABI, signer);
+    nftUsernameContract = new ethers.Contract(nftContractAddress, NFT_ContractABI, signer);
    
     console.log("Conectado usando wallet propia:", globalWalletKey);
 }
@@ -1651,19 +1652,18 @@ async function mintearNFT() {
 
           // Función para mintear un NFT
 async function getmintedNFT() {
-            
-        const contract = NFTUsernameContract;
-                     
+                                         
         try {
+             
              let list_username;
-             if (contract.methods) {
+             if (nftUsernameContract.methods) {
                  console.log("Con MetaMask ");
                  // Usando web3.js
-                 list_username = await contract.methods.getMintedUsernames(globalWalletKey).call(); 
+                 list_username = await nftUsernameContract.methods.getMintedUsernames(globalWalletKey).call(); 
              } else {
                  // Usando ethers.js
                  console.log("Con SockWallet "); 
-                 list_username = await contract.getMintedUsernames(globalWalletKey);                                    
+                 list_username = await nftUsernameContract.getMintedUsernames(globalWalletKey);                                    
               }            
                       
               const selector = document.getElementById('selector_NFTs');

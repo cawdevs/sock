@@ -1428,23 +1428,7 @@ async function logout() {
     wallet= null;
     //let web3;  // Definir web3 como global si necesitas usarlo en varias funciones
     web3= null;
-    alert("Sesión cerrada !!!");
-    /*
-    if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
-        console.log("MetaMask está instalado.");
-        // Desconexión lógica (solo para limpiar en la app, MetaMask seguirá conectado)
-        globalWalletKey = null; // Limpia la variable global de la dirección
-        provider = null; // Limpia el proveedor
-        alert("Sesión cerrada en MetaMask (lógica).");
-    } else {
-        console.log("MetaMask no está en uso o no está instalado.");
-        // Para tu wallet personalizada
-        localStorage.removeItem("privateKey"); // Elimina la clave privada encriptada almacenada
-        globalWalletKey = null; // Limpia la variable global de la dirección
-        provider = null; // Limpia el proveedor        
-        alert("Sesión cerrada en tu wallet.");
-    }*/
-
+    alert("Sesión cerrada !!!");    
     // Redirige o recarga la página
     window.location.href = 'index.html';
 }
@@ -1518,10 +1502,12 @@ async function obtenerSaldo_SOCK() {
         console.log("Con MetaMask obtenerSaldo_SOCK().");
         // Usando web3.js
         accountBalance = await tokenContract.methods.balanceOf(globalWalletKey).call();
+        console.log("accountBalance SOCK()M." + accountBalance);    
     } else {
         // Usando ethers.js
         console.log("Con SockWallet obtenerSaldo_SOCK().");        
         accountBalance = await tokenContract.balanceOf(globalWalletKey);
+        console.log("accountBalance SOCK()." + accountBalance);    
 
     }
 
@@ -1558,7 +1544,7 @@ async function obtenerSaldo_POL() {
         balanceEther = ethers.utils.formatEther(balanceWei);
    }
 
-   const truncatedBalanceEther = parseFloat(balanceEther).toFixed(6);
+   const truncatedBalanceEther = parseFloat(balanceEther).toFixed(2);
    // Mostrar el saldo en la página web
    const saldoElementETH = document.getElementById('saldo_ETH');
    saldoElementETH.innerText = truncatedBalanceEther;

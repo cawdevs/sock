@@ -295,12 +295,13 @@ async function info_profile_sock(){
     
         const selectorNFTs = document.getElementById('selector_NFTs').value;
         
-        const accounts = await web3.eth.getAccounts();
-        const myAddress = accounts[0];
+        //const accounts = await web3.eth.getAccounts();
+        //const myAddress = accounts[0];
         //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
-            
-        const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+        //const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
      
+
+
         const containner_info_sock = document.getElementById('info-sock');
         containner_info_sock.innerHTML = "";   
         containner_info_sock.style.display = "flex";
@@ -313,10 +314,26 @@ async function info_profile_sock(){
         
 
         try {
-                        
-            const info_username = await contract.methods.getNFTInfoByUsername(selectorNFTs).call();
-            const total_minted_NFT = await contract.methods.getTotalMintedNFTs().call();
+
+             let info_username,total_minted_NFT;
+             
+             if (nftUsernameContract.methods) {
+                 console.log("Con MetaMask ");
+                 // Usando web3.js
+                info_username = await nftUsernameContract.methods.getNFTInfoByUsername(selectorNFTs).call();
+                total_minted_NFT = await nftUsernameContract.methods.getTotalMintedNFTs().call();
             
+             } else {
+                 // Usando ethers.js
+                console.log("Con SockWallet "); 
+                info_username = await nftUsernameContract.getNFTInfoByUsername(selectorNFTs);
+                total_minted_NFT = await nftUsernameContractgetTotalMintedNFTs();
+                                              
+              } 
+
+
+                        
+             
              //alert('info' +" "+ info_username+ "*/* " + total_minted_NFT);
 
              //function transferNFT(address to, string memory username)
@@ -469,12 +486,34 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                     const priceInWei = web3.utils.toWei(price.toString(), 'ether'); // Convertir a Wei
 
                     try {
-                        await contract.methods.sellNFT(username_info, priceInWei).send({
+                         
+                       if (nftUsernameContract.methods) {
+                            console.log("Con MetaMask ");
+                            await nftUsernameContract.methods.sellNFT(username_info, priceInWei).send({
                             from: myAddress,
                             gas: 200000,
                             gasPrice: web3.utils.toWei('50', 'gwei')
-                        });
-                        console.log('NFT Username ready to Sell.');
+                            });
+                            console.log('NFT Username ready to Sell.');
+                                       
+
+                       } else {
+                             // Usando ethers.js
+                             console.log("Con SockWallet "); 
+                             // Llamar al método sellNFT
+                             const tx = await nftUsernameContract.sellNFT(username_info, priceInWei, {
+                             gasLimit: 200000,
+                             gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei
+                             });
+
+                             console.log("Transacción enviada:", tx.hash);
+
+                             // Esperar la confirmación
+                             const receipt = await tx.wait();
+                             console.log("Transacción confirmada:", receipt);
+                                    
+                          } 
+
                     } catch (error) {
                         console.error('Error al listar el NFT Username:', error);
                     }
@@ -483,14 +522,36 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 async function handleButtonCancelSellClick() {
                     //alert("Has clickeado el Botón 2");
                     try {
-                        await contract.methods.cancelNFTSale(username_info,).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
-                        console.log('NFT Username is Delisted.');
+                        if (nftUsernameContract.methods) {
+                            console.log("Con MetaMask ");
+                            await nftUsernameContract.methods.cancelNFTSale(username_info,).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                            console.log('NFT Username is Delisted.');
+                                                       
+
+                       } else {
+                           console.log("Con SockWallet ");
+                            // Llamada con ethers.js
+                           const tx = await nftUsernameContract.cancelNFTSale(username_info, {
+                           gasLimit: 200000,
+                           gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei
+                           });
+
+                           console.log("Transacción enviada:", tx.hash);
+                           // Esperar confirmación
+                           const receipt = await tx.wait();
+                           console.log("Transacción confirmada:", receipt);
+                           console.log('NFT Username is Delisted.'); 
+
+                       } 
+
+                       
                      }catch (error) {
                         console.error('Error al deslistar el NFT Username:', error);
                      }
                 }
 
                 // Define las funciones que llamarán cada botón
+                
                 async function handleButtonTransferClick() {
                     //alert("Has clickeado el Botón 3");
                     const address_to = textInput_transfer.value; // Accede al valor de la entrada de texto
@@ -501,8 +562,28 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                     }
                     
                     try {
-                        await contract.methods.transferNFT(address_to , username_info).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
-                        console.log('NFT transferido.');
+                         if (nftUsernameContract.methods) {
+                            console.log("Con MetaMask ");
+                            await nftUsernameContract.methods.transferNFT(address_to , username_info).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                            console.log('NFT transferido.');
+                                                      
+                         } else {
+
+                            // Llamada con ethers.js
+                            const tx = await nftUsernameContract.transferNFT(address_to, username_info, {
+                            gasLimit: 200000,
+                            gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei
+                            });
+
+                            console.log("Transacción enviada:", tx.hash);
+
+                            // Esperar confirmación
+                            const receipt = await tx.wait();
+                            console.log("Transacción confirmada:", receipt);
+                            console.log('NFT transferido.');
+
+                          }
+                        
                      }catch (error) {
                         console.error('Error al transferir NFT Username:', error);
                      }

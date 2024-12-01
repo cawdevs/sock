@@ -3,11 +3,6 @@ async function openBuyNftModal(username) {
 
     console.log(`openBuyNftModal called with username: ${username}`);
 
-    const accounts = await web3.eth.getAccounts();
-    const myAddress = accounts[0];
-
-    const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
-
     const containner_info_sock = document.getElementById('info-sock-to-buy');
     
     if (!containner_info_sock) {
@@ -25,9 +20,17 @@ async function openBuyNftModal(username) {
     containner_info_sock.style.width = "100%"; 
 
     try {
-        console.log(`try : ${username}`); 
-        const info_username = await contract.methods.getNFTInfoByUsername(username).call();
-          
+          console.log(`try : ${username}`);
+            
+          let info_username; 
+          if (nftUsernameContract.methods) {
+              console.log("Con MetaMask ");
+              info_username = await nftUsernameContract.methods.getNFTInfoByUsername(username).call();
+          }else{
+               console.log("Con SockWallet "); 
+               info_username = await nftUsernameContract.getNFTInfoByUsername(username);
+          } 
+       
         // Declarar las variables
         let id_info = info_username[0];
         let username_info = info_username[1];
@@ -63,7 +66,19 @@ async function openBuyNftModal(username) {
         // Agregar cada párrafo con contenido
 
         // Convertir de wei a MATIC para mostrar al usuario
-        const maticAmount = web3.utils.fromWei(precio_info, 'ether'); 
+        let maticAmount;
+        if (typeof tokenContract.methods !== 'undefined') {
+                console.log("Con MetaMask");
+                maticAmount = web3.utils.fromWei(precio_info, 'ether');
+                // Lógica específica para contratos instanciados con web3.js
+        } else {
+                console.log("Con SockWallet.");
+                maticAmount = ethers.utils.formatUnits(precio_info, 'ether');
+               // Lógica específica para contratos instanciados con ethers.js
+        }
+
+
+
 
         const paragraphs = [
             { text: `ID: ${id_info}`, color: "white" },
@@ -111,13 +126,35 @@ async function openBuyNftModal(username) {
             console.log(`Precio del NFT: ${precio_info} MATIC`);
             console.log(`Cantidad en Wei: ${maticAmount}`);
 
-              // Ejecutar la función mintNFT
-            await contract.methods.buyNFT(username).send({
+            if (nftUsernameContract.methods) {
+                  console.log("Con MetaMask");
+                  // Ejecutar la función mintNFT
+                  await nftUsernameContract.methods.buyNFT(username).send({
                   from: globalWalletKey,
                   gas: 800000,
                   gasPrice: web3.utils.toWei('60', 'gwei'),
                   value: precio_info // Especificar el valor de 10 MATIC
-              });
+                  });
+               
+
+
+            } else {
+                console.log("Con SockWallet.");
+               
+                const tx = await nftUsernameContract.buyNFT(username, {
+                gasLimit: 800000, // Límite de gas
+                gasPrice: ethers.utils.parseUnits('60', 'gwei'), // Gas Price en Gwei
+                value: precio_info // Cantidad de MATIC en Wei
+                });
+
+                // Registrar el hash de la transacción
+                console.log("Transacción enviada:", tx.hash);
+
+                // Esperar la confirmación de la transacción
+                const receipt = await tx.wait();
+                console.log("Transacción confirmada:", receipt);
+                
+        }            
 
         }
 
@@ -171,6 +208,19 @@ async function findNftWallet(value) {
       
         
         let nftUsernames, totalNFTs,limit;
+        
+        if (nftUsernameContract.methods) {
+                console.log("Con MetaMask");
+                totalNFTs= await nftUsernameContract.methods.getTotalMintedNFTs().call()-1;
+                
+                // Lógica específica para contratos instanciados con web3.js
+        } else {
+                console.log("Con SockWallet.");
+                totalNFTs= await nftUsernameContract.getTotalMintedNFTs()-1;
+                
+               // Lógica específica para contratos instanciados con ethers.js
+        }
+
 
         if (value==="following"){
          
@@ -181,7 +231,7 @@ async function findNftWallet(value) {
 
         }else if (value==="foryourand"){
            
-            totalNFTs= await nftUsernameContract.methods.getTotalMintedNFTs().call()-1;
+            
             limit=totalNFTs;
             const randomNumbers = [];
             if( totalNFTs > 10 ){
@@ -205,7 +255,19 @@ async function findNftWallet(value) {
             for (let i = 0; i < randomNumbers.length; i++) {
                 
                 let index=randomNumbers[i];
-                let username= await nftUsernameContract.methods.getUsernameByTokenId(index).call();                
+                let username;    
+                if (nftUsernameContract.methods) {
+                        console.log("Con MetaMask");
+                        username = await nftUsernameContract.methods.getUsernameByTokenId(index).call(); 
+                        
+                        // Lógica específica para contratos instanciados con web3.js
+                } else {
+                        console.log("Con SockWallet.");
+                        username = await nftUsernameContract.getUsernameByTokenId(index); 
+                        
+                       // Lógica específica para contratos instanciados con ethers.js
+                }
+                               
                 nftUsernames2.push(username);
                 console.log("username " + (i + 1) + ": " +username );
             }
@@ -215,8 +277,18 @@ async function findNftWallet(value) {
 
         }else if (value==="foryoulast"){
 
-          totalNFTs= await nftUsernameContract.methods.getTotalMintedNFTs().call()-1;   
-          nftUsernames= await nftUsernameContract.methods. getUsernamesInRange(0,totalNFTs).call();    
+                    
+                if (nftUsernameContract.methods) {
+                        console.log("Con MetaMask");
+                        nftUsernames= await nftUsernameContract.methods.getUsernamesInRange(0,totalNFTs).call();    
+          
+                        // Lógica específica para contratos instanciados con web3.js
+                } else {
+                        console.log("Con SockWallet.");
+                        nftUsernames= await nftUsernameContract.getUsernamesInRange(0,totalNFTs);    
+          
+                       // Lógica específica para contratos instanciados con ethers.js
+                }   
             
                  
 
@@ -293,9 +365,22 @@ async function findNftWallet(value) {
           listaNFTUsernames.push(username);
          
           try{
+
+                let for_sale;  
+                let codeHexaImage;     
+             
+                if (nftUsernameContract.methods) {
+                        console.log("Con MetaMask ");
+                        for_sale = await nftUsernameContract.methods.isNFTForSale(username).call();  
+                        codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(username).call();     
             
-            const for_sale = await nftUsernameContract.methods.isNFTForSale(username).call();  
-            const codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(username).call();     
+                } else {
+                         // Usando ethers.js
+                         console.log("Con SockWallet "); 
+                         for_sale = await nftUsernameContract.isNFTForSale(username);  
+                         codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(username);     
+            
+                }
               
             //console.log("codeHexaImage:", codeHexaImage);
              

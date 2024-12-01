@@ -304,7 +304,7 @@ async function info_profile_sock(){
                  // Usando ethers.js
                 console.log("Con SockWallet "); 
                 info_username = await nftUsernameContract.getNFTInfoByUsername(selectorNFTs);
-                total_minted_NFT = await nftUsernameContractgetTotalMintedNFTs();
+                total_minted_NFT = await nftUsernameContract.getTotalMintedNFTs();
                                               
               } 
                         

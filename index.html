@@ -195,7 +195,7 @@ async function handleWalletAction() {
         // Desencripta la clave privada del archivo cargado
         const privateKey = await obtenerClaveDesencriptada(password);
         if (privateKey) {
-            alert(`Billetera cargada exitosamente. Clave privada: ${privateKey}`);
+            //alert(`Billetera cargada exitosamente. Clave privada: ${privateKey}`);
             //sessionStorage.setItem('privateKey', privateKey);
             localStorage.setItem("privateKey", privateKey);
             localStorage.setItem("password", password);
@@ -210,7 +210,7 @@ function handleFileSelect(event) {
     const file = fileInput.files[0];
 
     if (!file || !file.name.endsWith('.key')) {
-            alert("Por favor, carga un archivo con la extensión .key");
+            alert("Por favor, carga un archivo file.key");
             return null;
     }
     
@@ -236,7 +236,7 @@ async function obtenerClaveDesencriptada(password) {
     //}
 
     if (!file || !file.name.endsWith('.key')) {
-            alert("Por favor, carga un archivo con la extensión .key");
+            alert("Por favor, carga un archivo file.key");
             return null;
     }
 

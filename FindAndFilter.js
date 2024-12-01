@@ -113,7 +113,7 @@ async function openBuyNftModal(username) {
 
               // Ejecutar la función mintNFT
             await contract.methods.buyNFT(username).send({
-                  from: myAddress,
+                  from: globalWalletKey,
                   gas: 800000,
                   gasPrice: web3.utils.toWei('60', 'gwei'),
                   value: precio_info // Especificar el valor de 10 MATIC
@@ -155,9 +155,9 @@ async function openBuyNftModal(username) {
 async function findNftWallet(value) {
   // Obtener la dirección de la cuenta conectada
   //alert("Clickeaste el botón de find wallet ");
-  const accounts = await web3.eth.getAccounts();
-  const myAddress = accounts[0];
-  const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+  //const accounts = await web3.eth.getAccounts();
+  //const myAddress = accounts[0];
+  //const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
 
   //const contractPROFILE = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
 
@@ -181,7 +181,7 @@ async function findNftWallet(value) {
 
         }else if (value==="foryourand"){
            
-            totalNFTs= await contractNFT.methods.getTotalMintedNFTs().call()-1;
+            totalNFTs= await nftUsernameContract.methods.getTotalMintedNFTs().call()-1;
             limit=totalNFTs;
             const randomNumbers = [];
             if( totalNFTs > 10 ){
@@ -205,7 +205,7 @@ async function findNftWallet(value) {
             for (let i = 0; i < randomNumbers.length; i++) {
                 
                 let index=randomNumbers[i];
-                let username= await contractNFT.methods.getUsernameByTokenId(index).call();                
+                let username= await nftUsernameContract.methods.getUsernameByTokenId(index).call();                
                 nftUsernames2.push(username);
                 console.log("username " + (i + 1) + ": " +username );
             }
@@ -215,8 +215,8 @@ async function findNftWallet(value) {
 
         }else if (value==="foryoulast"){
 
-          totalNFTs= await contractNFT.methods.getTotalMintedNFTs().call()-1;   
-          nftUsernames= await contractNFT.methods. getUsernamesInRange(0,totalNFTs).call();    
+          totalNFTs= await nftUsernameContract.methods.getTotalMintedNFTs().call()-1;   
+          nftUsernames= await nftUsernameContract.methods. getUsernamesInRange(0,totalNFTs).call();    
             
                  
 
@@ -229,7 +229,7 @@ async function findNftWallet(value) {
                   // La dirección tiene el formato correcto (es una dirección Ethereum válida)
                   console.log("La dirección es válida:", addressUserNfts);
                   // Aquí puedes realizar acciones relacionadas con una dirección Ethereum válida
-                  nftUsernames = await contractNFT.methods.getMintedUsernames(addressUserNfts).call();
+                  nftUsernames = await nftUsernameContract.methods.getMintedUsernames(addressUserNfts).call();
  
               } else {
                       let isMintedNFT;
@@ -242,10 +242,8 @@ async function findNftWallet(value) {
                              isMintedNFT = await nftUsernameContract.isMinted(addressUserNfts);
                      
                        }
-
-
-                  
-    
+               
+  
                   if (isMintedNFT) {
                       // Si está minteado, crear un arreglo nftUsernames con un solo elemento
                       nftUsernames = [addressUserNfts];
@@ -286,8 +284,8 @@ async function findNftWallet(value) {
          
           try{
             
-            const for_sale = await contractNFT.methods.isNFTForSale(username).call();  
-            const codeHexaImage = await contractNFT.methods.getimagecodeHexaFromUsername(username).call();     
+            const for_sale = await nftUsernameContract.methods.isNFTForSale(username).call();  
+            const codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(username).call();     
               
             //console.log("codeHexaImage:", codeHexaImage);
              

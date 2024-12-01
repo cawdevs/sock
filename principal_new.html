@@ -233,7 +233,7 @@
        <div class="well" style="border: 2px solid lime; background: black; border-radius: 20px;">  -->
                     <!--<div style="background: red; width:90px; height: 50px; display: inline-block; margin-top: 50px;"></div>  -->
 
-                    <h4> 
+                    <h5> 
                       <p style="display:inline-block;"><img src="images/icons/sock_coin.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; "></p>
      <div style="display:inline-block;" id="saldo_CAW"><font color="lime"></font></div>
 
@@ -241,7 +241,10 @@
      <div style="display:inline-block;" > </div>
      <p style="display:inline-block;"><img src="images/icons/matic_coin.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; "></p>
      <div style="display:inline-block;" id="saldo_ETH"><font color="white "></font></div>
+
      <div style="display:inline-block;" > </div>
+     <div style="display:inline-block;" > </div>
+     <div style="display:inline-block;" id="saldo_USD"><font color="white "></font></div>
      <div style="display:inline-block;" > </div>
      <a href="#" style="display:inline-block;" id="btn-obtener-saldo"><font color="black"><span class="glyphicon glyphicon-refresh"></span></font></a>
      
@@ -269,7 +272,7 @@
  
 
      
-    </h4>
+    </h5>
 
 
 
@@ -1555,6 +1558,23 @@ async function obtenerSaldo_POL() {
    const saldoElementETH = document.getElementById('saldo_ETH');
    saldoElementETH.innerText = truncatedBalanceEther;
    saldoElementETH.style.color = 'white';
+
+   // Obtener el precio de MATIC en USD desde CoinGecko
+   fetch('https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd')
+       .then(response => response.json())
+       .then(data => {
+           const maticPriceInUsd = data['matic-network'].usd;
+           const balanceInUsd = (parseFloat(balanceEther) * maticPriceInUsd).toFixed(2);
+           console.log("Valor en USD:", balanceInUsd);
+
+           // Mostrar el valor en USD
+           const saldoElementUSD = document.getElementById('saldo_USD');
+           saldoElementUSD.innerText = " $" + balanceInUsd;
+           saldoElementUSD.style.color = 'white';
+       })
+       .catch(error => console.error("Error al obtener el precio de MATIC:", error));
+
+
            
 }
 

@@ -357,19 +357,20 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         paragraph1.style.color = "black";
         paragraph1.style.fontSize = "18px";
         infoContainer.appendChild(paragraph1);
-
-        //const paragraph2 = document.createElement("p");
-        //paragraph2.textContent = `Minteado: ${is_minted}`;
-        //paragraph2.style.color = "black";
-        //infoContainer.appendChild(paragraph2);
-
-        //const paragraph3 = document.createElement("p");
-        //paragraph3.textContent = `Forsale: ${forsale_info}`;
-        //paragraph3.style.color = "lime";
-        //infoContainer.appendChild(paragraph3);
-        
+               
         // Convertir de wei a MATIC para mostrar al usuario
-        const maticAmount = web3.utils.fromWei(precio_info, 'ether');
+        let maticAmount;
+        if (typeof tokenContract.methods !== 'undefined') {
+                console.log("Con MetaMask");
+                maticAmount = web3.utils.fromWei(precio_info, 'ether');
+                // Lógica específica para contratos instanciados con web3.js
+        } else {
+                console.log("Con SockWallet.");
+                maticAmount = ethers.utils.formatUnits(precio_info, 'ether');
+               // Lógica específica para contratos instanciados con ethers.js
+        }
+        
+
         const paragraph4 = document.createElement("p");
         paragraph4.textContent = `Price: ${maticAmount}`;
         paragraph4.style.color = "green";

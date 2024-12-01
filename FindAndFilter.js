@@ -229,8 +229,18 @@ async function findNftWallet(value) {
                   // La dirección tiene el formato correcto (es una dirección Ethereum válida)
                   console.log("La dirección es válida:", addressUserNfts);
                   // Aquí puedes realizar acciones relacionadas con una dirección Ethereum válida
-                  nftUsernames = await nftUsernameContract.methods.getMintedUsernames(addressUserNfts).call();
- 
+                  
+                  if (nftUsernameContract.methods) {
+                       nftUsernames = await nftUsernameContract.methods.getMintedUsernames(addressUserNfts).call();
+                  }
+                  else{
+                       nftUsernames = await nftUsernameContract.getMintedUsernames(addressUserNfts);
+                  
+                  }  
+             
+
+
+
               } else {
                       let isMintedNFT;
                       if (nftUsernameContract.methods) {

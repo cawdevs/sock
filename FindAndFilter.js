@@ -157,7 +157,6 @@ async function findNftWallet(value) {
   //alert("Clickeaste el botón de find wallet ");
   const accounts = await web3.eth.getAccounts();
   const myAddress = accounts[0];
-
   const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
 
   //const contractPROFILE = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
@@ -233,9 +232,19 @@ async function findNftWallet(value) {
                   nftUsernames = await contractNFT.methods.getMintedUsernames(addressUserNfts).call();
  
               } else {
+                      let isMintedNFT;
+                      if (nftUsernameContract.methods) {
+                            console.log("Con MetaMask ");
+                            isMintedNFT = await nftUsernameContract.methods.isMinted(addressUserNfts).call();
+                      } else {
+                             // Usando ethers.js
+                             console.log("Con SockWallet "); 
+                             isMintedNFT = await nftUsernameContract.isMinted(addressUserNfts);
+                     
+                       }
 
-                  const isMintedNFT = await contractNFT.methods.isMinted(addressUserNfts).call();
 
+                  
     
                   if (isMintedNFT) {
                       // Si está minteado, crear un arreglo nftUsernames con un solo elemento

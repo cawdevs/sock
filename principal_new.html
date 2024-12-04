@@ -813,10 +813,7 @@ span.hashtag {
         <div class="modal-body">
 
 
-        <div style="display: flex; align-items: center; justify-content: flex-start; gap: 0;"> 
-          <p><h2>Matic required is: </h2></p>
-          <p id="mount-minteo"></p>
-        </div>
+       
 
      <center>
 
@@ -868,7 +865,16 @@ span.hashtag {
             <button id="btn-verify-nft" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">check username before</button>
 
             <button id="btn-mintear-nft" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px; display:none;">Mint NFT Username</button>
+          
+
+             <div style="display: flex; align-items: center; justify-content: flex-start; gap: 0;"> 
+          <p><h2>POL required is: </h2></p>
+          <p id="mount-minteo"></p>
+        </div>
+
           </center>
+
+
 
 
           
@@ -1609,11 +1615,11 @@ async function mintearNFT() {
             loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la función
 
             // Obtener la dirección de la cuenta conectada
-            const accounts = await web3.eth.getAccounts();
-            const myAddress = accounts[0];
+            //const accounts = await web3.eth.getAccounts();
+            //const myAddress = accounts[0];
             //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
             
-            const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+            //const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
             // Mintear el NFT
             const nftusername = document.getElementById('text-mintear-nft').value;
             const codeimageHexa = document.getElementById("codeimageHexa").textContent;
@@ -1625,19 +1631,44 @@ async function mintearNFT() {
             try {              
               //await contract.methods.mintNFT(nftusername,).send({from: myAddress, gas: 400000, gasPrice: web3.utils.toWei('50', 'gwei') });
               // Calcular el valor de 10 MATIC en Wei
-             
-              const maticAmount = web3.utils.toWei(maticrequired, 'ether'); // 10 MATIC
 
-              // Ejecutar la función mintNFT
-              await contract.methods.mintNFT(nftusername, codeimageHexa).send({
-                  from: myAddress,
+              // Convertir de wei a MATIC para mostrar al usuario
+        let maticAmount;
+        if (nftUsernameContract.methods) {
+              console.log("Con MetaMask");
+              maticAmount = web3.utils.fromWei(maticrequired, 'ether');
+
+                // Ejecutar la función mintNFT
+              await nftUsernameContract.methods.mintNFT(nftusername, codeimageHexa).send({
+                  from: globalWalletKey,
                   gas: 800000,
                   gasPrice: web3.utils.toWei('60', 'gwei'),
                   value: maticAmount // Especificar el valor de 10 MATIC
               });
+                // Lógica específica para contratos instanciados con web3.js
+        } else {
+                console.log("Con SockWallet.");
+                maticAmount = ethers.utils.formatUnits(maticrequired, 'ether');
+                const tx = await nftUsernameContract.mintNFT(nftusername, codeimageHexa, {
+                  gasLimit: 800000,
+                  gasPrice: ethers.utils.parseUnits('60', 'gwei'), // Gas price en gwei
+                  value: maticAmount // Especificar el valor en Wei
+                  });
+
+                  console.log("Transacción enviada:", tx.hash);
+
+                  // Esperar confirmación
+                  const receipt = await tx.wait();
+                  console.log("Transacción confirmada:", receipt);
+               
+               // Lógica específica para contratos instanciados con ethers.js
+        }
 
 
 
+
+             
+              
               //alert('NFT Minteado exitosamente:');
               loadingAnimation.style.display = 'none'; // Oculta la animación
               $('#myModal').modal('hide'); 
@@ -1716,13 +1747,7 @@ async function getmintedNFT() {
 }
 
 
-         
-
-
-
-
-
-
+      
 
          
 
@@ -3339,17 +3364,27 @@ async function sendETHtowallet(){
 async function verifymintearNFT(){
 
     // Obtener la dirección de la cuenta conectada
-    const accounts = await web3.eth.getAccounts();
-    const myAddress = accounts[0];
-
-    const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+    //const accounts = await web3.eth.getAccounts();
+    //const myAddress = accounts[0];
+    //const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
 
     const nftusername = document.getElementById('text-mintear-nft').value;
     const bottonMint = document.getElementById('btn-mintear-nft');
     const bottonVerifyMint = document.getElementById('btn-verify-nft');
     const errorDisplay = document.getElementById('Error_Minted_username');
     const readyDisplay = document.getElementById('Minted_username');
-    const isMintedNFT = await contractNFT.methods.isMinted(nftusername).call();    
+
+    let isMintedNFT;
+    if (nftUsernameContract.methods) {
+                 console.log("Con MetaMask ");
+                 // Usando web3.js
+                 isMintedNFT = await nftUsernameContract.methods.isMinted(nftusername).call();
+    } else {
+                 // Usando ethers.js
+                console.log("Con SockWallet "); 
+                isMintedNFT = await nftUsernameContract.isMinted(nftusername); 
+    }
+      
     
     if(isMintedNFT){
 

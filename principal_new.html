@@ -868,7 +868,7 @@ span.hashtag {
           
 
           <div style="display: flex; align-items: center; justify-content: flex-start; gap: 0; color: lime;">
-             <h4 style="margin: 0;">POL required is:</h4>
+             <h4 style="margin: 0;">POL required is :</h4>
              <p id="mount-minteo" style="margin: 0;"></p>
           </div>
 
@@ -1403,6 +1403,11 @@ async function conectarMetaMask() {
 
         tokenContract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
         nftUsernameContract= new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+
+        freeTokensContract= new web3.eth.Contract(FreeTokens_ContractABI, freeTokensContractAddress);
+
+        
+
     } catch (error) {
         console.error("Error al conectar con MetaMask:", error);
     }
@@ -1428,7 +1433,7 @@ function conectarWalletPropia() {
     
     tokenContract = new ethers.Contract(tokenContractAddress, CAW_tokenABI, signer);
     nftUsernameContract = new ethers.Contract(nftContractAddress, NFT_ContractABI, signer);
-   
+    freeTokensContract= new ethers.Contract(freeTokensContractAddress, FreeTokens_ContractABI, signer );
     console.log("Conectado usando wallet propia:", globalWalletKey);
 }
 
@@ -1536,7 +1541,7 @@ async function obtenerSaldo_SOCK() {
    saldoElement.style.color = 'lime';
 
    console.log("Saldo Sock SOCK()." + truncatedBalance);    
-
+   return truncatedBalance;
 }  
 
 
@@ -1580,7 +1585,7 @@ async function obtenerSaldo_POL() {
        })
        .catch(error => console.error("Error al obtener el precio de MATIC:", error));
 
-
+    return truncatedBalanceEther;
            
 }
 
@@ -1660,7 +1665,7 @@ async function mintearNFT() {
                   // Esperar confirmación
                   const receipt = await tx.wait();
                   console.log("Transacción confirmada:", receipt);
-               
+                  alert('Transaction ok :)');
                // Lógica específica para contratos instanciados con ethers.js
         }
 

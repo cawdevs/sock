@@ -477,6 +477,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                              // Esperar la confirmación
                              const receipt = await tx.wait();
                              console.log("Transacción confirmada:", receipt);
+                             alert('Transaction ok :)');
                                     
                           } 
 
@@ -506,7 +507,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                            // Esperar confirmación
                            const receipt = await tx.wait();
                            console.log("Transacción confirmada:", receipt);
-                           console.log('NFT Username is Delisted.'); 
+                           alert('Transaction ok :)');
 
                        } 
 
@@ -546,7 +547,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             // Esperar confirmación
                             const receipt = await tx.wait();
                             console.log("Transacción confirmada:", receipt);
-                            console.log('NFT transferido.');
+                            alert('Transaction ok :)');
 
                           }
                         

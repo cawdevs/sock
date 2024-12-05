@@ -166,11 +166,10 @@ function claimTokens() {
     document.getElementById('claimTokensButton').style.display = 'none';
     const privateKey = localStorage.getItem('privateKey'); 
 
-    if (!privateKey){
-        tokensFree('SOCK');
-    } else{
-        tokensFree_wallet('SOCK');
-    }
+   
+   tokensFree('SOCK');
+   
+   
        
     
     

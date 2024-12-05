@@ -153,6 +153,7 @@ async function openBuyNftModal(username) {
                 // Esperar la confirmación de la transacción
                 const receipt = await tx.wait();
                 console.log("Transacción confirmada:", receipt);
+                alert('Transaction ok :)');
                 
         }            
 

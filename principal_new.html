@@ -412,11 +412,26 @@ span.hashtag {
           <h4><div id="nft-username-list-direct-message"></div></h4>   
           <br>
            
-             <center><h3>Games</h3></center>
+      <center><h3>Games</h3></center>
              <!-- Botón opcional para 2mcargar el juego -->
-         <button onclick="loadGame()">load game Cartas</button>
+         
+         <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin: 20px;">
+    <!-- Botón 1 -->
+    <button onclick="loadGame()" style="display: flex; align-items: center; gap: 8px; padding: 10px; font-size: 16px; background-color: lime; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        <img src="games/cartaMayor/images/majorcart.SVG" alt="Icono" style="width: 150px;">
+        
+    </button>
+    <!-- Botón 2 -->
+    <button onclick="loadGame_sockWar()" style="display: flex; align-items: center; gap: 8px; padding: 10px; font-size: 16px; background-color: lime; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        <img src="games/sockWar/images/sockwar.SVG" alt="Icono" style="width: 150px;">
+        
+    </button>
+</div>
+
+         <br>
           <div id="gameContainer"></div>
-              <br>
+          <div id="gameContainer2"></div>
+              
                <br>
       </div>
     </div>
@@ -1208,9 +1223,11 @@ span.hashtag {
    
 <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
 <!-- Archivo JavaScript para cargar contenido dinámico del juego carta Mayor-->
-    <script src="games/cartaMayor/loadGameCartas.js"></script>
-    <!-- Lógica del juego -->
+ <!--   <script src="games/cartaMayor/loadGameCartas.js"></script>
     <script src="games/cartaMayor/scriptCartas.js"></script>
+  -->  
+    <script src="games/sockWar/loadGameSockWar.js"></script>
+    <script src="games/sockWar/scriptSockWar.js"></script>
 
 
 
@@ -1618,30 +1635,24 @@ async function mintearNFT() {
 
             const loadingAnimation = document.getElementById('loadingAnimation-mint');
             loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la función
-
-            // Obtener la dirección de la cuenta conectada
-            //const accounts = await web3.eth.getAccounts();
-            //const myAddress = accounts[0];
-            //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
-            
-            //const contract = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
+           
             // Mintear el NFT
             const nftusername = document.getElementById('text-mintear-nft').value;
             const codeimageHexa = document.getElementById("codeimageHexa").textContent;
             const maticrequired = document.getElementById("mount-minteo").textContent;
+
+            Convierte 
             // ...
 
              //alert('Hexa: ' + codeimageHexa);
             
             try {              
-              //await contract.methods.mintNFT(nftusername,).send({from: myAddress, gas: 400000, gasPrice: web3.utils.toWei('50', 'gwei') });
-              // Calcular el valor de 10 MATIC en Wei
-
-              // Convertir de wei a MATIC para mostrar al usuario
+             
+              
         let maticAmount;
         if (nftUsernameContract.methods) {
               console.log("Con MetaMask");
-              maticAmount = web3.utils.fromWei(maticrequired, 'ether');
+              maticAmount = web3.utils.toWei(maticrequired, 'ether'); 
 
                 // Ejecutar la función mintNFT
               await nftUsernameContract.methods.mintNFT(nftusername, codeimageHexa).send({
@@ -1653,7 +1664,8 @@ async function mintearNFT() {
                 // Lógica específica para contratos instanciados con web3.js
         } else {
                 console.log("Con SockWallet.");
-                maticAmount = ethers.utils.formatUnits(maticrequired, 'ether');
+              
+                maticAmount = ethers.utils.parseEther(maticrequired); //
                 const tx = await nftUsernameContract.mintNFT(nftusername, codeimageHexa, {
                   gasLimit: 800000,
                   gasPrice: ethers.utils.parseUnits('60', 'gwei'), // Gas price en gwei

@@ -410,29 +410,26 @@ span.hashtag {
       
       <div class="container-fluid"> 
           <h4><div id="nft-username-list-direct-message"></div></h4>   
-          <br>
-           
-      <center><h3>Games</h3></center>
+          
              <!-- Botón opcional para 2mcargar el juego -->
          
-         <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin: 20px;">
+         <div style="display: flex; gap: 10px; justify-content: center; align-items: center; margin: 20px;">
     <!-- Botón 1 -->
-    <button onclick="loadGame()" style="display: flex; align-items: center; gap: 8px; padding: 10px; font-size: 16px; background-color: lime; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        <img src="games/cartaMayor/images/majorcart.SVG" alt="Icono" style="width: 150px;">
+    <button onclick="loadGame()" style="display: flex; align-items: center;  background-color: white; color: white; border: none; border-radius: 10px; cursor: pointer;">
+        <img src="games/cartaMayor/images/majorcart.SVG" alt="Icono" style="width: 120px;">
         
     </button>
     <!-- Botón 2 -->
-    <button onclick="loadGame_sockWar()" style="display: flex; align-items: center; gap: 8px; padding: 10px; font-size: 16px; background-color: lime; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        <img src="games/sockWar/images/sockwar.SVG" alt="Icono" style="width: 150px;">
+    <button onclick="loadGame_sockWar()" style="display: flex; align-items: center;  font-size: 16px; background-color: white; color: white; border: none; border-radius: 10px; cursor: pointer;">
+        <img src="games/sockWar/images/sockwar.SVG" alt="Icono" style="width: 120px;">
         
     </button>
 </div>
 
-         <br>
-          <div id="gameContainer"></div>
-          <div id="gameContainer2"></div>
+        
+          <div id="gameContainer"></div>        
               
-               <br>
+             
       </div>
     </div>
   
@@ -1223,9 +1220,9 @@ span.hashtag {
    
 <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
 <!-- Archivo JavaScript para cargar contenido dinámico del juego carta Mayor-->
- <!--   <script src="games/cartaMayor/loadGameCartas.js"></script>
+    <script src="games/cartaMayor/loadGameCartas.js"></script>
     <script src="games/cartaMayor/scriptCartas.js"></script>
-  -->  
+    
     <script src="games/sockWar/loadGameSockWar.js"></script>
     <script src="games/sockWar/scriptSockWar.js"></script>
 

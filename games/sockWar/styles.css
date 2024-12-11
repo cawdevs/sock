@@ -1,0 +1,97 @@
+#gameContainer {
+    width: 100%;
+    max-width: 600px; /* Limita el ancho máximo del contenedor del juego */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 20px; /* Espacio interno */
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+    overflow: hidden; /* Evita el desbordamiento del contenido */
+    border: 1px solid #ccc; /* Borde para distinguir el contenedor */
+    border-radius: 10px; /* Esquinas redondeadas */
+    background-color: #fff; /* Fondo blanco */
+}
+
+.containerbox {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas de igual tamaño */
+    gap: 10px; /* Espacio entre cuadros */
+    justify-content: start; /* Asegura que los cuadros inicien en la primera posición */
+    margin: 0 auto; /* Centra la cuadrícula dentro del contenedor */
+    padding: 0; /* Sin padding interno */
+    width: 200px; /* Ancho calculado en base a los cuadros (60px * 3 + 2 * gap) */
+    box-sizing: border-box; /* Asegura que el padding no afecte las dimensiones */
+}
+
+.box {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #000; /* Borde para distinguir los cuadros */
+    display: flex;
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+    background-color: #f0f0f0; /* Fondo claro */
+    cursor: pointer; /* Apunta al cuadro al pasar el mouse */
+    box-sizing: border-box; /* Incluye el borde en el tamaño total */
+}
+
+.green {
+    background-color: #d4f7d4; /* Fondo verde claro */
+}
+
+.orange {
+    background-color: #f7d4d4; /* Fondo naranja claro */
+}
+
+.box img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    pointer-events: none; /* Evita que la imagen reciba clics */
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #006400;
+    display: block;
+    margin-bottom: 10px;
+}
+
+select {
+    width: 200px;
+    padding: 10px;
+    border: 2px solid #32cd32;
+    border-radius: 20px;
+    font-size: 16px;
+    color: #006400;
+    background-color: white;
+    cursor: pointer;
+}
+
+select:hover {
+    border-color: #228b22;
+    background-color: #d0ffd0;
+}
+
+select:focus {
+    outline: none;
+    border-color: #006400;
+    box-shadow: 0 0 5px #32cd32;
+}

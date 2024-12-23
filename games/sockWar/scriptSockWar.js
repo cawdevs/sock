@@ -141,7 +141,7 @@ async function get_data_SockWar() {
     const username = document.getElementById('selector_NFTs').value;
 
 
-    bet_Amount=100000;
+    //bet_Amount=100000;
     try {
 
          //let bet_Amount, has_OpenBet;   
@@ -228,7 +228,7 @@ async function  approve_Bet_SockWar() {
         
               //bet_Amount = await betContract.methods.betAmount().call(); 
               amountToApprove = web3.utils.toWei(bet_Amount, 'ether');
-
+              
               await tokenContract.methods.approve(betContractAddress, amountToApprove).send({from: globalWalletKey, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });                       
        
         } else {

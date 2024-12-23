@@ -141,14 +141,15 @@ async function get_data_SockWar() {
     const username = document.getElementById('selector_NFTs').value;
 
 
-    //bet_Amount=100000;
+    
     try {
 
          //let bet_Amount, has_OpenBet;   
          let nft_username_Hash;
          if (betContract.methods) {
              console.log("Con MetaMask.");
-             bet_Amount = await betContract.methods.betAmount().call();      
+             bet_Amount = await betContract.methods.betAmount().call(); 
+             console.log("Bet_amount: ", bet_Amount);     
              bet_Counter= await betContract.methods.betCounter().call();
              //rewardAmount = await contract.methods.rewardAmount().call();
              has_OpenBet = await betContract.methods.hasOpenBet().call();
@@ -162,6 +163,7 @@ async function get_data_SockWar() {
              // Usando ethers.js
              console.log("Con SockWallet.");   
              betAmount = await betContract.betAmount();
+             console.log("Bet_amount: ", bet_Amount);
              bet_Counter= await betContract.betCounter();
              //rewardAmount = await contract.rewardAmount(); 
              has_OpenBet = await betContract.hasOpenBet();
@@ -170,7 +172,7 @@ async function get_data_SockWar() {
              console.log("has_OpenBet: ", has_OpenBet);    
          }
 
-
+        /*
          // Referencia al contenedor donde se mostrarán los resultados
         const historyContainer = document.getElementById('history-bet-player');
         // Limpia el contenedor antes de agregar los nuevos resultados
@@ -194,7 +196,7 @@ async function get_data_SockWar() {
             `;
             historyContainer.appendChild(betElement);
         });
-
+       */
 
          //coloca monto de apuesta y si hay un apostador            
 
@@ -228,7 +230,7 @@ async function  approve_Bet_SockWar() {
         
               //bet_Amount = await betContract.methods.betAmount().call(); 
               amountToApprove = web3.utils.toWei(bet_Amount, 'ether');
-              
+
               await tokenContract.methods.approve(betContractAddress, amountToApprove).send({from: globalWalletKey, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });                       
        
         } else {

@@ -229,8 +229,8 @@ async function  approve_Bet_SockWar() {
               console.log("Con MetaMask.");
         
               //bet_Amount = await betContract.methods.betAmount().call(); 
-              amountToApprove = web3.utils.toWei(bet_Amount, 'ether');
-
+              //amountToApprove = web3.utils.toWei(bet_Amount, 'ether');
+              amountToApprove = betAmount;
               await tokenContract.methods.approve(betContractAddress, amountToApprove).send({from: globalWalletKey, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });                       
        
         } else {
@@ -238,8 +238,8 @@ async function  approve_Bet_SockWar() {
                
             console.log("Con SockWallet ");
             //bet_Amount = await betContract.betAmount(); 
-            amountToApprove = ethers.utils.parseUnits(bet_Amount, 'ether');  // Convertir a ethers usando la cantidad de decimales correcta
-
+            //amountToApprove = ethers.utils.parseUnits(bet_Amount, 'ether');  // Convertir a ethers usando la cantidad de decimales correcta
+            amountToApprove = betAmount;
             // Aprobar el gasto usando ethers.js
             const tx = await tokenContract.approve(betContractAddress, amountToApprove, {
                 gasLimit: 300000,
@@ -285,7 +285,8 @@ async function  approve_Bet_SockWar() {
               //aprobar monto              
               nft_username_Hash = await nftUsernameContract.methods.getHashFromUsername(username).call();  
               //bet_Amount = await betContract.methods.betAmount().call(); 
-              amountToApprove = web3.utils.toWei(bet_Amount, 'ether');
+              //amountToApprove = web3.utils.toWei(bet_Amount, 'ether');
+              amountToApprove = betAmount;
 
               // Ejemplo de uso:              
               binaryMove = getGridState();
@@ -303,8 +304,8 @@ async function  approve_Bet_SockWar() {
             nft_username_Hash = await nftUsernameContract.getHashFromUsername(username);  
             //bet_Amount = await betContract.betAmount(); 
                         
-            amountToApprove = ethers.utils.parseUnits(bet_Amount, 'ether');  // Convertir a ethers usando la cantidad de decimales correcta
-
+            //amountToApprove = ethers.utils.parseUnits(bet_Amount, 'ether');  // Convertir a ethers usando la cantidad de decimales correcta
+            amountToApprove = betAmount;
             // Ejemplo de uso:              
             binaryMove = getGridState();
             result_move = addHashAndMove(nft_username_Hash, binaryMove);   

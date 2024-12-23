@@ -343,7 +343,6 @@ function addHashAndMove(nftUsernameHash, binaryMove) {
     const moveDecimal = parseInt(binaryMove, 2); // Convertir binario a decimal
     const moveHex = moveDecimal.toString(16); // Convertir decimal a hexadecimal
     // Convertir el hash y el movimiento a números grandes para manejar valores grandes
-    const BigNumber = require('bignumber.js'); // Asegúrate de instalar esta biblioteca
     const hashValue = new BigNumber(nftUsernameHash, 16); // Hash como número en base 16
     const moveValue = new BigNumber(moveHex, 16); // Movimiento como número en base 16
     // Sumar ambos valores

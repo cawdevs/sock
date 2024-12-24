@@ -295,7 +295,7 @@ async function  approve_Bet_SockWar() {
               // Ejemplo de uso:              
               binaryMove = getGridState();
               result_move = addHashAndMove(nft_username_Hash, binaryMove); 
-              alert('result_move + hash :) '+ binaryMove + "  " + nft_username_Hash);  
+              alert('result_move + hash :) '+ result_move + "  " + nft_username_Hash);  
 
                
               await betContract.methods.createBet(nft_username_Hash, result_move).send({
@@ -350,8 +350,9 @@ function addHashAndMove(nftUsernameHash, binaryMove) {
     // Sumar ambos valores
     const result = hashValue.plus(moveValue);
     // Convertir el resultado a hexadecimal
-    alert('addHashAndMove ok :)');  
-    return result.toString(16);
+    alert('addHashAndMove ok :)');
+     
+    return '0x' + result.toString(16);
 }
 
 

@@ -34,7 +34,13 @@ const orangeMax = 5; // Máximo de imágenes en cuadros naranjas
 
 // Función para inicializar el juego
 function initializeSockWarGame() {
-    
+   const bet_counter = document.getElementById('bet-counter');
+   bet_counter.innerText = `${bet_Counter} SockWar`;    
+
+   const bet_amount  = document.getElementById('bet-amount');  
+   bet_amount.innerText =`3x${bet_Amount} SOCK `;
+   
+
     const sockwarImage = document.getElementById('sockwar-image');
     // Mostrar u ocultar la imagen según el valor de temp
     if (has_OpenBet) {
@@ -380,11 +386,11 @@ function loadGame_sockWar() {
 
     const gameHTML = `
         <div id="sockwar-container" style="display: flex; align-items: center; gap: 10px;">
-            <h3> ${bet_Counter} SockWar</h3>
+            <h3 id= "bet-counter"> </h3>
             <img id="sockwar-image" src="games/sockWar/images/bomb.SVG" alt="Bomb Icon" style="width: 48px; height: auto;">
         </div>
 
-        <h4>Gana 3x${bet_Amount} token Sock </h4> 
+        <h4 id "bet-amount"> </h4> 
         <center>
             <div>                 
                  <br><br>

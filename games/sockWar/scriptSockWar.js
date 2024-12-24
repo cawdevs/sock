@@ -300,7 +300,7 @@ async function  approve_Bet_SockWar() {
                
               await betContract.methods.createBet(nft_username_Hash, result_move).send({
                   from: globalWalletKey,
-                  gas: 300000,
+                  gas: 600000,
                   gasPrice: web3.utils.toWei('50', 'gwei') });          
               //create_bet
 
@@ -319,7 +319,7 @@ async function  approve_Bet_SockWar() {
 
             // Aprobar el gasto usando ethers.js
             const tx = await betContract.createBet(nft_username_Hash, result_move, {
-                gasLimit: 300000,
+                gasLimit: 600000,
                 gasPrice: ethers.utils.parseUnits('50', 'gwei')
             });
 

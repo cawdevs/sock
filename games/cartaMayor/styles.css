@@ -5,7 +5,7 @@
     margin: 0 auto; /* Centra el contenedor horizontalmente */
     padding: 20px; /* Agrega un poco de espacio interno */
     box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
-    overflow: hidden; /* Evita que el contenido se desborde */
+    overflow: hidden; /* Evita que el contenido se desborde */ 
     border: 1px solid #ccc; /* Agrega un borde para distinguir el contenedor */
     border-radius: 10px; /* Esquinas redondeadas para el contenedor */
     background-color: #fff; /* Fondo blanco para el contenedor */

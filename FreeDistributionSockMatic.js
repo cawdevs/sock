@@ -13,7 +13,6 @@ let freeTokensContract;
 
 
 
-
 async function tokensFree(token) {
 	try {
 	    //const accounts = await web3.eth.getAccounts();
@@ -32,7 +31,7 @@ async function tokensFree(token) {
                  	  if (nftUsernameContract.methods) {
                            console.log("Con MetaMask ");
                            alert('2M tokens free for you :)');        	 
-		          	       const transaction = await freeTokensContract.methods.requestTokensSock().send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') }); 
+		          	       const transaction = await freeTokensContract.methods.requestTokensSock().send({from: globalWalletKey, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') }); 
 		          
                                                       
                       } else {
@@ -63,8 +62,7 @@ async function tokensFree(token) {
              }
               
                   
-	       
-	      
+	       	      
 	    } else {
 	      
 	    }

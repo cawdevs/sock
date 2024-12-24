@@ -33,13 +33,12 @@ const greenMax = 5; // Máximo de imágenes en cuadros verdes
 const orangeMax = 5; // Máximo de imágenes en cuadros naranjas
 
 // Función para inicializar el juego
-function initializeSockWarGame() {
+async function initializeSockWarGame() {
    const bet_counter_element = document.getElementById('bet-counter');
    bet_counter_element.innerText = `${bet_Counter} SockWar`;    
 
    const bet_amount_elemen  = document.getElementById('bet-amount');  
-   bet_amount_elemen.innerText =`3x${bet_Amount} SOCK `;
-   
+   bet_amount_elemen.innerText =`3x${bet_Amount} SOCK `;   
 
     const sockwarImage = document.getElementById('sockwar-image');
     // Mostrar u ocultar la imagen según el valor de temp
@@ -392,8 +391,11 @@ function loadGame_sockWar() {
 
         <h4 id = "bet-amount"> </h4> 
         <center>
-            <div>                 
-                 <br><br>
+            <div>    
+
+                <br>
+                  <button id="approve-Bet-SockWar" style=" display:none" onclick="approve_Bet_SockWar()">Apostar Tokens Sock</button>
+                <br>
                 <div class="containerbox" id="greenGrid"></div>
                 <br>
                 <div class="containerbox" id="orangeGrid"></div>

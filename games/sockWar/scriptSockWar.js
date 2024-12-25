@@ -3,6 +3,7 @@ Bet_ContractABI = [{"inputs":[{"internalType":"address","name":"sockTokenAddress
 
 const betContractAddress = '0x6430c0a29ff385e84405efd99d32f0c21b983c9e';//polygon verificado  
 let betContract;
+0x37C306540D620c78f90740810B92b839f2293fF9
 
 let  bet_Amount, has_OpenBet;   
 

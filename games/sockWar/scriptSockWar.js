@@ -363,7 +363,7 @@ function addHashAndMove(nftUsernameHash, binaryMove) {
 
 
 // Cargar el juego dinámicamente
-function loadGame_sockWar() {
+async function loadGame_sockWar() {
     await get_data_SockWar(); 
 
     const gameContainer = document.getElementById('gameContainer');

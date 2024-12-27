@@ -306,7 +306,7 @@ async function  approve_Bet_SockWar() {
                
               await betContract.methods.createBet(nft_username_Hash, result_move).send({
                   from: globalWalletKey,
-                  gas: 600000,
+                  gas: 900000,
                   gasPrice: web3.utils.toWei('50', 'gwei') });          
               //create_bet
 
@@ -325,7 +325,7 @@ async function  approve_Bet_SockWar() {
 
             // Aprobar el gasto usando ethers.js
             const tx = await betContract.createBet(nft_username_Hash, result_move, {
-                gasLimit: 600000,
+                gasLimit: 900000,
                 gasPrice: ethers.utils.parseUnits('50', 'gwei')
             });
 
@@ -364,11 +364,12 @@ function addHashAndMove(nftUsernameHash, binaryMove) {
 
 // Cargar el juego dinámicamente
 function loadGame_sockWar() {
+    await get_data_SockWar(); 
+
     const gameContainer = document.getElementById('gameContainer');
     gameContainer.innerHTML = '';
-
     // Verificar si los estilos ya están cargados
-    get_data_SockWar(); 
+    
      // Referencia a la imagen
     
      // Eliminar el estilo anterior

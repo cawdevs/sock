@@ -211,7 +211,7 @@ async function get_data_SockWar() {
          //coloca monto de apuesta y si hay un apostador            
 
     } catch (error) {
-        console.error('Error al realizar la transacción:', error);
+        console.error('Error al realizar la transacción: get_data_SockWar()', error);
         alert('Error al realizar la transacción: ' + error.message);
     }
 

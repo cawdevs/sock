@@ -267,7 +267,7 @@ async function  approve_Bet_SockWar() {
          //coloca monto de apuesta y si hay un apostador            
 
     } catch (error) {
-        console.error('Error al realizar la transacción:', error);
+        console.error('Error al realizar la transacción: approve_Bet_SockWar()', error);
         alert('Error al realizar la transacción: ' + error.message);
     }
 
@@ -340,7 +340,7 @@ async function  approve_Bet_SockWar() {
          //coloca monto de apuesta y si hay un apostador            
 
     } catch (error) {
-        console.error('Error al realizar la transacción:', error);
+        console.error('Error al realizar la transacción:create_Bet_SockWar', error);
         alert('Error al realizar la transacción: ' + error.message);
     }    
 }    

@@ -170,8 +170,9 @@ async function get_data_SockWar() {
              // Usando ethers.js
              console.log("Con SockWallet.");   
              betAmount = await betContract.betAmount();
+             console.log("Bet_amount000000: ", bet_Amount);
              betAmount = ethers.utils.formatUnits(bet_Amount, 18);
-             console.log("Bet_amount: ", bet_Amount);
+             console.log("Bet_amount1: ", bet_Amount);
              bet_Counter= await betContract.betCounter();
              //rewardAmount = await contract.rewardAmount(); 
              has_OpenBet = await betContract.hasOpenBet();
@@ -182,7 +183,7 @@ async function get_data_SockWar() {
 
 
 
-        /*
+        
          // Referencia al contenedor donde se mostrarán los resultados
         const historyContainer = document.getElementById('history-bet-player');
         // Limpia el contenedor antes de agregar los nuevos resultados
@@ -206,7 +207,7 @@ async function get_data_SockWar() {
             `;
             historyContainer.appendChild(betElement);
         });
-       */
+       
 
          //coloca monto de apuesta y si hay un apostador            
 

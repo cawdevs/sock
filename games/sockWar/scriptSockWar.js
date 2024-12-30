@@ -35,8 +35,8 @@ const orangeMax = 5; // Máximo de imágenes en cuadros naranjas
 
 // Función para inicializar el juego
 async function initializeSockWarGame() {
-   const bet_counter_element = document.getElementById('bet-counter');
-   bet_counter_element.innerText = `${bet_Counter} SockWar`;    
+   //const bet_counter_element = document.getElementById('bet-counter');
+   //bet_counter_element.innerText = `${bet_Counter} SockWar`;    
 
    const bet_amount_elemen  = document.getElementById('bet-amount');  
    bet_amount_elemen.innerText =`3x${bet_Amount} SOCK `;   

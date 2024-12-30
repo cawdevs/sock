@@ -105,6 +105,12 @@
                  
            <div style="display: flex; justify-content: space-between; margin-top: 20px">
                 <a class="underlineHover" onclick="createWallet()" style="display: inline-block;">New Wallet</a>
+
+                <a class="underlineHover" onclick="goToHelp()" style="display: inline-block;"> <span class="glyphicon glyphicon-question-sign" style="color: black; font-size: 24px;"></a>
+
+                <a class="underlineHover" onclick="goToExplain()" style="display: inline-block;"><span class="glyphicon glyphicon-info-sign" style="color: black; font-size: 24px;"></a>
+       
+
                 <a class="underlineHover" onclick="goToSockMetamask()" style="display: inline-block;">Metamask Enter</a>
            </div>
 
@@ -118,6 +124,18 @@
 </div>
 
 <script>
+    function goToHelp(){
+
+        alert("1 -Pon una/tu contraseña \n\n 2 -Crea una wallet (New Wallet) si ya la tienes pasa al punto 3 \n\t a) se descargará file.key en “/descargas” \n\t El archivo contiene la credenciales de tu billetera \n\n 3 -Presiona el botón LOAD KEY WALLET \n\t a) Busca y carga el archivo “file.key” \n\n 4 -presiona ENTER \n\n Si tienes metamsk (Simplemente Metamask Enter)");
+        
+    }
+    function goToExplain(){
+        alert("TheSocks.net es una red social descentralizada única en su tipo, diseñada para revolucionar la forma en que interactuamos, compartimos contenido y manejamos nuestras finanzas en línea. A diferencia de las redes tradicionales, TheSocks.net no solo te permite hacer publicaciones y enviar mensajes, sino que también integra un ecosistema financiero innovador impulsado por su propia criptomoneda, llamada SOCK. ");
+    }
+
+
+
+
     function goToMainPage() {
         window.location.href = 'principal_new.html';
     }

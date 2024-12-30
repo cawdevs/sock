@@ -197,9 +197,11 @@ async function get_data_SockWar() {
              console.log("Con SockWallet.");   
              bet_Amount = await betContract.betAmount();            
              bet_Amount = ethers.utils.formatUnits(bet_Amount, 18);
-             bet_Amount = parseFloat(bet_Amount); // Esto lo convierte en un número
+             bet_Amount= "100000";
 
              console.log("Bet_amount123: ", bet_Amount);
+            
+
              bet_Counter= await betContract.betCounter();
              //rewardAmount = await contract.rewardAmount(); 
              has_OpenBet = await betContract.hasOpenBet();

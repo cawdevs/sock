@@ -241,6 +241,7 @@ async function  approve_Bet_SockWar() {
         
               //bet_Amount = await betContract.methods.betAmount().call(); 
               amountToApprove = web3.utils.toWei(bet_Amount, 'ether');
+              console.log(" amountToApprove: ",  amountToApprove);
               
               await tokenContract.methods.approve(betContractAddress, amountToApprove).send({from: globalWalletKey, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });                       
        
@@ -251,6 +252,7 @@ async function  approve_Bet_SockWar() {
             //bet_Amount = await betContract.betAmount(); 
             amountToApprove = ethers.utils.parseUnits(bet_Amount, 'ether');  // Convertir a ethers usando la cantidad de decimales correcta
             //amountToApprove = betAmount;
+            console.log(" amountToApproveSOCK: ",  amountToApprove);
             // Aprobar el gasto usando ethers.js
             const tx = await tokenContract.approve(betContractAddress, amountToApprove, {
                 gasLimit: 300000,

@@ -256,7 +256,8 @@ async function  approve_Bet_SockWar() {
             //bet_Amount = await betContract.betAmount(); 
             console.log(" bet_Amount SOCK: ",  bet_Amount);
             amountToApprove = ethers.utils.parseUnits(bet_Amount, 'ether');  // Convertir a ethers usando la cantidad de decimales correcta
-            amountToApprove = amountToApprove.toString();
+            amountToApprove = 100000;
+            //amountToApprove.toString();
             //amountToApprove = betAmount;
             console.log(" amountToApproveSOCK: ",  amountToApprove.toString());
             // Aprobar el gasto usando ethers.js

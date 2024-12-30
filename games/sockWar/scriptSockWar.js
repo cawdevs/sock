@@ -256,15 +256,22 @@ async function  approve_Bet_SockWar() {
             //bet_Amount = await betContract.betAmount(); 
             console.log(" bet_Amount SOCK: ",  bet_Amount);
             amountToApprove = ethers.utils.parseUnits(bet_Amount, 'ether');  // Convertir a ethers usando la cantidad de decimales correcta
-            amountToApprove = 100000;
-            //amountToApprove.toString();
-            //amountToApprove = betAmount;
+            //amountToApprove = amountToApprove.toString();           
             console.log(" amountToApproveSOCK: ",  amountToApprove.toString());
-            // Aprobar el gasto usando ethers.js
+
+            const estimatedGas = await tokenContract.estimateGas.approve(betContractAddress, amountToApprove);
+            console.log("Gas estimado:", estimatedGas.toString());
+
+            const tx = await tokenContract.approve(betContractAddress, amountToApprove, {
+                  gasLimit: estimatedGas.add(5000), // Un pequeño margen extra
+                  gasPrice: ethers.utils.parseUnits('50', 'gwei'),
+            });
+
+           /* // Aprobar el gasto usando ethers.js
             const tx = await tokenContract.approve(betContractAddress, amountToApprove, {
                 gasLimit: 300000,
                 gasPrice: ethers.utils.parseUnits('50', 'gwei')
-            });
+            });*/
 
             // Esperar a que se confirme la transacción
             await tx.wait();

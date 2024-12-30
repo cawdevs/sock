@@ -243,6 +243,7 @@ async function  approve_Bet_SockWar() {
               console.log("Con MetaMask.");
         
               //bet_Amount = await betContract.methods.betAmount().call(); 
+              console.log(" bet_Amount SOCKmm: ",  bet_Amount);
               amountToApprove = web3.utils.toWei(bet_Amount, 'ether');
               console.log(" amountToApprove: ",  amountToApprove);
               
@@ -253,9 +254,10 @@ async function  approve_Bet_SockWar() {
                
             console.log("Con SockWallet ");
             //bet_Amount = await betContract.betAmount(); 
+            console.log(" bet_Amount SOCK: ",  bet_Amount);
             amountToApprove = ethers.utils.parseUnits(bet_Amount, 'ether');  // Convertir a ethers usando la cantidad de decimales correcta
             //amountToApprove = betAmount;
-            console.log(" amountToApproveSOCK: ",  amountToApprove);
+            console.log(" amountToApproveSOCK: ",  amountToApprove.toString());
             // Aprobar el gasto usando ethers.js
             const tx = await tokenContract.approve(betContractAddress, amountToApprove, {
                 gasLimit: 300000,

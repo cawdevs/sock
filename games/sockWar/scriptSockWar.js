@@ -58,6 +58,32 @@ async function initializeSockWarGame() {
         // Generar cuadros verdes y naranjas
     createGrid(greenGrid, 'green', 'green');
     createGrid(orangeGrid, 'orange', 'orange');
+
+
+        // Referencia al contenedor donde se mostrarán los resultados
+        const historyContainer = document.getElementById('history-bet-player');
+        // Limpia el contenedor antes de agregar los nuevos resultados
+        historyContainer.innerHTML = '';
+        // Si no hay resultados, mostrar un mensaje
+        if (bet_History.length === 0) {
+            historyContainer.innerHTML = '<p>No hay apuestas realizadas.</p>';
+            return;
+        }
+
+         // Crear un elemento para cada resultado y añadirlo al contenedor
+        bet_History.forEach(bet => {
+            const betElement = document.createElement('div');
+            betElement.style.marginBottom = '10px';
+            betElement.innerHTML = `
+                <p><strong>Contrincante:</strong> xxxxx ${bet}</p>
+                <p><strong>Contrincante:</strong> ${bet.opponent}</p>
+                <p><strong>Resultado:</strong> ${bet.result ? 'Ganaste' : 'Perdiste'}</p>
+                <p><strong>Monto:</strong> ${web3.utils.fromWei(bet.amount, 'ether')} ETH</p>
+                <hr>
+            `;
+            historyContainer.appendChild(betElement);
+        });
+       
     
 }
 
@@ -184,30 +210,7 @@ async function get_data_SockWar() {
 
 
         
-         // Referencia al contenedor donde se mostrarán los resultados
-        const historyContainer = document.getElementById('history-bet-player');
-        // Limpia el contenedor antes de agregar los nuevos resultados
-        historyContainer.innerHTML = '';
-        // Si no hay resultados, mostrar un mensaje
-        if (bet_History.length === 0) {
-            historyContainer.innerHTML = '<p>No hay apuestas realizadas.</p>';
-            return;
-        }
-
-         // Crear un elemento para cada resultado y añadirlo al contenedor
-        bet_History.forEach(bet => {
-            const betElement = document.createElement('div');
-            betElement.style.marginBottom = '10px';
-            betElement.innerHTML = `
-                <p><strong>Contrincante:</strong> xxxxx ${bet}</p>
-                <p><strong>Contrincante:</strong> ${bet.opponent}</p>
-                <p><strong>Resultado:</strong> ${bet.result ? 'Ganaste' : 'Perdiste'}</p>
-                <p><strong>Monto:</strong> ${web3.utils.fromWei(bet.amount, 'ether')} ETH</p>
-                <hr>
-            `;
-            historyContainer.appendChild(betElement);
-        });
-       
+        
 
          //coloca monto de apuesta y si hay un apostador            
 

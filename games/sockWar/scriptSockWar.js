@@ -180,10 +180,11 @@ async function get_data_SockWar() {
          let nft_username_Hash;
          if (betContract.methods) {
              console.log("Con MetaMask.");
-             bet_Amount = await betContract.methods.betAmount().call(); 
-             bet_Amount = web3.utils.fromWei(bet_Amount, 'ether');
+             //bet_Amount = await betContract.methods.betAmount().call(); 
+             //bet_Amount = web3.utils.fromWei(bet_Amount, 'ether');
+             bet_Amount="100000";
              console.log("Bet_amount: ", bet_Amount);     
-             bet_Counter= await betContract.methods.betCounter().call();
+             //bet_Counter= await betContract.methods.betCounter().call();
              //rewardAmount = await contract.methods.rewardAmount().call();
              has_OpenBet = await betContract.methods.hasOpenBet().call();
              nft_username_Hash = await nftUsernameContract.methods.getHashFromUsername(username).call();  
@@ -195,24 +196,20 @@ async function get_data_SockWar() {
          } else {
              // Usando ethers.js
              console.log("Con SockWallet.");   
-             bet_Amount = await betContract.betAmount();            
-             bet_Amount = ethers.utils.formatUnits(bet_Amount, 18);
+             //bet_Amount = await betContract.betAmount();            
+             //bet_Amount = ethers.utils.formatUnits(bet_Amount, 18);
              bet_Amount= "100000";
 
              console.log("Bet_amount123: ", bet_Amount);
             
 
-             bet_Counter= await betContract.betCounter();
+             //bet_Counter= await betContract.betCounter();
              //rewardAmount = await contract.rewardAmount(); 
              has_OpenBet = await betContract.hasOpenBet();
              nft_username_Hash = await nftUsernameContract.getHashFromUsername(username);  
              bet_History= await betContract.getPlayerBetHistory(nft_username_Hash);
              console.log("has_OpenBet: ", has_OpenBet);    
-         }
-
-
-
-        
+         }        
         
 
          //coloca monto de apuesta y si hay un apostador            
@@ -230,8 +227,7 @@ async function get_data_SockWar() {
 async function  approve_Bet_SockWar() {
      console.log("hellooooo.");
     
-     const button_figth = document.getElementById('create-fight-bomb-bets');
-     button_figth.style.display = 'block';
+     
 
      const button_approve = document.getElementById('approve-Bet-SockWar');
      button_approve.style.display = 'none';
@@ -281,6 +277,9 @@ async function  approve_Bet_SockWar() {
 
             console.log("Aprobación con SockWallet realizada con éxito.");
             alert('Transaction ok :)'); 
+
+            const button_figth = document.getElementById('create-fight-bomb-bets');
+            button_figth.style.display = 'block';
                  
         }
 
@@ -407,7 +406,6 @@ async function loadGame_sockWar() {
 
     const gameHTML = `
         <div id="sockwar-container" style="display: flex; align-items: center; gap: 10px;">
-            <h3 id= "bet-counter"> </h3>
             <img id="sockwar-image" src="games/sockWar/images/bomb.SVG" alt="Bomb Icon" style="width: 48px; height: auto;">
         </div>
 

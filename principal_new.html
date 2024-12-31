@@ -1256,25 +1256,35 @@ span.hashtag {
 
 <script>
     // Definir las palabras clave
-    const palabrasClave = ['Tecnología', 'Arte', 'Ciencia', 'Deportes', 'Música'];
+     
+    const palabras_gustos=['Art and Creativity','Sports and Physical Activities','Entertainment and Media','Culture and Society','Nature and Outdoor Activities','Science and Technology','Gastronomy','Personal Development','Volunteering and Social Causes'];
+
+    const palabras_actitudinales=['Optimism and Positivity','Introspection and Self-Awareness','Ambition and Drive','Empathy and Compassion','Adaptability and Open-Mindedness','Pragmatism and Logic','Creativity and Innovation','Collaboration and Sociability','Resilience and Perseverance'];
+
+    const palabras_coductuales=['Routine and Organization','Risk and Adventure','Helping and Support','Leadership and Authority','Learning and Growth','Conflict and Resolution','Expressiveness and Communication','Resourcefulness and Ingenuity','Collaboration and Teamwork'];
 
     // Función para llenar los selects
     function llenarSelects() {
-      for (let i = 1; i <= 5; i++) {
+      const vector_palabras=[palabras_gustos,palabras_actitudinales,palabras_coductuales];
+
+      for (let i = 1; i <= 3; i++) {
         // Obtener el select actual
         const select = document.getElementById(`selector_key${i}`);
-
         // Limpiar cualquier opción existente
         select.innerHTML = '';
-
         // Agregar las opciones
-        palabrasClave.forEach(palabra => {
+        vector_palabras[i-1].forEach(palabra => {
           const opcion = document.createElement('option');
           opcion.value = palabra;
           opcion.text = palabra;
           select.add(opcion);
         });
+      
+
+
       }
+    
+
     }
 
     // Llenar los selects al cargar la página

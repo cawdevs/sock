@@ -55,12 +55,12 @@ async function create_NFTUsername_profile(value){
                     if (value === 0) {// Lógica para crear un nuevo perfil
 		        	    dataProfile = await profileContract.methods.createProfile(nftusername,perfilJSON, preferenciasArray).send({
 		          	    	from: globalWalletKey, 
-		          	    	gas: 900000, 
+		          	    	gasLimit: 1000000, 
 		          	        gasPrice: web3.utils.toWei('60', 'gwei') }); 
 		            }else{
 		                 dataProfile = await profileContract.methods.updateProfile(nftusername,perfilJSON, preferenciasArray).send({
 		          	      	 from: globalWalletKey, 
-		          	       	 gas: 900000, 
+		          	       	 gasLimit: 1000000, 
 		          	       	 gasPrice: web3.utils.toWei('60', 'gwei') });
 
 		            }
@@ -96,7 +96,7 @@ async function create_NFTUsername_profile(value){
   } catch (error) {   
   			loadingAnimation.style.display = 'none'; // Oculta la animación
     		alert('Error Create profile');
-    		console.error('Error:', error);
+    		console.error('Error:', error.message);
   }
 
 

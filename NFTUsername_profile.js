@@ -55,13 +55,13 @@ async function create_NFTUsername_profile(value){
                     if (value === 0) {// Lógica para crear un nuevo perfil
 		        	    dataProfile = await profileContract.methods.createProfile(nftusername,perfilJSON, preferenciasArray).send({
 		          	    	from: globalWalletKey, 
-		          	    	gas: 600000, 
-		          	        gasPrice: web3.utils.toWei('50', 'gwei') }); 
+		          	    	gas: 900000, 
+		          	        gasPrice: web3.utils.toWei('60', 'gwei') }); 
 		            }else{
 		                 dataProfile = await profileContract.methods.updateProfile(nftusername,perfilJSON, preferenciasArray).send({
 		          	      	 from: globalWalletKey, 
-		          	       	 gas: 600000, 
-		          	       	 gasPrice: web3.utils.toWei('50', 'gwei') });
+		          	       	 gas: 900000, 
+		          	       	 gasPrice: web3.utils.toWei('60', 'gwei') });
 
 		            }
 
@@ -120,11 +120,11 @@ async function get_NFTUsername_profile() {
     let profileText;
     if (profileContract.methods) {
             console.log("Con MetaMask ");                           	 
-		    profileText =await contract.methods.getProfileByUsername(nftusername).call();  	       
+		    profileText =await profileContract.methods.getProfileByUsername(nftusername).call();  	       
                  
     } else {
             console.log("Con SOCKWALLET ");
-            profileText =await contract.getProfileByUsername(nftusername);  	       
+            profileText =await profileContract.getProfileByUsername(nftusername);  	       
             
     }	
     

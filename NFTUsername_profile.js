@@ -55,12 +55,12 @@ async function create_NFTUsername_profile(value){
                     if (value === 0) {// Lógica para crear un nuevo perfil
 		        	    dataProfile = await profileContract.methods.createProfile(nftusername,perfilJSON, preferenciasArray).send({
 		          	    	from: globalWalletKey, 
-		          	    	gas: 300000, 
+		          	    	gas: 600000, 
 		          	        gasPrice: web3.utils.toWei('50', 'gwei') }); 
 		            }else{
 		                 dataProfile = await profileContract.methods.updateProfile(nftusername,perfilJSON, preferenciasArray).send({
 		          	      	 from: globalWalletKey, 
-		          	       	 gas: 300000, 
+		          	       	 gas: 600000, 
 		          	       	 gasPrice: web3.utils.toWei('50', 'gwei') });
 
 		            }

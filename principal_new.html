@@ -102,6 +102,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
+<script src="NFTUsername_profile.js"></script>
+
  
 
 <br>
@@ -360,11 +362,28 @@ span.hashtag {
     <div id="menu1" class="tab-pane fade">
    <!--****************************************************-->
    <!--****************************************************-->
-   <br>
+                 
+                
+          <div class="container-fluid" style="display: flex; justify-content: space-between; margin-top: 20px">
+               
+                
+
+              <a class="underlineHover" href="#" data-toggle="modal" data-target="#myModalprofile">
+                <span class="glyphicon glyphicon-user" style="color: black; font-size: 30px; vertical-align: middle;"></span>
+              </a>
+
+                <a class="underlineHover" onclick="goToExplain()" style="display: inline-block;"><span class="glyphicon glyphicon-pencil" style="color: black; font-size: 24px;"></a>
+
+               <a class="underlineHover" onclick="goToExplain()" style="display: inline-block;"><span class="glyphicon glyphicon-trash" style="color: black; font-size: 24px;"></a>   
+                      
+           </div>
+
+           <div id="nft-username-profile"></div>
             
+              
              <center><h3>Follower and following username</h3></center>
               <br>
-               <br>
+              <br>
 
        
    </div>  
@@ -944,9 +963,7 @@ span.hashtag {
 </div></center>
 
 <center> <div style="display: flex; width: 80%;">
-   
-    <select id="selector_key4" class="form-control" placeholder="select key" style="border: 2px solid black; border-radius: 20px;"></select>
-    <select id="selector_key5" class="form-control" placeholder="select key" style="border: 2px solid black; border-radius: 20px;"></select>
+       
 </div></center>
 
 <br>
@@ -964,8 +981,10 @@ span.hashtag {
 
                <br> 
           <center>      
-              <button id="btn-create-profile" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;"> Guardar Perfil </button>
-<button id="btn-update-profile" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;"> Editar Perfil </button>
+              
+              <button id="btn-create-profile" onclick="create_NFTUsername_profile(0)"style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;"> Guardar Perfil </button>
+
+<button id="btn-update-profile" onclick="get_NFTUsername_profile()" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;"> Editar Perfil </button>
           </center> 
 
        </div>
@@ -1316,13 +1335,13 @@ const transferContractAddress = '0x9582dacf43aa2bf143ac909faa5a718cbca92333';//p
 
 
 
-const Profile_ContractABI = [{"constant":false,"inputs":[{"name":"username","type":"string"},{"name":"profileJson","type":"string"}],"name":"createProfile","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"follower","type":"string"},{"name":"following","type":"string"},{"name":"userTimestamp","type":"uint256"},{"name":"signatureToUser","type":"bytes32"}],"name":"follow","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"nftusername","type":"string"}],"name":"getFollowing","outputs":[{"name":"","type":"string[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"follower","type":"string"},{"name":"following","type":"string"}],"name":"unfollow","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"nftusername","type":"string"}],"name":"getProfile","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"follower","type":"string"},{"name":"following","type":"string"}],"name":"isFollowing","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProfileCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"follower","type":"string"},{"name":"following","type":"string"}],"name":"getFollowingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftusername","type":"string"}],"name":"getFollowingCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftusername","type":"string"}],"name":"getProfileTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"nftusername","type":"string"}],"name":"getFollowerCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"startIndex","type":"uint256"},{"name":"endIndex","type":"uint256"}],"name":"getProfilesInRange","outputs":[{"name":"","type":"tuple[]","components":[{"name":"id","type":"uint256"},{"name":"name","type":"string"},{"name":"age","type":"uint256"}]}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"username","type":"string"},{"name":"profileJson","type":"string"}],"name":"updateProfile","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}];
+const Profile_ContractABI = [{"inputs":[{"internalType":"address","name":"nftContractAddress","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"OwnableInvalidOwner","type":"error"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"OwnableUnauthorizedAccount","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"string","name":"nftUsername","type":"string"},{"indexed":false,"internalType":"string","name":"json","type":"string"},{"indexed":false,"internalType":"string[3]","name":"tags","type":"string[3]"}],"name":"ProfileCreated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"string","name":"nftUsername","type":"string"}],"name":"ProfileDeleted","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"string","name":"nftUsername","type":"string"},{"indexed":false,"internalType":"string","name":"json","type":"string"},{"indexed":false,"internalType":"string[3]","name":"tags","type":"string[3]"}],"name":"ProfileUpdated","type":"event"},{"inputs":[{"internalType":"string","name":"username","type":"string"},{"internalType":"string","name":"json","type":"string"},{"internalType":"string[3]","name":"tags","type":"string[3]"}],"name":"createProfile","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"deleteProfile","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"}],"name":"getProfileByUsername","outputs":[{"components":[{"internalType":"string","name":"nftUsername","type":"string"},{"internalType":"string","name":"json","type":"string"},{"internalType":"string[3]","name":"tags","type":"string[3]"},{"internalType":"uint256","name":"timestamp","type":"uint256"}],"internalType":"struct UserProfileContract.Profile","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getProfileCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"tag","type":"string"},{"internalType":"uint256","name":"limit","type":"uint256"}],"name":"getProfilesByActitudTag","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"tag","type":"string"},{"internalType":"uint256","name":"limit","type":"uint256"}],"name":"getProfilesByConductaTag","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"tag","type":"string"},{"internalType":"uint256","name":"limit","type":"uint256"}],"name":"getProfilesByGustoTag","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"profileCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"username","type":"string"},{"internalType":"string","name":"json","type":"string"},{"internalType":"string[3]","name":"tags","type":"string[3]"}],"name":"updateProfile","outputs":[],"stateMutability":"nonpayable","type":"function"}];
 
 
 
 
 
-const profileContractAddress = '0xa569895d95Eec6F96939c4988e9f0E0e095BbB70'; //polygon
+const profileContractAddress = '0x6eb8f69ddce8b6493b791ad96dea2ebf7597db75'; //polygon
 
 
 
@@ -1436,7 +1455,8 @@ async function conectarMetaMask() {
         freeTokensContract= new web3.eth.Contract(FreeTokens_ContractABI, freeTokensContractAddress);
 
         betContract= new web3.eth.Contract(Bet_ContractABI, betContractAddress);
-
+        profileContract = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
+        
         
 
     } catch (error) {
@@ -1467,7 +1487,7 @@ function conectarWalletPropia() {
     freeTokensContract= new ethers.Contract(freeTokensContractAddress, FreeTokens_ContractABI, signer );
 
     betContract= new ethers.Contract(betContractAddress, Bet_ContractABI, signer); 
-    
+    profileContract = new ethers.Contract(profileContractAddress, Profile_ContractABI,  signer);    
     console.log("Conectado usando wallet propia:", globalWalletKey);
 }
 
@@ -1784,7 +1804,7 @@ async function getmintedNFT() {
 
           // Función para crear un perfil
           // Función para mintear un NFT
-  async function createProfile(value) {
+  async function createProfile2(value) {
   // Obtener la dirección de la cuenta conectada
   const accounts = await web3.eth.getAccounts();
   const myAddress = accounts[0];

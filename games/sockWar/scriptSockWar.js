@@ -226,6 +226,9 @@ async function get_data_SockWar() {
 
 async function  approve_Bet_SockWar() {
      console.log("hellooooo.");
+
+     const loadingAnimation = document.getElementById('loadingAnimation-sockwar');
+     loadingAnimation.style.display = 'block'; // Muestra la animación al 
     
      
 
@@ -280,7 +283,8 @@ async function  approve_Bet_SockWar() {
 
             const button_figth = document.getElementById('create-fight-bomb-bets');
             button_figth.style.display = 'block';
-                 
+             
+            loadingAnimation.style.display = 'none'; // Oculta la animación      
         }
 
          //coloca monto de apuesta y si hay un apostador            
@@ -288,6 +292,7 @@ async function  approve_Bet_SockWar() {
     } catch (error) {
         console.error('Error al realizar la transacción: approve_Bet_SockWar()', error);
         alert('Error al realizar la transacción: ' + error.message);
+        loadingAnimation.style.display = 'none'; // Oculta la animación
     }
 
 
@@ -298,6 +303,10 @@ async function  approve_Bet_SockWar() {
   
  
  async function  create_Bet_SockWar() {
+
+    const loadingAnimation = document.getElementById('loadingAnimation-sockwar');
+    loadingAnimation.style.display = 'block'; // Muestra la animación al 
+
     try {
 
          const username = document.getElementById('selector_NFTs').value;
@@ -356,11 +365,14 @@ async function  approve_Bet_SockWar() {
                  
          }
 
+          loadingAnimation.style.display = 'none'; // Oculta la animación  
+
          //coloca monto de apuesta y si hay un apostador            
 
     } catch (error) {
         console.error('Error al realizar la transacción:create_Bet_SockWar', error);
         alert('Error al realizar la transacción: ' + error.message);
+        loadingAnimation.style.display = 'none'; // Oculta la animación  
     }    
 }    
 
@@ -418,6 +430,9 @@ async function loadGame_sockWar() {
                 <br>
                 <div class="containerbox" id="greenGrid"></div>
                 <br>
+                 <div id="loadingAnimation-sockwar" style="display: none;">
+                     <div class="spinner"></div>               
+                 </div>
                 <div class="containerbox" id="orangeGrid"></div>
                 <br>
              

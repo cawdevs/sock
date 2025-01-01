@@ -134,49 +134,81 @@ async function get_NFTUsername_profile() {
     console.log("profileTex:", profileText );
 
     // Extraer los datos
-    const nftUsername = profileText[0];
-    const jsonProfile = JSON.parse(profileText[1]);
-    const tags = profileText[2];
-    const timestamp = profileText[3];
+	const nftUsername = profileText[0];
+	const jsonProfile = JSON.parse(profileText[1]);
+	const tags = profileText[2];
+	const timestamp = profileText[3];
 
-    const { nombre, bio, ubicacion, paginaWeb, fotoPerfil, fotoPortada } = jsonProfile;
+	const { nombre, bio, ubicacion, paginaWeb, fotoPerfil, fotoPortada } = jsonProfile;
 
-    const nftProfileDiv = document.getElementById('nft-username-profile');
-    
-    // Crear el contenido del perfil
+	// Obtener el contenedor del perfil
+	const nftProfileDiv = document.getElementById('nft-username-profile');
+	if (!nftProfileDiv) {
+	    alert("Error: No se encontró el contenedor con id 'nft-username-profile'");
+	    return;
+	}
+
+	// Crear el contenedor principal del perfil
+	const profileContainer = document.createElement('div');
+	profileContainer.style.width = '100%';
+	profileContainer.style.maxWidth = '500px';
+	profileContainer.style.margin = '0 auto';
+	profileContainer.style.border = '1px solid #ddd';
+	profileContainer.style.borderRadius = '8px';
+	profileContainer.style.overflow = 'hidden';
+	profileContainer.style.backgroundColor = '#fff';
+
+	// Crear la imagen de portada
+	const coverImage = document.createElement('img');
+	coverImage.src = fotoPortada || ''; // Asegurarse de que `fotoPortada` esté definido
+	coverImage.style.width = '100%';
+	coverImage.style.height = '200px';
+	coverImage.style.objectFit = 'cover';
+
+	// Crear el contenido del perfil
 	const profileContent = document.createElement('div');
 	profileContent.style.padding = '20px';
 	profileContent.style.marginTop = '20px'; // Ajuste del espacio superior
 
-	// Contenedor para la imagen de perfil y el texto (nombre y biografía)
+	// Crear el encabezado del perfil
 	const profileHeader = document.createElement('div');
 	profileHeader.style.display = 'flex';
 	profileHeader.style.alignItems = 'center';
 	profileHeader.style.gap = '15px'; // Espaciado entre la imagen y el texto
 
-	// Crear un contenedor para el nombre y la biografía
+	// Crear el contenedor para la imagen de perfil
+	const profileImageContainer = document.createElement('div');
+	profileImageContainer.style.borderRadius = '50%';
+	profileImageContainer.style.overflow = 'hidden';
+	profileImageContainer.style.border = '4px solid white';
+	profileImageContainer.style.width = '80px';
+	profileImageContainer.style.height = '80px';
+	profileImageContainer.style.flexShrink = '0';
+
+	// Crear la imagen de perfil
+	const profileImage = document.createElement('img');
+	profileImage.src = fotoPerfil || ''; // Asegurarse de que `fotoPerfil` esté definido
+	profileImage.style.width = '100%';
+	profileImage.style.height = '100%';
+	profileImage.style.objectFit = 'cover';
+
+	// Agregar la imagen de perfil al contenedor
+	profileImageContainer.appendChild(profileImage);
+
+	// Crear el contenedor de texto (nombre y biografía)
 	const textContainer = document.createElement('div');
 
 	// Nombre
 	const name = document.createElement('h2');
-	name.innerText = nombre;
-	name.style.margin = '0'; // Quitar márgenes
+	name.innerText = nombre || 'Sin nombre'; // Valor por defecto
+	name.style.margin = '0';
 	textContainer.appendChild(name);
 
 	// Biografía
 	const biography = document.createElement('p');
-	biography.innerText = bio;
-	biography.style.margin = '0'; // Quitar márgenes
+	biography.innerText = bio || 'Sin biografía'; // Valor por defecto
+	biography.style.margin = '0';
 	textContainer.appendChild(biography);
-
-	// Ajustar el contenedor de la imagen de perfil
-	// Crear el contenedor de la imagen de perfil
-    const profileImageContainer = document.createElement('div');
-    profileImageContainer.style.position = 'static'; // Quitar posición absoluta
-	profileImageContainer.style.margin = '0'; // Alinear sin márgenes
-	profileImageContainer.style.flexShrink = '0'; // Evitar que la imagen cambie de tamaño
-	profileImageContainer.style.width = '80px'; // Ajustar tamaño para diseño horizontal
-	profileImageContainer.style.height = '80px';
 
 	// Agregar imagen y texto al encabezado
 	profileHeader.appendChild(profileImageContainer);
@@ -185,46 +217,49 @@ async function get_NFTUsername_profile() {
 	// Agregar el encabezado al contenido del perfil
 	profileContent.appendChild(profileHeader);
 
-	// Agregar los elementos restantes al contenido del perfil
+	// Agregar los elementos adicionales al contenido del perfil
 	const location = document.createElement('p');
-	location.innerText = `Ubicación: ${ubicacion}`;
+	location.innerText = `Ubicación: ${ubicacion || 'No especificada'}`;
 	profileContent.appendChild(location);
 
 	const website = document.createElement('a');
-	website.href = paginaWeb;
+	website.href = paginaWeb || '#';
 	website.target = '_blank';
 	website.innerText = 'Visitar Página Web';
 	website.style.display = 'block';
 	website.style.marginBottom = '10px';
 	profileContent.appendChild(website);
 
+	// Crear y agregar las etiquetas
 	const tagContainer = document.createElement('div');
 	tagContainer.style.display = 'flex';
 	tagContainer.style.flexWrap = 'wrap';
-	tags.forEach(tag => {
-	  const tagElement = document.createElement('span');
-	  tagElement.innerText = `#${tag}`;
-	  tagElement.style.marginRight = '10px';
-	  tagElement.style.fontWeight = 'bold';
-	  tagElement.style.color = '#007BFF';
-	  tagContainer.appendChild(tagElement);
+	(tags || []).forEach(tag => {
+	    const tagElement = document.createElement('span');
+	    tagElement.innerText = `#${tag}`;
+	    tagElement.style.marginRight = '10px';
+	    tagElement.style.fontWeight = 'bold';
+	    tagElement.style.color = '#007BFF';
+	    tagContainer.appendChild(tagElement);
 	});
 	profileContent.appendChild(tagContainer);
 
+	// Agregar el timestamp
 	const timestampElement = document.createElement('p');
 	timestampElement.innerText = `Creado en: ${new Date(timestamp * 1000).toLocaleString()}`;
 	profileContent.appendChild(timestampElement);
 
-	// Agregar el perfil al contenedor principal
+	// Agregar los elementos al contenedor principal
 	profileContainer.appendChild(coverImage);
 	profileContainer.appendChild(profileContent);
 
-	// Agregar el perfil al contenedor en la página
+	// Agregar el contenedor principal al DOM
 	nftProfileDiv.innerHTML = ''; // Limpiar el contenido anterior
 	nftProfileDiv.appendChild(profileContainer);
 
-    alert('Funcion get profile OK :');
-    showSuccess('Create profile is OK!.');
+	// Mensajes de éxito
+	alert('Funcion get profile OK:');
+	showSuccess('Create profile is OK!');
 
   } catch (error) {
     console.error('Error al obtener el perfil:', error);

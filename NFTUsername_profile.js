@@ -48,7 +48,7 @@ async function create_NFTUsername_profile(value){
             console.log("Profile2:", perfilJSON );
             console.log("Profile3:", preferenciasArray );
 
-            alert('perfilJSON :'+ " " perfilJSON);
+            alert('perfilJSON :'+ perfilJSON);
 
 
             const jsonObject = {
@@ -63,7 +63,7 @@ async function create_NFTUsername_profile(value){
   // Convertir el objeto a una cadena JSON válida
   const jsonString = JSON.stringify(jsonObject);
   console.log("Profile4:", jsonObject );
-  alert('jsonObject :'+ " " jsonObject);
+  alert('jsonObject :'+  jsonObject);
 
             let dataProfile; 
             let tx;

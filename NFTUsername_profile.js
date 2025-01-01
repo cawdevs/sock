@@ -170,7 +170,9 @@ async function get_NFTUsername_profile() {
 	textContainer.appendChild(biography);
 
 	// Ajustar el contenedor de la imagen de perfil
-	profileImageContainer.style.position = 'static'; // Quitar posición absoluta
+	// Crear el contenedor de la imagen de perfil
+    const profileImageContainer = document.createElement('div');
+    profileImageContainer.style.position = 'static'; // Quitar posición absoluta
 	profileImageContainer.style.margin = '0'; // Alinear sin márgenes
 	profileImageContainer.style.flexShrink = '0'; // Evitar que la imagen cambie de tamaño
 	profileImageContainer.style.width = '80px'; // Ajustar tamaño para diseño horizontal

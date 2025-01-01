@@ -132,10 +132,14 @@ async function get_NFTUsername_profile() {
     
 
     console.log("profileTex:", profileText );
-    // Crear el contenido del perfil
-    const { nombre, bio, ubicacion, paginaWeb, fotoPerfil, fotoPortada } = profileText;
-    const tags = profileText.tags.split(','); // Asumimos que los tags están separados por coma
-    const timestamp = profileText.timestamp;
+
+    // Extraer los datos
+    const nftUsername = profileText[0];
+    const jsonProfile = JSON.parse(profileText[1]);
+    const tags = profileText[2];
+    const timestamp = profileText[3];
+
+    const { nombre, bio, ubicacion, paginaWeb, fotoPerfil, fotoPortada } = jsonProfile;
 
     const nftProfileDiv = document.getElementById('nft-username-profile');
     
@@ -148,6 +152,7 @@ async function get_NFTUsername_profile() {
     profileContainer.style.borderRadius = '8px';
     profileContainer.style.overflow = 'hidden';
     profileContainer.style.backgroundColor = '#fff';
+    profileContainer.style.position = 'relative';
 
     // Crear la imagen de portada
     const coverImage = document.createElement('img');
@@ -159,7 +164,7 @@ async function get_NFTUsername_profile() {
     // Crear el contenedor de la imagen de perfil
     const profileImageContainer = document.createElement('div');
     profileImageContainer.style.position = 'absolute';
-    profileImageContainer.style.bottom = '10px';
+    profileImageContainer.style.bottom = '-50px';
     profileImageContainer.style.left = '10px';
     profileImageContainer.style.borderRadius = '50%';
     profileImageContainer.style.overflow = 'hidden';
@@ -180,7 +185,8 @@ async function get_NFTUsername_profile() {
     // Crear el contenido del perfil
     const profileContent = document.createElement('div');
     profileContent.style.padding = '20px';
-    
+    profileContent.style.marginTop = '50px'; // Para ajustar al espacio de la imagen circular
+
     // Nombre
     const name = document.createElement('h2');
     name.innerText = nombre;
@@ -201,6 +207,8 @@ async function get_NFTUsername_profile() {
     website.href = paginaWeb;
     website.target = '_blank';
     website.innerText = 'Visitar Página Web';
+    website.style.display = 'block';
+    website.style.marginBottom = '10px';
     profileContent.appendChild(website);
 
     // Tags
@@ -238,8 +246,9 @@ async function get_NFTUsername_profile() {
     console.error('Error al obtener el perfil:', error);
   }
 }
+   
 
-
+  
   
     //const elementProfileCreate = document.getElementById('profile-create');
     

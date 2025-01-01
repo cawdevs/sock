@@ -91,6 +91,7 @@ async function create_NFTUsername_profile(value){
             
             loadingAnimation.style.display = 'none'; // Oculta la animación
           	$('#myModalprofile').modal('hide');  
+            
             alert('Funcion create or update profile OK :');
 
   } catch (error) {   
@@ -131,6 +132,112 @@ async function get_NFTUsername_profile() {
     
 
     console.log("profileTex:", profileTex );
+    // Crear el contenido del perfil
+    const { nombre, bio, ubicacion, paginaWeb, fotoPerfil, fotoPortada } = profileText;
+    const tags = profileText.tags.split(','); // Asumimos que los tags están separados por coma
+    const timestamp = profileText.timestamp;
+
+    const nftProfileDiv = document.getElementById('nft-username-profile');
+    
+    // Crear el contenedor principal
+    const profileContainer = document.createElement('div');
+    profileContainer.style.width = '100%';
+    profileContainer.style.maxWidth = '500px';
+    profileContainer.style.margin = '0 auto';
+    profileContainer.style.border = '1px solid #ddd';
+    profileContainer.style.borderRadius = '8px';
+    profileContainer.style.overflow = 'hidden';
+    profileContainer.style.backgroundColor = '#fff';
+
+    // Crear la imagen de portada
+    const coverImage = document.createElement('img');
+    coverImage.src = fotoPortada;
+    coverImage.style.width = '100%';
+    coverImage.style.height = '200px';
+    coverImage.style.objectFit = 'cover';
+
+    // Crear el contenedor de la imagen de perfil
+    const profileImageContainer = document.createElement('div');
+    profileImageContainer.style.position = 'absolute';
+    profileImageContainer.style.bottom = '10px';
+    profileImageContainer.style.left = '10px';
+    profileImageContainer.style.borderRadius = '50%';
+    profileImageContainer.style.overflow = 'hidden';
+    profileImageContainer.style.border = '4px solid white';
+    profileImageContainer.style.width = '100px';
+    profileImageContainer.style.height = '100px';
+
+    // Crear la imagen de perfil
+    const profileImage = document.createElement('img');
+    profileImage.src = fotoPerfil;
+    profileImage.style.width = '100%';
+    profileImage.style.height = '100%';
+    profileImage.style.objectFit = 'cover';
+    
+    // Agregar la imagen de perfil al contenedor
+    profileImageContainer.appendChild(profileImage);
+
+    // Crear el contenido del perfil
+    const profileContent = document.createElement('div');
+    profileContent.style.padding = '20px';
+    
+    // Nombre
+    const name = document.createElement('h2');
+    name.innerText = nombre;
+    profileContent.appendChild(name);
+    
+    // Biografía
+    const biography = document.createElement('p');
+    biography.innerText = bio;
+    profileContent.appendChild(biography);
+
+    // Ubicación
+    const location = document.createElement('p');
+    location.innerText = `Ubicación: ${ubicacion}`;
+    profileContent.appendChild(location);
+
+    // Página Web
+    const website = document.createElement('a');
+    website.href = paginaWeb;
+    website.target = '_blank';
+    website.innerText = 'Visitar Página Web';
+    profileContent.appendChild(website);
+
+    // Tags
+    const tagContainer = document.createElement('div');
+    tagContainer.style.display = 'flex';
+    tagContainer.style.flexWrap = 'wrap';
+    tags.forEach(tag => {
+      const tagElement = document.createElement('span');
+      tagElement.innerText = `#${tag}`;
+      tagElement.style.marginRight = '10px';
+      tagElement.style.fontWeight = 'bold';
+      tagElement.style.color = '#007BFF';
+      tagContainer.appendChild(tagElement);
+    });
+    profileContent.appendChild(tagContainer);
+
+    // Timestamp
+    const timestampElement = document.createElement('p');
+    timestampElement.innerText = `Creado en: ${new Date(timestamp * 1000).toLocaleString()}`;
+    profileContent.appendChild(timestampElement);
+
+    // Agregar los elementos al contenedor principal
+    profileContainer.appendChild(coverImage);
+    profileContainer.appendChild(profileImageContainer);
+    profileContainer.appendChild(profileContent);
+
+    // Agregar el perfil al contenedor en la página
+    nftProfileDiv.innerHTML = '';  // Limpiar el contenido anterior
+    nftProfileDiv.appendChild(profileContainer);
+
+    alert('Funcion get profile OK :');
+    showSuccess('Create profile is OK!.');
+
+  } catch (error) {
+    console.error('Error al obtener el perfil:', error);
+  }
+}
 
 
   
@@ -222,7 +329,7 @@ async function get_NFTUsername_profile() {
     //alert('getSmartUserPublications(listFollowingUser,followings_user);'+listFollowingUser); 
     getSmartUserPublications(listFollowingUser,"followings_user");
    
-    */
+ 
     alert('Funcion get profile OK :');
     showSuccess('Create profile is OK!.');
     
@@ -237,7 +344,7 @@ async function get_NFTUsername_profile() {
     
   }
 
-}
+}   */
 
 
 

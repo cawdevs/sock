@@ -143,101 +143,83 @@ async function get_NFTUsername_profile() {
 
     const nftProfileDiv = document.getElementById('nft-username-profile');
     
-    // Crear el contenedor principal
-    const profileContainer = document.createElement('div');
-    profileContainer.style.width = '100%';
-    profileContainer.style.maxWidth = '500px';
-    profileContainer.style.margin = '0 auto';
-    profileContainer.style.border = '1px solid #ddd';
-    profileContainer.style.borderRadius = '8px';
-    profileContainer.style.overflow = 'hidden';
-    profileContainer.style.backgroundColor = '#fff';
-    profileContainer.style.position = 'relative';
-
-    // Crear la imagen de portada
-    const coverImage = document.createElement('img');
-    coverImage.src = fotoPortada;
-    coverImage.style.width = '100%';
-    coverImage.style.height = '200px';
-    coverImage.style.objectFit = 'cover';
-
-    // Crear el contenedor de la imagen de perfil
-    const profileImageContainer = document.createElement('div');
-    profileImageContainer.style.position = 'absolute';
-    profileImageContainer.style.bottom = '-50px';
-    profileImageContainer.style.left = '10px';
-    profileImageContainer.style.borderRadius = '50%';
-    profileImageContainer.style.overflow = 'hidden';
-    profileImageContainer.style.border = '4px solid white';
-    profileImageContainer.style.width = '100px';
-    profileImageContainer.style.height = '100px';
-
-    // Crear la imagen de perfil
-    const profileImage = document.createElement('img');
-    profileImage.src = fotoPerfil;
-    profileImage.style.width = '100%';
-    profileImage.style.height = '100%';
-    profileImage.style.objectFit = 'cover';
-    
-    // Agregar la imagen de perfil al contenedor
-    profileImageContainer.appendChild(profileImage);
-
     // Crear el contenido del perfil
-    const profileContent = document.createElement('div');
-    profileContent.style.padding = '20px';
-    profileContent.style.marginTop = '50px'; // Para ajustar al espacio de la imagen circular
+	const profileContent = document.createElement('div');
+	profileContent.style.padding = '20px';
+	profileContent.style.marginTop = '20px'; // Ajuste del espacio superior
 
-    // Nombre
-    const name = document.createElement('h2');
-    name.innerText = nombre;
-    profileContent.appendChild(name);
-    
-    // Biografía
-    const biography = document.createElement('p');
-    biography.innerText = bio;
-    profileContent.appendChild(biography);
+	// Contenedor para la imagen de perfil y el texto (nombre y biografía)
+	const profileHeader = document.createElement('div');
+	profileHeader.style.display = 'flex';
+	profileHeader.style.alignItems = 'center';
+	profileHeader.style.gap = '15px'; // Espaciado entre la imagen y el texto
 
-    // Ubicación
-    const location = document.createElement('p');
-    location.innerText = `Ubicación: ${ubicacion}`;
-    profileContent.appendChild(location);
+	// Crear un contenedor para el nombre y la biografía
+	const textContainer = document.createElement('div');
 
-    // Página Web
-    const website = document.createElement('a');
-    website.href = paginaWeb;
-    website.target = '_blank';
-    website.innerText = 'Visitar Página Web';
-    website.style.display = 'block';
-    website.style.marginBottom = '10px';
-    profileContent.appendChild(website);
+	// Nombre
+	const name = document.createElement('h2');
+	name.innerText = nombre;
+	name.style.margin = '0'; // Quitar márgenes
+	textContainer.appendChild(name);
 
-    // Tags
-    const tagContainer = document.createElement('div');
-    tagContainer.style.display = 'flex';
-    tagContainer.style.flexWrap = 'wrap';
-    tags.forEach(tag => {
-      const tagElement = document.createElement('span');
-      tagElement.innerText = `#${tag}`;
-      tagElement.style.marginRight = '10px';
-      tagElement.style.fontWeight = 'bold';
-      tagElement.style.color = '#007BFF';
-      tagContainer.appendChild(tagElement);
-    });
-    profileContent.appendChild(tagContainer);
+	// Biografía
+	const biography = document.createElement('p');
+	biography.innerText = bio;
+	biography.style.margin = '0'; // Quitar márgenes
+	textContainer.appendChild(biography);
 
-    // Timestamp
-    const timestampElement = document.createElement('p');
-    timestampElement.innerText = `Creado en: ${new Date(timestamp * 1000).toLocaleString()}`;
-    profileContent.appendChild(timestampElement);
+	// Ajustar el contenedor de la imagen de perfil
+	profileImageContainer.style.position = 'static'; // Quitar posición absoluta
+	profileImageContainer.style.margin = '0'; // Alinear sin márgenes
+	profileImageContainer.style.flexShrink = '0'; // Evitar que la imagen cambie de tamaño
+	profileImageContainer.style.width = '80px'; // Ajustar tamaño para diseño horizontal
+	profileImageContainer.style.height = '80px';
 
-    // Agregar los elementos al contenedor principal
-    profileContainer.appendChild(coverImage);
-    profileContainer.appendChild(profileImageContainer);
-    profileContainer.appendChild(profileContent);
+	// Agregar imagen y texto al encabezado
+	profileHeader.appendChild(profileImageContainer);
+	profileHeader.appendChild(textContainer);
 
-    // Agregar el perfil al contenedor en la página
-    nftProfileDiv.innerHTML = '';  // Limpiar el contenido anterior
-    nftProfileDiv.appendChild(profileContainer);
+	// Agregar el encabezado al contenido del perfil
+	profileContent.appendChild(profileHeader);
+
+	// Agregar los elementos restantes al contenido del perfil
+	const location = document.createElement('p');
+	location.innerText = `Ubicación: ${ubicacion}`;
+	profileContent.appendChild(location);
+
+	const website = document.createElement('a');
+	website.href = paginaWeb;
+	website.target = '_blank';
+	website.innerText = 'Visitar Página Web';
+	website.style.display = 'block';
+	website.style.marginBottom = '10px';
+	profileContent.appendChild(website);
+
+	const tagContainer = document.createElement('div');
+	tagContainer.style.display = 'flex';
+	tagContainer.style.flexWrap = 'wrap';
+	tags.forEach(tag => {
+	  const tagElement = document.createElement('span');
+	  tagElement.innerText = `#${tag}`;
+	  tagElement.style.marginRight = '10px';
+	  tagElement.style.fontWeight = 'bold';
+	  tagElement.style.color = '#007BFF';
+	  tagContainer.appendChild(tagElement);
+	});
+	profileContent.appendChild(tagContainer);
+
+	const timestampElement = document.createElement('p');
+	timestampElement.innerText = `Creado en: ${new Date(timestamp * 1000).toLocaleString()}`;
+	profileContent.appendChild(timestampElement);
+
+	// Agregar el perfil al contenedor principal
+	profileContainer.appendChild(coverImage);
+	profileContainer.appendChild(profileContent);
+
+	// Agregar el perfil al contenedor en la página
+	nftProfileDiv.innerHTML = ''; // Limpiar el contenido anterior
+	nftProfileDiv.appendChild(profileContainer);
 
     alert('Funcion get profile OK :');
     showSuccess('Create profile is OK!.');

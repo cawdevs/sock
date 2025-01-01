@@ -280,12 +280,13 @@ async function  approve_Bet_SockWar() {
 
             console.log("Aprobación con SockWallet realizada con éxito.");
             alert('Transaction ok :)'); 
-
-            const button_figth = document.getElementById('create-fight-bomb-bets');
-            button_figth.style.display = 'block';
-             
-            loadingAnimation.style.display = 'none'; // Oculta la animación      
+                 
         }
+
+        const button_figth = document.getElementById('create-fight-bomb-bets');
+        button_figth.style.display = 'block';
+             
+        loadingAnimation.style.display = 'none'; // Oculta la animación 
 
          //coloca monto de apuesta y si hay un apostador            
 

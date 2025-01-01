@@ -60,7 +60,7 @@ async function create_NFTUsername_profile(value){
 
 // Convertir el objeto a una cadena JSON válida
 const jsonString = JSON.stringify(jsonObject);
-console.log("Profile4:", jsonString );
+console.log("Profile4:", jsonObject );
 
             let dataProfile; 
             let tx;

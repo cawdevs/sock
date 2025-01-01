@@ -113,7 +113,7 @@ async function create_NFTUsername_profile(value){
   // Función para poner los datos de un perfil
 async function get_NFTUsername_profile() {
   // Obtener la dirección de la cuenta conectada
-  
+  alert('Get profile');
   const nftusername = document.getElementById('selector_NFTs').value;
   
   try {
@@ -131,7 +131,7 @@ async function get_NFTUsername_profile() {
     }	
     
 
-    console.log("profileTex:", profileTex );
+    console.log("profileTex:", profileText );
     // Crear el contenido del perfil
     const { nombre, bio, ubicacion, paginaWeb, fotoPerfil, fotoPortada } = profileText;
     const tags = profileText.tags.split(','); // Asumimos que los tags están separados por coma

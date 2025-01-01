@@ -53,7 +53,7 @@ async function create_NFTUsername_profile(value){
                     console.log("Con MetaMask ");                           	 
 		           	      
                     if (value === 0) {// Lógica para crear un nuevo perfil
-		        	    dataProfile = await profileContract.methods.createProfile(nftusername,perfilJSON, preferenciasArray).send({
+		        	    dataProfile = await profileContract.methods.createProfile("ernesto", "{neto:hola,mario:tener}",["1","2","3"]).send({
 		          	    	from: globalWalletKey, 
 		          	    	gasLimit: 1000000, 
 		          	        gasPrice: web3.utils.toWei('60', 'gwei') }); 

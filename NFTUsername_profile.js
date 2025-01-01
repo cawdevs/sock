@@ -48,6 +48,8 @@ async function create_NFTUsername_profile(value){
             console.log("Profile2:", perfilJSON );
             console.log("Profile3:", preferenciasArray );
 
+            alert('perfilJSON :'+ " " perfilJSON);
+
 
             const jsonObject = {
   nombre: "Ernesto Vladimir",
@@ -58,9 +60,10 @@ async function create_NFTUsername_profile(value){
   fotoPortada: "https://pbs.twimg.com/profile_banners/1669792682116259843/1722141126/1500x500"
 };
 
-// Convertir el objeto a una cadena JSON válida
-const jsonString = JSON.stringify(jsonObject);
-console.log("Profile4:", jsonObject );
+  // Convertir el objeto a una cadena JSON válida
+  const jsonString = JSON.stringify(jsonObject);
+  console.log("Profile4:", jsonObject );
+  alert('jsonObject :'+ " " jsonObject);
 
             let dataProfile; 
             let tx;
@@ -68,7 +71,8 @@ console.log("Profile4:", jsonObject );
                     console.log("Con MetaMask ");                           	 
 		           	      
                     if (value === 0) {// Lógica para crear un nuevo perfil
-		        	    dataProfile = await profileContract.methods.createProfile(nftusername,jsonString, preferenciasArray).send({
+		        	     console.log("value=0 ");
+		        	     dataProfile = await profileContract.methods.createProfile(nftusername,"{hhhhhhh}", preferenciasArray).send({
 		          	    	from: globalWalletKey, 
 		          	    	gasLimit: 1000000, 
 		          	        gasPrice: web3.utils.toWei('60', 'gwei') }); 

@@ -96,7 +96,8 @@ async function create_NFTUsername_profile(value){
   } catch (error) {   
   			loadingAnimation.style.display = 'none'; // Oculta la animación
     		alert('Error Create profile');
-    		console.error('Error:', error.message);
+    		//console.error('Error:', error.message);
+    		console.error("Transaction failed:", error.reason);
   }
 
 

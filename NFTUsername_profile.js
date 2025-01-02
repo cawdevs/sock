@@ -267,7 +267,67 @@ async function get_NFTUsername_profile() {
 }
    
 
-  
+async function loadProfile() {
+    alert('Get profile');
+
+    // Obtener el nombre de usuario del selector
+    const nftusername = document.getElementById('selector_NFTs').value;
+
+    try {
+        let profileText;
+
+        // Determinar el método de obtención de datos según el tipo de wallet
+        if (profileContract.methods) {
+            console.log("Con MetaMask");
+            profileText = await profileContract.methods.getProfileByUsername(nftusername).call();
+        } else {
+            console.log("Con SOCKWALLET");
+            profileText = await profileContract.getProfileByUsername(nftusername);
+        }
+
+        console.log("profileText:", profileText);
+
+        // Validar que el perfil fue obtenido correctamente
+        if (!profileText || profileText.length < 4) {
+            throw new Error("El perfil no contiene datos suficientes.");
+        }
+
+        // Extraer los datos
+        const nftUsername = profileText[0];
+        const jsonProfile = JSON.parse(profileText[1]);
+        const tags = profileText[2];
+        const timestamp = profileText[3];
+
+        // Desestructurar los datos del perfil
+        const { nombre, bio, ubicacion, paginaWeb, fotoPerfil, fotoPortada, preferencias } = jsonProfile;
+
+        // Actualizar los elementos del formulario con los datos del perfil
+        document.getElementById('nombre').value = nombre || '';
+        document.getElementById('bio').value = bio || '';
+        document.getElementById('ubicacion').value = ubicacion || '';
+        document.getElementById('pagina-web').value = paginaWeb || '';
+        document.getElementById('foto-perfil').value = fotoPerfil || '';
+        document.getElementById('foto-portada').value = fotoPortada || '';
+
+        // Actualizar los selects con las preferencias (si existen)
+        if (preferencias) {
+            const preferenciasArray = JSON.parse(preferencias);
+            const preferenciasSelects = document.querySelectorAll('.preferencias-selector');
+
+            preferenciasSelects.forEach((select, index) => {
+                select.value = preferenciasArray[index] || '';
+            });
+        }
+
+        // Mostrar el modal (asumiendo que usas Bootstrap)
+        $('#myModalprofile').modal('show');
+
+        alert('Funcion update profile OK');
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al obtener y cargar el perfil');
+    }
+}
   
     
 

@@ -2096,51 +2096,6 @@ async function approveCAWSpending(action) {
 
 
 
-async function loadProfile() {
-  // Obtener la dirección de la cuenta conectada
-  const accounts = await web3.eth.getAccounts();
-  const myAddress = accounts[0];
-
-  const contract = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
-
-  
-  try {
-    
-
-    const selectorNFTs = document.getElementById('selector_NFTs').value;
-    const nftusername = selectorNFTs.replace('@CAW', '');
-
-    const profileText = await contract.methods.getProfile(nftusername).call();
-
-    const profile = JSON.parse(profileText);
-
-    // Actualizar los elementos del formulario con los datos del perfil
-  document.getElementById('nombre').value = profile.nombre;
-  document.getElementById('bio').value = profile.bio;
-  document.getElementById('ubicacion').value = profile.ubicacion;
-  document.getElementById('pagina-web').value = profile.paginaWeb;
-  document.getElementById('foto-perfil').value = profile.fotoPerfil;
-  document.getElementById('foto-portada').value = profile.fotoPortada;
-
-  // Actualizar los selects con las preferencias
-  const preferenciasSelects = document.querySelectorAll('.preferencias-selector');
-  const preferenciasArray = JSON.parse(profile.preferencias);
-
-  preferenciasSelects.forEach((select, index) => {
-    select.value = preferenciasArray[index];
-  });
-
-  // Mostrar el modal
-  $('#myModalprofile').modal('show');
-
-  //alert('Funcion update profile OK :');
-  } catch (error) {
-    //alert('Error update profile');
-    console.error('Error:', error);
-  }
-}
-                    
-   
 
 
 

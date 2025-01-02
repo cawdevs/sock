@@ -114,6 +114,10 @@ async function create_NFTUsername_profile(value){
 async function get_NFTUsername_profile() {
   // Obtener la dirección de la cuenta conectada
   alert('Get profile');
+  
+
+
+
   const nftusername = document.getElementById('selector_NFTs').value;
   
   try {
@@ -266,9 +270,27 @@ async function get_NFTUsername_profile() {
   }
 }
    
+async function restore_button_update() {
+	// Obtener el botón por su ID o clase
+    const button = document.getElementById('btn-create-profile');
+    // Cambiar el texto del botón
+    button.textContent = 'Create Profile';
+    // Cambiar el atributo onclick para llamar a la función con el valor deseado
+    button.setAttribute('onclick', 'create_NFTUsername_profile(0)');
+
+}
+
 
 async function loadProfile() {
+
     alert('Get profile');
+    
+     // Obtener el botón por su ID o clase
+    const button = document.getElementById('btn-create-profile');
+    // Cambiar el texto del botón
+    button.textContent = 'Update Profile';
+    // Cambiar el atributo onclick para llamar a la función con el valor deseado
+    button.setAttribute('onclick', 'create_NFTUsername_profile(1)');
 
     // Obtener el nombre de usuario del selector
     const nftusername = document.getElementById('selector_NFTs').value;
@@ -310,22 +332,34 @@ async function loadProfile() {
         document.getElementById('foto-portada').value = fotoPortada || '';
 
         // Actualizar los selects con las preferencias (si existen)
-if (preferencias) {
-    const preferenciasArray = JSON.parse(preferencias);
-    const preferenciasSelects = document.querySelectorAll('.preferencias-selector');
+		// Actualizar cada selector con su respectiva preferencia
+		if (preferencias) {
+		    const preferenciasArray = JSON.parse(preferencias);
 
-    preferenciasSelects.forEach((select, index) => {
-        const preferencia = preferenciasArray[index] || '';
-        const option = Array.from(select.options).find(opt => opt.value === preferencia);
+		    // Asociar preferencias con los selectores
+		    const selectors = [
+		        { id: "selector_key1", value: preferenciasArray[0] },
+		        { id: "selector_key2", value: preferenciasArray[1] },
+		        { id: "selector_key3", value: preferenciasArray[2] }
+		    ];
 
-        if (option) {
-            select.value = preferencia; // Seleccionar la preferencia correspondiente
-        } else {
-            console.warn(`La preferencia "${preferencia}" no se encuentra en las opciones del select.`);
-            select.selectedIndex = 0; // Seleccionar la primera opción como fallback
-        }
-    });
-}
+		    // Actualizar cada selector
+		    selectors.forEach(({ id, value }) => {
+		        const select = document.getElementById(id);
+		        if (select) {
+		            const option = Array.from(select.options).find(opt => opt.value === value);
+
+		            if (option) {
+		                select.value = value; // Setear el valor de la preferencia
+		            } else {
+		                console.warn(`La preferencia "${value}" no se encuentra en las opciones del selector con id "${id}".`);
+		                select.selectedIndex = 0; // Fallback a la primera opción
+		            }
+		        } else {
+		            console.error(`No se encontró el selector con id "${id}".`);
+		        }
+		    });
+		}
 
         // Mostrar el modal (asumiendo que usas Bootstrap)
         $('#myModalprofile').modal('show');

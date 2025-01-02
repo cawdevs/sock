@@ -199,7 +199,7 @@ async function get_NFTUsername_profile() {
 	const textContainer = document.createElement('div');
 
 	// Nombre
-	const name = document.createElement('h2');
+	const name = document.createElement('h3');
 	name.innerText = nombre || 'Sin nombre'; // Valor por defecto
 	name.style.margin = '0';
 	textContainer.appendChild(name);
@@ -310,14 +310,22 @@ async function loadProfile() {
         document.getElementById('foto-portada').value = fotoPortada || '';
 
         // Actualizar los selects con las preferencias (si existen)
-        if (preferencias) {
-            const preferenciasArray = JSON.parse(preferencias);
-            const preferenciasSelects = document.querySelectorAll('.preferencias-selector');
+if (preferencias) {
+    const preferenciasArray = JSON.parse(preferencias);
+    const preferenciasSelects = document.querySelectorAll('.preferencias-selector');
 
-            preferenciasSelects.forEach((select, index) => {
-                select.value = preferenciasArray[index] || '';
-            });
+    preferenciasSelects.forEach((select, index) => {
+        const preferencia = preferenciasArray[index] || '';
+        const option = Array.from(select.options).find(opt => opt.value === preferencia);
+
+        if (option) {
+            select.value = preferencia; // Seleccionar la preferencia correspondiente
+        } else {
+            console.warn(`La preferencia "${preferencia}" no se encuentra en las opciones del select.`);
+            select.selectedIndex = 0; // Seleccionar la primera opción como fallback
         }
+    });
+}
 
         // Mostrar el modal (asumiendo que usas Bootstrap)
         $('#myModalprofile').modal('show');

@@ -380,23 +380,35 @@ async function loadProfile() {
     }
 }
   
-    
-
-
-
-
-
-
-
-
-
 
 async function clear_NFTUsername_profile(){
 
+  const nftusername = document.getElementById('selector_NFTs').value;
+  
+  try {   
+		    
+		    if (profileContract.methods) {
+		            console.log("Con MetaMask ");                           	 
+				    await profileContract.methods.deleteProfile(nftusername).call();  	       
+		                 
+		    } else {
+		            console.log("Con SOCKWALLET ");
+		            await profileContract.deleteProfile(nftusername);  	       
+		            
+		    }
+
+		    alert('Perfil eliminado');
+    		
+  } catch (error) {   
+  			console.error('Error al borrar perfil:', error.message);
+    		
+  }	
+
+
+
+
+
+
 }
 
 
-
-async function recomended_NFTUsername_profile(){
-
-}

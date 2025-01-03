@@ -278,7 +278,16 @@ async function restore_button_update() {
     // Cambiar el atributo onclick para llamar a la función con el valor deseado
     button.setAttribute('onclick', 'create_NFTUsername_profile(0)');
 
+    document.getElementById('nombre').value = '';
+    document.getElementById('bio').value = '';
+    document.getElementById('ubicacion').value = '';
+    document.getElementById('pagina-web').value = '';
+    document.getElementById('foto-perfil').value = '';
+    document.getElementById('foto-portada').value = '';
+
 }
+
+
 
 
 async function loadProfile() {

@@ -70,13 +70,13 @@ async function create_NFTUsername_profile(value){
 
                    	if (value === 0) {// Lógica para crear un nuevo perfil
                    	    tx = await profileContract.createProfile(nftusername,perfilJSON, preferenciasArray,{
-           					gasLimit: 300000,
+           					gasLimit: 600000,
 		            		gasPrice: ethers.utils.parseUnits('50', 'gwei')
 		        		   	});
                         
                     }else{
                         tx = await profileContract.updateProfile(nftusername,perfilJSON, preferenciasArray,{
-		            		gasLimit: 300000,
+		            		gasLimit: 600000,
 		              	    gasPrice: ethers.utils.parseUnits('50', 'gwei')
 		        			});
 
@@ -172,7 +172,7 @@ async function get_NFTUsername_profile() {
 	// Crear el contenido del perfil
 	const profileContent = document.createElement('div');
 	profileContent.style.padding = '20px';
-	profileContent.style.marginTop = '20px'; // Ajuste del espacio superior
+	profileContent.style.marginTop = '10px'; // Ajuste del espacio superior
 
 	// Crear el encabezado del perfil
 	const profileHeader = document.createElement('div');
@@ -224,6 +224,8 @@ async function get_NFTUsername_profile() {
 	// Agregar los elementos adicionales al contenido del perfil
 	const location = document.createElement('p');
 	location.innerText = `Ubicación: ${ubicacion || 'No especificada'}`;
+	location.style.marginTop = '10px'; // Ajuste del espacio superior
+	
 	profileContent.appendChild(location);
 
 	const website = document.createElement('a');

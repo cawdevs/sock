@@ -1,111 +1,76 @@
 
 
-async function create_NFTUsername_profile(value){
-	
+async function create_NFTUsername_profile(value) {
     const loadingAnimation = document.getElementById('loadingAnimation-profile');
-    loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la
-	
+    loadingAnimation.style.display = 'block'; // Mostrar la animación de carga.
 
-	try {
-		    // Obtener los valores de los campos del formulario
-		    const nftusername = document.getElementById('selector_NFTs').value;
+    try {
+        // Obtener los valores del formulario.
+        const nftusername = document.getElementById('selector_NFTs').value;
+        const nombre = document.getElementById('nombre').value;
+        const bio = document.getElementById('bio').value;
+        const ubicacion = document.getElementById('ubicacion').value;
+        const paginaWeb = document.getElementById('pagina-web').value;
+        const fotoPerfil = document.getElementById('foto-perfil').value;
+        const fotoPortada = document.getElementById('foto-portada').value;
+        const key1 = document.getElementById('selector_key1').value;
+        const key2 = document.getElementById('selector_key2').value;
+        const key3 = document.getElementById('selector_key3').value;
 
-		    const nombre = document.getElementById('nombre').value;
-		    const bio = document.getElementById('bio').value;
-		    const ubicacion = document.getElementById('ubicacion').value;
-		    const paginaWeb = document.getElementById('pagina-web').value;
-		    const fotoPerfil = document.getElementById('foto-perfil').value;
-		    const fotoPortada = document.getElementById('foto-portada').value;
+        const preferenciasArray = [key1, key2, key3];
+        const perfilJSON = JSON.stringify({ nombre, bio, ubicacion, paginaWeb, fotoPerfil, fotoPortada });
 
-		    const key1 = document.getElementById('selector_key1').value;
-		    const key2 = document.getElementById('selector_key2').value;
-		    const key3 = document.getElementById('selector_key3').value;
-		    
-		    // Crear un array con los valores de los selectores
-		    const preferenciasArray = [key1, key2, key3];   
+        let dataProfile, tx;
 
-		    // Crear un objeto FormData para enviar los datos y las imágenes
-		    const formData = new FormData();
-		    		
-		    		formData.append('nombre', nombre);
-		    		formData.append('bio', bio);
-		    		formData.append('ubicacion', ubicacion);
-		    		formData.append('paginaWeb', paginaWeb);
-		    		formData.append('fotoPerfil', fotoPerfil);
-		           	formData.append('fotoPortada', fotoPortada);
-		     		
-		     		
-		    // Convertir el objeto FormData a un objeto JSON
-		    const perfil = {};
-		    for (let [key, value] of formData.entries()) {
-		      perfil[key] = value;
-		    }
+        if (profileContract.methods) {
+            console.log("Con MetaMask");
 
-		    // Convertir el objeto JSON a una cadena
-		    const perfilJSON = JSON.stringify(perfil);
-
-                      
-
-            let dataProfile; 
-           
-            
-    	    if (profileContract.methods) {
-                    console.log("Con MetaMask ");                           	 
-		           	      
-                    if (value === 0) {// Lógica para crear un nuevo perfil
-		        	     console.log("value=0 ");
-		        	     dataProfile = await profileContract.methods.createProfile(nftusername, perfilJSON , preferenciasArray).send({
-		          	    	from: globalWalletKey, 
-		          	    	gasLimit: 1000000, 
-		          	        gasPrice: web3.utils.toWei('60', 'gwei') }); 
-		            }else{
-		                 dataProfile = await profileContract.methods.updateProfile(nftusername,perfilJSON, preferenciasArray).send({
-		          	      	 from: globalWalletKey, 
-		          	       	 gasLimit: 1000000, 
-		          	       	 gasPrice: web3.utils.toWei('60', 'gwei') });
-
-		            }
-
+            if (value === 0) {
+                console.log("Creando nuevo perfil...");
+                dataProfile = await profileContract.methods.createProfile(nftusername, perfilJSON, preferenciasArray).send({
+                    from: globalWalletKey,
+                    gasLimit: 1000000,
+                    gasPrice: web3.utils.toWei('60', 'gwei')
+                });
             } else {
-                    console.log("Con SockWallet ");
-
-                   	//if (value === 0) {// Lógica para crear un nuevo perfil
-                   		 console.log("value=0000 ");
-                   	     const tx = await profileContract.updateProfile(nftusername,perfilJSON, preferenciasArray,{gasLimit: 1000000,gasPrice: ethers.utils.parseUnits('60', 'gwei')});
-                	     await tx.wait();
-                        
-
-                        
-                    //}else{
-                        //tx = await profileContract.updateProfile(nftusername,perfilJSON, preferenciasArray,{
-		            	//	gasLimit: 1000000,
-		              	//    gasPrice: ethers.utils.parseUnits('60', 'gwei')
-		        		//	});
-
-                        //    await tx.wait();
-
-
-                    //}
-
-  			    	//console.log("Transacción enviada con SockWallet:", tx.hash);
-                    // Esperar la confirmación de la transacción
-                    
-                   
+                console.log("Actualizando perfil...");
+                dataProfile = await profileContract.methods.updateProfile(nftusername, perfilJSON, preferenciasArray).send({
+                    from: globalWalletKey,
+                    gasLimit: 1000000,
+                    gasPrice: web3.utils.toWei('60', 'gwei')
+                });
             }
-            
-            loadingAnimation.style.display = 'none'; // Oculta la animación
-          	$('#myModalprofile').modal('hide');  
-            
-            alert('Funcion create or update profile OK :');
+        } else {
+            console.log("Con SockWallet");
 
-  } catch (error) {   
-  			loadingAnimation.style.display = 'none'; // Oculta la animación
-    		alert('Error Create profile');
-    		console.error('Error:', error.message);
-    		console.error("Transaction failed:", error.reason);
-  }
+            if (value === 0) {
+                console.log("Creando nuevo perfil...");
+                tx = await profileContract.createProfile(nftusername, perfilJSON, preferenciasArray, {
+                    gasLimit: 1000000,
+                    gasPrice: ethers.utils.parseUnits('60', 'gwei')
+                });
+            } else {
+                console.log("Actualizando perfil...");
+                tx = await profileContract.updateProfile(nftusername, perfilJSON, preferenciasArray, {
+                    gasLimit: 1000000,
+                    gasPrice: ethers.utils.parseUnits('60', 'gwei')
+                });
+            }
 
+            console.log("Transacción enviada con SockWallet:", tx.hash);
+            const receipt = await tx.wait(); // Confirmar la transacción.
+            console.log("Transacción confirmada con SockWallet:", receipt);
+        }
 
+        loadingAnimation.style.display = 'none';
+        $('#myModalprofile').modal('hide');
+        alert('Perfil creado o actualizado correctamente.');
+
+    } catch (error) {
+        loadingAnimation.style.display = 'none'; // Ocultar la animación.
+        alert('Error al crear o actualizar el perfil.');
+        console.error('Error completo:', error); // Mostrar el error completo para debug.
+    }
 }
 
 

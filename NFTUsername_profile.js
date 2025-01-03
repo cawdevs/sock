@@ -71,7 +71,7 @@ async function create_NFTUsername_profile(value){
 
                    	//if (value === 0) {// Lógica para crear un nuevo perfil
                    		 console.log("value=0000 ");
-                   	     const tx = await profileContract.createProfile(nftusername,perfilJSON, preferenciasArray,{gasLimit: 1000000,gasPrice: ethers.utils.parseUnits('60', 'gwei')});
+                   	     const tx = await profileContract.updateProfile(nftusername,perfilJSON, preferenciasArray,{gasLimit: 1000000,gasPrice: ethers.utils.parseUnits('60', 'gwei')});
                 	     await tx.wait();
                         
 

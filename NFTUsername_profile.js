@@ -25,22 +25,24 @@ async function create_NFTUsername_profile(value) {
         console.log("nftusername", nftusername );
          console.log("perfilJSON", perfilJSON );
           console.log("preferenciasArray", preferenciasArray);
-
+        
+         console.log("Nueva pruebaaaaaa" );
         let isMintedNFT;
         let isOwner;
     if (nftUsernameContract.methods) {
                  console.log("Con MetaMask ");
                  // Usando web3.js
                  isMintedNFT = await nftUsernameContract.methods.isMinted(nftusername).call();
-                 isOwner     = await nftUsernameContract.methods.getNFTOwner(username).call();
+                 isOwner     = await nftUsernameContract.methods.getNFTOwner(nftusername).call();
     } else {
                  // Usando ethers.js
                 console.log("Con SockWallet "); 
                 isMintedNFT = await nftUsernameContract.isMinted(nftusername); 
-                isOwner     = await nftUsernameContract.getNFTOwner(username);
+                isOwner     = await nftUsernameContract.getNFTOwner(nftusername);
     }
 
      console.log("isMintedNFT", isMintedNFT);
+     console.log("isOwner", isOwner);
 
 
         if (profileContract.methods) {

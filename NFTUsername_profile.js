@@ -26,7 +26,7 @@ async function create_NFTUsername_profile(value) {
          console.log("perfilJSON", perfilJSON );
           console.log("preferenciasArray", preferenciasArray);
         
-         console.log("nftUsernameContract" nftUsernameContract);
+         console.log("nftUsernameContract", nftUsernameContract);
         let isMintedNFT;
         let isOwner;
     if (nftUsernameContract.methods) {

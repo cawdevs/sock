@@ -80,16 +80,27 @@ async function create_NFTUsername_profile(value) {
 
 
   // Función para poner los datos de un perfil
-async function get_NFTUsername_profile() {
+async function get_NFTUsername_profile(nftusername = undefined) {
   // Obtener la dirección de la cuenta conectada
   alert('Get profile');
-  
 
 
-
-  const nftusername = document.getElementById('selector_NFTs').value;
+ 
   
   try {
+    let nftProfileDiv;
+  	if (nftusername) {
+            console.log("NFTUsername proporcionado:", nftusername);
+            nftProfileDiv = document.getElementById('modal_nft-username-profile');
+
+            // Lógica cuando se proporciona el nftusername
+  } else {
+            console.log("No se proporcionó NFTUsername, usando lógica alternativa.");
+            const nftusername = document.getElementById('selector_NFTs').value;
+            nftProfileDiv = document.getElementById('nft-username-profile');
+            // Lógica cuando no se proporciona el nftusername
+  }
+  
 
    
     let profileText;
@@ -115,7 +126,7 @@ async function get_NFTUsername_profile() {
 	const { nombre, bio, ubicacion, paginaWeb, fotoPerfil, fotoPortada } = jsonProfile;
 
 	// Obtener el contenedor del perfil
-	const nftProfileDiv = document.getElementById('nft-username-profile');
+	//const nftProfileDiv = document.getElementById('nft-username-profile');
 	if (!nftProfileDiv) {
 	    alert("Error: No se encontró el contenedor con id 'nft-username-profile'");
 	    return;

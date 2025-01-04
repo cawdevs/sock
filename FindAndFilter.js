@@ -416,10 +416,10 @@ async function findNftWallet(value) {
                   nameButton.classList.add("clickable-button");
                   nameButton.addEventListener("click", function () {
                       //alert("Clickeaste el botón de usuario para " + username);
-                      //alert("Clickeaste el botón de usuario para " + username);
+                      alert("Clickeaste el botón de usuario para " + username);
                       //await get_NFTUsername_profile(username);  
                       // Ahora muestra el modal
-                      $('#UsernameProfileModal').modal('show');
+                      //$('#UsernameProfileModal').modal('show');
                   });
                   nameButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
                                     

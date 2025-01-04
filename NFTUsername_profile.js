@@ -22,6 +22,10 @@ async function create_NFTUsername_profile(value) {
 
         let dataProfile, tx;
 
+        console.log("nftusername", nftusername );
+         console.log("perfilJSON", perfilJSON );
+          console.log("preferenciasArray", preferenciasArray);
+
         if (profileContract.methods) {
             console.log("Con MetaMask");
 

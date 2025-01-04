@@ -369,18 +369,18 @@ async function findNftWallet(value) {
 
                 let for_sale;  
                 let codeHexaImage;     
-             
+                let walletOwner;
                 if (nftUsernameContract.methods) {
                         console.log("Con MetaMask ");
                         for_sale = await nftUsernameContract.methods.isNFTForSale(username).call();  
                         codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(username).call();     
-            
+                        walletOwner     = await nftUsernameContract..methods.getNFTOwner(nftusername).call();
                 } else {
                          // Usando ethers.js
                          console.log("Con SockWallet "); 
                          for_sale = await nftUsernameContract.isNFTForSale(username);  
                          codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(username);     
-            
+                         walletOwner     = await nftUsernameContract.getNFTOwner(nftusername);
                 }
               
             //console.log("codeHexaImage:", codeHexaImage);
@@ -447,6 +447,22 @@ async function findNftWallet(value) {
                     
                     userRowContainer.appendChild(buyButton);
               }  
+
+              const walletButton = document.createElement("span");
+                  walletButton.innerHTML = '<span style="font-size: 10px; vertical-align: middle; display: inline-block;"></span>';
+                  walletButton.textContent = walletOwner;
+                  walletButton.style.color = "gray";
+                  walletButton.classList.add("clickable-button");
+                  walletButton.addEventListener("click", async function () {
+                      //alert("Clickeaste el botón de usuario para " + username);
+                      //alert("Clickeaste el botón de usuario para " + username);
+                      await get_NFTUsername_profile(username);  
+                      // Ahora muestra el modal
+                      $('#UsernameProfileModal').modal('show');
+                  });
+                  walletButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
+                                    
+              userRowContainer.appendChild(walletButtonButton);
              
              
               nftUsernameList.appendChild(userRowContainer);

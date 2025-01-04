@@ -462,7 +462,7 @@ async function findNftWallet(value) {
                   });
                   walletButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
                                     
-              userRowContainer.appendChild(walletButtonButton);
+              userRowContainer.appendChild(walletButton);
              
              
               nftUsernameList.appendChild(userRowContainer);

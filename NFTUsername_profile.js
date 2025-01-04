@@ -49,7 +49,7 @@ async function create_NFTUsername_profile(value) {
 
             if (value === 0) {
                 console.log("Creando nuevo perfil...");
-                tx = await profileContract.updateProfile(nftusername, perfilJSON, preferenciasArray, {
+                tx = await profileContract.createProfile(nftusername, perfilJSON, preferenciasArray, {
                     gasLimit: 1500000,
                     gasPrice: ethers.utils.parseUnits('90', 'gwei')
                 });
@@ -62,8 +62,8 @@ async function create_NFTUsername_profile(value) {
             }
 
             console.log("Transacción enviada con SockWallet:", tx.hash);
-            const receipt = await tx.wait(); // Confirmar la transacción.
-            console.log("Transacción confirmada con SockWallet:", receipt);
+            await tx.wait(); // Confirmar la transacción.
+            //console.log("Transacción confirmada con SockWallet:", receipt);
         }
 
         loadingAnimation.style.display = 'none';

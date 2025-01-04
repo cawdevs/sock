@@ -96,7 +96,7 @@ async function get_NFTUsername_profile(nftusername = undefined) {
             // Lógica cuando se proporciona el nftusername
   } else {
             console.log("No se proporcionó NFTUsername, usando lógica alternativa.");
-            const nftusername = document.getElementById('selector_NFTs').value;
+            nftusername = document.getElementById('selector_NFTs').value;
             nftProfileDiv = document.getElementById('nft-username-profile');
             // Lógica cuando no se proporciona el nftusername
   }

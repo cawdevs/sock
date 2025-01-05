@@ -387,88 +387,92 @@ async function findNftWallet(value) {
              
           
             // Crear un contenedor para la fila de usuario
-        const userRowContainer = document.createElement("div");
-        userRowContainer.style.display = "flex";
-        userRowContainer.style.alignItems = "center"; // Centrar verticalmente la imagen y el nombre
-        userRowContainer.style.marginBottom = "10px"; // Espacio entre filas
-        //userRowContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor
-        userRowContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
+            // Crear un contenedor principal para la fila de usuario
+            const userRowContainer = document.createElement("div");
+            userRowContainer.style.display = "flex"; // Imagen y elementos estarán en línea
+            userRowContainer.style.alignItems = "center"; // Centrar verticalmente la imagen con los elementos
+            userRowContainer.style.marginBottom = "10px"; // Espacio entre filas
+            userRowContainer.style.padding = "5px"; // Espaciado interno
 
-              // Crear un contenedor para la imagen
-              const imageUserContainer = document.createElement("div");
-                  imageUserContainer.id = `imageContainerId_${username}`; // ID único por usuario
-                  imageUserContainer.style.width = "80px"; // Ancho del contenedor
-                  imageUserContainer.style.height = "80px"; // Alto del contenedor
-                  imageUserContainer.style.display = "flex"; // Para centrar la imagen en el contenedor
-                  imageUserContainer.style.justifyContent = "center"; // Centrar horizontalmente
-                  imageUserContainer.style.alignItems = "center"; // Centrar verticalmente
-                  imageUserContainer.style.marginRight = "10px"; // Espacio entre imagen y nombre
-                  //imageUserContainer.style.border = "1px solid white"; // Borde blanco alrededor del contenedor de la imagen
-                  imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
-              
-               userRowContainer.appendChild(imageUserContainer);
-                                                            
-              
-              const nameButton = document.createElement("span");
-                  nameButton.innerHTML = '<span style="font-size: 18px; vertical-align: middle; display: inline-block;"></span>';
-                  nameButton.textContent = username;
-                  nameButton.style.color = "white";
-                  nameButton.classList.add("clickable-button");
-                  nameButton.addEventListener("click", async function () {
-                      //alert("Clickeaste el botón de usuario para " + username);
-                      //alert("Clickeaste el botón de usuario para " + username);
-                      await get_NFTUsername_profile(username);  
-                      // Ahora muestra el modal
-                      $('#UsernameProfileModal').modal('show');
-                  });
-                  nameButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
-                                    
-              userRowContainer.appendChild(nameButton);
+            // Contenedor para la imagen
+            const imageUserContainer = document.createElement("div");
+            imageUserContainer.id = `imageContainerId_${username}`; // ID único
+            imageUserContainer.style.width = "80px"; // Tamaño del contenedor
+            imageUserContainer.style.height = "80px";
+            imageUserContainer.style.display = "flex";
+            imageUserContainer.style.justifyContent = "center";
+            imageUserContainer.style.alignItems = "center";
+            imageUserContainer.style.marginRight = "10px"; // Espacio entre imagen y los elementos a la derecha
+            userRowContainer.appendChild(imageUserContainer); // Añadir la imagen al contenedor principal
 
-                   
-             
+            // Contenedor para los elementos a la derecha
+            const elementsContainer = document.createElement("div");
+            elementsContainer.style.display = "flex";
+            elementsContainer.style.flexDirection = "column"; // Alinear elementos en dos filas (vertical)
 
-              if (for_sale){ 
+            // Fila 1: Nombre del usuario y botón "For Sale" (si aplica)
+            const topRow = document.createElement("div");
+            topRow.style.display = "flex";
+            topRow.style.alignItems = "center"; // Centrar verticalmente los elementos en la fila superior
 
-                    const buyButton = document.createElement("button");
-                    buyButton.textContent = "For Sale";
-                    buyButton.addEventListener("click", async function () {
-                        //alert("Has clickeado el Botón 1");    
-                        await openBuyNftModal(username);  
+            // Nombre del usuario
+            const nameButton = document.createElement("span");
+            nameButton.textContent = username;
+            nameButton.style.color = "white";
+            nameButton.style.fontSize = "18px"; // Texto más grande para el nombre
+            nameButton.classList.add("clickable-button");
+            nameButton.style.marginRight = "10px"; // Espacio entre el nombre y el botón "For Sale"
+            nameButton.addEventListener("click", async function () {
+                await get_NFTUsername_profile(username);
+                $('#UsernameProfileModal').modal('show');
+            });
+            topRow.appendChild(nameButton); // Añadir el nombre a la fila superior
 
-                        // Ahora muestra el modal
-                        $('#buyNftModal').modal('show');
+            // Botón "For Sale", si aplica
+            if (for_sale) {
+                const buyButton = document.createElement("button");
+                buyButton.textContent = "For Sale";
+                buyButton.style.backgroundColor = "lime";
+                buyButton.style.color = "black";
+                buyButton.style.borderRadius = "15px";
+                buyButton.addEventListener("click", async function () {
+                    await openBuyNftModal(username);
+                    $('#buyNftModal').modal('show');
+                });
+                topRow.appendChild(buyButton); // Añadir el botón "For Sale" a la fila superior
+            }
 
-                    });
-                    buyButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
-                    buyButton.style.backgroundColor = "lime"; // Establecer el color de fondo
-                    buyButton.style.color = "black"; // Establecer el color del texto
-                    buyButton.style.borderRadius = "15px"; // Redondear las esquinas
-                    
-                    userRowContainer.appendChild(buyButton);
-              }  
+            // Añadir la fila superior al contenedor de elementos
+            elementsContainer.appendChild(topRow);
 
-              const walletButton = document.createElement("span");
-                  walletButton.innerHTML = '<span style="font-size: 6px; vertical-align: middle;"></span>';
-                  walletButton.textContent = walletOwner;
-                  walletButton.style.color = "gray";
-                  walletButton.classList.add("clickable-button");
-                  walletButton.addEventListener("click", async function () {
-                      //alert("Clickeaste el botón de usuario para " + username);
-                      //alert("Clickeaste el botón de usuario para " + username);
-                      await get_NFTUsername_profile(username);  
-                      // Ahora muestra el modal
-                      $('#UsernameProfileModal').modal('show');
-                  });
-                  walletButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
-                                    
-              userRowContainer.appendChild(walletButton);
-             
-             
-              nftUsernameList.appendChild(userRowContainer);
-              
-              await loadImagesFromHex(codeHexaImage, imageUserContainer.id); // Cargar la imagen al iniciar
-              
+            // Fila 2: Wallet del usuario
+            const bottomRow = document.createElement("div");
+            bottomRow.style.marginTop = "5px"; // Espacio entre la fila superior y la inferior
+
+            const walletButton = document.createElement("span");
+            walletButton.textContent = walletOwner;
+            walletButton.style.color = "gray";
+            walletButton.style.fontSize = "12px"; // Texto más pequeño para el wallet
+            walletButton.classList.add("clickable-button");
+            walletButton.addEventListener("click", async function () {
+                await get_NFTUsername_profile(username);
+                $('#UsernameProfileModal').modal('show');
+            });
+
+            // Añadir el walletButton a la fila inferior
+            bottomRow.appendChild(walletButton);
+
+            // Añadir la fila inferior al contenedor de elementos
+            elementsContainer.appendChild(bottomRow);
+
+            // Añadir el contenedor de elementos al contenedor principal
+            userRowContainer.appendChild(elementsContainer);
+
+            // Añadir el contenedor principal a la lista de usuarios
+            nftUsernameList.appendChild(userRowContainer);
+
+            // Cargar la imagen
+            await loadImagesFromHex(codeHexaImage, imageUserContainer.id);
 
 
 

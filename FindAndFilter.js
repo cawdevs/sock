@@ -452,7 +452,7 @@ async function findNftWallet(value) {
             const walletButton = document.createElement("span");
             walletButton.textContent = walletOwner;
             walletButton.style.color = "gray";
-            walletButton.style.fontSize = "12px"; // Texto más pequeño para el wallet
+            walletButton.style.fontSize = "8px"; // Texto más pequeño para el wallet
             walletButton.classList.add("clickable-button");
             walletButton.addEventListener("click", async function () {
                 await get_NFTUsername_profile(username);

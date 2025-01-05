@@ -449,7 +449,7 @@ async function findNftWallet(value) {
               }  
 
               const walletButton = document.createElement("span");
-                  walletButton.innerHTML = '<span style="font-size: 10px; vertical-align: middle; display: inline-block;"></span>';
+                  walletButton.innerHTML = '<span style="font-size: 6px; vertical-align: middle;"></span>';
                   walletButton.textContent = walletOwner;
                   walletButton.style.color = "gray";
                   walletButton.classList.add("clickable-button");

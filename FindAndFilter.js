@@ -374,13 +374,13 @@ async function findNftWallet(value) {
                         console.log("Con MetaMask ");
                         for_sale = await nftUsernameContract.methods.isNFTForSale(username).call();  
                         codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(username).call();     
-                        walletOwner     = await nftUsernameContract.methods.getNFTOwner(nftusername).call();
+                        walletOwner     = await nftUsernameContract.methods.getNFTOwner(username).call();
                 } else {
                          // Usando ethers.js
                          console.log("Con SockWallet "); 
                          for_sale = await nftUsernameContract.isNFTForSale(username);  
                          codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(username);     
-                         walletOwner     = await nftUsernameContract.getNFTOwner(nftusername);
+                         walletOwner     = await nftUsernameContract.getNFTOwner(username);
                 }
               
             //console.log("codeHexaImage:", codeHexaImage);

@@ -382,6 +382,11 @@ async function findNftWallet(value) {
                          codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(username);     
                          walletOwner     = await nftUsernameContract.getNFTOwner(username);
                 }
+
+            const start = walletOwner.slice(0, 6);
+            const end = walletOwner.slice(-4);
+            walletOwnerCut = `${start}...${end}`;
+               
               
             //console.log("codeHexaImage:", codeHexaImage);
              
@@ -450,9 +455,9 @@ async function findNftWallet(value) {
             bottomRow.style.marginTop = "5px"; // Espacio entre la fila superior y la inferior
 
             const walletButton = document.createElement("span");
-            walletButton.textContent = walletOwner;
+            walletButton.textContent = walletOwnerCut;
             walletButton.style.color = "gray";
-            walletButton.style.fontSize = "8px"; // Texto más pequeño para el wallet
+            walletButton.style.fontSize = "12px"; // Texto más pequeño para el wallet
             walletButton.classList.add("clickable-button");
             walletButton.addEventListener("click", async function () {
                 await get_NFTUsername_profile(username);

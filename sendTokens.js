@@ -145,16 +145,16 @@ async function transferSockTokens(recipientAddress, amount) {
         const amountInWei = ethers.utils.parseUnits(amount.toString(), 18);                
         // Transferir los tokens SOCK
         let tx;
-        if (sockTokenContract.methods) {
+        if (tokenContract.methods) {
             // Usando MetaMask (Web3.js)
-            tx = await sockTokenContract.methods.transfer(recipientAddress, amountInWei).send({
+            tx = await tokenContract.methods.transfer(recipientAddress, amountInWei).send({
                 from: globalWalletKey,
                 gasLimit: 300000,
                 gasPrice: web3.utils.toWei('60', 'gwei'),
             });
         } else {
             // Usando SockWallet (Ethers.js)
-            tx = await sockTokenContract.transfer(recipientAddress, amountInWei, {
+            tx = await tokenContract.transfer(recipientAddress, amountInWei, {
                 gasLimit: 300000,
                 gasPrice: ethers.utils.parseUnits('90', 'gwei'),
             });

@@ -140,6 +140,8 @@ async function modal_enviarTokens(nftusername = undefined, key_wallet= undefined
 // Transferencia de SOCK tokens
 async function transferSockTokens(recipientAddress, amount) {
 	alert("eSock"+  recipientAddress +amount); 
+    const loadingAnimation = document.getElementById('loadingAnimation-sendSocks');
+    loadingAnimation.style.display = 'block'; // Mostrar la animación de carga.
     try {
         // Convertir la cantidad a Wei según los decimales del contrato (18 decimales en ERC20)
         const amountInWei = ethers.utils.parseUnits(amount.toString(), 18);                
@@ -162,9 +164,16 @@ async function transferSockTokens(recipientAddress, amount) {
             await tx.wait(); // Confirmar la transacción.
         }
 
+
         alert("Transferencia de SOCK exitosa.");
 
+        loadingAnimation.style.display = 'none';
+        $('#myModalEnviarTokens').modal('hide');
+
     } catch (error) {
+
+    	loadingAnimation.style.display = 'none';
+        
         console.error("Error en la transferencia de SOCK:", error);
         alert("Error en la transferencia de SOCK.");
     }
@@ -176,6 +185,9 @@ async function transferSockTokens(recipientAddress, amount) {
 // Transferencia de MATIC
 async function transferMatic(recipientAddress, amount) {
 	alert("Matic"+  recipientAddress +amount); 
+    const loadingAnimation = document.getElementById('loadingAnimation-sendPol');
+    loadingAnimation.style.display = 'block'; // Mostrar la animación de carga.
+
     try {
         const amountInWei = ethers.utils.parseEther(amount.toString());
 
@@ -207,6 +219,9 @@ async function transferMatic(recipientAddress, amount) {
         }
 
         alert("Transferencia de MATIC exitosa.");
+        loadingAnimation.style.display = 'none';
+        $('#myModalEnviarTokens').modal('hide');
+
     } catch (error) {
         console.error("Error en la transferencia de MATIC:", error);
         alert("Error en la transferencia de MATIC.");

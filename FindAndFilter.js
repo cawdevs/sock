@@ -464,8 +464,21 @@ async function findNftWallet(value) {
                 $('#UsernameProfileModal').modal('show');
             });
 
+            const sendwalletButton = document.createElement("span");
+            sendwalletButton.innerHTML = `<font color="lime"><span class="glyphicon glyphicon-send"></span></font>`; // Icono en lugar de texto
+            sendwalletButton.style.marginLeft = "20px"; // Espacio entre el nombre y el botón "For Sale"
+            sendwalletButton.style.fontSize = "24px"; // Ajusta el tamaño si es necesario
+
+            sendwalletButton.classList.add("clickable-button");
+            sendwalletButton.addEventListener("click", async function () {
+                await  modal_enviarTokens(username,walletOwner);
+                $('#myModalEnviarTokens').modal('show');
+            });
+
             // Añadir el walletButton a la fila inferior
             bottomRow.appendChild(walletButton);
+            // Añadir el walletButton a la fila inferior
+            bottomRow.appendChild(sendwalletButton);
 
             // Añadir la fila inferior al contenedor de elementos
             elementsContainer.appendChild(bottomRow);

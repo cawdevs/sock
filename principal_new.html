@@ -1867,7 +1867,8 @@ async function getmintedNFT() {
               }
                
               const total_nft_Username = document.getElementById('NFTUsernames-count');
-              total_nft_Username.innerHTML = total_minted_username; 
+              total_nft_Username.style.color = 'lime';
+              total_nft_Username.innerHTML =`Total NFTUsernames: ${total_minted_username}`; 
 
                       
               const selector = document.getElementById('selector_NFTs');
@@ -2981,7 +2982,7 @@ inputField.addEventListener('input', function() {
     if (saldoCaw < maticNeeded) {
       output.textContent = `${maticNeeded}`
       output.style.fontSize = '24px'; // Cambia el tamaño de fuente
-      output.style.color = 'white'; // Cambia el color
+      output.style.color = 'white'; // Cambia el color`ID: ${publication_ID}`;
       //bottonMint.style.display = 'none';
     } else {
       output.textContent = `${maticNeeded}`;

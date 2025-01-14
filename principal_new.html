@@ -567,6 +567,7 @@ span.hashtag {
 
                      
                           <div class="input-group">
+                            <div id ="NFTUsernames-count">NFTUsernames: </div>
                             <input type="text" id="text-address-wallet" class="form-control" placeholder="Search 0x.. or NftUsername" style="border: 2px solid black; border-radius: 20px; width: 100%; height: 40px; margin-right: 10px;">
                             <div class="input-group-btn">
                               <button id="btn-find-nft" class="btn btn-default"  onclick="findNftWallet('user')" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
@@ -1850,15 +1851,24 @@ async function getmintedNFT() {
         try {
              
              let list_username;
+             let total_minted_username;
+
              if (nftUsernameContract.methods) {
                  console.log("Con MetaMask ");
                  // Usando web3.js
-                 list_username = await nftUsernameContract.methods.getMintedUsernames(globalWalletKey).call(); 
+                 list_username = await nftUsernameContract.methods.getMintedUsernames(globalWalletKey).call();
+                 total_minted_username = await nftUsernameContract.methods.getTotalMintedNFTs().call();
+
              } else {
                  // Usando ethers.js
                  console.log("Con SockWallet "); 
-                 list_username = await nftUsernameContract.getMintedUsernames(globalWalletKey);                                    
-              }            
+                 list_username = await nftUsernameContract.getMintedUsernames(globalWalletKey);
+                 total_minted_username = await nftUsernameContract.methods.getTotalMintedNFTs().call();                                    
+              }
+               
+              const total_nft_Username = document.getElementById('NFTUsernames-count');
+              total_nft_Username.innerHTML = total_minted_username; 
+
                       
               const selector = document.getElementById('selector_NFTs');
               // Limpiar las opciones existentes

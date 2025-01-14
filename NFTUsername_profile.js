@@ -1,12 +1,4 @@
- // Obtener el selector de NFTs
- const selectorNFTs = document.getElementById('selector_NFTs');
- // Agregar evento 'change' al selector
- selectorNFTs.addEventListener('change', () => {
-            getImageNFTUsername("NFT_image-container");
-            info_profile_sock();
-            get_NFTUsername_profile();
- 
-          });
+
 
 
 async function create_NFTUsername_profile(value) {

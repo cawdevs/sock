@@ -1610,6 +1610,7 @@ async function inicializarUI() {
     await obtenerSaldo_POL();
     await obtenerSaldo_SOCK();
     await getmintedNFT();
+    
     await get_NFTUsername_profile();
    
 
@@ -1817,7 +1818,7 @@ async function mintearNFT() {
               loadingAnimation.style.display = 'none'; // Oculta la animación
               $('#myModal').modal('hide'); 
 
-              //getProfile(); 
+              await get_NFTUsername_profile();
               info_profile_sock();
 
                 // Mostrar mensaje de éxito
@@ -1884,7 +1885,7 @@ async function getmintedNFT() {
 
               getImageNFTUsername("NFT_image-container");
 
-              //getProfile();
+              await get_NFTUsername_profile();
                
               info_profile_sock();            
               
@@ -2299,7 +2300,7 @@ async function createActionPublication(receiverNFTUsername,publication_id,type_a
    loadingAnimationPublication.style.display = 'none'; // Oculta la animación
    $('#myModal_publication').modal('hide');
 
-   getProfile();
+   await getProfile();
 
 
 

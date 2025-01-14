@@ -1,3 +1,12 @@
+ // Obtener el selector de NFTs
+ const selectorNFTs = document.getElementById('selector_NFTs');
+ // Agregar evento 'change' al selector
+ selectorNFTs.addEventListener('change', () => {
+            getImageNFTUsername("NFT_image-container");
+            info_profile_sock();
+            get_NFTUsername_profile();
+ 
+          });
 
 
 async function create_NFTUsername_profile(value) {
@@ -105,7 +114,7 @@ async function create_NFTUsername_profile(value) {
   // Función para poner los datos de un perfil
 async function get_NFTUsername_profile(nftusername = undefined) {
   // Obtener la dirección de la cuenta conectada
-  alert('Get profile');
+  //alert('Get profile');
 
 
  
@@ -267,7 +276,7 @@ async function get_NFTUsername_profile(nftusername = undefined) {
 	nftProfileDiv.appendChild(profileContainer);
 
 	// Mensajes de éxito
-	alert('Funcion get profile OK:');
+	//alert('Funcion get profile OK:');
 	showSuccess('Create profile is OK!');
 
   } catch (error) {
@@ -297,7 +306,7 @@ async function restore_button_update() {
 
 async function loadProfile() {
 
-    alert('Get profile');
+    //alert('Get profile');
     
      // Obtener el botón por su ID o clase
     const button = document.getElementById('btn-create-profile');

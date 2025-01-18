@@ -368,6 +368,8 @@ async function findNftWallet(value) {
           try{
 
                 let for_sale;  
+                let isfollowing;
+                let isfollower;
                 let codeHexaImage;     
                 let walletOwner;
                 if (nftUsernameContract.methods) {
@@ -375,12 +377,16 @@ async function findNftWallet(value) {
                         for_sale = await nftUsernameContract.methods.isNFTForSale(username).call();  
                         codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(username).call();     
                         walletOwner     = await nftUsernameContract.methods.getNFTOwner(username).call();
+                        //following=?
+                        //follower =?
                 } else {
                          // Usando ethers.js
                          console.log("Con SockWallet "); 
                          for_sale = await nftUsernameContract.isNFTForSale(username);  
                          codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(username);     
                          walletOwner     = await nftUsernameContract.getNFTOwner(username);
+                         //following=?
+                         //follower =?
                 }
 
             const start = walletOwner.slice(0, 6);
@@ -446,6 +452,50 @@ async function findNftWallet(value) {
                 });
                 topRow.appendChild(buyButton); // Añadir el botón "For Sale" a la fila superior
             }
+
+            // Botón "seguir o siguiend segun sea
+            //if (isfollowing) {
+                const followingButton = document.createElement("button");
+                followingButton.textContent = "Siguiendo";
+                followingButton.style.backgroundColor = "green";
+                followingButton.style.color = "white";
+                followingButton.style.borderRadius = "15px";
+                
+                topRow.appendChild(followingButton); // Añadir el botón "For Sale" a la fila superior
+
+
+                const unfollowButton = document.createElement("button");
+                unfollowButton.textContent = "olvidar";
+                unfollowButton.style.backgroundColor = "red";
+                unfollowButton.style.color = "white";
+                unfollowButton.style.borderRadius = "15px";
+                unfollowButton.addEventListener("click", async function () {
+                    await unfollow(username);                                        
+                });
+                topRow.appendChild(unfollowButton); // Añadir el botón "For Sale" a la fila superior
+
+
+
+
+
+
+            //}
+            //else{
+                const followButton = document.createElement("button");
+                followButton.textContent = "Seguir";
+                followButton.style.backgroundColor = "gray";
+                followButton.style.color = "white";
+                followButton.style.borderRadius = "15px";
+                followButton.addEventListener("click", async function () {
+                    await follow(username);                                        
+                });
+                topRow.appendChild(follow); // Añadir el botón "For Sale" a la fila superior
+
+            //}
+
+
+
+
 
             // Añadir la fila superior al contenedor de elementos
             elementsContainer.appendChild(topRow);

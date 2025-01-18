@@ -445,6 +445,19 @@ async function findNftWallet(value) {
             });
             topRow.appendChild(nameButton); // Añadir el nombre a la fila superior
 
+            if (is_follower) {           
+                const followSymbol = document.createElement("span");
+                followSymbol.textContent = "*"; // Representa el asterisco
+                followSymbol.style.fontSize = "12px";
+                followSymbol.style.cursor = "pointer"; // Cambiar el cursor para indicar que es interactivo
+                followSymbol.style.color = "lime"; // Cambiar el color del texto
+               
+                topRow.appendChild(followSymbol); // Añadir el asterisco interactivo a la fila superior
+           }  
+
+
+
+
             // Botón "For Sale", si aplica
             if (for_sale) {
                 const buyButton = document.createElement("button");
@@ -479,7 +492,9 @@ async function findNftWallet(value) {
                 unfollowButton.style.color = "white";
                 unfollowButton.style.borderRadius = "15px";
                 unfollowButton.addEventListener("click", async function () {
-                    //await unfollow(username);                                        
+                    //await unfollow(username); 
+                    await unfollow_username(username);
+                                                                               
                 });
                 topRow.appendChild(unfollowButton); // Añadir el botón "For Sale" a la fila superior
 
@@ -500,22 +515,10 @@ async function findNftWallet(value) {
                     await follow_username(username);                                        
                 });
                 topRow.appendChild(followButton); // Añadir el botón "For Sale" a la fila superior
+              
 
-            }
-
-
+            }         
             
-            if (is_follower) {
-                const followerButton = document.createElement("button");
-                followerButton.textContent = " * ";
-                followerButton.style.fontSize = "12px"; // Texto más pequeño 
-                followerButton.style.backgroundColor = "gold";
-                followerButton.style.color = "black";
-                followerButton.style.borderRadius = "15px";
-                
-                topRow.appendChild(followerButton); // Añadir el botón "For Sale" a la fila superior
-           
-            }
 
 
 

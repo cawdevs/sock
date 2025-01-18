@@ -381,6 +381,7 @@ async function findNftWallet(value) {
                         //following=?
                         //follower =?
                         is_following = await followControlContract.methods.isFollowing(selectorNFTs,username).call();
+                        is_follower = await followControlContract.methods.isFollowedBy(selectorNFTs,username).call();
 
                 } else {
                          // Usando ethers.js
@@ -391,6 +392,7 @@ async function findNftWallet(value) {
                          //following=?
                          //follower =?
                          is_following = await followControlContract.isFollowing(selectorNFTs,username);
+                         is_follower = await followControlContract.isFollowedBy(selectorNFTs,username);
                 }
 
             const start = walletOwner.slice(0, 6);
@@ -499,6 +501,20 @@ async function findNftWallet(value) {
                 });
                 topRow.appendChild(followButton); // Añadir el botón "For Sale" a la fila superior
 
+            }
+
+
+            
+            if (is_follower) {
+                const followerButton = document.createElement("button");
+                followerButton.textContent = " * ";
+                followerButton.style.fontSize = "12px"; // Texto más pequeño 
+                followerButton.style.backgroundColor = "gold";
+                followerButton.style.color = "black";
+                followerButton.style.borderRadius = "15px";
+                
+                topRow.appendChild(followerButton); // Añadir el botón "For Sale" a la fila superior
+           
             }
 
 

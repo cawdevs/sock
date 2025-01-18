@@ -470,7 +470,7 @@ async function findNftWallet(value) {
                 unfollowButton.style.color = "white";
                 unfollowButton.style.borderRadius = "15px";
                 unfollowButton.addEventListener("click", async function () {
-                    await unfollow(username);                                        
+                    //await unfollow(username);                                        
                 });
                 topRow.appendChild(unfollowButton); // Añadir el botón "For Sale" a la fila superior
 
@@ -487,9 +487,9 @@ async function findNftWallet(value) {
                 followButton.style.color = "white";
                 followButton.style.borderRadius = "15px";
                 followButton.addEventListener("click", async function () {
-                    await follow(username);                                        
+                    //await follow(username);                                        
                 });
-                topRow.appendChild(follow); // Añadir el botón "For Sale" a la fila superior
+                topRow.appendChild(followButton); // Añadir el botón "For Sale" a la fila superior
 
             //}
 

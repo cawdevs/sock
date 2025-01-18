@@ -1557,8 +1557,9 @@ async function conectarMetaMask() {
 
         betContract= new web3.eth.Contract(Bet_ContractABI, betContractAddress);
         profileContract = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
+        followControlContract = new web3.eth.Contract(FollowControl_ContractABI, followControlContractAddress);
         
-        
+
 
     } catch (error) {
         console.error("Error al conectar con MetaMask:", error);
@@ -1588,7 +1589,10 @@ function conectarWalletPropia() {
     freeTokensContract= new ethers.Contract(freeTokensContractAddress, FreeTokens_ContractABI, signer );
 
     betContract= new ethers.Contract(betContractAddress, Bet_ContractABI, signer); 
-    profileContract = new ethers.Contract(profileContractAddress, Profile_ContractABI,  signer);    
+    profileContract = new ethers.Contract(profileContractAddress, Profile_ContractABI,  signer); 
+
+    followControlContract = new ethers.Contract(followControlContractAddress, FollowControl_ContractABI, signer);
+          
     console.log("Conectado usando wallet propia:", globalWalletKey);
 }
 

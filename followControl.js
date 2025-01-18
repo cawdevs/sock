@@ -40,7 +40,7 @@ async function follow_username(username_to_follow) {
 
 
 
-async function is_following_username() {
+/*async function is_following_username() {
      
     try {
         
@@ -64,3 +64,4 @@ async function is_following_username() {
     }
 
 }
+*/

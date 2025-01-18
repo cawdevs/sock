@@ -16,7 +16,7 @@ async function follow_username(username_to_follow) {
             } else {
                            console.log("seguir Con SockWallet ");
                             // Llamada con ethers.js
-                           const tx = await followControlContract.follow(selected_username, username_to_follow {
+                           const tx = await followControlContract.follow(selected_username, username_to_follow , {
                            gasLimit: 200000,
                            gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei
                            });

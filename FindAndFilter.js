@@ -369,8 +369,8 @@ async function findNftWallet(value) {
           try{
 
                 let for_sale;  
-                let isfollowing;
-                let isfollower;
+                let is_following;
+                let is_follower;
                 let codeHexaImage;     
                 let walletOwner;
                 if (nftUsernameContract.methods) {
@@ -380,6 +380,8 @@ async function findNftWallet(value) {
                         walletOwner     = await nftUsernameContract.methods.getNFTOwner(username).call();
                         //following=?
                         //follower =?
+                        is_following = await followControlContract.methods.isFollowing(selectorNFTs,username).call();
+
                 } else {
                          // Usando ethers.js
                          console.log("Con SockWallet "); 
@@ -388,6 +390,7 @@ async function findNftWallet(value) {
                          walletOwner     = await nftUsernameContract.getNFTOwner(username);
                          //following=?
                          //follower =?
+                         is_following = await followControlContract.isFollowing(selectorNFTs,username);
                 }
 
             const start = walletOwner.slice(0, 6);
@@ -456,7 +459,7 @@ async function findNftWallet(value) {
             }
 
             // Botón "seguir o siguiend segun sea
-            //if (isfollowing) {
+            if (is_following) {
                 const followingButton = document.createElement("button");
                 followingButton.textContent = "Siguiendo";
                 followingButton.style.fontSize = "12px"; // Texto más pequeño 
@@ -483,8 +486,8 @@ async function findNftWallet(value) {
 
 
 
-            //}
-            //else{
+            }
+            else{
                 const followButton = document.createElement("button");
                 followButton.textContent = "Seguir";
                 followButton.style.fontSize = "10px";
@@ -496,7 +499,7 @@ async function findNftWallet(value) {
                 });
                 topRow.appendChild(followButton); // Añadir el botón "For Sale" a la fila superior
 
-            //}
+            }
 
 
 

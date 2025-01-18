@@ -443,6 +443,7 @@ async function findNftWallet(value) {
             if (for_sale) {
                 const buyButton = document.createElement("button");
                 buyButton.textContent = "For Sale";
+                buyButton.style.fontSize = "10px"; 
                 buyButton.style.backgroundColor = "lime";
                 buyButton.style.color = "black";
                 buyButton.style.borderRadius = "15px";
@@ -457,6 +458,7 @@ async function findNftWallet(value) {
             //if (isfollowing) {
                 const followingButton = document.createElement("button");
                 followingButton.textContent = "Siguiendo";
+                followingButton.style.fontSize = "10px"; // Texto más pequeño 
                 followingButton.style.backgroundColor = "green";
                 followingButton.style.color = "white";
                 followingButton.style.borderRadius = "15px";
@@ -466,6 +468,7 @@ async function findNftWallet(value) {
 
                 const unfollowButton = document.createElement("button");
                 unfollowButton.textContent = "olvidar";
+                unfollowButtonButton.style.fontSize = "10px"; 
                 unfollowButton.style.backgroundColor = "red";
                 unfollowButton.style.color = "white";
                 unfollowButton.style.borderRadius = "15px";
@@ -483,6 +486,7 @@ async function findNftWallet(value) {
             //else{
                 const followButton = document.createElement("button");
                 followButton.textContent = "Seguir";
+                followButtonButton.style.fontSize = "10px";
                 followButton.style.backgroundColor = "gray";
                 followButton.style.color = "white";
                 followButton.style.borderRadius = "15px";

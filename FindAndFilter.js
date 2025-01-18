@@ -316,7 +316,7 @@ async function findNftWallet(value) {
 
               } else {
                       let isMintedNFT;
-                      addressUserNfts = addressUserNfts.toLowerCase();
+                      
                       if (nftUsernameContract.methods) {
                             console.log("Con MetaMask ");
                             isMintedNFT = await nftUsernameContract.methods.isMinted(addressUserNfts).call();

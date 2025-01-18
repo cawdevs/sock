@@ -79,6 +79,39 @@ async function unfollow_username(username_to_unfollow) {
 }
 
 
+
+async function count_follow_username(username) {
+ 
+    try{        
+    	    let following_count;
+    	    let follower_count;
+
+            if (followControlContract.methods) {
+
+                           console.log("cant Con MetaMask ");
+                           following_count= await followControlContract.methods.getFollowingCount(username).call();  
+                           follower_count= await followControlContract.methods.getFollowerCount(username).call();      
+                 
+            } else {
+                           console.log("cant Con SockWallet ");
+                            // Llamada con ethers.js
+                           following_count= await followControlContract.getFollowingCount(username);  
+                           follower_count= await followControlContract.getFollowerCount(username);                       
+            } 
+
+            // Devuelve los valores como un objeto
+            return { following_count, follower_count };
+    
+    } catch (error) {
+           
+          alert('Error de conteo.');
+          console.error('Error completo ccc:', error.code); // Mostrar el error completo para debug.
+    
+    }
+
+}
+
+
 /*async function is_following_username() {
      
     try {

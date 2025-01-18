@@ -259,6 +259,43 @@ async function get_NFTUsername_profile(nftusername = undefined) {
 	timestampElement.innerText = `Creado en: ${new Date(timestamp * 1000).toLocaleString()}`;
 	profileContent.appendChild(timestampElement);
 
+    /////obtiene seguidores y seguidos
+    const cont_follow = await count_follow_username(nftusername);
+
+    if (cont_follow) {
+    const followingCount = cont_follow.following_count;
+    const followerCount = cont_follow.follower_count;
+
+    // Crear un contenedor para la fila
+    const rowElement = document.createElement('div');
+    rowElement.style.display = 'flex'; // Usar flexbox para alinear elementos
+    rowElement.style.justifyContent = 'center'; // Centrar los elementos
+    rowElement.style.gap = '20px'; // Separar los elementos
+    rowElement.style.marginTop = '10px'; // Espaciado superior opcional
+
+    // Crear el elemento para "Siguiendo"
+    const followingElement = document.createElement('p');
+    followingElement.innerText = `Siguiendo: ${followingCount}`;
+    followingElement.style.margin = '0'; // Quitar márgenes por defecto
+    followingElement.style.textAlign = 'center';
+
+    // Crear el elemento para "Seguidores"
+    const followerElement = document.createElement('p');
+    followerElement.innerText = `Seguidores: ${followerCount}`;
+    followerElement.style.margin = '0'; // Quitar márgenes por defecto
+    followerElement.style.textAlign = 'center';
+
+    // Agregar los elementos al contenedor
+    rowElement.appendChild(followingElement);
+    rowElement.appendChild(followerElement);
+
+    // Agregar el contenedor al contenido del perfil
+    profileContent.appendChild(rowElement);
+    }
+
+
+
+
 	// Agregar los elementos al contenedor principal
 	profileContainer.appendChild(coverImage);
 	profileContainer.appendChild(profileContent);
@@ -266,6 +303,13 @@ async function get_NFTUsername_profile(nftusername = undefined) {
 	// Agregar el contenedor principal al DOM
 	nftProfileDiv.innerHTML = ''; // Limpiar el contenido anterior
 	nftProfileDiv.appendChild(profileContainer);
+
+
+
+
+
+
+
 
 	// Mensajes de éxito
 	//alert('Funcion get profile OK:');

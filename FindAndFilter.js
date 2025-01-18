@@ -437,8 +437,7 @@ async function findNftWallet(value) {
             nameButton.textContent = username;
             nameButton.style.color = "white";
             nameButton.style.fontSize = "18px"; // Texto más grande para el nombre
-            nameButton.classList.add("clickable-button");
-            nameButton.style.marginRight = "10px"; // Espacio entre el nombre y el botón "For Sale"
+            nameButton.classList.add("clickable-button");            
             nameButton.addEventListener("click", async function () {
                 await get_NFTUsername_profile(username);
                 $('#UsernameProfileModal').modal('show');
@@ -451,7 +450,7 @@ async function findNftWallet(value) {
                 followSymbol.style.fontSize = "12px";
                 followSymbol.style.cursor = "pointer"; // Cambiar el cursor para indicar que es interactivo
                 followSymbol.style.color = "lime"; // Cambiar el color del texto
-               
+                followSymbol.style.marginRight = "14px"; // Espacio entre el nombre y el botón "For Sale"
                 topRow.appendChild(followSymbol); // Añadir el asterisco interactivo a la fila superior
            }  
 
@@ -494,7 +493,7 @@ async function findNftWallet(value) {
                 unfollowButton.addEventListener("click", async function () {
                     //await unfollow(username); 
                     await unfollow_username(username);
-                                                                               
+
                 });
                 topRow.appendChild(unfollowButton); // Añadir el botón "For Sale" a la fila superior
 

@@ -39,6 +39,45 @@ async function follow_username(username_to_follow) {
 }
 
 
+async function unfollow_username(username_to_unfollow) {
+
+ 
+    try{        
+
+    	     const selected_username = document.getElementById('selector_NFTs').value;
+             
+
+            if (followControlContract.methods) {
+                            console.log("dejar de seguir Con MetaMask ");
+                            await followControlContract.methods.unfollow(selected_username,username_to_follow).send({from: globalWalletKey, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                            console.log('NFT Username is Delisted.');
+                                                       
+
+            } else {
+                           console.log("dejar de seguir Con SockWallet ");
+                            // Llamada con ethers.js
+                           const tx = await followControlContract.unfollow(selected_username, username_to_follow , {
+                           gasLimit: 200000,
+                           gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei
+                           });
+
+                           console.log("Transacción enviada:", tx.hash);
+                           // Esperar confirmación
+                           const receipt = await tx.wait();
+                           console.log("Transacción confirmada:", receipt);
+                           alert('Transaction ok :)');
+
+                       } 
+
+    } catch (error) {
+           
+          alert('Error al intentar dejar de seguir al NFTUSERNAME.');
+          console.error('Error completo ccc:', error.code); // Mostrar el error completo para debug.
+    
+    }
+
+}
+
 
 /*async function is_following_username() {
      

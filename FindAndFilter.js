@@ -226,6 +226,9 @@ async function findNftWallet(value) {
         if (value==="following"){
          
              console.log("Estás siguiendo a alguien.");
+
+
+
         }else if (value==="foryou"){
                  
               console.log("Contenido recomendado para ti.");
@@ -432,27 +435,30 @@ async function findNftWallet(value) {
             topRow.style.display = "flex";
             topRow.style.alignItems = "center"; // Centrar verticalmente los elementos en la fila superior
 
+            if (is_follower) {           
+                const followSymbol = document.createElement("span");
+                followSymbol.textContent = "*"; // Representa el asterisco
+                followSymbol.style.fontSize = "16px";
+                followSymbol.style.cursor = "pointer"; // Cambiar el cursor para indicar que es interactivo
+                followSymbol.style.color = "lime"; // Cambiar el color del texto
+                followSymbol.style.marginRight = "7px"; // Espacio entre el nombre y el botón "For Sale"
+                topRow.appendChild(followSymbol); // Añadir el asterisco interactivo a la fila superior
+           }   
+             
             // Nombre del usuario
             const nameButton = document.createElement("span");
             nameButton.textContent = username;
             nameButton.style.color = "white";
             nameButton.style.fontSize = "18px"; // Texto más grande para el nombre
-            nameButton.classList.add("clickable-button");            
+            nameButton.classList.add("clickable-button");   
+            nameButton.style.marginRight = "14px";         
             nameButton.addEventListener("click", async function () {
                 await get_NFTUsername_profile(username);
                 $('#UsernameProfileModal').modal('show');
             });
             topRow.appendChild(nameButton); // Añadir el nombre a la fila superior
 
-            if (is_follower) {           
-                const followSymbol = document.createElement("span");
-                followSymbol.textContent = "*"; // Representa el asterisco
-                followSymbol.style.fontSize = "12px";
-                followSymbol.style.cursor = "pointer"; // Cambiar el cursor para indicar que es interactivo
-                followSymbol.style.color = "lime"; // Cambiar el color del texto
-                followSymbol.style.marginRight = "14px"; // Espacio entre el nombre y el botón "For Sale"
-                topRow.appendChild(followSymbol); // Añadir el asterisco interactivo a la fila superior
-           }  
+            
 
 
 

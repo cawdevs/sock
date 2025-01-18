@@ -1864,7 +1864,7 @@ async function getmintedNFT() {
                  // Usando ethers.js
                  console.log("Con SockWallet "); 
                  list_username = await nftUsernameContract.getMintedUsernames(globalWalletKey);
-                 total_minted_username = await nftUsernameContract.methods.getTotalMintedNFTs().call();                                    
+                 total_minted_username = await nftUsernameContract.getTotalMintedNFTs();                                    
               }
                
               const total_nft_Username = document.getElementById('NFTUsernames-count');

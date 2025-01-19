@@ -226,6 +226,17 @@ async function findNftWallet(value) {
         if (value==="following"){
          
              console.log("Estás siguiendo a alguien.");
+             if (followControlContract.methods) {
+                      console.log("Con MetaMask");
+                      nftUsernames = await followControlContract.methods.getFollowingList(nft_username_selected).call();
+                      
+                      // Lógica específica para contratos instanciados con web3.js
+              } else {
+                      console.log("Con SockWallet.");
+                      nftUsernames = await followControlContract.getFollowingList(nft_username_selected);
+                      
+                     // Lógica específica para contratos instanciados con ethers.js
+              }
 
 
 

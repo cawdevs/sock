@@ -118,6 +118,8 @@
 <script src="NFTUsername_profile.js"></script>
 <script src="sendTokens.js"></script>
 <script src="followControl.js"></script>
+<script src="postPublication.js"></script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
@@ -317,7 +319,7 @@
  
   <ul class="gallery_toolbar" style="background-color: lightgray; border: 2px solid lime; border-radius: 20px;">     
    
-       <a href="#" data-toggle="modal" data-target="#myModal" style=" margin-left: 15px;">
+       <a href="#" data-toggle="modal" data-target="#myModal_publication" onclick="createPublicationElements() " style=" margin-left: 15px;">
                 <img  id="image-post" src="images/icons/post_icon.SVG" alt="post" width="45">
        </a>
 
@@ -682,95 +684,24 @@ span.hashtag {
 
 <div class="container">
   
-  <!-- Modal -->
-  <div class="modal fade" id="myModal_publication" role="dialog">
+<!-- Modal -->
+<div class="modal fade" id="myModal_publication" role="dialog">
     <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          
-                    
-                   <div style="display: flex; align-items: center; justify-content: flex-start; ">
-         
-          <img id="image-perfil-publication" src="static/images/caw_logo_2.svg" alt="My svg_logo" width="60" class="img-circle" style="border: 4px solid white;">
-          <h3><p style="display:inline-block; margin-left: 20px;" id="nftUsername-publication"></p></h3> 
-     
-          
-          </div>
+        <!-- Modal content -->
+        <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
+            </div>
+            <div class="modal-body">
+                <div id="publication-post-container"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
-        <div class="modal-body">
-         
-
-     <!--//////////////////////////////////////////////////////////////-->   
-      <!--//////////////////////////////////////////////////////////////-->  
-       <!--//////////////////////////////////////////////////////////////-->  
-                   <form>
-    <div class="form-group">
-      <textarea class="form-control" id="publicacion" rows="3" placeholder="¡¿What are you dreaming about?!" required style=" display:inline-block; border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 160px; font-size: 18px; "></textarea>
     </div>
-
-
-   <div style="display: flex; align-items: center; ">
-    <div style="display: flex; align-items: center; justify-content: flex-start; ">
-        
-        <div style=" display:inline-block; margin-bottom: 10px;" class="form-group">
-            <select class="form-control" id="filter-privacidad" style="border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px;">
-                <option>*</option>
-                <option>+12</option>
-                <option>+18</option>
-            </select>
-        </div>
-
-        <button data-toggle="collapse" data-target="#demo" style="display:inline-block; margin-left: 20px;  margin-bottom: 10px; ">
-            <span class="glyphicon glyphicon-picture"></span>
-        </button>
-
-        <h4><font color="red"><p style="display:inline-block; margin-left: 30px;" id="char-count"></p></font></h4>
-    
-    </div>
-
-    <a href="#" style = " margin-left: auto;  margin-bottom: 10px;" id="btn-publication">
-        <img src="static/images/caw_enviar.svg" alt="Publicar CAW" width="75">
-    </a>
-
-
 </div>
-
- 
-      <div id="demo" class="collapse">    
-           <input type="text" id="media-publication" placeholder=" Link to media publication" style="border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px;">
-      </div>
- 
-       
-  </form>
-
-
-
-  <center>
-       
-       <div id="loadingAnimation-publication" style="display: none;">
-              <div class="spinner"></div>               
-       </div>
-
-   </center> 
-
- <!--//////////////////////////////////////////////////////////////-->  
-  <!--//////////////////////////////////////////////////////////////-->  
-   <!--//////////////////////////////////////////////////////////////-->  
-
-
-
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
   
 </div>
 

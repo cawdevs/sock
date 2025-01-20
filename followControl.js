@@ -2,7 +2,7 @@
 async function follow_username(username_to_follow) {
 
  
-    try{        
+    try{        ////////////////////
 
     	     const selected_username = document.getElementById('selector_NFTs').value;
              

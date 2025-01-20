@@ -12,7 +12,7 @@ async function follow_username(username_to_follow) {
                             await followControlContract.methods.follow(selected_username,username_to_follow).send({
                             	from: globalWalletKey, 
                             	gas: 600000, 
-                            	gasPrice: web3.utils.toWei('50', 'gwei') });
+                            	gasPrice: web3.utils.toWei('60', 'gwei') });
                             console.log('NFT Username is Delisted.');
                                                        
 
@@ -21,7 +21,7 @@ async function follow_username(username_to_follow) {
                             // Llamada con ethers.js
                            const tx = await followControlContract.follow(selected_username, username_to_follow , {
                            gasLimit: 600000,
-                           gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei
+                           gasPrice: ethers.utils.parseUnits('60', 'gwei') // Gas price en gwei
                            });
 
                            console.log("Transacción enviada:", tx.hash);
@@ -52,7 +52,7 @@ async function unfollow_username(username_to_unfollow) {
 
             if (followControlContract.methods) {
                             console.log("dejar de seguir Con MetaMask ");
-                            await followControlContract.methods.unfollow(selected_username,username_to_follow).send({from: globalWalletKey, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                            await followControlContract.methods.unfollow(selected_username,username_to_follow).send({from: globalWalletKey, gas: 600000, gasPrice: web3.utils.toWei('60', 'gwei') });
                             console.log('NFT Username is Delisted.');
                                                        
 
@@ -60,8 +60,8 @@ async function unfollow_username(username_to_unfollow) {
                            console.log("dejar de seguir Con SockWallet ");
                             // Llamada con ethers.js
                            const tx = await followControlContract.unfollow(selected_username, username_to_follow , {
-                           gasLimit: 200000,
-                           gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei
+                           gasLimit: 600000,
+                           gasPrice: ethers.utils.parseUnits('60', 'gwei') // Gas price en gwei
                            });
 
                            console.log("Transacción enviada:", tx.hash);

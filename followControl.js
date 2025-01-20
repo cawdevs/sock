@@ -9,7 +9,10 @@ async function follow_username(username_to_follow) {
 
             if (followControlContract.methods) {
                             console.log("seguir Con MetaMask ");
-                            await followControlContract.methods.follow(selected_username,username_to_follow).send({from: globalWalletKey, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                            await followControlContract.methods.follow(selected_username,username_to_follow).send({
+                            	from: globalWalletKey, 
+                            	gas: 600000, 
+                            	gasPrice: web3.utils.toWei('50', 'gwei') });
                             console.log('NFT Username is Delisted.');
                                                        
 
@@ -17,7 +20,7 @@ async function follow_username(username_to_follow) {
                            console.log("seguir Con SockWallet ");
                             // Llamada con ethers.js
                            const tx = await followControlContract.follow(selected_username, username_to_follow , {
-                           gasLimit: 200000,
+                           gasLimit: 600000,
                            gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei
                            });
 

@@ -24,7 +24,7 @@ function createPublicationElements() {
     textarea.classList.add('form-control');
     textarea.id = 'publicacion';
     textarea.rows = '3';
-    textarea.placeholder = `"${nftusername}" ¿Que quieres publicar hoy?`;
+    textarea.placeholder = `${nftusername} ¿Que quieres publicar hoy?`;
     textarea.required = true;
     textarea.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 160px; font-size: 18px;';
     textareaDiv.appendChild(textarea);

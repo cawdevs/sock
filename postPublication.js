@@ -2,6 +2,15 @@
 
 
 function createPublicationElements() {
+
+
+    // Obtener el nombre de usuario del selector
+    const nftusername = document.getElementById('selector_NFTs').value;
+
+
+
+    getImageNFTUsername("publication-post-container");
+
     const container = document.getElementById('publication-post-container');
     container.innerHTML = '';
     
@@ -14,7 +23,7 @@ function createPublicationElements() {
     textarea.classList.add('form-control');
     textarea.id = 'publicacion';
     textarea.rows = '3';
-    textarea.placeholder = '¡¿En que estas pensando hoy?!';
+    textarea.placeholder = `"${nftusername}" ¿Que quieres publicar hoy?`;
     textarea.required = true;
     textarea.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 160px; font-size: 18px;';
     textareaDiv.appendChild(textarea);

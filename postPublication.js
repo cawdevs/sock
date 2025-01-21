@@ -8,8 +8,9 @@ function createPublicationElements() {
     const nftusername = document.getElementById('selector_NFTs').value;
 
 
+    
+    getImageNFTUsername("publication-NFT_image-container");
 
-    getImageNFTUsername("publication-post-container");
 
     const container = document.getElementById('publication-post-container');
     container.innerHTML = '';

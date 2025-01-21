@@ -521,17 +521,80 @@ async function findNftWallet(value) {
 
             }
             else{
-                const followButton = document.createElement("button");
-                followButton.textContent = "Seguir";
-                followButton.style.fontSize = "10px";
-                followButton.style.backgroundColor = "gray";
-                followButton.style.color = "white";
-                followButton.style.borderRadius = "15px";
-                followButton.addEventListener("click", async function () {
-                    await follow_username(username);                                        
-                });
-                topRow.appendChild(followButton); // Añadir el botón "For Sale" a la fila superior
+                //const followButton = document.createElement("button");
+                //followButton.textContent = "Seguir";
+                //followButton.style.fontSize = "10px";
+                //followButton.style.backgroundColor = "gray";
+                //followButton.style.color = "white";
+                //followButton.style.borderRadius = "15px";
+                //followButton.addEventListener("click", async function () {
+                //    await follow_username(username);                                        
+                //});
+                //topRow.appendChild(followButton); // Añadir el botón "For Sale" a la fila superior
               
+
+                //////////////////////////////////////////////////////
+                const followButton = document.createElement("button");
+followButton.textContent = "Seguir";
+followButton.style.fontSize = "10px";
+followButton.style.backgroundColor = "gray";
+followButton.style.color = "white";
+followButton.style.borderRadius = "15px";
+followButton.addEventListener("click", async function () {
+    // Guardar el texto original del botón
+    const originalText = followButton.textContent;
+
+    // Mostrar spinner y deshabilitar el botón
+    followButton.innerHTML = `<div class="spinner-border spinner-border-sm text-light" role="status"></div> Siguiendo...`;
+    followButton.disabled = true;
+
+    try {
+        // Llamada a la función de seguimiento
+        await follow_username(username);
+
+        // Cambiar el texto del botón a "Siguiendo"
+        followButton.textContent = "Siguiendo";
+        followButton.style.backgroundColor = "green";  // Cambiar color para indicar estado
+    } catch (error) {
+        console.error("Error al seguir:", error);
+        followButton.textContent = originalText;  // Restaurar texto en caso de error
+    } finally {
+        followButton.disabled = false;  // Habilitar el botón nuevamente
+    }
+});
+
+// Crear spinner oculto inicialmente
+const spinner = document.createElement("span");
+spinner.classList.add("spinner-border", "spinner-border-sm"); // Bootstrap spinner
+spinner.style.display = "none"; // Oculto por defecto
+spinner.style.marginLeft = "5px";
+
+followButton.appendChild(spinner); // Añadir spinner al botón
+
+followButton.addEventListener("click", async function () {
+    followButton.disabled = true;  // Desactivar botón
+    followButton.textContent = "Siguiendo..."; 
+    followButton.appendChild(spinner); 
+    spinner.style.display = "inline-block"; // Mostrar spinner
+
+    try {
+        await follow_username(username);  // Llamada a la función de seguimiento
+        followButton.textContent = "Siguiendo";
+        followButton.style.backgroundColor = "green";
+    } catch (error) {
+        console.error("Error al seguir:", error);
+        followButton.textContent = "Seguir";  // Restaurar texto si hay error
+        followButton.style.backgroundColor = "gray";
+    } finally {
+        spinner.style.display = "none"; // Ocultar spinner
+        followButton.disabled = false;  // Reactivar botón
+    }
+});
+topRow.appendChild(followButton); 
+
+
+
+
 
             }         
             

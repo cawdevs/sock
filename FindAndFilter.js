@@ -240,6 +240,23 @@ async function findNftWallet(value) {
 
 
 
+        }else if (value==="foyowers"){                 
+              console.log("Los que te estan siguiendo");
+              console.log("Estás siguiendo a alguien.");
+              if (followControlContract.methods) {
+                      console.log("Con MetaMask");
+                      nftUsernames = await followControlContract.methods.getFollowersList(nft_username_selected).call();
+                      
+                      // Lógica específica para contratos instanciados con web3.js
+              } else {
+                      console.log("Con SockWallet.");
+                      nftUsernames = await followControlContract.getFollowersList(nft_username_selected);
+                      
+                     // Lógica específica para contratos instanciados con ethers.js
+              }
+              
+
+
         }else if (value==="foryou"){
                  
               console.log("Contenido recomendado para ti.");

@@ -261,7 +261,9 @@ async function findNftWallet(value) {
                  
               console.log("Contenido recomendado para ti.");
 
-        }else if (value==="foryourand"){
+        }
+
+        /*else if (value==="foryourand"){
            
             
             limit=totalNFTs;
@@ -307,7 +309,10 @@ async function findNftWallet(value) {
  
             
 
-        }else if (value==="foryoulast"){
+        }*/
+
+
+        else if (value==="foryoulast"){
 
                     
                 if (nftUsernameContract.methods) {
@@ -378,6 +383,8 @@ async function findNftWallet(value) {
 
         }       
 
+
+
         const nftUsernameList = document.getElementById('nft-username-list');
 
         //nftUsernameList.style.display="none";
@@ -388,6 +395,8 @@ async function findNftWallet(value) {
         
         const listaNFTUsernames = [];
         //nftUsernames.forEach(function (username) {
+        const imageLoadPromises = [];  // Lista para almacenar las promesas de carga de imágenes
+
     
 
     console.log("Lista usernames2:", nftUsernames);
@@ -643,8 +652,13 @@ async function findNftWallet(value) {
             // Añadir el contenedor principal a la lista de usuarios
             nftUsernameList.appendChild(userRowContainer);
 
+
+             // Agregar la promesa de carga de imagen a la lista
+            imageLoadPromises.push(loadImagesFromHex(codeHexaImage, imageUserContainer.id));
+ 
+
             // Cargar la imagen
-            await loadImagesFromHex(codeHexaImage, imageUserContainer.id);
+            //await loadImagesFromHex(codeHexaImage, imageUserContainer.id);
 
 
 
@@ -657,6 +671,10 @@ async function findNftWallet(value) {
 
 
     }
+
+    // Esperar a que todas las imágenes se carguen en paralelo
+    await Promise.all(imageLoadPromises);
+
               
     return listaNFTUsernames;
 

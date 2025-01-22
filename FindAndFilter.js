@@ -240,7 +240,7 @@ async function findNftWallet(value) {
 
 
 
-        }else if (value==="foyowers"){                 
+        }else if (value==="followers"){                 
               console.log("Los que te estan siguiendo");
               console.log("Estás siguiendo a alguien.");
               if (followControlContract.methods) {

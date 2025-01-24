@@ -413,6 +413,7 @@ async function findNftWallet(value) {
                 let is_follower;
                 let codeHexaImage;     
                 let walletOwner;
+                let is_profile;
                 if (nftUsernameContract.methods) {
                         console.log("Con MetaMask ");
                         for_sale = await nftUsernameContract.methods.isNFTForSale(username).call();  
@@ -422,7 +423,9 @@ async function findNftWallet(value) {
                         //follower =?
                         is_following = await followControlContract.methods.isFollowing(selectorNFTs,username).call();
                         is_follower = await followControlContract.methods.isFollowedBy(selectorNFTs,username).call();
-
+                        is_profile = await profileContract.methods.getProfileByUsername(username).call();
+        
+        
                 } else {
                          // Usando ethers.js
                          console.log("Con SockWallet "); 
@@ -433,6 +436,7 @@ async function findNftWallet(value) {
                          //follower =?
                          is_following = await followControlContract.isFollowing(selectorNFTs,username);
                          is_follower = await followControlContract.isFollowedBy(selectorNFTs,username);
+                         is_profile = await profileContract.getProfileByUsername(username);
                 }
 
             const start = walletOwner.slice(0, 6);
@@ -485,6 +489,14 @@ async function findNftWallet(value) {
             // Nombre del usuario
             const nameButton = document.createElement("span");
             nameButton.textContent = username;
+            
+            if (is_profile.nftUsername && profile.nftUsername.length > 0) {
+                 nameButton.style.color = "lime";
+            } else {
+                 nameButton.style.color = "white";
+            } 
+                       
+
             nameButton.style.color = "white";
             nameButton.style.fontSize = "18px"; // Texto más grande para el nombre
             nameButton.classList.add("clickable-button");   

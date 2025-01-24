@@ -423,8 +423,12 @@ async function findNftWallet(value) {
                         //follower =?
                         is_following = await followControlContract.methods.isFollowing(selectorNFTs,username).call();
                         is_follower = await followControlContract.methods.isFollowedBy(selectorNFTs,username).call();
-                        is_profile = await profileContract.methods.getProfileByUsername(username).call();
-        
+                        try{
+                             is_profile = await profileContract.methods.getProfileByUsername(username).call();
+                         }
+                         catch{
+                              is_profile=false;
+                         } 
         
                 } else {
                          // Usando ethers.js
@@ -436,7 +440,12 @@ async function findNftWallet(value) {
                          //follower =?
                          is_following = await followControlContract.isFollowing(selectorNFTs,username);
                          is_follower = await followControlContract.isFollowedBy(selectorNFTs,username);
-                         is_profile = await profileContract.getProfileByUsername(username);
+                         try{
+                            is_profile = await profileContract.getProfileByUsername(username);
+                         }catch{
+                            is_profile=false; 
+                         } 
+                         
                 }
 
             const start = walletOwner.slice(0, 6);
@@ -490,7 +499,7 @@ async function findNftWallet(value) {
             const nameButton = document.createElement("span");
             nameButton.textContent = username;
             
-            if (is_profile.nftUsername && is_profile.nftUsername.length > 0) {
+            if (is_profile) {
                  nameButton.style.color = "lime";
             } else {
                  nameButton.style.color = "white";

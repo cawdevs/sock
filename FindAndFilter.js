@@ -426,7 +426,7 @@ async function findNftWallet(value) {
                         try{
                              is_profile = await profileContract.methods.getProfileByUsername(username).call();
                          }
-                         catch{
+                         catch(error){
                               is_profile=false;
                          } 
         
@@ -440,12 +440,14 @@ async function findNftWallet(value) {
                          //follower =?
                          is_following = await followControlContract.isFollowing(selectorNFTs,username);
                          is_follower = await followControlContract.isFollowedBy(selectorNFTs,username);
+                         
                          try{
                             is_profile = await profileContract.getProfileByUsername(username);
-                         }catch{
+                         }catch(error){
                             is_profile=false; 
                          } 
-                         
+
+                                                  
                 }
 
             const start = walletOwner.slice(0, 6);
@@ -499,12 +501,13 @@ async function findNftWallet(value) {
             const nameButton = document.createElement("span");
             nameButton.textContent = username;
             
-            if (is_profile) {
+            if (is_profile && is_profile.nftUsername && is_profile.nftUsername.length > 0) {
                  nameButton.style.color = "lime";
             } else {
                  nameButton.style.color = "white";
             } 
-                       
+
+                         
 
             nameButton.style.color = "white";
             nameButton.style.fontSize = "18px"; // Texto más grande para el nombre

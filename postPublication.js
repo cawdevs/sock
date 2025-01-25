@@ -2,62 +2,62 @@
 
 
 function createPublicationElements() {
-
-
     // Obtener el nombre de usuario del selector
     const nftusername = document.getElementById('selector_NFTs').value;
 
-
-    
     getImageNFTUsername("publication-NFT_image-container");
-
 
     const container = document.getElementById('publication-post-container');
     container.innerHTML = '';
-    
+
     const form = document.createElement('form');
 
-    // Textarea
+    // Primera fila: Textarea de publicación
     const textareaDiv = document.createElement('div');
     textareaDiv.classList.add('form-group');
     const textarea = document.createElement('textarea');
     textarea.classList.add('form-control');
     textarea.id = 'publicacion';
     textarea.rows = '3';
-    textarea.placeholder = `${nftusername} ¿Que quieres publicar hoy?`;
+    textarea.placeholder = `${nftusername} ¿Qué quieres publicar hoy?`;
     textarea.required = true;
     textarea.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 160px; font-size: 18px;';
     textareaDiv.appendChild(textarea);
     form.appendChild(textareaDiv);
 
-    // Controls container
-    const controlsDiv = document.createElement('div');
-    controlsDiv.style.cssText = 'display: flex; align-items: center;';
+    // Segunda fila: Input para el link de la imagen
+    const mediaInputDiv = document.createElement('div');
+    mediaInputDiv.classList.add('form-group');
+    const mediaInput = document.createElement('input');
+    mediaInput.type = 'text';
+    mediaInput.id = 'media-publication';
+    mediaInput.placeholder = 'Link to media publication';
+    mediaInput.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px; width: 100%;';
+    mediaInputDiv.appendChild(mediaInput);
+    form.appendChild(mediaInputDiv);
 
+    // Tercera fila: Contenedor con imagen, select y botón de enviar
+    const controlsDiv = document.createElement('div');
+    controlsDiv.style.cssText = 'display: flex; align-items: center; gap: 10px; justify-content: space-between;';
+
+    // Imagen
+    const imageContainer = document.createElement('div');
+    imageContainer.id = 'publication-NFT_image-container';
+    imageContainer.style.cssText = 'width: 50px; height: 50px; border-radius: 50%; border: 2px solid black;';
+    controlsDiv.appendChild(imageContainer);
+
+    // Select de privacidad
     const selectDiv = document.createElement('div');
     selectDiv.classList.add('form-group');
     const select = document.createElement('select');
     select.classList.add('form-control');
     select.id = 'filter-privacidad';
     select.innerHTML = '<option>*</option><option>>12</option><option>>18</option>';
-    select.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px;';
+    select.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 40px;';
     selectDiv.appendChild(select);
     controlsDiv.appendChild(selectDiv);
 
-    // Image button
-    const button = document.createElement('button');
-    button.setAttribute('data-toggle', 'collapse');
-    button.setAttribute('data-target', '#demo');
-    button.innerHTML = '<span class="glyphicon glyphicon-picture"></span>';
-    button.style.cssText = 'margin-left: 20px; margin-bottom: 10px;';
-    controlsDiv.appendChild(button);
-
-    // Character count
-    const charCount = document.createElement('h4');
-    charCount.innerHTML = '<font color="red"><p id="char-count" style="display:inline-block; margin-left: 30px;"></p></font>';
-    controlsDiv.appendChild(charCount);
-
-    // Submit button
+    // Botón de enviar publicación
     const submitLink = document.createElement('a');
     submitLink.href = '#';
     submitLink.id = 'btn-publication';
@@ -67,18 +67,6 @@ function createPublicationElements() {
 
     form.appendChild(controlsDiv);
 
-    // Collapsible media input
-    const collapseDiv = document.createElement('div');
-    collapseDiv.id = 'demo';
-    collapseDiv.classList.add('collapse');
-    const mediaInput = document.createElement('input');
-    mediaInput.type = 'text';
-    mediaInput.id = 'media-publication';
-    mediaInput.placeholder = 'Link to media publication';
-    mediaInput.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px;';
-    collapseDiv.appendChild(mediaInput);
-    form.appendChild(collapseDiv);
-
     container.appendChild(form);
 
     // Loading animation
@@ -87,7 +75,19 @@ function createPublicationElements() {
     loadingDiv.style.display = 'none';
     loadingDiv.innerHTML = '<div class="spinner"></div>';
     container.appendChild(loadingDiv);
+
+    
+
+    getImageNFTUsername("publication-NFT_image-container");
+
+
+
 }
 
-// Call function to generate elements when needed
+// Llamar la función para generar los elementos cuando sea necesario
 createPublicationElements();
+
+
+
+
+

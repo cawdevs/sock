@@ -507,9 +507,9 @@ async function findNftWallet(value) {
                  nameButton.style.color = "white";
             } 
 
-                         
 
-            nameButton.style.color = "white";
+
+            //nameButton.style.color = "white";
             nameButton.style.fontSize = "18px"; // Texto más grande para el nombre
             nameButton.classList.add("clickable-button");   
             nameButton.style.marginRight = "14px";         

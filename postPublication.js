@@ -43,7 +43,7 @@ function createPublicationElements() {
     // Imagen
     const imageContainer = document.createElement('div');
     imageContainer.id = 'publication-NFT_image-container';
-    imageContainer.style.cssText = 'width: 50px; height: 50px; border-radius: 50%; border: 2px solid black;';
+    //imageContainer.style.cssText = 'width: 50px; height: 50px; border-radius: 50%; ';
     controlsDiv.appendChild(imageContainer);
 
     // Select de privacidad

@@ -5,7 +5,7 @@ function createPublicationElements() {
     // Obtener el nombre de usuario del selector
     const nftusername = document.getElementById('selector_NFTs').value;
 
-    getImageNFTUsername("publication-NFT_image-container");
+   
 
     const container = document.getElementById('publication-post-container');
     container.innerHTML = '';

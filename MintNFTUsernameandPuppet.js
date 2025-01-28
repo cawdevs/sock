@@ -74,6 +74,9 @@ async function loadImage(src) {
     });
 }
 
+
+
+
 async function loadImages() {
     const container = document.getElementById('image-container');
     container.innerHTML = ''; // Limpiar el contenedor antes de cargar nuevas imágenes
@@ -176,22 +179,16 @@ async function getImageNFTUsername(image_contenedor){
     
 }
 
-async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
-
+async function loadImagesFromHexWithCanvas(hexString, image_contenedor, size = "medium") {
     const container = document.getElementById(image_contenedor);
-    //container.style.border = "1px solid blue"; // Borde blanco alrededor del contenedor
-    container.style.padding = "5px"; // Espacio interno para separar el contenido del borde
-    container.style.position = "relative"; // Posicionamiento para las imágenes
-    container.style.overflow = "hidden"; // Asegura que no se salga del borde
+
+    // Configurar el contenedor
+    container.style.padding = "5px";
+    container.style.position = "relative";
+    container.style.overflow = "hidden";
 
     // Limpiar el contenedor
     container.innerHTML = "";
-
-
-    // Limpiar el contenedor removiendo todos los nodos hijos
-    //while (container.firstChild) {
-    //    container.removeChild(container.firstChild);
-    //}
 
     // Eliminar el prefijo '0x' del código hexadecimal si está presente
     hexString = hexString.startsWith('0x') ? hexString.slice(2) : hexString;
@@ -212,65 +209,61 @@ async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
     const ojosImage = getImageFromHex(ojosHex, ojosImages);
     const peloImage = getImageFromHex(peloHex, peloImages);
 
-    // Crear un objeto con las fuentes de las imágenes
-    const imageSources = {
-        base: `pupets_imagenes/base/${baseImage}`,
-        brazo: `pupets_imagenes/brazo/${brazoImage}`,
-        cuerpo: `pupets_imagenes/cuerpo/${cuerpoImage}`,
-        cuello: `pupets_imagenes/cuello/${cuelloImage}`,
-        ojos: `pupets_imagenes/ojos/${ojosImage}`,
-        pelo: `pupets_imagenes/pelo/${peloImage}`
-    };
+    const imageSources = [
+        `pupets_imagenes/base/${baseImage}`,
+        `pupets_imagenes/brazo/${brazoImage}`,
+        `pupets_imagenes/cuerpo/${cuerpoImage}`,
+        `pupets_imagenes/cuello/${cuelloImage}`,
+        `pupets_imagenes/ojos/${ojosImage}`,
+        `pupets_imagenes/pelo/${peloImage}`
+    ];
 
-    // Mostrar "Cargando..." mientras se cargan las imágenes
-    //const loadingText = document.createElement('div');
-    //loadingText.textContent = 'Cargando...';
-    //container.appendChild(loadingText);
+    // Crear el canvas
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    // Configurar tamaño del canvas basado en el parámetro `size`
+    if (size === "small") {
+        canvas.width = 60;
+        canvas.height = 60;
+    } else if (size === "medium") {
+        canvas.width = 80;
+        canvas.height = 80;
+    } else if (size === "big") {
+        canvas.width = 200;
+        canvas.height = 200;
+    } else {
+        canvas.width = 150;
+        canvas.height = 150;
+    }
 
     try {
-        // Cargar y mostrar las imágenes
-        const promises = Object.values(imageSources).map(src => loadImage(src));
-        const images = await Promise.all(promises);
+        // Cargar todas las imágenes
+        const images = await Promise.all(
+            imageSources.map(src => loadImageX(src))
+        );
 
-        //alert('images: ' + hexString);
-     
-
-        
-
-        // Configuración de tamaño según la variable `size`
-    let width, height;
-    if (size === "small") {
-        width = "60px";
-        height = "60px";
-    } else if (size === "medium") {
-        width = "80px";
-        height = "80px";
-    } else if (size === "big") {
-        width = "200px";
-        height = "200px";
-    } else {
-        // Valor por defecto si no se proporciona `size` válido
-        width = "150px";
-        height = "150px";
-    }
-
-      
-
+        // Dibujar las imágenes en el canvas en el orden correcto
         images.forEach(img => {
-            img.style.width = width;
-            img.style.height = height;
-            img.style.objectFit = "cover";
-            container.appendChild(img);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         });
 
-
-
-       
-
+        // Agregar el canvas al contenedor
+        container.appendChild(canvas);
     } catch (error) {
-        console.error(error);
+        console.error("Error al cargar las imágenes:", error);
         container.innerHTML = '<p>Error al cargar las imágenes.</p>';
     }
+}
+
+// Utilidad para cargar una imagen
+function loadImageX(src) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+    });
 }
 
 

@@ -179,7 +179,7 @@ async function getImageNFTUsername(image_contenedor){
     
 }
 
-async function loadImagesFromHexWithCanvas(hexString, image_contenedor, size = "medium") {
+async function loadImagesFromHex(hexString, image_contenedor, size = "medium") {
     const container = document.getElementById(image_contenedor);
 
     // Configurar el contenedor

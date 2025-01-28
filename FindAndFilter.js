@@ -678,9 +678,9 @@ async function findNftWallet(value) {
 
 
              // Agregar la promesa de carga de imagen a la lista
-            imageLoadPromises.push(loadImagesFromHex(codeHexaImage, imageUserContainer.id));
+            //imageLoadPromises.push(loadImagesFromHex(codeHexaImage, imageUserContainer.id));
  
-
+            loadImagesFromHex(codeHexaImage, imageUserContainer.id)
             // Cargar la imagen
             //await loadImagesFromHex(codeHexaImage, imageUserContainer.id);
 
@@ -697,7 +697,7 @@ async function findNftWallet(value) {
     }
 
     // Esperar a que todas las imágenes se carguen en paralelo
-    await Promise.all(imageLoadPromises);
+    //await Promise.all(imageLoadPromises);
 
               
     return listaNFTUsernames;

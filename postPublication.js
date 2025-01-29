@@ -240,7 +240,7 @@ async function get_publication(id_publication){
 function createPublicationElement(publication) {
     
     const { nftUsername, timestamp, content, mediaUrl } = publication; // Datos correctos
-
+    console.log('media:', mediaUrl); // Mostrar el error completo para debug.
     // Crear el contenedor principal de la publicación
     const publicationDiv = document.createElement('div');
     publicationDiv.classList.add('publication-container');
@@ -286,6 +286,8 @@ function createPublicationElement(publication) {
     // ---- Fila 3: Imagen de la publicación ----
     const mediaDiv = document.createElement('div');
     mediaDiv.classList.add('publication-media');
+
+
 
     if (mediaUrl) {
         const mediaImage = document.createElement('img');

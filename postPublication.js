@@ -122,16 +122,14 @@ async function publicar_main_post(){
             const jsonMetadata = {
                     media: document.getElementById('media-publication').value,
                     privacidad: document.getElementById('filter-privacidad').value,
+                    calsificacion: document.getElementById('filter-classification').value
                     
             };
             // Convertir a formato de texto (string)
             const jsonString = JSON.stringify(jsonMetadata);
-            const publicationType = document.getElementById('filter-classification').value
-            const threadOrder=0;
-
-           
-             
-            
+            const publicationType = 0; ()
+            const threadOrder=0;          
+                         
 
             if (publisherContract.methods) {
                             console.log("publicar Con MetaMask ");

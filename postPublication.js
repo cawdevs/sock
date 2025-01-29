@@ -124,6 +124,8 @@ async function publicar_main_post(){
                     privacidad: document.getElementById('filter-privacidad').value,
                     
             };
+            // Convertir a formato de texto (string)
+            const jsonString = JSON.stringify(jsonMetadata);
             const publicationType = document.getElementById('filter-classification').value
             const threadOrder=0;
 
@@ -133,7 +135,7 @@ async function publicar_main_post(){
 
             if (publisherContract.methods) {
                             console.log("publicar Con MetaMask ");
-                            await publisherContract.methods.createPublication(selected_username,content,jsonMetadata,publicationType,publicationType,threadOrder).send({
+                            await publisherContract.methods.createPublication(selected_username,content,jsonString,publicationType,publicationType,threadOrder).send({
                                 from: globalWalletKey, 
                                 gas: 600000, 
                                 gasPrice: web3.utils.toWei('60', 'gwei') });
@@ -143,7 +145,7 @@ async function publicar_main_post(){
             } else {
                            console.log("publicado Con SockWallet ");
                             // Llamada con ethers.js
-                           const tx = await publisherContract.createPublication(selected_username,content,jsonMetadata,publicationType,publicationType,threadOrder , {
+                           const tx = await publisherContract.createPublication(selected_username,content,jsonString,publicationType,publicationType,threadOrder , {
                            gasLimit: 600000,
                            gasPrice: ethers.utils.parseUnits('60', 'gwei') // Gas price en gwei
                            });

@@ -110,12 +110,11 @@ createPublicationElements();
 
 
 async function publicar_main_post(){
-    alert('publicar_main_post');
-
-       
-    
-    
+   
+   
     try{        ////////////////////
+
+            document.getElementById('loadingAnimation-publication').style.display = 'block';
 
             const selected_username = document.getElementById('selector_NFTs').value;
             const content = document.getElementById("publicacion").value;
@@ -155,14 +154,51 @@ async function publicar_main_post(){
                            alert('Transaction ok :)');
 
                        } 
+           document.getElementById('loadingAnimation-publication').style.display = 'none';
+           
 
     } catch (error) {
-           
+          document.getElementById('loadingAnimation-publication').style.display = 'none';
+ 
           alert('Error al intentar Publicar.');
           console.error('Error completo ppp:', error.code); // Mostrar el error completo para debug.
     
     }
 }
+
+
+async function get_publication(id_publication){
+   
+   
+    try{        ////////////////////
+   
+
+            let publication=[];
+            if (publisherContract.methods) {
+                         console.log("get_publication Con MetaMask ");
+                         // Usando web3.js
+                         publication = await publisherContract.methods.getPublication(id_publication).call();
+                         
+            } else {
+                         // Usando ethers.js
+                        console.log("get_publication Con SockWallet "); 
+                        publication = await publisherContract.getPublication(id_publication); 
+                      
+            }             
+
+             console.error('publication{}:',publication ); // Mostrar el error completo para debug.
+    
+           
+
+    } catch (error) {
+          
+          alert('Error al intentar get_publication.');
+          console.error('Error completo ppp:', error.code); // Mostrar el error completo para debug.
+    
+    }
+}
+
+await get_publication(0);
 
 async function publicar_thread_post(){
          alert('publicar_thread_post');

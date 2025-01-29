@@ -223,8 +223,8 @@ async function get_publication(id_publication){
             document.getElementById('publications-container').appendChild(publicationElement);
           
 
-            console.log('publication{}:',publication ); // Mostrar el error completo para debug.
-            console.log('publication count:',count_publication );
+            //console.log('publication{}:',publication ); // Mostrar el error completo para debug.
+            //console.log('publication count:',count_publication );
            
 
 

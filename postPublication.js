@@ -214,7 +214,7 @@ async function get_publication(id_publication){
                 nftUsername,
                 publicationType,
                 timestamp,
-                media,
+                mediaUrl,
                 privacidad,
                 clasificacion
             });

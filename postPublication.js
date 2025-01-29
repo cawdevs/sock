@@ -187,7 +187,41 @@ async function get_publication(id_publication){
                         count_publication=  await publisherContract.publicationCount();
                         publication = await publisherContract.getPublication(id_publication); 
                       
-            }             
+            }  
+
+            
+            
+            // 🔹 El primer elemento de publication contiene los datos que necesitamos
+            const publicationData = publication[0]; 
+
+            // 🔹 Convertir jsonMetadata de string a JSON
+            const jsonMetadata = JSON.parse(publicationData.jsonMetadata);
+
+            // 🔹 Extraer datos
+            const id = publicationData.id;
+            const content = publicationData.content;
+            const nftUsername = publicationData.nftUsername;
+            const publicationType = publicationData.publicationType;
+            const timestamp = new Date(publicationData.timestamp * 1000).toLocaleString(); // Convertir a fecha legible
+            const media = jsonMetadata.media || ''; // Si no tiene media, poner ''
+            const privacidad = jsonMetadata.privacidad || 'Pública'; 
+            const clasificacion = jsonMetadata.calsificacion || 'General';
+
+            // 🔹 Crear el elemento de la publicación en el DOM
+            const publicationElement = createPublicationElement({
+                id,
+                content,
+                nftUsername,
+                publicationType,
+                timestamp,
+                media,
+                privacidad,
+                clasificacion
+            });
+
+            // 🔹 Agregarlo al contenedor de publicaciones
+            document.getElementById('publications-container').appendChild(publicationElement);
+          
 
             console.log('publication{}:',publication ); // Mostrar el error completo para debug.
             console.log('publication count:',count_publication );
@@ -201,6 +235,78 @@ async function get_publication(id_publication){
     
     }
 }
+
+
+function createPublicationElement(publication) {
+    const { username, date, content, mediaUrl } = publication; // Datos de la publicación
+    
+    // Crear el contenedor principal de la publicación
+    const publicationDiv = document.createElement('div');
+    publicationDiv.classList.add('publication-container');
+    publicationDiv.style.cssText = 'border: 2px solid black; padding: 10px; border-radius: 10px; margin-bottom: 20px; width: 100%; max-width: 500px;';
+
+    // ---- Fila 1: NFTUsername, Nombre, Fecha y Select ----
+    const headerDiv = document.createElement('div');
+    headerDiv.classList.add('publication-header');
+    headerDiv.style.cssText = 'display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;';
+
+    const profileImage = document.createElement('img');
+    profileImage.src = `https://api.nftusername.com/avatar/${nftUsername}`; // URL del avatar
+    profileImage.alt = 'NFT Avatar';
+    profileImage.style.cssText = 'width: 50px; height: 50px; border-radius: 50%; object-fit: cover;';
+
+    const usernameSpan = document.createElement('span');
+    usernameSpan.textContent = nftUsername;
+    usernameSpan.style.cssText = 'font-weight: bold; margin-left: 10px;';
+
+    const dateSpan = document.createElement('span');
+    dateSpan.textContent = timestamp;
+    dateSpan.style.cssText = 'font-size: 12px; color: gray;';
+
+    const actionSelect = document.createElement('select');
+    actionSelect.innerHTML = '<option>Opciones</option><option value="edit">Editar</option><option value="delete">Eliminar</option>';
+    actionSelect.style.cssText = 'border: 2px solid black; border-radius: 5px; padding: 5px;';
+
+    const userInfoDiv = document.createElement('div');
+    userInfoDiv.style.cssText = 'display: flex; align-items: center;';
+    userInfoDiv.appendChild(profileImage);
+    userInfoDiv.appendChild(usernameSpan);
+
+    headerDiv.appendChild(userInfoDiv);
+    headerDiv.appendChild(dateSpan);
+    headerDiv.appendChild(actionSelect);
+
+    // ---- Fila 2: Contenido de la publicación ----
+    const contentDiv = document.createElement('div');
+    contentDiv.classList.add('publication-content');
+    contentDiv.textContent = content;
+    contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 14px;';
+
+    // ---- Fila 3: Imagen de la publicación ----
+    const mediaDiv = document.createElement('div');
+    mediaDiv.classList.add('publication-media');
+
+    if (mediaUrl) {
+        const mediaImage = document.createElement('img');
+        mediaImage.src = mediaUrl;
+        mediaImage.alt = 'Publicación';
+        mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+        mediaDiv.appendChild(mediaImage);
+    }
+
+    // Agregar filas al contenedor principal
+    publicationDiv.appendChild(headerDiv);
+    publicationDiv.appendChild(contentDiv);
+    publicationDiv.appendChild(mediaDiv);
+
+    return publicationDiv;
+}
+
+
+
+
+
+
 
 
 

@@ -378,10 +378,9 @@ span.hashtag {
 
     <div id="home" class="tab-pane fade in active" >
          <br>
-            <h3><p>Informacion de la Aplicacion</p> </h3>
-            <br>
-            <p> Se actualizò el juego Carta mayor, juega y gana indefinidamente 2M de tokens a medida que aumenta la dificultad</p>
+                   
 
+         <div id="publications-container"></div>
 
           
          <div class="user-following-publication-container"  >
@@ -1587,7 +1586,8 @@ async function inicializarUI() {
     await getmintedNFT();
     
     await get_NFTUsername_profile();
-   
+    
+    await get_publication(1)
 
     // Registrar eventos de botones
     document.getElementById("btn-mintear-nft").addEventListener("click", mintearNFT);

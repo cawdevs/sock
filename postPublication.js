@@ -127,7 +127,7 @@ async function publicar_main_post(){
             };
             // Convertir a formato de texto (string)
             const jsonString = JSON.stringify(jsonMetadata);
-            const publicationType = 0; ()
+            const publicationType = 0; 
             const threadOrder=0;          
                          
 

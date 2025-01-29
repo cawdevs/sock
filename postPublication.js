@@ -238,7 +238,8 @@ async function get_publication(id_publication){
 
 
 function createPublicationElement(publication) {
-    const { username, date, content, mediaUrl } = publication; // Datos de la publicación
+    
+    const { nftUsername, timestamp, content, mediaUrl } = publication; // Datos correctos
 
     // Crear el contenedor principal de la publicación
     const publicationDiv = document.createElement('div');

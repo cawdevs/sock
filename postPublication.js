@@ -178,13 +178,13 @@ async function get_publication(id_publication){
             if (publisherContract.methods) {
                         console.log("get_publication Con MetaMask ");
                         // Usando web3.js
-                        count_publication=  await publisherContract.methods.publicationCount().call();                        
+                        //count_publication=  await publisherContract.methods.publicationCount().call();                        
                         publication = await publisherContract.methods.getPublication(id_publication).call();
                          
             } else {
                          // Usando ethers.js
                         console.log("get_publication Con SockWallet "); 
-                        count_publication=  await publisherContract.publicationCount();
+                        //count_publication=  await publisherContract.publicationCount();
                         publication = await publisherContract.getPublication(id_publication); 
                       
             }  
@@ -239,7 +239,7 @@ async function get_publication(id_publication){
 
 function createPublicationElement(publication) {
     const { username, date, content, mediaUrl } = publication; // Datos de la publicación
-    
+
     // Crear el contenedor principal de la publicación
     const publicationDiv = document.createElement('div');
     publicationDiv.classList.add('publication-container');

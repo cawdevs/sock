@@ -174,21 +174,25 @@ async function get_publication(id_publication){
    
 
             let publication=[];
+            let count_publication;
             if (publisherContract.methods) {
-                         console.log("get_publication Con MetaMask ");
-                         // Usando web3.js
-                         publication = await publisherContract.methods.getPublication(id_publication).call();
+                        console.log("get_publication Con MetaMask ");
+                        // Usando web3.js
+                        count_publication=  await publisherContract.methods.publicationCount().call();                        
+                        publication = await publisherContract.methods.getPublication(id_publication).call();
                          
             } else {
                          // Usando ethers.js
                         console.log("get_publication Con SockWallet "); 
+                        count_publication=  await publisherContract.publicationCount();
                         publication = await publisherContract.getPublication(id_publication); 
                       
             }             
 
-             console.log('publication{}:',publication ); // Mostrar el error completo para debug.
-    
+            console.log('publication{}:',publication ); // Mostrar el error completo para debug.
+            console.log('publication count:',count_publication );
            
+
 
     } catch (error) {
           
@@ -198,7 +202,7 @@ async function get_publication(id_publication){
     }
 }
 
-get_publication(0);
+
 
 async function publicar_thread_post(){
          alert('publicar_thread_post');
@@ -235,3 +239,15 @@ async function delete_post(){
         //select.id = 'filter-privacidad';
 }
 
+  NFT_Username = document.getElementById('selector_NFTs').value;
+  content = document.getElementById("publicacion").value;
+            const jsonMetadata = {
+                    media: document.getElementById('media-publication').value,
+                    privacidad: document.getElementById('filter-privacidad').value,
+                    calsificacion: document.getElementById('filter-classification').value
+                    
+            };
+            // Convertir a formato de texto (string)
+            const jsonString = JSON.stringify(jsonMetadata);
+            const publicationType = 0; 
+            const threadOrder=0; 

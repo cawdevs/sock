@@ -186,7 +186,7 @@ async function get_publication(id_publication){
                       
             }             
 
-             console.error('publication{}:',publication ); // Mostrar el error completo para debug.
+             console.log('publication{}:',publication ); // Mostrar el error completo para debug.
     
            
 
@@ -198,7 +198,7 @@ async function get_publication(id_publication){
     }
 }
 
-await get_publication(0);
+get_publication(0);
 
 async function publicar_thread_post(){
          alert('publicar_thread_post');

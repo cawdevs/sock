@@ -174,7 +174,7 @@ async function get_publication(id_publication){
    
 
             let publication=[];
-            let count_publication;
+            //let count_publication;
             if (publisherContract.methods) {
                         console.log("get_publication Con MetaMask ");
                         // Usando web3.js
@@ -231,7 +231,7 @@ async function get_publication(id_publication){
     } catch (error) {
           
           alert('Error al intentar get_publication.');
-          console.error('Error completo ppp:', error.code); // Mostrar el error completo para debug.
+          console.error('Error completo ppp:', error); // Mostrar el error completo para debug.
     
     }
 }

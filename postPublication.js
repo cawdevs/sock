@@ -193,6 +193,7 @@ async function get_publication(id_publication){
             
             // 🔹 El primer elemento de publication contiene los datos que necesitamos
             const publicationData = publication[0]; 
+            
 
             // 🔹 Convertir jsonMetadata de string a JSON
             const jsonMetadata = JSON.parse(publicationData.jsonMetadata);

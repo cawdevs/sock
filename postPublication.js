@@ -167,95 +167,61 @@ async function publicar_main_post(){
 }
 
 
-async function get_publication(id_publication){
-   
-   
-    try{        ////////////////////
-   
+async function get_publication(id_publication) {
+    try {
+        let publication = [];
 
-            let publication=[];
-            //let count_publication;
-            if (publisherContract.methods) {
-                        console.log("get_publication Con MetaMask ");
-                        // Usando web3.js
-                        //count_publication=  await publisherContract.methods.publicationCount().call();                        
-                        publication = await publisherContract.methods.getPublication(id_publication).call();
-                         
-            } else {
-                         // Usando ethers.js
-                        console.log("get_publication Con SockWallet "); 
-                        //count_publication=  await publisherContract.publicationCount();
-                        publication = await publisherContract.getPublication(id_publication); 
-                      
-            }  
+        if (publisherContract.methods) {
+            console.log("get_publication Con MetaMask");
+            publication = await publisherContract.methods.getPublication(id_publication).call();
+        } else {
+            console.log("get_publication Con SockWallet");
+            publication = await publisherContract.getPublication(id_publication);
+        }
 
-            
-            
-            // 🔹 El primer elemento de publication contiene los datos que necesitamos
-            const publicationData = publication[0]; 
+        const publicationData = publication[0];
+        const jsonMetadata = JSON.parse(publicationData.jsonMetadata);
 
+        const publicationObject = {
+            id: publicationData.id,
+            content: publicationData.content,
+            nftUsername: publicationData.nftUsername,
+            publicationType: publicationData.publicationType,
+            timestamp: new Date(publicationData.timestamp * 1000).toLocaleString(),
+            media: jsonMetadata.media || '',
+            privacidad: jsonMetadata.privacidad || 'Pública',
+            clasificacion: jsonMetadata.clasificacion || 'General'
+        };
 
-            // 🔹 Convertir jsonMetadata de string a JSON
-            const jsonMetadata = JSON.parse(publicationData.jsonMetadata);
+        // 🔹 Primero agregamos la publicación al DOM
+        const publicationElement = await createPublicationElement(publicationObject);
+        document.getElementById('publications-container').appendChild(publicationElement);
 
-            // 🔹 Extraer datos
-            const id = publicationData.id;
-            const content = publicationData.content;
-            const nftUsername = publicationData.nftUsername;
-            const publicationType = publicationData.publicationType;
-            const timestamp = new Date(publicationData.timestamp * 1000).toLocaleString(); // Convertir a fecha legible
-            const media = jsonMetadata.media || ''; // Si no tiene media, poner ''
-            const privacidad = jsonMetadata.privacidad || 'Pública'; 
-            const clasificacion = jsonMetadata.calsificacion || 'General';
+        // 🔥 Ahora podemos cargar la imagen porque el elemento ya está en el DOM
+        const profileImageContainerId = `imageContainerId_${publicationObject.nftUsername}`;
+        let codeHexaImage;
 
-            // 🔹 Crear el elemento de la publicación en el DOM
-            const publicationObject = await createPublicationElement({
-                id,
-                content,
-                nftUsername,
-                publicationType,
-                timestamp,
-                media,
-                privacidad,
-                clasificacion
-            });
+        if (nftUsernameContract.methods) {
+            console.log("get_codehexa Con MetaMask ");
+            codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(publicationObject.nftUsername).call();
+        } else {
+            console.log("get_codehaxa Con SockWallet "); 
+            codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(publicationObject.nftUsername);
+        }
 
-
-            // 🔹 Agregarlo al contenedor de publicaciones
-            document.getElementById('publications-container').appendChild(publicationObject);
-            
-            const profileImageContainerId = `imageContainerId_${publicationObject.nftUsername}`;
-            let codeHexaImage;    
-            if (nftUsernameContract.methods) {
-                console.log("get_codehexa Con MetaMask ");
-                codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(nftUsername).call();
-            } else {
-                console.log("get_codehaxa Con SockWallet "); 
-                codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(nftUsername);
-            } 
-           
-            // Cargar imagen de perfil desde el código hexadecimal
-            await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
-          
-
-            //console.log('publication{}:',publication ); // Mostrar el error completo para debug.
-            //console.log('publication count:',count_publication );
-           
-
+        await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
 
     } catch (error) {
-          
-          alert('Error al intentar get_publication.');
-          console.error('Error completo ppp:', error); // Mostrar el error completo para debug.
-    
+        alert('Error al intentar get_publication.');
+        console.error('Error completo:', error);
     }
 }
 
 
-async function createPublicationElement(publication) { // Agregar async
+
+async function createPublicationElement(publication) {
     const { nftUsername, timestamp, content, media } = publication;
-    console.log('media:', media); 
-    
+
     // ---- Creación de contenedores ----
     const publicationDiv = document.createElement('div');
     publicationDiv.classList.add('publication-container');
@@ -272,14 +238,13 @@ async function createPublicationElement(publication) { // Agregar async
     profileImageContainer.style.height = "60px";
     profileImageContainer.style.display = "flex";
     profileImageContainer.style.justifyContent = "center";
-    
 
     const usernameSpan = document.createElement('span');
     usernameSpan.textContent = nftUsername;
     usernameSpan.style.cssText = 'font-weight: bold; font-size: 18px; margin-left: 10px;';
 
     const dateSpan = document.createElement('span');
-    dateSpan.textContent = new Date(timestamp * 1000).toLocaleString(); // Convertir timestamp a fecha legible
+    dateSpan.textContent = timestamp; 
     dateSpan.style.cssText = 'font-size: 12px; color: gray;';
 
     const actionSelect = document.createElement('select');
@@ -289,7 +254,6 @@ async function createPublicationElement(publication) { // Agregar async
     const userInfoDiv = document.createElement('div');
     userInfoDiv.style.cssText = 'display: flex; align-items: center;';
     userInfoDiv.appendChild(profileImageContainer);
-
     userInfoDiv.appendChild(usernameSpan);
 
     headerDiv.appendChild(userInfoDiv);
@@ -318,10 +282,10 @@ async function createPublicationElement(publication) { // Agregar async
     publicationDiv.appendChild(headerDiv);
     publicationDiv.appendChild(contentDiv);
     publicationDiv.appendChild(mediaDiv);
-   
 
     return publicationDiv;
 }
+
 
 
 

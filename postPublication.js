@@ -214,7 +214,7 @@ async function get_publication(id_publication){
                 nftUsername,
                 publicationType,
                 timestamp,
-                mediaUrl,
+                media,
                 privacidad,
                 clasificacion
             });
@@ -239,8 +239,8 @@ async function get_publication(id_publication){
 
 function createPublicationElement(publication) {
     
-    const { nftUsername, timestamp, content, mediaUrl } = publication; // Datos correctos
-    console.log('media:', mediaUrl); // Mostrar el error completo para debug.
+    const { nftUsername, timestamp, content, media } = publication; // Datos correctos
+    console.log('media:', media); // Mostrar el error completo para debug.
     // Crear el contenedor principal de la publicación
     const publicationDiv = document.createElement('div');
     publicationDiv.classList.add('publication-container');
@@ -265,7 +265,7 @@ function createPublicationElement(publication) {
     dateSpan.style.cssText = 'font-size: 12px; color: gray;';
 
     const actionSelect = document.createElement('select');
-    actionSelect.innerHTML = '<option>Opciones</option><option value="edit">Editar</option><option value="delete">Eliminar</option>';
+    actionSelect.innerHTML = '<option></option><option value="edit">Editar</option><option value="delete">Eliminar</option>';
     actionSelect.style.cssText = 'border: 2px solid black; border-radius: 5px; padding: 5px;';
 
     const userInfoDiv = document.createElement('div');
@@ -289,9 +289,9 @@ function createPublicationElement(publication) {
 
 
 
-    if (mediaUrl) {
+    if (media) {
         const mediaImage = document.createElement('img');
-        mediaImage.src = mediaUrl;
+        mediaImage.src = media;
         mediaImage.alt = 'Publicación';
         mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
         mediaDiv.appendChild(mediaImage);

@@ -167,6 +167,42 @@ async function publicar_main_post(){
 }
 
 
+
+
+async function get_publications_home() {
+    try {
+        let total_publication;
+
+        if (publisherContract.methods) {
+            console.log("get_publication Con MetaMask");
+            total_publication = await publisherContract.methods.publicationCount().call();
+        } else {
+            console.log("get_publication Con SockWallet");
+            total_publication = await publisherContract.publicationCount();
+        }
+
+        for (let i = 1; i <= total_publication; i++) {  // Corrección del bucle
+            await get_publication(i);  // Se pasa `i` como `id_publication`
+        }
+
+    } catch (error) {
+        alert('Error al intentar get_publications_home.');
+        console.error('Error completo:', error);
+    }
+}
+
+
+
+
+
+
+async function get_my_publication(){    
+}
+
+async function get_publication_NFTUsername(){    
+}
+
+
 async function get_publication(id_publication) {
     try {
         let publication = [];

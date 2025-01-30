@@ -223,6 +223,19 @@ async function get_publication(id_publication){
 
             // 🔹 Agregarlo al contenedor de publicaciones
             document.getElementById('publications-container').appendChild(publicationElement);
+            
+            const profileImageContainerId = `imageContainerId_${publicationObject.nftUsername}`;
+            let codeHexaImage;    
+            if (nftUsernameContract.methods) {
+                console.log("get_codehexa Con MetaMask ");
+                codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(nftUsername).call();
+            } else {
+                console.log("get_codehaxa Con SockWallet "); 
+                codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(nftUsername);
+            } 
+           
+            // Cargar imagen de perfil desde el código hexadecimal
+            await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
           
 
             //console.log('publication{}:',publication ); // Mostrar el error completo para debug.
@@ -242,17 +255,7 @@ async function get_publication(id_publication){
 async function createPublicationElement(publication) { // Agregar async
     const { nftUsername, timestamp, content, media } = publication;
     console.log('media:', media); 
-
-    let codeHexaImage;
     
-    if (nftUsernameContract.methods) {
-        console.log("get_codehexa Con MetaMask ");
-        codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(nftUsername).call();
-    } else {
-        console.log("get_codehaxa Con SockWallet "); 
-        codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(nftUsername);
-    }
-
     // ---- Creación de contenedores ----
     const publicationDiv = document.createElement('div');
     publicationDiv.classList.add('publication-container');
@@ -315,9 +318,7 @@ async function createPublicationElement(publication) { // Agregar async
     publicationDiv.appendChild(headerDiv);
     publicationDiv.appendChild(contentDiv);
     publicationDiv.appendChild(mediaDiv);
-
-    // Cargar imagen de perfil desde el código hexadecimal
-    //await loadImagesFromHex(codeHexaImage, profileImageContainer.id, "small"); 
+   
 
     return publicationDiv;
 }

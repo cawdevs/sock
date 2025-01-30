@@ -1586,11 +1586,8 @@ async function inicializarUI() {
     
     await get_NFTUsername_profile();
     
-    await get_publication(2);
-    await get_publication(3);
-    await get_publication(2);
-    await get_publication(3);
-    await get_publication(4);
+    await get_publications_home();
+    
     // Registrar eventos de botones
     document.getElementById("btn-mintear-nft").addEventListener("click", mintearNFT);
     document.getElementById("btn-verify-nft").addEventListener("click", verifymintearNFT);

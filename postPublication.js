@@ -244,7 +244,7 @@ function createPublicationElement(publication) {
     // Crear el contenedor principal de la publicación
     const publicationDiv = document.createElement('div');
     publicationDiv.classList.add('publication-container');
-    publicationDiv.style.cssText = 'border: 2px solid black; padding: 10px; border-radius: 10px; margin-bottom: 20px; width: 100%; max-width: 500px;';
+    publicationDiv.style.cssText = 'border: 1px solid gray; padding: 0px; border-radius: 10px; margin-bottom: 10px; width: 100%; max-width: 500px;';
 
     // ---- Fila 1: NFTUsername, Nombre, Fecha y Select ----
     const headerDiv = document.createElement('div');
@@ -258,7 +258,7 @@ function createPublicationElement(publication) {
 
     const usernameSpan = document.createElement('span');
     usernameSpan.textContent = nftUsername;
-    usernameSpan.style.cssText = 'font-weight: bold; margin-left: 10px;';
+    usernameSpan.style.cssText = 'font-weight: bold; font-size: 18px; margin-left: 10px;';
 
     const dateSpan = document.createElement('span');
     dateSpan.textContent = timestamp;
@@ -266,7 +266,7 @@ function createPublicationElement(publication) {
 
     const actionSelect = document.createElement('select');
     actionSelect.innerHTML = '<option></option><option value="edit">Editar</option><option value="delete">Eliminar</option>';
-    actionSelect.style.cssText = 'border: 2px solid black; border-radius: 5px; padding: 5px;';
+    actionSelect.style.cssText = 'border: 0px solid black; border-radius: 5px; padding: 5px;';
 
     const userInfoDiv = document.createElement('div');
     userInfoDiv.style.cssText = 'display: flex; align-items: center;';
@@ -281,7 +281,7 @@ function createPublicationElement(publication) {
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('publication-content');
     contentDiv.textContent = content;
-    contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 14px;';
+    contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 16px;';
 
     // ---- Fila 3: Imagen de la publicación ----
     const mediaDiv = document.createElement('div');

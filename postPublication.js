@@ -239,7 +239,7 @@ async function get_publication(id_publication){
 }
 
 
-function createPublicationElement(publication) {
+async function createPublicationElement(publication) {
     
     const { nftUsername, timestamp, content, media } = publication; // Datos correctos
     console.log('media:', media); // Mostrar el error completo para debug.

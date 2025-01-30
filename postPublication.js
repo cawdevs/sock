@@ -209,7 +209,7 @@ async function get_publication(id_publication){
             const clasificacion = jsonMetadata.calsificacion || 'General';
 
             // 🔹 Crear el elemento de la publicación en el DOM
-            const publicationElement = createPublicationElement({
+            const publicationElement = await createPublicationElement({
                 id,
                 content,
                 nftUsername,

@@ -193,7 +193,7 @@ async function get_publication(id_publication){
             
             // 🔹 El primer elemento de publication contiene los datos que necesitamos
             const publicationData = publication[0]; 
-            
+
 
             // 🔹 Convertir jsonMetadata de string a JSON
             const jsonMetadata = JSON.parse(publicationData.jsonMetadata);
@@ -220,6 +220,7 @@ async function get_publication(id_publication){
                 clasificacion
             });
 
+
             // 🔹 Agregarlo al contenedor de publicaciones
             document.getElementById('publications-container').appendChild(publicationElement);
           
@@ -242,7 +243,20 @@ function createPublicationElement(publication) {
     
     const { nftUsername, timestamp, content, media } = publication; // Datos correctos
     console.log('media:', media); // Mostrar el error completo para debug.
+    
 
+    
+    let codeHexaImage;
+            //let count_publication;
+    if (nftUsernameContract.methods) {
+                console.log("get_codehexa Con MetaMask ");
+                // Usando web3.js
+                codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(nftUsername).call(); 
+    } else {
+                 // Usando ethers.js
+                 console.log("get_codehaxa Con SockWallet "); 
+                 codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(nftUsername); 
+    }  
 
     // Crear el contenedor principal de la publicación
     const publicationDiv = document.createElement('div');
@@ -256,11 +270,14 @@ function createPublicationElement(publication) {
     headerDiv.classList.add('publication-header');
     headerDiv.style.cssText = 'display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;';
 
-    const profileImage = document.createElement('img');
-    profileImage.src = `https://api.nftusername.com/avatar/${nftUsername}`; // URL del avatar
-    profileImage.alt = 'NFT Avatar';
-    profileImage.style.cssText = 'width: 50px; height: 50px; border-radius: 50%; object-fit: cover;';
+    const profileImageContainer = document.createElement('div');
+    profileImageContainer.id = `imageContainerId_${username}`; // ID único
+    profileImageContainer.style.width = "60px";
+    profileImageContainer.style.height = "60px";
+    profileImageContainer.style.display = "flex";
+    profileImageContainer.style.justifyContent = "center";
 
+  
     const usernameSpan = document.createElement('span');
     usernameSpan.textContent = nftUsername;
     usernameSpan.style.cssText = 'font-weight: bold; font-size: 18px; margin-left: 10px;';
@@ -275,7 +292,7 @@ function createPublicationElement(publication) {
 
     const userInfoDiv = document.createElement('div');
     userInfoDiv.style.cssText = 'display: flex; align-items: center;';
-    userInfoDiv.appendChild(profileImage);
+    userInfoDiv.appendChild(profileImageContainer);
     userInfoDiv.appendChild(usernameSpan);
 
     headerDiv.appendChild(userInfoDiv);
@@ -306,6 +323,8 @@ function createPublicationElement(publication) {
     publicationDiv.appendChild(headerDiv);
     publicationDiv.appendChild(contentDiv);
     publicationDiv.appendChild(mediaDiv);
+
+    await loadImagesFromHex(codeHexaImage, profileImageContainer.id, "small");
 
     return publicationDiv;
 }

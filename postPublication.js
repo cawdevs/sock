@@ -317,7 +317,7 @@ async function createPublicationElement(publication) { // Agregar async
     publicationDiv.appendChild(mediaDiv);
 
     // Cargar imagen de perfil desde el código hexadecimal
-    await loadImagesFromHex(codeHexaImage, profileImageContainer.id, "small"); 
+    //await loadImagesFromHex(codeHexaImage, profileImageContainer.id, "small"); 
 
     return publicationDiv;
 }

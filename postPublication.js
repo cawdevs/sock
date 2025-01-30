@@ -241,10 +241,14 @@ function createPublicationElement(publication) {
     
     const { nftUsername, timestamp, content, media } = publication; // Datos correctos
     console.log('media:', media); // Mostrar el error completo para debug.
+
+
     // Crear el contenedor principal de la publicación
     const publicationDiv = document.createElement('div');
     publicationDiv.classList.add('publication-container');
     publicationDiv.style.cssText = 'border: 1px solid gray; padding: 0px; border-radius: 10px; margin-bottom: 10px; width: 100%; max-width: 500px;';
+    publicationDiv.style.width = '100%';
+    publicationDiv.style.overflow = 'hidden';
 
     // ---- Fila 1: NFTUsername, Nombre, Fecha y Select ----
     const headerDiv = document.createElement('div');

@@ -271,7 +271,7 @@ function createPublicationElement(publication) {
     headerDiv.style.cssText = 'display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;';
 
     const profileImageContainer = document.createElement('div');
-    profileImageContainer.id = `imageContainerId_${username}`; // ID único
+    profileImageContainer.id = `imageContainerId_${nftUsername}`; // ID único
     profileImageContainer.style.width = "60px";
     profileImageContainer.style.height = "60px";
     profileImageContainer.style.display = "flex";

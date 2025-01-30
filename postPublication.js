@@ -209,7 +209,7 @@ async function get_publication(id_publication){
             const clasificacion = jsonMetadata.calsificacion || 'General';
 
             // 🔹 Crear el elemento de la publicación en el DOM
-            const publicationElement = await createPublicationElement({
+            const publicationObject = await createPublicationElement({
                 id,
                 content,
                 nftUsername,
@@ -222,7 +222,7 @@ async function get_publication(id_publication){
 
 
             // 🔹 Agregarlo al contenedor de publicaciones
-            document.getElementById('publications-container').appendChild(publicationElement);
+            document.getElementById('publications-container').appendChild(publicationObject);
             
             const profileImageContainerId = `imageContainerId_${publicationObject.nftUsername}`;
             let codeHexaImage;    

@@ -198,7 +198,7 @@ async function get_publication(id_publication) {
         document.getElementById('publications-container').appendChild(publicationElement);
 
         // 🔥 Ahora podemos cargar la imagen porque el elemento ya está en el DOM
-        const profileImageContainerId = `imageContainerId_${publicationObject.nftUsername}`;
+        const profileImageContainerId = `imageContainerId_${publicationObject.id}`;
         let codeHexaImage;
 
         if (nftUsernameContract.methods) {
@@ -220,7 +220,7 @@ async function get_publication(id_publication) {
 
 
 async function createPublicationElement(publication) {
-    const { nftUsername, timestamp, content, media } = publication;
+    const { id, nftUsername, timestamp, content, media } = publication;
 
     // ---- Creación de contenedores ----
     const publicationDiv = document.createElement('div');
@@ -233,7 +233,7 @@ async function createPublicationElement(publication) {
     headerDiv.style.cssText = 'display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;';
 
     const profileImageContainer = document.createElement('div');
-    profileImageContainer.id = `imageContainerId_${nftUsername}`;
+    profileImageContainer.id = `imageContainerId_${id}`;
     profileImageContainer.style.width = "60px";
     profileImageContainer.style.height = "60px";
     profileImageContainer.style.display = "flex";

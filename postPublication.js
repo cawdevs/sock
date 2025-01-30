@@ -239,31 +239,24 @@ async function get_publication(id_publication){
 }
 
 
-async function createPublicationElement(publication) {
-    
-    const { nftUsername, timestamp, content, media } = publication; // Datos correctos
-    console.log('media:', media); // Mostrar el error completo para debug.
-    
+async function createPublicationElement(publication) { // Agregar async
+    const { nftUsername, timestamp, content, media } = publication;
+    console.log('media:', media); 
 
-    
     let codeHexaImage;
-            //let count_publication;
+    
     if (nftUsernameContract.methods) {
-                console.log("get_codehexa Con MetaMask ");
-                // Usando web3.js
-                codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(nftUsername).call(); 
+        console.log("get_codehexa Con MetaMask ");
+        codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(nftUsername).call();
     } else {
-                 // Usando ethers.js
-                 console.log("get_codehaxa Con SockWallet "); 
-                 codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(nftUsername); 
-    }  
+        console.log("get_codehaxa Con SockWallet "); 
+        codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(nftUsername);
+    }
 
-    // Crear el contenedor principal de la publicación
+    // ---- Creación de contenedores ----
     const publicationDiv = document.createElement('div');
     publicationDiv.classList.add('publication-container');
-    publicationDiv.style.cssText = 'border: 1px solid gray; padding: 0px; border-radius: 10px; margin-bottom: 10px; width: 100%; max-width: 500px;';
-    publicationDiv.style.width = '100%';
-    publicationDiv.style.overflow = 'hidden';
+    publicationDiv.style.cssText = 'border: 1px solid gray; padding: 0px; border-radius: 10px; margin-bottom: 10px; width: 100%; max-width: 500px; overflow: hidden;';
 
     // ---- Fila 1: NFTUsername, Nombre, Fecha y Select ----
     const headerDiv = document.createElement('div');
@@ -271,19 +264,18 @@ async function createPublicationElement(publication) {
     headerDiv.style.cssText = 'display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;';
 
     const profileImageContainer = document.createElement('div');
-    profileImageContainer.id = `imageContainerId_${nftUsername}`; // ID único
+    profileImageContainer.id = `imageContainerId_${nftUsername}`;
     profileImageContainer.style.width = "60px";
     profileImageContainer.style.height = "60px";
     profileImageContainer.style.display = "flex";
     profileImageContainer.style.justifyContent = "center";
 
-  
     const usernameSpan = document.createElement('span');
     usernameSpan.textContent = nftUsername;
     usernameSpan.style.cssText = 'font-weight: bold; font-size: 18px; margin-left: 10px;';
 
     const dateSpan = document.createElement('span');
-    dateSpan.textContent = timestamp;
+    dateSpan.textContent = new Date(timestamp * 1000).toLocaleString(); // Convertir timestamp a fecha legible
     dateSpan.style.cssText = 'font-size: 12px; color: gray;';
 
     const actionSelect = document.createElement('select');
@@ -309,8 +301,6 @@ async function createPublicationElement(publication) {
     const mediaDiv = document.createElement('div');
     mediaDiv.classList.add('publication-media');
 
-
-
     if (media) {
         const mediaImage = document.createElement('img');
         mediaImage.src = media;
@@ -324,6 +314,7 @@ async function createPublicationElement(publication) {
     publicationDiv.appendChild(contentDiv);
     publicationDiv.appendChild(mediaDiv);
 
+    // Cargar imagen de perfil desde el código hexadecimal
     await loadImagesFromHex(codeHexaImage, profileImageContainer.id, "small");
 
     return publicationDiv;

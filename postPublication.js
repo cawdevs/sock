@@ -211,7 +211,7 @@ async function get_NFTUsername_publication(nftusername, NFTUsenmane_container){
 
         // Recorrer el array de IDs y obtener cada publicación
         for (const publicationId of my_publication) {
-            await getPublication(publicationId,NFTUsenmane_container);
+            await get_Publication(publicationId,NFTUsenmane_container);
         }
 
 

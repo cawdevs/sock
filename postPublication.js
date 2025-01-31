@@ -171,7 +171,11 @@ async function publicar_main_post(){
 
 
 async function get_all_publications_home(homecontainnerID) {
+
     try {
+
+        document.getElementById(homecontainnerID).innerHTML = '';
+
         let total_publication;
 
         if (publisherContract.methods) {
@@ -200,7 +204,8 @@ async function get_all_publications_home(homecontainnerID) {
 async function get_NFTUsername_publication(nftusername, NFTUsenmane_container){  
       
  try {
-        
+        document.getElementById(NFTUsenmane_container).innerHTML = '';
+
         let my_publication =[];
         if (publisherContract.methods) {
             console.log("get_mypublication Con MetaMask",nftusername);
@@ -256,8 +261,19 @@ async function get_publication(id_publication,principalContainerID) {
         // 🔹 Primero agregamos la publicación al DOM
         const publicationElement = await createPublicationElement(publicationObject);
 
-        document.getElementById(principalContainerID).appendChild(publicationElement);
+        const principalContainer = document.getElementById(principalContainerID);
+        // Estilos para centrar el div y darle fondo blanco
+        principalContainer.style.backgroundColor = "white"; // Fondo blanco
+        principalContainer.style.margin = "0 auto"; // Centrar horizontalmente
+        principalContainer.style.display = "flex"; // Para centrarlo si el padre lo permite
+        principalContainer.style.justifyContent = "center"; // Centrar si es necesario
+        principalContainer.style.alignItems = "center"; // Mantener el contenido alineado
+        principalContainer.style.width = "80%"; // Ajusta el ancho según necesites
+        principalContainer.style.borderRadius = "10px"; // Bordes redondeados opcional
+        principalContainer.style.padding = "10px"; // Espaciado interno opcional
 
+        principalContainer.appendChild(publicationElement);
+                               
         // 🔥 Ahora podemos cargar la imagen porque el elemento ya está en el DOM
         const profileImageContainerId = `imageContainerId_${publicationObject.id}`;
         let codeHexaImage;

@@ -333,15 +333,23 @@ async function createPublicationElement(publication) {
 
     if (media) {
         // Comprobamos si es un video de YouTube mediante un iframe
-        if (media.includes('<iframe') && media.includes('youtube.com/embed')) {
-            // Extraer la URL del src del iframe
-            const iframeSrc = media.match(/src="(https:\/\/www\.youtube\.com\/embed\/[a-zA-Z0-9_-]+)"/);
-            
-            if (iframeSrc) {
+        if (media.includes("youtube.com/watch") || media.includes("youtu.be/")) {
+            let videoId;
+
+            // Si la URL es del tipo "https://www.youtube.com/watch?v=..."
+            if (media.includes("youtube.com/watch")) {
+                videoId = media.split("v=")[1]?.split("&")[0]; // Obtener el ID del video
+            }
+            // Si la URL es del tipo "https://youtu.be/..."
+            else if (media.includes("youtu.be/")) {
+                videoId = media.split("youtu.be/")[1]?.split("?")[0]; // Obtener el ID del video
+            }
+
+            if (videoId) {
                 const iframe = document.createElement('iframe');
                 iframe.width = '560';
                 iframe.height = '315';
-                iframe.src = iframeSrc[1]; // Usamos la URL extraída del src
+                iframe.src = `https://www.youtube.com/embed/${videoId}`;
                 iframe.title = 'YouTube video';
                 iframe.frameBorder = '0';
                 iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
@@ -349,19 +357,9 @@ async function createPublicationElement(publication) {
                 mediaDiv.appendChild(iframe);
             }
         }
-        // Comprobamos si es un video de YouTube con una URL tipo https://youtu.be/
-        else if (media.includes("youtube.com") && media.includes("watch")) {
-            const videoId = media.split("v=")[1].split("&")[0]; // Obtener el ID del video
-            const iframe = document.createElement('iframe');
-            iframe.width = '560';
-            iframe.height = '315';
-            iframe.src = `https://www.youtube.com/embed/${videoId}`;
-            iframe.title = 'YouTube video';
-            iframe.frameBorder = '0';
-            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-            iframe.allowFullscreen = true;
-            mediaDiv.appendChild(iframe);
-        } 
+
+
+
         // Comprobamos si es una imagen
         else if (media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.png') || media.endsWith('.gif')) {
             const mediaImage = document.createElement('img');

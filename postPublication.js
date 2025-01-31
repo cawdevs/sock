@@ -263,14 +263,19 @@ async function get_publication(id_publication,principalContainerID) {
 
         const principalContainer = document.getElementById(principalContainerID);
         // Estilos para centrar el div y darle fondo blanco
+        // Estilos para centrar el div y darle fondo blanco
         principalContainer.style.backgroundColor = "white"; // Fondo blanco
         principalContainer.style.margin = "0 auto"; // Centrar horizontalmente
-        principalContainer.style.display = "flex"; // Para centrarlo si el padre lo permite
+        principalContainer.style.display = "flex"; // Usa flexbox
+        principalContainer.style.flexDirection = "column"; // Coloca los elementos en columna
         principalContainer.style.justifyContent = "center"; // Centrar si es necesario
         principalContainer.style.alignItems = "center"; // Mantener el contenido alineado
         principalContainer.style.width = "80%"; // Ajusta el ancho según necesites
         principalContainer.style.borderRadius = "10px"; // Bordes redondeados opcional
         principalContainer.style.padding = "10px"; // Espaciado interno opcional
+
+        // Asegurar que los elementos hijos ocupen el máximo ancho permitido
+        publicationElement.style.width = "100%"; // Los elementos ocupan todo el ancho
 
         principalContainer.appendChild(publicationElement);
                                

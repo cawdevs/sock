@@ -285,7 +285,9 @@ async function createPublicationElement(publication) {
     // ---- Creación de contenedores ----
     const publicationDiv = document.createElement('div');
     publicationDiv.classList.add('publication-container');
-    publicationDiv.style.cssText = 'border: 1px solid gray; padding: 0px; border-radius: 10px; margin-bottom: 10px; width: 100%; max-width: 500px; overflow: hidden;';
+    publicationDiv.style.cssText = ' backgroundColor:#fff; border: 1px solid gray; padding: 0px; border-radius: 10px; margin-bottom: 10px; width: 100%; max-width: 500px; overflow: hidden;';
+    
+  
 
     // ---- Fila 1: NFTUsername, Nombre, Fecha y Select ----
     const headerDiv = document.createElement('div');

@@ -169,7 +169,7 @@ async function publicar_main_post(){
 
 
 
-async function get_publications_home() {
+async function get_all_publications_home(homecontainnerID) {
     try {
         let total_publication;
 
@@ -182,7 +182,7 @@ async function get_publications_home() {
         }
 
         for (let i = 1; i <= total_publication; i++) {  // Corrección del bucle
-            await get_publication(i);  // Se pasa `i` como `id_publication`
+            await get_publication(i,homecontainnerID);  // Se pasa `i` como `id_publication`
         }
 
     } catch (error) {
@@ -196,14 +196,37 @@ async function get_publications_home() {
 
 
 
-async function get_my_publication(){    
+async function get_NFTUsername_publication(nftusername, NFTUsenmane_container){  
+      
+ try {
+        
+        let my_publication =[];
+        if (publisherContract.methods) {
+            console.log("get_mypublication Con MetaMask");
+            my_publication = await publisherContract.methods.getMainPostsByNFTUsername(nftusername).call();
+        } else {
+            console.log("get_mypublication Con SockWallet");
+            my_publication = await publisherContract.getMainPostsByNFTUsername(nftusername);
+        }
+
+        // Recorrer el array de IDs y obtener cada publicación
+        for (const publicationId of my_publication[0]) {
+            await getPublication(publicationId,NFTUsenmane_container);
+        }
+
+
+    } catch (error) {
+        alert('Error al intentar getmy_publications_home.');
+        console.error('Error completo:', error);
+    }  
+
 }
 
 async function get_publication_NFTUsername(){    
 }
 
 
-async function get_publication(id_publication) {
+async function get_publication(id_publication,principalContainerID) {
     try {
         let publication = [];
 
@@ -231,7 +254,8 @@ async function get_publication(id_publication) {
 
         // 🔹 Primero agregamos la publicación al DOM
         const publicationElement = await createPublicationElement(publicationObject);
-        document.getElementById('publications-container').appendChild(publicationElement);
+
+        document.getElementById(principalContainerID).appendChild(publicationElement);
 
         // 🔥 Ahora podemos cargar la imagen porque el elemento ya está en el DOM
         const profileImageContainerId = `imageContainerId_${publicationObject.id}`;

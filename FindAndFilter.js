@@ -325,7 +325,9 @@ async function findNftWallet(value) {
                         nftUsernames= await nftUsernameContract.getUsernamesInRange(0,totalNFTs);    
           
                        // Lógica específica para contratos instanciados con ethers.js
-                }   
+                }
+
+                   
             
                  
 
@@ -515,6 +517,7 @@ async function findNftWallet(value) {
             nameButton.style.marginRight = "14px";         
             nameButton.addEventListener("click", async function () {
                 await get_NFTUsername_profile(username);
+                await get_NFTUsername_publication(username,"modal_publication-nftusername");
                 $('#UsernameProfileModal').modal('show');
             });
             topRow.appendChild(nameButton); // Añadir el nombre a la fila superior

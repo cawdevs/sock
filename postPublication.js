@@ -6,6 +6,7 @@ function createPublicationElements() {
    
 
     const container = document.getElementById('publication-post-container');
+    container.style.cssText = 'background-color:#fff;';
     container.innerHTML = '';
 
     const form = document.createElement('form');
@@ -285,9 +286,7 @@ async function createPublicationElement(publication) {
     // ---- Creación de contenedores ----
     const publicationDiv = document.createElement('div');
     publicationDiv.classList.add('publication-container');
-    publicationDiv.style.cssText = ' backgroundColor:#fff; border: 1px solid gray; padding: 0px; border-radius: 10px; margin-bottom: 10px; width: 100%; max-width: 500px; overflow: hidden;';
-    
-  
+    publicationDiv.style.cssText = 'border: 1px solid gray; padding: 0px; border-radius: 10px; margin-bottom: 10px; width: 100%; max-width: 500px; overflow: hidden;';
 
     // ---- Fila 1: NFTUsername, Nombre, Fecha y Select ----
     const headerDiv = document.createElement('div');
@@ -328,16 +327,39 @@ async function createPublicationElement(publication) {
     contentDiv.textContent = content;
     contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 16px;';
 
-    // ---- Fila 3: Imagen de la publicación ----
+    // ---- Fila 3: Media (Imagen o Video de YouTube) ----
     const mediaDiv = document.createElement('div');
     mediaDiv.classList.add('publication-media');
 
     if (media) {
-        const mediaImage = document.createElement('img');
-        mediaImage.src = media;
-        mediaImage.alt = 'Publicación';
-        mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
-        mediaDiv.appendChild(mediaImage);
+        // Comprobamos si es un video de YouTube
+        if (media.includes("youtube.com") && media.includes("watch")) {
+            const videoId = media.split("v=")[1].split("&")[0]; // Obtener el ID del video
+            const iframe = document.createElement('iframe');
+            iframe.width = '560';
+            iframe.height = '315';
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            iframe.title = 'YouTube video';
+            iframe.frameBorder = '0';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            mediaDiv.appendChild(iframe);
+        } 
+        // Comprobamos si es una imagen
+        else if (media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.png') || media.endsWith('.gif')) {
+            const mediaImage = document.createElement('img');
+            mediaImage.src = media;
+            mediaImage.alt = 'Publicación';
+            mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+            mediaDiv.appendChild(mediaImage);
+        } 
+        // Si no es una URL válida
+        else {
+            const errorMessage = document.createElement('div');
+            errorMessage.textContent = 'El archivo o URL no es válido.';
+            errorMessage.style.cssText = 'background-color: green; color: white; padding: 10px; border-radius: 5px; text-align: center;';
+            mediaDiv.appendChild(errorMessage);
+        }
     }
 
     // Agregar filas al contenedor principal
@@ -392,15 +414,4 @@ async function delete_post(){
         //select.id = 'filter-privacidad';
 }
 
-  NFT_Username = document.getElementById('selector_NFTs').value;
-  content = document.getElementById("publicacion").value;
-            const jsonMetadata = {
-                    media: document.getElementById('media-publication').value,
-                    privacidad: document.getElementById('filter-privacidad').value,
-                    calsificacion: document.getElementById('filter-classification').value
-                    
-            };
-            // Convertir a formato de texto (string)
-            const jsonString = JSON.stringify(jsonMetadata);
-            const publicationType = 0; 
-            const threadOrder=0; 
+  

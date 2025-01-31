@@ -369,14 +369,28 @@ async function createPublicationElement(publication) {
             mediaImage.alt = 'Publicación';
             mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
             mediaDiv.appendChild(mediaImage);
-        } 
-        // Si no es una URL válida, mostramos el cuadro verde
-        else {
-            const errorMessage = document.createElement('div');
-            errorMessage.textContent = 'El archivo o URL no es válido.';
-            errorMessage.style.cssText = 'background-color: green; color: white; padding: 10px; border-radius: 5px; text-align: center;';
-            mediaDiv.appendChild(errorMessage);
         }
+        // Si es una URL válida a una imagen, aunque no tenga extensión visible
+        else {
+            const img = new Image();
+            img.onload = function() {
+                const mediaImage = document.createElement('img');
+                mediaImage.src = media;
+                mediaImage.alt = 'Publicación';
+                mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+                mediaDiv.appendChild(mediaImage);
+            };
+            img.onerror = function() {
+                const errorMessage = document.createElement('div');
+                errorMessage.textContent = 'El archivo o URL no es válido.';
+                errorMessage.style.cssText = 'background-color: green; color: white; padding: 10px; border-radius: 5px; text-align: center;';
+                mediaDiv.appendChild(errorMessage);
+            };
+            img.src = media; // Intenta cargar la imagen de la URL proporcionada
+       }
+
+        // Si no es una URL válida, mostramos el cuadro verde
+        
     }
 
     // Agregar filas al contenedor principal
@@ -390,7 +404,52 @@ async function createPublicationElement(publication) {
 
 
 
-
+if (media) {
+    // Comprobamos si es un video de YouTube (enlace corto)
+    if (media.includes("youtube.com") && media.includes("watch")) {
+        const videoId = media.split("v=")[1].split("&")[0]; // Obtener el ID del video
+        const iframe = document.createElement('iframe');
+        iframe.width = '560';
+        iframe.height = '315';
+        iframe.src = `https://www.youtube.com/embed/${videoId}`;
+        iframe.title = 'YouTube video';
+        iframe.frameBorder = '0';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        mediaDiv.appendChild(iframe);
+    } 
+    // Comprobamos si es una URL de imagen (y puede ser de otra web)
+    else if (media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.png') || media.endsWith('.gif')) {
+        const mediaImage = document.createElement('img');
+        mediaImage.src = media;
+        mediaImage.alt = 'Publicación';
+        mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+        mediaDiv.appendChild(mediaImage);
+    }
+    // Si es una URL válida a una imagen, aunque no tenga extensión visible
+    else {
+        const img = new Image();
+        img.onload = function() {
+            const mediaImage = document.createElement('img');
+            mediaImage.src = media;
+            mediaImage.alt = 'Publicación';
+            mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+            mediaDiv.appendChild(mediaImage);
+        };
+        img.onerror = function() {
+            const errorMessage = document.createElement('div');
+            errorMessage.textContent = 'El archivo o URL no es válido.';
+            errorMessage.style.cssText = 'background-color: green; color: white; padding: 10px; border-radius: 5px; text-align: center;';
+            mediaDiv.appendChild(errorMessage);
+        };
+        img.src = media; // Intenta cargar la imagen de la URL proporcionada
+    }
+} else {
+    const errorMessage = document.createElement('div');
+    errorMessage.textContent = 'El archivo o URL no es válido.';
+    errorMessage.style.cssText = 'background-color: green; color: white; padding: 10px; border-radius: 5px; text-align: center;';
+    mediaDiv.appendChild(errorMessage);
+}
 
 
 

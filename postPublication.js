@@ -202,15 +202,15 @@ async function get_NFTUsername_publication(nftusername, NFTUsenmane_container){
         
         let my_publication =[];
         if (publisherContract.methods) {
-            console.log("get_mypublication Con MetaMask");
+            console.log("get_mypublication Con MetaMask",nftusername);
             my_publication = await publisherContract.methods.getMainPostsByNFTUsername(nftusername).call();
         } else {
-            console.log("get_mypublication Con SockWallet");
+            console.log("get_mypublication Con SockWallet",nftusername);
             my_publication = await publisherContract.getMainPostsByNFTUsername(nftusername);
         }
 
         // Recorrer el array de IDs y obtener cada publicación
-        for (const publicationId of my_publication[0]) {
+        for (const publicationId of my_publication) {
             await getPublication(publicationId,NFTUsenmane_container);
         }
 

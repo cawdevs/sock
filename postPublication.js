@@ -356,10 +356,38 @@ async function createPublicationElement(publication) {
                 iframe.allowFullscreen = true;
                 mediaDiv.appendChild(iframe);
             }
+        } else if (media.includes("x.com/")) {
+            let tweetUrl;
+
+            // Si la URL es del tipo "https://x.com/usuario/status/..."
+            if (media.match(/x\.com\/([^\/]+)\/status\/(\d+)/)) {
+                tweetUrl = media.replace("x.com", "twitter.com");
+            }
+            // Si la URL es del tipo "https://x.com/i/status/..."
+            else if (media.match(/x\.com\/i\/status\/(\d+)/)) {
+                const tweetId = media.split("/").pop();
+                tweetUrl = `https://twitter.com/i/status/${tweetId}`;
+            }
+
+            if (tweetUrl) {
+                const blockquote = document.createElement("blockquote");
+                blockquote.className = "twitter-tweet";
+                blockquote.setAttribute("data-media-max-width", "500");
+
+                const link = document.createElement("a");
+                link.href = tweetUrl;
+
+                blockquote.appendChild(link);
+                mediaDiv.appendChild(blockquote);
+
+                // Agregar el script de Twitter para que cargue el embed
+                const script = document.createElement("script");
+                script.async = true;
+                script.src = "https://platform.twitter.com/widgets.js";
+                script.charset = "utf-8";
+                document.body.appendChild(script);
+            }
         }
-
-
-
         // Comprobamos si es una imagen
         else if (media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.png') || media.endsWith('.gif')) {
             const mediaImage = document.createElement('img');

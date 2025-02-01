@@ -342,10 +342,7 @@ async function createPublicationElement(publication) {
             } else {
                 alert("Acción cancelada");
             }
-        };
-
-        // Agregar el ícono al contenedor correspondiente
-        document.getElementById("publication-reaction-icons").appendChild(deleteIcon);
+        };               
         
         // Agregarlo también a headerDiv si es necesario
         headerDiv.appendChild(deleteIcon);
@@ -363,7 +360,7 @@ async function createPublicationElement(publication) {
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('publication-content');
     contentDiv.textContent = content;
-    contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 16px;';
+    contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 16px; padding: 10px;';
 
     // ---- Fila 3: Media (Imagen o Video de YouTube) ----
     const mediaDiv = document.createElement('div');

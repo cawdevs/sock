@@ -270,7 +270,7 @@ async function get_publication(id_publication,principalContainerID) {
         principalContainer.style.flexDirection = "column"; // Coloca los elementos en columna
         principalContainer.style.justifyContent = "center"; // Centrar si es necesario
         principalContainer.style.alignItems = "center"; // Mantener el contenido alineado
-        principalContainer.style.width = "80%"; // Ajusta el ancho según necesites
+        principalContainer.style.width = "100%"; // Ajusta el ancho según necesites
         principalContainer.style.borderRadius = "10px"; // Bordes redondeados opcional
         principalContainer.style.padding = "10px"; // Espaciado interno opcional
 

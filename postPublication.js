@@ -294,7 +294,7 @@ async function get_publication(id_publication,principalContainerID) {
         await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
 
     } catch (error) {
-        alert('Error al intentar get_publication.');
+        //alert('Error al intentar get_publication.');
         console.error('Error completo:', error);
     }
 }
@@ -330,10 +330,20 @@ async function createPublicationElement(publication) {
     dateSpan.textContent = timestamp; 
     dateSpan.style.cssText = 'font-size: 12px; color: gray;';
 
+   
+
+    const userInfoDiv = document.createElement('div');
+    userInfoDiv.style.cssText = 'display: flex; align-items: center;';
+    userInfoDiv.appendChild(profileImageContainer);
+    userInfoDiv.appendChild(usernameSpan);
+
+    headerDiv.appendChild(userInfoDiv);
+    headerDiv.appendChild(dateSpan);
+
     if (selected_username === nftUsername) {
         const deleteIcon = document.createElement('span');
         deleteIcon.className = 'glyphicon glyphicon-trash';
-        deleteIcon.style.cssText = 'cursor: pointer; font-size: 18px; color: red; padding: 5px;';
+        deleteIcon.style.cssText = 'cursor: pointer; font-size: 18px; color: gray; padding: 5px;';
         deleteIcon.onclick = function() {
             //delete_post();
             let respuesta = confirm("¿Borrar publicación?");
@@ -347,13 +357,6 @@ async function createPublicationElement(publication) {
         // Agregarlo también a headerDiv si es necesario
         headerDiv.appendChild(deleteIcon);
     }
-    const userInfoDiv = document.createElement('div');
-    userInfoDiv.style.cssText = 'display: flex; align-items: center;';
-    userInfoDiv.appendChild(profileImageContainer);
-    userInfoDiv.appendChild(usernameSpan);
-
-    headerDiv.appendChild(userInfoDiv);
-    headerDiv.appendChild(dateSpan);
     
 
     // ---- Fila 2: Contenido de la publicación ----

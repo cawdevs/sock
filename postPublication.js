@@ -161,7 +161,7 @@ async function publicar_main_post(){
     } catch (error) {
           document.getElementById('loadingAnimation-publication').style.display = 'none';
  
-          alert('Error al intentar Publicar.');
+          //alert('Error al intentar Publicar.');
           console.error('Error completo ppp:', error.code); // Mostrar el error completo para debug.
     
     }
@@ -330,7 +330,7 @@ async function createPublicationElement(publication) {
     dateSpan.textContent = timestamp; 
     dateSpan.style.cssText = 'font-size: 12px; color: gray;';
 
-    if (selected_username === nftusername) {
+    if (selected_username === nftUsername) {
         const deleteIcon = document.createElement('span');
         deleteIcon.className = 'glyphicon glyphicon-trash';
         deleteIcon.style.cssText = 'cursor: pointer; font-size: 18px; color: red; padding: 5px;';

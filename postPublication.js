@@ -303,7 +303,8 @@ async function get_publication(id_publication,principalContainerID) {
 
 async function createPublicationElement(publication) {
     const { id, nftUsername, timestamp, content, media } = publication;
-
+    const selected_username = document.getElementById('selector_NFTs').value;
+    
     // ---- Creación de contenedores ----
     const publicationDiv = document.createElement('div');
     publicationDiv.classList.add('publication-container');
@@ -329,10 +330,26 @@ async function createPublicationElement(publication) {
     dateSpan.textContent = timestamp; 
     dateSpan.style.cssText = 'font-size: 12px; color: gray;';
 
-    const actionSelect = document.createElement('select');
-    actionSelect.innerHTML = '<option></option><option value="edit">Editar</option><option value="delete">Eliminar</option>';
-    actionSelect.style.cssText = 'border: 0px solid black; border-radius: 5px; padding: 5px;';
+    if (selected_username === nftusername) {
+        const deleteIcon = document.createElement('span');
+        deleteIcon.className = 'glyphicon glyphicon-trash';
+        deleteIcon.style.cssText = 'cursor: pointer; font-size: 18px; color: red; padding: 5px;';
+        deleteIcon.onclick = function() {
+            //delete_post();
+            let respuesta = confirm("¿Borrar publicación?");
+            if (respuesta) {
+                alert("Borrar publicacion");
+            } else {
+                alert("Acción cancelada");
+            }
+        };
 
+        // Agregar el ícono al contenedor correspondiente
+        document.getElementById("publication-reaction-icons").appendChild(deleteIcon);
+        
+        // Agregarlo también a headerDiv si es necesario
+        headerDiv.appendChild(deleteIcon);
+    }
     const userInfoDiv = document.createElement('div');
     userInfoDiv.style.cssText = 'display: flex; align-items: center;';
     userInfoDiv.appendChild(profileImageContainer);
@@ -340,7 +357,7 @@ async function createPublicationElement(publication) {
 
     headerDiv.appendChild(userInfoDiv);
     headerDiv.appendChild(dateSpan);
-    headerDiv.appendChild(actionSelect);
+    
 
     // ---- Fila 2: Contenido de la publicación ----
     const contentDiv = document.createElement('div');

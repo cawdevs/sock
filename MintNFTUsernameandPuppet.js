@@ -449,12 +449,13 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                         return;
                     }
 
-                    const priceInWei = web3.utils.toWei(price.toString(), 'ether'); // Convertir a Wei
-
+                     let priceInWei;
                     try {
                          
                        if (nftUsernameContract.methods) {
                             console.log("Con MetaMask ");
+                            priceInWei = web3.utils.toWei(price.toString(), 'ether'); // Convertir a Wei
+                            
                             await nftUsernameContract.methods.sellNFT(username_info, priceInWei).send({
                             from: globalWalletKey,
                             gas: 200000,
@@ -467,6 +468,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                              // Usando ethers.js
                              console.log("Con SockWallet "); 
                              // Llamar al método sellNFT
+                             priceInWei = ethers.utils.parseEther(maticrequired); //
                              const tx = await nftUsernameContract.sellNFT(username_info, priceInWei, {
                              gasLimit: 200000,
                              gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei
@@ -523,13 +525,18 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                     //alert("Has clickeado el Botón 3");
                     const address_to = textInput_transfer.value; // Accede al valor de la entrada de texto
                     // Verificar si la dirección es válida
-                    if (!web3.utils.isAddress(address_to)) {
-                        alert("Invalid  address.");
-                        return; // Detener la ejecución si la dirección no es válida
-                    }
+                    
                     
                     try {
+
+                         
+                         
                          if (nftUsernameContract.methods) {
+
+                            if (!web3.utils.isAddress(address_to)) {
+                                alert("Invalid  address.");
+                                return; // Detener la ejecución si la dirección no es válida
+                            }
                             console.log("Con MetaMask ");
                             await nftUsernameContract.methods.transferNFT(address_to , username_info).send({from: globalWalletKey, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
                             console.log('NFT transferido.');
@@ -537,6 +544,12 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                          } else {
 
                             // Llamada con ethers.js
+                            if (!ethers.utils.isAddress(address_to)) {
+                                console.error("La dirección de la wallet no es válida.");
+                                return;
+                            }
+                         
+
                             const tx = await nftUsernameContract.transferNFT(address_to, username_info, {
                             gasLimit: 200000,
                             gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei

@@ -1532,6 +1532,8 @@ async function conectarMetaMask() {
 
 // Conectar usando tu wallet propia
 function conectarWalletPropia() {
+    
+  try {
     const privateKey = localStorage.getItem("privateKey");
     if (!privateKey) {
         console.error("No se encontró una clave privada almacenada.");
@@ -1560,6 +1562,10 @@ function conectarWalletPropia() {
     publisherContract = new ethers.Contract(publisherContractAddress, Publisher_ContractABI, signer);
           
     console.log("Conectado usando wallet propia:", globalWalletKey);
+  } catch (error) {
+        console.error("Error al conectar con wallet propia:", error);
+    }
+
 }
 
 

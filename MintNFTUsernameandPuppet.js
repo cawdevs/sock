@@ -468,7 +468,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                              // Usando ethers.js
                              console.log("Con SockWallet "); 
                              // Llamar al método sellNFT
-                             priceInWei = ethers.utils.parseEther(maticrequired); //
+                             priceInWei = ethers.utils.parseEther(price.toString()); //
                              const tx = await nftUsernameContract.sellNFT(username_info, priceInWei, {
                              gasLimit: 200000,
                              gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei

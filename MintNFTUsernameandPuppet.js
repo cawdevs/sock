@@ -572,6 +572,8 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                            console.log("Transacción confirmada:", receipt);
                            alert('Transaction ok :)');
 
+                       }
+
                }catch (error) {
                         console.error('Error al deslistar el NFT Username:', error);
                      }

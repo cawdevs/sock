@@ -394,6 +394,14 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
         infoContainer.appendChild(paragraph7);
 
 
+        // Loading animation
+        const loadingDiv = document.createElement('div');
+        loadingDiv.id = 'loadingAnimation-info-sock-puppet';
+        loadingDiv.style.display = 'none';
+        loadingDiv.innerHTML = '<div class="spinner"></div>';
+        infoContainer.appendChild(loadingDiv);
+
+
 
         // Crear el contenedor de botones y entrada de texto
         const sellContainer = document.createElement("div");
@@ -441,6 +449,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                 async function handleButtonSellClick() {
                     //alert("Has clickeado el Botón 1");
                     // Obtén el valor del input
+                    document.getElementById('loadingAnimation-info-sock-puppet').style.display = 'block';
                     const price = textInput_sell.value; // Accede al valor de la entrada de texto
 
                     // Verifica si el valor es válido
@@ -510,6 +519,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             // Esperar la confirmación
                             const receipt = await tx.wait();
                             console.log("Transacción confirmada:", receipt);
+                            document.getElementById('loadingAnimation-info-sock-puppet').style.display = 'none';
                             alert('Transaction ok :)');
 
                                    
@@ -517,12 +527,17 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 
                     } catch (error) {
                         console.error('Error al listar el NFT Username:', error);
+                        document.getElementById('loadingAnimation-info-sock-puppet').style.display = 'none';
                     }
                 }
 
                 async function handleButtonCancelSellClick() {
                     //alert("Has clickeado el Botón 2");
-                    try {
+                   
+                    try {                        
+
+                         document.getElementById('loadingAnimation-info-sock-puppet').style.display = 'block'; 
+
                         if (nftUsernameContract.methods) {
                             console.log("Con MetaMask ");
                             await nftUsernameContract.methods.cancelNFTSale(username_info,).send({from: globalWalletKey, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
@@ -570,11 +585,13 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                            // Esperar confirmación
                            const receipt = await tx.wait();
                            console.log("Transacción confirmada:", receipt);
+                           document.getElementById('loadingAnimation-info-sock-puppet').style.display = 'none';
                            alert('Transaction ok :)');
 
                        }
 
                }catch (error) {
+                        document.getElementById('loadingAnimation-info-sock-puppet').style.display = 'none'; 
                         console.error('Error al deslistar el NFT Username:', error);
                      }
                 }
@@ -588,7 +605,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                     
                     
                     try {
-
+                          document.getElementById('loadingAnimation-info-sock-puppet').style.display = 'block';
                          
                          
                          if (nftUsernameContract.methods) {
@@ -626,7 +643,6 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 
                             // Obtener datos de gas
                             const feeData = await provider.getFeeData();
-
                             const gasPrice = feeData.gasPrice;
                             const adjustedGasPrice = gasPrice.mul(110).div(100); // Incrementar un 10%
 
@@ -652,10 +668,12 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             // Esperar confirmación
                             const receipt = await tx.wait();
                             console.log("Transacción confirmada:", receipt);
+                            document.getElementById('loadingAnimation-info-sock-puppet').style.display = 'none';
                             alert('Transaction ok :)');
                           }
                         
                      }catch (error) {
+                        document.getElementById('loadingAnimation-info-sock-puppet').style.display = 'none';
                         console.error('Error al transferir NFT Username:', error);
                      }
                 }

@@ -477,7 +477,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             // Llamar al método sellNFT
                                                        
                             // Obtener la tarifa de gas base desde la red
-                            const adjustedGasPrice = obtenerGasAjustado();
+                            const adjustedGasPrice = await obtenerGasAjustado();
                             
                             // Convertir el precio a wei
                             priceInWei = ethers.utils.parseEther(price.toString());
@@ -530,7 +530,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                            
                            // Obtener datos de gas
                          
-                           const adjustedGasPrice = obtenerGasAjustado();
+                           const adjustedGasPrice = await obtenerGasAjustado();
 
                            // Estimar gas necesario para la función cancelNFTSale
                            const estimatedGasLimit = await nftUsernameContract.estimateGas.cancelNFTSale(username_info);
@@ -596,14 +596,11 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             console.log("Con SockWallet ");
 
                             // Obtener datos de gas
-                            const adjustedGasPrice = obtenerGasAjustado();
+                            const adjustedGasPrice = await obtenerGasAjustado();
                             
                             // Estimar gas necesario para la función transferNFT
                             const estimatedGasLimit = await nftUsernameContract.estimateGas.transferNFT(address_to, username_info);
                             const adjustedGasLimit = estimatedGasLimit.mul(110).div(100); // Incrementar un 10%
-
-                            console.log("Gas Limit estimado:", estimatedGasLimit.toString());
-                            console.log("Gas Limit con 10% extra:", adjustedGasLimit.toString());
 
                             // Llamada con ethers.js
                             const tx = await nftUsernameContract.transferNFT(address_to, username_info, {

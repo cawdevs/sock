@@ -1649,7 +1649,43 @@ async function initializeTransactionContext() {
     }
 }
 
+async function obtenerGasAjustado() {
+    try {
+        // Obtener datos de gas
+        const feeData = await provider.getFeeData();
+        // Obtener el gasPrice base
+        const gasPrice = feeData.gasPrice;
+        // Incrementar el gasPrice en un 10%
+        const adjustedGasPrice = gasPrice.mul(110).div(100);
+        // Mostrar el gasPrice original y ajustado en Gwei
+        console.log("Gas Price:", ethers.utils.formatUnits(gasPrice, 'gwei'), "Gwei");
+        console.log("Gas Price con 10% extra:", ethers.utils.formatUnits(adjustedGasPrice, 'gwei'), "Gwei");
+        return adjustedGasPrice; // Devolver el gasPrice ajustado
+    } catch (error) {
+        console.error("Error al obtener el gas:", error);
+        alert("Error, no se pueden estimar el gas!.");
+    }
+}
+async function obtenerGasAjustado(provider) {
+    try {
+        // Obtener datos de gas
+        const feeData = await provider.getFeeData();
 
+        // Obtener el gasPrice base
+        const gasPrice = feeData.gasPrice;
+
+        // Incrementar el gasPrice en un 10%
+        const adjustedGasPrice = gasPrice.mul(110).div(100);
+
+        // Mostrar el gasPrice original y ajustado en Gwei
+        console.log("Gas Price:", ethers.utils.formatUnits(gasPrice, 'gwei'), "Gwei");
+        console.log("Gas Price con 10% extra:", ethers.utils.formatUnits(adjustedGasPrice, 'gwei'), "Gwei");
+
+        return adjustedGasPrice; // Devolver el gasPrice ajustado
+    } catch (error) {
+        console.error("Error al obtener el gas:", error);
+    }
+}
 
       
 async function obtenerSaldo_SOCK() {

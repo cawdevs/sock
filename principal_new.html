@@ -1666,7 +1666,7 @@ async function obtenerGasAjustado() {
         alert("Error, no se pueden estimar el gas!.");
     }
 }
-async function obtenerGasAjustado(provider) {
+async function obtenerGasAjustado() {
     try {
         // Obtener datos de gas
         const feeData = await provider.getFeeData();

@@ -1669,7 +1669,10 @@ async function obtenerGasAjustado() {
 async function obtenerGasAjustado() {
     try {
         // Obtener datos de gas
+
         console.log("Gas Price:0");
+        console.log("Provider:", provider);
+
         const feeData = await provider.getFeeData();
         console.log("Gas Price:1");  
         // Obtener el gasPrice base

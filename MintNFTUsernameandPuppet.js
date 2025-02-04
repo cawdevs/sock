@@ -477,19 +477,19 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             // Llamar al método sellNFT
                                                        
                             // Obtener la tarifa de gas base desde la red
-                            const adjustedGasPrice = await obtenerGasAjustado();
+                            //const adjustedGasPrice = await obtenerGasAjustado();
                             
                             // Convertir el precio a wei
                             priceInWei = ethers.utils.parseEther(price.toString());
 
                             // Establecer gasLimit estimado
                             const estimatedGas = await nftUsernameContract.estimateGas.sellNFT(username_info, priceInWei);
-                            const gasLimitWithExtra = estimatedGas.mul(110).div(100); // Aumenta en 10%
+                            const adjustedGasLimit = estimatedGas.mul(110).div(100); // Aumenta en 10%
 
                             // Ejecutar la transacción con los valores ajustados
                             const tx = await nftUsernameContract.sellNFT(username_info, priceInWei, {
-                                gasLimit: gasLimitWithExtra,
-                                gasPrice: gasPriceWithExtra
+                                gasLimit: adjustedGasLimit,
+                                gasPrice: adjustedGasPrice
                             });
 
                             console.log("Transacción enviada:", tx.hash);
@@ -530,7 +530,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                            
                            // Obtener datos de gas
                          
-                           const adjustedGasPrice = await obtenerGasAjustado();
+                           //const adjustedGasPrice = await obtenerGasAjustado();
 
                            // Estimar gas necesario para la función cancelNFTSale
                            const estimatedGasLimit = await nftUsernameContract.estimateGas.cancelNFTSale(username_info);
@@ -596,7 +596,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             console.log("Con SockWallet ");
 
                             // Obtener datos de gas
-                            const adjustedGasPrice = await obtenerGasAjustado();
+                            //const adjustedGasPrice = await obtenerGasAjustado();
                             
                             // Estimar gas necesario para la función transferNFT
                             const estimatedGasLimit = await nftUsernameContract.estimateGas.transferNFT(address_to, username_info);

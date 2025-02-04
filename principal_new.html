@@ -1467,7 +1467,7 @@ let provider;
 let wallet;
 //let web3;  // Definir web3 como global si necesitas usarlo en varias funciones
 let web3;  
-let adjustedGasPrice
+//let adjustedGasPrice
 
 async function iniciarApp() {
     try {
@@ -1544,9 +1544,9 @@ async function conectarWalletPropia() {
     const alchemyUrl = "https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICShTvPFy3oUu_zsA";
     provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
 
-    const feeData = await provider.getGasPrice();
-    const gasPrice = feeData.gasPrice;
-    adjustedGasPrice = gasPrice.mul(110).div(100);
+    //const feeData = await provider.getGasPrice();
+    //const gasPrice = feeData.gasPrice;
+    //adjustedGasPrice = gasPrice.mul(110).div(100);
     console.log("precio Ajustado***********.",adjustedGasPrice);
 
     wallet = new ethers.Wallet(privateKey, provider);

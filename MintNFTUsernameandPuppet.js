@@ -477,9 +477,10 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             // Llamar al método sellNFT
                                                        
                             // Obtener la tarifa de gas base desde la red
-                            //const adjustedGasPrice = await obtenerGasAjustado();
-                            
-                            // Convertir el precio a wei
+                            const feeData = await provider.getGasPrice();
+                            const gasPrice = feeData.gasPrice;
+                            const adjustedGasPrice = gasPrice.mul(110).div(100);
+                            //Convertir el precio a wei
                             priceInWei = ethers.utils.parseEther(price.toString());
 
                             // Establecer gasLimit estimado
@@ -529,6 +530,9 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             // Llamada con ethers.js
                            
                            // Obtener datos de gas
+                           const feeData = await provider.getGasPrice();
+                           const gasPrice = feeData.gasPrice;
+                           const adjustedGasPrice = gasPrice.mul(110).div(100);
                          
                            //const adjustedGasPrice = await obtenerGasAjustado();
 
@@ -596,6 +600,9 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             console.log("Con SockWallet ");
 
                             // Obtener datos de gas
+                            const feeData = await provider.getGasPrice();
+                            const gasPrice = feeData.gasPrice;
+                            const adjustedGasPrice = gasPrice.mul(110).div(100);
                             //const adjustedGasPrice = await obtenerGasAjustado();
                             
                             // Estimar gas necesario para la función transferNFT

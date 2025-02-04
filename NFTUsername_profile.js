@@ -105,7 +105,7 @@ async function create_NFTUsername_profile(value) {
     } catch (error) {
         loadingAnimation.style.display = 'none'; // Ocultar la animación.
         alert('Error al crear o actualizar el perfil.');
-        console.error('Error completo ccc:', error.code); // Mostrar el error completo para debug.
+        console.error('Error completo ccc:', error); // Mostrar el error completo para debug.
     }
 }
 

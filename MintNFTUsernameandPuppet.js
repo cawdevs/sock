@@ -466,41 +466,19 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             priceInWei = web3.utils.toWei(price.toString(), 'ether'); // Convertir a Wei
                             
                             await nftUsernameContract.methods.sellNFT(username_info, priceInWei).send({
-                            from: globalWalletKey,
-                            gas: 200000,
-                            gasPrice: web3.utils.toWei('50', 'gwei')
+                            from: globalWalletKey,                            
                             });
                             console.log('NFT Username ready to Sell.');
                                        
 
                        } else {
-                             // Usando ethers.js
-                             console.log("Con SockWallet "); 
-                             // Llamar al método sellNFT
-                             /*
-                             priceInWei = ethers.utils.parseEther(price.toString()); //
-                             const tx = await nftUsernameContract.sellNFT(username_info, priceInWei, {
-                             gasLimit: 200000,
-                             gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei
-                             });
-
-                             console.log("Transacción enviada:", tx.hash);
-
-                             // Esperar la confirmación
-                             const receipt = await tx.wait();
-                             console.log("Transacción confirmada:", receipt);
-                             alert('Transaction ok :)');
-                             */
-                             
-
-
+                            // Usando ethers.js
+                            console.log("Con SockWallet "); 
+                            // Llamar al método sellNFT
+                                                       
                             // Obtener la tarifa de gas base desde la red
-                            const feeData = await provider.getFeeData();
+                            const adjustedGasPrice = obtenerGasAjustado();
                             
-                            // Obtener gasPrice recomendado y agregarle 10%
-                            let gasPrice = feeData.gasPrice;
-                            let gasPriceWithExtra = gasPrice.mul(110).div(100); // Aumenta en 10%
-
                             // Convertir el precio a wei
                             priceInWei = ethers.utils.parseEther(price.toString());
 
@@ -540,32 +518,19 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 
                         if (nftUsernameContract.methods) {
                             console.log("Con MetaMask ");
-                            await nftUsernameContract.methods.cancelNFTSale(username_info,).send({from: globalWalletKey, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                            await nftUsernameContract.methods.cancelNFTSale(username_info,).send({
+                                from: globalWalletKey,                               
+                            });
                             console.log('NFT Username is Delisted.');
                                                        
 
                        } else {
                            console.log("Con SockWallet ");
                             // Llamada con ethers.js
-                           /*const tx = await nftUsernameContract.cancelNFTSale(username_info, {
-                           gasLimit: 200000,
-                           gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei
-                           });
-
-                           console.log("Transacción enviada:", tx.hash);
-                           // Esperar confirmación
-                           const receipt = await tx.wait();
-                           console.log("Transacción confirmada:", receipt);
-                           alert('Transaction ok :)');*/
-
+                           
                            // Obtener datos de gas
-                           const feeData = await provider.getFeeData();
-
-                           const gasPrice = feeData.gasPrice;
-                           const adjustedGasPrice = gasPrice.mul(110).div(100); // Incrementar un 10%
-
-                           console.log("Gas Price:", ethers.utils.formatUnits(gasPrice, 'gwei'), "Gwei");
-                           console.log("Gas Price con 10% extra:", ethers.utils.formatUnits(adjustedGasPrice, 'gwei'), "Gwei");
+                         
+                           const adjustedGasPrice = obtenerGasAjustado();
 
                            // Estimar gas necesario para la función cancelNFTSale
                            const estimatedGasLimit = await nftUsernameContract.estimateGas.cancelNFTSale(username_info);
@@ -615,7 +580,9 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                                 return; // Detener la ejecución si la dirección no es válida
                             }
                             console.log("Con MetaMask ");
-                            await nftUsernameContract.methods.transferNFT(address_to , username_info).send({from: globalWalletKey, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
+                            await nftUsernameContract.methods.transferNFT(address_to , username_info).send({
+                                from: globalWalletKey, 
+                                });
                             console.log('NFT transferido.');
                                                       
                          } else {
@@ -625,31 +592,12 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                                 console.error("La dirección de la wallet no es válida.");
                                 return;
                             }
-                         
-                            /*
-                            const tx = await nftUsernameContract.transferNFT(address_to, username_info, {
-                            gasLimit: 200000,
-                            gasPrice: ethers.utils.parseUnits('50', 'gwei') // Gas price en gwei
-                            });
-
-                            console.log("Transacción enviada:", tx.hash);
-
-                            // Esperar confirmación
-                            const receipt = await tx.wait();
-                            console.log("Transacción confirmada:", receipt);
-                            alert('Transaction ok :)');
-                            */
+                                                     
                             console.log("Con SockWallet ");
 
                             // Obtener datos de gas
-                            const feeData = await provider.getFeeData();
-                            const gasPrice = feeData.gasPrice;
-                            const adjustedGasPrice = gasPrice.mul(110).div(100); // Incrementar un 10%
-
-                            console.log("Gas Price:", ethers.utils.formatUnits(gasPrice, 'gwei'), "Gwei");
-                            console.log("Gas Price con 10% extra:", ethers.utils.formatUnits(adjustedGasPrice, 'gwei'), "Gwei");
-
-
+                            const adjustedGasPrice = obtenerGasAjustado();
+                            
                             // Estimar gas necesario para la función transferNFT
                             const estimatedGasLimit = await nftUsernameContract.estimateGas.transferNFT(address_to, username_info);
                             const adjustedGasLimit = estimatedGasLimit.mul(110).div(100); // Incrementar un 10%

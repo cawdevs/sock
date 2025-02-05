@@ -539,8 +539,8 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                            const adjustedGasPrice = await obtenerGasAjustado();
 
                            // Estimar gas necesario para la función cancelNFTSale
-                           const estimatedGasLimit = await nftUsernameContract.estimateGas.cancelNFTSale(username_info);
-                           const adjustedGasLimit = estimatedGasLimit.mul(110).div(100); // Incrementar un 10%
+                           //const estimatedGasLimit = await nftUsernameContract.estimateGas.cancelNFTSale(username_info);
+                           //const adjustedGasLimit = estimatedGasLimit.mul(110).div(100); // Incrementar un 10%
 
                            console.log("Gas Limit estimado:", estimatedGasLimit.toString());
                            console.log("Gas Limit con 10% extra:", adjustedGasLimit.toString());
@@ -548,7 +548,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                            // Llamada con ethers.js
                            const tx = await nftUsernameContract.cancelNFTSale(username_info, {
                                     gasLimit: adjustedGasLimit,
-                                    gasPrice: adjustedGasPrice
+                                    gasPrice: 600000
                                 });
 
                            console.log("Transacción enviada:", tx.hash);

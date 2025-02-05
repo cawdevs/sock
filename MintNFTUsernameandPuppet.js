@@ -477,10 +477,12 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             // Llamar al método sellNFT
                                                        
                             // Obtener la tarifa de gas base desde la red
-                            const feeData = await provider.getGasPrice();
-                            const gasPrice = feeData.gasPrice;
-                            const adjustedGasPrice = gasPrice.mul(110).div(100);
+                             //const feeData = await provider.getGasPrice();
+                             //const gasPrice = feeData.gasPrice;
+                             //const adjustedGasPrice = gasPrice.mul(110).div(100);
                             //Convertir el precio a wei
+                            const adjustedGasPrice = ethers.utils.parseUnits("50", "gwei"); // 50 Gwei
+
                             priceInWei = ethers.utils.parseEther(price.toString());
 
                             // Establecer gasLimit estimado
@@ -530,10 +532,10 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             // Llamada con ethers.js
                            
                            // Obtener datos de gas
-                           const feeData = await provider.getGasPrice();
-                           const gasPrice = feeData.gasPrice;
-                           const adjustedGasPrice = gasPrice.mul(110).div(100);
-                         
+                           //const feeData = await provider.getGasPrice();
+                           //const gasPrice = feeData.gasPrice;
+                           //const adjustedGasPrice = gasPrice.mul(110).div(100);
+                           const adjustedGasPrice = ethers.utils.parseUnits("50", "gwei"); // 50 Gwei
                            //const adjustedGasPrice = await obtenerGasAjustado();
 
                            // Estimar gas necesario para la función cancelNFTSale
@@ -600,11 +602,11 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             console.log("Con SockWallet ");
 
                             // Obtener datos de gas
-                            const feeData = await provider.getGasPrice();
-                            const gasPrice = feeData.gasPrice;
-                            const adjustedGasPrice = gasPrice.mul(110).div(100);
+                            //const feeData = await provider.getGasPrice();
+                            //const gasPrice = feeData.gasPrice;
+                            //const adjustedGasPrice = gasPrice.mul(110).div(100);
                             //const adjustedGasPrice = await obtenerGasAjustado();
-                            
+                            const adjustedGasPrice = ethers.utils.parseUnits("50", "gwei"); // 50 Gwei
                             // Estimar gas necesario para la función transferNFT
                             const estimatedGasLimit = await nftUsernameContract.estimateGas.transferNFT(address_to, username_info);
                             const adjustedGasLimit = estimatedGasLimit.mul(110).div(100); // Incrementar un 10%

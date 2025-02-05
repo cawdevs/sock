@@ -536,10 +536,12 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                            //const gasPrice = feeData.gasPrice;
                            //const adjustedGasPrice = gasPrice.mul(110).div(100);
                            const adjustedGasPrice = ethers.utils.parseUnits("50", "gwei"); // 50 Gwei
+                           console.log("adjustedGasPrice:", adjustedGasPrice.toString());
                            //const adjustedGasPrice = await obtenerGasAjustado();
-
+  
                            // Estimar gas necesario para la función cancelNFTSale
                            const estimatedGasLimit = await nftUsernameContract.estimateGas.cancelNFTSale(username_info);
+                           console.log("estimatedGasLimit:", estimatedGasLimit.toString()); 
                            const adjustedGasLimit = estimatedGasLimit.mul(110).div(100); // Incrementar un 10%
 
                            console.log("Gas Limit estimado:", estimatedGasLimit.toString());

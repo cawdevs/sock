@@ -548,7 +548,7 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 
                            // Llamada con ethers.js
                            const tx = await nftUsernameContract.cancelNFTSale(username_info, {
-                                    gasLimit: 600000,
+                                    gasLimit: 1200000,
                                     gasPrice: adjustedGasPrice
                                 });
 
@@ -556,12 +556,13 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 
                            // Esperar confirmación
                            const receipt = await tx.wait();
-                           console.log("Transacción confirmada:", receipt);
-                           document.getElementById('loadingAnimation-info-sock-puppet').style.display = 'none';
+                           console.log("Transacción confirmada:", receipt);                           
                            alert('Transaction ok :)');
 
                        }
 
+
+                       document.getElementById('loadingAnimation-info-sock-puppet').style.display = 'none';
                }catch (error) {
                         document.getElementById('loadingAnimation-info-sock-puppet').style.display = 'none'; 
                         console.error('Error al deslistar el NFT Username:', error);

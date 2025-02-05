@@ -548,8 +548,8 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 
                            // Llamada con ethers.js
                            const tx = await nftUsernameContract.cancelNFTSale(username_info, {
-                                    gasLimit: adjustedGasLimit,
-                                    gasPrice: 600000
+                                    gasLimit: 600000,
+                                    gasPrice: adjustedGasPrice
                                 });
 
                            console.log("Transacción enviada:", tx.hash);

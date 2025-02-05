@@ -1678,21 +1678,21 @@ async function obtenerGasAjustado() {
     try {
         // Obtener datos de gas
 
-        console.log("Gas Price:0");
-        console.log("Provider:", provider);
+        //console.log("Gas Price:0");
+        //console.log("Provider:", provider);
 
-        const feeData = await provider.getGasPrice();
+        //const feeData = await provider.getGasPrice();
 
-        console.log("Gas Price:1");  
+        //console.log("Gas Price:1");  
         // Obtener el gasPrice base
         //const gasPrice = feeData.gasPrice;
-        console.log("Gas Price:2"); 
+        //console.log("Gas Price:2"); 
         // Incrementar el gasPrice en un 10%
-        const adjustedGasPrice = gasPrice.mul(110).div(100);
-
+        //const adjustedGasPrice = gasPrice.mul(110).div(100);
+        const adjustedGasPrice = ethers.utils.parseUnits('60', 'gwei') 
         // Mostrar el gasPrice original y ajustado en Gwei
-        console.log("Gas Price:x");
-        console.log("Gas Price con 10% extra:1.1x", );
+        console.log("Gas Price:x",adjustedGasPrice);
+        //console.log("Gas Price con 10% extra:1.1x", );
 
         return adjustedGasPrice; // Devolver el gasPrice ajustado
     } catch (error) {

@@ -545,6 +545,12 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                            //console.log("Gas Limit estimado:", estimatedGasLimit.toString());
                            //console.log("Gas Limit con 10% extra:", adjustedGasLimit.toString());
                            console.log("Gas Limit con 10% extra:");
+                           
+                           console.log("Con SockWallet ", username_info, "Tipo:", typeof username_info);
+                           const isMinted= await nftUsernameContract.isMinted(username_info);
+                           console.log("Con SockWallet is minted?", isMinted);
+                           const callerNFT = await nftUsernameContract.isCallerNFTOwner(username_info);
+                           console.log("Con SockWallet is ownewr ", callerNFT);
 
                            // Llamada con ethers.js
                            const tx = await nftUsernameContract.cancelNFTSale(username_info, {

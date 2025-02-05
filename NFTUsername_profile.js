@@ -68,6 +68,7 @@ async function create_NFTUsername_profile(value) {
 
             // Obtener la tarifa de gas base desde la red
             const adjustedGasPrice = obtenerGasAjustado();
+            
 
 
             
@@ -77,8 +78,8 @@ async function create_NFTUsername_profile(value) {
                 gasLimitWithExtra = estimatedGas.mul(110).div(100); // Aumenta en 10%
 
                 tx = await profileContract.createProfile(nftusername, perfilJSON, preferenciasArray, {
-                    gasLimit: gasLimitWithExtra,
-                    gasPrice: gasPriceWithExtra
+                    gasLimit: adjustedGasLimit,
+                    gasPrice: adjustedGasPrice
                 });
             } else {
 
@@ -88,8 +89,8 @@ async function create_NFTUsername_profile(value) {
                 gasLimitWithExtra = estimatedGas.mul(110).div(100); // Aumenta en 10%
 
                 tx = await profileContract.updateProfile(nftusername, perfilJSON, preferenciasArray, {
-                    gasLimit: gasLimitWithExtra,
-                    gasPrice: gasPriceWithExtra
+                    gasLimit: adjustedGasLimit,
+                    gasPrice: adjustedGasPrice
                 });
             }
 

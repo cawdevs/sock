@@ -477,12 +477,12 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             // Llamar al método sellNFT
                                                        
                             // Obtener la tarifa de gas base desde la red
-                             //const feeData = await provider.getGasPrice();
-                             //const gasPrice = feeData.gasPrice;
-                             //const adjustedGasPrice = gasPrice.mul(110).div(100);
+                            //const feeData = await provider.getGasPrice();
+                            //const gasPrice = feeData.gasPrice;
+                            //const adjustedGasPrice = gasPrice.mul(110).div(100);
+                            const adjustedGasPrice = await obtenerGasAjustado();
+                            
                             //Convertir el precio a wei
-                            const adjustedGasPrice = ethers.utils.parseUnits("50", "gwei"); // 50 Gwei
-
                             priceInWei = ethers.utils.parseEther(price.toString());
 
                             // Establecer gasLimit estimado
@@ -535,13 +535,11 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                            //const feeData = await provider.getGasPrice();
                            //const gasPrice = feeData.gasPrice;
                            //const adjustedGasPrice = gasPrice.mul(110).div(100);
-                           const adjustedGasPrice = ethers.utils.parseUnits("50", "gwei"); // 50 Gwei
-                           console.log("adjustedGasPrice:", adjustedGasPrice.toString());
-                           //const adjustedGasPrice = await obtenerGasAjustado();
-  
+                         
+                           const adjustedGasPrice = await obtenerGasAjustado();
+
                            // Estimar gas necesario para la función cancelNFTSale
                            const estimatedGasLimit = await nftUsernameContract.estimateGas.cancelNFTSale(username_info);
-                           console.log("estimatedGasLimit:", estimatedGasLimit.toString()); 
                            const adjustedGasLimit = estimatedGasLimit.mul(110).div(100); // Incrementar un 10%
 
                            console.log("Gas Limit estimado:", estimatedGasLimit.toString());
@@ -607,8 +605,8 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
                             //const feeData = await provider.getGasPrice();
                             //const gasPrice = feeData.gasPrice;
                             //const adjustedGasPrice = gasPrice.mul(110).div(100);
-                            //const adjustedGasPrice = await obtenerGasAjustado();
-                            const adjustedGasPrice = ethers.utils.parseUnits("50", "gwei"); // 50 Gwei
+                            const adjustedGasPrice = await obtenerGasAjustado();
+                            
                             // Estimar gas necesario para la función transferNFT
                             const estimatedGasLimit = await nftUsernameContract.estimateGas.transferNFT(address_to, username_info);
                             const adjustedGasLimit = estimatedGasLimit.mul(110).div(100); // Incrementar un 10%

@@ -75,7 +75,7 @@ async function create_NFTUsername_profile(value) {
             if (value === 0) {
                 console.log("Creando nuevo perfil...");
                 estimatedGas = await profileContract.estimateGas.createProfile(nftusername, perfilJSON, preferenciasArray);
-                gasLimitWithExtra = estimatedGas.mul(110).div(100); // Aumenta en 10%
+                adjustedGasLimit = estimatedGas.mul(110).div(100); // Aumenta en 10%
 
                 tx = await profileContract.createProfile(nftusername, perfilJSON, preferenciasArray, {
                     gasLimit: adjustedGasLimit,
@@ -86,7 +86,7 @@ async function create_NFTUsername_profile(value) {
 
                 console.log("Actualizando perfil...");
                 estimatedGas = await profileContract.estimateGas.updateProfile(nftusername, perfilJSON, preferenciasArray);
-                gasLimitWithExtra = estimatedGas.mul(110).div(100); // Aumenta en 10%
+                adjustedGasLimit = estimatedGas.mul(110).div(100); // Aumenta en 10%
 
                 tx = await profileContract.updateProfile(nftusername, perfilJSON, preferenciasArray, {
                     gasLimit: adjustedGasLimit,

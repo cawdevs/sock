@@ -185,9 +185,13 @@ async function get_all_publications_home(homecontainnerID) {
             console.log("get_publication Con SockWallet");
             total_publication = await publisherContract.publicationCount();
         }
+       
+        // Definir el inicio y el fin del bucle
+        const start = total_publication;  
+        const end = Math.max(1, total_publication - 4); // Asegura que no haya índices negativos
 
-        for (let i = 1; i <= total_publication; i++) {  // Corrección del bucle
-            await get_publication(i,homecontainnerID);  // Se pasa `i` como `id_publication`
+        for (let i = start; i >= end; i--) {  
+            await get_publication(i, homecontainnerID);
         }
 
     } catch (error) {
@@ -215,9 +219,11 @@ async function get_NFTUsername_publication(nftusername, NFTUsenmane_container){
             my_publication = await publisherContract.getMainPostsByNFTUsername(nftusername);
         }
 
-        // Recorrer el array de IDs y obtener cada publicación
-        for (const publicationId of my_publication) {
-            await get_publication(publicationId,NFTUsenmane_container);
+        //recorrer el array desde la más nueva a la más vieja
+        const reversedPublications = [...my_publication].reverse();
+
+        for (const publicationId of reversedPublications) {
+            await get_publication(publicationId, NFTUsenmane_container);
         }
 
 

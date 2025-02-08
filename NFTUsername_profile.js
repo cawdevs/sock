@@ -463,7 +463,7 @@ async function clear_NFTUsername_profile(){
                     const estimatedGas = await profileContract.estimateGas.deleteProfile(nftusername);
                     const adjustedGasLimit = estimatedGas.mul(110).div(100); // Aumenta en 10%
 
-                    tx = await profileContract.deleteProfile(nftusername, {
+                    const tx = await profileContract.deleteProfile(nftusername, {
                         gasLimit: adjustedGasLimit,
                         gasPrice: adjustedGasPrice
                     }); 

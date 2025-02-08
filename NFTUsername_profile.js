@@ -426,7 +426,7 @@ async function loadProfile() {
 
         // Mostrar el modal (asumiendo que usas Bootstrap)
         $('#myModalprofile').modal('show');
-        showSuccess("Ok, perfil cargado", receipt);
+        showSuccess("Ok, perfil cargado");
 
     } catch (error) {
         showError('Error al cargar datos del perfil:', error);
@@ -450,6 +450,9 @@ async function clear_NFTUsername_profile(){
 		                 
 		    } else {
 		            console.log("Con SOCKWALLET ");
+
+                    // Obtener la tarifa de gas base desde la red
+                    const adjustedGasPrice = obtenerGasAjustado();
 		            
                     const estimatedGas = await profileContract.estimateGas.deleteProfile(nftusername);
                     const adjustedGasLimit = estimatedGas.mul(110).div(100); // Aumenta en 10%

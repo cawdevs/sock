@@ -1217,67 +1217,11 @@ span.hashtag {
   </script>
 
 
-<script>
-  //scrip que usa un modal SI o NO
-  function mostrarModal(mensaje, funcSi, funcNo) {
-          document.getElementById("user-question").innerHTML = mensaje;
-
-          // Asignar eventos a los botones
-          document.getElementById("modal-btn-yes").onclick = function () {
-            if (funcSi) funcSi();
-            $('#myModal_Si_No').modal('hide');
-          };
-
-          document.getElementById("modal-btn-no").onclick = function () {
-            if (funcNo) funcNo();
-            $('#myModal_Si_No').modal('hide');
-          };
-
-          // Mostrar el modal
-          $('#myModal_Si_No').modal('show');
-  }
-
-  // Ejemplo de uso
-  function accionSi() {
-    console.log("Ejecutando acción de 'Sí'");
-  }
-
-  function accionNo() {
-    console.log("Ejecutando acción de 'No'");
-  }
-
-  // Llamar al modal con funciones personalizadas
-  // mostrarModal("¿Deseas borrar la publicación?", accionSi, accionNo);
-</script>
-
-
-
-
-
-
 
 
 
 
 <script> 
-
-/*
-const CAW_tokenABI = [
-    {"constant": true, "inputs": [], "name": "name", "outputs": [{"name": "", "type": "string"}], "payable": false, "stateMutability": "view", "type": "function"},
-    {"constant": true, "inputs": [{"name": "spender", "type": "address"}, {"name": "owner", "type": "address"}], "name": "allowance", "outputs": [{"name": "", "type": "uint256"}], "payable": false, "stateMutability": "view", "type": "function"},
-    {"constant": false, "inputs": [{"name": "contractAddress", "type": "address"}], "name": "authorizeContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function"},
-    {"constant": true, "inputs": [{"name": "owner", "type": "address"}], "name": "balanceOf", "outputs": [{"name": "", "type": "uint256"}], "payable": false, "stateMutability": "view", "type": "function"},
-    {"constant": false, "inputs": [{"name": "spender", "type": "address"}, {"name": "subtractedValue", "type": "uint256"}], "name": "decreaseAllowance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function"},
-    {"constant": true, "inputs": [], "name": "decimals", "outputs": [{"name": "", "type": "uint8"}], "payable": false, "stateMutability": "view", "type": "function"},
-    {"constant": false, "inputs": [{"name": "spender", "type": "address"}, {"name": "addedValue", "type": "uint256"}], "name": "increaseAllowance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function"},
-    {"constant": true, "inputs": [], "name": "totalSupply", "outputs": [{"name": "", "type": "uint256"}], "payable": false, "stateMutability": "view", "type": "function"},
-    {"constant": true, "inputs": [], "name": "symbol", "outputs": [{"name": "", "type": "string"}], "payable": false, "stateMutability": "view", "type": "function"},
-    {"constant": false, "inputs": [{"name": "amount", "type": "uint256"}, {"name": "user", "type": "address"}], "name": "burn", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function"},
-    {"constant": true, "inputs": [{"name": "spender", "type": "address"}, {"name": "value", "type": "uint256"}], "name": "approve", "outputs": [], "payable": false, "stateMutability": "view", "type": "function"},
-    {"constant": false, "inputs": [{"name": "spender", "type": "address"}, {"name": "amount", "type": "uint256"}], "name": "approveCAWTransfer", "outputs": [{"name": "", "type": "bool"}], "payable": false, "stateMutability": "nonpayable", "type": "function"},
-    {"constant": false, "inputs": [], "name": "revokeAuthorization", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function"},
-    {"constant": true, "inputs": [{"name": "contractAddress", "type": "address"}], "name": "onlyAuthorizedContract", "outputs": [], "payable": false, "stateMutability": "view", "type": "function"}
-];*/
 
 const CAW_tokenABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"TokensBurned","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"contractAddress","type":"address"}],"name":"authorizeContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"address","name":"user","type":"address"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"contractAddress","type":"address"}],"name":"isAuthorizedContract","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"tokenAddress","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"recoverERC20","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"contractAddress","type":"address"}],"name":"revokeAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"}];
 
@@ -1500,7 +1444,7 @@ async function inicializarUI() {
     document.getElementById("addres-wallet").style.color = "white";
 
     // Obtener y mostrar saldos
-    mostrarModal("¿Deseas continuar cargando ?", accionSi, accionNo);
+    
     await obtenerSaldo_POL();
     await obtenerSaldo_SOCK();
 

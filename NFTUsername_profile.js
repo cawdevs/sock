@@ -444,17 +444,11 @@ async function loadProfile() {
 }
   
 
-async function clear_NFTUsername_profile2(){
-    alert('clear_NFTUsername_profile2()');
-
-}
-async function clear_NFTUsername_profile3(){
-    alert('clear_NFTUsername_profile3()');
-
-}
-
 async function clear_NFTUsername_profile(){
 
+  const loadingAnimation = document.getElementById('loadingAnimation-profile');
+  loadingAnimation.style.display = 'block'; // Mostrar la animación de carga.
+  
   const nftusername = document.getElementById('selector_NFTs').value;
   
   try {   
@@ -465,15 +459,35 @@ async function clear_NFTUsername_profile(){
 		                 
 		    } else {
 		            console.log("Con SOCKWALLET ");
-		            await profileContract.deleteProfile(nftusername);  	       
+		            
+                    const estimatedGas = await profileContract.estimateGas.deleteProfile(nftusername);
+                    const adjustedGasLimit = estimatedGas.mul(110).div(100); // Aumenta en 10%
+
+                    tx = await profileContract.deleteProfile(nftusername, {
+                        gasLimit: adjustedGasLimit,
+                        gasPrice: adjustedGasPrice
+                    }); 
+
+                    console.log("Eliminando perfil:", tx.hash);
+                    //await tx.wait(); // Confirmar la transacción.
+                    //console.log("Transacción confirmada con SockWallet:", receipt);
+                    tx.wait().then(receipt => {
+                        console.log("Transacción confirmada:", receipt);
+                        alert('Perfil eliminado..');
+                    }).catch(error => {
+                        console.error("Error en la transacción:", error);
+                    });
 		            
 		    }
 
 		    alert('Perfil eliminado');
+            loadingAnimation.style.display = 'none';
+            $('#myModalprofile').modal('hide');
     		
   } catch (error) {   
   			console.error('Error al borrar perfil:', error.message);
-    		
+    		loadingAnimation.style.display = 'none';
+            $('#myModalprofile').modal('hide');
   }	
 
 

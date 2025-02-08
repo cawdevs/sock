@@ -408,7 +408,7 @@ span.hashtag {
 
                 <a class="underlineHover" onclick="loadProfile()" style="display: inline-block;"><span class="glyphicon glyphicon-pencil" style="color: black; font-size: 24px;"></a>
 
-               <a class="underlineHover" onclick="mostrarModal_si_no('¿Eliminar Perfil?', clear_NFTUsername_profile2,clear_NFTUsername_profile3)" style="display: inline-block;"><span class="glyphicon glyphicon-trash" style="color: black; font-size: 24px;"></a>   
+               <a class="underlineHover" onclick="mostrarModal_si_no('¿Eliminar Perfil?', clear_NFTUsername_profile,hacer_nada)" style="display: inline-block;"><span class="glyphicon glyphicon-trash" style="color: black; font-size: 24px;"></a>   
                       
            </div>
 
@@ -1778,6 +1778,9 @@ function mostrarModal_si_no(mensaje, funcSi, funcNo) {
     $('#myModal_Si_No').modal('show');
 }
         
+function hacer_nada() {
+  // No hace nada
+}        
 
 
  function tiempoTranscurrido(timestamp) {

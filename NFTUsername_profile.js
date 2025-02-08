@@ -2,6 +2,7 @@
 
 
 async function create_NFTUsername_profile(value) {
+    
     const loadingAnimation = document.getElementById('loadingAnimation-profile');
     loadingAnimation.style.display = 'block'; // Mostrar la animación de carga.
 
@@ -43,10 +44,7 @@ async function create_NFTUsername_profile(value) {
                 isOwner     = await nftUsernameContract.getNFTOwner(nftusername);
     }
 
-     console.log("isMintedNFT", isMintedNFT);
-     console.log("isOwner", isOwner);
-
-
+     
         if (profileContract.methods) {
             console.log("Con MetaMask");
 
@@ -93,25 +91,27 @@ async function create_NFTUsername_profile(value) {
                     gasPrice: adjustedGasPrice
                 });
             }
+                       
+            tx.wait().then(receipt => {
+                  showSuccess("Ok Perfil Creado/Actualizado", receipt);
+            }).catch(error => {
+                  showError("Error :", error);
+            });
 
-            console.log("Transacción enviada con SockWallet:", tx.hash);
-            await tx.wait(); // Confirmar la transacción.
-            //console.log("Transacción confirmada con SockWallet:", receipt);
+
         }
 
         loadingAnimation.style.display = 'none';
         $('#myModalprofile').modal('hide');
-        alert('Perfil creado o actualizado correctamente.');
+        showSuccess("Perfil creado o actualizado correctamente.");
+        //alert('Perfil creado o actualizado correctamente.');
 
     } catch (error) {
         loadingAnimation.style.display = 'none'; // Ocultar la animación.
-        alert('Error al crear o actualizar el perfil.');
-        console.error('Error completo ccc:', error); // Mostrar el error completo para debug.
+        $('#myModalprofile').modal('hide');
+        showError("Error al crear o actualizar el perfil.",error)
     }
 }
-
-
-
 
 
 
@@ -120,10 +120,7 @@ async function create_NFTUsername_profile(value) {
 async function get_NFTUsername_profile(nftusername = undefined) {
   // Obtener la dirección de la cuenta conectada
   //alert('Get profile');
-
-
  
-  
   try {
     let nftProfileDiv;
   	if (nftusername) {
@@ -317,19 +314,13 @@ async function get_NFTUsername_profile(nftusername = undefined) {
 	nftProfileDiv.innerHTML = ''; // Limpiar el contenido anterior
 	nftProfileDiv.appendChild(profileContainer);
 
-
-
-
-
-
-
-
 	// Mensajes de éxito
 	//alert('Funcion get profile OK:');
-	showSuccess('Create profile is OK!');
+	showSuccess('Perfil colocado OK!');
 
   } catch (error) {
-    console.error('Error al obtener el perfil:', error);
+    showError('Error al obtener el perfil:', error);
+
   }
 }
    
@@ -435,11 +426,11 @@ async function loadProfile() {
 
         // Mostrar el modal (asumiendo que usas Bootstrap)
         $('#myModalprofile').modal('show');
+        showSuccess("Ok, perfil cargado", receipt);
 
-        alert('Funcion update profile OK');
     } catch (error) {
-        console.error('Error:', error);
-        alert('Error al obtener y cargar el perfil');
+        showError('Error al cargar datos del perfil:', error);
+        
     }
 }
   
@@ -472,23 +463,26 @@ async function clear_NFTUsername_profile(){
                     //await tx.wait(); // Confirmar la transacción.
                     //console.log("Transacción confirmada con SockWallet:", receipt);
                     tx.wait().then(receipt => {
-                        console.log("Transacción confirmada:", receipt);
-                        alert('Perfil eliminado..');
+                        showSuccess("Confirmado: Perfil Eliminado", receipt);
+                        
                     }).catch(error => {
-                        console.error("Error en la transacción:", error);
+                        showError("Sin confirmar:Perfil Eliminado.",error)
+
                     });
 		            
 		    }
 
-		    alert('Perfil eliminado');
+		    
             loadingAnimation.style.display = 'none';
             $('#myModalprofile').modal('hide');
+            showSuccess("Perfil Eliminado");
     		
   } catch (error) {   
-  			console.error('Error al borrar perfil:', error.message);
+  			
     		loadingAnimation.style.display = 'none';
             $('#myModalprofile').modal('hide');
-  }	
+            showError("Error: No se Elimino el perfil.",error)
+  }	             
 
 
 

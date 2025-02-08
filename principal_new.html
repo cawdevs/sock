@@ -649,12 +649,15 @@ span.hashtag {
 
                    
               
-                  <div class="well" style="border: 2px solid lime;  border-radius: 20px;">
+                  <div class="well" style="border: 4px solid lime;  border-radius: 20px;">
+                   
+                    <div id="success-message"></div>                  
+                          
+                  </div>
 
-                    <!--<button class="boton-conectar"  onclick="openBuyNftModal(`ernesto`)" style="display: inline-block; margin-left: 10px;">load image</button>   
-                   -->
-                    <div id="success-message"></div>
-                           <div id="error-message"></div>  
+                  <div class="well" style="border: 4px solid red;  border-radius: 20px;">
+                   
+                    <div id="error-message"></div>  
                           
                   </div>
 
@@ -785,22 +788,6 @@ span.hashtag {
 <!-- #####################################################################-->
 <!-- #####################################################################-->
 <!-- #####################################################################-->
-<style>
-.spinner {
-  border: 5px solid rgba(0, 0, 0, 0.1);
-  border-left: 5px solid #FFD700; /* Amarillo */
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-</style>
-
 
 <div class="container">
   <!-- Modal -->
@@ -1146,8 +1133,9 @@ span.hashtag {
       <!-- Modal content -->
       <div class="modal-content" style="background: linear-gradient(180deg, white, white);">
         <div class="modal-body" style="display: flex; align-items: flex-start; gap: 10px;">
-          <div id="user-question" style="flex: 1; padding: 10px; border-radius: 10px;"></div>                  
-        </div>      
+          <div id="user-question" style="flex: 1; padding: 10px; border-radius: 10px;"></div> 
+          
+          </div>      
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" id="modal-btn-no" data-dismiss="modal">No</button>
           <button type="button" class="btn btn-success" id="modal-btn-yes">Sí</button>
@@ -1804,28 +1792,31 @@ function hacer_nada() {
   }
 }     
          
-
-
           // Funciones para mostrar mensajes en la página
 
-           function showSuccess(message) {
-            const successElement = document.getElementById('success-message');
-            successElement.innerText = message;
-          } 
-          function showSuccess(message) {
-            const successElement = document.getElementById('success-message');
-            successElement.innerText = message;
+          function showSuccess(message, details = null) {
+              const successElement = document.getElementById('success-message');
+              successElement.innerText = message;
+
+              if (details) {
+                  console.log('Detalles de éxito:', details); // Mostrar en consola
+                  successElement.innerText += `\nDetalles: ${details}`;
+              }
           }
 
-          function showError(message) {
-            const errorElement = document.getElementById('error-message');
-            errorElement.innerText = message;
+
+          
+          function showError(message, error = null) {
+              const errorElement = document.getElementById('error-message');
+              errorElement.innerText = message;
+
+              if (error) {
+                  console.error('Detalles del error:', error); // Mostrar en consola
+                  errorElement.innerText += `\nDetalles: ${error.message || error}`; // Mostrar en la UI
+              }
           }
 
-          function showBalance(balance) {
-            const balanceElement = document.getElementById('saldo');
-            balanceElement.innerText = 'Saldo: ' + balance;
-          }
+      
 
 
 async function verifymintearNFT(){

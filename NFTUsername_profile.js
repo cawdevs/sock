@@ -444,6 +444,15 @@ async function loadProfile() {
 }
   
 
+async function clear_NFTUsername_profile2(){
+    alert('clear_NFTUsername_profile2()');
+
+}
+async function clear_NFTUsername_profile3(){
+    alert('clear_NFTUsername_profile3()');
+
+}
+
 async function clear_NFTUsername_profile(){
 
   const nftusername = document.getElementById('selector_NFTs').value;

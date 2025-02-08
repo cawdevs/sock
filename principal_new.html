@@ -408,7 +408,7 @@ span.hashtag {
 
                 <a class="underlineHover" onclick="loadProfile()" style="display: inline-block;"><span class="glyphicon glyphicon-pencil" style="color: black; font-size: 24px;"></a>
 
-               <a class="underlineHover" onclick="goToExplain()" style="display: inline-block;"><span class="glyphicon glyphicon-trash" style="color: black; font-size: 24px;"></a>   
+               <a class="underlineHover" onclick="mostrarModal_si_no('¿Eliminar Perfil?', clear_NFTUsername_profile2,clear_NFTUsername_profile3)" style="display: inline-block;"><span class="glyphicon glyphicon-trash" style="color: black; font-size: 24px;"></a>   
                       
            </div>
 
@@ -1134,157 +1134,35 @@ span.hashtag {
   </div>
 </div>
 
-
-
-
-
-
-
-<!-- ############## ventana emergente mensajes directos ###########################-->
+<!-- ############## ventana emergente SI NO ###########################-->
 <!-- #################################################################################-->
 
 
-<style>
-    #conversation {
-      border: 1px solid #ccc;
-      padding: 10px;
-      height: 300px;
-      overflow-y: scroll;
-    }
-
-    #messageInput {
-      margin-top: 10px;
-    }
-  </style>
-
-
-
-
-<div class="container"> 
+<div class="container">
+  
   <!-- Modal -->
- <!-- Modal -->
-<div class="modal fade" id="myModal-msg-direct" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-
-    <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      
-
-<style>
- 
-.left-section {
-    text-align: left;
-} 
-.right-section {
-    text-align: right;
-} 
-</style>
-
-
-<center>
- <div class="container-fluid">
-
-
-    <div class="left-section" style="display:inline-block; ">
-        <img id="profile-photo-sender" src="" width="60" class="img-circle" style="border: 4px solid white;">
-        <div id="NFTsender-direct-message"></div>
-    </div>
-
-    <div class="right-section" style="display:inline-block; margin-left: 60px;">
-        <img id="profile-photo-reciever" src="" width="60" class="img-circle" style="border: 4px solid white;">
-        <div id="NFTreceiver-direct-message"></div>
-    </div>
-</div>
-
-</center>
-
- 
-<br>
-  <div class="container-fluid">
- 
- <center>
-  
-<!--
-  <a href="#"  data-toggle="collapse" data-target="#demo2"style="display:inline-block; margin-left: 0px;"><font color="black">ETH <span class="glyphicon glyphicon-arrow-right"></span></font></a>
-
-  <div style="display:inline-block; margin-left: 50px;" > </div>
-  <div style="display:inline-block; margin-left: 50px;" > </div>
-    <div style="display:inline-block; margin-left: 50px;" > </div>
-  <div style="display:inline-block; margin-left: 50px;" > </div>
-  <div style="display:inline-block; margin-left: 50px;" > </div>
- 
-  
-  <a href="#"  data-toggle="collapse" data-target="#demo3" style="display:inline-block; margin-left: 30px;"><font color="black">CAW <span class="glyphicon glyphicon-arrow-right"></span></font></a>
-  
-
-
-  <div id="demo2" class="collapse" >
-                          
-
-
-                          <div class="input-group" style="margin-top: 10px; margin-bottom: 10px; width: 90%;">
-                            <input type="text" id="text-mount-ETH-send" class="form-control" placeholder="ETH mount to send" style="border: 2px solid black; border-radius: 20px; width: 80%; height: 40px; ">
-                           
-                            <div class="input-group-btn">
-                              <button id="btn-send-ETH" class="btn btn-default"  style="background-color: black; color: white; border: 2px solid gold; border-radius: 20px; height: 40px;">
-                                <span class="glyphicon glyphicon-send"></span>
-                              </button>                             
-                            </div>                          
-
-                           </div> 
-                           
-                           
-  
-  <div id="demo3" class="collapse">
-
-                         <div class="input-group" style=" margin-top: 10px; margin-bottom: 10px; width: 90%;">
-                            <input type="text" id="text-mount-CAW-send" class="form-control" placeholder="CAW mount to send" style="border: 2px solid black; border-radius: 20px; width: 80%; height: 40px; ">
-                            <div class="input-group-btn">
-                              <button id="btn-send-CAW" class="btn btn-default" style="background-color: black; color: white; border: 2px solid gold; border-radius: 20px; height: 40px;">
-                                <span class="glyphicon glyphicon-send"></span>
-                              </button>                             
-                            </div>
-                          </div> 
-
-  </div>
--->
-
-
-</center>
-</div>
-
-
-<center><div id="conversation" style="background-color: black; width: 90%; border: 2px solid black; border-radius: 20px; height: 400px;"></div></center>
-
-
-<center>
- <div class="input-group" style=" margin-top: 10px; margin-bottom: 10px; width: 90%;">
-
-                           <input type="text" id="messageInput" class="form-control" placeholder="Direct Message" style="border: 2px solid black; border-radius: 20px; width: 80%; height: 40px; ">
-                            <div class="input-group-btn">
-                              <button class="btn btn-default" onclick="enviarMensaje()" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
-                                <span class="glyphicon glyphicon-send"></span>
-                              </button>                             
-                            </div>
-                          </div> 
-</center>
-   
-
-      <!--<div class="modal-body">       
-      </div>-->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+  <div class="modal fade" id="myModal_Si_No" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content -->
+      <div class="modal-content" style="background: linear-gradient(180deg, white, white);">
+        <div class="modal-body" style="display: flex; align-items: flex-start; gap: 10px;">
+          <div id="user-question" style="flex: 1; padding: 10px; border-radius: 10px;"></div>                  
+        </div>      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="modal-btn-no" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-success" id="modal-btn-yes">Sí</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
-<!-- #####################################################################-->
-<!-- #####################################################################-->
 
-        <!-- Puedes agregar más elementos según sea necesario -->
+<!-- #################################################################################-->
+
+
+
+ 
+<!-- Puedes agregar más elementos según sea necesario -->
   
    
 <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
@@ -1337,6 +1215,48 @@ span.hashtag {
     // Llenar los selects al cargar la página
     llenarSelects();
   </script>
+
+
+<script>
+  //scrip que usa un modal SI o NO
+  function mostrarModal(mensaje, funcSi, funcNo) {
+          document.getElementById("user-question").innerHTML = mensaje;
+
+          // Asignar eventos a los botones
+          document.getElementById("modal-btn-yes").onclick = function () {
+            if (funcSi) funcSi();
+            $('#myModal_Si_No').modal('hide');
+          };
+
+          document.getElementById("modal-btn-no").onclick = function () {
+            if (funcNo) funcNo();
+            $('#myModal_Si_No').modal('hide');
+          };
+
+          // Mostrar el modal
+          $('#myModal_Si_No').modal('show');
+  }
+
+  // Ejemplo de uso
+  function accionSi() {
+    console.log("Ejecutando acción de 'Sí'");
+  }
+
+  function accionNo() {
+    console.log("Ejecutando acción de 'No'");
+  }
+
+  // Llamar al modal con funciones personalizadas
+  // mostrarModal("¿Deseas borrar la publicación?", accionSi, accionNo);
+</script>
+
+
+
+
+
+
+
+
 
 
 <script> 
@@ -1442,24 +1362,6 @@ FreeTokens_ContractABI = [{"constant":false,"inputs":[],"name":"conectar","outpu
 
 const freeTokensContractAddress = '0xa0b89d894939e5810849e602a3e3f3e75931b07e';//polygon  
 
-*/
-
-
-/*
-//setting para la red MATIC sin usar metamask
-
-// Setup: npm install alchemy-sdk
-// Github: https://github.com/alchemyplatform/alchemy-sdk-js
-import { Network, Alchemy } from "alchemy-sdk";
-
-// Optional config object, but defaults to demo api-key and eth-mainnet.
-const settings = {
-  apiKey: "ur1NT06b5xJJs619w8MiC1jDWE2RXEH9", // Replace with your Alchemy API Key.
-  network: Network.MATIC_MAINNET, // Replace with your network.
-};
-const alchemy = new Alchemy(settings);
-
-alchemy.core.getBlock(15221026).then(console.log);
 */
 
 let globalWalletKey = "";
@@ -1598,8 +1500,10 @@ async function inicializarUI() {
     document.getElementById("addres-wallet").style.color = "white";
 
     // Obtener y mostrar saldos
+    mostrarModal("¿Deseas continuar cargando ?", accionSi, accionNo);
     await obtenerSaldo_POL();
     await obtenerSaldo_SOCK();
+
     await getmintedNFT();
     
     await get_NFTUsername_profile();
@@ -1654,25 +1558,7 @@ async function initializeTransactionContext() {
         throw new Error('No se pudo inicializar el contexto de la transacción: ' + error.message);
     }
 }
-/*
-async function obtenerGasAjustado() {
-    try {
-        // Obtener datos de gas
-        const feeData = await provider.getFeeData();
-        // Obtener el gasPrice base
-        const gasPrice = feeData.gasPrice;
-        // Incrementar el gasPrice en un 10%
-        const adjustedGasPrice = gasPrice.mul(110).div(100);
-        // Mostrar el gasPrice original y ajustado en Gwei
-        console.log("Gas Price:", ethers.utils.formatUnits(gasPrice, 'gwei'), "Gwei");
-        console.log("Gas Price con 10% extra:", ethers.utils.formatUnits(adjustedGasPrice, 'gwei'), "Gwei");
-        return adjustedGasPrice; // Devolver el gasPrice ajustado
-    } catch (error) {
-        console.error("Error al obtener el gas:", error);
-        alert("Error, no se pueden estimar el gas!.");
-    }
-}
-*/
+
 
 async function obtenerGasAjustado() {
     try {
@@ -1774,29 +1660,6 @@ async function obtenerSaldo_POL() {
     return truncatedBalanceEther;
            
 }
-
-           // Función para aprobar un contrato
-async function aprobarContrato() {
-            // Obtener la dirección de la cuenta conectada
-            const accounts = await web3.eth.getAccounts();
-            const myAddress = accounts[0];
-            //alert('Conectado con éxito a MetaMask. Dirección de la cuenta: ' + myAddress);
-
-            const contract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
-
-            try {
-              //await contract.methods.authorizeContract(nftContractAddress).send({ from: myAddress });
-  await contract.methods.authorizeContract(nftContractAddress).send({from: myAddress, gas: 200000, gasPrice: web3.utils.toWei('50', 'gwei') });
-
-              //alert('Contrato aprobado exitosamente:');
-              console.log('Contrato aprobado exitosamente.');
-            } catch (error) {
-              //alert('Error al aprobar el contrato');
-              console.error('Error al aprobar el contrato:', error);
-            }
-           
-          }
-
 
 
 // Función para mintear un NFT
@@ -1950,849 +1813,27 @@ async function getmintedNFT() {
           });
       
 
-         
-
-         
 
 
 
-async function getNFTusernameDirectMessage() {
-  // Obtener la dirección de la cuenta conectada
-  const accounts = await web3.eth.getAccounts();
-  const myAddress = accounts[0];
 
-  const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
-  const contractPROFILE = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
+function mostrarModal_si_no(mensaje, funcSi, funcNo) {
+    document.getElementById("user-question").innerHTML = mensaje;
+    // Asignar eventos a los botones
+    document.getElementById("modal-btn-yes").onclick = function () {
+      if (funcSi) funcSi();
+      $('#myModal_Si_No').modal('hide');
+    };
 
-  const selectorNFTs = document.getElementById('selector_NFTs').value;
-  const nft_username_selected = selectorNFTs.replace('@CAW', '');
-  
-  try {
-        //showSuccess('Show mensage amigos: ' + addressUserNfts);
-                
-        const nftUsernames = await contractPROFILE.methods.getFollowing(nft_username_selected).call();
-              
-        const nftUsernameList = document.getElementById('nft-username-list-direct-message');
-                                                        
-        // Limpia el contenido actual del contenedor
-        nftUsernameList.innerHTML = "";
+    document.getElementById("modal-btn-no").onclick = function () {
+      if (funcNo) funcNo();
+      $('#myModal_Si_No').modal('hide');
+    };
 
-        //obtiene el nombre de usuario del selector
-       
-        //nftUsernames.forEach(function (username) {
-    for (const username of nftUsernames) {
-    
-   
-    
-try{
-    const following = await contractPROFILE.methods.isFollowing(nft_username_selected, username).call();
-
-    const following_following = await contractPROFILE.methods.isFollowing(username, nft_username_selected).call();
-
-    const container = document.createElement("div");
-
-
-    const profileText = await contractPROFILE.methods.getProfile(username).call();
-    const profile = JSON.parse(profileText);
-    const img_profile = profile.fotoPerfil;  
-
-    
-
-    if (following) {
-               
-       if (following_following) {   
-
-            const userButton = document.createElement("span");
-            userButton.innerHTML = `<img src="${img_profile}" style="width: 50px; height: 50px; border-radius: 50%; vertical-align: middle; display: inline-block; margin-left: 10px;" >`;
-            userButton.classList.add("clickable-button");
-            userButton.addEventListener("click", function () {
-            //alert("Clickeaste el botón de usuario para " + username);
-            });
-            userButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos     
-
-            const nameButton = document.createElement("span");
-            nameButton.innerHTML = '<span style="font-size: 16px; vertical-align: middle; display: inline-block; margin-left: 10px;"></span>';
-            nameButton.textContent = username;
-            nameButton.classList.add("clickable-button");
-            nameButton.addEventListener("click", function () {
-                 
-                 readConversation(username);
-                 $('#myModal-msg-direct').modal('show');
-            
-            
-
-            });
-            nameButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
-
-
-            const msgButton = document.createElement("span");
-            msgButton.innerHTML = '<span class="glyphicon glyphicon-envelope" style="font-size: 24px; vertical-align: middle; display: inline-block; margin-left: 10px;" ></span>';
-            msgButton.classList.add("clickable-button");
-            msgButton.addEventListener("click", function () {
-                    //alert("Clickeaste el botón de usuario para " + username);
-                    readConversation(username);
-                    $('#myModal-msg-direct').modal('show');
-
-            }); 
-            msgButton.style.marginLeft = "10px"; // Añadir un margen izquierdo para separar los elementos
-            msgButton.style.color = "blue";
+    // Mostrar el modal
+    $('#myModal_Si_No').modal('show');
+}
         
-
-
-            
-            container.appendChild(userButton);
-            container.appendChild(nameButton);
-            container.appendChild(msgButton);
-
-
-       }
-
-
-
-    }    else { 
-        //userButton.style.color = "black";
-    }     
-
-
-    nftUsernameList.appendChild(container);
-} catch (error){
-
-  if (error.message.includes("Profiles do not exist")) {
-      const container = document.createElement("div");
-      const nameButton = document.createElement("span");
-      nameButton.innerHTML = '<span style="font-size: 24px; vertical-align: middle; display: inline-block; margin-left: 10px;"></span>';
-      nameButton.textContent = username;
-      nameButton.classList.add("clickable-button");
-      nameButton.addEventListener("click", function () {
-      //alert("Clickeaste el botón de usuario para " + username);
-      });
-      container.appendChild(nameButton);
-      nftUsernameList.appendChild(container);
-    } else {
-      // Otro manejo de errores si es necesario
-      console.error("Errorx:", error);
-      
-    }
-}
-
-
-// Crear un espacio entre las iteraciones
-    const spacer = document.createElement("div");
-    spacer.style.height = '20px'; // Ajusta la altura a tu preferencia
-    nftUsernameList.appendChild(spacer);
-
-
-}
-   
- 
-
-    showSuccess('Show mensage amigos: ' + nftUsernames);      
-    //alert('Funcion lista NFTS OK :');
-
-
-  } catch (error) {
-
-
-    // Otro manejo de errores si es necesario
-      console.error("Error al buscar NFTs:", error);
-      //alert('Error lista NFTS'); 
-   
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Suponiendo que ya has definido la instancia del contrato como `contractPROFILE`
-
-async function approveAndAction(nftusernameselected, username,action) {
-
-  try {  
-
-      if (action !== 'unfollow') {
-        // Aprobar el gasto de CAW por el contrato de perfil
-        await approveCAWSpending(action);
-        // Esperar un tiempo (puedes ajustar este tiempo según lo que necesites)
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        // Seguir al usuario
-      }
-        
-
-        await actionUser(nftusernameselected, username,action);
-  
-  } catch (error) {
-        console.error('Error en el proceso de aprobación y seguimiento:', error);
-        // Realiza acciones adicionales en caso de error
-  }
-       
-}
-      
-
-
-
-async function actionUser(follower, following, action) {
-  try {
-    const accounts = await web3.eth.getAccounts();
-    const myAddress = accounts[0];
-
-    const contract = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
-
-    const signatureToUser = '0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321';
-    //const timestamp = Date.now();
-    const timestamp = 0;
-  
-    let result;
-  
-    if (action === 'like') {
-      // Realizar acciones para 'like' si es necesario
-      console.log('Acción like realizada si es necesario');
-    } else if (action === 'follow') {
-      result = await contract.methods.follow(follower, following, timestamp, signatureToUser).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });
-    } else if (action === 'unfollow') {
-      
-      result = await contract.methods.unfollow(follower, following).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });
-    } else if (action === 'publisher') {
-      // Realizar acciones para 'publisher' o 'share' si es necesario
-      console.log('Acción publisher o share realizada si es necesario');
-    } else if (action === 'share') {
-      // Realizar acciones para 'publisher' o 'share' si es necesario
-      console.log('Acción publisher o share realizada si es necesario');
-    } 
-    else {
-      console.error('Tipo no válido');
-      return;
-    }
-
-    console.log('Transacción exitosa:', result);
-    // Realizar acciones adicionales si es necesario después de seguir al usuario
-  } catch (error) {
-    console.error('Error al seguir al usuario:', error);
-    // Realizar acciones en caso de error
-  }
-}
-
-   
-
-async function approveCAWSpending(action) {
-  try {
-    const accounts = await web3.eth.getAccounts();
-    const myAddress = accounts[0];
-           
-    let amountToApprove = 0;
-
-    // Asignar el monto a aprobar según el tipo
-    if (action === 'like') {
-      amountToApprove = web3.utils.toWei('2000', 'ether');
-    } else if (action === 'follow') {
-      amountToApprove = web3.utils.toWei('30000', 'ether');
-    } else if (action === 'unfollow') {
-      amountToApprove = web3.utils.toWei('0', 'ether');
-    } else if (action === 'publisher') {
-      amountToApprove = web3.utils.toWei('5000', 'ether');
-    } else if (action === 'share') {
-      amountToApprove = web3.utils.toWei('4000', 'ether');
-    } else {
-      // Manejar un tipo desconocido o incorrecto
-      console.error('Tipo no válido');
-      return;
-    }
-
-
-    // Crear instancia del contrato del token CAW
-    const tokenContract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
-    showSuccess('aprobacion: ' +action+amountToApprove);      
-    // Aprobar al contrato del perfil para gastar el CAW
-    await tokenContract.methods.approve(transferContractAddress, amountToApprove).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });
-          
-    console.log('Aprobación de gasto de CAW realizada con éxito');
-    // Realiza acciones adicionales si la aprobación es exitosa
-  } catch (error) {
-    console.error('Error al aprobar el gasto de CAW:', error);
-    // Realiza acciones en caso de error
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-async function createActionPublication(receiverNFTUsername,publication_id,type_action){
-
- 
-  console.error('createActionPublication');
-  // Obtener la dirección de la cuenta conectada
-  const accounts = await web3.eth.getAccounts();
-  const myAddress = accounts[0];
-
-  const contract = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
-
-  const selectorNFTs = document.getElementById('selector_NFTs').value;
-  const nftusername = selectorNFTs.replace('@CAW', '');
-   
-  const loadingAnimationPublication = document.getElementById('loadingAnimation-publication');
-  loadingAnimationPublication.style.display = 'block'; // Oculta la animación
-
-  try {         
-
-     
-    
-    let amountToApprove = 0;
-    if(type_action==="publication"){     
-               
-        amountToApprove = web3.utils.toWei('5000', 'ether');
-    }
-    else if (type_action==="like") {
-          amountToApprove = web3.utils.toWei('2000', 'ether');
-    }
-    else if (type_action==="share") {
-           amountToApprove = web3.utils.toWei('4000', 'ether');
-    }else{
-
-    }
-
-   
-    // Crear instancia del contrato del token CAW
-    //loadingAnimationPublication.style.display = 'none'; // Oculta la animación
-    
-
-    const tokenContract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
-        
-    // Aprobar al contrato del perfil para gastar el CAW
-    await tokenContract.methods.approve(transferContractAddress, amountToApprove).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });          
-    
-    
-    // Realiza acciones adicionales si la aprobación es exitosa
-  } catch (error) {
-    console.error('Error al aprobar el gasto de CAW:', error);
-    loadingAnimationPublication.style.display = 'none'; // Oculta la animación
-    
-    // Realiza acciones en caso de error
-  }
-
-    await new Promise(resolve => setTimeout(resolve, 1000)); 
-
-  try {
-    
-    const contractPUBLICATION = new web3.eth.Contract(Publisher_ContractABI, publisherContractAddress);
-    const signatureToUser = '0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321';
-    const timestamp = 0;    
-
-     const type_post = 0;//m,ainpost
-     const parentPublicationId=0;     
-     const content = document.getElementById('publicacion').value;
-     const linkToMedia = document.getElementById('media-publication').value;
-     const filterPrivacidad = document.getElementById('filter-privacidad').value;
-    
-     const jsonMetadata = {
-            "linkToMedia": linkToMedia,
-            "filterPrivacidad": filterPrivacidad
-         };
-
-     const jsonString = JSON.stringify(jsonMetadata);
-
-
-    if(type_action==="publication"){
-       
-        loadingAnimationPublication.style.display = 'block'; // Muestra la animación al e    
-        //alert("alerta publicacion "+nftusername+timestamp+signatureToUser+content+
-          //jsonString+type_post+parentPublicationId);
-        await contractPUBLICATION.methods.createPublication(nftusername,timestamp,signatureToUser,content,
-          jsonString,type_post,parentPublicationId).send({from: myAddress, gas: 600000, gasPrice: web3.utils.toWei('50', 'gwei') });
-   
-       
-    }
-    else if (type_action==="like") {
-
-      await contractPUBLICATION.methods.addReaction(nftusername, receiverNFTUsername,timestamp, signatureToUser,publication_id ).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') }); 
-
-    
-    }
-    else if (type_action==="share") {
-         await contractPUBLICATION.methods.sharePublication(nftusername, receiverNFTUsername,timestamp, signatureToUser,publication_id ).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });
-
-    }else{
-
-      showSuccess('Error to Action .');
-
-    }
-
-    
-   
-   
-   
-   loadingAnimationPublication.style.display = 'none'; // Oculta la animación
-   $('#myModal_publication').modal('hide');
-
-   await getProfile();
-
-
-
-  } catch (error) {
-    loadingAnimationPublication.style.display = 'none'; // Oculta la animación
-    showSuccess('Error to crearte Publication .');
-  
-  }  
-
-}
-
-async function createActionResponse(content_response,publication_id){
-
- 
-  const accounts = await web3.eth.getAccounts();
-  const myAddress = accounts[0];
-  
-  const selectorNFTs = document.getElementById('selector_NFTs').value;
-  const nftusername = selectorNFTs.replace('@CAW', '');
-      
-  const contractPUBLICATION = new web3.eth.Contract(Publisher_ContractABI, publisherContractAddress);
-     
-  const parentPublicationId=publication_id;
-
-  const content = content_response;
-  const linkToMedia = "";
-  const filterPrivacidad = "";
-    
-  const jsonMetadata = {
-            "linkToMedia": linkToMedia,
-            "filterPrivacidad": filterPrivacidad
-  };
-
-  const jsonString = JSON.stringify(jsonMetadata);
-  
-
-
-       
-  //alert('createPublicationResponse.' + jsonString+"    "+jsonMetadata);
-  try {
-     await contractPUBLICATION.methods.createPublicationResponse(nftusername,content,jsonMetadata,parentPublicationId).send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });
-   
-  } catch (error) {    
-    showSuccess('Error to crearte Publication.');
-  
-  }  
-
-}
-
-
-async function getSmartUserPublications(username, type_user) {
-
-  const selectorNFTs = document.getElementById('selector_NFTs').value;
-  const nftUsername = selectorNFTs.replace('@CAW', '');
-  //alert("nftusername  "+ nftusername);
-
-  let userPublicationContainer=""
-  let vectorNftUsername=[];
-
-  if(type_user==="user"){
-    userPublicationContainer = document.querySelector('.user-publication-container');
-    userPublicationContainer.innerHTML = "";
-    //alert('Publication X '+ username);
-    vectorNftUsername.push(username);
-    //alert('getSmartUserPublications(nftusername,"user");' + vectorNftUsername); 
-    
-
-  } else{
-    userPublicationContainer = document.querySelector('.user-following-publication-container');
-    //alert('Publication Xxx '+ username);
-    userPublicationContainer.innerHTML = "";
-    vectorNftUsername=username;
-  }
-
- 
-
-
-
-  const accounts = await web3.eth.getAccounts();
-  const myAddress = accounts[0];
-  
-
-for (let user of vectorNftUsername) {
-  //alert('Publication For user X '+ user);
-
-  //const selectorNFTs = document.getElementById('selector_NFTs').value;
-  //const nftUsername = selectorNFTs.replace('@CAW', '');
-
-  //////nftUsername=user;
-
-  try {
-    
-    const contractPROFILE = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
-    //const profileText = await contractPROFILE.methods.getProfile(user).call();
-    //const profile = JSON.parse(profileText);
-    //profile_picture_publication=profile.fotoPerfil;
-    //profile_name=profile.nombre;
-    //alert('getSmartUserPublications(nftusername,"user");' + user+profile.nombre); 
-    
-    
-
-    const contractPUBLICATION = new web3.eth.Contract(Publisher_ContractABI, publisherContractAddress);
-    const count = await contractPUBLICATION.methods.getUserTotalPublicationsCount(user).call();
-
-    let count_like,count_share,count_comment,user_like,user_share,user_comment;
-
-    for (let i = 0; i < count; i++) {
-     const result = await contractPUBLICATION.methods.getUserPublication(user, i).call();
-
-     const profileText = await contractPROFILE.methods.getProfile(result[0]).call();
-     const profile = JSON.parse(profileText);
-     profile_picture_publication=profile.fotoPerfil;
-     profile_name=profile.nombre;
-     //alert('getSmartUserPublications(nftusername,"user");' + user+profile.nombre); 
-     
-
-
-       //llama a las funciones que ponen los likes y los shares
-      count_like = await contractPUBLICATION.methods.getLikesCountByPublication(result[1]).call();
-      count_share = await contractPUBLICATION.methods.getSharesCountByPublication(result[1]).call(); 
-      count_comment = await contractPUBLICATION.methods. getCommentCount(result[1]).call(); 
-     
-
-      user_like = await contractPUBLICATION.methods.getUserLikeStatusByPublication(nftUsername,result[1]).call();
-      user_share = await contractPUBLICATION.methods.getUserShareStatusByPublication(nftUsername,result[1]).call(); 
-      user_comment = await contractPUBLICATION.methods.getUserCommentStatusByPublication(nftUsername,result[1]).call(); 
-      
-     
-     
-
-       try{
-      //Convierte la cadena JSON a un objeto JavaScript
-      let linkToMedia; 
-      let filterPrivacidad;
-
-       
-       //const jsonMetadata = JSON.parse(result[3]);
-       //let  linkToMedia=""
-       //let filterPrivacidad=""
-      
-       let jsonMetadata;
-       try{      
-        jsonMetadata = JSON.parse(result[3]);
-        linkToMedia = jsonMetadata.linkToMedia;
-        filterPrivacidad = jsonMetadata.filterPrivacidad;
-      }catch{
-         linkToMedia = '';
-         filterPrivacidad = '';
-      }
-
-    
-       
-      
-
-      const publication_username =result[0];
-      const publication_ID =result[1];
-      const content_publication = result[2];      
-      const timestamp = result[4];
-      const publication_Type=result[5];
-
-      const publication_date = tiempoTranscurrido(timestamp);                                                  
-
-     //alert('Publication:g '+ publication_Type);
-      //alert('Publication:g '+publication_ID+ publication_username+content_publication+ timestamp+filterPrivacidad+linkToMedia);
-      
-      
-      const userPublicationGroup = document.createElement('div');
-      userPublicationGroup.classList.add('user-publication-group');
-      userPublicationGroup.addEventListener('click', () => {
-        // Acción al hacer clic en la publicación completa
-        // Por ejemplo, ver más detalles o redireccionar a una página
-      });
-      userPublicationGroup.style.width = '100%'; // Ocupar el ancho completo del contenedor principal
-      userPublicationGroup.style.border = '2px solid #ccc'; // Ejemplo de borde para mostrar el contenedor
-      userPublicationGroup.style.display= "inline-block";
-      userPublicationGroup.style.marginTop = '10px';
-      userPublicationGroup.style.borderRadius="20px"
-      
-       const userPublicationId = document.createElement('div');
-       userPublicationId.classList.add('user-publication-id');
-       userPublicationId.innerHTML = `ID: ${publication_ID}`;
-       userPublicationId.style.display= "inline-block";
-
-
-       const imageLink = document.createElement('a');
-       imageLink.href = 'URL_DE_DESTINO'; // Coloca la URL a la que quieres redirigir al hacer clic en la imagen
-
-
-
-       const roundImage = document.createElement('img');
-       roundImage.src = profile_picture_publication; // Inserta la URL de la imagen que deseas mostrar
-       roundImage.style.borderRadius = '50%'; // Para crear una imagen redonda
-       roundImage.style.width = '60px'; // Establece el ancho de la imagen
-       roundImage.style.height = '60px'; // Establece la altura de la imagen
-       roundImage.style.marginRight = '15px'; // Añade margen derecho
-       roundImage.style.marginLeft = '15px';
-       roundImage.style.display= "inline-block";
-       roundImage.style.marginTop= "10px";
-       roundImage.style.marginBottom= "20px";
-       // Agrega la imagen redonda al enlace
-       imageLink.appendChild(roundImage);
-
-      // Agrega el enlace con la imagen redonda al contenedor 'userPublicationId'
-      
-
-
-      const usernamePublication = document.createElement('div');
-      usernamePublication.classList.add('user-publication-id');
-      usernamePublication.innerHTML = profile_name;
-      usernamePublication.style.marginRight = '15px'; // Añade margen derecho
-      usernamePublication.style.fontSize = '1.5em'; // Tamaño de letra más grande
-      usernamePublication.style.display= "inline-block";
-
-      
-      const nftusernamePublication = document.createElement('div');
-      nftusernamePublication.classList.add('user-publication-id');
-      nftusernamePublication.innerHTML ="@"+publication_username;
-      nftusernamePublication.style.marginRight = '15px'; // Añade margen derecho
-      nftusernamePublication.style.display= "inline-block";
-
-
-      const userPublicationDate = document.createElement('div');
-      userPublicationDate.classList.add('user-publication-id');
-      userPublicationDate.innerHTML =publication_date;
-      userPublicationDate.style.display= "inline-block";
-   
-  
-      
-
-const userPublication = document.createElement('div');
-userPublication.classList.add('user-publication');
-userPublication.style.width = '100%'; // Ocupar el ancho completo del contenedor principal
-userPublication.style.fontSize = '1.2em'; // Tamaño de letra más grande
-userPublication.style.marginBottom = "20px";
-userPublication.style.wordWrap = 'break-word'; // Envolver el texto si es demasiado largo
-userPublication.style.whiteSpace = 'pre-line'; // Mantener los saltos de línea del texto original  
-
-const words = content_publication.split(/(P\S+|r\S+|\s+)/); // Divide el contenido
-
-
-words.forEach(word => {
-  const span = document.createElement('span');
-
-  if (word.startsWith('@')) {
-    span.style.color = 'blue'; // Colorear las palabras que comienzan con @
-    span.innerText = word;
-    span.style.fontWeight = 'bold'; // Hacer la letra más gruesa (negrita)
-    span.addEventListener('click', () => {
-      // Acción al hacer clic en una palabra que comienza con @
-    });
-  } else if (word.startsWith('#')) {
-    span.style.color = 'green'; // Colorear las palabras que comienzan con #
-    span.style.fontWeight = 'bold'; // Hacer la letra más gruesa (negrita)
-    span.innerText = word;
-    span.addEventListener('click', () => {
-      // Acción al hacer clic en una palabra que comienza con #
-    });
-  } else if (word === ' ') {
-    // Preserva el espacio entre las palabras
-    span.innerHTML = '&nbsp;';
-  } else {
-    span.innerText = word;
-  }
-
-  userPublication.appendChild(span);
-});
-    
-
-      const userPublicationImage = document.createElement('img');
-      userPublicationImage.classList.add('user-publication-image');
-      userPublicationImage.src = linkToMedia;
-      userPublicationImage.style.borderRadius = '15px'; // Redondear las esquinas
-      userPublicationImage.style.width = '100%'; // Expandir la imagen al ancho del contenedor
-     
-      // ... Crear y configurar otros elementos para mostrar la información
-
-      const publicationIconsGroup = document.createElement('div');
-      publicationIconsGroup.classList.add('publication-icons-group');
-      publicationIconsGroup.style.width = '100%'; // Ocupar el ancho completo del contenedor principal
-      publicationIconsGroup.style.textAlign = 'center'; // Alinear elementos al centro
-      publicationIconsGroup.style.marginTop = "10px";
- 
-  const comentPublicationGroup = document.createElement('div');
-       comentPublicationGroup.classList.add('publication-icons-group');
-       comentPublicationGroup.style.width = '100%'; // Ocupar el ancho completo del contenedor principal
-       comentPublicationGroup.style.textAlign = 'center'; // Alinear elementos al centro
-       comentPublicationGroup.style.marginTop = "10px";
-
-
-
-// Crear el enlace (<a>) con HTML directamente
-const retweetIcon = document.createElement('a');
-retweetIcon.href = '#'; // Puedes establecer el enlace que desees
-if (user_share){
-   retweetIcon.innerHTML = `<span class="glyphicon glyphicon-retweet" style="font-size: 2em; color: green; margin-left: 20px;"></span>&nbsp; ${count_share}`;
-}else{
-  retweetIcon.innerHTML = `<span class="glyphicon glyphicon-retweet" style="font-size: 2em; color: black; margin-left: 20px;"></span>&nbsp; ${count_share}`;
-
-}
-// Agregar el evento de clic al enlace
-retweetIcon.addEventListener('click', () => {
-  // Acción al hacer clic en el enlace
-  createActionPublication(publication_username,publication_ID,"share");
-  //alert('¡Hiciste clic en el enlace!');
-});
-
-
-
-
-
-
-
-// Crear el enlace (<a>) con HTML directamente
-const heartIcon = document.createElement('a');
-heartIcon.href = '#'; // Puedes establecer el enlace que desees
-
-if (user_like){
-   heartIcon.innerHTML = `<span class="glyphicon glyphicon-heart" style="font-size: 2em; color: red; margin-left: 50px;"></span>&nbsp; ${count_like}`;
-}else{
-  heartIcon.innerHTML = `<span class="glyphicon glyphicon-heart-empty" style="font-size: 2em; color: black; margin-left: 50px;"></span>&nbsp; ${count_like}`;
-}
-
-// Agregar el evento de clic al enlace
-heartIcon.addEventListener('click', () => {
-  // Acción al hacer clic en el enlace
-  createActionPublication(publication_username,publication_ID,"like");
-  //alert('¡Hiciste clic en el enlace!');
-});
-
-
-
- //alert('comment XX '+user_comment+ " " + count_comment ); 
-// Crear el enlace (<a>) con HTML directamente
-const commentIcon = document.createElement('a');
-commentIcon.href = '#'; // Puedes establecer el enlace que desees
-
-if (user_comment){
-     commentIcon.innerHTML = `<span class="glyphicon glyphicon-comment" style="font-size: 2em; color: blue; margin-left: 50px;"></span>&nbsp; ${count_comment}`;
-}else{
-  commentIcon.innerHTML = `<span class="glyphicon glyphicon-comment" style="font-size: 2em; color: black; margin-left: 50px;"></span>&nbsp; ${count_comment}`;
-}
-
-// Agregar el evento de clic al enlace
-commentIcon.addEventListener('click', () => {
-  // Acción al hacer clic en el enlace
-  //alert('¡Hiciste clic en el enlace!');
-    getresponses(publication_ID); 
-    $('#myModal-responses').modal('show');
-});
-
-
-////////////comentarios///////////////////////////////////////////////////////
-// Crear la entrada de texto dinámicamente
-    
-    const commentTextArea = document.createElement('textarea');
-    commentTextArea.placeholder = 'Comment publication here';
-    commentTextArea.style = 'border: 2px solid black; border-radius: 10px; width: 100%; margin-bottom: 0px; height: 40px; resize: true;';      
-
-
-    // Crear el enlace (<a>) con HTML directamente
-const commentButtonIcon = document.createElement('a');
-commentButtonIcon.href = '#'; // Puedes establecer el enlace que desees
-commentButtonIcon.innerHTML = `<span class="glyphicon glyphicon-send" style="font-size: 2em; color: lime; margin-left: 50px;"></span>&nbsp; `;
-// Agregar el evento de clic al enlace
-commentButtonIcon.addEventListener('click', () => {
-  // Acción al hacer clic en el enlace
-      const textoIngresado =  commentTextArea.value;
-      //(`Texto ingresado: ${textoIngresado}`);
-      
-      createActionResponse(commentTextArea.value,publication_ID);
-
-      //createActionPublication(publication_username,publication_ID,"like");
-      // Otra lógica para procesar el texto según tus necesidades
-      // ...
-
-      // Limpiar la entrada de texto después de procesar
-      commentTextArea.value = '';
-});
-
-
-
-//////////////////////////////////////////////////////////////////   
-
-
-
-     
-      // Agregar elementos al contenedor de iconos
-
-      publicationIconsGroup.appendChild(retweetIcon);     
-      publicationIconsGroup.appendChild(heartIcon);
-      publicationIconsGroup.appendChild(commentIcon);
-      publicationIconsGroup.appendChild(commentButtonIcon);
-       
-
-      comentPublicationGroup.appendChild(commentTextArea);
-      
-
-
-
-
-      // Agregar todos los elementos al contenedor de la publicación
-      //userPublicationGroup.appendChild(userPublicationId);
-      userPublicationGroup.appendChild(imageLink);
-      userPublicationGroup.appendChild(usernamePublication);
-      userPublicationGroup.appendChild(nftusernamePublication);
-      userPublicationGroup.appendChild(userPublicationDate);  
-
-      userPublicationGroup.appendChild(userPublication);
-      userPublicationGroup.appendChild(userPublicationImage);
-       userPublicationGroup.appendChild(comentPublicationGroup);
-      userPublicationGroup.appendChild(publicationIconsGroup);
-      
-
-
-      // Agregar la publicación al contenedor principal
-      //solo se muestran las publicaciones, las respuestas no se muewstran
-      if (publication_Type==="0"){
-          userPublicationContainer.appendChild(userPublicationGroup);
-      }
-      // Agregar espacio entre publicaciones
-      userPublicationContainer.appendChild(document.createElement('br'));
-     
-///##     userPublicationContainer.style.display="block"; 
-
-
-
-      } catch (error) {
-          console.error('Error al obtener las publicaciones:', error.message);
-      }
-
-
-
-
-    }
-  } catch (error) {
-    console.error('Error al obtener las publicaciones:', error.message);
-  }
-
-
-
-}
-
-
-
-
-}
 
 
  function tiempoTranscurrido(timestamp) {
@@ -2839,86 +1880,7 @@ commentButtonIcon.addEventListener('click', () => {
             balanceElement.innerText = 'Saldo: ' + balance;
           }
 
-/* async function tokensFree(token) {
-  try {
-    const accounts = await web3.eth.getAccounts();
-    const myAddress = accounts[0];
-    const contractFREETOKENS = new web3.eth.Contract(FreeTokens_ContractABI, freeTokensContractAddress);
 
-
-
-    if (token === "CAW") {
-      //const balanceCAW = await contractFREETOKENS.methods.balanceOfCAW(myAddress).call();
-      //if (balanceCAW <= 2000) {
-        const transaction = await contractFREETOKENS.methods.requestTokensCaw().send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') }); 
-        
-        //console.log('Transacción exitosa:', transaction);
-      //} else {
-        //  console.log('El usuario ya tiene suficientes tokens CAW.');
-      
-    } else {
-      const balanceEther = await web3.eth.getBalance(myAddress);
-      if (balanceEther <= web3.utils.toWei('0.0001', 'ether')) {
-        const transaction = await contractFREETOKENS.methods.conectar().send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });       
-        console.log('Transacción exitosa:', transaction);
-      } else {
-        console.log('El usuario tiene Ether.');
-      }
-    }
-  } catch (error) {
-    console.error('Error al realizar la transacción:', error);
-    alert('Error al realizar la transacción: ' + error.message);
-  }
-}
-
-
-
-
-
-async function sendETHtowallet(){
-
-    const accounts = await web3.eth.getAccounts();
-    const myAddress = accounts[0];
-    const contractFREETOKENS = new web3.eth.Contract(FreeTokens_ContractABI, freeTokensContractAddress);
-    
-    const walletelement = document.getElementById('text-address-to-send-ETH');      
-    const friendAddress=walletelement.value;
-
-    alert('friendAddress  '+ friendAddress);
-
-    const balanceEther = await web3.eth.getBalance(friendAddress); 
-    
-    if (balanceEther <= web3.utils.toWei('0.0', 'ether')) {
-          try{
-             const transaction = await contractFREETOKENS.methods.send({from: myAddress, gas: 300000, gasPrice: web3.utils.toWei('50', 'gwei') });      
-          }catch{
-               console.error('Error al realizar la transacción:', error);
-          } 
-    }else{
-      alert('El usuario ya posee ETHER');
-
-      console.log('El usuario tiene Ether.');
-    }
-
-
-    walletelement.innerHTML = '';
-
-}
-
- */
-    
-
-          // Otros botones y acciones
-          // ...
-
-//function getFollowing(string memory nftusername) public view returns (string[] memory) {
-//function getFollowingTime(string memory follower, string memory following) public view returns (uint256) {
-//function getFollowingCount(string memory nftusername) public view returns (uint256) {
-//function getProfileTime(string memory nftusername) public view returns (uint256) {
-//function getProfileCount() public view returns (uint256) {
-//function profileExists(string memory nftusername) private view returns (bool) {
-//function isFollowing(string memory follower, string memory following) public view returns (bool) {
-    
 async function verifymintearNFT(){
 
     // Obtener la dirección de la cuenta conectada

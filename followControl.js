@@ -10,33 +10,42 @@ async function follow_username(username_to_follow) {
             if (followControlContract.methods) {
                             console.log("seguir Con MetaMask ");
                             await followControlContract.methods.follow(selected_username,username_to_follow).send({
-                            	from: globalWalletKey, 
-                            	gas: 600000, 
-                            	gasPrice: web3.utils.toWei('60', 'gwei') });
+                            	from: globalWalletKey,
+                              });
+
                             console.log('NFT Username is Delisted.');
                                                        
 
             } else {
                            console.log("seguir Con SockWallet ");
+
+                           // Obtener la tarifa de gas base desde la red
+                           const adjustedGasPrice = obtenerGasAjustado();
                             // Llamada con ethers.js
+
+                           const estimatedGas = await followControlContract.estimateGas.follow(selected_username, username_to_follow);
+                           const adjustedGasLimit = estimatedGas.mul(110).div(100); // Aume 
+                           
                            const tx = await followControlContract.follow(selected_username, username_to_follow , {
-                           gasLimit: 600000,
-                           gasPrice: ethers.utils.parseUnits('60', 'gwei') // Gas price en gwei
+                           gasLimit: adjustedGasLimit,
+                           gasPrice: adjustedGasPrice
                            });
 
                            console.log("Transacción enviada:", tx.hash);
                            // Esperar confirmación
-                           const receipt = await tx.wait();
-                           console.log("Transacción confirmada:", receipt);
-                           alert('Transaction ok :)');
+                           tx.wait().then(receipt => {
+                                showSuccess("Confirmado: follow", receipt);
+                           }).catch(error => {
+                                showError("Sin confirmar:follow.",error);
+
+                           });
 
                        } 
 
     } catch (error) {
-           
-          alert('Error al intentar seguir al NFTUSERNAME.');
-          console.error('Error completo ccc:', error.code); // Mostrar el error completo para debug.
-    
+          
+          showError("Error: No se puede segir al NFTUsername.",error);
+          
     }
 
 }
@@ -52,31 +61,44 @@ async function unfollow_username(username_to_unfollow) {
 
             if (followControlContract.methods) {
                             console.log("dejar de seguir Con MetaMask ");
-                            await followControlContract.methods.unfollow(selected_username,username_to_follow).send({from: globalWalletKey, gas: 600000, gasPrice: web3.utils.toWei('60', 'gwei') });
+                            await followControlContract.methods.unfollow(selected_username,username_to_follow).send({from: 
+                              globalWalletKey,
+                              });
+
                             console.log('NFT Username is Delisted.');
                                                        
 
             } else {
                            console.log("dejar de seguir Con SockWallet ");
                             // Llamada con ethers.js
+                           
+                           // Obtener la tarifa de gas base desde la red
+                           const adjustedGasPrice = obtenerGasAjustado(); 
+
+                           const estimatedGas = await followControlContract.estimateGas.unfollow(selected_username, username_to_follow);
+                           const adjustedGasLimit = estimatedGas.mul(110).div(100); 
+
                            const tx = await followControlContract.unfollow(selected_username, username_to_follow , {
-                           gasLimit: 600000,
-                           gasPrice: ethers.utils.parseUnits('60', 'gwei') // Gas price en gwei
+                           gasLimit: adjustedGasLimit,
+                           gasPrice: adjustedGasPrice
                            });
 
                            console.log("Transacción enviada:", tx.hash);
                            // Esperar confirmación
-                           const receipt = await tx.wait();
-                           console.log("Transacción confirmada:", receipt);
-                           alert('Transaction ok :)');
+
+                           tx.wait().then(receipt => {
+                                showSuccess("Confirmado: Unfollow", receipt);
+                           }).catch(error => {
+                                showError("Sin confirmar:Unfollow.",error);
+
+                           });
+                      
 
                        } 
 
     } catch (error) {
            
-          alert('Error al intentar dejar de seguir al NFTUSERNAME.');
-          console.error('Error completo ccc:', error.code); // Mostrar el error completo para debug.
-    
+          showError("Error: No se puede dejar de segir al NFTUsername.",error);
     }
 
 }
@@ -107,9 +129,7 @@ async function count_follow_username(username) {
     
     } catch (error) {
            
-          alert('Error de conteo.');
-          console.error('Error completo ccc:', error.code); // Mostrar el error completo para debug.
-    
+          showError("Error: en Conteo de seguidos y seguidores.",error);
     }
 
 }

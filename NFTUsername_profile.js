@@ -109,7 +109,7 @@ async function create_NFTUsername_profile(value) {
     } catch (error) {
         loadingAnimation.style.display = 'none'; // Ocultar la animación.
         $('#myModalprofile').modal('hide');
-        showError("Error al crear o actualizar el perfil.",error)
+        showError("Error al crear o actualizar el perfil.",error);
     }
 }
 
@@ -469,7 +469,7 @@ async function clear_NFTUsername_profile(){
                         showSuccess("Confirmado: Perfil Eliminado", receipt);
                         
                     }).catch(error => {
-                        showError("Sin confirmar:Perfil Eliminado.",error)
+                        showError("Sin confirmar:Perfil Eliminado.",error);
 
                     });
 		            
@@ -484,7 +484,7 @@ async function clear_NFTUsername_profile(){
   			
     		loadingAnimation.style.display = 'none';
             $('#myModalprofile').modal('hide');
-            showError("Error: No se Elimino el perfil.",error)
+            showError("Error: No se Elimino el perfil.",error);
   }	             
 
 

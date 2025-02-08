@@ -61,12 +61,11 @@ async function unfollow_username(username_to_unfollow) {
 
             if (followControlContract.methods) {
                             console.log("dejar de seguir Con MetaMask ");
-                            await followControlContract.methods.unfollow(selected_username,username_to_follow).send({from: 
+                            await followControlContract.methods.unfollow(selected_username,username_to_unfollow).send({from: 
                               globalWalletKey,
                               });
 
-                            console.log('NFT Username is Delisted.');
-                                                       
+                            console.log('NFT Username is Delisted.');                                                       
 
             } else {
                            console.log("dejar de seguir Con SockWallet ");
@@ -75,10 +74,10 @@ async function unfollow_username(username_to_unfollow) {
                            // Obtener la tarifa de gas base desde la red
                            const adjustedGasPrice = obtenerGasAjustado(); 
 
-                           const estimatedGas = await followControlContract.estimateGas.unfollow(selected_username, username_to_follow);
+                           const estimatedGas = await followControlContract.estimateGas.unfollow(selected_username, username_to_unfollow);
                            const adjustedGasLimit = estimatedGas.mul(110).div(100); 
 
-                           const tx = await followControlContract.unfollow(selected_username, username_to_follow , {
+                           const tx = await followControlContract.unfollow(selected_username, username_to_unfollow , {
                            gasLimit: adjustedGasLimit,
                            gasPrice: adjustedGasPrice
                            });

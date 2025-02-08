@@ -130,9 +130,7 @@ async function openBuyNftModal(username) {
                   console.log("Con MetaMask");
                   // Ejecutar la función mintNFT
                   await nftUsernameContract.methods.buyNFT(username).send({
-                  from: globalWalletKey,
-                  gas: 800000,
-                  gasPrice: web3.utils.toWei('60', 'gwei'),
+                  from: globalWalletKey,                  
                   value: precio_info // Especificar el valor de 10 MATIC
                   });
                
@@ -140,20 +138,27 @@ async function openBuyNftModal(username) {
 
             } else {
                 console.log("Con SockWallet.");
-               
+
+                // Obtener la tarifa de gas base desde la red
+                const adjustedGasPrice = obtenerGasAjustado();
+                
+                const estimatedGas = await nftUsernameContract.estimateGas.buyNFT(username);
+                const adjustedGasLimit = estimatedGas.mul(110).div(100); // Aumenta en 10% 
+              
                 const tx = await nftUsernameContract.buyNFT(username, {
-                gasLimit: 800000, // Límite de gas
-                gasPrice: ethers.utils.parseUnits('60', 'gwei'), // Gas Price en Gwei
+                gasLimit: adjustedGasLimit,
+                gasPrice: adjustedGasPrice, // Gas Price en Gwei
                 value: precio_info // Cantidad de MATIC en Wei
                 });
 
                 // Registrar el hash de la transacción
                 console.log("Transacción enviada:", tx.hash);
 
-                // Esperar la confirmación de la transacción
-                const receipt = await tx.wait();
-                console.log("Transacción confirmada:", receipt);
-                alert('Transaction ok :)');
+                tx.wait().then(receipt => {
+                    showSuccess("Confirmado: Buy NFTUsername", receipt);
+                }).catch(error => {
+                    showError("Sin confirmar:Buy NFTUsername.",error);
+                });
                 
         }            
 
@@ -179,26 +184,8 @@ async function openBuyNftModal(username) {
 
 
 
-
-
-
-
-
-//    // Lógica para procesar la compra
-//    console.log('Compra confirmada');
-    // Aquí puedes agregar la lógica para realizar la compra del NFT
-//    $('#buyNftModal').modal('hide'); // Cerrar el modal después de confirmar
-//}
-
 async function findNftWallet(value) {
-  // Obtener la dirección de la cuenta conectada
-  //alert("Clickeaste el botón de find wallet ");
-  //const accounts = await web3.eth.getAccounts();
-  //const myAddress = accounts[0];
-  //const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
-
-  //const contractPROFILE = new web3.eth.Contract(Profile_ContractABI, profileContractAddress);
-
+  
   const addressUserNfts = document.getElementById('text-address-wallet').value;
 
   const selectorNFTs = document.getElementById('selector_NFTs').value;
@@ -354,6 +341,8 @@ async function findNftWallet(value) {
 
               } else {
                       let isMintedNFT;
+                      //convierte a minusculas lo que tenga addressUserNfts.
+                      addressUserNfts = (addressUserNfts || '').toLowerCase();
                       
                       if (nftUsernameContract.methods) {
                             console.log("Con MetaMask ");

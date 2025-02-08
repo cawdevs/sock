@@ -295,6 +295,10 @@ async function get_NFTUsername_profile(nftusername = undefined) {
     followerElement.style.margin = '0'; // Quitar márgenes por defecto
     followerElement.style.textAlign = 'center';
 
+    //seteo los botones de busqueda
+            document.getElementById("btn-find-followin").innerText = `Siguiendo (${followingCount})`;
+            document.getElementById("btn-find-followers").innerText = `Seguidores (${followerCount})`;
+
     // Agregar los elementos al contenedor
     rowElement.appendChild(followingElement);
     rowElement.appendChild(followerElement);

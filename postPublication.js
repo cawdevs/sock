@@ -135,24 +135,31 @@ async function publicar_main_post(){
                             console.log("publicar Con MetaMask ");
                             await publisherContract.methods.createPublication(selected_username,content,jsonString,publicationType,publicationType,threadOrder).send({
                                 from: globalWalletKey, 
-                                gas: 600000, 
-                                gasPrice: web3.utils.toWei('60', 'gwei') });
+                                });
                             console.log('publicado Con MetaMask.');
                                                        
 
             } else {
                            console.log("publicado Con SockWallet ");
                             // Llamada con ethers.js
+
+                           const adjustedGasPrice = obtenerGasAjustado();
+                
+                           const estimatedGas = await publisherContract.estimateGas.createPublication(selected_username,content,jsonString,publicationType,publicationType,threadOrder);
+                           const adjustedGasLimit = estimatedGas.mul(110).div(100); // Aumenta en 10%  
+                           
                            const tx = await publisherContract.createPublication(selected_username,content,jsonString,publicationType,publicationType,threadOrder , {
-                           gasLimit: 600000,
-                           gasPrice: ethers.utils.parseUnits('60', 'gwei') // Gas price en gwei
+                            gasLimit: adjustedGasLimit,
+                            gasPrice: adjustedGasPrice, // Gas Price en Gwei
                            });
 
                            console.log("Transacción enviada:", tx.hash);
                            // Esperar confirmación
-                           const receipt = await tx.wait();
-                           console.log("Transacción confirmada:", receipt);
-                           alert('Transaction ok :)');
+                           tx.wait().then(receipt => {
+                               showSuccess("Confirmado: Publicado Main Post", receipt);
+                           }).catch(error => {
+                               showError("Sin confirmar:Publicado Main Post.",error);
+                           });
 
                        } 
            document.getElementById('loadingAnimation-publication').style.display = 'none';
@@ -160,10 +167,8 @@ async function publicar_main_post(){
 
     } catch (error) {
           document.getElementById('loadingAnimation-publication').style.display = 'none';
- 
-          //alert('Error al intentar Publicar.');
-          console.error('Error completo ppp:', error.code); // Mostrar el error completo para debug.
-    
+          showError("Sin confirmar:Publicado Main Post.",error);
+          
     }
 }
 
@@ -352,6 +357,7 @@ async function createPublicationElement(publication) {
         deleteIcon.style.cssText = 'cursor: pointer; font-size: 18px; color: gray; padding: 5px;';
         deleteIcon.onclick = function() {
             //delete_post();
+            
             let respuesta = confirm("¿Borrar publicación?");
             if (respuesta) {
                 alert("Borrar publicacion");
@@ -359,6 +365,7 @@ async function createPublicationElement(publication) {
                 alert("Acción cancelada");
             }
         };               
+        
         
         // Agregarlo también a headerDiv si es necesario
         headerDiv.appendChild(deleteIcon);

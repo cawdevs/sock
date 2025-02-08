@@ -341,23 +341,21 @@ async function findNftWallet(value) {
 
               } else {
                       let isMintedNFT;
-                      //convierte a minusculas lo que tenga addressUserNfts.
-                      const findUserNfts = (addressUserNfts || '').toLowerCase();
                       
                       if (nftUsernameContract.methods) {
                             console.log("Con MetaMask ");
-                            isMintedNFT = await nftUsernameContract.methods.isMinted(findUserNfts).call();
+                            isMintedNFT = await nftUsernameContract.methods.isMinted(addressUserNfts).call();
                       } else {
                              // Usando ethers.js
                              console.log("Con SockWallet "); 
-                             isMintedNFT = await nftUsernameContract.isMinted(findUserNfts);
+                             isMintedNFT = await nftUsernameContract.isMinted(addressUserNfts);
                      
                        }
                
   
                   if (isMintedNFT) {
                       // Si está minteado, crear un arreglo nftUsernames con un solo elemento
-                      nftUsernames = [findUserNfts];
+                      nftUsernames = [addressUserNfts];
                       console.log("NFT minteado:", nftUsernames);
 
                       // Aquí puedes realizar acciones adicionales para el caso de un NFT minteado

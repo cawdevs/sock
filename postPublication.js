@@ -274,7 +274,8 @@ async function get_publication(id_publication,principalContainerID) {
             privacidad: jsonMetadata.privacidad || 'Pública',
             clasificacion: jsonMetadata.clasificacion || 'General'
         };
-        alert('publicationObject.publicationType',publicationObject.publicationType);
+        alert('publicationObject.publicationType'+publicationObject.publicationType);
+        console.log(typeof publicationObject.publicationType);
         //verifica si la publicacion esta marcada como borrada
         //if (publicationObject.publicationType != 3) {
 

@@ -7,6 +7,8 @@ function createPublicationElements() {
 
     const container = document.getElementById('publication-post-container');
     container.style.cssText = 'background-color:#fff;';
+    container.style.width = '100%';
+    container.style.borderRadius = '20px';
     container.innerHTML = '';
 
     const form = document.createElement('form');

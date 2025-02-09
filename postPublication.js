@@ -365,7 +365,7 @@ async function createPublicationElement(publication) {
         deleteIcon.style.cssText = 'cursor: pointer; font-size: 18px; color: gray; padding: 5px;';
         deleteIcon.onclick = function() {
             mostrarModal_si_no('¿Borrar publicación?', function () {
-                    alert("Borrar publicación");
+                    
                     delete_post(id); // Llama a la función para eliminar la publicación
                 }, hacer_nada);
             };
@@ -511,7 +511,7 @@ async function edit_post(){
 }
 */
 async function delete_post(publicationId){
-    alert('delete_post');
+    
     try{        ////////////////////
  
 
@@ -529,7 +529,7 @@ async function delete_post(publicationId){
 
                            const adjustedGasPrice = obtenerGasAjustado();
                 
-                           const estimatedGas = await publisherContract.estimateGas.createPublication(publicationId);
+                           const estimatedGas = await publisherContract.estimateGas.deletePublication(publicationId);
                            const adjustedGasLimit = estimatedGas.mul(110).div(100); // Aumenta en 10%  
                            
                            const tx = await publisherContract.deletePublication(publicationId, {

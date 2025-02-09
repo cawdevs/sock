@@ -524,13 +524,14 @@ async function delete_post(publicationId){
                                                        
 
             } else {
-                           console.log("publicado Con SockWallet ");
+                           console.log("publicado Con SockWallet ",publicationId);
                             // Llamada con ethers.js
 
                            const adjustedGasPrice = obtenerGasAjustado();
                 
                            const estimatedGas = await publisherContract.estimateGas.deletePublication(publicationId);
                            const adjustedGasLimit = estimatedGas.mul(110).div(100); // Aumenta en 10%  
+                           console.log("adjustedGasLimit ",adjustedGasLimit);
                            
                            const tx = await publisherContract.deletePublication(publicationId, {
                             gasLimit: adjustedGasLimit,

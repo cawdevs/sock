@@ -274,10 +274,10 @@ async function get_publication(id_publication,principalContainerID) {
             privacidad: jsonMetadata.privacidad || 'Pública',
             clasificacion: jsonMetadata.clasificacion || 'General'
         };
-        alert('publicationObject.publicationType'+publicationObject.publicationType);
-        console.log(typeof publicationObject.publicationType);
+        //alert('publicationObject.publicationType'+publicationObject.publicationType);
+        //console.log(typeof publicationObject.publicationType);
         //verifica si la publicacion esta marcada como borrada
-        //if (publicationObject.publicationType != 3) {
+        if (publicationObject.publicationType != 3) {
 
                 // 🔹 Primero agregamos la publicación al DOM
                 const publicationElement = await createPublicationElement(publicationObject);
@@ -313,7 +313,7 @@ async function get_publication(id_publication,principalContainerID) {
                 }
 
                 await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
-        //}
+        }
     } catch (error) {
         //alert('Error al intentar get_publication.');
         console.error('Error completo:', error);

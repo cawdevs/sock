@@ -117,7 +117,11 @@ async function publicar_main_post(){
    
     try{        ////////////////////
 
-            document.getElementById('loadingAnimation-publication').style.display = 'block';
+           
+
+            const loadingAnimation = document.getElementById('loadingAnimation-publication');
+            loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la función
+           
 
             const selected_username = document.getElementById('selector_NFTs').value;
             const content = document.getElementById("publicacion").value;
@@ -164,11 +168,11 @@ async function publicar_main_post(){
                            });
 
                        } 
-           document.getElementById('loadingAnimation-publication').style.display = 'none';
+           loadingAnimation.style.display = 'none';
            
 
     } catch (error) {
-          document.getElementById('loadingAnimation-publication').style.display = 'none';
+          loadingAnimation.style.display = 'none';
           showError("Sin confirmar:Publicado Main Post.",error);
           
     }
@@ -270,42 +274,44 @@ async function get_publication(id_publication,principalContainerID) {
             privacidad: jsonMetadata.privacidad || 'Pública',
             clasificacion: jsonMetadata.clasificacion || 'General'
         };
+        
+        //verifica si la publicacion esta marcada como borrada
+        if (publicationObject.publicationType != 3) {
+                // 🔹 Primero agregamos la publicación al DOM
+                const publicationElement = await createPublicationElement(publicationObject);
 
-        // 🔹 Primero agregamos la publicación al DOM
-        const publicationElement = await createPublicationElement(publicationObject);
+                const principalContainer = document.getElementById(principalContainerID);
+                // Estilos para centrar el div y darle fondo blanco
+                // Estilos para centrar el div y darle fondo blanco
+                principalContainer.style.backgroundColor = "white"; // Fondo blanco
+                principalContainer.style.margin = "0 auto"; // Centrar horizontalmente
+                principalContainer.style.display = "flex"; // Usa flexbox
+                principalContainer.style.flexDirection = "column"; // Coloca los elementos en columna
+                principalContainer.style.justifyContent = "center"; // Centrar si es necesario
+                principalContainer.style.alignItems = "center"; // Mantener el contenido alineado
+                principalContainer.style.width = "100%"; // Ajusta el ancho según necesites
+                principalContainer.style.borderRadius = "10px"; // Bordes redondeados opcional
+                principalContainer.style.padding = "10px"; // Espaciado interno opcional
 
-        const principalContainer = document.getElementById(principalContainerID);
-        // Estilos para centrar el div y darle fondo blanco
-        // Estilos para centrar el div y darle fondo blanco
-        principalContainer.style.backgroundColor = "white"; // Fondo blanco
-        principalContainer.style.margin = "0 auto"; // Centrar horizontalmente
-        principalContainer.style.display = "flex"; // Usa flexbox
-        principalContainer.style.flexDirection = "column"; // Coloca los elementos en columna
-        principalContainer.style.justifyContent = "center"; // Centrar si es necesario
-        principalContainer.style.alignItems = "center"; // Mantener el contenido alineado
-        principalContainer.style.width = "100%"; // Ajusta el ancho según necesites
-        principalContainer.style.borderRadius = "10px"; // Bordes redondeados opcional
-        principalContainer.style.padding = "10px"; // Espaciado interno opcional
+                // Asegurar que los elementos hijos ocupen el máximo ancho permitido
+                publicationElement.style.width = "100%"; // Los elementos ocupan todo el ancho
 
-        // Asegurar que los elementos hijos ocupen el máximo ancho permitido
-        publicationElement.style.width = "100%"; // Los elementos ocupan todo el ancho
+                principalContainer.appendChild(publicationElement);
+                                       
+                // 🔥 Ahora podemos cargar la imagen porque el elemento ya está en el DOM
+                const profileImageContainerId = `imageContainerId_${publicationObject.id}`;
+                let codeHexaImage;
 
-        principalContainer.appendChild(publicationElement);
-                               
-        // 🔥 Ahora podemos cargar la imagen porque el elemento ya está en el DOM
-        const profileImageContainerId = `imageContainerId_${publicationObject.id}`;
-        let codeHexaImage;
+                if (nftUsernameContract.methods) {
+                    console.log("get_codehexa Con MetaMask ");
+                    codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(publicationObject.nftUsername).call();
+                } else {
+                    console.log("get_codehaxa Con SockWallet "); 
+                    codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(publicationObject.nftUsername);
+                }
 
-        if (nftUsernameContract.methods) {
-            console.log("get_codehexa Con MetaMask ");
-            codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(publicationObject.nftUsername).call();
-        } else {
-            console.log("get_codehaxa Con SockWallet "); 
-            codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(publicationObject.nftUsername);
+                await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
         }
-
-        await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
-
     } catch (error) {
         //alert('Error al intentar get_publication.');
         console.error('Error completo:', error);
@@ -358,17 +364,12 @@ async function createPublicationElement(publication) {
         deleteIcon.className = 'glyphicon glyphicon-trash';
         deleteIcon.style.cssText = 'cursor: pointer; font-size: 18px; color: gray; padding: 5px;';
         deleteIcon.onclick = function() {
-            //delete_post();
-            
-            let respuesta = confirm("¿Borrar publicación?");
-            if (respuesta) {
-                alert("Borrar publicacion");
-            } else {
-                alert("Acción cancelada");
-            }
-        };               
-        
-        
+            mostrarModal_si_no('¿Borrar publicación?', function () {
+                    alert("Borrar publicación");
+                    delete_post(id); // Llama a la función para eliminar la publicación
+                }, hacer_nada);
+            };
+                 
         // Agregarlo también a headerDiv si es necesario
         headerDiv.appendChild(deleteIcon);
     }
@@ -482,58 +483,7 @@ async function createPublicationElement(publication) {
 
 
 
-
-if (media) {
-    // Comprobamos si es un video de YouTube (enlace corto)
-    if (media.includes("youtube.com") && media.includes("watch")) {
-        const videoId = media.split("v=")[1].split("&")[0]; // Obtener el ID del video
-        const iframe = document.createElement('iframe');
-        iframe.width = '560';
-        iframe.height = '315';
-        iframe.src = `https://www.youtube.com/embed/${videoId}`;
-        iframe.title = 'YouTube video';
-        iframe.frameBorder = '0';
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-        iframe.allowFullscreen = true;
-        mediaDiv.appendChild(iframe);
-    } 
-    // Comprobamos si es una URL de imagen (y puede ser de otra web)
-    else if (media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.png') || media.endsWith('.gif')) {
-        const mediaImage = document.createElement('img');
-        mediaImage.src = media;
-        mediaImage.alt = 'Publicación';
-        mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
-        mediaDiv.appendChild(mediaImage);
-    }
-    // Si es una URL válida a una imagen, aunque no tenga extensión visible
-    else {
-        const img = new Image();
-        img.onload = function() {
-            const mediaImage = document.createElement('img');
-            mediaImage.src = media;
-            mediaImage.alt = 'Publicación';
-            mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
-            mediaDiv.appendChild(mediaImage);
-        };
-        img.onerror = function() {
-            const errorMessage = document.createElement('div');
-            errorMessage.textContent = 'El archivo o URL no es válido.';
-            errorMessage.style.cssText = 'background-color: green; color: white; padding: 10px; border-radius: 5px; text-align: center;';
-            mediaDiv.appendChild(errorMessage);
-        };
-        img.src = media; // Intenta cargar la imagen de la URL proporcionada
-    }
-} else {
-    const errorMessage = document.createElement('div');
-    errorMessage.textContent = 'El archivo o URL no es válido.';
-    errorMessage.style.cssText = 'background-color: green; color: white; padding: 10px; border-radius: 5px; text-align: center;';
-    mediaDiv.appendChild(errorMessage);
-}
-
-
-
-
-
+/*
 async function publicar_thread_post(){
          alert('publicar_thread_post');
 
@@ -559,14 +509,52 @@ async function edit_post(){
         //mediaInput.id = 'media-publication';
         //select.id = 'filter-privacidad';
 }
+*/
+async function delete_post(publicationId){
+    alert('delete_post');
+    try{        ////////////////////
+ 
 
-async function delete_post(){
-         alert('delete_post');
+            if (publisherContract.methods) {
+                            console.log("delete Con MetaMask ");
+                            await publisherContract.methods.deletePublication(publicationId).send({
+                                from: globalWalletKey, 
+                                });
+                            console.log('publicado Con MetaMask.');
+                                                       
 
-        //textarea.id = 'publicacion';
-        //const nftusername = document.getElementById('selector_NFTs').value;
-        //mediaInput.id = 'media-publication';
-        //select.id = 'filter-privacidad';
+            } else {
+                           console.log("publicado Con SockWallet ");
+                            // Llamada con ethers.js
+
+                           const adjustedGasPrice = obtenerGasAjustado();
+                
+                           const estimatedGas = await publisherContract.estimateGas.createPublication(publicationId);
+                           const adjustedGasLimit = estimatedGas.mul(110).div(100); // Aumenta en 10%  
+                           
+                           const tx = await publisherContract.deletePublication(publicationId, {
+                            gasLimit: adjustedGasLimit,
+                            gasPrice: adjustedGasPrice, // Gas Price en Gwei
+                           });
+
+                           console.log("Transacción enviada:", tx.hash);
+                           // Esperar confirmación
+                           tx.wait().then(receipt => {
+                               showSuccess("Confirmado: Main Post Eliminado", receipt);
+                           }).catch(error => {
+                               showError("Sin confirmar:Main Post Elimiado.",error);
+                           });
+
+                       }  
+
+    } catch (error) {
+         
+          showError("error :Al eliminar Main Post.",error);
+          
+    }
 }
+   
+
+
 
   

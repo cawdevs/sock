@@ -407,6 +407,8 @@ async function createPublicationElement(publication) {
 
     // Agregar los elementos al headerDiv
     userInfoDiv.appendChild(dateContainer);
+
+    headerDiv.appendChild(profileImageContainer);
     headerDiv.appendChild(userInfoDiv);
 
 

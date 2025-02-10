@@ -361,7 +361,7 @@ async function createPublicationElement(publication) {
     // Verificar si imageProfile está definido y no es una cadena vacía
     if (imageProfile) {
         const profileImage = document.createElement('img');
-        profileImage.src = publicationObject.imageProfile;
+        profileImage.src = imageProfile;
         profileImage.alt = "Profile Image";
         profileImage.style.width = "100%";  // Para que la imagen se ajuste al contenedor
         profileImage.style.height = "100%";

@@ -376,11 +376,7 @@ async function createPublicationElement(publication) {
     usernameSpan.textContent = nftUsername;
     usernameSpan.style.cssText = 'font-weight: bold; font-size: 18px; margin-left: 10px;';
 
-    if (usernameProfile){
-        const profileUsernameSpan = document.createElement('span');
-        profileUsernameSpan.textContent = usernameProfile;
-        profileUsernameSpan.style.cssText = 'font-weight: bold; font-size: 18px; margin-left: 10px;';
-    } 
+    
 
 
     const dateSpan = document.createElement('span');
@@ -391,9 +387,17 @@ async function createPublicationElement(publication) {
 
     const userInfoDiv = document.createElement('div');
     userInfoDiv.style.cssText = 'display: flex; align-items: center;';
+    
+
     userInfoDiv.appendChild(profileImageContainer);
     userInfoDiv.appendChild(usernameSpan);
-    userInfoDiv.appendChild(profileUsernameSpan);
+    if (usernameProfile){
+        const profileUsernameSpan = document.createElement('span');
+        profileUsernameSpan.textContent = usernameProfile;
+        profileUsernameSpan.style.cssText = 'font-weight: bold; font-size: 18px; margin-left: 10px;';
+        userInfoDiv.appendChild(profileUsernameSpan);
+    } 
+   
 
     headerDiv.appendChild(userInfoDiv);
     headerDiv.appendChild(dateSpan);

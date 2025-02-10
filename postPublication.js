@@ -10,14 +10,7 @@ function createPublicationElements() {
     container.style.width = '100%';
     container.style.borderRadius = '20px';
     container.innerHTML = '';
-
-    // Loading animation
-    const loadingDiv = document.createElement('div');
-    loadingDiv.id = 'loadingAnimation-publication';
-    loadingDiv.style.display = 'none';
-    loadingDiv.innerHTML = '<div class="spinner"></div>';
-    container.appendChild(loadingDiv);
-
+    
     const form = document.createElement('form');
 
     // Primera fila: Textarea de publicación
@@ -117,7 +110,7 @@ async function publicar_main_post(){
 
            
 
-            const loadingAnimation = document.getElementById('loadingAnimation-publication');
+            const loadingAnimation = document.getElementById('loadingAnimation-post-publication');
             loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la función
            
 
@@ -300,8 +293,11 @@ async function get_publication(id_publication,principalContainerID) {
                                        
                 // 🔥 Ahora podemos cargar la imagen porque el elemento ya está en el DOM
                 const profileImageContainerId = `imageContainerId_${publicationObject.id}`;
-                let codeHexaImage;
+            
 
+
+              
+                let codeHexaImage;             
                 if (nftUsernameContract.methods) {
                     console.log("get_codehexa Con MetaMask ");
                     codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(publicationObject.nftUsername).call();

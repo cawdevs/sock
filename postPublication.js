@@ -372,35 +372,43 @@ async function createPublicationElement(publication) {
     }
 
 
-    const usernameSpan = document.createElement('span');
-    usernameSpan.textContent = nftUsername;
-    usernameSpan.style.cssText = 'font-weight: bold; font-size: 18px; margin-left: 10px;';
-
-    
-
-
-    const dateSpan = document.createElement('span');
-    dateSpan.textContent = timestamp; 
-    dateSpan.style.cssText = 'font-size: 12px; color: gray;';
-
-   
-
     const userInfoDiv = document.createElement('div');
-    userInfoDiv.style.cssText = 'display: flex; align-items: center;';
-    
+    userInfoDiv.style.cssText = `
+        display: flex; 
+        flex-direction: column; /* Colocar los elementos en tres filas */
+        gap: 5px; /* Espacio entre los elementos */
+        width: 100%; /* Asegurar que ocupe el ancho completo */
+    `;
 
-    userInfoDiv.appendChild(profileImageContainer);
-    userInfoDiv.appendChild(usernameSpan);
-    if (usernameProfile){
-        const profileUsernameSpan = document.createElement('span');
-        profileUsernameSpan.textContent = usernameProfile;
-        profileUsernameSpan.style.cssText = 'font-weight: bold; font-size: 18px; margin-left: 10px;';
-        userInfoDiv.appendChild(profileUsernameSpan);
-    } 
-   
+            if (usernameProfile) {
+                const profileUsernameSpan = document.createElement('span');
+                profileUsernameSpan.textContent = usernameProfile;
+                profileUsernameSpan.style.cssText = 'font-weight: bold; font-size: 20px; margin-left: 10px;';
+                userInfoDiv.appendChild(profileUsernameSpan);
+            }
 
+            const usernameSpan = document.createElement('span');
+            usernameSpan.textContent = `${nftUsername}@sock`;
+            usernameSpan.style.cssText = 'font-weight: bold; font-size: 18px; margin-left: 10px;';
+            userInfoDiv.appendChild(usernameSpan);
+
+            // Contenedor para justificar dateSpan a la derecha
+            const dateContainer = document.createElement('div');
+            dateContainer.style.cssText = `
+                display: flex;
+                justify-content: flex-end; /* Alinear a la derecha */
+                width: 100%;
+            `;
+
+                    const dateSpan = document.createElement('span');
+                    dateSpan.textContent = timestamp;
+                    dateSpan.style.cssText = 'font-size: 12px; color: gray;';
+            dateContainer.appendChild(dateSpan);
+
+    // Agregar los elementos al headerDiv
+    userInfoDiv.appendChild(dateContainer);
     headerDiv.appendChild(userInfoDiv);
-    headerDiv.appendChild(dateSpan);
+
 
     if (selected_username === nftUsername) {
         const deleteIcon = document.createElement('span');

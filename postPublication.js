@@ -11,6 +11,13 @@ function createPublicationElements() {
     container.style.borderRadius = '20px';
     container.innerHTML = '';
 
+    // Loading animation
+    const loadingDiv = document.createElement('div');
+    loadingDiv.id = 'loadingAnimation-publication';
+    loadingDiv.style.display = 'none';
+    loadingDiv.innerHTML = '<div class="spinner"></div>';
+    container.appendChild(loadingDiv);
+
     const form = document.createElement('form');
 
     // Primera fila: Textarea de publicación
@@ -94,21 +101,12 @@ function createPublicationElements() {
 
     form.appendChild(controlsDiv);
 
-    container.appendChild(form);
-
-    // Loading animation
-    const loadingDiv = document.createElement('div');
-    loadingDiv.id = 'loadingAnimation-publication';
-    loadingDiv.style.display = 'none';
-    loadingDiv.innerHTML = '<div class="spinner"></div>';
-    container.appendChild(loadingDiv);
+    container.appendChild(form);    
 
     getImageNFTUsername("publication-NFT_image-container");
 
 }
 
-// Llamar la función para generar los elementos cuando sea necesario
-createPublicationElements();
 
 
 

@@ -372,6 +372,7 @@ async function createPublicationElement(publication) {
 
         profileImage.addEventListener("click", async function () {
                 await get_NFTUsername_profile(nftUsername);
+                await get_NFTUsername_publication(nftUsername,"modal_publication-nftusername");
                 $('#UsernameProfileModal').modal('show');
             });
 

@@ -364,7 +364,7 @@ async function createPublicationElement(publication) {
         profileImage.src = imageProfile;
         profileImage.alt = "Profile Image";
         profileImage.style.width = "100%";  // Para que la imagen se ajuste al contenedor
-        profileImage.style.height = "100%";
+        //profileImage.style.height = "100%";
         profileImage.style.borderRadius = "50%"; // Para que la imagen sea circular
         profileImage.style.objectFit = "cover";  // Para que la imagen mantenga su aspecto
 

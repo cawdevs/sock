@@ -169,7 +169,7 @@ async function get_NFTUsername_profile(nftusername = undefined) {
 	// Crear el contenedor principal del perfil
 	const profileContainer = document.createElement('div');
 	profileContainer.style.width = '100%';
-	profileContainer.style.maxWidth = '500px';
+	//profileContainer.style.maxWidth = '500px';
 	profileContainer.style.margin = '0 auto';
 	profileContainer.style.border = '1px solid #ddd';
 	profileContainer.style.borderRadius = '8px';

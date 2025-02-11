@@ -351,6 +351,8 @@ async function createPublicationElement(publication) {
     const headerDiv = document.createElement('div');
     headerDiv.classList.add('publication-header');
     headerDiv.style.cssText = 'display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;';
+    
+
 
     const profileImageContainer = document.createElement('div');
     profileImageContainer.id = `imageContainerId_${id}`;
@@ -368,7 +370,15 @@ async function createPublicationElement(publication) {
         profileImage.style.borderRadius = "50%"; // Para que la imagen sea circular
         profileImage.style.objectFit = "cover";  // Para que la imagen mantenga su aspecto
 
+        profileImage.addEventListener("click", async function () {
+                await get_NFTUsername_profile(nftUsername);
+                $('#UsernameProfileModal').modal('show');
+            });
+
         profileImageContainer.appendChild(profileImage);
+
+        
+
     }
 
 

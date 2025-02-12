@@ -328,7 +328,21 @@ async function get_publication(id_publication,principalContainerID) {
                             codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(publicationObject.nftUsername);
                         }
 
-                }        await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
+                }        
+                await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
+
+                //creamos un div donde van a estar las reacciones 
+                const publicationReactionDiv = document.createElement('div');
+                publicationReactionDiv.id = `publication-reaction-icons-${publicationObject.id}`;  // ID único basado en la variable id
+                publicationReactionDiv.className = "icon-reaction-container";
+
+                principalContainer.appendChild(publicationReactionDiv);
+
+                await get_reactions(publicationObject.id , publicationReactionDiv);
+
+                
+
+
         }
     } catch (error) {
         //alert('Error al intentar get_publication.');

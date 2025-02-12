@@ -52,12 +52,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Función que se ejecuta cuando se hace clic en "Me gusta" ❤️
     function likePost(postId) {
-        alert(`Has dado like a la publicación ${postId}`);
+        //alert(`Has dado like a la publicación ${postId}`);
     }
 
     // Función que se ejecuta cuando se hace clic en "Compartir" 🔄
     function sharePost(postId) {
-        alert(`Has compartido la publicación ${postId}`);
+        //alert(`Has compartido la publicación ${postId}`);
     }
 
     window.getReactions = getReactions; // Exponer la función globalmente

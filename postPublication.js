@@ -550,6 +550,7 @@ async function createPublicationElement(publication) {
     const publicationReactionDiv = document.createElement('div');
     publicationReactionDiv.id = `publication-reaction-icons-${id}`;  // ID único basado en la variable id
     publicationReactionDiv.className = "icon-reaction-container";
+    publicationReactionDiv.style.marginBottom = '20px';
 
     await getReactions(id , publicationReactionDiv);
 

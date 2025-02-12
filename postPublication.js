@@ -327,20 +327,13 @@ async function get_publication(id_publication,principalContainerID) {
                             console.log("get_codehaxa Con SockWallet "); 
                             codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(publicationObject.nftUsername);
                         }
-                        
+
                          await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
 
                 }        
                
 
-                //creamos un div donde van a estar las reacciones 
-                const publicationReactionDiv = document.createElement('div');
-                publicationReactionDiv.id = `publication-reaction-icons-${publicationObject.id}`;  // ID único basado en la variable id
-                publicationReactionDiv.className = "icon-reaction-container";
-
-                principalContainer.appendChild(publicationReactionDiv);
-
-                await getReactions(publicationObject.id , publicationReactionDiv);
+                
 
                 
 
@@ -553,10 +546,18 @@ async function createPublicationElement(publication) {
         
     }
 
+    //creamos un div donde van a estar las reacciones 
+    const publicationReactionDiv = document.createElement('div');
+    publicationReactionDiv.id = `publication-reaction-icons-${id}`;  // ID único basado en la variable id
+    publicationReactionDiv.className = "icon-reaction-container";
+
+    await getReactions(id , publicationReactionDiv);
+
     // Agregar filas al contenedor principal
     publicationDiv.appendChild(headerDiv);
     publicationDiv.appendChild(contentDiv);
     publicationDiv.appendChild(mediaDiv);
+    publicationDiv.appendChild(publicationReactionDiv);
 
     return publicationDiv;
 }

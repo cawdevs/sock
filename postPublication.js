@@ -338,7 +338,7 @@ async function get_publication(id_publication,principalContainerID) {
 
                 principalContainer.appendChild(publicationReactionDiv);
 
-                await get_reactions(publicationObject.id , publicationReactionDiv);
+                await getReactions(publicationObject.id , publicationReactionDiv);
 
                 
 

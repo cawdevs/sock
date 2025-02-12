@@ -327,9 +327,11 @@ async function get_publication(id_publication,principalContainerID) {
                             console.log("get_codehaxa Con SockWallet "); 
                             codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(publicationObject.nftUsername);
                         }
+                        
+                         await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
 
                 }        
-                await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
+               
 
                 //creamos un div donde van a estar las reacciones 
                 const publicationReactionDiv = document.createElement('div');

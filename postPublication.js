@@ -287,10 +287,12 @@ async function get_publication(id_publication,principalContainerID) {
                 //const tags = profileText[2];
                 //const timestamp = profileText[3];
                 const { nombre, bio, ubicacion, paginaWeb, fotoPerfil, fotoPortada } = jsonProfile;
+                console.log("datas",nombre, bio, ubicacion, paginaWeb, fotoPerfil, fotoPortada);
                 //añade imagen y username del perfil de usuario si existe 
                 publicationObject.imageProfile = fotoPerfil || '';
                 publicationObject.usernameProfile = nombre || '';
-
+                
+                console.log("publicationObject",publicationObject);
 
                 // 🔹 Primero agregamos la publicación al DOM
                 const publicationElement = await createPublicationElement(publicationObject);

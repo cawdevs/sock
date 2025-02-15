@@ -270,29 +270,43 @@ async function get_publication(id_publication,principalContainerID) {
         //verifica si la publicacion esta marcada como borrada
         if (publicationObject.publicationType != 3) {
 
-                let profileText;
-                if (profileContract.methods) {
-                        console.log("Con MetaMask ");                                
-                        profileText =await profileContract.methods.getProfileByUsername(publicationObject.nftUsername).call();           
-                             
-                } else {
-                        console.log("Con SOCKWALLET ");
-                        profileText =await profileContract.getProfileByUsername(publicationObject.nftUsername);          
+
+                    try {
+                        let profileText;
                         
-                }   
-                        
-                // Extraer los datos
-                //const nftUsername = profileText[0];
-                const jsonProfile = JSON.parse(profileText[1]);
-                //const tags = profileText[2];
-                //const timestamp = profileText[3];
-                const { nombre, bio, ubicacion, paginaWeb, fotoPerfil, fotoPortada } = jsonProfile;
-                console.log("datas",nombre, bio, ubicacion, paginaWeb, fotoPerfil, fotoPortada);
-                //añade imagen y username del perfil de usuario si existe 
-                publicationObject.imageProfile = fotoPerfil || '';
-                publicationObject.usernameProfile = nombre || '';
+                        if (profileContract.methods) {
+                            console.log("Con MetaMask ");
+                            profileText = await profileContract.methods.getProfileByUsername(publicationObject.nftUsername).call();
+                        } else {
+                            console.log("Con SOCKWALLET ");
+                            profileText = await profileContract.getProfileByUsername(publicationObject.nftUsername);
+                        }
+
+                        // Intentar parsear los datos obtenidos
+                        let jsonProfile = {};
+                        if (profileText && profileText[1]) {
+                            jsonProfile = JSON.parse(profileText[1]);
+                        }
+
+                        // Extraer los datos o asignar valores predeterminados
+                        const { nombre = '', bio = '', ubicacion = '', paginaWeb = '', fotoPerfil = '', fotoPortada = '' } = jsonProfile;
+
+                        // Añadir imagen y username del perfil de usuario si existe
+                        publicationObject.imageProfile = fotoPerfil;
+                        publicationObject.usernameProfile = nombre;
+
+                    } catch (error) {
+                        console.error("Error al obtener el perfil:", error);
+
+                        // Asignar valores predeterminados en caso de error
+                        publicationObject.imageProfile = '';
+                        publicationObject.usernameProfile = '';
+                    }
                 
-                console.log("publicationObject",publicationObject);
+
+
+
+
 
                 // 🔹 Primero agregamos la publicación al DOM
                 const publicationElement = await createPublicationElement(publicationObject);

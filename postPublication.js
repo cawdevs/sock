@@ -355,13 +355,11 @@ async function get_publication(id_publication,principalContainerID) {
 
                          await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
 
-                }
-                       
-
-                
-        return publicationObject.publicationType;
-
+                }                      
+                        
+        
         }
+        return publicationObject.publicationType;
     } catch (error) {
         //alert('Error al intentar get_publication.');
         console.error('Error completo:', error);

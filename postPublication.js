@@ -188,12 +188,19 @@ async function get_all_publications_home(homecontainnerID) {
             total_publication = await publisherContract.publicationCount();
         }
        
-        // Definir el inicio y el fin del bucle
+       // Definir el inicio y el fin del bucle
         const start = total_publication;  
-        const end = Math.max(1, total_publication - 4); // Asegura que no haya índices negativos
+        let count = 0; // Contador de publicaciones válidas
+        let i = start;
 
-        for (let i = start; i >= end; i--) {  
-            await get_publication(i, homecontainnerID);
+        while (count < 5 && i >= 1) {  
+            let type_publication = await get_publication(i, homecontainnerID);
+            
+            if (type_publication !== 3) { 
+                count++; // Solo contar publicaciones válidas
+            } 
+
+            i--; // Continuar iterando hacia atrás
         }
 
     } catch (error) {
@@ -223,9 +230,10 @@ async function get_NFTUsername_publication(nftusername, NFTUsenmane_container){
 
         //recorrer el array desde la más nueva a la más vieja
         const reversedPublications = [...my_publication].reverse();
-
+       
         for (const publicationId of reversedPublications) {
             await get_publication(publicationId, NFTUsenmane_container);
+          
         }
 
 
@@ -268,6 +276,7 @@ async function get_publication(id_publication,principalContainerID) {
         //alert('publicationObject.publicationType'+publicationObject.publicationType);
         //console.log(typeof publicationObject.publicationType);
         //verifica si la publicacion esta marcada como borrada
+
         if (publicationObject.publicationType != 3) {
 
 
@@ -346,13 +355,11 @@ async function get_publication(id_publication,principalContainerID) {
 
                          await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
 
-                }        
-               
+                }
+                       
 
                 
-
-                
-
+        return publicationObject.publicationType;
 
         }
     } catch (error) {

@@ -92,7 +92,7 @@
     }
 
     .glyphicon {
-        font-size: 26px;
+        font-size: 22px;
         transition: transform 0.5s, color 0.5s;
     }
 
@@ -790,29 +790,24 @@ span.hashtag {
         }
     </style>
  
-    <div class="img-circle" id="image-container"></div>
-    <p id="codeimageHexa">    </p>
+    <div class="img-circle" id="image-container" onclick="loadImages()"> <font color="white" size="5">Presione / imagen de perfil</font></div>
+    <p id="codeimageHexa" style ="display: none">    </p>
     <br>
     
+
  
-
-  <div style="display: flex; align-items: center; justify-content: flex-start; gap: 0;">
-    <p style = "font-size: 18px; color: white;" ><i>1- Seleccione imagen de perfil</i></p>
-    <button onclick="loadImages()" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px; margin-left: 30px">Siguiente > </button>
- </div>      
-
 <!-- *******************************************************-->
 
             <h3><font color="white"><p id="Minted_username"></p></font></h3>
             <h4><font color="orange"><p id="Error_Minted_username"></p></font></h4>
       
-            <input type="text" id="text-mintear-nft" placeholder=" 2- Enter a username " required required style="border: 2px solid black; border-radius: 20px; width: 75%; margin-bottom: 10px; height: 40px;  font-size: 24px;"/> 
+            <input type="text" id="text-mintear-nft" placeholder=" Nombre de Usuario " required required style="border: 2px solid black; border-radius: 20px; width: 75%; margin-bottom: 10px; height: 40px;  font-size: 24px;"/> 
             <br>           
             <br>
 
 <!--         <button id="btn-verify-nft" style="background-color: black; color: white; border:        2px solid lime; border-radius: 20px; height: 40px;">check username before</button>
 -->
-            <button id="btn-mintear-nft" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px; ">Crear Usuario</button>
+            <button id="btn-mintear-nft" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px; "><font color="white" size="5">Crear Usuario</font></button>
           
 
           <div style="display: flex; align-items: center; justify-content: flex-start; gap: 0; color: lime;">
@@ -1949,14 +1944,15 @@ inputField.addEventListener('input', function() {
 
     if (saldoCaw < maticNeeded) {
       output.textContent = `${maticNeeded}`
-      output.style.fontSize = '24px'; // Cambia el tamaño de fuente
+      output.style.fontSize = '36px'; // Cambia el tamaño de fuente
       output.style.color = 'white'; // Cambia el color`ID: ${publication_ID}`;
       //bottonMint.style.display = 'none';
     } else {
       output.textContent = `${maticNeeded}`;
-      output.style.fontSize = '24px'; // Cambia el tamaño de fuente
+      output.style.fontSize = '36px'; // Cambia el tamaño de fuente
       output.style.color = 'red'; // Cambia el color
-      errorDisplay.textContent="Insufficient MATIC balance"
+      errorDisplay.textContent="No tienes suficiente saldo $ POL"
+
       //bottonMint.style.display = 'block';
     }
   }

@@ -722,11 +722,13 @@ span.hashtag {
               <!--   <div id="publication-NFT_image-container" style="width: 80px; height: 80px; "></div>-->
                 <div id="publication-post-container" style="flex: 1; padding: 10px; border-radius: 10px;"></div>   
             
-                <div id="loadingAnimation-post-publication" style="display: none;">
-                    <div class="spinner"></div>              
-                </div>               
+                             
             
-            </div>                 
+            </div>      
+
+            <center><div id="loadingAnimation-post-publication" style="display: none;">
+                    <div class="spinner"></div>              
+            </div>  </center>           
                           
 
             <div class="modal-footer">
@@ -772,11 +774,7 @@ span.hashtag {
 
        
 
-     <center>
-
-          <div id="loadingAnimation-mint" style="display: none;">
-            <div class="spinner"></div>              
-          </div>
+     <center>         
 
           <!--*******************************************************   -->
 
@@ -806,8 +804,8 @@ span.hashtag {
  
 
   <div style="display: flex; align-items: center; justify-content: flex-start; gap: 0;">
-    <p style = "font-size: 18px; color: white;" ><i>1- Select image for you NFTUsername</i></p>
-    <button onclick="loadImages()" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px; margin-left: 30px">Next > </button>
+    <p style = "font-size: 18px; color: white;" ><i>1- Seleccione imagen de perfil</i></p>
+    <button onclick="loadImages()" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px; margin-left: 30px">Siguiente > </button>
  </div>      
 
 <!-- *******************************************************-->
@@ -819,17 +817,24 @@ span.hashtag {
             <br>           
             <br>
 
-            <button id="btn-verify-nft" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">check username before</button>
-
-            <button id="btn-mintear-nft" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px; display:none;">Mint NFT Username</button>
+<!--         <button id="btn-verify-nft" style="background-color: black; color: white; border:        2px solid lime; border-radius: 20px; height: 40px;">check username before</button>
+-->
+            <button id="btn-mintear-nft" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px; ">Crear Usuario</button>
           
 
           <div style="display: flex; align-items: center; justify-content: flex-start; gap: 0; color: lime;">
-             <h4 style="margin: 0;">POL required is :</h4>
+             <h4 style="margin: 0;">POL son Requeridos :</h4>
              <p id="mount-minteo" style="margin: 0;"></p>
           </div>
 
           </center>
+
+
+         <center>
+             <div id="loadingAnimation-mint" style="display: none;">
+               <div class="spinner"></div>              
+             </div>
+        </center>
 
 
 
@@ -1150,10 +1155,10 @@ span.hashtag {
 <style>
 .spinner {
   border: 5px solid rgba(0, 0, 0, 0.1);
-  border-left: 5px solid #darkgreen; /* Amarillo */
+  border-left: 5px solid #FFD700; /* Amarillo */
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 75px;
+  height: 75px;
   animation: spin 1s linear infinite;
 }
 
@@ -1445,7 +1450,7 @@ async function inicializarUI() {
     
     // Registrar eventos de botones
     document.getElementById("btn-mintear-nft").addEventListener("click", mintearNFT);
-    document.getElementById("btn-verify-nft").addEventListener("click", verifymintearNFT);
+    //document.getElementById("btn-verify-nft").addEventListener("click", verifymintearNFT);
 }
 
 // Iniciar la aplicación al cargar la página
@@ -1602,72 +1607,93 @@ async function mintearNFT() {
             const nftusername = document.getElementById('text-mintear-nft').value;
             const codeimageHexa = document.getElementById("codeimageHexa").textContent;
             const maticrequired = document.getElementById("mount-minteo").textContent;
+
+            const errorDisplay = document.getElementById('Error_Minted_username');
+            const readyDisplay = document.getElementById('Minted_username');
             
-             //alert('Hexa: ' + codeimageHexa);
+            //alert('Hexa: ' + codeimageHexa);
             
-            try {              
-             
+            try {   
+
+                      let isMintedNFT;            
+                      if (nftUsernameContract.methods) {
+                                   console.log("Con MetaMask ");
+                                   // Usando web3.js
+                                   isMintedNFT = await nftUsernameContract.methods.isMinted(nftusername).call();
+                      } else {
+                                   // Usando ethers.js
+                                  console.log("Con SockWallet "); 
+                                  isMintedNFT = await nftUsernameContract.isMinted(nftusername); 
+                      }  
+
+                      if(isMintedNFT){
+                        
+                         errorDisplay.textContent = 'El nombre de usuario no esta disponible!.';
+                             
+
+                      }else{  
+
+                            let maticAmount;
+                            if (nftUsernameContract.methods) {
+                                  console.log("Con MetaMask");
+                                  maticAmount = web3.utils.toWei(maticrequired, 'ether'); 
+                                
+                                    // Ejecutar la función mintNFT
+                                  await nftUsernameContract.methods.mintNFT(nftusername, codeimageHexa).send({
+                                      from: globalWalletKey,
+                                      gas: 800000,
+                                      gasPrice: web3.utils.toWei('60', 'gwei'),
+                                      value: maticAmount // Especificar el valor de 10 MATIC
+                                  });
+                                    // Lógica específica para contratos instanciados con web3.js
+                            } else {
+                                    console.log("Con SockWallet.");
+                                  
+                                    maticAmount = ethers.utils.parseEther(maticrequired); //
+                                    
+                                    const tx = await nftUsernameContract.mintNFT(nftusername, codeimageHexa, {
+                                      gasLimit: 800000,
+                                      gasPrice: ethers.utils.parseUnits('60', 'gwei'), // Gas price en gwei
+                                      value: maticAmount // Especificar el valor en Wei
+                                      });
+
+                                      console.log("Transacción enviada:", tx.hash);
+
+                                      // Esperar confirmación
+                                      const receipt = await tx.wait();
+                                      console.log("Transacción confirmada:", receipt);
+                                      alert('Transaction ok :)');
+                                   // Lógica específica para contratos instanciados con ethers.js
+                            }
+
+                            //alert('NFT Minteado exitosamente:');
+                            loadingAnimation.style.display = 'none'; // Oculta la animación
+                            $('#myModal').modal('hide'); 
+
+                            await get_NFTUsername_profile();
+                            info_profile_sock();
+
+                              // Mostrar mensaje de éxito
+                            showSuccess('NFT minteado correctamente.');
+                      
+                      }
+        
               
-        let maticAmount;
-        if (nftUsernameContract.methods) {
-              console.log("Con MetaMask");
-              maticAmount = web3.utils.toWei(maticrequired, 'ether'); 
-
-                // Ejecutar la función mintNFT
-              await nftUsernameContract.methods.mintNFT(nftusername, codeimageHexa).send({
-                  from: globalWalletKey,
-                  gas: 800000,
-                  gasPrice: web3.utils.toWei('60', 'gwei'),
-                  value: maticAmount // Especificar el valor de 10 MATIC
-              });
-                // Lógica específica para contratos instanciados con web3.js
-        } else {
-                console.log("Con SockWallet.");
-              
-                maticAmount = ethers.utils.parseEther(maticrequired); //
-                const tx = await nftUsernameContract.mintNFT(nftusername, codeimageHexa, {
-                  gasLimit: 800000,
-                  gasPrice: ethers.utils.parseUnits('60', 'gwei'), // Gas price en gwei
-                  value: maticAmount // Especificar el valor en Wei
-                  });
-
-                  console.log("Transacción enviada:", tx.hash);
-
-                  // Esperar confirmación
-                  const receipt = await tx.wait();
-                  console.log("Transacción confirmada:", receipt);
-                  alert('Transaction ok :)');
-               // Lógica específica para contratos instanciados con ethers.js
-        }
-
-
-
-
-             
-              
-              //alert('NFT Minteado exitosamente:');
-              loadingAnimation.style.display = 'none'; // Oculta la animación
-              $('#myModal').modal('hide'); 
-
-              await get_NFTUsername_profile();
-              info_profile_sock();
-
-                // Mostrar mensaje de éxito
-              showSuccess('NFT minteado correctamente.');
             } catch (error) {
 
-                  loadingAnimation.style.display = 'none'; // Oculta la animación
-                 
+                  // Cambia el color de la animación a rojo y lo mantiene 2 segundos
+                  loadingAnimation.style.borderLeftColor = 'red';                 
+                  setTimeout(() => { 
+                      loadingAnimation.style.display = 'none';
+                  }, 2000);
+
                   if (error.message.includes("Invalid username")) {
-                    showSuccess('Invalid username.');
-                  }else if (error.message.includes("Invalid username")){
-                    showSuccess('Invalid username.'); 
+                    showSuccess('Nombre Invalido.');
                   }else if (error.message.includes("Insufficient Sock balance")){
-                    showSuccess('Insufficient CAW balance.');
+                    showSuccess('Insuficiente saldo $ POL.');
                   }else  {
                     //alert('Error al mintear el NFT');
-                    console.error('Error al mintear el NFT:', error);
-
+                    console.error('Error al crear el Nombre de Usuario:', error);
                   }                  
 
               
@@ -1816,14 +1842,10 @@ function hacer_nada() {
 
       
 
-
+/*
 async function verifymintearNFT(){
 
-    // Obtener la dirección de la cuenta conectada
-    //const accounts = await web3.eth.getAccounts();
-    //const myAddress = accounts[0];
-    //const contractNFT = new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
-
+        
     const nftusername = document.getElementById('text-mintear-nft').value;
     const bottonMint = document.getElementById('btn-mintear-nft');
     const bottonVerifyMint = document.getElementById('btn-verify-nft');
@@ -1857,10 +1879,9 @@ async function verifymintearNFT(){
        bottonVerifyMint.style.display = 'none';
     }
 
-
-
+    
 }    
-   
+*/   
 
 </script>
 
@@ -1870,7 +1891,7 @@ const output = document.getElementById('mount-minteo');
 const errorDisplay = document.getElementById('Error_Minted_username');
 const bottonMint = document.getElementById('btn-mintear-nft');
 
-const bottonVerifyMint = document.getElementById('btn-verify-nft');
+//const bottonVerifyMint = document.getElementById('btn-verify-nft');
 
 
 

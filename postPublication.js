@@ -159,8 +159,14 @@ async function publicar_main_post(){
                            });
 
                        } 
-           loadingAnimation.style.display = 'none';
-           $('#UsernameProfileModal').modal('hide');
+
+            loadingAnimation.style.borderLeftColor = 'lime';                 
+            setTimeout(() => { 
+                loadingAnimation.style.display = 'none';
+            }, 2000);
+
+
+           $('#myModal_publication').modal('hide');
 
 
            

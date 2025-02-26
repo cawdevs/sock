@@ -615,7 +615,7 @@ span.hashtag {
 
                      
                           <div class="input-group">
-                            <div id ="NFTUsernames-count">NFTUsernames: </div>
+                            <div id ="NFTUsernames-count">Usuarios: </div>
                             <br>
                             <input type="text" id="text-address-wallet" class="form-control" placeholder="Search 0x.. or NftUsername" style="border: 2px solid black; border-radius: 20px; width: 100%; height: 40px; margin-right: 10px;">
                             <div class="input-group-btn">
@@ -704,13 +704,6 @@ span.hashtag {
 
 
 <!-- ############## ventana emergente Publicaciones ###########################-->
-<!-- #################################################################################-->
-<!-- #####################################################################-->
-<!-- #####################################################################-->
-<!-- #####################################################################-->
-<!-- #####################################################################-->
-
-
   
 <!-- Modal -->
 <div class="modal fade" id="myModal_publication" role="dialog">
@@ -765,7 +758,7 @@ span.hashtag {
            <button type="button" class="close" data-dismiss="modal">&times;</button>
           <div class="profile-form">
             <center>
-              <h3>NFTUsername</h3>
+              <h3>Crear Usuario</h3>
             </center>
           </div>
         </div>
@@ -1013,11 +1006,11 @@ span.hashtag {
       <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <center><h5><font color="black">Buy NFT Username</font></h5></center>
+          <center><h5><font color="black">Comprar Nombre de usuario</font></h5></center>
         </div>
         <div class="modal-body">
           <center>
-            <h6><font color="black">Buy  NFTUsername :</font></h6>           
+            <h6><font color="black">Comprar Nombre de usuario :</font></h6>           
                        
             <div id="info-sock-to-buy"></div>
                     
@@ -1629,8 +1622,13 @@ async function mintearNFT() {
                       if(isMintedNFT){
                         
                          errorDisplay.textContent = 'El nombre de usuario no esta disponible!.';
-                             
+                         
+                         loadingAnimation.style.borderLeftColor = 'red';                 
+                         setTimeout(() => { 
+                              loadingAnimation.style.display = 'none';
+                         }, 2000);
 
+                      
                       }else{  
 
                             let maticAmount;
@@ -1667,8 +1665,12 @@ async function mintearNFT() {
                             }
 
                             //alert('NFT Minteado exitosamente:');
-                            loadingAnimation.style.display = 'none'; // Oculta la animación
-                            $('#myModal').modal('hide'); 
+                            loadingAnimation.style.borderLeftColor = 'lime';                 
+                            setTimeout(() => { 
+                                loadingAnimation.style.display = 'none';
+                                $('#myModal').modal('hide'); 
+                            }, 2000);
+                            
 
                             await get_NFTUsername_profile();
                             info_profile_sock();
@@ -1904,18 +1906,18 @@ inputField.addEventListener('input', function() {
   const enteredText = inputField.value.trim();
   const count = enteredText.length;
   const saldoCaw = parseFloat(document.getElementById('saldo_CAW').textContent);
-  bottonMint.style.display = 'none';
-  bottonVerifyMint.style.display = 'block';
+  //bottonMint.style.display = 'none';
+  //bottonVerifyMint.style.display = 'block';
   
   if (!isValidNFTUsername(enteredText)) {
     errorDisplay.style.display = 'block';
-    errorDisplay.textContent = 'Only lowercase letters and numbers are valid.';
+    errorDisplay.textContent = 'Solo letras minusculas y numeros son validos.';
     output.textContent = '';
-    //bottonMint.style.display = 'none';
+    bottonMint.style.display = 'none';
     
   } else {
     errorDisplay.style.display = 'none';
-    //bottonMint.style.display = 'block';
+    bottonMint.style.display = 'block';
 
     let maticNeeded = 0;
     if (count >= 8) {

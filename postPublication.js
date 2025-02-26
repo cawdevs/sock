@@ -160,10 +160,19 @@ async function publicar_main_post(){
 
                        } 
            loadingAnimation.style.display = 'none';
+           $('#UsernameProfileModal').modal('hide');
+
+
            
 
     } catch (error) {
-          loadingAnimation.style.display = 'none';
+          
+          // Cambia el color de la animación a rojo y lo mantiene 2 segundos
+          loadingAnimation.style.borderLeftColor = 'red';                 
+          setTimeout(() => { 
+              loadingAnimation.style.display = 'none';
+          }, 2000);
+          
           showError("Sin confirmar:Publicado Main Post.",error);
           
     }

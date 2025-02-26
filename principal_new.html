@@ -1900,7 +1900,7 @@ function isValidNFTUsername(username) {
 inputField.addEventListener('input', function() {
   const enteredText = inputField.value.trim();
   const count = enteredText.length;
-  const saldoCaw = parseFloat(document.getElementById('saldo_CAW').textContent);
+  const saldoPol = parseFloat(document.getElementById('saldo_ETH').textContent);
   //bottonMint.style.display = 'none';
   //bottonVerifyMint.style.display = 'block';
   
@@ -1942,7 +1942,7 @@ inputField.addEventListener('input', function() {
       }
     }
 
-    if (saldoCaw < maticNeeded) {
+    if (saldoPol < maticNeeded) {
       output.textContent = `${maticNeeded}`
       output.style.fontSize = '36px'; // Cambia el tamaño de fuente
       output.style.color = 'white'; // Cambia el color`ID: ${publication_ID}`;

@@ -102,6 +102,51 @@
 
 </style>
 
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Menú lateral oculto en móviles */
+        .menu {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100vh;
+            background: #333;
+            color: white;
+            padding: 20px;
+            transition: left 0.3s ease-in-out;
+        }
+
+        .menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu ul li {
+            margin: 15px 0;
+        }
+
+        .menu ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu.show {
+            left: 0;
+        }
+
+        /* Ocultar la primera columna en móviles y usarla como menú */
+        @media (max-width: 768px) {
+            .col-sm-3:first-child {
+                display: none;
+            }
+        }
+    </style>
+
 
 
 
@@ -235,7 +280,17 @@
 <div class="container-fluid">
 <div class="row">
 
-   <div class="col-sm-1"> 
+   <div class="col-sm-3"> 
+
+        <div id="menu" class="menu">
+                <h2>theSocks.net</h2>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Perfil</a></li>
+                    <li><a href="#">Configuración</a></li>
+                </ul>
+            </div>
+
    </div>
 
           
@@ -609,7 +664,7 @@ span.hashtag {
 
 
 
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                
                 <div class="well" style="border: 2px solid lime; background: black; border-radius: 20px;">
 
@@ -692,8 +747,7 @@ span.hashtag {
 
             </div>
 
-            <div class="col-sm-1"> 
-            </div>
+            
 
             
         </div>
@@ -1195,7 +1249,34 @@ span.hashtag {
     llenarSelects();
   </script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let menu = document.getElementById("menu");
+        let touchStartX = 0;
+        let touchEndX = 0;
 
+        // Detectar el inicio del toque
+        document.body.addEventListener("touchstart", function (event) {
+            touchStartX = event.touches[0].clientX;
+        });
+
+        // Detectar el movimiento del toque
+        document.body.addEventListener("touchmove", function (event) {
+            touchEndX = event.touches[0].clientX;
+        });
+
+        // Detectar final del toque y abrir/cerrar el menú
+        document.body.addEventListener("touchend", function () {
+            if (touchStartX < 50 && touchEndX > touchStartX + 50) {
+                // Deslizar de izquierda a derecha (abrir menú)
+                menu.classList.add("show");
+            } else if (touchStartX > 150 && touchEndX < touchStartX - 50) {
+                // Deslizar de derecha a izquierda (cerrar menú)
+                menu.classList.remove("show");
+            }
+        });
+    });
+</script>
 
 
 

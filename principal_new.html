@@ -102,13 +102,14 @@
 
 </style>
 
+
 <style>
         body {
             font-family: Arial, sans-serif;
             overflow-x: hidden;
         }
 
-        /* Menú lateral oculto en móviles */
+        /* Menú lateral */
         .menu {
             position: fixed;
             top: 0;
@@ -139,13 +140,33 @@
             left: 0;
         }
 
+        /* Botón de menú (visible en PC) */
+        .menu-button {
+            position: relative;
+            top: 20px;
+            left: 20px;
+            background: black;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 1000;
+            border-radius: 5px;
+        }
+
         /* Ocultar la primera columna en móviles y usarla como menú */
         @media (max-width: 768px) {
             .col-sm-3:first-child {
                 display: none;
             }
+
+            .menu-button {
+                display: none;
+            }
         }
     </style>
+
+
 
 
 
@@ -280,17 +301,7 @@
 <div class="container-fluid">
 <div class="row">
 
-   <div class="col-sm-3"> 
-
-        <div id="menu" class="menu">
-                <h2>theSocks.net</h2>
-                <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Perfil</a></li>
-                    <li><a href="#">Configuración</a></li>
-                </ul>
-            </div>
-
+   <div class="col-sm-2"> 
    </div>
 
           
@@ -298,10 +309,70 @@
 
 
 
+   <div id="menu" class="menu">
+                <h2>Thesocks.net</h2>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Perfil</a></li>
+                    <li><a href="#">Configuración</a></li>
+                       
+
+    <!-- Dirección de la billetera -->
+    <li><h2><div id="addres-wallet" style="color: white;">Mi Cuenta </div></h2></li>
+    
+    <!-- Generar código QR -->
+    <li><a href="#" data-toggle="modal" data-target="#myModalQR" onclick="generarCodigoQR()">
+        <span class="glyphicon glyphicon-qrcode" style="color: white;">Recibir Criptos</span>
+    </a></li>
+    
+    <!-- Copiar clave -->
+    <li><a href="#" id="btn-copy-key" onclick="myFunctionbtc()">
+        <span class="glyphicon glyphicon-duplicate" style="color: white;">Copiar nùmero de billetera</span>
+    <li></a></li>
+
+    <!-- Cerrar sesión -->
+    <li><a href="#" onclick="logout()" style="color: white;">
+        <span class="glyphicon glyphicon-off"  title="Salir"> Salir/ Cerrar </span>
+    </a></li>
+    
+   
+   
+
+
+ </ul>
+
+
+
+
+
+
+
+
+  </div>
+
+
+
 
 
 <nav class="navbar navbar-inverse" role="navigation" style="border: 2px solid white; border-radius: 20px; background: black; position: relative; height: 50px;"> <!-- Ajusta la altura de la barra aquí -->
+   
+   
+ 
+    
+           
+
+
     <div class="container-fluid" style="display: flex; align-items: center; justify-content: flex-start; height: 100%;">
+
+
+
+         <!-- Icono de publicación -->
+        <div style="display: flex; align-items: center; margin-left: 10px;">
+              <!-- Botón para abrir menú en PC -->
+              <button id="menuBtn" class="menu-button">☰</button>
+        </div> 
+
+
 
         <!-- Selector de NFTs a 120px del borde izquierdo -->
         <div style="margin-left: 90px; display: flex; align-items: center;">
@@ -314,9 +385,7 @@
                 <span class="glyphicon glyphicon-plus-sign" style="color: lime; font-size: 36px; vertical-align: middle;"></span>
             </a>
         </div>
-
-
-      
+  
      
 
     </div>
@@ -664,7 +733,7 @@ span.hashtag {
 
 
 
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                
                 <div class="well" style="border: 2px solid lime; background: black; border-radius: 20px;">
 
@@ -1210,7 +1279,63 @@ span.hashtag {
 }
 </style>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let menu = document.getElementById("menu");
+        let menuBtn = document.getElementById("menuBtn");
 
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let mouseStartX = 0;
+        let mouseEndX = 0;
+
+        // Función para abrir/cerrar menú
+        function toggleMenu(open) {
+            if (open) {
+                menu.classList.add("show");
+            } else {
+                menu.classList.remove("show");
+            }
+        }
+
+        // Evento para botón de menú en PC
+        menuBtn.addEventListener("click", function () {
+            menu.classList.toggle("show");
+        });
+
+        // Eventos táctiles para móviles
+        document.body.addEventListener("touchstart", function (event) {
+            touchStartX = event.touches[0].clientX;
+        });
+
+        document.body.addEventListener("touchmove", function (event) {
+            touchEndX = event.touches[0].clientX;
+        });
+
+        document.body.addEventListener("touchend", function () {
+            if (touchStartX < 50 && touchEndX > touchStartX + 50) {
+                toggleMenu(true);
+            } else if (touchStartX > 150 && touchEndX < touchStartX - 50) {
+                toggleMenu(false);
+            }
+        });
+
+        // Eventos de mouse para PC (arrastre)
+        document.body.addEventListener("mousedown", function (event) {
+            mouseStartX = event.clientX;
+        });
+
+        document.body.addEventListener("mouseup", function (event) {
+            mouseEndX = event.clientX;
+
+            if (mouseStartX < 50 && mouseEndX > mouseStartX + 50) {
+                toggleMenu(true);
+            } else if (mouseStartX > 150 && mouseEndX < mouseStartX - 50) {
+                toggleMenu(false);
+            }
+        });
+    });
+</script>
 
 <script>
     // Definir las palabras clave
@@ -1249,34 +1374,7 @@ span.hashtag {
     llenarSelects();
   </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let menu = document.getElementById("menu");
-        let touchStartX = 0;
-        let touchEndX = 0;
 
-        // Detectar el inicio del toque
-        document.body.addEventListener("touchstart", function (event) {
-            touchStartX = event.touches[0].clientX;
-        });
-
-        // Detectar el movimiento del toque
-        document.body.addEventListener("touchmove", function (event) {
-            touchEndX = event.touches[0].clientX;
-        });
-
-        // Detectar final del toque y abrir/cerrar el menú
-        document.body.addEventListener("touchend", function () {
-            if (touchStartX < 50 && touchEndX > touchStartX + 50) {
-                // Deslizar de izquierda a derecha (abrir menú)
-                menu.classList.add("show");
-            } else if (touchStartX > 150 && touchEndX < touchStartX - 50) {
-                // Deslizar de derecha a izquierda (cerrar menú)
-                menu.classList.remove("show");
-            }
-        });
-    });
-</script>
 
 
 

@@ -289,31 +289,78 @@
           
  <div class="col-sm-6">   
 
-
+glyphicon glyphicon-user
+  glyphicon glyphicon-cog
+    glyphicon glyphicon-piggy-bank
 
       <div id="menu" class="menu">
                 <h3>Thesocks.net</h3>
-                <ul>      
+               
+             
+
+
+                <ul>    
+
+
+                    <li>                         
+                           <div id="NFT_image-container" style=" width:80px;  height: 80px;"> </div>
+                        
+                    </li>   
+
+                    <li> 
+                      
+                            <select id="selector_NFTs" class="form-control" placeholder="Username" style="border: 2px solid lime; border-radius: 10px; font-size: 20px; height: auto; width: 180px;"></select>
+                        
+                      
+                    </li> 
+  
 
                       <h4>                                   
                       <!-- Dirección de la billetera -->
-                      <li><div id="addres-wallet" style="color: white;">Mi Cuenta </div></li>
+                      <li>
+                       
+                        <a href="#">
+                          <span class="glyphicon glyphicon-piggy-bank" style="color: white; margin-left: 8px; margin-right: 16px;"></span>                            
+                          <span>Mi Cuenta</span>
+
+                           <div id="addres-wallet" style="color: white;"></div>
+
+                          </a>
+
+                      </li>
                       
+
+
                       <!-- Generar código QR -->
                       <li><a href="#" data-toggle="modal" data-target="#myModalQR" onclick="generarCodigoQR()">
-                          <span class="glyphicon glyphicon-qrcode" style="color: white;">Recibir Criptos</span>
+                          <span class="glyphicon glyphicon-qrcode" style="color: white; margin-left: 8px; margin-right: 16px;"></span>
+
+                          <span>Recibir</span>
+
                           </a>
                       </li>
                       
                       <!-- Copiar clave -->
                       <li><a href="#" id="btn-copy-key" onclick="myFunctionbtc()">
-                          <span class="glyphicon glyphicon-duplicate" style="color: white;">Copiar nùmero de billetera</span>
+                          <span class="glyphicon glyphicon-duplicate" style="color: white; margin-left: 8px; margin-right: 16px;"></span>
+                           
+                          <span>Copiar No. billetera</span>
+
                           </a>
+
                        </li>
+
+
+                      <li>
+                          
+                          <button class="boton-conectar" id="btn-conectar" data-toggle="modal" data-target="#myModal" onclick="conectarMetaMask()" style="display: inline-block; margin-left: 20px; margin-top: 40px;">Crear Usuario Nuevo</button>
+                      </li>
 
                       <!-- Cerrar sesión -->
                       <li><a href="#" onclick="logout()" style="color: white;">
-                          <span class="glyphicon glyphicon-off"  title="Salir"> Salir/ Cerrar </span>
+                          <span  class="glyphicon glyphicon-off"  title="Salir" style="margin-left: 4px; margin-right: 16px; margin-top: 60px;"></span>
+
+                          <span>Salir/Cerrar</span>
                           </a>
                       </li>
 
@@ -325,33 +372,16 @@
 
 
 
-
-<nav class="navbar navbar-inverse" role="navigation" style="border: 2px solid white; border-radius: 20px; background: black; position: relative; height: 50px;"> <!-- Ajusta la altura de la barra aquí -->
-   
-   
- 
-    
-           
-
-
+<!--
+<nav class="navbar navbar-inverse" role="navigation" style="border: 2px solid white; border-radius: 20px; background: black; position: relative; height: 50px;"> 
+        
     <div class="container-fluid" style="display: flex; align-items: center; justify-content: flex-start; height: 100%;">
-
-
-
-         <!-- Icono de publicación -->
-        <div style="display: flex; align-items: center; margin-left: 10px;">
-              <!-- Botón para abrir menú en PC -->
-              <button id="menuBtn" class="menu-button">☰</button>
-        </div> 
-
-
-
-        <!-- Selector de NFTs a 120px del borde izquierdo -->
+    
         <div style="margin-left: 90px; display: flex; align-items: center;">
             <select id="selector_NFTs" class="form-control" placeholder="Username" style="border: 2px solid lime; border-radius: 10px; font-size: 20px; height: auto; width: 180px;"></select>
         </div>
 
-        <!-- Icono de publicación -->
+     
         <div style="display: flex; align-items: center; margin-left: 10px;">
             <a href="#" data-toggle="modal" data-target="#myModal">
                 <span class="glyphicon glyphicon-plus-sign" style="color: lime; font-size: 36px; vertical-align: middle;"></span>
@@ -362,25 +392,30 @@
 
     </div>
 
-    <!-- Imagen NFT sobrepuesta a la izquierda -->
-
+  
      <div  style="border: 0px solid white; border-radius: 50%; position: absolute; top: 50%; left: 10px; transform: translateY(-50%); width: 80px; height: 80px;">
         <div id="NFT_image-container" style=" width:80px;  height: 80px;"> </div>
     </div>
 
-
     
 </nav>
 
-
-
+-->
                   
        <!--   
        <div class="well" style="border: 2px solid lime; background: black; border-radius: 20px;">  -->
                     <!--<div style="background: red; width:90px; height: 50px; display: inline-block; margin-top: 50px;"></div>  -->
 
-                    <h5> 
-                      <p style="display:inline-block;"><img src="images/icons/sock_coin.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; "></p>
+                    <h5>
+
+
+     
+     <button id="menuBtn" class="menu-button">☰</button>
+      
+
+
+     <p style="display:inline-block;"><img src="images/icons/sock_coin.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; "></p>
+     
      <div style="display:inline-block;" id="saldo_CAW"><font color="lime"></font></div>
 
      <div style="display:inline-block;" > </div>

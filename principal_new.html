@@ -289,12 +289,9 @@
           
  <div class="col-sm-6">   
 
-glyphicon glyphicon-user
-  glyphicon glyphicon-cog
-    glyphicon glyphicon-piggy-bank
 
       <div id="menu" class="menu">
-                <h3>Thesocks.net</h3>
+                <h3><l>thesocks.net</l></h3>
                
              
 
@@ -303,13 +300,13 @@ glyphicon glyphicon-user
 
 
                     <li>                         
-                           <div id="NFT_image-container" style=" width:80px;  height: 80px;"> </div>
+                           
                         
                     </li>   
 
                     <li> 
                       
-                            <select id="selector_NFTs" class="form-control" placeholder="Username" style="border: 2px solid lime; border-radius: 10px; font-size: 20px; height: auto; width: 180px;"></select>
+                            <select id="selector_NFTs" placeholder="Username" style="border: 2px solid lime; border-radius: 10px; font-size: 20px; height: auto; width: 180px;"></select>
                         
                       
                     </li> 
@@ -319,11 +316,9 @@ glyphicon glyphicon-user
                       <!-- Dirección de la billetera -->
                       <li>
                        
-                        <a href="#">
-                          <span class="glyphicon glyphicon-piggy-bank" style="color: white; margin-left: 8px; margin-right: 16px;"></span>                            
-                          <span>Mi Cuenta</span>
-
-                           <div id="addres-wallet" style="color: white;"></div>
+                        <a href="#" id="btn-copy-key" onclick="myFunctionbtc()">
+                          <span class="glyphicon glyphicon-duplicate" style="color: white; margin-left: 8px; margin-right: 16px;"></span>                           
+                          <span id="addres-wallet" style="color: white;"></span>                         
 
                           </a>
 
@@ -339,15 +334,28 @@ glyphicon glyphicon-user
 
                           </a>
                       </li>
+
+
+                      <li>                       
+                        <a href="#">
+                          <span class="glyphicon glyphicon-user" style="color: white; margin-left: 8px; margin-right: 16px;"></span>                           
+                          <span >Perfil</span>                      
+                        </a>
+                      </li>
+
+
+                        <li><a href="#">
+                          <span class="glyphicon glyphicon-question-sign " style="color: white; margin-left: 8px; margin-right: 16px;"></span>                           
+                          <span>Aprender más</span>
+                          </a>
+                       </li>
+
                       
                       <!-- Copiar clave -->
-                      <li><a href="#" id="btn-copy-key" onclick="myFunctionbtc()">
-                          <span class="glyphicon glyphicon-duplicate" style="color: white; margin-left: 8px; margin-right: 16px;"></span>
-                           
-                          <span>Copiar No. billetera</span>
-
+                      <li><a href="#">
+                          <span class="glyphicon glyphicon-cog" style="color: white; margin-left: 8px; margin-right: 16px;"></span>                           
+                          <span>Ajustes</span>
                           </a>
-
                        </li>
 
 
@@ -469,7 +477,15 @@ glyphicon glyphicon-user
 
   
  
-  <ul class="gallery_toolbar" style="background-color: lightgray; border: 2px solid lime; border-radius: 20px;">     
+  <ul class="gallery_toolbar" style="background-color: lightgray; border: 2px solid lime; border-radius: 20px;">  
+
+      
+
+       <a href="#" style=" margin-left: 15px;">
+          <div id="NFT_image-container" style=" width:80px;  height: 80px;"> </div>     
+       </a>
+
+
    
        <a href="#" data-toggle="modal" data-target="#myModal_publication" onclick="createPublicationElements() " style=" margin-left: 15px;">
                 <img  id="image-post" src="images/icons/post_icon.SVG" alt="post" width="35">

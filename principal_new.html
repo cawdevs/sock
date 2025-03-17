@@ -211,13 +211,6 @@
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
 
-
- 
-
-<br>
- 
-
-
 <!--
  <center>  <div>
     <img src="images/sock_logo.SVG" alt="My svg_logo" width="45" class="img-circle" style="transform: rotate(0deg); display: inline-block; margin-left: 10px;border: 2px solid white;">
@@ -291,47 +284,88 @@
 
 
       <div id="menu" class="menu">
-                <h3><l>thesocks.net</l></h3>
-               
-             
-
+                <center><h3><i>thesocks.net</i></h3></center>
 
                 <ul>    
-
-
                     <li>                         
-                           <div id="NFT_image-container" style=" width:80px;  height: 80px;"> </div>
+                           <center><div id="NFT_image-container" style=" width:80px;  height: 80px;"> </div></center>
                         
                     </li>   
 
                     <li> 
-                      
+                            <center>
                             <select id="selector_NFTs" class="form-control" placeholder="Username" style="border: 2px solid lime; border-radius: 10px; font-size: 20px; height: auto; width: 180px;"></select>
-                        
+                            </center>
                       
                     </li> 
   
 
                       <h4>                                   
                       <!-- Dirección de la billetera -->
-                      <li>
-                       
+                      <li>                      
                         <a href="#" id="btn-copy-key" onclick="myFunctionbtc()">
                           <span class="glyphicon glyphicon-duplicate" style="color: white; margin-left: 8px; margin-right: 16px;"></span>                           
-                          <span id="addres-wallet" style="color: white;"></span>                         
+                          <span id="addres-wallet" style="color: white;"></span>                       
+                        </a>
+                      </li>                
+    
 
+    
+                      <li>                      
+                        <a href="#">
+                          <img src="images/icons/matic_coin.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">
+
+                           <div style="display:inline-block;" id="saldo_ETH"><font color="white "></font></div>
+
+                           <div style="display:inline-block;" id="saldo_USD"><font color="white "></font></div>
+                                           
+                        </a>
+                      </li>
+
+
+
+                      <li>                      
+                        <a href="#">
+                          <img src="images/icons/sock_coin.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">
+
+                           <div style="display:inline-block;" id="saldo_CAW"><font color="lime"></font></div>   
+                                           
+                        </a>
+                      </li>         
+
+                                      
+                 
+                       <li>
+                        <a href="#" id="btn-obtener-saldo" onclick="obtenerSaldo_POL_SOCK()" >
+                          <span class="glyphicon glyphicon-refresh" style="transform: rotate(0deg); display: inline-block; margin-left: 20px; " ></span>
+                          
+                          <span>Actualizar Balance</span>
                           </a>
+                      </li>
+    
 
+
+
+
+
+                      <br>
+
+                       
+
+                      <li>
+                        <a href="#" id="btn-enviar-saldo" onclick="modal_enviarTokens()">
+
+                          <font color="lime"><span class="glyphicon glyphicon-send" style="margin-left: 8px; margin-right: 16px;"></span></font>
+                          
+                          <span>Enviar</span>
+                          </a>
                       </li>
                       
-
 
                       <!-- Generar código QR -->
                       <li><a href="#" data-toggle="modal" data-target="#myModalQR" onclick="generarCodigoQR()">
                           <span class="glyphicon glyphicon-qrcode" style="color: white; margin-left: 8px; margin-right: 16px;"></span>
-
                           <span>Recibir</span>
-
                           </a>
                       </li>
 
@@ -417,34 +451,7 @@
                     <h5>
 
 
-     
-     <button id="menuBtn" class="menu-button">☰</button>
-      
-
-
-     <p style="display:inline-block;"><img src="images/icons/sock_coin.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; "></p>
-     
-     <div style="display:inline-block;" id="saldo_CAW"><font color="lime"></font></div>
-
-     <div style="display:inline-block;" > </div>
-     <div style="display:inline-block;" > </div>
-     <p style="display:inline-block;"><img src="images/icons/matic_coin.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; "></p>
-     <div style="display:inline-block;" id="saldo_ETH"><font color="white "></font></div>
-
-     <div style="display:inline-block;" > </div>
-     <div style="display:inline-block;" > </div>
-     <div style="display:inline-block;" id="saldo_USD"><font color="white "></font></div>
-     <div style="display:inline-block;" > </div>
-     <a href="#" style="display:inline-block;" id="btn-obtener-saldo"><font color="black"><span class="glyphicon glyphicon-refresh"></span></font></a>
-     
-     <div style="display:inline-block;" > </div>
-      <div style="display:inline-block;" > </div>
-     <a href="#" style="display:inline-block;  margin-left: 20px;  font-size: 24px;" id="btn-enviar-saldo" onclick="modal_enviarTokens()"><font color="lime"><span class="glyphicon glyphicon-send"></span></font></a>
-
-     <div style="display:inline-block;" > </div>
-
-      
-
+   
      
 
          
@@ -475,9 +482,12 @@
  
 
 
-  
+  <button id="menuBtn" class="menu-button">☰</button>     
  
   <ul class="gallery_toolbar" style="background-color: lightgray; border: 2px solid lime; border-radius: 20px;">     
+           
+
+       
    
        <a href="#" data-toggle="modal" data-target="#myModal_publication" onclick="createPublicationElements() " style=" margin-left: 15px;">
                 <img  id="image-post" src="images/icons/post_icon.SVG" alt="post" width="35">
@@ -1778,6 +1788,11 @@ async function obtenerSaldo_POL() {
            
 }
 
+
+async function obtenerSaldo_POL_SOCK(){
+    await obtenerSaldo_POL();
+    await obtenerSaldo_SOCK();
+}
 
 // Función para mintear un NFT
 async function mintearNFT() {

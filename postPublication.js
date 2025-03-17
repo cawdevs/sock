@@ -208,7 +208,7 @@ async function get_all_publications_home(homecontainnerID) {
         let count = 0; // Contador de publicaciones válidas
         let i = start;
 
-        while (count < 20 && i >= 1) {  
+        while (count < 5 && i >= 1) {  
             let type_publication = await get_publication(i, homecontainnerID);
             
             if (type_publication !== 3) { 

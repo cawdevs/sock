@@ -66,6 +66,10 @@
             background-color: green;
         }
     </style>
+
+
+
+
 </head>
 
 <body>
@@ -252,6 +256,32 @@ function handleFileSelect(event) {
 document.getElementById('fileInput').addEventListener('change', handleFileSelect);
 
 
+function check_privatekey() {
+    try {
+        // Primero, intenta conectar usando la wallet propia si hay una clave privada almacenada
+        const privateKey = localStorage.getItem("privateKey");
+        console.log("privateKey" + privateKey ); 
+
+        if (localStorage.getItem("privateKey")) {
+            goToMainPage();
+            
+        } 
+           
+        // Luego, si no hay wallet propia, intenta conectar con MetaMask
+        else if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask ) {
+            goToSockMetamask();
+        } 
+        // Si no hay MetaMask ni una clave privada, muestra un error
+        else {
+            console.error("No se detectó clave privada (Metamask)");
+            return;
+        }
+
+    } catch (error) {
+        console.error("No hay privateKey en el cache:", error);
+    }
+}
+
 
 async function obtenerClaveDesencriptada(password) {
     const fileInput = document.getElementById('fileInput'); // Asegúrate de tener este input en tu HTML
@@ -295,7 +325,7 @@ async function obtenerClaveDesencriptada(password) {
 
 
     // Verifica la existencia de una billetera al cargar la página
-    //window.onload = checkWallet;
+    window.onload = check_privatekey;
 
     // Función para cargar el archivo y recuperar la clave privada
     function cargarArchivo() {

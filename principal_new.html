@@ -549,6 +549,10 @@ span.hashtag {
     <div id="home" class="tab-pane fade in active" >
          <br>
                    
+         <center><div id="loadingAnimation-principal" style="display: none;">
+                    <div class="spinner"></div>              
+         </div>  </center> 
+
 
          <div id="home-publications-container"></div>
           
@@ -1621,6 +1625,11 @@ async function logout() {
 // Inicializar la interfaz de usuario
 async function inicializarUI() {
     // Mostrar dirección en la interfaz
+    const loadingAnimation = document.getElementById('loadingAnimation-principal');
+    loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la función
+           
+ 
+
     const start = globalWalletKey.slice(0, 6);
     const end = globalWalletKey.slice(-4);
     document.getElementById("addres-wallet").innerText = `${start}...${end}`;
@@ -1639,6 +1648,8 @@ async function inicializarUI() {
 
     const nftusername = document.getElementById('selector_NFTs').value;
     await get_NFTUsername_publication(nftusername,"my-publications-container");
+
+    loadingAnimation.style.display = 'none';
     
     // Registrar eventos de botones
     document.getElementById("btn-mintear-nft").addEventListener("click", mintearNFT);

@@ -15,9 +15,9 @@
         } 
            
         // Luego, si no hay wallet propia, intenta conectar con MetaMask
-        else if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask ) {
-             window.location.href = 'principal_new.html';
-        } 
+        //else if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask ) {
+        //     window.location.href = 'principal_new.html';
+        //} 
         // Si no hay MetaMask ni una clave privada, muestra un error
         else {
             console.error("No se detectó clave privada (Metamask)");

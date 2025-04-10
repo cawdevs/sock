@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                username: username,
+                username: username_selected,
                 post_id: postId,
                 liked: liked
             })

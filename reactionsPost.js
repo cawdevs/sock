@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    function getReactions(postId, container) {
+    function getReactions(username_selected,postId, container) {
         const icons = [
             { id: "comment", icon: "glyphicon-comment", color1: "gray", color2: "blue" },
             { id: "heart", icon: "glyphicon-heart", color1: "gray", color2: "red" },
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // 🔴 DETECTAR CLICK EN EL ICONO ESPECÍFICO 🔴
                 if (id === "heart") {
                     console.log(`❤️ Me gusta en la publicación ${postId}`);
-                    likePost(postId);
+                    likePost(username_selected,postId);
                 } else if (id === "retweet") {
                     console.log(`🔄 Compartido en la publicación ${postId}`);
                     sharePost(postId);
@@ -51,9 +51,30 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Función que se ejecuta cuando se hace clic en "Me gusta" ❤️
-    function likePost(postId) {
+    function likePost(username_selected,postId) {
         //alert(`Has dado like a la publicación ${postId}`);
+
+        //consultar si ya le dio like
+        const liked = true;
+
+        fetch("http://201.247.64.26:8802/like-post/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                post_id: postId,
+                liked: liked
+            })
+        })
+        .then(response => response.json())
+        .then(data => console.log("Respuesta:", data))
+        .catch(error => console.error("Error:", error));
+
     }
+
+
 
     // Función que se ejecuta cuando se hace clic en "Compartir" 🔄
     function sharePost(postId) {

@@ -588,7 +588,7 @@ async function createPublicationElement(publication) {
     publicationReactionDiv.className = "icon-reaction-container";
     publicationReactionDiv.style.marginBottom = '20px';
 
-    await getReactions(id , publicationReactionDiv);
+    await getReactions(selected_username, id , publicationReactionDiv);
 
     // Agregar filas al contenedor principal
     publicationDiv.appendChild(headerDiv);

@@ -476,8 +476,25 @@
  
 
 
-  <button id="menuBtn" class="menu-button">☰</button>     
- 
+  <button id="menuBtn" class="menu-button">☰</button>    
+
+  
+  <div class="input-group" style="display: flex; align-items: center; gap: 10px;">
+          <div id="NFTUsernames-count"><em>thesocls</em>:</div>
+
+          <input type="text" id="text-address-wallet" class="form-control"
+                 placeholder="Search 0x.. or NftUsername"
+                 style="border: 2px solid black; border-radius: 20px; height: 40px; flex: 1;">
+
+          <button id="btn-find-nft" class="btn btn-default"
+                  onclick="findNftWallet('user')"
+                  style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+  </div>
+
+
+
   <ul class="gallery_toolbar" style="background-color: lightgray; border: 2px solid lime; border-radius: 20px;">     
            
 
@@ -585,6 +602,16 @@ span.hashtag {
 
            <div id="nft-username-profile"></div>
            <br> 
+          
+
+           <button id="btn-find-followin"  onclick="findNftWallet('following')"style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">Siguiendo</button> 
+
+           <button id="btn-find-followers"  onclick="findNftWallet('followers')"style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">Seguidores</button> 
+
+           <button id="btn-find-messages"  onclick="findNftWallet('messages')"style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;"><span class="glyphicon glyphicon-envelope"></span></button> 
+
+
+           <br>
             <div id="my-publications-container"></div>
             
              
@@ -763,7 +790,7 @@ span.hashtag {
                
                 <div class="well" style="border: 2px solid lime; background: black; border-radius: 20px;">
 
-                     
+                     <!--
                           <div class="input-group">
                             <div id ="NFTUsernames-count">Usuarios: </div>
                             <br>
@@ -774,13 +801,9 @@ span.hashtag {
                               </button>                             
                             </div>
                           </div> 
-                           <br>
+                           <br>  -->
 
-                           <button id="btn-find-followin"  onclick="findNftWallet('following')"style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">Siguiendo</button> 
-
-                           <button id="btn-find-followers"  onclick="findNftWallet('followers')"style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">Seguidores</button> 
-
-                           <button id="btn-find-messages"  onclick="findNftWallet('messages')"style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;"><span class="glyphicon glyphicon-envelope"></span></button> 
+                           
 
 
                        

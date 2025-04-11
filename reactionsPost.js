@@ -57,7 +57,9 @@ document.addEventListener("DOMContentLoaded", function () {
         //consultar si ya le dio like
         const liked = true;
 
-        fetch("http://201.247.64.26:8802/like-post/", {
+        fetch("https://api.thesocks.net/like-post/", {
+
+           
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
 */
 
 document.addEventListener("DOMContentLoaded", function () {
-    function getReactions(username_selected, postId, container) {
+    function getReactions(username_selected,nftUsername_post postId, container) {
         const icons = [
             { id: "comment", icon: "glyphicon-comment", color1: "gray", color2: "blue" },
             { id: "heart", icon: "glyphicon-heart", color1: "gray", color2: "red" },
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     body: JSON.stringify({
                         nft_username: username_selected,
                         id_publication: postId.toNumber ? postId.toNumber() : postId,
-                        
+
                     })
                 })
                 .then(res => res.json())
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 500);
     }
 
-    function likePost(username_selected, postId) {
+    function likePost(username_selected,nftUsername_post, postId) {
         const heartIcon = document.getElementById(`icon-heart-${postId}`);
         const liked = heartIcon.dataset.liked === "true";
         const newLiked = !liked;
@@ -185,6 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify({
                 username: username_selected,
+                username_post: nftUsername_post  
                 post_id: postId.toNumber ? postId.toNumber() : postId,
                 liked: newLiked
             })

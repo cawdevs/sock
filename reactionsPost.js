@@ -53,7 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // Función que se ejecuta cuando se hace clic en "Me gusta" ❤️
     function likePost(username_selected,postId) {
         //alert(`Has dado like a la publicación ${postId}`);
-        
+
+        console.log("Respuesta:", username_selected,postId);
+
         //consultar si ya le dio like
         const liked = true;
 

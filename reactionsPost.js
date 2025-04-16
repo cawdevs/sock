@@ -52,10 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Función que se ejecuta cuando se hace clic en "Me gusta" ❤️
     function likePost(username_selected,postId) {
-        //alert(`Has dado like a la publicación ${postId}`);
-
-        console.log("Respuesta:", username_selected,postId);
-
+        //alert(`Has dado like a la publicación ${postId}`);        
+        
         //consultar si ya le dio like
         const liked = true;
 
@@ -67,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify({
                 username: username_selected,
-                post_id: 10,
+                post_id: = postId.toNumber(); // convierte BigNumber a número normal,
                 liked: liked
             })
         })

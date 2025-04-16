@@ -120,6 +120,8 @@
             color: white;
             padding: 20px;
             transition: left 0.3s ease-in-out;
+            z-index: 9999; /* 🔥 Esto lo pone por encima de casi todo */
+
         }
 
         .menu ul {
@@ -150,7 +152,7 @@
             border: none;
             padding: 10px 15px;
             cursor: pointer;
-            z-index: 9999;
+            z-index: 100;
             border-radius: 5px;
         }
 
@@ -1183,7 +1185,7 @@ span.hashtag {
           <center>
             <h6><font color="black">Comprar Nombre de usuario :</font></h6>           
                        
-            <div id="info-sock-to-buy"></div>
+            <div id="menu-to-buy"></div>
                     
           </center>
         </div>

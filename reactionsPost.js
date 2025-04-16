@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
 */
 
 document.addEventListener("DOMContentLoaded", function () {
-    function getReactions(username_selected,nftUsername_post postId, container) {
+    function getReactions(username_selected,nftUsername_post, postId, container) {
         const icons = [
             { id: "comment", icon: "glyphicon-comment", color1: "gray", color2: "blue" },
             { id: "heart", icon: "glyphicon-heart", color1: "gray", color2: "red" },
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (id === "heart") {
                     console.log(`❤️ Me gusta en la publicación ${postId}`);
-                    likePost(username_selected, postId);
+                    likePost(username_selected,nftUsername_post, postId);
                 } else if (id === "send") {
                     console.log(`✉️ Compartido en la publicación ${postId}`);
                     sharePost(postId);

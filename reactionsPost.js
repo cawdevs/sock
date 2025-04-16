@@ -59,14 +59,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         fetch("https://api.thesocks.net/like-post/", {
 
-           
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 username: username_selected,
-                post_id: postId,
+                post_id: 10,
                 liked: liked
             })
         })

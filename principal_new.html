@@ -366,8 +366,10 @@
 
                       <li>                       
                         <a href="#">
-                          <span class="glyphicon glyphicon-user" style="color: white; margin-left: 8px; margin-right: 16px;"></span>                           
-                          <span >Perfil</span>                      
+                          <span class="glyphicon glyphicon-heart" style="color: red; margin-left: 8px; margin-right: 16px;"></span>                           
+                          <span>Reclamar</span>
+                          <span id="total_like_username">0</span>
+
                         </a>
                       </li>
 
@@ -1664,6 +1666,8 @@ async function inicializarUI() {
 
     await getmintedNFT();
     
+    await get_total_liked();
+
     await get_NFTUsername_profile();
     
     await get_all_publications_home("home-publications-container");
@@ -1746,7 +1750,32 @@ async function obtenerGasAjustado() {
     }
 }
 
-      
+async function get_total_liked() {
+    const nftusername = document.getElementById('selector_NFTs').value;
+
+    try {
+        const response = await fetch("https://api.thesocks.net/total-likes-user/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ nft_username_post: nftusername })
+        });
+
+        const data = await response.json();
+
+        if (data && data.total_likes !== undefined) {
+            document.getElementById("total_like_username").textContent = data.total_likes;
+        } else {
+            document.getElementById("total_like_username").textContent = "0";
+        }
+
+    } catch (error) {
+        console.error("Error al obtener total de likes:", error);
+        document.getElementById("total_like_username").textContent = "0";
+    }
+}
+
 async function obtenerSaldo_SOCK() {
 
     let accountBalance;
@@ -2003,7 +2032,9 @@ async function getmintedNFT() {
  // Agregar evento 'change' al selector
  selectorNFTs.addEventListener('change', async () => {
             getImageNFTUsername("NFT_image-container");
+            await get_total_liked();
             info_profile_sock();
+
             await get_NFTUsername_profile();
  
           });

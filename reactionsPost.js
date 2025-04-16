@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify({
                 username: username_selected,
-                username_post: nftUsername_post  
+                username_post: nftUsername_post,  
                 post_id: postId.toNumber ? postId.toNumber() : postId,
                 liked: newLiked
             })

@@ -124,7 +124,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     },
                     body: JSON.stringify({
                         nft_username: username_selected,
-                        id_publication: postId
+                        id_publication: postId.toNumber ? postId.toNumber() : postId,
+                        
                     })
                 })
                 .then(res => res.json())

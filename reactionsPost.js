@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 span.appendChild(likeCount);
 
                 // 👇 Aquí consultamos el estado del like y total
-                fetch("https://api.thesocks.net/like-info/", {
+                fetch("https://api.thesocks.net/get-like-info/", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 })
                 .then(res => res.json())
                 .then(data => {
+                    console.log("Respuesta de like-info:", data);
                     span.dataset.liked = data.user_like_status;
                     span.style.color = data.user_like_status ? color2 : color1;
                     likeCount.textContent = data.total_likes;

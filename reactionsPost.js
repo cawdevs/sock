@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const icons = [
             { id: "comment", icon: "glyphicon-comment", color1: "gray", color2: "blue" },
             { id: "heart", icon: "glyphicon-heart", color1: "gray", color2: "red" },
-            { id: "retweet", icon: "glyphicon-retweet", color1: "gray", color2: "lime" },
-            { id: "trash", icon: "glyphicon-trash", color1: "gray", color2: "red" },
+            //{ id: "retweet", icon: "glyphicon-retweet", color1: "gray", color2: "lime" },
+            //{ id: "trash", icon: "glyphicon-trash", color1: "gray", color2: "red" },
             { id: "send", icon: "glyphicon-send", color1: "gray", color2: "lime" },
-            { id: "plus", icon: "glyphicon-plus", color1: "gray", color2: "lime" }
+            //{ id: "plus", icon: "glyphicon-plus", color1: "gray", color2: "lime" }
         ];
 
         container.innerHTML = ""; // Limpiar contenido previo
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
             icon.style.color = newColor;
             icon.setAttribute("data-color2", originalColor);
             icon.setAttribute("data-color1", newColor);
-        }, 300);
+        }, 500);
     }
 
     // Función que se ejecuta cuando se hace clic en "Me gusta" ❤️

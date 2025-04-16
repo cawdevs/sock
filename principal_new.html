@@ -791,7 +791,7 @@ span.hashtag {
             <div class="col-sm-4">
                
                 <div class="well" style="border: 2px solid lime; background: black; border-radius: 20px;">
-
+                     <h1><div id ="NFTUsernames-count">Usuarios: </div><h1>
                      <!--
                           <div class="input-group">
                             <div id ="NFTUsernames-count">Usuarios: </div>
@@ -1962,6 +1962,8 @@ async function getmintedNFT() {
                  list_username = await nftUsernameContract.getMintedUsernames(globalWalletKey);
                  total_minted_username = await nftUsernameContract.getTotalMintedNFTs();                                    
               }
+
+              console.log("total_nft_Username",total_nft_Username,list_username);
                
               const total_nft_Username = document.getElementById('NFTUsernames-count');
               total_nft_Username.style.color = 'lime';

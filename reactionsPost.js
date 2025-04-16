@@ -167,6 +167,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function likePost(username_selected,nftUsername_post, postId) {
+
+        console.log("Username que publica (nftUsername_post):", nftUsername_post);
+        
         const heartIcon = document.getElementById(`icon-heart-${postId}`);
         const liked = heartIcon.dataset.liked === "true";
         const newLiked = !liked;

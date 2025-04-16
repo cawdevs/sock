@@ -1752,7 +1752,7 @@ async function obtenerGasAjustado() {
 
 function get_total_liked() {
     const nftusername = document.getElementById('selector_NFTs').value;
-
+    console.log("total likes user.",nftusername);
     fetch("https://api.thesocks.net/total-likes-user/", {
         method: "POST",
         headers: {
@@ -1762,10 +1762,12 @@ function get_total_liked() {
     })
     .then(response => response.json())
     .then(data => {
+
+        console.log("total likes user.",nftusername,data.total_likes);
         if (data && data.total_likes !== undefined) {
             document.getElementById("total_like_username").textContent = data.total_likes;
         } else {
-            document.getElementById("total_like_username").textContent = "0";
+            document.getElementById("total_like_username").textContent = "000";
         }
     })
     .catch(error => {

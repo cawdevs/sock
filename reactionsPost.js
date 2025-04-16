@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify({
                 username: username_selected,
-                post_id: postId.toNumber(); // convierte BigNumber a número normal,
+                post_id: postId.toNumber(), // convierte BigNumber a número normal,
                 liked: liked
             })
         })

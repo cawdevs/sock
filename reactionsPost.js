@@ -1,3 +1,4 @@
+/**
 document.addEventListener("DOMContentLoaded", function () {
     function getReactions(username_selected,postId, container) {
         const icons = [
@@ -52,11 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Función que se ejecuta cuando se hace clic en "Me gusta" ❤️
     function likePost(username_selected,postId) {
-        //alert(`Has dado like a la publicación ${postId}`);
-
+        //alert(`Has dado like a la publicación ${postId}`);        
         
-        
-
         //consultar si ya le dio like
         const liked = true;
 
@@ -85,5 +83,120 @@ document.addEventListener("DOMContentLoaded", function () {
         //alert(`Has compartido la publicación ${postId}`);
     }
 
+    
     window.getReactions = getReactions; // Exponer la función globalmente
 });
+
+*/
+
+document.addEventListener("DOMContentLoaded", function () {
+    function getReactions(username_selected, postId, container) {
+        const icons = [
+            { id: "comment", icon: "glyphicon-comment", color1: "gray", color2: "blue" },
+            { id: "heart", icon: "glyphicon-heart", color1: "gray", color2: "red" },
+            { id: "send", icon: "glyphicon-send", color1: "gray", color2: "lime" },
+        ];
+
+        container.innerHTML = ""; // Limpiar contenido previo
+
+        icons.forEach(({ id, icon, color1, color2 }) => {
+            const span = document.createElement("span");
+            span.className = `glyphicon ${icon}`;
+            span.id = `icon-${id}-${postId}`;
+            span.setAttribute("data-color1", color1);
+            span.setAttribute("data-color2", color2);
+            span.style.color = color1;
+            span.style.cursor = "pointer";
+
+            // Contador para los likes
+            if (id === "heart") {
+                const likeCount = document.createElement("span");
+                likeCount.id = `likes-count-${postId}`;
+                likeCount.style.marginLeft = "5px";
+                likeCount.textContent = "0";
+                span.appendChild(likeCount);
+
+                // 👇 Aquí consultamos el estado del like y total
+                fetch("https://api.thesocks.net/like-info/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nft_username: username_selected,
+                        id_publication: postId
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    span.dataset.liked = data.user_like_status;
+                    span.style.color = data.user_like_status ? color2 : color1;
+                    likeCount.textContent = data.total_likes;
+                });
+            }
+
+            span.addEventListener("click", function () {
+                toggleReaction(span);
+
+                if (id === "heart") {
+                    console.log(`❤️ Me gusta en la publicación ${postId}`);
+                    likePost(username_selected, postId);
+                } else if (id === "send") {
+                    console.log(`✉️ Compartido en la publicación ${postId}`);
+                    sharePost(postId);
+                }
+            });
+
+            container.appendChild(span);
+        });
+    }
+
+    function toggleReaction(icon) {
+        const newColor = icon.getAttribute("data-color2");
+        const originalColor = icon.getAttribute("data-color1");
+
+        icon.classList.add("grow");
+        setTimeout(() => {
+            icon.classList.remove("grow");
+            icon.style.color = newColor;
+            icon.setAttribute("data-color2", originalColor);
+            icon.setAttribute("data-color1", newColor);
+        }, 500);
+    }
+
+    function likePost(username_selected, postId) {
+        const heartIcon = document.getElementById(`icon-heart-${postId}`);
+        const liked = heartIcon.dataset.liked === "true";
+        const newLiked = !liked;
+
+        const countSpan = document.getElementById(`likes-count-${postId}`);
+        let currentLikes = parseInt(countSpan.textContent) || 0;
+        countSpan.textContent = newLiked ? currentLikes + 1 : currentLikes - 1;
+
+        heartIcon.style.color = newLiked ? heartIcon.getAttribute("data-color2") : heartIcon.getAttribute("data-color1");
+        heartIcon.dataset.liked = newLiked;
+
+        fetch("https://api.thesocks.net/like-post/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username_selected,
+                post_id: postId.toNumber ? postId.toNumber() : postId,
+                liked: newLiked
+            })
+        })
+        .then(response => response.json())
+        .then(data => console.log("Respuesta:", data))
+        .catch(error => console.error("Error:", error));
+    }
+
+    function sharePost(postId) {
+        // Lógica para compartir
+        alert(`Compartiste la publicación ${postId}`);
+    }
+
+    window.getReactions = getReactions; // Exponer globalmente
+});
+

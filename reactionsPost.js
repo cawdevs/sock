@@ -253,7 +253,7 @@ function showSendOptions(postId,nftUsername_post, container) {
                 }
 
                 //envia los tokens al cliente               
-                await transferSockTokens(walletPropine, amount)
+                await transferSockTokens(walletPropine, amount);
             
 
             setTimeout(() => {

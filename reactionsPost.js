@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.getReactions = getReactions; // Exponer globalmente
 });
 
-function showSendOptions(nftUsername_post,postId, container) {
+async function showSendOptions(nftUsername_post,postId, container) {
     // Evitar duplicación
     const existing = document.getElementById(`send-options-${postId}`);
     if (existing) {
@@ -226,7 +226,7 @@ function showSendOptions(nftUsername_post,postId, container) {
     optionsWrapper.className = "reaction-group";
     optionsWrapper.id = `send-options-${postId}`;
 
-    const amounts = [5000, 10000, 20000];
+    const amounts = [55000, 110000, 220000];
 
     amounts.forEach(amount => {
         const option = document.createElement("span");
@@ -238,6 +238,11 @@ function showSendOptions(nftUsername_post,postId, container) {
 
             // Acción personalizada según cantidad
             console.log(`💸 Enviado $${amount} en la publicación ${postId}`);
+
+            await transferSockTokens(recipientAddress, amount); 
+
+
+
 
             setTimeout(() => {
                 option.classList.remove("grow");

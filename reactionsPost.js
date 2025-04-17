@@ -228,6 +228,18 @@ async function showSendOptions(postId, nftUsername_post, container) {
 
     const amounts = [1000, 5000, 10000];
 
+    const walletPropine;               
+    if (nftUsernameContract.methods) {
+        console.log("Con MetaMask ");
+        walletPropine     = await nftUsernameContract.methods.getNFTOwner(nftUsername_post).call();
+                                
+    } else {
+        // Usando ethers.js
+        console.log("Con SockWallet "); 
+        walletPropine     = await nftUsernameContract.getNFTOwner(nftUsername_post);
+                                                                         
+    }
+
     amounts.forEach(amount => {
         const option = document.createElement("span");
         option.className = "reaction-option";
@@ -240,20 +252,10 @@ async function showSendOptions(postId, nftUsername_post, container) {
             console.log(`💸 Enviado $${amount} en la publicación ${postId}`);
             
             ///////////////////determinamos la billetera del quien recibe la propina
-            let walletPropine;               
-                if (nftUsernameContract.methods) {
-                        console.log("Con MetaMask ");
-                        walletPropine     = await nftUsernameContract.methods.getNFTOwner(nftUsername_post).call();
-                                
-                } else {
-                        // Usando ethers.js
-                        console.log("Con SockWallet "); 
-                        walletPropine     = await nftUsernameContract.getNFTOwner(nftUsername_post);
-                                                                         
-                }
+            
 
-                //envia los tokens al cliente               
-                await transferSockTokens(walletPropine, amount);
+            //envia los tokens al cliente               
+            await transferSockTokens(walletPropine, amount);
             
 
             setTimeout(() => {

@@ -109,16 +109,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Contador para los likes
             if (id === "heart") {
-
-
                 const likeCount = document.createElement("span");
                 likeCount.id = `likes-count-${postId}`;
                 likeCount.style.marginLeft = "5px";
                 likeCount.textContent = "0";
                 span.appendChild(likeCount);
-                
-                //se comunica con djngo para actualizar likes
-                likePost(username_selected,nftUsername_post, postId);
 
                 // 👇 Aquí consultamos el estado del like y total
                 fetch("https://api.thesocks.net/get-like-info/", {
@@ -145,22 +140,22 @@ document.addEventListener("DOMContentLoaded", function () {
             else if (id === "send") {
                 span.addEventListener("click", function () {
                     toggleReaction(span);
-                    showSendOptions(postId, nftUsername_post, container);
+                    showSendOptions(postId, container);
                 });
             }
 
             
-           // span.addEventListener("click", function () {
-             ///   toggleReaction(span);
+            span.addEventListener("click", function () {
+                toggleReaction(span);
 
-             //   if (id === "heart") {
-             //       console.log(`❤️ Me gusta en la publicación ${postId}`);
-             //       likePost(username_selected,nftUsername_post, postId);
-             //   } //else if (id === "send") {
-                   // console.log(`✉️ Compartido en la publicación ${postId}`);
+                if (id === "heart") {
+                    console.log(`❤️ Me gusta en la publicación ${postId}`);
+                    likePost(username_selected,nftUsername_post, postId);
+                } else if (id === "send") {
+                    console.log(`✉️ Compartido en la publicación ${postId}`);
                     //sharePost(postId);
-                //}
-           // });
+                }
+            });
 
             container.appendChild(span);
         });
@@ -179,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 500);
     }
 
-    function likePost(username_selected, nftUsername_post, postId) {
+    function likePost(username_selected,nftUsername_post, postId) {
 
         console.log("Username que publica (nftUsername_post):", nftUsername_post);
         
@@ -219,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.getReactions = getReactions; // Exponer globalmente
 });
 
-function showSendOptions(postId, nftUsername_post, container) {
+function showSendOptions(postId, container) {
     // Evitar duplicación
     const existing = document.getElementById(`send-options-${postId}`);
     if (existing) {
@@ -233,18 +228,6 @@ function showSendOptions(postId, nftUsername_post, container) {
 
     const amounts = [1000, 5000, 10000];
 
-    //const walletPropine;               
-    //if (nftUsernameContract.methods) {
-    //    console.log("Con MetaMask ");
-    //    walletPropine     = await nftUsernameContract.methods.getNFTOwner(nftUsername_post).call();
-                                
-    //} else {
-        // Usando ethers.js
-    //    console.log("Con SockWallet "); 
-    //    walletPropine     = await nftUsernameContract.getNFTOwner(nftUsername_post);
-                                                                         
-    //}
-
     amounts.forEach(amount => {
         const option = document.createElement("span");
         option.className = "reaction-option";
@@ -255,13 +238,6 @@ function showSendOptions(postId, nftUsername_post, container) {
 
             // Acción personalizada según cantidad
             console.log(`💸 Enviado $${amount} en la publicación ${postId}`);
-            
-            ///////////////////determinamos la billetera del quien recibe la propina
-            
-
-            //envia los tokens al cliente               
-            //await transferSockTokens(walletPropine, amount);
-            
 
             setTimeout(() => {
                 option.classList.remove("grow");

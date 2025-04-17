@@ -115,9 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 likeCount.textContent = "0";
                 span.appendChild(likeCount);
 
-                //hacemos click y comunicamos con django
-                likePost(username_selected,nftUsername_post, postId);
-
                 // 👇 Aquí consultamos el estado del like y total
                 fetch("https://api.thesocks.net/get-like-info/", {
                     method: "POST",
@@ -143,11 +140,11 @@ document.addEventListener("DOMContentLoaded", function () {
             else if (id === "send") {
                 span.addEventListener("click", function () {
                     toggleReaction(span);
-                    showSendOptions(nftUsername_post, postId, container);
+                    showSendOptions(postId, container);
                 });
             }
 
-            /*
+            
             span.addEventListener("click", function () {
                 toggleReaction(span);
 
@@ -159,7 +156,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     //sharePost(postId);
                 }
             });
-            */
 
             container.appendChild(span);
         });
@@ -218,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.getReactions = getReactions; // Exponer globalmente
 });
 
-function showSendOptions(nftUsername_post, postId, container) {
+function showSendOptions(postId, container) {
     // Evitar duplicación
     const existing = document.getElementById(`send-options-${postId}`);
     if (existing) {
@@ -230,7 +226,7 @@ function showSendOptions(nftUsername_post, postId, container) {
     optionsWrapper.className = "reaction-group";
     optionsWrapper.id = `send-options-${postId}`;
 
-    const amounts = [1000, 5000, 10000];
+    const amounts = [2000, 3000, 4000];
 
     amounts.forEach(amount => {
         const option = document.createElement("span");
@@ -242,7 +238,6 @@ function showSendOptions(nftUsername_post, postId, container) {
 
             // Acción personalizada según cantidad
             console.log(`💸 Enviado $${amount} en la publicación ${postId}`);
-            
 
             setTimeout(() => {
                 option.classList.remove("grow");

@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
             else if (id === "send") {
                 span.addEventListener("click", function () {
                     toggleReaction(span);
-                    showSendOptions(postId, container);
+                    showSendOptions(nftUsername_post,postId, container);
                 });
             }
 
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.getReactions = getReactions; // Exponer globalmente
 });
 
-function showSendOptions(postId, container) {
+function showSendOptions(nftUsername_post,postId, container) {
     // Evitar duplicación
     const existing = document.getElementById(`send-options-${postId}`);
     if (existing) {
@@ -226,7 +226,7 @@ function showSendOptions(postId, container) {
     optionsWrapper.className = "reaction-group";
     optionsWrapper.id = `send-options-${postId}`;
 
-    const amounts = [2000, 3000, 4000];
+    const amounts = [5000, 10000, 20000];
 
     amounts.forEach(amount => {
         const option = document.createElement("span");

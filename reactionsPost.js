@@ -223,7 +223,7 @@ async function showSendOptions(nftUsername_post,postId, container) {
     }
 
 
-    let walletOwner;
+    let recipientAddress;
                 
     if (nftUsernameContract.methods) {
              console.log("Con MetaMask ");

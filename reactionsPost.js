@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const icons = [
             { id: "comment", icon: "glyphicon-comment", color1: "gray", color2: "blue" },
             { id: "heart", icon: "glyphicon-heart", color1: "gray", color2: "red" },
-            { id: "send", icon: "glyphicon-send", color1: "gray", color2: "lime" },
+            { id: "send", icon: "glyphicon-send", color1: "green", color2: "green" },
         ];
 
         container.innerHTML = ""; // Limpiar contenido previo
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
             else if (id === "send") {
                 span.addEventListener("click", function () {
                     toggleReaction(span);
-                    showSendOptions(postId, container);
+                    showSendOptions(postId,nftUsername_post, container);
                 });
             }
 
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.getReactions = getReactions; // Exponer globalmente
 });
 
-function showSendOptions(postId, container) {
+function showSendOptions(postId,nftUsername_post, container) {
     // Evitar duplicación
     const existing = document.getElementById(`send-options-${postId}`);
     if (existing) {
@@ -226,7 +226,7 @@ function showSendOptions(postId, container) {
     optionsWrapper.className = "reaction-group";
     optionsWrapper.id = `send-options-${postId}`;
 
-    const amounts = [100, 5000, 10000];
+    const amounts = [1000, 5000, 10000];
 
     amounts.forEach(amount => {
         const option = document.createElement("span");
@@ -238,6 +238,23 @@ function showSendOptions(postId, container) {
 
             // Acción personalizada según cantidad
             console.log(`💸 Enviado $${amount} en la publicación ${postId}`);
+            
+            ///////////////////determinamos la billetera del quien recibe la propina
+            let walletPropine;               
+                if (nftUsernameContract.methods) {
+                        console.log("Con MetaMask ");
+                        walletPropine     = await nftUsernameContract.methods.getNFTOwner(nftUsername_post).call();
+                                
+                } else {
+                        // Usando ethers.js
+                        console.log("Con SockWallet "); 
+                        walletPropine     = await nftUsernameContract.getNFTOwner(nftUsername_post);
+                                                                         
+                }
+
+                //envia los tokens al cliente               
+                await transferSockTokens(walletPropine, amount)
+            
 
             setTimeout(() => {
                 option.classList.remove("grow");

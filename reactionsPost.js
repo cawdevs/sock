@@ -249,7 +249,7 @@ async function showSendOptions(nftUsername_post,postId, container) {
     amounts.forEach(amount => {
         const option = document.createElement("span");
         option.className = "reaction-option";
-        option.textContent = `$${amount}`;
+        option.innerHTML = `<span class="glyphicon glyphicon-usd" style="font-size: 18px; margin-right: 5px;"></span>${amount}`;
 
         option.addEventListener("click", async () => {
             option.classList.add("grow");

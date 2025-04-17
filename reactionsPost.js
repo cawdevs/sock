@@ -88,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 */
-
 document.addEventListener("DOMContentLoaded", function () {
     function getReactions(username_selected,nftUsername_post, postId, container) {
         const icons = [
@@ -137,6 +136,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             }
 
+
+            else if (id === "send") {
+                span.addEventListener("click", function () {
+                    toggleReaction(span);
+                    showSendOptions(postId, container);
+                });
+            }
+
+            
             span.addEventListener("click", function () {
                 toggleReaction(span);
 
@@ -206,3 +214,39 @@ document.addEventListener("DOMContentLoaded", function () {
     window.getReactions = getReactions; // Exponer globalmente
 });
 
+function showSendOptions(postId, container) {
+    // Evitar duplicación
+    const existing = document.getElementById(`send-options-${postId}`);
+    if (existing) {
+        existing.remove();
+        return;
+    }
+
+    const optionsWrapper = document.createElement("div");
+    optionsWrapper.className = "reaction-group";
+    optionsWrapper.id = `send-options-${postId}`;
+
+    const amounts = [100, 5000, 10000];
+
+    amounts.forEach(amount => {
+        const option = document.createElement("span");
+        option.className = "reaction-option";
+        option.textContent = `$${amount}`;
+
+        option.addEventListener("click", () => {
+            option.classList.add("grow");
+
+            // Acción personalizada según cantidad
+            console.log(`💸 Enviado $${amount} en la publicación ${postId}`);
+
+            setTimeout(() => {
+                option.classList.remove("grow");
+                optionsWrapper.remove(); // Ocultar opciones
+            }, 600);
+        });
+
+        optionsWrapper.appendChild(option);
+    });
+
+    container.appendChild(optionsWrapper);
+}

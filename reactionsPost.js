@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     likePost(username_selected,nftUsername_post, postId);
                 } else if (id === "send") {
                     console.log(`✉️ Compartido en la publicación ${postId}`);
-                    sharePost(postId);
+                    //sharePost(postId);
                 }
             });
 
@@ -206,10 +206,10 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error("Error:", error));
     }
 
-    function sharePost(postId) {
+    //function sharePost(postId) {
         // Lógica para compartir
-        alert(`Compartiste la publicación ${postId}`);
-    }
+      //  alert(`Compartiste la publicación ${postId}`);
+    //}
 
     window.getReactions = getReactions; // Exponer globalmente
 });

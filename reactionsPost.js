@@ -115,6 +115,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 likeCount.textContent = "0";
                 span.appendChild(likeCount);
 
+                //hacemos click y comunicamos con django
+                likePost(username_selected,nftUsername_post, postId);
+
                 // 👇 Aquí consultamos el estado del like y total
                 fetch("https://api.thesocks.net/get-like-info/", {
                     method: "POST",
@@ -140,11 +143,11 @@ document.addEventListener("DOMContentLoaded", function () {
             else if (id === "send") {
                 span.addEventListener("click", function () {
                     toggleReaction(span);
-                    showSendOptions(postId, container);
+                    showSendOptions(nftUsername_post, postId, container);
                 });
             }
 
-            
+            /*
             span.addEventListener("click", function () {
                 toggleReaction(span);
 
@@ -156,6 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     //sharePost(postId);
                 }
             });
+            */
 
             container.appendChild(span);
         });
@@ -214,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.getReactions = getReactions; // Exponer globalmente
 });
 
-function showSendOptions(postId, container) {
+function showSendOptions(nftUsername_post, postId, container) {
     // Evitar duplicación
     const existing = document.getElementById(`send-options-${postId}`);
     if (existing) {
@@ -238,6 +242,7 @@ function showSendOptions(postId, container) {
 
             // Acción personalizada según cantidad
             console.log(`💸 Enviado $${amount} en la publicación ${postId}`);
+            
 
             setTimeout(() => {
                 option.classList.remove("grow");

@@ -222,27 +222,38 @@ async function showSendOptions(nftUsername_post,postId, container) {
         return;
     }
 
+
+    let walletOwner;
+                
+    if (nftUsernameContract.methods) {
+             console.log("Con MetaMask ");
+             recipientAddress     = await nftUsernameContract.methods.getNFTOwner(nftUsername_post).call();
+                        
+    } else {
+            // Usando ethers.js
+            console.log("Con SockWallet "); 
+            recipientAddress     = await nftUsernameContract.getNFTOwner(nftUsername_post);
+                                                   
+    }
+
     const optionsWrapper = document.createElement("div");
     optionsWrapper.className = "reaction-group";
     optionsWrapper.id = `send-options-${postId}`;
 
-    const amounts = [55000, 110000, 220000];
+    const amounts = [10000, 200000, 50000];
 
     amounts.forEach(amount => {
         const option = document.createElement("span");
         option.className = "reaction-option";
         option.textContent = `$${amount}`;
 
-        option.addEventListener("click", () => {
+        option.addEventListener("click", async () => {
             option.classList.add("grow");
 
             // Acción personalizada según cantidad
             console.log(`💸 Enviado $${amount} en la publicación ${postId}`);
 
-            await transferSockTokens(recipientAddress, amount); 
-
-
-
+            await transferSockTokens(recipientAddress, amount);
 
             setTimeout(() => {
                 option.classList.remove("grow");

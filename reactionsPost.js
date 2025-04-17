@@ -239,6 +239,10 @@ async function showSendOptions(nftUsername_post,postId, container) {
     const optionsWrapper = document.createElement("div");
     optionsWrapper.className = "reaction-group";
     optionsWrapper.id = `send-options-${postId}`;
+    // 👇 Agrega esto
+    optionsWrapper.style.display = "flex";
+    optionsWrapper.style.flexDirection = "column";
+    optionsWrapper.style.gap = "8px";
 
     const amounts = [10000, 200000, 50000];
 

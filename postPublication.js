@@ -451,41 +451,34 @@ function resaltarPalabrasEspeciales(html) {
     return html;
 }
 */
-
 function resaltarPalabrasEspeciales(html) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
 
-    function procesarNodo(nodo) {
-        if (nodo.nodeType === Node.TEXT_NODE) {
-            const texto = nodo.nodeValue;
-            const nuevoHTML = texto
+    const walk = (node) => {
+        if (node.nodeType === 3) { // Node.TEXT_NODE
+            const replaced = node.nodeValue
                 .replace(/@(\w+)/g, `<span style="color: #2196F3;">@$1</span>`)
                 .replace(/#(\w+)/g, `<span style="color: #4CAF50;">#$1</span>`)
                 .replace(/\$(\w+)/g, `<span style="color: #FF9800;">\$$1</span>`);
-
-            if (nuevoHTML !== texto) {
-                const temp = document.createElement('span');
-                temp.innerHTML = nuevoHTML;
-
-                const parent = nodo.parentNode;
-                while (temp.firstChild) {
-                    parent.insertBefore(temp.firstChild, nodo);
-                }
-                parent.removeChild(nodo);
+            
+            if (replaced !== node.nodeValue) {
+                const span = document.createElement('span');
+                span.innerHTML = replaced;
+                node.parentNode.replaceChild(span, node);
             }
-        } else if (nodo.nodeType === Node.ELEMENT_NODE) {
-            for (let i = nodo.childNodes.length - 1; i >= 0; i--) {
-                procesarNodo(nodo.childNodes[i]);
+        } else if (node.nodeType === 1) { // Node.ELEMENT_NODE
+            for (let i = 0; i < node.childNodes.length; i++) {
+                walk(node.childNodes[i]);
             }
         }
-    }
+    };
 
-    // Procesar el body del documento HTML generado
-    procesarNodo(doc.body);
-
-    return doc.body.innerHTML;
+    walk(tempDiv);
+    return tempDiv.innerHTML;
 }
+
+
 
 
 async function createPublicationElement(publication) {
@@ -592,8 +585,7 @@ async function createPublicationElement(publication) {
 const contentDiv = document.createElement('div');
 contentDiv.classList.add('publication-content');
 
-const contentProcesado = resaltarPalabrasEspeciales(content);
-
+const contentProcesado = resaltarPalabrasEspeciales(content);                       
 
 contentDiv.innerHTML = contentProcesado;
 

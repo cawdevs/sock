@@ -519,15 +519,10 @@
           <!--<h3><div id="NFTUsernames-count"><em>thesocks</em>:</div></h3>-->
           <h3><div style=" margin-right: 10px; margin-left: 10px;" ><font color="white"><em> thesocks </font></em></div></h3>
 
-          <input type="text" id="text-address-wallet" class="form-control"
-                 placeholder="Search 0x.. or NftUsername"
-                 style="border: 2px solid black; border-radius: 20px; height: 40px; flex: 1;">
+                
 
-          <button id="btn-find-nft" class="btn btn-default"
-                  onclick="findNftWallet('user')"
-                  style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
+           <a data-toggle="tab" href="#menu_buscar" style=" margin-left: 15px;">  <img  id="image-home" src="images/icons/buscar_icon.SVG" alt="home" width="35"></a>  
+
   </div>
 
 
@@ -676,7 +671,32 @@ span.hashtag {
          
     </div>
 
-  
+  <div id="menu_buscar" class="tab-pane fade">    
+         <br>
+         <div class="input-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+          
+               
+                <input type="text" id="text-address-wallet" class="form-control"
+                       placeholder="Search 0x.. or NftUsername"
+                       style="border: 2px solid black; border-radius: 20px; height: 40px; flex: 1;">
+
+                <button id="btn-find-nft" class="btn btn-default"
+                        onclick="findNftWallet('user')"
+                        style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>              
+         </div>
+
+         <h4><div id="nft-username-list" style="border: 2px solid white"></div></h4>
+
+         <h4><div id="nft-username-list-for-you"></div></h4>
+          
+               
+
+        
+         
+    </div>
+
 
 
     
@@ -870,10 +890,7 @@ span.hashtag {
                        
                            
                            <br>
-                          <h4><div id="nft-username-list" style="border: 2px solid white"></div></h4>
-
-                           <h4><div id="nft-username-list-for-you"></div></h4>
-                                                                 
+                                                                                         
            
                     
                 </div>     

@@ -552,14 +552,9 @@ async function createPublicationElement(publication) {
 
 const contentDiv = document.createElement('div');
 contentDiv.classList.add('publication-content');
-//contentDiv.innerHTML = content;
+contentDiv.innerHTML = content;
 
-// Usamos window.miEditorQuill para insertar contenido con formato
-const quillContent = window.miEditorQuill;
-quillContent.clipboard.dangerouslyPasteHTML(content); // Aquí `content` es el HTML con los estilos aplicados
 
-// Ahora, insertamos el contenido procesado por Quill
-contentDiv.innerHTML = quillContent.root.innerHTML;
 
 
      

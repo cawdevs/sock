@@ -452,7 +452,7 @@ function resaltarPalabrasEspeciales(html) {
 }
 */
 
-unction resaltarPalabrasEspecialesHTML(html) {
+function resaltarPalabrasEspecialesHTML(html) {
     const contenedor = document.createElement('div');
     contenedor.innerHTML = html;
 

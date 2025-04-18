@@ -13,18 +13,32 @@ function createPublicationElements() {
     
     const form = document.createElement('form');
 
-    // Primera fila: Textarea de publicación
-    const textareaDiv = document.createElement('div');
-    textareaDiv.classList.add('form-group');
-    const textarea = document.createElement('textarea');
-    textarea.classList.add('form-control');
-    textarea.id = 'publicacion';
-    textarea.rows = '3';
-    textarea.placeholder = `${nftusername} ¿Qué quieres publicar hoy?`;
-    textarea.required = true;
-    textarea.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 160px; font-size: 18px;';
-    textareaDiv.appendChild(textarea);
-    form.appendChild(textareaDiv);
+    /////////////////////////////////////////////////////////////////////////
+    // NUEVO: contenedor para el editor
+const editorContainer = document.createElement('div');
+editorContainer.id = 'miContenedorEditor'; // Este es el nuevo editor dinámico
+editorContainer.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; height: 160px; margin-bottom: 10px; font-size: 18px;';
+textareaDiv.appendChild(editorContainer);
+form.appendChild(textareaDiv);
+
+// Inicializa Quill después de que el contenedor está en el DOM
+setTimeout(() => {
+    const quill = new Quill('#miContenedorEditor', {
+        theme: 'snow',
+        placeholder: `${nftusername} ¿Qué quieres publicar hoy?`,
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline'],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                ['link', 'image']
+            ]
+        }
+    });
+    // Guarda la instancia global para usarla luego
+    window.miEditorQuill = quill;
+}, 0);
+
+    /////////////////////////////////////////////////////////////////////////
 
     // Segunda fila: Input para el link de la imagen
     const mediaInputDiv = document.createElement('div');
@@ -115,7 +129,8 @@ async function publicar_main_post(){
            
 
             const selected_username = document.getElementById('selector_NFTs').value;
-            const content = document.getElementById("publicacion").value;
+//////////            const content = document.getElementById("publicacion").value;
+            const content = window.miEditorQuill.root.innerHTML;
             const jsonMetadata = {
                     media: document.getElementById('media-publication').value,
                     privacidad: document.getElementById('filter-privacidad').value,

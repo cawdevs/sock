@@ -440,7 +440,7 @@ async function get_publication(id_publication,principalContainerID) {
     }
 }
 
-
+/*
 function resaltarPalabrasEspeciales(html) {
     // @usuario
     html = html.replace(/@(\w+)/g, `<span style="color: #2196F3;">@$1</span>`);
@@ -449,6 +449,42 @@ function resaltarPalabrasEspeciales(html) {
     // $valor
     html = html.replace(/\$(\w+)/g, `<span style="color: #FF9800;">\$$1</span>`);
     return html;
+}
+*/
+
+function resaltarPalabrasEspeciales(html) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+
+    function procesarNodo(nodo) {
+        if (nodo.nodeType === Node.TEXT_NODE) {
+            const texto = nodo.nodeValue;
+            const nuevoHTML = texto
+                .replace(/@(\w+)/g, `<span style="color: #2196F3;">@$1</span>`)
+                .replace(/#(\w+)/g, `<span style="color: #4CAF50;">#$1</span>`)
+                .replace(/\$(\w+)/g, `<span style="color: #FF9800;">\$$1</span>`);
+
+            if (nuevoHTML !== texto) {
+                const temp = document.createElement('span');
+                temp.innerHTML = nuevoHTML;
+
+                const parent = nodo.parentNode;
+                while (temp.firstChild) {
+                    parent.insertBefore(temp.firstChild, nodo);
+                }
+                parent.removeChild(nodo);
+            }
+        } else if (nodo.nodeType === Node.ELEMENT_NODE) {
+            for (let i = nodo.childNodes.length - 1; i >= 0; i--) {
+                procesarNodo(nodo.childNodes[i]);
+            }
+        }
+    }
+
+    // Procesar el body del documento HTML generado
+    procesarNodo(doc.body);
+
+    return doc.body.innerHTML;
 }
 
 

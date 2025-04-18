@@ -19,7 +19,7 @@ function createPublicationElements() {
 // Reemplaza esta parte de createPublicationElements
 const textareaDiv = document.createElement('div');
 textareaDiv.classList.add('form-group');
-    
+
 const editorContainer = document.createElement('div');
 editorContainer.id = 'miContenedorEditor'; // Este es el nuevo editor dinámico
 editorContainer.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; height: 160px; margin-bottom: 10px; font-size: 18px;';
@@ -507,7 +507,8 @@ async function createPublicationElement(publication) {
     // ---- Fila 2: Contenido de la publicación ----
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('publication-content');
-    contentDiv.textContent = content;
+    contentDiv.innerHTML = content;
+
     contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 16px; padding: 10px;';
 
     // ---- Fila 3: Media (Imagen o Video de YouTube) ----

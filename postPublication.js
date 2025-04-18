@@ -22,7 +22,7 @@ textareaDiv.classList.add('form-group');
 
 const editorContainer = document.createElement('div');
 editorContainer.id = 'miContenedorEditor'; // Este es el nuevo editor dinámico
-editorContainer.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; height: 160px; margin-bottom: 10px; font-size: 18px;';
+editorContainer.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; height: 360px; margin-bottom: 10px; font-size: 18px;';
 textareaDiv.appendChild(editorContainer);
 form.appendChild(textareaDiv);
 
@@ -456,20 +456,22 @@ function resaltarPalabrasEspeciales(html) {
     tempDiv.innerHTML = html;
 
     const walk = (node) => {
-        if (node.nodeType === 3) { // Node.TEXT_NODE
-            const replaced = node.nodeValue
-                .replace(/@(\w+)/g, `<span style="color: #2196F3;">@$1</span>`)
-                .replace(/#(\w+)/g, `<span style="color: #4CAF50;">#$1</span>`)
-                .replace(/%(\w+)/g, `<span style="color: #FF9800;">%$1</span>`);
-            
-            if (replaced !== node.nodeValue) {
-                const span = document.createElement('span');
-                span.innerHTML = replaced;
-                node.parentNode.replaceChild(span, node);
+        if (node.nodeType === Node.TEXT_NODE) {
+            const originalText = node.nodeValue;
+            const replaced = originalText
+                .replace(/@(\w+)/g, '<span style="color: #2196F3;">@$1</span>')
+                .replace(/#(\w+)/g, '<span style="color: #4CAF50;">#$1</span>')
+                .replace(/%(\w+)/g, '<span style="color: #FF9800;">%$1</span>');
+
+            if (replaced !== originalText) {
+                const fragment = document.createElement('span');
+                fragment.innerHTML = replaced;
+                node.parentNode.replaceChild(fragment, node);
             }
-        } else if (node.nodeType === 1) { // Node.ELEMENT_NODE
-            for (let i = 0; i < node.childNodes.length; i++) {
-                walk(node.childNodes[i]);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+            const children = Array.from(node.childNodes); // Copia segura
+            for (let child of children) {
+                walk(child);
             }
         }
     };

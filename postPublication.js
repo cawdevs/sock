@@ -42,49 +42,32 @@ setTimeout(() => {
         }
     });
 
-    // Guarda la instancia global para usarla luego
     window.miEditorQuill = quill;
 
-    // CONTADOR DE CARACTERES
     const MAX_CHARS = 512;
 
+    // Crear el contador
     const contadorElement = document.createElement('div');
     contadorElement.id = 'contadorCaracteres';
     contadorElement.style.cssText = 'text-align: right; font-size: 14px; color: gray; margin-top: 5px;';
     quill.container.parentNode.appendChild(contadorElement);
 
+    // Función para actualizar contador
     function actualizarContador() {
-        const plainText = quill.getText().trim();
-        const remaining = MAX_CHARS - plainText.length;
-        contadorElement.textContent = `${remaining} caracteres restantes`;
-
-        if (remaining < 0) {
+        const textoPlano = quill.getText(); // sin HTML
+        const caracteres = textoPlano.trim().length;
+        const restantes = MAX_CHARS - caracteres;
+        contadorElement.textContent = `${restantes} caracteres restantes`;
+        if (restantes < 0) {
             contadorElement.style.color = 'red';
         } else {
             contadorElement.style.color = 'gray';
         }
     }
 
-    function aplicarColoresPersonalizados() {
-        const editor = quill.root;
-        let html = editor.innerHTML;
-
-        html = html.replace(/<span class="colored-[^"]+">([^<]*)<\/span>/g, '$1');
-
-        html = html.replace(/(@\w+)/g, '<span class="colored-blue">$1</span>');
-        html = html.replace(/(#\w+)/g, '<span class="colored-purple">$1</span>');
-        html = html.replace(/(\$\w+)/g, '<span class="colored-green">$1</span>');
-        html = html.replace(/(!\w+)/g, '<span class="colored-red">$1</span>');
-
-        editor.innerHTML = html;
-    }
-
-    quill.on('text-change', function () {
-        actualizarContador();
-        aplicarColoresPersonalizados();
-    });
-
-    actualizarContador(); // Inicial
+    // Llamar cuando se escribe
+    quill.on('text-change', actualizarContador);
+    actualizarContador(); // al inicio
 
 }, 0);
 
@@ -458,6 +441,16 @@ async function get_publication(id_publication,principalContainerID) {
 }
 
 
+function resaltarPalabrasEspeciales(html) {
+    // @usuario
+    html = html.replace(/@(\w+)/g, `<span style="color: #2196F3;">@$1</span>`);
+    // #hashtag
+    html = html.replace(/#(\w+)/g, `<span style="color: #4CAF50;">#$1</span>`);
+    // $valor
+    html = html.replace(/\$(\w+)/g, `<span style="color: #FF9800;">\$$1</span>`);
+    return html;
+}
+
 
 async function createPublicationElement(publication) {
     const { id, nftUsername, timestamp, content, media, privacidad, clasificacion, imageProfile, usernameProfile } = publication;
@@ -563,7 +556,19 @@ async function createPublicationElement(publication) {
     // ---- Fila 2: Contenido de la publicación ----
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('publication-content');
-    contentDiv.innerHTML = content;
+
+    // Procesamos el contenido para resaltar palabras
+const processedContent = resaltarPalabrasEspeciales(content);
+
+// Insertamos el contenido procesado en el div
+contentDiv.innerHTML = processedContent;
+
+   
+
+
+
+    const finalHTML = resaltarPalabrasEspeciales(content);
+document.getElementById('contenedorPublicacion').innerHTML = finalHTML;
 
     contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 16px; padding: 10px;';
 

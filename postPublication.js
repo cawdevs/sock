@@ -15,6 +15,11 @@ function createPublicationElements() {
 
     /////////////////////////////////////////////////////////////////////////
     // NUEVO: contenedor para el editor
+
+// Reemplaza esta parte de createPublicationElements
+const textareaDiv = document.createElement('div');
+textareaDiv.classList.add('form-group');
+    
 const editorContainer = document.createElement('div');
 editorContainer.id = 'miContenedorEditor'; // Este es el nuevo editor dinámico
 editorContainer.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; height: 160px; margin-bottom: 10px; font-size: 18px;';

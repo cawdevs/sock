@@ -442,38 +442,13 @@ async function get_publication(id_publication,principalContainerID) {
 
 
 function resaltarPalabrasEspeciales(html) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-
-    function procesarNodo(nodo) {
-        if (nodo.nodeType === Node.TEXT_NODE) {
-            const texto = nodo.nodeValue;
-            const nuevoHTML = texto
-                .replace(/@(\w+)/g, `<span style="color: #2196F3;">@$1</span>`)
-                .replace(/#(\w+)/g, `<span style="color: #4CAF50;">#$1</span>`)
-                .replace(/\$(\w+)/g, `<span style="color: #FF9800;">\$$1</span>`);
-
-            if (nuevoHTML !== texto) {
-                const temp = document.createElement('span');
-                temp.innerHTML = nuevoHTML;
-
-                const parent = nodo.parentNode;
-                while (temp.firstChild) {
-                    parent.insertBefore(temp.firstChild, nodo);
-                }
-                parent.removeChild(nodo);
-            }
-        } else if (nodo.nodeType === Node.ELEMENT_NODE) {
-            for (let i = nodo.childNodes.length - 1; i >= 0; i--) {
-                procesarNodo(nodo.childNodes[i]);
-            }
-        }
-    }
-
-    // Procesar el body del documento HTML generado
-    procesarNodo(doc.body);
-
-    return doc.body.innerHTML;
+    // @usuario
+    html = html.replace(/@(\w+)/g, `<span style="color: #2196F3;">@$1</span>`);
+    // #hashtag
+    html = html.replace(/#(\w+)/g, `<span style="color: #4CAF50;">#$1</span>`);
+    // $valor
+    html = html.replace(/\$(\w+)/g, `<span style="color: #FF9800;">\$$1</span>`);
+    return html;
 }
 
 
@@ -578,24 +553,15 @@ async function createPublicationElement(publication) {
     }
     
 
+    // ---- Fila 2: Contenido de la publicación ----
+    const contentDiv = document.createElement('div');
+    contentDiv.classList.add('publication-content');
 
-
-
-
-// ---- Fila 2: Contenido de la publicación ----
-
-const contentDiv = document.createElement('div');
-contentDiv.classList.add('publication-content');
-
-// Procesamos el contenido para resaltar palabras
+    // Procesamos el contenido para resaltar palabras
 const processedContent = resaltarPalabrasEspeciales(content);
 
 // Insertamos el contenido procesado en el div
 contentDiv.innerHTML = processedContent;
-
-
-
-
 
       
     contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 16px; padding: 10px;';

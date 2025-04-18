@@ -33,11 +33,14 @@ setTimeout(() => {
         placeholder: `${nftusername} ¿Qué quieres publicar hoy?`,
         modules: {
             toolbar: [
+                
                 [{ 'size': ['small', false, 'large', 'huge'] }],
                 ['bold', 'italic', 'underline'],
+                [{ 'color': [] }, { 'background': [] }], // <-- aquí añadimos color y fondo
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 [{ 'align': [] }],
                 ['link']
+
             ]
         }
     });
@@ -440,45 +443,6 @@ async function get_publication(id_publication,principalContainerID) {
     }
 }
 
-/*
-function resaltarPalabrasEspeciales(html) {
-    // @usuario
-    html = html.replace(/@(\w+)/g, `<span style="color: #2196F3;">@$1</span>`);
-    // #hashtag
-    html = html.replace(/#(\w+)/g, `<span style="color: #4CAF50;">#$1</span>`);
-    // $valor
-    html = html.replace(/\$(\w+)/g, `<span style="color: #FF9800;">\$$1</span>`);
-    return html;
-}
-*/
-
-function resaltarPalabrasEspecialesHTML(html) {
-    const contenedor = document.createElement('div');
-    contenedor.innerHTML = html;
-
-    const resaltar = (nodo) => {
-        if (nodo.nodeType === Node.TEXT_NODE) {
-            const texto = nodo.textContent;
-
-            const reemplazado = texto
-                .replace(/@(\w+)/g, `<span style="color: #2196F3;">@$1</span>`)
-                .replace(/#(\w+)/g, `<span style="color: #4CAF50;">#$1</span>`)
-                .replace(/%(\w+)/g, `<span style="color: #FF9800;">%$1</span>`);
-
-            if (reemplazado !== texto) {
-                const nuevoFragmento = document.createRange().createContextualFragment(reemplazado);
-                nodo.replaceWith(nuevoFragmento);
-            }
-        } else if (nodo.nodeType === Node.ELEMENT_NODE) {
-            Array.from(nodo.childNodes).forEach(resaltar);
-        }
-    };
-
-    Array.from(contenedor.childNodes).forEach(resaltar);
-
-    return contenedor.innerHTML;
-}
-
 
 
 
@@ -583,16 +547,12 @@ async function createPublicationElement(publication) {
     }
     
 
+
+//const contentProcesado = resaltarPalabrasEspecialesHTML(content);
+
 const contentDiv = document.createElement('div');
 contentDiv.classList.add('publication-content');
-
-const contentProcesado = resaltarPalabrasEspecialesHTML(content);                       
-
-contentDiv.innerHTML = contentProcesado;
-
-
-
-
+contentDiv.innerHTML = content;
 
 
      

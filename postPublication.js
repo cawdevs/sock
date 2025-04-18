@@ -29,30 +29,64 @@ form.appendChild(textareaDiv);
 // Inicializa Quill después de que el contenedor está en el DOM
 setTimeout(() => {
     const quill = new Quill('#miContenedorEditor', {
-          theme: 'snow',
-          placeholder: `${nftusername} ¿Qué quieres publicar hoy?`,
-          modules: {
+        theme: 'snow',
+        placeholder: `${nftusername} ¿Qué quieres publicar hoy?`,
+        modules: {
             toolbar: [
-              [{ 'size': ['small', false, 'large', 'huge'] }], // Tamaños de texto
-              ['bold', 'italic', 'underline'],                // Estilos básicos
-              [{ 'list': 'ordered' }, { 'list': 'bullet' }],  // Listas
-              [{ 'align': [] }],                              // Alineación
-              ['link']                                         // Solo enlaces (sin imagen)
+                [{ 'size': ['small', false, 'large', 'huge'] }],
+                ['bold', 'italic', 'underline'],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{ 'align': [] }],
+                ['link']
             ]
-          }
-        });
+        }
+    });
+
     // Guarda la instancia global para usarla luego
     window.miEditorQuill = quill;
+
+    // CONTADOR DE CARACTERES
+    const MAX_CHARS = 512;
+
+    const contadorElement = document.createElement('div');
+    contadorElement.id = 'contadorCaracteres';
+    contadorElement.style.cssText = 'text-align: right; font-size: 14px; color: gray; margin-top: 5px;';
+    quill.container.parentNode.appendChild(contadorElement);
+
+    function actualizarContador() {
+        const plainText = quill.getText().trim();
+        const remaining = MAX_CHARS - plainText.length;
+        contadorElement.textContent = `${remaining} caracteres restantes`;
+
+        if (remaining < 0) {
+            contadorElement.style.color = 'red';
+        } else {
+            contadorElement.style.color = 'gray';
+        }
+    }
+
+    function aplicarColoresPersonalizados() {
+        const editor = quill.root;
+        let html = editor.innerHTML;
+
+        html = html.replace(/<span class="colored-[^"]+">([^<]*)<\/span>/g, '$1');
+
+        html = html.replace(/(@\w+)/g, '<span class="colored-blue">$1</span>');
+        html = html.replace(/(#\w+)/g, '<span class="colored-purple">$1</span>');
+        html = html.replace(/(\$\w+)/g, '<span class="colored-green">$1</span>');
+        html = html.replace(/(!\w+)/g, '<span class="colored-red">$1</span>');
+
+        editor.innerHTML = html;
+    }
+
+    quill.on('text-change', function () {
+        actualizarContador();
+        aplicarColoresPersonalizados();
+    });
+
+    actualizarContador(); // Inicial
+
 }, 0);
-
-
-const MAX_CHARS = 512;
-
-// Crear el contador
-const contadorElement = document.createElement('div');
-contadorElement.id = 'contadorCaracteres';
-contadorElement.style.cssText = 'text-align: right; font-size: 14px; color: gray; margin-top: 5px;';
-quill.container.parentNode.appendChild(contadorElement);
 
 
 
@@ -141,39 +175,6 @@ quill.container.parentNode.appendChild(contadorElement);
 
 
 
-
-function actualizarContador() {
-    const plainText = quill.getText().trim(); // Solo texto visible
-    const remaining = MAX_CHARS - plainText.length;
-    contadorElement.textContent = `${remaining} caracteres restantes`;
-
-    if (remaining < 0) {
-        contadorElement.style.color = 'red';
-    } else {
-        contadorElement.style.color = 'gray';
-    }
-}
-
-function aplicarColoresPersonalizados() {
-    const editor = quill.root;
-    let html = editor.innerHTML;
-
-    html = html.replace(/<span class="colored-[^"]+">([^<]*)<\/span>/g, '$1');
-
-    html = html.replace(/(@\w+)/g, '<span class="colored-blue">$1</span>');
-    html = html.replace(/(#\w+)/g, '<span class="colored-purple">$1</span>');
-    html = html.replace(/(\$\w+)/g, '<span class="colored-green">$1</span>');
-    html = html.replace(/(!\w+)/g, '<span class="colored-red">$1</span>');
-
-    editor.innerHTML = html;
-}
-
-quill.on('text-change', function () {
-    actualizarContador();
-    aplicarColoresPersonalizados();
-});
-
-actualizarContador(); // Inicial
 
 
 

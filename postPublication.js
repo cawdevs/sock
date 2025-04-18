@@ -578,9 +578,12 @@ async function createPublicationElement(publication) {
     }
     
 
-   
+
+
+
+
 // ---- Fila 2: Contenido de la publicación ----
-const content = window.miEditorQuill.root.innerHTML; // Obtener el contenido del editor
+
 const contentDiv = document.createElement('div');
 contentDiv.classList.add('publication-content');
 

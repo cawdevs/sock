@@ -563,13 +563,7 @@ const processedContent = resaltarPalabrasEspeciales(content);
 // Insertamos el contenido procesado en el div
 contentDiv.innerHTML = processedContent;
 
-   
-
-
-
-    const finalHTML = resaltarPalabrasEspeciales(content);
-document.getElementById('contenedorPublicacion').innerHTML = finalHTML;
-
+      
     contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 16px; padding: 10px;';
 
     // ---- Fila 3: Media (Imagen o Video de YouTube) ----

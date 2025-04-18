@@ -460,7 +460,7 @@ function resaltarPalabrasEspeciales(html) {
             const replaced = node.nodeValue
                 .replace(/@(\w+)/g, `<span style="color: #2196F3;">@$1</span>`)
                 .replace(/#(\w+)/g, `<span style="color: #4CAF50;">#$1</span>`)
-                .replace(/\$(\w+)/g, `<span style="color: #FF9800;">\$$1</span>`);
+                .replace(/%(\w+)/g, `<span style="color: #FF9800;">%$1</span>`);
             
             if (replaced !== node.nodeValue) {
                 const span = document.createElement('span');

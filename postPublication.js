@@ -451,33 +451,32 @@ function resaltarPalabrasEspeciales(html) {
     return html;
 }
 */
-function resaltarPalabrasEspeciales(html) {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = html;
 
-    const walk = (node) => {
-        if (node.nodeType === Node.TEXT_NODE) {
-            const originalText = node.nodeValue;
-            const replaced = originalText
-                .replace(/@(\w+)/g, '<span style="color: #2196F3;">@$1</span>')
-                .replace(/#(\w+)/g, '<span style="color: #4CAF50;">#$1</span>')
-                .replace(/%(\w+)/g, '<span style="color: #FF9800;">%$1</span>');
+unction resaltarPalabrasEspecialesHTML(html) {
+    const contenedor = document.createElement('div');
+    contenedor.innerHTML = html;
 
-            if (replaced !== originalText) {
-                const fragment = document.createElement('span');
-                fragment.innerHTML = replaced;
-                node.parentNode.replaceChild(fragment, node);
+    const resaltar = (nodo) => {
+        if (nodo.nodeType === Node.TEXT_NODE) {
+            const texto = nodo.textContent;
+
+            const reemplazado = texto
+                .replace(/@(\w+)/g, `<span style="color: #2196F3;">@$1</span>`)
+                .replace(/#(\w+)/g, `<span style="color: #4CAF50;">#$1</span>`)
+                .replace(/%(\w+)/g, `<span style="color: #FF9800;">%$1</span>`);
+
+            if (reemplazado !== texto) {
+                const nuevoFragmento = document.createRange().createContextualFragment(reemplazado);
+                nodo.replaceWith(nuevoFragmento);
             }
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-            const children = Array.from(node.childNodes); // Copia segura
-            for (let child of children) {
-                walk(child);
-            }
+        } else if (nodo.nodeType === Node.ELEMENT_NODE) {
+            Array.from(nodo.childNodes).forEach(resaltar);
         }
     };
 
-    walk(tempDiv);
-    return tempDiv.innerHTML;
+    Array.from(contenedor.childNodes).forEach(resaltar);
+
+    return contenedor.innerHTML;
 }
 
 
@@ -587,9 +586,11 @@ async function createPublicationElement(publication) {
 const contentDiv = document.createElement('div');
 contentDiv.classList.add('publication-content');
 
-const contentProcesado = resaltarPalabrasEspeciales(content);                       
+const contentProcesado = resaltarPalabrasEspecialesHTML(content);                       
 
 contentDiv.innerHTML = contentProcesado;
+
+
 
 
 

@@ -589,17 +589,18 @@ async function createPublicationElement(publication) {
     }
     
 
-    // ---- Fila 2: Contenido de la publicación ----
-    const contentDiv = document.createElement('div');
-    contentDiv.classList.add('publication-content');
+const contentDiv = document.createElement('div');
+contentDiv.classList.add('publication-content');
 
-    // Procesamos el contenido para resaltar palabras
-const processedContent = resaltarPalabrasEspeciales(content);
+const contentProcesado = resaltarPalabrasEspeciales(content);
 
-// Insertamos el contenido procesado en el div
-contentDiv.innerHTML = processedContent;
 
-      
+contentDiv.innerHTML = contentProcesado;
+
+
+
+
+     
     contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 16px; padding: 10px;';
 
     // ---- Fila 3: Media (Imagen o Video de YouTube) ----

@@ -166,12 +166,12 @@ setTimeout(() => {
 
 async function publicar_main_post(){
    
-   
+    const loadingAnimation = document.getElementById('loadingAnimation-post-publication');
     try{        ////////////////////
 
            
 
-            const loadingAnimation = document.getElementById('loadingAnimation-post-publication');
+           
             loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la función
            
 

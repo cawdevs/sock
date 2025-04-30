@@ -94,6 +94,9 @@ document.addEventListener("DOMContentLoaded", function () {
             { id: "comment", icon: "glyphicon-comment", color1: "gray", color2: "blue" },
             { id: "heart", icon: "glyphicon-heart", color1: "gray", color2: "red" },
             { id: "send", icon: "glyphicon-send", color1: "green", color2: "green" },
+            { id: "share", icon: "sglyphicon-share-alt", color1: "gray", color2: "black" },
+
+            glyphicon 
         ];
 
         container.innerHTML = ""; // Limpiar contenido previo
@@ -141,6 +144,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 span.addEventListener("click", function () {
                     toggleReaction(span);
                     showSendOptions(nftUsername_post,postId, container);
+                });
+            }
+
+            else if (id === "share") {
+                span.addEventListener("click", function () {
+                    toggleReaction(span);
+                    //creamos en el portapapeles un enlase a post 
+                     const enlace = `${window.location.origin}/ver.html?id=${idPublicacion}`;
+                     navigator.clipboard.writeText(enlace)
+                          .then(() => alert("¡Enlace copiado al portapapeles!"))
+                          .catch(err => console.error("Error al copiar el enlace:", err)); 
                 });
             }
 
@@ -244,7 +258,7 @@ async function showSendOptions(nftUsername_post,postId, container) {
     optionsWrapper.style.flexDirection = "column";
     optionsWrapper.style.gap = "8px";
 
-    const amounts = [10000, 200000, 50000];
+    const amounts = [10000, 20000, 50000];
 
     amounts.forEach(amount => {
         const option = document.createElement("span");

@@ -228,7 +228,10 @@ async function publicar_main_post(){
             }, 2000);
 
 
+           
            $('#myModal_publication').modal('hide');
+           $('.modal-backdrop').remove();
+           $('body').removeClass('modal-open');
 
 
            

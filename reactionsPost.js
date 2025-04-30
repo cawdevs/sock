@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { id: "comment", icon: "glyphicon-comment", color1: "gray", color2: "blue" },
             { id: "heart", icon: "glyphicon-heart", color1: "gray", color2: "red" },
             { id: "send", icon: "glyphicon-send", color1: "green", color2: "green" },
-            { id: "share", icon: "sglyphicon-share-alt", color1: "gray", color2: "black" },
+            { id: "share", icon: "glyphicon-share-alt", color1: "gray", color2: "black" },
 
             glyphicon 
         ];

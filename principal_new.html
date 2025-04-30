@@ -511,7 +511,7 @@
  
 
 
-  <button id="menuBtn" class="menu-button">☰</button>    
+   
 
   
   <div class="input-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
@@ -522,6 +522,10 @@
                 
 
            <a data-toggle="tab" href="#menu_buscar" style=" margin-left: 15px;">  <img  id="image-home" src="images/icons/buscar_icon.SVG" alt="home" width="35"></a>  
+
+          <a data-toggle="tab" href="#menu_buscar" style=" margin-left: 15px;">  <img  id="image-home" src="images/icons/buscar_icon.SVG" alt="home" width="35"></a>    
+        
+           <button id="menuBtn" class="menu-button">☰</button>  
 
   </div>
 
@@ -536,6 +540,7 @@
                 <img  id="image-post" src="images/icons/post_icon.SVG" alt="post" width="35">
        </a>
 -->
+
        <a href="#" data-toggle="modal" data-target="#myModal_publication" style="margin-left: 15px;">
     <img id="image-post" src="images/icons/post_icon.SVG" alt="post" width="35">
 </a>
@@ -652,6 +657,9 @@ span.hashtag {
 
 
            <br>
+
+           <button id="btn-mostrar-mis-publicaciones"  onclick="mostrar_mis_publicaciones()" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 100px;"><span class="glyphicon glyphicon-envelope"></span></button> 
+
             <div id="my-publications-container"></div>
             
              
@@ -1681,8 +1689,8 @@ async function inicializarUI() {
     
     await get_all_publications_home("home-publications-container");
 
-    const nftusername = document.getElementById('selector_NFTs').value;
-    await get_NFTUsername_publication(nftusername,"my-publications-container");
+    //const nftusername = document.getElementById('selector_NFTs').value;
+    //await get_NFTUsername_publication(nftusername,"my-publications-container");
 
     loadingAnimation.style.display = 'none';
     
@@ -2365,7 +2373,12 @@ if (/\.(jpeg|jpg|gif|png)$/.test(linkToImage)) {
 </script>
 
 
-
+<script>
+    async function mostrar_mis_publicaciones(){ 
+        const nftusername = document.getElementById('selector_NFTs').value;
+        await get_NFTUsername_publication(nftusername,"my-publications-container");
+    }
+</script>  
 
 
 <script src="bootstrap/js/jquery.min.js" ></script>

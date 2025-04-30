@@ -527,14 +527,18 @@
 
 
 
-  <ul class="gallery_toolbar" style="background-color: lightgray; border: 2px solid lime; border-radius: 20px;">     
+  <ul class="gallery_toolbar" style="background-color: green; border: 2px solid lime; border-radius: 20px;">     
            
 
        
    
-       <a href="#" data-toggle="modal" data-target="#myModal_publication" onclick="createPublicationElements() " style=" margin-left: 15px;">
+      <!-- <a href="#" data-toggle="modal" data-target="#myModal_publication" onclick="createPublicationElements() " style=" margin-left: 15px;">
                 <img  id="image-post" src="images/icons/post_icon.SVG" alt="post" width="35">
        </a>
+-->
+       <a href="#" data-toggle="modal" data-target="#myModal_publication" style="margin-left: 15px;">
+    <img id="image-post" src="images/icons/post_icon.SVG" alt="post" width="35">
+</a>
 
        
        <a data-toggle="tab" href="#home" style=" margin-left: 15px;">  <img  id="image-home" src="images/icons/home_icon.SVG" alt="home" width="35"></a> 
@@ -887,6 +891,7 @@ span.hashtag {
   
 <!-- Modal -->
 <div class="modal fade" id="myModal_publication" role="dialog">
+    
     <div class="modal-dialog">
         <!-- Modal content -->
         <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">

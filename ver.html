@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ver publicación</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      padding: 20px;
+    }
+    #publicacion {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center;">Publicación</h2>
+  <div id="publicacion">Cargando publicación...</div>
+
+  <script>
+    // Extraer el parámetro ?id=12345 desde la URL
+    function obtenerParametro(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    // Función que se ejecuta cuando se carga la página
+    window.addEventListener('DOMContentLoaded', async () => {
+      const id = obtenerParametro('id');
+      const contenedorID = 'publicacion';
+
+      if (!id) {
+        document.getElementById(contenedorID).textContent = 'No se especificó ninguna publicación.';
+        return;
+      }
+
+      try {
+        // Esperar a que web3 esté disponible (si es necesario), o usa tu contrato directamente
+        await get_publication(id, contenedorID);
+      } catch (error) {
+        console.error('Error al mostrar la publicación:', error);
+        document.getElementById(contenedorID).textContent = 'Error al cargar la publicación.';
+      }
+    });
+
+    // Aquí deberías incluir tus contratos y tu función get_publication completa
+    // Ejemplo mínimo: 
+
+    const publisherContract = new web3.eth.Contract(ABI_PUBLICATION, '0xf8e01ee332845747920e3896586c7d9eb5147808');
+    const profileContract = new web3.eth.Contract(ABI_PROFILE, '0x486CbA957Ed26A3AFe31ba00df5Dcc64AF4d3274');
+    const nftUsernameContract = new web3.eth.Contract(ABI_NFTUSERNAME, '0xac6f27b3b55b96d7f6bfc4b905257bed6758922e');
+
+    async function get_publication(id_publication, principalContainerID) {
+      // Pega aquí tu función get_publication exacta
+    }
+
+    // También necesitas incluir web3.js y tu ABI (puede ser desde archivo o inline)
+    // <script src="https://cdn.jsdelivr.net/npm/web3@1.8.2/dist/web3.min.js"></script>
+  </script>
+
+</body>
+</html>

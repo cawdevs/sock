@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { id: "send", icon: "glyphicon-send", color1: "green", color2: "green" },
             { id: "share", icon: "glyphicon-share-alt", color1: "gray", color2: "black" },
 
-            glyphicon 
+           
         ];
 
         container.innerHTML = ""; // Limpiar contenido previo

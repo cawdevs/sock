@@ -151,10 +151,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 span.addEventListener("click", function () {
                     toggleReaction(span);
                     //creamos en el portapapeles un enlase a post 
-                     const enlace = `${window.location.origin}/ver.html?id=${idPublicacion}`;
-                     navigator.clipboard.writeText(enlace)
+                    const enlace = `${window.location.origin}/ver.html?id=${postId}`;
+                    navigator.clipboard.writeText(enlace)
                           .then(() => alert("¡Enlace copiado al portapapeles!"))
                           .catch(err => console.error("Error al copiar el enlace:", err)); 
+
+                    compartir_en_redes_sociales(postId)
+                    
                 });
             }
 
@@ -284,3 +287,24 @@ async function showSendOptions(nftUsername_post,postId, container) {
 
     container.appendChild(optionsWrapper);
 }
+
+
+
+ function compartir_en_redes_sociales(idPublicacion) {
+    const enlace = `${window.location.origin}/ver.html?id=${idPublicacion}`;
+    
+    if (navigator.share) {
+      navigator.share({
+        title: '¡Mira esta publicación!',
+        text: 'Te comparto esta publicación de la red social descentralizada:',
+        url: enlace
+      })
+      .then(() => console.log('Enlace compartido con éxito'))
+      .catch((error) => console.error('Error al compartir:', error));
+    } else {
+      // Fallback si el navegador no soporta navigator.share
+      navigator.clipboard.writeText(enlace)
+        .then(() => alert("Tu navegador no permite compartir directamente. El enlace fue copiado al portapapeles."))
+        .catch(err => console.error("Error al copiar el enlace:", err));
+    }
+  }

@@ -151,13 +151,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 span.addEventListener("click", function () {
                     toggleReaction(span);
                     //creamos en el portapapeles un enlase a post 
-                    const enlace = `${window.location.origin}/ver.html?id=${postId}`;
-                    navigator.clipboard.writeText(enlace)
-                          .then(() => alert("¡Enlace copiado al portapapeles!"))
-                          .catch(err => console.error("Error al copiar el enlace:", err)); 
+                   // const enlace = `${window.location.origin}/ver.html?id=${postId}`;
+                    //navigator.clipboard.writeText(enlace)
+                          //.then(() => alert("¡Enlace copiado al portapapeles!"))
+                          //.catch(err => console.error("Error al copiar el enlace:", err)); 
 
                     compartir_en_redes_sociales(postId)
-                    
+
                 });
             }
 
@@ -291,7 +291,7 @@ async function showSendOptions(nftUsername_post,postId, container) {
 
 
  function compartir_en_redes_sociales(idPublicacion) {
-    const enlace = `${window.location.origin}/ver.html?id=${idPublicacion}`;
+    const enlace = `${window.location.origin}/ver_post.html?id=${idPublicacion}`;
     
     if (navigator.share) {
       navigator.share({

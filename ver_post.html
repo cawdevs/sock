@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ver Publicación</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 2rem;
+    }
+    #post {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: auto;
+    }
+    img {
+      margin-top: 1rem;
+      max-width: 100%;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="post">
+    <p id="status">Cargando publicación...</p>
+  </div>
+<br>
+
+<div style="text-align: center; margin-top: 2rem;">
+  <button onclick="window.location.href='https://thesocks.net';" 
+          style="padding: 10px 20px; margin: 5px; font-size: 18px; background-color: green; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    ¡Únete a TheSocks.net !
+  </button>
+  
+</div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+  <script>
+    const contractAddress =  "0xf8e01ee332845747920e3896586c7d9eb5147808";
+    const contractABI = [
+      {
+        "inputs": [{ "internalType": "uint256", "name": "publicationId", "type": "uint256" }],
+        "name": "getPublication",
+        "outputs": [
+          {
+            "components": [
+              { "internalType": "uint256", "name": "id", "type": "uint256" },
+              { "internalType": "string", "name": "content", "type": "string" },
+              { "internalType": "string", "name": "jsonMetadata", "type": "string" },
+              { "internalType": "string", "name": "nftUsername", "type": "string" },
+              { "internalType": "enum PostControl.PublicationType", "name": "publicationType", "type": "uint8" },
+              { "internalType": "uint256", "name": "parentPublicationId", "type": "uint256" },
+              { "internalType": "uint256", "name": "threadOrder", "type": "uint256" },
+              { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+            ],
+            "internalType": "struct PostControl.Publication",
+            "name": "",
+            "type": "tuple"
+          },
+          { "internalType": "uint256[]", "name": "threads", "type": "uint256[]" },
+          { "internalType": "uint256[]", "name": "responses", "type": "uint256[]" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ];
+
+    const provider = new Web3.providers.HttpProvider("https://polygon-rpc.com");
+    const web3 = new Web3(provider);
+    const publisherContract = new web3.eth.Contract(contractABI, contractAddress);
+
+    (async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get("id");
+
+      if (id) {
+        await getPublication(id);
+      } else {
+        document.getElementById("status").textContent = "ID de publicación no especificado.";
+      }
+
+      async function getPublication(id) {
+        try {
+          const publication = await publisherContract.methods.getPublication(id).call();
+          const publicationData = publication[0];
+          const jsonMetadata = JSON.parse(publicationData.jsonMetadata);
+
+          const publicationObject = {
+            id: publicationData.id,
+            content: publicationData.content,
+            nftUsername: publicationData.nftUsername,
+            publicationType: publicationData.publicationType,
+            timestamp: new Date(publicationData.timestamp * 1000).toLocaleString(),
+            media: jsonMetadata.media || '',
+            privacidad: jsonMetadata.privacidad || 'Pública',
+            clasificacion: jsonMetadata.clasificacion || 'General'
+          };
+
+          createPublicationElement(publicationObject);
+        } catch (error) {
+          document.getElementById("status").textContent = "Error al cargar la publicación.";
+          console.error(error);
+        }
+      }
+
+      function createPublicationElement(publication) {
+        const postDiv = document.getElementById("post");
+        postDiv.innerHTML = `
+          <p id="status"></p>
+          <h3>@${publication.nftUsername}</h3>
+          <p>${publication.content}</p>
+          ${publication.media ? `<div class="media-container" data-media="${publication.media}"></div>` : ''}
+        `;
+
+        // Asegurar que el DOM se actualice antes de procesar medios
+        setTimeout(procesarMedios, 0);
+      }
+
+      function procesarMedios() {
+        document.querySelectorAll('.media-container').forEach(mediaDiv => {
+          const media = mediaDiv.dataset.media;
+          if (!media) return;
+
+          // YouTube
+          if (media.includes("youtube.com/watch") || media.includes("youtu.be/")) {
+            let videoId;
+            if (media.includes("youtube.com/watch")) {
+              videoId = media.split("v=")[1]?.split("&")[0];
+            } else if (media.includes("youtu.be/")) {
+              videoId = media.split("youtu.be/")[1]?.split("?")[0];
+            }
+            if (videoId) {
+              const iframe = document.createElement('iframe');
+              iframe.width = '100%';
+              iframe.height = '315';
+              iframe.src = `https://www.youtube.com/embed/${videoId}`;
+              iframe.title = 'YouTube video';
+              iframe.frameBorder = '0';
+              iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+              iframe.allowFullscreen = true;
+              mediaDiv.appendChild(iframe);
+            }
+          }
+
+          // Tweets (x.com)
+          else if (media.includes("x.com/")) {
+            let tweetUrl;
+            if (media.match(/x\.com\/([^\/]+)\/status\/(\d+)/)) {
+              tweetUrl = media.replace("x.com", "twitter.com");
+            } else if (media.match(/x\.com\/i\/status\/(\d+)/)) {
+              const tweetId = media.split("/").pop();
+              tweetUrl = `https://twitter.com/i/status/${tweetId}`;
+            }
+            if (tweetUrl) {
+              const blockquote = document.createElement("blockquote");
+              blockquote.className = "twitter-tweet";
+              const link = document.createElement("a");
+              link.href = tweetUrl;
+              blockquote.appendChild(link);
+              mediaDiv.appendChild(blockquote);
+
+              const script = document.createElement("script");
+              script.async = true;
+              script.src = "https://platform.twitter.com/widgets.js";
+              script.charset = "utf-8";
+              document.body.appendChild(script);
+            }
+          }
+
+          // Imagen con extensión conocida
+          else if (media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.png') || media.endsWith('.gif')) {
+            const mediaImage = document.createElement('img');
+            mediaImage.src = media;
+            mediaImage.alt = 'Publicación';
+            mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+            mediaDiv.appendChild(mediaImage);
+          }
+
+          // Intento de cargar como imagen sin extensión
+          else {
+            const img = new Image();
+            img.onload = function () {
+              const mediaImage = document.createElement('img');
+              mediaImage.src = media;
+              mediaImage.alt = 'Publicación';
+              mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+              mediaDiv.appendChild(mediaImage);
+            };
+            img.onerror = function () {
+              const errorMessage = document.createElement('div');
+              errorMessage.textContent = 'El archivo o URL no es válido.';
+              errorMessage.style.cssText = 'background-color: green; color: white; padding: 10px; border-radius: 5px; text-align: center;';
+              mediaDiv.appendChild(errorMessage);
+            };
+            img.src = media;
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -47,7 +47,7 @@ setTimeout(() => {
 
     window.miEditorQuill = quill;
 
-    const MAX_CHARS = 512;
+    const MAX_CHARS = 10240;
 
     // Crear el contador
     const contadorElement = document.createElement('div');
@@ -88,13 +88,38 @@ setTimeout(() => {
     // Segunda fila: Input para el link de la imagen
     const mediaInputDiv = document.createElement('div');
     mediaInputDiv.classList.add('form-group');
+
+    
+     // Botón de subir Imagen o video
+    const submit_media = document.createElement('a');
+    submit_media.href = '#';
+    submit_media.id = 'btn-media';
+    submit_media.style.cssText = 'padding: 10px; font-size: 24px; color: green; cursor: pointer;';
+    submit_media.innerHTML = '<span class="glyphicon glyphicon-picture"></span>';
+
+    submit_media.addEventListener('click', async function(event) {
+        event.preventDefault();
+        // await publicar_main_post();
+    });
+    mediaInputDiv.appendChild(submit_media);
+    
+
+
     const mediaInput = document.createElement('input');
     mediaInput.type = 'text';
     mediaInput.id = 'media-publication';
-    mediaInput.placeholder = 'Link to media publication';
+    mediaInput.placeholder = 'Link a youtube, X, image, etc';
     mediaInput.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px; width: 100%;';
     mediaInputDiv.appendChild(mediaInput);
+        
+    
     form.appendChild(mediaInputDiv);
+
+
+
+
+
+
 
     // Tercera fila: Contenedor con imagen, select y botón de enviar
     const controlsDiv = document.createElement('div');
@@ -136,6 +161,8 @@ setTimeout(() => {
     selectClassDiv.appendChild(selectClass);
     controlsDiv.appendChild(selectClassDiv);
 
+    
+
     // Botón de enviar publicación
     const submitLink = document.createElement('a');
     submitLink.href = '#';
@@ -148,6 +175,10 @@ setTimeout(() => {
         event.preventDefault(); // Evita que el enlace navegue a otra página
         await publicar_main_post(); // Llama a la función asíncrona
     });
+
+
+
+
 
     controlsDiv.appendChild(submitLink);
 

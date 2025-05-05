@@ -55,6 +55,27 @@ setTimeout(() => {
     contadorElement.style.cssText = 'text-align: right; font-size: 14px; color: gray; margin-top: 5px;';
     quill.container.parentNode.appendChild(contadorElement);
 
+
+     // Botón de subir Imagen o video
+    const submit_media = document.createElement('a');
+    submit_media.href = '#';
+    submit_media.id = 'btn-media';
+    //submit_media.style.cssText = 'padding: 10px; font-size: 24px; color: green; cursor: pointer;';
+    submit_media.style.cssText = 'font-size: 18px; border: 2px solid lime; border-radius: 20px; width: 100%; margin-bottom: 10px; margin-top: 10px; height: 40px; width: 100%;';
+    submit_media.innerHTML = ' Subir Foto/Video <span class="glyphicon glyphicon-picture"></span>';
+    submit_media.addEventListener('click', async function(event) {
+        event.preventDefault();
+        // await publicar_main_post();
+    });
+    //mediaInputDiv.appendChild(submit_media);
+    quill.container.parentNode.appendChild(submit_media);
+
+
+
+
+
+
+
     // Función para actualizar contador
     function actualizarContador() {
         const textoPlano = quill.getText(); // sin HTML
@@ -89,26 +110,11 @@ setTimeout(() => {
     const mediaInputDiv = document.createElement('div');
     mediaInputDiv.classList.add('form-group');
 
-    
-     // Botón de subir Imagen o video
-    const submit_media = document.createElement('a');
-    submit_media.href = '#';
-    submit_media.id = 'btn-media';
-    submit_media.style.cssText = 'padding: 10px; font-size: 24px; color: green; cursor: pointer;';
-    submit_media.innerHTML = '<span class="glyphicon glyphicon-picture"></span>';
-
-    submit_media.addEventListener('click', async function(event) {
-        event.preventDefault();
-        // await publicar_main_post();
-    });
-    mediaInputDiv.appendChild(submit_media);
-    
-
-
+     
     const mediaInput = document.createElement('input');
     mediaInput.type = 'text';
     mediaInput.id = 'media-publication';
-    mediaInput.placeholder = 'Link a youtube, X, image, etc';
+    mediaInput.placeholder = 'Subir un Link o enlace a youtube, X, image, etc';
     mediaInput.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px; width: 100%;';
     mediaInputDiv.appendChild(mediaInput);
         
@@ -484,7 +490,7 @@ async function createPublicationElement(publication) {
     // ---- Creación de contenedores ----
     const publicationDiv = document.createElement('div');
     publicationDiv.classList.add('publication-container');
-    publicationDiv.style.cssText = 'border: 1px solid gray; padding: 0px; border-radius: 10px; margin-bottom: 0px; width: 100%; max-width: 100%; overflow: hidden; box-sizing: border-box;';
+    publicationDiv.style.cssText = 'border: 1px solid gray; padding: 0px; border-radius: 10px; margin-bottom: 10px; width: 100%; max-width: 100%; overflow: hidden; box-sizing: border-box;';
 
     // ---- Fila 1: NFTUsername, Nombre, Fecha y Select ----
     const headerDiv = document.createElement('div');

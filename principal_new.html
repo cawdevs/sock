@@ -613,22 +613,22 @@ span.hashtag {
          <br>
                    
          <center><div id="loadingAnimation-principal" style="display: none;">
-                    <br>
+                    
                     <br>
                     <div class="spinner"></div> 
                     <br>
-                    <br>             
+                              
          </div>  </center> 
 
 
-         <div id="home-publications-container"></div>
-
-        
-
+         <div id="home-publications-container"></div>       
           
          <div class="user-following-publication-container"  >
          </div> 
-    
+        
+         <button id="verMasBtn" class="btn btn-primary" style="margin-top: 10px;">
+    Ver más publicaciones
+  </button>     
 
     </div>
 <!--#################################################-->    
@@ -1558,6 +1558,9 @@ let wallet;
 let web3;  
 //let adjustedGasPrice
 
+
+
+
 async function iniciarApp() {
     try {
         // Primero, intenta conectar usando la wallet propia si hay una clave privada almacenada
@@ -1719,6 +1722,8 @@ async function inicializarUI() {
 document.addEventListener('DOMContentLoaded', (event) => {
     iniciarApp();
 });
+
+
 
 
 

@@ -543,7 +543,7 @@
 </div>
 
 
-  <ul class="gallery_toolbar" style="background-color: dodgerblue; border: 2px solid blue; border-radius: 20px;">     
+  <ul class="gallery_toolbar" style="background-color: dodgerblue; border: 2px solid blue; border-radius: 10px; margin-right: 15;">     
            
 
        
@@ -621,11 +621,14 @@ span.hashtag {
          </div>  </center> 
 
 
-         <div id="home-publications-container"></div>
+         <div id="home-publications-container"></div>       
           
          <div class="user-following-publication-container"  >
          </div> 
-    
+        
+         <button id="verMasBtn" class="btn btn-primary" style="margin-top: 10px;">
+    Ver más publicaciones
+  </button>     
 
     </div>
 <!--#################################################-->    
@@ -1717,6 +1720,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     iniciarApp();
 });
 
+
+// Configurar el botón
+document.getElementById("verMasBtn").addEventListener("click", () => {
+    get_all_publications_home("publicacionesContainer", true);
+});
 
 
 async function initializeTransactionContext() {

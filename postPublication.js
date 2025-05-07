@@ -286,7 +286,7 @@ async function publicar_main_post(){
 
 
 
-async function get_all_publications_home(homecontainnerID) {
+/*async function get_all_publications_home(homecontainnerID) {
 
     try {
 
@@ -322,7 +322,54 @@ async function get_all_publications_home(homecontainnerID) {
         console.error('Error completo:', error);
     }
 }
+*/
 
+
+let currentIndex = null;
+let total_publication = null;
+
+async function get_all_publications_home(containerID, append = false) {
+    try {
+        const container = document.getElementById(containerID);
+
+        if (!append) {
+            container.innerHTML = '';
+
+            // Obtener total de publicaciones
+            if (publisherContract.methods) {
+                total_publication = await publisherContract.methods.publicationCount().call();
+            } else {
+                total_publication = await publisherContract.publicationCount();
+            }
+
+            currentIndex = total_publication;
+        }
+
+        let count = 0;
+        let i = currentIndex;
+
+        while (count < 5 && i >= 1) {
+            let type_publication = await get_publication(i, containerID);
+
+            if (type_publication !== 3) {
+                count++;
+            }
+
+            i--;
+        }
+
+        currentIndex = i;
+
+        // Si ya no hay más publicaciones, ocultar el botón
+        if (currentIndex < 1) {
+            document.getElementById("verMasBtn").style.display = "none";
+        }
+
+    } catch (error) {
+        alert('Error al intentar get_publications_home.');
+        console.error('Error completo:', error);
+    }
+}
 
 
 

@@ -1569,8 +1569,10 @@ let web3;
 //let adjustedGasPrice
 
 
-
-
+// Iniciar la aplicación al cargar la página
+document.addEventListener('DOMContentLoaded', (event) => {
+    iniciarApp();
+});
 async function iniciarApp() {
     try {
         // Primero, intenta conectar usando la wallet propia si hay una clave privada almacenada
@@ -1600,6 +1602,10 @@ async function iniciarApp() {
     }
 }
 // Conectar con MetaMask
+
+
+
+
 async function conectarMetaMask() {
     try {
         // Solicitar acceso a la cuenta del usuario
@@ -1727,11 +1733,7 @@ async function inicializarUI() {
     //document.getElementById("btn-verify-nft").addEventListener("click", verifymintearNFT);
 }
 
-// Iniciar la aplicación al cargar la página
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    iniciarApp();
-});
 
 
 

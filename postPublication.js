@@ -325,8 +325,6 @@ async function publicar_main_post(){
 */
 
 
-let currentIndex = null;
-let total_publication = null;
 
 async function get_all_publications_home(containerID, append = false) {
     try {

@@ -548,10 +548,13 @@
 
        
    
-      <a href="#" data-toggle="modal" data-target="#myModal_publication" onclick="createPublicationElements() " style=" margin-left: 15px;">
+  <!--    <a href="#" data-toggle="modal" data-target="#myModal_publication" onclick="createPublicationElements() " style=" margin-left: 15px;">
                 <img  id="image-post" src="images/icons/post_icon.SVG" alt="post" width="35">
        </a>
-
+   -->    
+       <a href="#" onclick="abrirModalPublicacion()" style="margin-left: 15px;">
+    <img id="image-post" src="images/icons/post_icon.SVG" alt="post" width="35">
+</a>
 
       
        <a data-toggle="tab" href="#home" style=" margin-left: 15px;">  <img  id="image-home" src="images/icons/home_icon.SVG" alt="home" width="35"></a> 
@@ -1435,6 +1438,11 @@ span.hashtag {
 
 <script>
     // Definir las palabras clave
+
+    function abrirModalPublicacion() {
+    createPublicationElements();
+    $('#myModal_publication').modal('show');
+}
      
     const palabras_gustos=['Art and Creativity','Sports and Physical Activities','Entertainment and Media','Culture and Society','Nature and Outdoor Activities','Science and Technology','Gastronomy','Personal Development','Volunteering and Social Causes'];
 

@@ -259,13 +259,20 @@ async function publicar_main_post(){
 
                        } 
 
+               
+            const recent_publication = document.getElementById('recent-home-publications-container');
+            await get_publication(0,recent_publication);      
+
             loadingAnimation.style.borderLeftColor = 'lime';                 
             setTimeout(() => { 
                 loadingAnimation.style.display = 'none';
             }, 2000);
 
-
-           $('#myModal_publication').modal('hide');
+           $('#myModal_publication').on('hidden.bs.modal', function () {
+    $('.modal-backdrop').remove();
+    $('body').removeClass('modal-open');
+});
+           //$('#myModal_publication').modal('hide');
 
 
            

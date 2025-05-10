@@ -260,8 +260,8 @@ async function publicar_main_post(){
                        } 
 
                
-            const recent_publication = document.getElementById('recent-home-publications-container');
-            await get_publication(0,recent_publication);      
+            //const recent_publication = document.getElementById('recent-home-publications-container');
+            //await get_publication(0,'recent-home-publications-container');      
 
             loadingAnimation.style.borderLeftColor = 'lime';                 
             setTimeout(() => { 

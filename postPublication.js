@@ -393,11 +393,12 @@ async function get_ultima_publication(containerID) {
         } else {
             currentIndex = await publisherContract.publicationCount();
         }
-
-        console.log('get_publication  currentIndex' , currentIndex); 
+        
+        const currentIndex2=currentIndex+1;
+        console.log('get_publication  currentIndex' , currentIndex2); 
 
         if (currentIndex > 0) {
-            await get_publication(currentIndex+2, containerID);
+            await get_publication(currentIndex+1, containerID);
         } else {
             console.log('No hay publicaciones aún.');
         }

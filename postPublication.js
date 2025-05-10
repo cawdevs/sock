@@ -267,7 +267,7 @@ async function publicar_main_post(){
             loadingAnimation.style.borderLeftColor = 'lime';                 
             setTimeout(() => { 
                 loadingAnimation.style.display = 'none';
-            }, 4000);
+            }, 10000);
 
             console.log('get_ultima_publication.'); 
             await get_ultima_publication('recent-home-publications-container'); 

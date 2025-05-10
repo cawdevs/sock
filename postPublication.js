@@ -261,14 +261,16 @@ async function publicar_main_post(){
 
                
             //const recent_publication = document.getElementById('recent-home-publications-container');
-            console.log('get_ultima_publication.'); 
-            await get_ultima_publication('recent-home-publications-container');      
+                 
             
 
             loadingAnimation.style.borderLeftColor = 'lime';                 
             setTimeout(() => { 
                 loadingAnimation.style.display = 'none';
-            }, 2000);
+            }, 4000);
+
+            console.log('get_ultima_publication.'); 
+            await get_ultima_publication('recent-home-publications-container'); 
 
            $('#myModal_publication').on('hidden.bs.modal', function () {
     $('.modal-backdrop').remove();

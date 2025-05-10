@@ -383,20 +383,20 @@ async function get_all_publications_home(containerID, append = false) {
 
 async function get_ultima_publication(containerID) {
     try {
-            const container = document.getElementById(containerID);
+        const container = document.getElementById(containerID);
 
-            // Obtener total de publicaciones
-            const currentIndex;
-            if (publisherContract.methods) {
-                currentIndex = await publisherContract.methods.publicationCount().call();
-            } else {
-                currentIndex = await publisherContract.publicationCount();
-            }
+        let currentIndex;
+        if (publisherContract.methods) {
+            currentIndex = await publisherContract.methods.publicationCount().call();
+        } else {
+            currentIndex = await publisherContract.publicationCount();
+        }
 
-                          
-            await get_publication(currentIndex, containerID);
-
-                  
+        if (currentIndex > 0) {
+            await get_publication(currentIndex - 1, containerID);
+        } else {
+            console.log('No hay publicaciones aún.');
+        }
 
     } catch (error) {
         alert('Error al intentar get_publications_home.');

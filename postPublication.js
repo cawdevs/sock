@@ -393,12 +393,14 @@ async function get_ultima_publication(containerID) {
         } else {
             currentIndex = await publisherContract.publicationCount();
         }
+
+        currentIndex = currentIndex.toNumber();  // Solo si es BigNumber
         
 
         console.log('get_publication  valor del currentIndex' , currentIndex); 
 
         if (currentIndex > 0) {
-            await get_publication(currentIndex, containerID);
+            await get_publication(currentIndex-1, containerID);
         } else {
             console.log('No hay publicaciones aún.');
         }

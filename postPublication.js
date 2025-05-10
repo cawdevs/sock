@@ -261,8 +261,10 @@ async function publicar_main_post(){
 
                
             //const recent_publication = document.getElementById('recent-home-publications-container');
+            console.log('get_ultima_publication.'); 
             await get_ultima_publication('recent-home-publications-container');      
             
+
             loadingAnimation.style.borderLeftColor = 'lime';                 
             setTimeout(() => { 
                 loadingAnimation.style.display = 'none';
@@ -392,6 +394,8 @@ async function get_ultima_publication(containerID) {
             currentIndex = await publisherContract.publicationCount();
         }
 
+        console.log('get_publication  currentIndex' , currentIndex); 
+
         if (currentIndex > 0) {
             await get_publication(currentIndex - 1, containerID);
         } else {
@@ -399,7 +403,7 @@ async function get_ultima_publication(containerID) {
         }
 
     } catch (error) {
-        alert('Error al intentar get_publications_home.');
+        alert('Error al intentar get_ultima_publication.');
         console.error('Error completo:', error);
     }
 }

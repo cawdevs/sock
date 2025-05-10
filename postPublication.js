@@ -394,8 +394,8 @@ async function get_ultima_publication(containerID) {
             currentIndex = await publisherContract.publicationCount();
         }
         
-        const currentIndex2=currentIndex+1;
-        console.log('get_publication  currentIndex' , currentIndex2); 
+
+        console.log('get_publication  valor del currentIndex' , currentIndex); 
 
         if (currentIndex > 0) {
             await get_publication(currentIndex+1, containerID);

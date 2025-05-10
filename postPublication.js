@@ -261,8 +261,8 @@ async function publicar_main_post(){
 
                
             //const recent_publication = document.getElementById('recent-home-publications-container');
-            //await get_publication(0,'recent-home-publications-container');      
-
+            await get_ultima_publication('recent-home-publications-container');      
+            
             loadingAnimation.style.borderLeftColor = 'lime';                 
             setTimeout(() => { 
                 loadingAnimation.style.display = 'none';
@@ -332,6 +332,9 @@ async function publicar_main_post(){
 */
 
 
+
+
+
 let currentIndex = null;
 let total_publication = null;
 async function get_all_publications_home(containerID, append = false) {
@@ -377,6 +380,36 @@ async function get_all_publications_home(containerID, append = false) {
     }
 }
 
+
+async function get_ultima_publication(containerID) {
+    try {
+            const container = document.getElementById(containerID);
+
+            // Obtener total de publicaciones
+            const currentIndex;
+            if (publisherContract.methods) {
+                currentIndex = await publisherContract.methods.publicationCount().call();
+            } else {
+                currentIndex = await publisherContract.publicationCount();
+            }
+
+                          
+            await get_publication(currentIndex, containerID);
+
+                  
+
+    } catch (error) {
+        alert('Error al intentar get_publications_home.');
+        console.error('Error completo:', error);
+    }
+}
+
+
+
+
+
+
+
 // Ejecutar al cargar la página
 document.addEventListener("DOMContentLoaded", async () => {
     await get_all_publications_home("home-publications-container");
@@ -386,6 +419,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         get_all_publications_home("home-publications-container", true);
     });
 });
+
+
 
 
 

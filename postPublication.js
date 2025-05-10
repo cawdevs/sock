@@ -397,7 +397,7 @@ async function get_ultima_publication(containerID) {
         console.log('get_publication  currentIndex' , currentIndex); 
 
         if (currentIndex > 0) {
-            await get_publication(currentIndex, containerID);
+            await get_publication(currentIndex+1, containerID);
         } else {
             console.log('No hay publicaciones aún.');
         }

@@ -233,31 +233,50 @@ async function publicar_main_post(){
                                 from: globalWalletKey, 
                                 });
                             console.log('publicado Con MetaMask.');
-                                                       
+
+                                                                                  
 
             } else {
-                           console.log("publicado Con SockWallet ");
-                            // Llamada con ethers.js
 
-                           const adjustedGasPrice = obtenerGasAjustado();
-                
-                           const estimatedGas = await publisherContract.estimateGas.createPublication(selected_username,content,jsonString,publicationType,publicationType,threadOrder);
-                           const adjustedGasLimit = estimatedGas.mul(110).div(100); // Aumenta en 10%  
-                           
-                           const tx = await publisherContract.createPublication(selected_username,content,jsonString,publicationType,publicationType,threadOrder , {
+                    // SockWallet con ethers.js
+                    console.log("publicado Con SockWallet ");
+
+                    const adjustedGasPrice = obtenerGasAjustado();
+                    const estimatedGas = await publisherContract.estimateGas.createPublication(
+                        selected_username,
+                        content,
+                        jsonString,
+                        publicationType,
+                        publicationType,
+                        threadOrder
+                    );
+                    const adjustedGasLimit = estimatedGas.mul(110).div(100); // 10% más gas
+
+                    const tx = await publisherContract.createPublication(
+                        selected_username,
+                        content,
+                        jsonString,
+                        publicationType,
+                        publicationType,
+                        threadOrder,
+                        {
                             gasLimit: adjustedGasLimit,
-                            gasPrice: adjustedGasPrice, // Gas Price en Gwei
-                           });
+                            gasPrice: adjustedGasPrice,
+                        }
+                    );
 
-                           console.log("Transacción enviada:", tx.hash);
-                           // Esperar confirmación
-                           tx.wait().then(receipt => {
-                               showSuccess("Confirmado: Publicado Main Post", receipt);
-                           }).catch(error => {
-                               showError("Sin confirmar:Publicado Main Post.",error);
-                           });
+                    console.log("Transacción enviada:", tx.hash);
 
-                       } 
+                    try {
+                        const receipt = await tx.wait(); // 👈 Espera confirmación aquí
+                        showSuccess("Confirmado: Publicado Main Post", receipt);
+                    } catch (error) {
+                        showError("Sin confirmar: Publicado Main Post.", error);
+                        return; // ❌ No seguir si falló
+                    }
+                           
+
+            } 
 
                
             //const recent_publication = document.getElementById('recent-home-publications-container');

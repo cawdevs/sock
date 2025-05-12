@@ -288,8 +288,9 @@ async function publicar_main_post(){
                 loadingAnimation.style.display = 'none';
             }, 10000);
 
-            console.log('get_ultima_publication.'); 
+            console.log('iniciamos get_ultima_publication.'); 
             await get_ultima_publication('recent-home-publications-container'); 
+            console.log('regresamoss get_ultima_publication.'); 
 
            $('#myModal_publication').on('hidden.bs.modal', function () {
     $('.modal-backdrop').remove();
@@ -418,13 +419,15 @@ async function get_ultima_publication(containerID) {
         currentIndex = currentIndex.toNumber();  // Solo si es BigNumber
         
 
-        console.log('get_publication  valor del currentIndex si' , currentIndex); 
-
+       
+        console.log('get_publication  valor del currentIndex si' , currentIndex);  
+        
         if (currentIndex > 0) {
             await get_publication(currentIndex, containerID);
         } else {
             console.log('No hay publicaciones aún.');
         }
+        console.log('publicamos' , currentIndex); 
 
     } catch (error) {
         alert('Error al intentar get_ultima_publication.');

@@ -1,5 +1,4 @@
 
-
 function createPublicationElements() {
     // Obtener el nombre de usuario del selector
     const nftusername = document.getElementById('selector_NFTs').value;
@@ -292,11 +291,11 @@ async function publicar_main_post(){
             await get_ultima_publication('recent-home-publications-container'); 
             console.log('regresamoss get_ultima_publication.'); 
 
-           $('#myModal_publication').on('hidden.bs.modal', function () {
-    $('.modal-backdrop').remove();
-    $('body').removeClass('modal-open');
-});
-           //$('#myModal_publication').modal('hide');
+           //$('#myModal_publication').on('hidden.bs.modal', function () {
+    //$('.modal-backdrop').remove();
+    //$('body').removeClass('modal-open');
+//});
+           $('#myModal_publication').modal('hide');
 
 
            

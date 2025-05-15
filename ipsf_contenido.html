@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Subir Imagen/Video a IPFS</title>
+</head>
+<body>
+    <h2>Subir Imagen o Video a IPFS</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="file">Selecciona imagen o video:</label><br/>
+        <input type="file" id="file" name="file" accept="image/*,video/*" required /><br/><br/>
+
+        <label for="tipo">Tipo:</label><br/>
+        <select id="tipo" name="tipo" required>
+            <option value="">--Selecciona tipo--</option>
+            <option value="imagen">Imagen</option>
+            <option value="video">Video</option>
+        </select><br/><br/>
+
+        <button type="submit">Subir a IPFS y registrar</button>
+    </form>
+
+    <div id="resultado" style="margin-top:20px;"></div>
+
+    <script>
+        const form = document.getElementById('uploadForm');
+        const resultadoDiv = document.getElementById('resultado');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            try {
+                const res = await fetch('https://api.thesocks.net/registrar-contenido/', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    resultadoDiv.innerHTML = `<p style="color:green;">¡Contenido registrado!</p>
+                        <p>IPFS URL: <a href="${data.ipfs_url}" target="_blank">${data.ipfs_url}</a></p>`;
+                } else {
+                    resultadoDiv.innerHTML = `<p style="color:red;">Error: ${data.error || data.mensaje}</p>`;
+                }
+            } catch (error) {
+                resultadoDiv.innerHTML = `<p style="color:red;">Error de red o servidor</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

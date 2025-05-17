@@ -713,39 +713,35 @@ async function createPublicationElement(publication) {
 
 //const contentProcesado = resaltarPalabrasEspecialesHTML(content);
 ///mostrar el texto de la publicacion, si es corto se muestra como tal, si es largo se muestra una parte
-const maxLength = 200; // caracteres que se muestran inicialmente
 const contentDiv = document.createElement('div');
 contentDiv.classList.add('publication-content');
 
-if (content.length > maxLength) {
-    const shortText = content.substring(0, maxLength) + '...';
-    
-    contentDiv.innerHTML = `
-        <span class="short-text">${shortText}</span>
-        <span class="full-text" style="display: none;">${content}</span>
-        <span class="toggle-button" style="color: blue; cursor: pointer;">Mostrar más</span>
-    `;
+contentDiv.innerHTML = `
+  <div class="rich-text short-view" style="max-height: 150px; overflow: hidden; position: relative;">
+    ${content}
+  </div>
+  <div class="rich-text full-view" style="display: none;">
+    ${content}
+  </div>
+  <span class="toggle-button" style="color: blue; cursor: pointer; display: inline-block; margin-top: 5px;">Mostrar más</span>
+`;
 
-    // Evento para alternar texto
-    contentDiv.querySelector('.toggle-button').addEventListener('click', function() {
-        const shortTextEl = contentDiv.querySelector('.short-text');
-        const fullTextEl = contentDiv.querySelector('.full-text');
-        const isCollapsed = shortTextEl.style.display !== 'none';
+const toggleButton = contentDiv.querySelector('.toggle-button');
 
-        if (isCollapsed) {
-            shortTextEl.style.display = 'none';
-            fullTextEl.style.display = 'inline';
-            this.textContent = 'Mostrar menos';
-        } else {
-            shortTextEl.style.display = 'inline';
-            fullTextEl.style.display = 'none';
-            this.textContent = 'Mostrar más';
-        }
-    });
+toggleButton.addEventListener('click', () => {
+  const shortView = contentDiv.querySelector('.short-view');
+  const fullView = contentDiv.querySelector('.full-view');
 
-} else {
-    contentDiv.textContent = content;
-}
+  if (shortView.style.display !== 'none') {
+    shortView.style.display = 'none';
+    fullView.style.display = 'block';
+    toggleButton.textContent = 'Mostrar menos';
+  } else {
+    shortView.style.display = 'block';
+    fullView.style.display = 'none';
+    toggleButton.textContent = 'Mostrar más';
+  }
+});
 
 
 

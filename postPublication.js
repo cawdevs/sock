@@ -712,11 +712,40 @@ async function createPublicationElement(publication) {
 
 
 //const contentProcesado = resaltarPalabrasEspecialesHTML(content);
-
+///mostrar el texto de la publicacion, si es corto se muestra como tal, si es largo se muestra una parte
+const maxLength = 200; // caracteres que se muestran inicialmente
 const contentDiv = document.createElement('div');
 contentDiv.classList.add('publication-content');
-contentDiv.innerHTML = content;
 
+if (content.length > maxLength) {
+    const shortText = content.substring(0, maxLength) + '...';
+    
+    contentDiv.innerHTML = `
+        <span class="short-text">${shortText}</span>
+        <span class="full-text" style="display: none;">${content}</span>
+        <span class="toggle-button" style="color: blue; cursor: pointer;">Mostrar más</span>
+    `;
+
+    // Evento para alternar texto
+    contentDiv.querySelector('.toggle-button').addEventListener('click', function() {
+        const shortTextEl = contentDiv.querySelector('.short-text');
+        const fullTextEl = contentDiv.querySelector('.full-text');
+        const isCollapsed = shortTextEl.style.display !== 'none';
+
+        if (isCollapsed) {
+            shortTextEl.style.display = 'none';
+            fullTextEl.style.display = 'inline';
+            this.textContent = 'Mostrar menos';
+        } else {
+            shortTextEl.style.display = 'inline';
+            fullTextEl.style.display = 'none';
+            this.textContent = 'Mostrar más';
+        }
+    });
+
+} else {
+    contentDiv.textContent = content;
+}
 
 
 

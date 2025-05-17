@@ -450,75 +450,7 @@
 
 
 
-<!--
-<nav class="navbar navbar-inverse" role="navigation" style="border: 2px solid white; border-radius: 20px; background: black; position: relative; height: 50px;"> 
-        
-    <div class="container-fluid" style="display: flex; align-items: center; justify-content: flex-start; height: 100%;">
-    
-        <div style="margin-left: 90px; display: flex; align-items: center;">
-            <select id="selector_NFTs" class="form-control" placeholder="Username" style="border: 2px solid lime; border-radius: 10px; font-size: 20px; height: auto; width: 180px;"></select>
-        </div>
-
-     
-        <div style="display: flex; align-items: center; margin-left: 10px;">
-            <a href="#" data-toggle="modal" data-target="#myModal">
-                <span class="glyphicon glyphicon-plus-sign" style="color: lime; font-size: 36px; vertical-align: middle;"></span>
-            </a>
-        </div>
-  
-     
-
-    </div>
-
-  
-     <div  style="border: 0px solid white; border-radius: 50%; position: absolute; top: 50%; left: 10px; transform: translateY(-50%); width: 80px; height: 80px;">
-        <div id="NFT_image-container" style=" width:80px;  height: 80px;"> </div>
-    </div>
-
-    
-</nav>
-
--->
-                  
-       <!--   
-       <div class="well" style="border: 2px solid lime; background: black; border-radius: 20px;">  -->
-                    <!--<div style="background: red; width:90px; height: 50px; display: inline-block; margin-top: 50px;"></div>  -->
-
-                    <h5>
-
-
-   
-     
-
-         
-<!--
-           <div class="input-group">                 
-
-                  <input type="text" id="text-address-to-send-ETH" class="form-control" placeholder="enter a 0x.. to send ETH" style="border: 2px solid black; border-radius: 10px; width: 100%; height: 40px; margin-right: 10px;">
-            
-                  <div class="input-group-btn">
-                       <button id="btn-send-ETH-wallet" class="btn btn-default" onclick="sendETHtowallet()" style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
-                         <span class="glyphicon glyphicon-send"></span>
-                       </button>  
-
-                        <button class="boton-conectar" id="btn-caw-free" onclick="tokensFree('SOCK')" style="display: inline-block; margin-left: 10px;">2M SOCK FREE</button>   
-                           
-                  </div>
-           </div>
-
-  -->
  
-
-     
-    </h5>
-
-
-
-
- 
-
-
-   
 
   
    
@@ -538,7 +470,7 @@
     <img id="image-home" src="images/icons/buscar_icon.SVG" alt="home" width="35">
   </a>  
 
-  <a id="menuBtn" style="margin-left: auto; font-size: 32px;">☰</a>  
+  <a id="menuBtn" style="margin-left: auto; margin-right: 15px; font-size: 32px;">☰</a>  
 
 </div>
 
@@ -930,7 +862,10 @@ span.hashtag {
     <div class="modal-dialog">
         <!-- Modal content -->
         <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">
-            
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+           
             <div class="modal-body" style="display: flex; align-items: flex-start; gap: 10px;">
            
                 <div id="publication-post-container" style="flex: 1; padding: 10px; border-radius: 10px;"></div>                                     
@@ -938,7 +873,6 @@ span.hashtag {
             </div>      
 
             <center>
-
                  <div id="loadingAnimation-post-publication" style="display: none;">
                         <div class="spinner"></div>              
                  </div>  
@@ -951,6 +885,9 @@ span.hashtag {
         </div>
     </div>
 </div>
+
+
+
 
 
 

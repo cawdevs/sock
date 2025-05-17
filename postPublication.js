@@ -398,7 +398,7 @@ async function get_all_publications_home(containerID, append = false) {
         }
 
     } catch (error) {
-        alert('Error al intentar get_publications_home.');
+       // alert('Error al intentar get_publications_home.');
         console.error('Error completo:', error);
     }
 }
@@ -726,12 +726,23 @@ contentDiv.innerHTML = `
   <span class="toggle-button" style="color: blue; cursor: pointer; display: inline-block; margin-top: 5px;">Mostrar más</span>
 `;
 
+document.body.appendChild(contentDiv); // O añádelo donde corresponda
+
+const shortView = contentDiv.querySelector('.short-view');
+const fullView = contentDiv.querySelector('.full-view');
 const toggleButton = contentDiv.querySelector('.toggle-button');
 
-toggleButton.addEventListener('click', () => {
-  const shortView = contentDiv.querySelector('.short-view');
-  const fullView = contentDiv.querySelector('.full-view');
+// Evaluar si el contenido es más alto que el límite visible
+// Esperamos a que el DOM lo renderice primero
+setTimeout(() => {
+  if (shortView.scrollHeight <= 150) {
+    // Si no es más alto, no mostrar el botón
+    toggleButton.style.display = 'none';
+  }
+}, 0);
 
+// Controlador del botón
+toggleButton.addEventListener('click', () => {
   if (shortView.style.display !== 'none') {
     shortView.style.display = 'none';
     fullView.style.display = 'block';
@@ -742,6 +753,7 @@ toggleButton.addEventListener('click', () => {
     toggleButton.textContent = 'Mostrar más';
   }
 });
+
 
 
 

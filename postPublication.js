@@ -21,7 +21,7 @@ textareaDiv.classList.add('form-group');
 
 const editorContainer = document.createElement('div');
 editorContainer.id = 'miContenedorEditor'; // Este es el nuevo editor dinámico
-editorContainer.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; height: 360px; margin-bottom: 10px; font-size: 18px;';
+editorContainer.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; height: 280px; margin-bottom: 10px; font-size: 18px;';
 textareaDiv.appendChild(editorContainer);
 form.appendChild(textareaDiv);
 
@@ -713,52 +713,52 @@ async function createPublicationElement(publication) {
 
 //const contentProcesado = resaltarPalabrasEspecialesHTML(content);
 ///mostrar el texto de la publicacion, si es corto se muestra como tal, si es largo se muestra una parte
-const contentDiv = document.createElement('div');
-contentDiv.classList.add('publication-content');
+    if (content && content.trim() !== '') {
+            const contentDiv = document.createElement('div');
+            contentDiv.classList.add('publication-content');
 
-contentDiv.innerHTML = `
-  <div class="rich-text short-view" style="max-height: 150px; overflow: hidden; position: relative;">
-    ${content}
-  </div>
-  <div class="rich-text full-view" style="display: none;">
-    ${content}
-  </div>
-  <span class="toggle-button" style="color: blue; cursor: pointer; display: inline-block; margin-top: 5px;">Mostrar más</span>
-`;
+            contentDiv.innerHTML = `
+              <div class="rich-text short-view" style="max-height: 150px; overflow: hidden; position: relative;">
+                ${content}
+              </div>
+              <div class="rich-text full-view" style="display: none;">
+                ${content}
+              </div>
+              <span class="toggle-button" style="color: blue; cursor: pointer; display: inline-block; margin-top: 5px;">Mostrar más</span>
+            `;
 
-document.body.appendChild(contentDiv); // O añádelo donde corresponda
+            document.body.appendChild(contentDiv); // O añádelo donde corresponda
 
-const shortView = contentDiv.querySelector('.short-view');
-const fullView = contentDiv.querySelector('.full-view');
-const toggleButton = contentDiv.querySelector('.toggle-button');
+            const shortView = contentDiv.querySelector('.short-view');
+            const fullView = contentDiv.querySelector('.full-view');
+            const toggleButton = contentDiv.querySelector('.toggle-button');
 
-// Evaluar si el contenido es más alto que el límite visible
-// Esperamos a que el DOM lo renderice primero
-setTimeout(() => {
-  if (shortView.scrollHeight <= 150) {
-    // Si no es más alto, no mostrar el botón
-    toggleButton.style.display = 'none';
-  }
-}, 0);
+            // Evaluar si el contenido es más alto que el límite visible
+            // Esperamos a que el DOM lo renderice primero
+            setTimeout(() => {
+              if (shortView.scrollHeight <= 150) {
+                // Si no es más alto, no mostrar el botón
+                toggleButton.style.display = 'none';
+              }
+            }, 0);
 
-// Controlador del botón
-toggleButton.addEventListener('click', () => {
-  if (shortView.style.display !== 'none') {
-    shortView.style.display = 'none';
-    fullView.style.display = 'block';
-    toggleButton.textContent = 'Mostrar menos';
-  } else {
-    shortView.style.display = 'block';
-    fullView.style.display = 'none';
-    toggleButton.textContent = 'Mostrar más';
-  }
-});
+            // Controlador del botón
+            toggleButton.addEventListener('click', () => {
+              if (shortView.style.display !== 'none') {
+                shortView.style.display = 'none';
+                fullView.style.display = 'block';
+                toggleButton.textContent = 'Mostrar menos';
+              } else {
+                shortView.style.display = 'block';
+                fullView.style.display = 'none';
+                toggleButton.textContent = 'Mostrar más';
+              }
+            });
+                
+                contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 16px; padding: 10px;';
+    }
 
 
-
-
-     
-    contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 16px; padding: 10px;';
 
     // ---- Fila 3: Media (Imagen o Video de YouTube) ----
     const mediaDiv = document.createElement('div');
@@ -778,17 +778,40 @@ toggleButton.addEventListener('click', () => {
                 videoId = media.split("youtu.be/")[1]?.split("?")[0]; // Obtener el ID del video
             }
 
+            
             if (videoId) {
-                const iframe = document.createElement('iframe');
-                iframe.width = '560';
-                iframe.height = '315';
-                iframe.src = `https://www.youtube.com/embed/${videoId}`;
-                iframe.title = 'YouTube video';
-                iframe.frameBorder = '0';
-                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-                iframe.allowFullscreen = true;
-                mediaDiv.appendChild(iframe);
-            }
+                  const wrapper = document.createElement('div');
+                  wrapper.setAttribute('style', `
+                    position: relative;
+                    padding-bottom: 56.25%;
+                    padding-top: 25px;
+                    height: 0;
+                    overflow: hidden;
+                    max-width: 100%;
+                    margin: auto;
+                  `);
+
+                  const iframe = document.createElement('iframe');
+                  iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                  iframe.title = 'YouTube video';
+                  iframe.setAttribute('style', `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border: 0;
+                  `);
+                  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                  iframe.allowFullscreen = true;
+
+                  wrapper.appendChild(iframe);
+                  mediaDiv.appendChild(wrapper);
+                }
+
+
+
+
         } else if (media.includes("x.com/")) {
             let tweetUrl;
 

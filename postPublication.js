@@ -714,6 +714,7 @@ async function createPublicationElement(publication) {
 //const contentProcesado = resaltarPalabrasEspecialesHTML(content);
 ///mostrar el texto de la publicacion, si es corto se muestra como tal, si es largo se muestra una parte
 const contentDiv = document.createElement('div');
+contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
     if (content && content.trim() !== '') {
             
             contentDiv.classList.add('publication-content');

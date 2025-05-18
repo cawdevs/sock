@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aprender más - Web3 y Blockchain</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4faff;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #1E90FF;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .accordion {
+      background-color: white;
+      border: 1px solid #1E90FF;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .accordion-header {
+      background-color: #1E90FF;
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      font-weight: bold;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .accordion-content {
+      display: none;
+      padding: 15px;
+      border-top: 1px solid #1E90FF;
+      animation: fadeIn 0.3s ease-in-out;
+      overflow-x: auto;
+    }
+
+    .content pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      font-family: monospace;
+    }
+
+    .accordion-content pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      max-width: 100%;
+      overflow-x: auto;
+    }  
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+
+
+  </style>
+</head>
+<body>
+
+  <h1>Aprender más</h1>
+
+
+  <div class="accordion">
+    <div class="accordion-header">🌐 ¿Qué es la Web3?</div>
+    <div class="accordion-content">
+      <pre>
+La Web3 es la evolución natural de la internet.
+
+En la Web1, internet inició con páginas web estáticas, únicamente de lectura.
+
+En la Web2, comenzamos a interactuar: chateamos, compartimos contenido y consumimos información en plataformas como redes sociales.
+
+En la Web3, damos un paso más allá: dejamos de ser meros consumidores para convertirnos en creadores, propietarios y distribuidores de contenido y valor digital. En esta nueva etapa, usamos tecnologías descentralizadas, como la blockchain, para almacenar, compartir y verificar información sin necesidad de intermediarios.
+    </pre>
+    </div>
+  </div>
+
+
+
+
+    <div class="accordion">
+    <div class="accordion-header">🔗 ¿Qué es la Blockchain?</div>
+    <div class="accordion-content">
+      <pre>
+Imagina una red global de computadoras distribuidas, cada una con un propietario independiente. Todas están conectadas entre sí, formando una red segura y descentralizada que comparte información de forma transparente, inalterable y permanente.
+
+Cada computadora (o nodo) tiene instalado un software específico que permite la conexión con los demás nodos.
+
+En el caso de la blockchain de Bitcoin, estos nodos son conocidos como mineros (equipos con gran poder de procesamiento), y su función es validar y registrar las transacciones que ocurren en la red.
+
+Por ejemplo, si Juan envía 1 Bitcoin a María, su billetera (wallet) se conecta a la blockchain o red de Bitcoin, un minero toma la transacción, verifica que Juan tenga saldo suficiente y, si todo es correcto, la transacción se registra y se notifica al resto de los nodos. Todos actualizan sus bases de datos en tiempo real, sabiendo que ahora María tiene ese Bitcoin. A este proceso se le llama transacción, y el minero que la valida recibe una pequeña comisión en BTC (normalmente entre $0.06 y $1.30, aunque puede variar).
+    </pre>
+    </div>
+  </div>
+
+ 
+
+   <div class="accordion">
+    <div class="accordion-header">🧱 ¿Qué es una "cadena de bloques"?</div>
+    <div class="accordion-content">
+      <pre>
+El software de los mineros, además de validar transacciones, las almacena en bloques de hasta 4MB de memoria. Una vez que un bloque se llena, se cierra y comienza la creación de otro. Cada bloque cerrado contiene un código único llamado hash, generado a partir de la información del bloque.
+
+El proceso de minado consiste en competir para encontrar un hash que cumpla ciertas condiciones criptográficas. El primer minero que lo logra recibe una recompensa en BTC y el nuevo bloque se encadena al anterior. De esta forma, nace la Blockchain, una cadena de bloques enlazados entre sí, que garantiza la seguridad e inmutabilidad del sistema.        
+
+    </pre>
+    </div>
+  </div> 
+
+
+ <div class="accordion">
+    <div class="accordion-header">🪙 Historia de Bitcoin y Ethereum</div>
+    <div class="accordion-content">
+      <pre>
+Bitcoin fue creado por Satoshi Nakamoto, quien desarrolló su código original para permitir transferencias de valor sin intermediarios, usando la red descentralizada de blockchain. Su objetivo era crear una "supercomputadora financiera" mundial basada en la confianza criptográfica.
+
+Años más tarde, Vitalik Buterin, un joven programador, propuso una idea revolucionaria: ¿y si la red de Bitcoin pudiera ejecutar también programas y algoritmos, no solo transacciones?
+
+Vitalik sugirió a los desarrolladores de Bitcoin que añadieran esta funcionalidad para que la blockchain se convirtiera en una plataforma de ejecución de software. Sin embargo, su propuesta fue rechazada.
+
+Entonces, Vitalik decidió crear desde cero una nueva blockchain con esta capacidad. Así nació Ethereum, cuya característica principal es la posibilidad de ejecutar contratos inteligentes: pequeños programas que permiten automatizar condiciones, reglas y procesos en las transacciones. Ya no solo se envía dinero, ahora se pueden establecer condiciones para hacerlo.
+
+    </pre>
+    </div>
+  </div> 
+
+
+<div class="accordion">
+    <div class="accordion-header">🤖 ¿Qué son los contratos inteligentes?</div>
+    <div class="accordion-content">
+      <pre>
+Un contrato inteligente es un programa autoejecutable que vive en la blockchain. Define las reglas para transferir criptomonedas, validar eventos o ejecutar tareas cuando se cumplen ciertas condiciones.
+
+Gracias a estos contratos, Ethereum permitió la creación de tokens (otras criptomonedas) y aplicaciones descentralizadas. La moneda nativa de Ethereum es Ether (ETH).
+    </pre>
+    </div>
+  </div> 
+
+
+
+
+<div class="accordion">
+    <div class="accordion-header">💎 Polygon: una solución escalable</div>
+    <div class="accordion-content">
+      <pre>
+Ethereum es poderosa, pero sus transacciones pueden ser costosas. Para resolver esto, nacieron las soluciones de capa 2 como "la blockchain de POLYGON", una red que se conecta a Ethereum para ofrecer transacciones más rápidas y con comisiones más bajas.
+
+POLYGON mantiene la seguridad de Ethereum, pero con mejor escalabilidad, convirtiéndose en una opción ideal para nuevos proyectos.
+    </pre>
+    </div>
+  </div> 
+
+
+
+<div class="accordion">
+    <div class="accordion-header">🧦 ¿Qué es thesocks.net?</div>
+    <div class="accordion-content">
+      <pre>
+thesocks.net es una red social de finanzas descentralizadas construida sobre la blockchain de Polygon. Al igual que otras redes sociales, permite a los usuarios:
+Publicar contenido (texto, imágenes, videos)
+
+    Reaccionar con "likes" y seguir a otros
+
+    Participar en juegos
+
+    Comentar e interactuar
+
+Pero además, incorpora funciones de finanzas descentralizadas (DeFi) como:
+    
+    Transferencias de fondos entre usuarios
+
+    Consulta de saldos
+
+    Staking (ahorro con recompensas)
+
+    Recompensas por participación en la red
+
+La economía interna de thesocks.net se basa en dos tokens:
+
+    POL: Moneda nativa de la red Polygon, usada para pagar comisiones.
+    SOCK: Token interno de la red social. Se puede ganar jugando, creando contenido o recibiendo propinas.
+    </pre>
+    </div>
+  </div> 
+
+
+
+<div class="accordion">
+    <div class="accordion-header">🪙 ¿Qué es una criptomoneda?</div>
+    <div class="accordion-content">
+      <pre>
+Una criptomoneda es un activo digital creado mediante un contrato inteligente. Este contrato define:
+El nombre de la moneda
+
+Su cantidad total
+
+Cuántos decimales usa
+
+Las funciones para transferir y consultar saldos
+
+Aunque no tiene forma física, su existencia está registrada en todos los nodos de la blockchain. Es una forma de valor 100% digital y verificable.
+    </pre>
+    </div>
+  </div> 
+
+
+<div class="accordion">
+    <div class="accordion-header">📲 ¿Qué es una dApp?</div>
+    <div class="accordion-content">
+      <pre>
+Una dApp (aplicación descentralizada) funciona igual que una app tradicional, pero en lugar de conectarse a servidores centralizados (como Facebook o WhatsApp), interactúa con una blockchain.
+
+Ejemplos:
+    
+    Apps centralizadas: Instagram, TikTok, YouTube
+    dApps: Metamask, Uniswap, thesocks.net
+    </pre>
+    </div>
+  </div> 
+
+
+
+<div class="accordion">
+    <div class="accordion-header">🛠 ¿Cómo obtener POL en thesocks.net?</div>
+    <div class="accordion-content">
+      <pre>
+Tienes varias formas seguras y fáciles para adquirir criptomonedas POL dentro de la red de thesocks.net:
+
+Usando Bitcoin: Envía Bitcoin a tu cuenta en thesocks.net y conviértelo directamente a POL.
+
+Utilizando una “Sockcard”: Una tarjeta física o virtual que puedes comprar. Al ingresar su código en la plataforma thesocks.net, recibirás el saldo en POL automáticamente.
+
+Transferencia de un amigo: Otro usuario puede enviarte POL directamente desde su wallet.
+
+Transferencia dentro de thesocks.net: Puedes recibir POL de otros usuarios de la plataforma.
+    </pre>
+    </div>
+  </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    const headers = document.querySelectorAll('.accordion-header');
+    headers.forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+  </script>
+
+</body>
+</html>

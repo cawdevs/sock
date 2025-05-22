@@ -43,6 +43,7 @@
                     resultadoDiv.innerHTML = `<p style="color:red;">Error: ${data.error || data.mensaje}</p>`;
                 }
             } catch (error) {
+                console.error("Error detectado:", error);
                 resultadoDiv.innerHTML = `<p style="color:red;">Error de red o servidor</p>`;
             }
         });

@@ -370,7 +370,7 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
             }
             console.log("enlace retornado desd django",data.cid);
 
-            return `https://w3s.link/ipfs/${data.cid}`;
+            return `${data.cid}`;
 
     }else{
         const respuesta = await fetch('https://api.thesocks.net/subirDj/', {

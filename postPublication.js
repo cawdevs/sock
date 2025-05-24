@@ -353,7 +353,7 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
     formData.append('correlativo', correlativo);
     
     if (file){ 
-            console.log("*****Que pasa aqui****", form, correlativo, file )
+           
             formData.append('archivo', file);
             // Enviar al servidor, aunque no haya archivo
             

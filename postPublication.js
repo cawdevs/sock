@@ -370,7 +370,16 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
             }
             console.log("enlace retornado desd django",data.cid);
 
-            return `${data.cid}`;
+            // Después de hacer el fetch y antes de devolver:
+            let cidRaw = data.cid;
+            // 1) Elimina caracteres de control o invisibles:
+            cidRaw = cidRaw.replace(/[^\x20-\x7E]/g, '');
+            // 2) Recorta espacios en los extremos:
+            cidRaw = cidRaw.trim();
+
+            // 3) Si el backend ya devuelve la URL completa, úsala tal cual:
+            return cidRaw;
+           
 
     }else{
         const respuesta = await fetch('https://api.thesocks.net/subirDj/', {

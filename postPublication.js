@@ -351,26 +351,33 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
 
     const formData = new FormData();
     formData.append('correlativo', correlativo);
-    if (file) formData.append('archivo', file);
-
-    console.log("correlativo", correlativo);
-
-    // Enviar al servidor, aunque no haya archivo
-    const respuesta = await fetch('https://api.thesocks.net/subir/', {
-        method: 'POST',
-        body: formData
-    });
-
-    const data = await respuesta.json();
     
-    if (!respuesta.ok || !data.cid) {
-        console.error(`Error del servidor: ${data.mensaje || 'CID no retornado'}`);
-        return false; // ❌ En lugar de lanzar error, retornamos false
-    }
+    if (file){ 
 
-    return `https://w3s.link/ipfs/${data.cid}`;
+            formData.append('archivo', file);
+            // Enviar al servidor, aunque no haya archivo
+            const respuesta = await fetch('https://api.thesocks.net/subirW3/', {
+                method: 'POST',
+                body: formData
+            });    
 
-   
+            const data = await respuesta.json();
+            
+            if (!respuesta.ok || !data.cid) {
+                console.error(`Error del servidor: ${data.mensaje || 'CID no retornado'}`);
+                return false; // ❌ En lugar de lanzar error, retornamos false
+            }
+
+            return `https://w3s.link/ipfs/${data.cid}`;
+
+    }else{
+        const respuesta = await fetch('https://api.thesocks.net/subirDj/', {
+            method: 'POST',
+            body: formData
+        });
+    }   
+
+
 }
 
 

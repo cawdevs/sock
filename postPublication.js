@@ -54,7 +54,7 @@ setTimeout(() => {
     contadorElement.style.cssText = 'text-align: right; font-size: 14px; color: gray; margin-top: 5px;';
     quill.container.parentNode.appendChild(contadorElement);
 
-
+    /*
      // Botón de subir Imagen o video
     const submit_media = document.createElement('a');
     submit_media.href = '#';
@@ -68,7 +68,135 @@ setTimeout(() => {
     });
     //mediaInputDiv.appendChild(submit_media);
     quill.container.parentNode.appendChild(submit_media);
+    */
 
+    const MAX_SIZE_BYTES = 20 * 1024 * 1024; // 20MB máximo
+const MAX_VIDEO_DURATION = 60; // 60 segundos máximo
+
+const subirBtn = document.createElement('button');
+subirBtn.textContent = 'Subir Foto/Video';
+subirBtn.style.cssText = 'font-size: 18px; border: 2px solid lime; border-radius: 20px; width: 100%; margin: 10px 0; height: 40px; cursor: pointer;';
+
+const inputArchivo = document.createElement('input');
+inputArchivo.type = 'file';
+inputArchivo.accept = 'image/*,video/*';
+inputArchivo.id = 'input-media-publication'; // ← le das un ID
+inputArchivo.style.display = 'none';
+
+
+const previewContainer = document.createElement('div');
+previewContainer.style.cssText = 'margin-top: 10px;';
+
+const mensajeSpan = document.createElement('span');
+mensajeSpan.style.cssText = 'display: block; font-style: italic; color: gray; margin-bottom: 5px;';
+
+subirBtn.addEventListener('click', () => {
+    mensajeSpan.textContent = '';
+    previewContainer.innerHTML = '';
+    inputArchivo.value = '';
+    inputArchivo.click();
+});
+
+inputArchivo.addEventListener('change', () => {
+    previewContainer.innerHTML = '';
+    mensajeSpan.textContent = '';
+
+    if (inputArchivo.files.length > 0) {
+        const archivo = inputArchivo.files[0];
+        const tipo = archivo.type;
+
+        if (!tipo.startsWith('image/') && !tipo.startsWith('video/')) {
+            mensajeSpan.style.color = 'red';
+            mensajeSpan.textContent = 'Error: Solo se permiten imágenes o videos válidos.';
+            return;
+        }
+
+        if (archivo.size > MAX_SIZE_BYTES) {
+            mensajeSpan.style.color = 'red';
+            mensajeSpan.textContent = `Error: El archivo es muy grande (máximo 20MB). Tamaño actual: ${(archivo.size / (1024*1024)).toFixed(2)} MB.`;
+            return;
+        }
+
+        if (tipo.startsWith('image/')) {
+            mensajeSpan.style.color = 'gray';
+            mensajeSpan.textContent = `Imagen seleccionada: ${archivo.name}`;
+
+            // Redimensionar imagen para preview
+            const img = new Image();
+            img.onload = () => {
+                const MAX_WIDTH = 300;
+                const MAX_HEIGHT = 300;
+                let width = img.width;
+                let height = img.height;
+
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height = Math.round(height * (MAX_WIDTH / width));
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width = Math.round(width * (MAX_HEIGHT / height));
+                        height = MAX_HEIGHT;
+                    }
+                }
+
+                // Canvas para redimensionar
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+
+                const previewImg = document.createElement('img');
+                previewImg.src = canvas.toDataURL(tipo);
+                previewImg.style.maxWidth = '100%';
+                previewImg.style.height = 'auto';
+
+                previewContainer.appendChild(previewImg);
+            };
+            img.src = URL.createObjectURL(archivo);
+        } else if (tipo.startsWith('video/')) {
+            mensajeSpan.style.color = 'gray';
+            mensajeSpan.textContent = `Video seleccionado: ${archivo.name}`;
+
+            // Crear video para verificar duración
+            const video = document.createElement('video');
+            video.preload = 'metadata';
+
+            video.onloadedmetadata = () => {
+                URL.revokeObjectURL(video.src); // liberar memoria
+
+                if (video.duration > MAX_VIDEO_DURATION) {
+                    mensajeSpan.style.color = 'red';
+                    mensajeSpan.textContent = `Error: El video dura más de 1 minuto (${Math.floor(video.duration)}s). Por favor seleccione otro.`;
+                    previewContainer.innerHTML = '';
+                    inputArchivo.value = '';
+                    return;
+                }
+
+                // Si duración ok, mostrar preview
+                video.controls = true;
+                video.style.maxWidth = '100%';
+                previewContainer.appendChild(video);
+            };
+
+            video.onerror = () => {
+                mensajeSpan.style.color = 'red';
+                mensajeSpan.textContent = 'Error al cargar el video.';
+                previewContainer.innerHTML = '';
+                inputArchivo.value = '';
+            };
+
+            video.src = URL.createObjectURL(archivo);
+        }
+    }
+});
+
+quill.container.parentNode.appendChild(subirBtn);
+quill.container.parentNode.appendChild(inputArchivo);
+quill.container.parentNode.appendChild(mensajeSpan);
+quill.container.parentNode.appendChild(previewContainer);
 
 
 
@@ -179,6 +307,7 @@ setTimeout(() => {
     submitLink.addEventListener('click', async function(event) {
         event.preventDefault(); // Evita que el enlace navegue a otra página
         await publicar_main_post(); // Llama a la función asíncrona
+        
     });
 
 
@@ -195,7 +324,54 @@ setTimeout(() => {
 
 }
 
+async function obtenerCorrelativoDesdeBlockchain() {
+    let total_publication;
 
+    if (publisherContract.methods) {
+        console.log("get_publication Con MetaMask");
+        total_publication = await publisherContract.methods.publicationCount().call();
+    } else {
+        console.log("get_publication Con SockWallet");
+        total_publication = await publisherContract.publicationCount();
+    }
+
+    return total_publication;
+}
+
+
+
+async function subirArchivoAlServidorYRetornarURL(file=null) {
+    
+    // Obtener correlativo desde la blockchain
+    const correlativo = await obtenerCorrelativoDesdeBlockchain();
+    
+    if (!correlativo || isNaN(correlativo)) {
+        throw new Error("No se obtuvo un correlativo válido desde la blockchain");
+    }
+
+    const formData = new FormData();
+    formData.append('correlativo', correlativo);
+    if (file) formData.append('archivo', file);
+
+    console.log("correlativo", correlativo);
+
+    // Enviar al servidor, aunque no haya archivo
+    const respuesta = await fetch('https://api.thesocks.net/subir/', {
+        method: 'POST',
+        body: formData
+    });
+
+    const data = await respuesta.json();
+    
+    if (!respuesta.ok || !data.cid) {
+        console.error(`Error del servidor: ${data.mensaje || 'CID no retornado'}`);
+        return false; // ❌ En lugar de lanzar error, retornamos false
+    }
+
+    return `https://w3s.link/ipfs/${data.cid}`;
+
+   
+}
 
 
 
@@ -205,21 +381,54 @@ async function publicar_main_post(){
     const loadingAnimation = document.getElementById('loadingAnimation-post-publication');
     try{        ////////////////////
 
-           
-
-           
+      
             loadingAnimation.style.display = 'block'; // Muestra la animación al ejecutar la función
-           
 
+            //obtenemos el CID del archivo guardado en IPSF 
+            let link_to_media = document.getElementById('media-publication').value
             const selected_username = document.getElementById('selector_NFTs').value;
 //////////            const content = document.getElementById("publicacion").value;
-            const content = window.miEditorQuill.root.innerHTML;
+            let content = window.miEditorQuill.root.innerHTML;
+            
+            const inputArchivo = document.getElementById('input-media-publication');
+            let  url_ipsf;
+            if (inputArchivo && inputArchivo.files.length > 0) {
+                 
+                    const archivo = inputArchivo.files[0];
+                    url_ipsf = await subirArchivoAlServidorYRetornarURL(archivo);
+                    // Este es el archivo que debes pasar al servidor o a IPFS
+                    console.log("Archivo seleccionado:", archivo.name);
+                    
+                    if (url_ipsf != false){
+                           //si se pudo subir la imagem    
+                           content += `<br><a href="${url_ipsf}" target="_blank" rel="noopener noreferrer">Ver link adjunto</a>`;
+                           link_to_media=url_ipsf;
+                           
+
+                    }else{
+                           //no se pudo subir la imagen
+                           console.log("No se pudo subir la imagen a IPSF"); 
+                    }
+
+                    
+            } else {
+                    url_ipsf = await subirArchivoAlServidorYRetornarURL();
+                    console.log("No se ha seleccionado ningún archivo.");
+            }
+          
+   
+             
+           
+            
+           
             const jsonMetadata = {
-                    media: document.getElementById('media-publication').value,
+                    media: link_to_media,
                     privacidad: document.getElementById('filter-privacidad').value,
                     calsificacion: document.getElementById('filter-classification').value
                     
             };
+
+            
             // Convertir a formato de texto (string)
             const jsonString = JSON.stringify(jsonMetadata);
             const publicationType = 0; 
@@ -232,8 +441,7 @@ async function publicar_main_post(){
                                 from: globalWalletKey, 
                                 });
                             console.log('publicado Con MetaMask.');
-
-                                                                                  
+                                                                                
 
             } else {
 

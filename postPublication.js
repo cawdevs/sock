@@ -353,9 +353,10 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
     formData.append('correlativo', correlativo);
     
     if (file){ 
-
+            console.log("*****Que pasa aqui****", form, correlativo, file )
             formData.append('archivo', file);
             // Enviar al servidor, aunque no haya archivo
+            
             const respuesta = await fetch('https://api.thesocks.net/subirW3/', {
                 method: 'POST',
                 body: formData
@@ -408,7 +409,7 @@ async function publicar_main_post(){
                     
                     if (url_ipsf != false){
                            //si se pudo subir la imagem    
-                           content += `<br><a href="${url_ipsf}" target="_blank" rel="noopener noreferrer">Ver link adjunto</a>`;
+                           content += `<br><a href="${link_to_media}" target="_blank" rel="noopener noreferrer">Ver link adjunto</a>`;
                            link_to_media=url_ipsf;
                            
 

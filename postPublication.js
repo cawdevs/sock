@@ -356,13 +356,15 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
            
             formData.append('archivo', file);
             // Enviar al servidor, aunque no haya archivo
-            
+            console.log("esto se va a subir",correlativo,file.name);
             const respuesta = await fetch('https://api.thesocks.net/subirW3/', {
                 method: 'POST',
                 body: formData
             });    
-
+            
             const data = await respuesta.json();
+
+            console.log("esto se recibe",data, data.mensaje);
             
             if (!respuesta.ok || !data.cid) {
                 console.error(`Error del servidor: ${data.mensaje || 'CID no retornado'}`);
@@ -1080,6 +1082,14 @@ contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
             mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
             mediaDiv.appendChild(mediaImage);
         }
+        // Comprobamos si es un video
+        else if (media.endsWith('.mp4') || media.endsWith('.webm') || media.endsWith('.ogg')) {
+            const mediaVideo = document.createElement('video');
+            mediaVideo.src = media;
+            mediaVideo.controls = true;
+            mediaVideo.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+            mediaDiv.appendChild(mediaVideo);
+        }
         // Si es una URL válida a una imagen, aunque no tenga extensión visible
         else {
             const img = new Image();
@@ -1090,11 +1100,14 @@ contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
                 mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
                 mediaDiv.appendChild(mediaImage);
             };
-            img.onerror = function() {
-                const errorMessage = document.createElement('div');
-                errorMessage.textContent = 'El archivo o URL no es válido.';
-                errorMessage.style.cssText = 'background-color: green; color: white; padding: 10px; border-radius: 5px; text-align: center;';
-                mediaDiv.appendChild(errorMessage);
+             img.onerror = function() {
+                const linkButton = document.createElement('button');
+                linkButton.textContent = 'Enlace a la publicación';
+                linkButton.style.cssText = 'background-color: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; text-align: center;';
+                linkButton.onclick = function() {
+                    window.open(media, '_blank');
+                };
+                mediaDiv.appendChild(linkButton);
             };
             img.src = media; // Intenta cargar la imagen de la URL proporcionada
        }

@@ -368,6 +368,7 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
                 console.error(`Error del servidor: ${data.mensaje || 'CID no retornado'}`);
                 return false; // ❌ En lugar de lanzar error, retornamos false
             }
+            console.log("enlace retornado desd django",data.cid);
 
             return `https://w3s.link/ipfs/${data.cid}`;
 

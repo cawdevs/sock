@@ -1101,13 +1101,20 @@ contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
                 mediaDiv.appendChild(mediaImage);
             };
              img.onerror = function() {
-                const linkButton = document.createElement('button');
-                linkButton.textContent = 'Enlace a la publicación';
-                linkButton.style.cssText = 'background-color: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; text-align: center;';
-                linkButton.onclick = function() {
-                    window.open(media, '_blank');
-                };
-                mediaDiv.appendChild(linkButton);
+                // Recortar visualmente la URL si es muy larga
+                const displayURL = media.length > 50 ? media.slice(0, 47) + '...' : media;
+
+                // Crear un enlace como texto enriquecido
+                const linkHTML = `<a href="${media}" target="_blank" style="color: blue; text-decoration: underline;">${displayURL}</a>`;
+
+                // Insertar el enlace al final del contenido
+                const fullView = contentDiv.querySelector('.full-view');
+                const shortView = contentDiv.querySelector('.short-view');
+
+                if (fullView && shortView) {
+                    fullView.innerHTML += `<br>${linkHTML}`;
+                    shortView.innerHTML += `<br>${linkHTML}`;
+                }
             };
             img.src = media; // Intenta cargar la imagen de la URL proporcionada
        }

@@ -351,7 +351,26 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
     formData.append('correlativo', correlativo);
     
     if (file){ 
-           
+
+            let archivoCorregido = file;
+
+            // Solo corregimos si es imagen JPEG o PNG
+            if (file.type.startsWith('image/')) {
+                archivoCorregido = await corregirOrientacionImagen(file);
+            }
+
+            const formData = new FormData();
+            formData.append('archivo', archivoCorregido);
+
+            console.log("esto se va a subir", correlativo, archivoCorregido.name);
+
+            const respuesta = await fetch('https://api.thesocks.net/subirW3/', {
+                method: 'POST',
+                body: formData
+            });
+
+          
+           /*
             formData.append('archivo', file);
             // Enviar al servidor, aunque no haya archivo
             console.log("esto se va a subir",correlativo,file.name);
@@ -359,7 +378,7 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
                 method: 'POST',
                 body: formData
             });    
-            
+            */
             const data = await respuesta.json();
 
             console.log("esto se recibe",data, data.mensaje);
@@ -1174,6 +1193,39 @@ async function delete_post(publicationId){
 }
    
 
+async function corregirOrientacionImagen(file) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
 
+                let width = img.width;
+                let height = img.height;
 
-  
+                // Asumimos orientación 6 si es una imagen vertical de teléfono
+                // Esto es un truco si no puedes leer EXIF directamente
+                if (height > width) {
+                    canvas.width = height;
+                    canvas.height = width;
+                    ctx.translate(height, 0);
+                    ctx.rotate(Math.PI / 2); // 90 grados
+                    ctx.drawImage(img, 0, 0);
+                } else {
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0);
+                }
+
+                canvas.toBlob((blob) => {
+                    const nuevoArchivo = new File([blob], file.name, { type: file.type });
+                    resolve(nuevoArchivo);
+                }, file.type);
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}

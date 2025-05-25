@@ -12,6 +12,82 @@ function createPublicationElements() {
     
     const form = document.createElement('form');
 
+
+
+
+
+    ///////////////////////////////////////////////////////////////////
+    /////////////publicar/////////////////////////////////////////////
+
+    // Tercera fila: Contenedor con imagen, select y botón de enviar
+    const controlsDiv = document.createElement('div');
+    controlsDiv.style.cssText = 'display: flex; align-items: center; gap: 10px; justify-content: space-between;';
+
+    // Imagen
+    const imageContainer = document.createElement('div');
+    imageContainer.id = 'publication-NFT_image-container';
+    imageContainer.style.cssText = 'width: 80px; height: 80px; border-radius: 50%; ';
+    controlsDiv.appendChild(imageContainer);
+
+    // Select de privacidad
+    const selectDiv = document.createElement('div');
+    selectDiv.classList.add('form-group');
+    const select = document.createElement('select');
+    select.classList.add('form-control');
+    select.id = 'filter-privacidad';
+    select.innerHTML = '<option>*</option><option>>12</option><option>>18</option>';
+    select.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 40px;';
+    selectDiv.appendChild(select);
+    controlsDiv.appendChild(selectDiv);
+
+    // Crear contenedor del select de clasificación
+    const selectClassDiv = document.createElement('div');
+    selectClassDiv.classList.add('form-group');
+
+    // Crear el select de clasificación
+    const selectClass = document.createElement('select');
+    selectClass.classList.add('form-control');
+    selectClass.id = 'filter-classification';
+    selectClass.innerHTML = `
+        <option value="general">General</option>
+        <option value="personal">Personal</option>
+        <option value="profesional">Profesional</option>
+    `;
+    selectClass.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 40px;';
+
+    // Agregar el select al contenedor y luego al `controlsDiv`
+    selectClassDiv.appendChild(selectClass);
+    controlsDiv.appendChild(selectClassDiv);
+    
+    // Botón de enviar publicación
+    const submitLink = document.createElement('a');
+    submitLink.href = '#';
+    submitLink.id = 'btn-publication';
+    submitLink.style.cssText = 'padding: 10px 20px; font-size: 16px; background-color: black; color: white; border: 2px solid lime; border-radius: 20px; cursor: pointer;';
+    submitLink.innerHTML = 'Publicar';
+
+    // Agregar evento de clic
+    submitLink.addEventListener('click', async function(event) {
+        event.preventDefault(); // Evita que el enlace navegue a otra página
+        await publicar_main_post(); // Llama a la función asíncrona
+        
+    });
+
+    controlsDiv.appendChild(submitLink);
+    form.appendChild(controlsDiv);
+
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
     /////////////////////////////////////////////////////////////////////////
     // NUEVO: contenedor para el editor
 
@@ -21,7 +97,7 @@ textareaDiv.classList.add('form-group');
 
 const editorContainer = document.createElement('div');
 editorContainer.id = 'miContenedorEditor'; // Este es el nuevo editor dinámico
-editorContainer.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; height: 280px; margin-bottom: 10px; font-size: 18px;';
+editorContainer.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; height: 220px; margin-bottom: 10px; font-size: 18px;';
 textareaDiv.appendChild(editorContainer);
 form.appendChild(textareaDiv);
 
@@ -235,73 +311,10 @@ quill.container.parentNode.appendChild(previewContainer);
 
 
 
+   
 
 
 
-
-    // Tercera fila: Contenedor con imagen, select y botón de enviar
-    const controlsDiv = document.createElement('div');
-    controlsDiv.style.cssText = 'display: flex; align-items: center; gap: 10px; justify-content: space-between;';
-
-    // Imagen
-    const imageContainer = document.createElement('div');
-    imageContainer.id = 'publication-NFT_image-container';
-    imageContainer.style.cssText = 'width: 80px; height: 80px; border-radius: 50%; ';
-    controlsDiv.appendChild(imageContainer);
-
-    // Select de privacidad
-    const selectDiv = document.createElement('div');
-    selectDiv.classList.add('form-group');
-    const select = document.createElement('select');
-    select.classList.add('form-control');
-    select.id = 'filter-privacidad';
-    select.innerHTML = '<option>*</option><option>>12</option><option>>18</option>';
-    select.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 40px;';
-    selectDiv.appendChild(select);
-    controlsDiv.appendChild(selectDiv);
-
-    // Crear contenedor del select de clasificación
-    const selectClassDiv = document.createElement('div');
-    selectClassDiv.classList.add('form-group');
-
-    // Crear el select de clasificación
-    const selectClass = document.createElement('select');
-    selectClass.classList.add('form-control');
-    selectClass.id = 'filter-classification';
-    selectClass.innerHTML = `
-        <option value="general">General</option>
-        <option value="personal">Personal</option>
-        <option value="profesional">Profesional</option>
-    `;
-    selectClass.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 40px;';
-
-    // Agregar el select al contenedor y luego al `controlsDiv`
-    selectClassDiv.appendChild(selectClass);
-    controlsDiv.appendChild(selectClassDiv);
-
-    
-
-    // Botón de enviar publicación
-    const submitLink = document.createElement('a');
-    submitLink.href = '#';
-    submitLink.id = 'btn-publication';
-    submitLink.style.cssText = 'padding: 10px 20px; font-size: 16px; background-color: black; color: white; border: 2px solid lime; border-radius: 20px; cursor: pointer;';
-    submitLink.innerHTML = 'Publicar';
-
-    // Agregar evento de clic
-    submitLink.addEventListener('click', async function(event) {
-        event.preventDefault(); // Evita que el enlace navegue a otra página
-        await publicar_main_post(); // Llama a la función asíncrona
-        
-    });
-
-
-
-
-
-    controlsDiv.appendChild(submitLink);
-
-    form.appendChild(controlsDiv);
 
     container.appendChild(form);    
 

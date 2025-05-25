@@ -54,22 +54,7 @@ setTimeout(() => {
     contadorElement.style.cssText = 'text-align: right; font-size: 14px; color: gray; margin-top: 5px;';
     quill.container.parentNode.appendChild(contadorElement);
 
-    /*
-     // Botón de subir Imagen o video
-    const submit_media = document.createElement('a');
-    submit_media.href = '#';
-    submit_media.id = 'btn-media';
-    //submit_media.style.cssText = 'padding: 10px; font-size: 24px; color: green; cursor: pointer;';
-    submit_media.style.cssText = 'font-size: 18px; border: 2px solid lime; border-radius: 20px; width: 100%; margin-bottom: 10px; margin-top: 10px; height: 40px; width: 100%;';
-    submit_media.innerHTML = ' Subir Foto/Video <span class="glyphicon glyphicon-picture"></span>';
-    submit_media.addEventListener('click', async function(event) {
-        event.preventDefault();
-        // await publicar_main_post();
-    });
-    //mediaInputDiv.appendChild(submit_media);
-    quill.container.parentNode.appendChild(submit_media);
-    */
-
+    
     const MAX_SIZE_BYTES = 20 * 1024 * 1024; // 20MB máximo
 const MAX_VIDEO_DURATION = 60; // 60 segundos máximo
 
@@ -541,46 +526,6 @@ async function publicar_main_post(){
     }
 }
 
-
-
-
-/*async function get_all_publications_home(homecontainnerID) {
-
-    try {
-
-        document.getElementById(homecontainnerID).innerHTML = '';
-
-        let total_publication;
-
-        if (publisherContract.methods) {
-            console.log("get_publication Con MetaMask");
-            total_publication = await publisherContract.methods.publicationCount().call();
-        } else {
-            console.log("get_publication Con SockWallet");
-            total_publication = await publisherContract.publicationCount();
-        }
-       
-       // Definir el inicio y el fin del bucle
-        const start = total_publication;  
-        let count = 0; // Contador de publicaciones válidas
-        let i = start;
-
-        while (count < 5 && i >= 1) {  
-            let type_publication = await get_publication(i, homecontainnerID);
-            
-            if (type_publication !== 3) { 
-                count++; // Solo contar publicaciones válidas
-            } 
-
-            i--; // Continuar iterando hacia atrás
-        }
-
-    } catch (error) {
-        alert('Error al intentar get_publications_home.');
-        console.error('Error completo:', error);
-    }
-}
-*/
 
 
 

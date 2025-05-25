@@ -357,6 +357,7 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
             // Solo corregimos si es imagen JPEG o PNG
             if (file.type.startsWith('image/')) {
                 archivoCorregido = await corregirOrientacionImagen(file);
+                console.log("se giró la imagen ok ");
             }
 
             const formData = new FormData();
@@ -1199,6 +1200,7 @@ async function corregirOrientacionImagen(file) {
         reader.onload = function(e) {
             const img = new Image();
             img.onload = function() {
+                console.log("inicia el proceso de giro la imagen ");
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
 

@@ -130,78 +130,148 @@
           if (!media) return;
 
           // YouTube
-          if (media.includes("youtube.com/watch") || media.includes("youtu.be/")) {
-            let videoId;
-            if (media.includes("youtube.com/watch")) {
-              videoId = media.split("v=")[1]?.split("&")[0];
-            } else if (media.includes("youtu.be/")) {
-              videoId = media.split("youtu.be/")[1]?.split("?")[0];
-            }
-            if (videoId) {
-              const iframe = document.createElement('iframe');
-              iframe.width = '100%';
-              iframe.height = '315';
-              iframe.src = `https://www.youtube.com/embed/${videoId}`;
-              iframe.title = 'YouTube video';
-              iframe.frameBorder = '0';
-              iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-              iframe.allowFullscreen = true;
-              mediaDiv.appendChild(iframe);
-            }
-          }
+          
+          // Comprobamos si es un video de YouTube mediante un iframe
+              if (media.includes("youtube.com/watch") || media.includes("youtu.be/")) {
+                  let videoId;
 
-          // Tweets (x.com)
-          else if (media.includes("x.com/")) {
-            let tweetUrl;
-            if (media.match(/x\.com\/([^\/]+)\/status\/(\d+)/)) {
-              tweetUrl = media.replace("x.com", "twitter.com");
-            } else if (media.match(/x\.com\/i\/status\/(\d+)/)) {
-              const tweetId = media.split("/").pop();
-              tweetUrl = `https://twitter.com/i/status/${tweetId}`;
-            }
-            if (tweetUrl) {
-              const blockquote = document.createElement("blockquote");
-              blockquote.className = "twitter-tweet";
-              const link = document.createElement("a");
-              link.href = tweetUrl;
-              blockquote.appendChild(link);
-              mediaDiv.appendChild(blockquote);
+                  // Si la URL es del tipo "https://www.youtube.com/watch?v=..."
+                  if (media.includes("youtube.com/watch")) {
+                      videoId = media.split("v=")[1]?.split("&")[0]; // Obtener el ID del video
+                  }
+                  // Si la URL es del tipo "https://youtu.be/..."
+                  else if (media.includes("youtu.be/")) {
+                      videoId = media.split("youtu.be/")[1]?.split("?")[0]; // Obtener el ID del video
+                  }
 
-              const script = document.createElement("script");
-              script.async = true;
-              script.src = "https://platform.twitter.com/widgets.js";
-              script.charset = "utf-8";
-              document.body.appendChild(script);
-            }
-          }
+                  
+                  if (videoId) {
+                        const wrapper = document.createElement('div');
+                        wrapper.setAttribute('style', `
+                          position: relative;
+                          padding-bottom: 56.25%;
+                          padding-top: 25px;
+                          height: 0;
+                          overflow: hidden;
+                          max-width: 100%;
+                          margin: auto;
+                        `);
 
-          // Imagen con extensión conocida
-          else if (media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.png') || media.endsWith('.gif')) {
-            const mediaImage = document.createElement('img');
-            mediaImage.src = media;
-            mediaImage.alt = 'Publicación';
-            mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
-            mediaDiv.appendChild(mediaImage);
-          }
+                        const iframe = document.createElement('iframe');
+                        iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                        iframe.title = 'YouTube video';
+                        iframe.setAttribute('style', `
+                          position: absolute;
+                          top: 0;
+                          left: 0;
+                          width: 100%;
+                          height: 100%;
+                          border: 0;
+                        `);
+                        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                        iframe.allowFullscreen = true;
 
-          // Intento de cargar como imagen sin extensión
-          else {
-            const img = new Image();
-            img.onload = function () {
-              const mediaImage = document.createElement('img');
-              mediaImage.src = media;
-              mediaImage.alt = 'Publicación';
-              mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
-              mediaDiv.appendChild(mediaImage);
-            };
-            img.onerror = function () {
-              const errorMessage = document.createElement('div');
-              errorMessage.textContent = 'El archivo o URL no es válido.';
-              errorMessage.style.cssText = 'background-color: green; color: white; padding: 10px; border-radius: 5px; text-align: center;';
-              mediaDiv.appendChild(errorMessage);
-            };
-            img.src = media;
-          }
+                        wrapper.appendChild(iframe);
+                        mediaDiv.appendChild(wrapper);
+                      }
+
+
+
+
+              } else if (media.includes("x.com/")) {
+                  let tweetUrl;
+
+                  // Si la URL es del tipo "https://x.com/usuario/status/..."
+                  if (media.match(/x\.com\/([^\/]+)\/status\/(\d+)/)) {
+                      tweetUrl = media.replace("x.com", "twitter.com");
+                  }
+                  // Si la URL es del tipo "https://x.com/i/status/..."
+                  else if (media.match(/x\.com\/i\/status\/(\d+)/)) {
+                      const tweetId = media.split("/").pop();
+                      tweetUrl = `https://twitter.com/i/status/${tweetId}`;
+                  }
+
+                  if (tweetUrl) {
+                      const blockquote = document.createElement("blockquote");
+                      blockquote.className = "twitter-tweet";
+                      blockquote.setAttribute("data-media-max-width", "500");
+
+                      const link = document.createElement("a");
+                      link.href = tweetUrl;
+
+                      blockquote.appendChild(link);
+                      mediaDiv.appendChild(blockquote);
+
+                      // Agregar el script de Twitter para que cargue el embed
+                      const script = document.createElement("script");
+                      script.async = true;
+                      script.src = "https://platform.twitter.com/widgets.js";
+                      script.charset = "utf-8";
+                      document.body.appendChild(script);
+                  }
+              }
+              // Comprobamos si es una imagen
+              else if (media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.png') || media.endsWith('.gif')) {
+                  const mediaImage = document.createElement('img');
+                  mediaImage.src = media;
+                  mediaImage.alt = 'Publicación';
+                  mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+                  mediaDiv.appendChild(mediaImage);
+              }
+
+              else if (media.endsWith('.mp4') || media.endsWith('.webm') || media.endsWith('.ogg')) {
+                  const mediaVideo = document.createElement('video');
+                  mediaVideo.controls = true;
+                  mediaVideo.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+
+                  const source = document.createElement('source');
+                  source.src = media;
+
+                  // Determinar el tipo MIME correcto
+                  if (media.endsWith('.mp4')) {
+                      source.type = 'video/mp4';
+                  } else if (media.endsWith('.webm')) {
+                      source.type = 'video/webm';
+                  } else if (media.endsWith('.ogg')) {
+                      source.type = 'video/ogg';
+                  }
+
+                  mediaVideo.appendChild(source);
+                  mediaDiv.appendChild(mediaVideo);
+              }
+              
+              // Si es una URL válida a una imagen, aunque no tenga extensión visible
+              else {
+                  const img = new Image();
+                  img.onload = function() {
+                      const mediaImage = document.createElement('img');
+                      mediaImage.src = media;
+                      mediaImage.alt = 'Publicación';
+                      mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+                      mediaDiv.appendChild(mediaImage);
+                  };
+                   img.onerror = function() {
+                      // Recortar visualmente la URL si es muy larga
+                      const displayURL = media.length > 50 ? media.slice(0, 47) + '...' : media;
+
+                      // Crear un enlace como texto enriquecido
+                      const linkHTML = `<a href="${media}" target="_blank" style="color: blue; text-decoration: underline;">${displayURL}</a>`;
+
+                      // Insertar el enlace al final del contenido
+                      const fullView = contentDiv.querySelector('.full-view');
+                      const shortView = contentDiv.querySelector('.short-view');
+
+                      if (fullView && shortView) {
+                          fullView.innerHTML += `<br>${linkHTML}`;
+                          shortView.innerHTML += `<br>${linkHTML}`;
+                      }
+                  };
+                  img.src = media; // Intenta cargar la imagen de la URL proporcionada
+             }
+
+
+
+
         });
       }
     })();

@@ -1040,14 +1040,28 @@ contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
             mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
             mediaDiv.appendChild(mediaImage);
         }
-        // Comprobamos si es un video
+
         else if (media.endsWith('.mp4') || media.endsWith('.webm') || media.endsWith('.ogg')) {
             const mediaVideo = document.createElement('video');
-            mediaVideo.src = media;
             mediaVideo.controls = true;
             mediaVideo.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+
+            const source = document.createElement('source');
+            source.src = media;
+
+            // Determinar el tipo MIME correcto
+            if (media.endsWith('.mp4')) {
+                source.type = 'video/mp4';
+            } else if (media.endsWith('.webm')) {
+                source.type = 'video/webm';
+            } else if (media.endsWith('.ogg')) {
+                source.type = 'video/ogg';
+            }
+
+            mediaVideo.appendChild(source);
             mediaDiv.appendChild(mediaVideo);
         }
+        
         // Si es una URL válida a una imagen, aunque no tenga extensión visible
         else {
             const img = new Image();

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía para nuevos usuarios - TheSocks.net</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4faff;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      color: darkblue;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .accordion {
+      background-color: white;
+      border: 1px solid #1E90FF;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .accordion-header {
+      background-color: darkblue;
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      font-weight: bold;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .accordion-content {
+      display: none;
+      padding: 15px;
+      border-top: 1px solid darkblue;
+      animation: fadeIn 0.3s ease-in-out;
+      overflow-x: auto;
+    }
+
+    .accordion-content pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Guía para nuevos usuarios de TheSocks.net</h2>
+
+  <div class="accordion">
+    <div class="accordion-header">🧦 ¿Qué es TheSocks.net?</div>
+    <div class="accordion-content">
+      <pre>
+TheSocks.net es una red social descentralizada y libre de censura. Cada usuario se representa como un "sock puppet" (títere de calcetín), y tú tienes el control total de tu identidad y contenido. Aquí no hay empresas que vendan tus datos ni anuncios molestos. Tú decides.
+
+Puedes usar TheSocks sin saber de criptomonedas. ¡Todo está hecho para que sea fácil!
+
+      </pre>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header">👤 ¿Qué es una cuenta en TheSocks.net?</div>
+    <div class="accordion-content">
+      <pre>
+Tu cuenta es tu identidad en la red. No necesitas numero de telefono o correo electronico tradicional. La cuenta se crea con una billetera digital y una frase secreta única. Esa frase es tu llave de acceso: ¡guárdala muy bien!
+      </pre>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header">💰 ¿Qué es una billetera?</div>
+    <div class="accordion-content">
+      <pre>
+Es un sistema seguro que protege tu identidad y permite crear u Usuario, hacer publicaciones, seguir usuarios y guardar tu perfil. No necesitas saber de criptomonedas para usarla, pero es importante que nunca compartas tu frase secreta.
+      </pre>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header">🧑‍🎨 ¿Qué es un nombre de usuario?</div>
+    <div class="accordion-content">
+      <pre>
+Tu nombre de usuario es único, se guarda en blockchain y está asociado a un avatar de calcetín. Puedes tener varios si lo deseas. Son tu identidad pública y creativa en TheSocks.net.
+      </pre>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header">📦 ¿Dónde se guarda mi contenido?</div>
+    <div class="accordion-content">
+      <pre>
+Todo tu contenido (fotos, videos, publicaciones) se guardan en la blockchain y en IPFS, un sistema descentralizado que asegura que nadie pueda borrar tu información. Siempre tendrás acceso a lo que compartes.
+      </pre>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header">⚠️ Consejos importantes</div>
+    <div class="accordion-content">
+      <pre>
+- Guarda tu frase secreta en un lugar seguro.
+- No compartas tu frase secreta. Es como tu llave maestra.
+- No pierdas tu frase secreta. Si la pierdes, no podrás recuperar tu cuenta.
+- Nadie del equipo de TheSocks.net te la pedirá nunca.
+- Si alguien te pide tu frase secreta, probablemente te está intentando estafar.
+
+      </pre>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header">🧵 ¿Por qué sock puppets?</div>
+    <div class="accordion-content">
+      <pre>
+Los títeres de calcetín son una forma creativa, divertida y anónima de representar a los usuarios. Aquí no necesitas mostrar tu cara ni tu nombre real. Es tu espacio libre, sin juicios.
+      </pre>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header">❓¿Tienes dudas?</div>
+    <div class="accordion-content">
+      <pre>
+Puedes encontrar ayuda directamente en el sitio o preguntando a otros usuarios. ¡La comunidad es abierta y amigable!
+
+      </pre>
+    </div>
+  </div>
+
+
+  <script>
+    const headers = document.querySelectorAll('.accordion-header');
+    headers.forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+  </script>
+</body>
+</html>

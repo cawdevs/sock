@@ -159,12 +159,19 @@
 
                 <a class="underlineHover" onclick="goToSockMetamask()" style="display: inline-block;">Entrar con metamask</a>
 
+             
+
+                 
+
            </div>
            
              <center>
            <div style=" justify-content: space-between; margin-top: 20px">
 
               <a class="underlineHover" style="display: inline-block;" href="https://raw.githubusercontent.com/cawdevs/sock/master/files/theSocksApp.apk" download>Descargar Apk para Android</a>     </center>   
+
+              <br>
+                 <a href="conocer_mas.html" class="underlineHover" style="display: inline-block;">❓Conocer Más</a>
 
                 </div>
             </div>
@@ -179,14 +186,12 @@
     <div class="modal-dialog">
         <!-- Modal content -->
         <div class="modal-content" style="background: linear-gradient(180deg, dodgerblue,darkblue);">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+           
            
             <div class="modal-body" style="display: flex; align-items: flex-start; gap: 10px;">
            
                <div class="wrapper fadeInDown"> 
-                 <p> Escriba una contraseña y luego presione el boton "Crear Cuenta", un archivo llamado file.key será descargado, guardelo (contiene sus credenciales) </p>
+                 <h4><p> Escriba una contraseña y luego presione el boton "Crear Cuenta", un archivo llamado file.key será descargado en /descargas, (contiene sus credenciales) </p></h4>
                  <input type="text" id="password" class="fadeIn third" placeholder="Escribir Contraseña" maxlength="8">
                  <button type="button" id="crer_cuenta" class="fadeIn fourth" onclick="createWallet()"> Crear cuenta</button>
                                                                  
@@ -196,7 +201,7 @@
                                        
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <center><button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button></center>>
             </div>
         </div>
     </div>
@@ -209,14 +214,12 @@
     <div class="modal-dialog">
         <!-- Modal content -->
         <div class="modal-content" style="background: linear-gradient(180deg, dodgerblue,darkblue);">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+           
            
             <div class="modal-body" style="display: flex; align-items: flex-start; gap: 10px;">
            
                <div class="wrapper fadeInDown"> 
-                 <p> Escriba Su contraseña y luego presione el boton "Cargar credenciales", Busque el archivo file.key precione ENTRAR A LA RED SOCIAL </p>
+                 <h4><p> Escriba Su contraseña y luego presione el boton "Cargar credenciales", Busque el archivo file.key (esta en /descargas) y presione ENTRAR A LA RED SOCIAL </p></h4>
                  <input type="text" id="password_enter" class="fadeIn third" placeholder="Escribir Contraseña" maxlength="8">
                  <!-- Botón personalizado para cargar archivo -->
 <button type="button" id="actionButton" class="fadeIn fourth" onclick="handleButtonClick()">Cargar Credenciales (file.key)</button>
@@ -228,7 +231,7 @@
                                        
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               <center> <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button></center>
             </div>
         </div>
     </div>

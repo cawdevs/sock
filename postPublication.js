@@ -1098,7 +1098,7 @@ contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
 
 
 
-   const respuestaDiv = crearDivRespuesta(id, selected_username);
+   //const respuestaDiv = crearDivRespuesta(id, selected_username);
    
 
 

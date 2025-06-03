@@ -209,6 +209,8 @@ async function mostrarMenuComentarios(publicationId, username) {
   comentariosPrevios.style.maxHeight = '200px';
   comentariosPrevios.innerHTML = 'Cargando comentarios…';
 
+
+  /*
   // 3) Hacer fetch para cargar comentarios previos desde Django
   fetch(`https://api.thesocks.net/comentarios/?id=${publicationId}`)
     .then(res => res.json())
@@ -230,6 +232,9 @@ async function mostrarMenuComentarios(publicationId, username) {
     .catch(() => {
       comentariosPrevios.innerHTML = 'Error al cargar comentarios.';
     });
+
+  */
+
 
   // 4) Crear contenedor “fila” para textarea + botón en la misma línea
   const filaInput = document.createElement('div');

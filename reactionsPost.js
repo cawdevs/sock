@@ -1,14 +1,3 @@
-// ==============================
-// 1) Inyectar animación CSS al <head>
-// ==============================
-const estiloAnimacion = document.createElement('style');
-estiloAnimacion.textContent = `
-  @keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
-  }
-`;
-document.head.appendChild(estiloAnimacion);
 
 document.addEventListener("DOMContentLoaded", function () {
   // ==============================

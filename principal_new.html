@@ -542,7 +542,7 @@ span.hashtag {
 
 
 
-
+<div id="estado-servidor_msg"></div>
 
  <div class="tab-content" style="border: 0px solid lime; border-radius: 20px; background:white;">
  
@@ -1336,7 +1336,12 @@ async function verificarServidor() {
     })
     .catch(error => {
       const estadoDiv = document.getElementById('estado-servidor');
-      estadoDiv.innerHTML = '<img src="images/icons/disconnect_icon.svg" alt="Algunas funciones están temporalmente fuera de servicio" />';
+      estadoDiv.innerHTML = '<img src="images/icons/disconnect_icon.svg" alt="Algunas funciones están temporalmente fuera de servicio" width="55"/>';
+
+      const estadoDiv2 = document.getElementById('estado-servidor_msg');
+      estadoDiv2.innerHTML = '<center><h4><p>Algunas funciones están temporalmente fuera de servicio </p></h4></center>';
+
+
     });
 }
 

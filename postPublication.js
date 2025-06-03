@@ -12,10 +12,6 @@ function createPublicationElements() {
     
     const form = document.createElement('form');
 
-
-
-
-
     ///////////////////////////////////////////////////////////////////
     /////////////publicar/////////////////////////////////////////////
 
@@ -297,7 +293,6 @@ quill.container.parentNode.appendChild(previewContainer);
     // Segunda fila: Input para el link de la imagen
     const mediaInputDiv = document.createElement('div');
     mediaInputDiv.classList.add('form-group');
-
      
     const mediaInput = document.createElement('input');
     mediaInput.type = 'text';
@@ -305,11 +300,9 @@ quill.container.parentNode.appendChild(previewContainer);
     mediaInput.placeholder = 'Subir un Link o enlace a youtube, X, image, etc';
     mediaInput.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px; width: 100%;';
     mediaInputDiv.appendChild(mediaInput);
-        
-    
+            
     form.appendChild(mediaInputDiv);
-
-
+    /////////////////////////////////////////////////////  
 
    
 
@@ -419,7 +412,7 @@ async function publicar_main_post(){
                     
                     if (url_ipsf != false){
                            //si se pudo subir la imagem    
-                           content += `<br><a href="${link_to_media}" target="_blank" rel="noopener noreferrer">Ver link adjunto</a>`;
+                           //content += `<br><a href="${link_to_media}" target="_blank" rel="noopener noreferrer">Ver link adjunto</a>`;
                            link_to_media=url_ipsf;
                            
 
@@ -1103,15 +1096,113 @@ contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
 
     await getReactions(selected_username,nftUsername, id , publicationReactionDiv);
 
+
+
+   const respuestaDiv = crearDivRespuesta(id, selected_username);
+   
+
+
+
+
+
     // Agregar filas al contenedor principal
     publicationDiv.appendChild(headerDiv);
     publicationDiv.appendChild(contentDiv);
     publicationDiv.appendChild(mediaDiv);
     publicationDiv.appendChild(publicationReactionDiv);
 
+    publicationDiv.appendChild(respuestaDiv);
+
     return publicationDiv;
 }
 
+
+function crearDivRespuesta(id, username) {
+  // Crear contenedor principal para respuestas
+  const respuestaDiv = document.createElement('div');
+  respuestaDiv.id = `respuesta-div-${id}`;
+  respuestaDiv.className = "respuesta-container";
+  respuestaDiv.style.marginTop = '10px';
+
+  // Botón "Responder"
+  const botonMostrarRespuesta = document.createElement('button');
+  botonMostrarRespuesta.textContent = "Responder";
+  botonMostrarRespuesta.style.width = '100%';
+  botonMostrarRespuesta.style.padding = '8px';
+  botonMostrarRespuesta.style.cursor = 'pointer';
+
+  // Contenedor del formulario (se mostrará al hacer clic)
+  const formRespuesta = document.createElement('div');
+  formRespuesta.style.display = 'none';  // Oculto por defecto
+  formRespuesta.style.marginTop = '10px';
+
+  // Textarea de dos líneas
+  const textarea = document.createElement('textarea');
+  textarea.rows = 2;
+  textarea.placeholder = "Escribe tu respuesta...";
+  textarea.style.width = '100%';
+  textarea.style.boxSizing = 'border-box';
+
+  // Botón de enviar
+  const botonEnviar = document.createElement('button');
+  botonEnviar.textContent = "Responder";
+  botonEnviar.style.marginTop = '5px';
+  botonEnviar.style.padding = '6px 12px';
+  botonEnviar.style.cursor = 'pointer';
+
+  // Mostrar/ocultar el formulario al hacer clic
+  botonMostrarRespuesta.onclick = () => {
+    formRespuesta.style.display = formRespuesta.style.display === 'none' ? 'block' : 'none';
+  };
+
+  // Acción al hacer clic en "Responder"
+  botonEnviar.onclick = async () => {
+    const respuesta = textarea.value.trim();
+    if (respuesta) {
+      await enviarRespuestaADjango(id, username, respuesta);
+      textarea.value = ''; // Limpiar textarea
+      formRespuesta.style.display = 'none'; // Contraer formulario
+    } else {
+      alert("Escribe una respuesta antes de enviar.");
+    }
+  };
+
+  // Ensamblar el formulario
+  formRespuesta.appendChild(textarea);
+  formRespuesta.appendChild(botonEnviar);
+
+  // Agregar elementos al contenedor principal
+  respuestaDiv.appendChild(botonMostrarRespuesta);
+  respuestaDiv.appendChild(formRespuesta);
+
+  return respuestaDiv;
+}
+
+async function enviarRespuestaADjango(publicationId, username, respuestaTexto) {
+  try {
+    const response = await fetch('https://api.thesocks.net/enviar-respuesta/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        publication_id: publicationId,
+        responder: username,
+        respuesta: respuestaTexto,
+      }),
+    });
+
+    if (!response.ok) throw new Error("Error al enviar respuesta");
+
+    const data = await response.json();
+    console.log("Respuesta enviada:", data);
+    // Puedes mostrar un mensaje al usuario si quieres
+
+  } catch (error) {
+    console.error("Error comunicándose con Django:", error);
+    alert("Ocurrió un error al enviar tu respuesta.");
+  }
+}
 
 
 /*

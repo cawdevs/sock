@@ -470,6 +470,10 @@
     <img id="image-home" src="images/icons/buscar_icon.SVG" alt="home" width="35">
   </a>  
 
+  
+ <div id="estado-servidor" onclick="verificarServidor()" style="cursor: pointer; margin-left: 10px;"></div>
+
+
   <a id="menuBtn" style="margin-left: auto; margin-right: 15px; font-size: 32px;">☰</a>  
 
 </div>
@@ -1317,6 +1321,27 @@ span.hashtag {
 }
 </style>
 
+
+
+<script>
+async function verificarServidor() {
+  fetch('https://api.thesocks.net/is-alive/')
+    .then(response => {
+      if (!response.ok) throw new Error("Respuesta no OK");
+      return response.json();
+    })
+    .then(data => {
+      if (data.alive !== true) throw new Error("Servidor no respondió true");
+      // Servidor está vivo, no hacer nada o puedes actualizar el estado visualmente
+    })
+    .catch(error => {
+      const estadoDiv = document.getElementById('estado-servidor');
+      estadoDiv.innerHTML = '<img src="icon.svg" alt="Servidor desconectado" />';
+    });
+}
+
+</script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         let menu = document.getElementById("menu");
@@ -1657,6 +1682,10 @@ async function inicializarUI() {
     const end = globalWalletKey.slice(-4);
     document.getElementById("addres-wallet").innerText = `${start}...${end}`;
     document.getElementById("addres-wallet").style.color = "white";
+
+
+    //verificar si el servidor esta vivo o no 
+    await verificarServidor();
 
     // Obtener y mostrar saldos
     

@@ -1111,7 +1111,7 @@ contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
     publicationDiv.appendChild(mediaDiv);
     publicationDiv.appendChild(publicationReactionDiv);
 
-    publicationDiv.appendChild(respuestaDiv);
+    //publicationDiv.appendChild(respuestaDiv);
 
     return publicationDiv;
 }

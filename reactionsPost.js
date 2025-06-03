@@ -312,7 +312,7 @@ async function mostrarMenuComentarios(publicationId, username) {
   // 7) Insertar el contenedor justo después del botón de icono de mensaje
   //     Se asume que el botón tiene un ID único: `btn-comentario-${publicationId}`
   //     o bien, que recibes en el evento el propio elemento “this”.
-  const btnIcono = document.getElementById(`btn-comentario-${publicationId}`);
+  const btnIcono = document.getElementById("comment");
   if (btnIcono) {
     btnIcono.insertAdjacentElement('afterend', contenedor);
   } else {

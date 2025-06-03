@@ -61,8 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
             else if (id === "comment") {
                 span.addEventListener("click", function () {
                     toggleReaction(span);
-                    showSendOptions(nftUsername_post,postId, container);
-                    mostrarMenuComentarios(postId, nftUsername_post)
+                    
+                    mostrarMenuComentarios(postId, nftUsername_post);
 
                 });
             }

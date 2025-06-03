@@ -1124,11 +1124,16 @@ function crearDivRespuesta(id, username) {
   respuestaDiv.className = "respuesta-container";
   respuestaDiv.style.marginTop = '10px';
 
+  // Contenedor flex para que textarea y botón estén en la misma fila
+  const fila = document.createElement('div');
+  fila.style.display = 'flex';
+  fila.style.gap = '8px'; // espacio entre textarea y botón
+
   // Textarea (dos líneas) con placeholder "Comentar publicación"
   const textarea = document.createElement('textarea');
   textarea.rows = 2;
   textarea.placeholder = "Comentar publicación";
-  textarea.style.width = '100%';
+  textarea.style.flexGrow = '1';       // ocupa todo el espacio disponible
   textarea.style.boxSizing = 'border-box';
   textarea.style.borderRadius = '6px';
   textarea.style.padding = '8px';
@@ -1136,9 +1141,7 @@ function crearDivRespuesta(id, username) {
   // Botón "Comentar"
   const botonComentar = document.createElement('button');
   botonComentar.textContent = "Comentar";
-  botonComentar.style.marginTop = '8px';
-  botonComentar.style.padding = '8px';
-  botonComentar.style.width = '100%';
+  botonComentar.style.padding = '8px 12px';
   botonComentar.style.backgroundColor = 'dodgerblue';
   botonComentar.style.color = '#fff';
   botonComentar.style.border = 'none';
@@ -1153,14 +1156,14 @@ function crearDivRespuesta(id, username) {
       return;
     }
     await enviarRespuestaADjango(id, username, comentario);
-    textarea.value = ''; // Limpiar textarea
-    // Si quieres que desaparezca el div después de enviar:
-    respuestaDiv.remove();
+    textarea.value = ''; 
+    respuestaDiv.remove(); 
   };
 
-  // Agregar textarea y botón al contenedor principal
-  respuestaDiv.appendChild(textarea);
-  respuestaDiv.appendChild(botonComentar);
+  // Ensamblar fila y agregar al contenedor principal
+  fila.appendChild(textarea);
+  fila.appendChild(botonComentar);
+  respuestaDiv.appendChild(fila);
 
   return respuestaDiv;
 }

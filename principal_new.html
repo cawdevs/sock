@@ -1690,21 +1690,19 @@ async function inicializarUI() {
 
 
     //verificar si el servidor esta vivo o no 
-    await verificarServidor();
+    await verificarServidor(); 
+      
+    await getmintedNFT();
+   
+    await get_all_publications_home("home-publications-container");
+
+    await get_NFTUsername_profile();
 
     // Obtener y mostrar saldos
-    
     await obtenerSaldo_POL();
     await obtenerSaldo_SOCK();
 
-    await getmintedNFT();
-    
     get_total_liked();
-
-    await get_NFTUsername_profile();
-    
-    await get_all_publications_home("home-publications-container");
-
     //const nftusername = document.getElementById('selector_NFTs').value;
     //await get_NFTUsername_publication(nftusername,"my-publications-container");
 

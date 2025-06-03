@@ -1124,56 +1124,43 @@ function crearDivRespuesta(id, username) {
   respuestaDiv.className = "respuesta-container";
   respuestaDiv.style.marginTop = '10px';
 
-  // Botón "Responder"
-  const botonMostrarRespuesta = document.createElement('button');
-  botonMostrarRespuesta.textContent = "Responder";
-  botonMostrarRespuesta.style.width = '100%';
-  botonMostrarRespuesta.style.padding = '8px';
-  botonMostrarRespuesta.style.cursor = 'pointer';
-
-  // Contenedor del formulario (se mostrará al hacer clic)
-  const formRespuesta = document.createElement('div');
-  formRespuesta.style.display = 'none';  // Oculto por defecto
-  formRespuesta.style.marginTop = '10px';
-
-  // Textarea de dos líneas
+  // Textarea (dos líneas) con placeholder "Comentar publicación"
   const textarea = document.createElement('textarea');
   textarea.rows = 2;
-  textarea.placeholder = "Escribe tu respuesta...";
+  textarea.placeholder = "Comentar publicación";
   textarea.style.width = '100%';
   textarea.style.boxSizing = 'border-box';
+  textarea.style.borderRadius = '6px';
+  textarea.style.padding = '8px';
 
-  // Botón de enviar
-  const botonEnviar = document.createElement('button');
-  botonEnviar.textContent = "Responder";
-  botonEnviar.style.marginTop = '5px';
-  botonEnviar.style.padding = '6px 12px';
-  botonEnviar.style.cursor = 'pointer';
+  // Botón "Comentar"
+  const botonComentar = document.createElement('button');
+  botonComentar.textContent = "Comentar";
+  botonComentar.style.marginTop = '8px';
+  botonComentar.style.padding = '8px';
+  botonComentar.style.width = '100%';
+  botonComentar.style.backgroundColor = 'dodgerblue';
+  botonComentar.style.color = '#fff';
+  botonComentar.style.border = 'none';
+  botonComentar.style.borderRadius = '6px';
+  botonComentar.style.cursor = 'pointer';
 
-  // Mostrar/ocultar el formulario al hacer clic
-  botonMostrarRespuesta.onclick = () => {
-    formRespuesta.style.display = formRespuesta.style.display === 'none' ? 'block' : 'none';
-  };
-
-  // Acción al hacer clic en "Responder"
-  botonEnviar.onclick = async () => {
-    const respuesta = textarea.value.trim();
-    if (respuesta) {
-      await enviarRespuestaADjango(id, username, respuesta);
-      textarea.value = ''; // Limpiar textarea
-      formRespuesta.style.display = 'none'; // Contraer formulario
-    } else {
-      alert("Escribe una respuesta antes de enviar.");
+  // Acción al hacer clic en "Comentar"
+  botonComentar.onclick = async () => {
+    const comentario = textarea.value.trim();
+    if (!comentario) {
+      alert("Escribe un comentario antes de enviar.");
+      return;
     }
+    await enviarRespuestaADjango(id, username, comentario);
+    textarea.value = ''; // Limpiar textarea
+    // Si quieres que desaparezca el div después de enviar:
+    respuestaDiv.remove();
   };
 
-  // Ensamblar el formulario
-  formRespuesta.appendChild(textarea);
-  formRespuesta.appendChild(botonEnviar);
-
-  // Agregar elementos al contenedor principal
-  respuestaDiv.appendChild(botonMostrarRespuesta);
-  respuestaDiv.appendChild(formRespuesta);
+  // Agregar textarea y botón al contenedor principal
+  respuestaDiv.appendChild(textarea);
+  respuestaDiv.appendChild(botonComentar);
 
   return respuestaDiv;
 }

@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
       else if (id === "comment") {
         span.addEventListener("click", function () {
           toggleReaction(span);
-          mostrarMenuComentarios(postId, nftUsername_post);
+          await mostrarMenuComentarios(postId, nftUsername_post);
         });
       }
       else if (id === "share") {

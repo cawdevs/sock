@@ -105,7 +105,127 @@ document.addEventListener("DOMContentLoaded", function () {
         const originalColor = icon.getAttribute("data-color1");
 
 
-function mostrarMenuComentarios(publicationId, username) {
+    function likePost(username_selected,nftUsername_post, postId) {
+
+        console.log("Username que publica (nftUsername_post):", nftUsername_post);
+        
+        const heartIcon = document.getElementById(`icon-heart-${postId}`);
+        const liked = heartIcon.dataset.liked === "true";
+        const newLiked = !liked;
+
+        const countSpan = document.getElementById(`likes-count-${postId}`);
+        let currentLikes = parseInt(countSpan.textContent) || 0;
+        countSpan.textContent = newLiked ? currentLikes + 1 : currentLikes - 1;
+
+        heartIcon.style.color = newLiked ? heartIcon.getAttribute("data-color2") : heartIcon.getAttribute("data-color1");
+        heartIcon.dataset.liked = newLiked;
+
+        fetch("https://api.thesocks.net/like-post/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username_selected,
+                username_post: nftUsername_post,  
+                post_id: postId.toNumber ? postId.toNumber() : postId,
+                liked: newLiked
+            })
+        })
+        .then(response => response.json())
+        .then(data => console.log("Respuesta:", data))
+        .catch(error => console.error("Error:", error));
+    }
+
+    //function sharePost(postId) {
+        // Lógica para compartir
+      //  alert(`Compartiste la publicación ${postId}`);
+    //}
+
+    window.getReactions = getReactions; // Exponer globalmente
+});
+
+async function showSendOptions(nftUsername_post,postId, container) {
+    // Evitar duplicación
+    const existing = document.getElementById(`send-options-${postId}`);
+    if (existing) {
+        existing.remove();
+        return;
+    }
+
+
+    let recipientAddress;
+                
+    if (nftUsernameContract.methods) {
+             console.log("Con MetaMask ");
+             recipientAddress     = await nftUsernameContract.methods.getNFTOwner(nftUsername_post).call();
+                        
+    } else {
+            // Usando ethers.js
+            console.log("Con SockWallet "); 
+            recipientAddress     = await nftUsernameContract.getNFTOwner(nftUsername_post);
+                                                   
+    }
+
+    const optionsWrapper = document.createElement("div");
+    optionsWrapper.className = "reaction-group";
+    optionsWrapper.id = `send-options-${postId}`;
+    // 👇 Agrega esto
+    optionsWrapper.style.display = "flex";
+    optionsWrapper.style.flexDirection = "column";
+    optionsWrapper.style.gap = "8px";
+
+    const amounts = [10000, 20000, 50000];
+
+    amounts.forEach(amount => {
+        const option = document.createElement("span");
+        option.className = "reaction-option";
+        option.innerHTML = `<span class="glyphicon glyphicon-usd" style="font-size: 18px; margin-right: 5px;"></span>${amount}`;
+
+        option.addEventListener("click", async () => {
+            option.classList.add("grow");
+
+            // Acción personalizada según cantidad
+            console.log(`💸 Enviado $${amount} en la publicación ${postId}`);
+
+            await transferSockTokens(recipientAddress, amount);
+
+            setTimeout(() => {
+                option.classList.remove("grow");
+                optionsWrapper.remove(); // Ocultar opciones
+            }, 600);
+        });
+
+        optionsWrapper.appendChild(option);
+    });
+
+    container.appendChild(optionsWrapper);
+}
+
+
+
+ function compartir_en_redes_sociales(idPublicacion) {
+    const enlace = `${window.location.origin}/ver_post.html?id=${idPublicacion}`;
+    
+    if (navigator.share) {
+      navigator.share({
+        title: '¡Mira esta publicación!',
+        text: 'Te comparto esta publicación de la red social descentralizada:',
+        url: enlace
+      })
+      .then(() => console.log('Enlace compartido con éxito'))
+      .catch((error) => console.error('Error al compartir:', error));
+    } else {
+      // Fallback si el navegador no soporta navigator.share
+      navigator.clipboard.writeText(enlace)
+        .then(() => alert("Tu navegador no permite compartir directamente. El enlace fue copiado al portapapeles."))
+        .catch(err => console.error("Error al copiar el enlace:", err));
+    }
+  }
+
+
+
+  function mostrarMenuComentarios(publicationId, username) {
   // Eliminar menú si ya existe
   const existente = document.getElementById('menu-comentarios');
   if (existente) existente.remove();
@@ -251,121 +371,3 @@ document.head.appendChild(estiloAnimacion);
             icon.setAttribute("data-color1", newColor);
         }, 500);
     }
-
-    function likePost(username_selected,nftUsername_post, postId) {
-
-        console.log("Username que publica (nftUsername_post):", nftUsername_post);
-        
-        const heartIcon = document.getElementById(`icon-heart-${postId}`);
-        const liked = heartIcon.dataset.liked === "true";
-        const newLiked = !liked;
-
-        const countSpan = document.getElementById(`likes-count-${postId}`);
-        let currentLikes = parseInt(countSpan.textContent) || 0;
-        countSpan.textContent = newLiked ? currentLikes + 1 : currentLikes - 1;
-
-        heartIcon.style.color = newLiked ? heartIcon.getAttribute("data-color2") : heartIcon.getAttribute("data-color1");
-        heartIcon.dataset.liked = newLiked;
-
-        fetch("https://api.thesocks.net/like-post/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: username_selected,
-                username_post: nftUsername_post,  
-                post_id: postId.toNumber ? postId.toNumber() : postId,
-                liked: newLiked
-            })
-        })
-        .then(response => response.json())
-        .then(data => console.log("Respuesta:", data))
-        .catch(error => console.error("Error:", error));
-    }
-
-    //function sharePost(postId) {
-        // Lógica para compartir
-      //  alert(`Compartiste la publicación ${postId}`);
-    //}
-
-    window.getReactions = getReactions; // Exponer globalmente
-});
-
-async function showSendOptions(nftUsername_post,postId, container) {
-    // Evitar duplicación
-    const existing = document.getElementById(`send-options-${postId}`);
-    if (existing) {
-        existing.remove();
-        return;
-    }
-
-
-    let recipientAddress;
-                
-    if (nftUsernameContract.methods) {
-             console.log("Con MetaMask ");
-             recipientAddress     = await nftUsernameContract.methods.getNFTOwner(nftUsername_post).call();
-                        
-    } else {
-            // Usando ethers.js
-            console.log("Con SockWallet "); 
-            recipientAddress     = await nftUsernameContract.getNFTOwner(nftUsername_post);
-                                                   
-    }
-
-    const optionsWrapper = document.createElement("div");
-    optionsWrapper.className = "reaction-group";
-    optionsWrapper.id = `send-options-${postId}`;
-    // 👇 Agrega esto
-    optionsWrapper.style.display = "flex";
-    optionsWrapper.style.flexDirection = "column";
-    optionsWrapper.style.gap = "8px";
-
-    const amounts = [10000, 20000, 50000];
-
-    amounts.forEach(amount => {
-        const option = document.createElement("span");
-        option.className = "reaction-option";
-        option.innerHTML = `<span class="glyphicon glyphicon-usd" style="font-size: 18px; margin-right: 5px;"></span>${amount}`;
-
-        option.addEventListener("click", async () => {
-            option.classList.add("grow");
-
-            // Acción personalizada según cantidad
-            console.log(`💸 Enviado $${amount} en la publicación ${postId}`);
-
-            await transferSockTokens(recipientAddress, amount);
-
-            setTimeout(() => {
-                option.classList.remove("grow");
-                optionsWrapper.remove(); // Ocultar opciones
-            }, 600);
-        });
-
-        optionsWrapper.appendChild(option);
-    });
-
-    container.appendChild(optionsWrapper);
-}
-
-
-
- function compartir_en_redes_sociales(idPublicacion) {
-    const enlace = `${window.location.origin}/ver_post.html?id=${idPublicacion}`;
-    
-    if (navigator.share) {
-      navigator.share({
-        title: '¡Mira esta publicación!',
-        text: 'Te comparto esta publicación de la red social descentralizada:',
-        url: enlace
-      })
-      .then(() => console.log('Enlace compartido con éxito'))
-      .catch((error) => console.error('Error al compartir:', error));
-    } else {
-      // Fallback si el navegador no soporta navigator.share
-      navigator.clipboard.writeText(enlace)
-        .then(() => alert("Tu navegador no permite compartir directamente. El enlace fue copiado al portapapeles."))
-        .catch(err => console.error("Error al copiar el enlace:", err));
-    }
-  }

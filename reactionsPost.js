@@ -1,93 +1,4 @@
-/**
-document.addEventListener("DOMContentLoaded", function () {
-    function getReactions(username_selected,postId, container) {
-        const icons = [
-            { id: "comment", icon: "glyphicon-comment", color1: "gray", color2: "blue" },
-            { id: "heart", icon: "glyphicon-heart", color1: "gray", color2: "red" },
-            //{ id: "retweet", icon: "glyphicon-retweet", color1: "gray", color2: "lime" },
-            //{ id: "trash", icon: "glyphicon-trash", color1: "gray", color2: "red" },
-            { id: "send", icon: "glyphicon-send", color1: "gray", color2: "lime" },
-            //{ id: "plus", icon: "glyphicon-plus", color1: "gray", color2: "lime" }
-        ];
 
-        container.innerHTML = ""; // Limpiar contenido previo
-
-        icons.forEach(({ id, icon, color1, color2 }) => {
-            const span = document.createElement("span");
-            span.className = `glyphicon ${icon}`;
-            span.id = `icon-${id}-${postId}`;  // ID único para cada publicación
-            span.setAttribute("data-color1", color1);
-            span.setAttribute("data-color2", color2);
-            span.style.color = color1;
-            span.style.cursor = "pointer";
-
-            span.addEventListener("click", function () {
-                toggleReaction(span);
-                
-                // 🔴 DETECTAR CLICK EN EL ICONO ESPECÍFICO 🔴
-                if (id === "heart") {
-                    console.log(`❤️ Me gusta en la publicación ${postId}`);
-                    likePost(username_selected,postId);
-                } else if (id === "retweet") {
-                    console.log(`🔄 Compartido en la publicación ${postId}`);
-                    sharePost(postId);
-                }
-            });
-
-            container.appendChild(span);
-        });
-    }
-
-    function toggleReaction(icon) {
-        const newColor = icon.getAttribute("data-color2");
-        const originalColor = icon.getAttribute("data-color1");
-
-        icon.classList.add("grow");
-        setTimeout(() => {
-            icon.classList.remove("grow");
-            icon.style.color = newColor;
-            icon.setAttribute("data-color2", originalColor);
-            icon.setAttribute("data-color1", newColor);
-        }, 500);
-    }
-
-    // Función que se ejecuta cuando se hace clic en "Me gusta" ❤️
-    function likePost(username_selected,postId) {
-        //alert(`Has dado like a la publicación ${postId}`);        
-        
-        //consultar si ya le dio like
-        const liked = true;
-
-        fetch("https://api.thesocks.net/like-post/", {
-
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: username_selected,
-                post_id: postId.toNumber(), // convierte BigNumber a número normal,
-                liked: liked
-            })
-        })
-        .then(response => response.json())
-        .then(data => console.log("Respuesta:", data))
-        .catch(error => console.error("Error:", error));
-
-    }
-
-
-
-    // Función que se ejecuta cuando se hace clic en "Compartir" 🔄
-    function sharePost(postId) {
-        //alert(`Has compartido la publicación ${postId}`);
-    }
-
-    
-    window.getReactions = getReactions; // Exponer la función globalmente
-});
-
-*/
 document.addEventListener("DOMContentLoaded", function () {
     function getReactions(username_selected,nftUsername_post, postId, container) {
         const icons = [
@@ -147,6 +58,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             }
 
+            else if (id === "comment") {
+                span.addEventListener("click", function () {
+                    toggleReaction(span);
+                    showSendOptions(nftUsername_post,postId, container);
+                    mostrarMenuComentarios(postId, nftUsername_post)
+
+                });
+            }
+            
+           
+
             else if (id === "share") {
                 span.addEventListener("click", function () {
                     toggleReaction(span);
@@ -181,6 +103,145 @@ document.addEventListener("DOMContentLoaded", function () {
     function toggleReaction(icon) {
         const newColor = icon.getAttribute("data-color2");
         const originalColor = icon.getAttribute("data-color1");
+
+
+function mostrarMenuComentarios(publicationId, username) {
+  // Eliminar menú si ya existe
+  const existente = document.getElementById('menu-comentarios');
+  if (existente) existente.remove();
+
+  // Crear overlay
+  const overlay = document.createElement('div');
+  overlay.id = 'menu-comentarios';
+  overlay.style.position = 'fixed';
+  overlay.style.left = 0;
+  overlay.style.right = 0;
+  overlay.style.bottom = 0;
+  overlay.style.top = 0;
+  overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+  overlay.style.display = 'flex';
+  overlay.style.justifyContent = 'center';
+  overlay.style.alignItems = 'flex-end';
+  overlay.style.zIndex = 1000;
+  overlay.style.overflow = 'hidden';
+
+  // Crear contenedor del menú
+  const menu = document.createElement('div');
+  menu.style.backgroundColor = '#fff';
+  menu.style.width = '100%';
+  menu.style.maxHeight = '80%';
+  menu.style.borderTopLeftRadius = '12px';
+  menu.style.borderTopRightRadius = '12px';
+  menu.style.padding = '15px';
+  menu.style.boxSizing = 'border-box';
+  menu.style.animation = 'slideUp 0.3s ease-out';
+  menu.style.overflow = 'hidden';
+
+  // Contenedor scrollable de comentarios
+  const comentariosDiv = document.createElement('div');
+  comentariosDiv.id = 'comentarios-antiguos';
+  comentariosDiv.style.maxHeight = '200px';
+  comentariosDiv.style.overflowY = 'auto';
+  comentariosDiv.style.border = '1px solid #ccc';
+  comentariosDiv.style.padding = '8px';
+  comentariosDiv.style.marginBottom = '10px';
+  comentariosDiv.innerHTML = 'Cargando comentarios...';
+
+  // Cargar comentarios desde Django
+  fetch(`https://api.thesocks.net/comentarios/?id=${publicationId}`)
+    .then(res => res.json())
+    .then(data => {
+      comentariosDiv.innerHTML = '';
+      if (data.comentarios && data.comentarios.length > 0) {
+        data.comentarios.forEach(com => {
+          const p = document.createElement('p');
+          p.innerHTML = `<strong>${com.usuario}</strong>: ${com.comentario}`;
+          comentariosDiv.appendChild(p);
+        });
+      } else {
+        comentariosDiv.innerHTML = 'No hay comentarios aún.';
+      }
+    })
+    .catch(() => {
+      comentariosDiv.innerHTML = 'Error al cargar comentarios.';
+    });
+
+  // Textarea para nuevo comentario
+  const textarea = document.createElement('textarea');
+  textarea.rows = 2;
+  textarea.placeholder = "Escribe tu comentario...";
+  textarea.style.width = '100%';
+  textarea.style.boxSizing = 'border-box';
+
+  // Botón para responder
+  const enviarBtn = document.createElement('button');
+  enviarBtn.textContent = "Responder";
+  enviarBtn.style.marginTop = '10px';
+  enviarBtn.style.padding = '8px';
+  enviarBtn.style.width = '100%';
+  enviarBtn.style.cursor = 'pointer';
+
+  enviarBtn.onclick = async () => {
+    const comentario = textarea.value.trim();
+    if (!comentario) return alert("Escribe algo antes de enviar.");
+
+    try {
+      const response = await fetch('https://api.thesocks.net/enviar-comentario/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          publication_id: publicationId,
+          usuario: username,
+          comentario: comentario
+        })
+      });
+
+      if (!response.ok) throw new Error("Error en el servidor");
+
+      // Agregar comentario nuevo visualmente
+      const p = document.createElement('p');
+      p.innerHTML = `<strong>${username}</strong>: ${comentario}`;
+      comentariosDiv.appendChild(p);
+      comentariosDiv.scrollTop = comentariosDiv.scrollHeight;
+
+      // Limpiar textarea y cerrar menú después de un segundo
+      textarea.value = '';
+      setTimeout(() => overlay.remove(), 800);
+
+    } catch (e) {
+      alert("Error al enviar comentario.");
+    }
+  };
+
+  // Detectar scroll hacia abajo para cerrar el menú
+  let startY = null;
+  overlay.addEventListener('touchstart', (e) => {
+    startY = e.touches[0].clientY;
+  });
+
+  overlay.addEventListener('touchmove', (e) => {
+    const currentY = e.touches[0].clientY;
+    if (startY && currentY - startY > 80) { // deslizó hacia abajo más de 80px
+      overlay.remove();
+    }
+  });
+
+  // Armar el menú
+  menu.appendChild(comentariosDiv);
+  menu.appendChild(textarea);
+  menu.appendChild(enviarBtn);
+  overlay.appendChild(menu);
+  document.body.appendChild(overlay);
+}
+
+// Animación CSS para deslizar
+const estiloAnimacion = document.createElement('style');
+estiloAnimacion.textContent = `
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}`;
+document.head.appendChild(estiloAnimacion);    
 
         icon.classList.add("grow");
         setTimeout(() => {

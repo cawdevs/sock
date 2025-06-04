@@ -52,10 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       else if (id === "comment") {
         span.addEventListener("click",async function () {
-          toggleReaction(span);
-            
-           $('#myModal_comentarios').modal('hide');
-          //await mostrarMenuComentarios(postId, nftUsername_post);
+          toggleReaction(span);            
+           
+          await mostrarMenuComentarios(postId, nftUsername_post);
         });
       }
       else if (id === "share") {
@@ -177,104 +176,68 @@ function compartir_en_redes_sociales(idPublicacion) {
 // 4) Función para mostrar el menú de comentarios
 // ==============================
 async function mostrarMenuComentarios(publicationId, username) {
-  // ID único para el contenedor completo de comentarios
+  const modalSelector = '#myModal_comentarios';
+  const contPadre     = document.getElementById('comentarios-container');
 
-   
-     
-
-   const container = document.getElementById('comentarios-container');
-   container.style.cssText = 'background-color:#fff;';
-   container.style.width = '100%';
-   container.style.borderRadius = '20px';
-   container.innerHTML = '';
-
-
-  /*
-  const containerId = `comentarios-completos-${publicationId}`;
-  const existing = document.getElementById(containerId);
-  if (existing) {
-    existing.remove();
+  // Si el modal ya está visible, lo ocultamos y salimos (toggle).
+  if ($(modalSelector).hasClass('show')) {
+    $(modalSelector).modal('hide');
     return;
   }
-  */
 
+  // 1) Limpiar el contenido previo:
+  contPadre.innerHTML = '';
+  contPadre.style.width           = '100%';
+  contPadre.style.borderRadius    = '20px';
+  contPadre.style.backgroundColor = '#fff';
 
-  // 1) Crear contenedor principal (bloque que ocupe el 100% y limpie floats)
-  const contenedor = document.createElement('div');
-  contenedor.style.display = 'block';       // elemento de bloque
-  contenedor.style.width = '100%';          // ocupa todo el ancho
-  contenedor.style.clear = 'both';          // limpia floats anteriores
-  contenedor.style.border = '1px solid #ccc';
-  contenedor.style.borderRadius = '8px';
-  contenedor.style.padding = '12px';
-  contenedor.style.marginTop = '10px';
-  contenedor.style.backgroundColor = '#fafafa';
-  contenedor.style.maxHeight = '300px';
-  contenedor.style.boxSizing = 'border-box';
-  //contenedor.style.display = 'flex';
-  contenedor.style.flexDirection = 'column';
-  contenedor.style.gap = '8px';
+  // 2) Crear el contenedor interno donde irá todo:
+  const wrapper = document.createElement('div');
+  wrapper.style.display      = 'flex';
+  wrapper.style.flexDirection = 'column';
+  wrapper.style.gap          = '8px';
+  // (Opcional: controlar altura total si quieres scrollbar general del modal)
+  // wrapper.style.maxHeight = '100vh';
 
-  // 2) Sub-contenedor scrollable para comentarios anteriores
+  // 3) Sub-contenedor scrollable para comentarios anteriores
   const comentariosPrevios = document.createElement('div');
-  comentariosPrevios.id = `scroll-comentarios-${publicationId}`;
-  comentariosPrevios.style.overflowY = 'auto';
-  comentariosPrevios.style.border = '1px solid #ddd';
+  comentariosPrevios.id              = `scroll-comentarios-${publicationId}`;
+  comentariosPrevios.style.overflowY   = 'auto';
+  comentariosPrevios.style.border      = '1px solid #ddd';
   comentariosPrevios.style.borderRadius = '6px';
-  comentariosPrevios.style.padding = '8px';
-  comentariosPrevios.style.flexGrow = '1';
-  comentariosPrevios.style.maxHeight = '200px';
-  comentariosPrevios.innerHTML = 'Cargando comentarios…';
+  comentariosPrevios.style.padding      = '8px';
+  comentariosPrevios.style.flexGrow     = '1';
+  comentariosPrevios.style.maxHeight    = '200px';
+  comentariosPrevios.innerHTML         = 'Cargando comentarios…';
 
-  /*
-  fetch(`https://api.thesocks.net/comentarios/?id=${publicationId}`)
-    .then(res => res.json())
-    .then(data => {
-      comentariosPrevios.innerHTML = '';
-      if (data.comentarios && data.comentarios.length > 0) {
-        data.comentarios.forEach(com => {
-          const p = document.createElement('p');
-          p.style.margin = '4px 0';
-          p.innerHTML = `<strong>${com.usuario}</strong>: ${com.comentario}`;
-          comentariosPrevios.appendChild(p);
-        });
-        comentariosPrevios.scrollTop = comentariosPrevios.scrollHeight;
-      } else {
-        comentariosPrevios.innerHTML = 'No hay comentarios aún.';
-      }
-    })
-    .catch(() => {
-      comentariosPrevios.innerHTML = 'Error al cargar comentarios.';
-    });
-  */
-
-  // 3) Fila para textarea + botón en la misma línea
+  // 4) Fila para textarea + botón en la misma línea
   const filaInput = document.createElement('div');
   filaInput.style.display = 'flex';
-  filaInput.style.gap = '6px';
+  filaInput.style.gap     = '6px';
 
-  // 3.1) Textarea para nuevo comentario
+  // 4.1) Textarea para nuevo comentario
   const textarea = document.createElement('textarea');
-  textarea.rows = 2;
+  textarea.rows        = 2;
   textarea.placeholder = 'Comentar publicación';
-  textarea.style.flexGrow = '1';
-  textarea.style.boxSizing = 'border-box';
-  textarea.style.padding = '8px';
-  textarea.style.border = '1px solid #ccc';
+  textarea.style.flexGrow   = '1';
+  textarea.style.boxSizing  = 'border-box';
+  textarea.style.padding    = '8px';
+  textarea.style.border     = '1px solid #ccc';
   textarea.style.borderRadius = '6px';
-  textarea.style.resize = 'none';
+  textarea.style.resize     = 'none';
 
-  // 3.2) Botón “Comentar”
+  // 4.2) Botón “Comentar”
   const botonComentar = document.createElement('button');
-  botonComentar.textContent = 'Comentar';
-  botonComentar.style.padding = '8px 12px';
+  botonComentar.textContent        = 'Comentar';
+  botonComentar.style.padding      = '8px 12px';
   botonComentar.style.backgroundColor = 'dodgerblue';
-  botonComentar.style.color = '#fff';
-  botonComentar.style.border = 'none';
+  botonComentar.style.color        = '#fff';
+  botonComentar.style.border       = 'none';
   botonComentar.style.borderRadius = '6px';
-  botonComentar.style.cursor = 'pointer';
-  botonComentar.style.flexShrink = '0';
+  botonComentar.style.cursor       = 'pointer';
+  botonComentar.style.flexShrink   = '0';
 
+  // 5) Acción al hacer clic en “Comentar”
   botonComentar.onclick = async () => {
     const texto = textarea.value.trim();
     if (!texto) {
@@ -282,6 +245,7 @@ async function mostrarMenuComentarios(publicationId, username) {
       return;
     }
     try {
+      // Enviar comentario al backend Django
       const response = await fetch('https://api.thesocks.net/enviar-comentario/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -293,26 +257,56 @@ async function mostrarMenuComentarios(publicationId, username) {
       });
       if (!response.ok) throw new Error('Error en el servidor');
 
+      // Una vez exitoso, inyectamos el comentario inmediatamente:
       const p = document.createElement('p');
       p.style.margin = '4px 0';
       p.innerHTML = `<strong>${username}</strong>: ${texto}`;
       comentariosPrevios.appendChild(p);
       comentariosPrevios.scrollTop = comentariosPrevios.scrollHeight;
+
+      // Limpiar el textarea
       textarea.value = '';
-    } catch {
+      // (Opcional) Para cerrar el modal tras publicar, descomenta:
+      // $(modalSelector).modal('hide');
+    } catch (error) {
       alert('Error al enviar comentario.');
     }
   };
 
-  // 4) Ensamblar fila de input
+  // 6) Ensamblar fila de input
   filaInput.appendChild(textarea);
   filaInput.appendChild(botonComentar);
 
-  // 5) Agregar secciones al contenedor
-  contenedor.appendChild(comentariosPrevios);
-  contenedor.appendChild(filaInput);
+  // 7) Agregar al wrapper general
+  wrapper.appendChild(comentariosPrevios);
+  wrapper.appendChild(filaInput);
 
-  // 6) Insertar el contenedor justo después del bloque de reacciones
-  //    Esto lo asegura en nueva línea debajo de todo lo que haya en "container"
-  container.appendChild(contenedor);
+  // 8) Inyectar todo dentro de #comentarios-container
+  contPadre.appendChild(wrapper);
+
+  // 9) Mostrar el modal (Bootstrap)
+  $(modalSelector).modal('show');
+
+  // 10) Cargar comentarios previos desde Django
+  try {
+    const res = await fetch(`https://api.thesocks.net/comentarios/?id=${publicationId}`);
+    if (!res.ok) throw new Error('Error al obtener comentarios');
+    const data = await res.json();
+
+    comentariosPrevios.innerHTML = ''; // Limpiar "Cargando comentarios..."
+
+    if (data.comentarios && data.comentarios.length > 0) {
+      data.comentarios.forEach(com => {
+        const p = document.createElement('p');
+        p.style.margin = '4px 0';
+        p.innerHTML = `<strong>${com.usuario}</strong>: ${com.comentario}`;
+        comentariosPrevios.appendChild(p);
+      });
+      comentariosPrevios.scrollTop = comentariosPrevios.scrollHeight;
+    } else {
+      comentariosPrevios.innerHTML = 'No hay comentarios aún.';
+    }
+  } catch (e) {
+    comentariosPrevios.innerHTML = 'Error al cargar comentarios.';
+  }
 }

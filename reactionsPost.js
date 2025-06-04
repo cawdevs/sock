@@ -53,6 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
       else if (id === "comment") {
         span.addEventListener("click",async function () {
           toggleReaction(span);
+            
+           $('#myModal_comentarios').modal('hide');
           await mostrarMenuComentarios(postId, nftUsername_post, container);
         });
       }
@@ -174,14 +176,28 @@ function compartir_en_redes_sociales(idPublicacion) {
 // ==============================
 // 4) Función para mostrar el menú de comentarios
 // ==============================
-async function mostrarMenuComentarios(publicationId, username, container) {
+async function mostrarMenuComentarios(publicationId, username) {
   // ID único para el contenedor completo de comentarios
+
+   
+     
+
+   const container = document.getElementById('comentarios-container');
+   container.style.cssText = 'background-color:#fff;';
+   container.style.width = '100%';
+   container.style.borderRadius = '20px';
+   container.innerHTML = '';
+
+
+  /*
   const containerId = `comentarios-completos-${publicationId}`;
   const existing = document.getElementById(containerId);
   if (existing) {
     existing.remove();
     return;
   }
+  */
+
 
   // 1) Crear contenedor principal (bloque que ocupe el 100% y limpie floats)
   const contenedor = document.createElement('div');

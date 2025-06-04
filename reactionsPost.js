@@ -311,7 +311,7 @@ async function mostrarMenuComentarios(publicationId, username,container) {
 
 
 
-  container.appendChild(contenedor):
+  container.appendChild(contenedor);
   // 7) Insertar el contenedor justo después del botón de icono de mensaje
   //     Se asume que el botón tiene un ID único: `btn-comentario-${publicationId}`
   //     o bien, que recibes en el evento el propio elemento “this”.

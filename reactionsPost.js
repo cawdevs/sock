@@ -196,7 +196,7 @@ async function mostrarMenuComentarios(publicationId, username, container) {
   contenedor.style.backgroundColor = '#fafafa';
   contenedor.style.maxHeight = '300px';
   contenedor.style.boxSizing = 'border-box';
-  contenedor.style.display = 'flex';
+  //contenedor.style.display = 'flex';
   contenedor.style.flexDirection = 'column';
   contenedor.style.gap = '8px';
 

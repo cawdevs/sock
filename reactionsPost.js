@@ -176,9 +176,9 @@ function compartir_en_redes_sociales(idPublicacion) {
 // ==============================
 async function mostrarMenuComentarios(publicationId, username,container) {
   // ID único para el contenedor completo de comentarios
-  const containerId = `comentarios-completos-${publicationId}`;
-  const existing = document.getElementById(containerId);
-
+  //const containerId = container;
+  //const containerId = `comentarios-completos-${publicationId}`;
+  const existing = container;
   if (existing) {
     // Si ya existía, eliminarlo para “ocultar” el cuadro
     existing.remove();
@@ -309,12 +309,15 @@ async function mostrarMenuComentarios(publicationId, username,container) {
   contenedor.appendChild(comentariosPrevios);
   contenedor.appendChild(filaInput);
 
+
+
+  container.appendChild(contenedor):
   // 7) Insertar el contenedor justo después del botón de icono de mensaje
   //     Se asume que el botón tiene un ID único: `btn-comentario-${publicationId}`
   //     o bien, que recibes en el evento el propio elemento “this”.
   //const btnIcono = document.getElementById("container");
 
-    btnIcono.insertAdjacentElement('afterend', container);
+  //btnIcono.insertAdjacentElement('afterend', container);
     // Si no tienes ID en el botón, puedes pasar el mismo elemento como parámetro
     // y hacer: elemento.insertAdjacentElement('afterend', contenedor);
   

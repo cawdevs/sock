@@ -855,7 +855,34 @@ span.hashtag {
          <!--   </div>  -->
     <!--   </div>   -->
 
+<!-- ############## ventana emergente Publicaciones ###########################-->
+  
+<!-- Modal -->
+<div class="modal fade" id="myModal_comentarios" role="dialog">    
+    <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content" style="background: linear-gradient(180deg, lime, black);">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                 
+            </div>
+           
+            <div class="modal-body" style="display: flex; align-items: flex-start; gap: 10px;">
 
+           
+                <div id="comentarios-container" style="flex: 1; padding: 10px; border-radius: 10px;"></div>                                     
+            
+            </div>      
+
+                   
+                          
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -1136,9 +1163,7 @@ span.hashtag {
              
              <center><div id="modal-enviar-tokens"></div></center>
 
-            
-
-             
+                        
 
        
       </div>
@@ -1246,9 +1271,6 @@ span.hashtag {
 
 <!-- ############## ventana emergente SI NO ###########################-->
 <!-- #################################################################################-->
-
-
- 
   <!-- Modal -->
   <div class="modal fade" id="myModal_Si_No" role="dialog">
     <div class="modal-dialog">

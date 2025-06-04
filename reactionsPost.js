@@ -179,23 +179,26 @@ async function mostrarMenuComentarios(publicationId, username, container) {
   const containerId = `comentarios-completos-${publicationId}`;
   const existing = document.getElementById(containerId);
   if (existing) {
-    // Si ya existe, lo eliminamos y salimos (para “ocultar”)
     existing.remove();
     return;
   }
 
-  // 1) Crear contenedor principal
+  // 1) Crear contenedor principal (bloque que ocupe el 100% y limpie floats)
   const contenedor = document.createElement('div');
   contenedor.id = containerId;
+  contenedor.style.display = 'block';       // elemento de bloque
+  contenedor.style.width = '100%';          // ocupa todo el ancho
+  contenedor.style.clear = 'both';          // limpia floats anteriores
   contenedor.style.border = '1px solid #ccc';
   contenedor.style.borderRadius = '8px';
   contenedor.style.padding = '12px';
   contenedor.style.marginTop = '10px';
   contenedor.style.backgroundColor = '#fafafa';
-  contenedor.style.maxHeight = '300px';       // Altura máxima total
+  contenedor.style.maxHeight = '300px';
+  contenedor.style.boxSizing = 'border-box';
   contenedor.style.display = 'flex';
   contenedor.style.flexDirection = 'column';
-  contenedor.style.gap = '8px';               // Separación vertical
+  contenedor.style.gap = '8px';
 
   // 2) Sub-contenedor scrollable para comentarios anteriores
   const comentariosPrevios = document.createElement('div');
@@ -204,12 +207,11 @@ async function mostrarMenuComentarios(publicationId, username, container) {
   comentariosPrevios.style.border = '1px solid #ddd';
   comentariosPrevios.style.borderRadius = '6px';
   comentariosPrevios.style.padding = '8px';
-  comentariosPrevios.style.flexGrow = '1';     // Ocupa espacio disponible
+  comentariosPrevios.style.flexGrow = '1';
   comentariosPrevios.style.maxHeight = '200px';
   comentariosPrevios.innerHTML = 'Cargando comentarios…';
 
   /*
-  // Aquí iría el fetch para cargar comentarios desde Django
   fetch(`https://api.thesocks.net/comentarios/?id=${publicationId}`)
     .then(res => res.json())
     .then(data => {
@@ -231,10 +233,10 @@ async function mostrarMenuComentarios(publicationId, username, container) {
     });
   */
 
-  // 3) Crear fila para textarea + botón en la misma línea
+  // 3) Fila para textarea + botón en la misma línea
   const filaInput = document.createElement('div');
   filaInput.style.display = 'flex';
-  filaInput.style.gap = '6px';          // Espacio entre textarea y botón
+  filaInput.style.gap = '6px';
 
   // 3.1) Textarea para nuevo comentario
   const textarea = document.createElement('textarea');
@@ -258,7 +260,6 @@ async function mostrarMenuComentarios(publicationId, username, container) {
   botonComentar.style.cursor = 'pointer';
   botonComentar.style.flexShrink = '0';
 
-  // Acción al hacer clic en “Comentar”
   botonComentar.onclick = async () => {
     const texto = textarea.value.trim();
     if (!texto) {
@@ -266,7 +267,6 @@ async function mostrarMenuComentarios(publicationId, username, container) {
       return;
     }
     try {
-      // Enviar comentario a Django
       const response = await fetch('https://api.thesocks.net/enviar-comentario/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -278,14 +278,13 @@ async function mostrarMenuComentarios(publicationId, username, container) {
       });
       if (!response.ok) throw new Error('Error en el servidor');
 
-      // Agregar nuevo comentario al scroll
       const p = document.createElement('p');
       p.style.margin = '4px 0';
       p.innerHTML = `<strong>${username}</strong>: ${texto}`;
       comentariosPrevios.appendChild(p);
       comentariosPrevios.scrollTop = comentariosPrevios.scrollHeight;
       textarea.value = '';
-    } catch (error) {
+    } catch {
       alert('Error al enviar comentario.');
     }
   };
@@ -298,6 +297,7 @@ async function mostrarMenuComentarios(publicationId, username, container) {
   contenedor.appendChild(comentariosPrevios);
   contenedor.appendChild(filaInput);
 
-  // 6) Insertar el contenedor al final de “container”
+  // 6) Insertar el contenedor justo después del bloque de reacciones
+  //    Esto lo asegura en nueva línea debajo de todo lo que haya en "container"
   container.appendChild(contenedor);
 }

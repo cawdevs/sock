@@ -174,18 +174,17 @@ function compartir_en_redes_sociales(idPublicacion) {
 // ==============================
 // 4) Función para mostrar el menú de comentarios
 // ==============================
-async function mostrarMenuComentarios(publicationId, username,container) {
+async function mostrarMenuComentarios(publicationId, username, container) {
   // ID único para el contenedor completo de comentarios
-  //const containerId = container;
-  //const containerId = `comentarios-completos-${publicationId}`;
-  /*const existing = container;
+  const containerId = `comentarios-completos-${publicationId}`;
+  const existing = document.getElementById(containerId);
   if (existing) {
-    // Si ya existía, eliminarlo para “ocultar” el cuadro
+    // Si ya existe, lo eliminamos y salimos (para “ocultar”)
     existing.remove();
     return;
-  }*/
+  }
 
-  // 1) Crear contenedor principal (overlay estático dentro del flujo)
+  // 1) Crear contenedor principal
   const contenedor = document.createElement('div');
   contenedor.id = containerId;
   contenedor.style.border = '1px solid #ccc';
@@ -196,26 +195,25 @@ async function mostrarMenuComentarios(publicationId, username,container) {
   contenedor.style.maxHeight = '300px';       // Altura máxima total
   contenedor.style.display = 'flex';
   contenedor.style.flexDirection = 'column';
-  contenedor.style.gap = '8px';               // Separación vertical entre secciones
+  contenedor.style.gap = '8px';               // Separación vertical
 
-  // 2) Crear sub-contenedor scrollable para comentarios anteriores
+  // 2) Sub-contenedor scrollable para comentarios anteriores
   const comentariosPrevios = document.createElement('div');
   comentariosPrevios.id = `scroll-comentarios-${publicationId}`;
   comentariosPrevios.style.overflowY = 'auto';
   comentariosPrevios.style.border = '1px solid #ddd';
   comentariosPrevios.style.borderRadius = '6px';
   comentariosPrevios.style.padding = '8px';
-  comentariosPrevios.style.flexGrow = '1';     // Ocupa todo el espacio disponible
+  comentariosPrevios.style.flexGrow = '1';     // Ocupa espacio disponible
   comentariosPrevios.style.maxHeight = '200px';
   comentariosPrevios.innerHTML = 'Cargando comentarios…';
 
-
   /*
-  // 3) Hacer fetch para cargar comentarios previos desde Django
+  // Aquí iría el fetch para cargar comentarios desde Django
   fetch(`https://api.thesocks.net/comentarios/?id=${publicationId}`)
     .then(res => res.json())
     .then(data => {
-      comentariosPrevios.innerHTML = ''; // Limpiar mensaje de “Cargando…”
+      comentariosPrevios.innerHTML = '';
       if (data.comentarios && data.comentarios.length > 0) {
         data.comentarios.forEach(com => {
           const p = document.createElement('p');
@@ -223,7 +221,6 @@ async function mostrarMenuComentarios(publicationId, username,container) {
           p.innerHTML = `<strong>${com.usuario}</strong>: ${com.comentario}`;
           comentariosPrevios.appendChild(p);
         });
-        // Sitúa siempre al final si hay scroll
         comentariosPrevios.scrollTop = comentariosPrevios.scrollHeight;
       } else {
         comentariosPrevios.innerHTML = 'No hay comentarios aún.';
@@ -232,16 +229,14 @@ async function mostrarMenuComentarios(publicationId, username,container) {
     .catch(() => {
       comentariosPrevios.innerHTML = 'Error al cargar comentarios.';
     });
-
   */
 
-
-  // 4) Crear contenedor “fila” para textarea + botón en la misma línea
+  // 3) Crear fila para textarea + botón en la misma línea
   const filaInput = document.createElement('div');
   filaInput.style.display = 'flex';
   filaInput.style.gap = '6px';          // Espacio entre textarea y botón
 
-  // 4.1) Textarea para escribir nuevo comentario
+  // 3.1) Textarea para nuevo comentario
   const textarea = document.createElement('textarea');
   textarea.rows = 2;
   textarea.placeholder = 'Comentar publicación';
@@ -250,9 +245,9 @@ async function mostrarMenuComentarios(publicationId, username,container) {
   textarea.style.padding = '8px';
   textarea.style.border = '1px solid #ccc';
   textarea.style.borderRadius = '6px';
-  textarea.style.resize = 'none';       // Evita que el usuario redimensione
+  textarea.style.resize = 'none';
 
-  // 4.2) Botón “Comentar”
+  // 3.2) Botón “Comentar”
   const botonComentar = document.createElement('button');
   botonComentar.textContent = 'Comentar';
   botonComentar.style.padding = '8px 12px';
@@ -261,7 +256,7 @@ async function mostrarMenuComentarios(publicationId, username,container) {
   botonComentar.style.border = 'none';
   botonComentar.style.borderRadius = '6px';
   botonComentar.style.cursor = 'pointer';
-  botonComentar.style.flexShrink = '0'; // No se reduzca de ancho
+  botonComentar.style.flexShrink = '0';
 
   // Acción al hacer clic en “Comentar”
   botonComentar.onclick = async () => {
@@ -270,7 +265,6 @@ async function mostrarMenuComentarios(publicationId, username,container) {
       alert('Escribe un comentario antes de enviar.');
       return;
     }
-
     try {
       // Enviar comentario a Django
       const response = await fetch('https://api.thesocks.net/enviar-comentario/', {
@@ -282,43 +276,28 @@ async function mostrarMenuComentarios(publicationId, username,container) {
           comentario: texto
         })
       });
-
       if (!response.ok) throw new Error('Error en el servidor');
 
-      // Agregar el nuevo comentario al contenedor scrollable
+      // Agregar nuevo comentario al scroll
       const p = document.createElement('p');
       p.style.margin = '4px 0';
       p.innerHTML = `<strong>${username}</strong>: ${texto}`;
       comentariosPrevios.appendChild(p);
       comentariosPrevios.scrollTop = comentariosPrevios.scrollHeight;
-
-      // Limpiar textarea
       textarea.value = '';
-      // Opcional: cerrar el cuadro después de enviar comentando (si no quieres que permanezca abierto)
-      // contenedor.remove();
     } catch (error) {
       alert('Error al enviar comentario.');
     }
   };
 
-  // 5) Ensamblar fila de input
+  // 4) Ensamblar fila de input
   filaInput.appendChild(textarea);
   filaInput.appendChild(botonComentar);
 
-  // 6) Agregar ambas secciones al contenedor principal
+  // 5) Agregar secciones al contenedor
   contenedor.appendChild(comentariosPrevios);
   contenedor.appendChild(filaInput);
 
-
-
+  // 6) Insertar el contenedor al final de “container”
   container.appendChild(contenedor);
-  // 7) Insertar el contenedor justo después del botón de icono de mensaje
-  //     Se asume que el botón tiene un ID único: `btn-comentario-${publicationId}`
-  //     o bien, que recibes en el evento el propio elemento “this”.
-  //const btnIcono = document.getElementById("container");
-
-  //btnIcono.insertAdjacentElement('afterend', container);
-    // Si no tienes ID en el botón, puedes pasar el mismo elemento como parámetro
-    // y hacer: elemento.insertAdjacentElement('afterend', contenedor);
-  
 }

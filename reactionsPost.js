@@ -178,12 +178,12 @@ async function mostrarMenuComentarios(publicationId, username,container) {
   // ID único para el contenedor completo de comentarios
   //const containerId = container;
   //const containerId = `comentarios-completos-${publicationId}`;
-  const existing = container;
+  /*const existing = container;
   if (existing) {
     // Si ya existía, eliminarlo para “ocultar” el cuadro
     existing.remove();
     return;
-  }
+  }*/
 
   // 1) Crear contenedor principal (overlay estático dentro del flujo)
   const contenedor = document.createElement('div');

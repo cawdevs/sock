@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
       else if (id === "comment") {
         span.addEventListener("click",async function () {
           toggleReaction(span);
-          await mostrarMenuComentarios(postId, nftUsername_post);
+          await mostrarMenuComentarios(postId, nftUsername_post, container);
         });
       }
       else if (id === "share") {
@@ -174,7 +174,7 @@ function compartir_en_redes_sociales(idPublicacion) {
 // ==============================
 // 4) Función para mostrar el menú de comentarios
 // ==============================
-async function mostrarMenuComentarios(publicationId, username) {
+async function mostrarMenuComentarios(publicationId, username,container) {
   // ID único para el contenedor completo de comentarios
   const containerId = `comentarios-completos-${publicationId}`;
   const existing = document.getElementById(containerId);
@@ -312,12 +312,10 @@ async function mostrarMenuComentarios(publicationId, username) {
   // 7) Insertar el contenedor justo después del botón de icono de mensaje
   //     Se asume que el botón tiene un ID único: `btn-comentario-${publicationId}`
   //     o bien, que recibes en el evento el propio elemento “this”.
-  const btnIcono = document.getElementById("comment");
-  if (btnIcono) {
-    btnIcono.insertAdjacentElement('afterend', contenedor);
-  } else {
+  //const btnIcono = document.getElementById("container");
+
+    btnIcono.insertAdjacentElement('afterend', container);
     // Si no tienes ID en el botón, puedes pasar el mismo elemento como parámetro
     // y hacer: elemento.insertAdjacentElement('afterend', contenedor);
-    console.warn('No se encontró el botón de comentario para insertar contenedor.');
-  }
+  
 }

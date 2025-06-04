@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
           toggleReaction(span);
             
            $('#myModal_comentarios').modal('hide');
-          await mostrarMenuComentarios(postId, nftUsername_post);
+          //await mostrarMenuComentarios(postId, nftUsername_post);
         });
       }
       else if (id === "share") {

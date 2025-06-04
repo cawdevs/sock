@@ -201,7 +201,6 @@ async function mostrarMenuComentarios(publicationId, username) {
 
   // 1) Crear contenedor principal (bloque que ocupe el 100% y limpie floats)
   const contenedor = document.createElement('div');
-  contenedor.id = containerId;
   contenedor.style.display = 'block';       // elemento de bloque
   contenedor.style.width = '100%';          // ocupa todo el ancho
   contenedor.style.clear = 'both';          // limpia floats anteriores

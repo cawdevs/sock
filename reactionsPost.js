@@ -250,7 +250,8 @@ async function mostrarMenuComentarios(publicationId, username) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          publication_id: publicationId,
+          publication_id: publicationId.toNumber ?     publicationId.toNumber() : publicationId.
+          //id_publication: postId.toNumber ? postId.toNumber() : postId,
           usuario: username,
           comentario: texto
         })

@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         span.addEventListener("click",async function () {
           toggleReaction(span);            
            
-          await mostrarMenuComentarios(postId, nftUsername_post);
+          await mostrarMenuComentarios(postId, username_selected);
         });
       }
       else if (id === "share") {
@@ -250,7 +250,7 @@ async function mostrarMenuComentarios(publicationId, username) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          publication_id: publicationId.toNumber ?     publicationId.toNumber() : publicationId,
+          publication_id: publicationId.toNumber ? publicationId.toNumber() : publicationId,
           //id_publication: postId.toNumber ? postId.toNumber() : postId,
           usuario: username,
           comentario: texto

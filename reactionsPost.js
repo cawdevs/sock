@@ -51,9 +51,26 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       }
       else if (id === "comment") {
-        span.addEventListener("click",async function () {
-          toggleReaction(span);            
-           
+        // Crear el contador visualmente a la par del ícono
+        const commentCount = document.createElement("span");
+        commentCount.id = `comments-count-${postId}`;
+        commentCount.style.marginLeft = "5px";
+        commentCount.textContent = "0";
+        span.appendChild(commentCount);
+
+        // Obtener el número de comentarios desde el backend
+        fetch(`https://api.thesocks.net/contar-comentarios/?id_publication=${postId.toNumber ? postId.toNumber() : postId}`)
+          .then(res => res.json())
+          .then(data => {
+            commentCount.textContent = data.total_comentarios;
+          })
+          .catch(err => {
+            console.error("Error al obtener cantidad de comentarios:", err);
+          });
+
+        // Agregar el evento para abrir el menú de comentarios
+        span.addEventListener("click", async function () {
+          toggleReaction(span);
           await mostrarMenuComentarios(postId, username_selected);
         });
       }

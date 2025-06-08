@@ -8,11 +8,21 @@ let attemptCount = 0;
 let claimAvailable = false; // Para gestionar el estado del botón "Reclamar Tokens"
 
 function selectCard(cardNumber) {
-    if (selectedCard !== null && selectedCard !== cardNumber) {
-        document.getElementById(`card${selectedCard}`).classList.remove('selected');
-    }
+    if (selectedCard !== null) return; // Prevenir múltiples selecciones
+
     selectedCard = cardNumber;
     document.getElementById(`card${cardNumber}`).classList.add('selected');
+
+    // Esperar 2 segundos y luego revelar las cartas
+    setTimeout(() => {
+        revealCards(); // Revela cartas automáticamente
+
+        // Esperar 3 segundos más para reiniciar automáticamente
+        setTimeout(() => {
+            resetGame(); // Vuelve a poner las cartas como estaban
+        }, 2000);
+
+    }, 1500);
 }
 
 function revealCards() {
@@ -21,7 +31,7 @@ function revealCards() {
         return;
     }
 
-    document.getElementById('revealButton').disabled = true;
+    //document.getElementById('revealButton').disabled = true;
 
     cardValues = [getRandomCardValue(), getRandomCardValue()];
 
@@ -38,7 +48,7 @@ function revealCards() {
 
     checkResult();
 
-    document.getElementById('resetButton').style.display = 'inline-block';
+    //document.getElementById('resetButton').style.display = 'inline-block';
 }
 
 function getRandomCardValue() {
@@ -53,11 +63,11 @@ function checkResult() {
     const messageElement = document.getElementById('message');
 
     if (result === 'win') {
-        messageElement.textContent = 'YOU WIN!';
+        messageElement.textContent = 'GANASTES !';
         messageElement.style.color = 'lime'; // Color para win
         winCount++;
     } else {
-        messageElement.textContent = 'YOU LOSS!';
+        messageElement.textContent = 'PERDISTES !';
         messageElement.style.color = 'red'; // Color para loss
         lossCount++;
     }

@@ -138,7 +138,7 @@
             height: 100vh;
             background: black;
             color: white;
-            padding: 20px;
+            padding: 15px;
             transition: left 0.3s ease-in-out;
             z-index: 9999; /* 🔥 Esto lo pone por encima de casi todo */
 
@@ -324,11 +324,10 @@
 
 
       <div id="menu" class="menu">
-                <center><h4><i><font color="dodgerblue">thesocks.net</i></font></h4></center>
-
+                
                 <ul>    
                     <li>                         
-                           <center><div id="NFT_image-container" style=" width:80px;  height: 80px;"> </div></center>
+                           <center><div id="NFT_image-container" style=" width:60px;  height: 60px;"> </div></center>
                         
                     </li>   
 
@@ -340,7 +339,7 @@
                     </li> 
   
 
-                      <h5>                                   
+                      <h6>                                   
                       <!-- Dirección de la billetera -->
                       <li>                      
                         <a href="#" id="btn-copy-key" onclick="myFunctionbtc()">
@@ -357,7 +356,7 @@
                            <div style="display:inline-block;" id="saldo_ETH"><font color="white "></font></div>
 
                            <div style="display:inline-block;" id="saldo_USD"><font color="white "></font></div>
-                                           
+                                         
                         </a>
                       </li>
 
@@ -382,7 +381,19 @@
                           </a>
                       </li>
     
+                     
 
+                     <li>
+                        <a data-toggle="tab" href="#menu_recargar_criptos">
+
+                          <font color="dodgerblue"><span class="glyphicon glyphicon-usd" style="margin-left: 8px; margin-right: 16px;"></span></font>
+                          
+                          <span>Comprar cripto POL/Sock</span>
+                          </a>
+
+
+                       
+                      </li>
                      
                        
 
@@ -442,7 +453,7 @@
                           </a>
                       </li>
 
-                      </h5>
+                      </h6>
 
                  </ul>
      </div>
@@ -767,9 +778,8 @@ span.hashtag {
           
                    
    
-    <!--/////////////////////////////////////////////////////////////-->
-    <!--/////////////////////////////////////////////////////////////-->
-
+ <!--/////////////////////////////////////////////////////////////-->
+ <!--/////////////////////////////////////////////////////////////-->
  <div id="menu_info_sock" class="tab-pane fade">      
      
                 <br>
@@ -782,7 +792,18 @@ span.hashtag {
  <!--/////////////////////////////////////////////////////////////-->
 
 
-
+<!--/////////////////////////////////////////////////////////////-->
+ <!--/////////////////////////////////////////////////////////////-->
+ <div id="menu_recargar_criptos" class="tab-pane fade">      
+     
+                <br>
+                <center><h3><p>Recargar SOCKS</p></h3></center>
+                <br>       
+                <div id="recargar-criptomonedas"></div>  
+                          
+ </div>
+ <!--/////////////////////////////////////////////////////////////-->
+ <!--/////////////////////////////////////////////////////////////-
 
 
 

@@ -351,8 +351,8 @@
 
 
                        <li>
-                       <a href="#">
-                          <img src="images/icons/btc_icon.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 8px; ">Recargar con Bitcoin
+                       <a data-toggle="tab" href="#menu_comprar_criptos" >
+                          <img src="images/icons/btc_icon.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 8px;  margin-right: 16px;">Recargar con Bitcoin
 
                            <div style="display:inline-block;" id="saldo_CAW"><font color="lime"></font></div>   
                                            
@@ -361,8 +361,8 @@
                             
 
                        <li>                
-                        <a href="#" id="recargar-tarjeta-red"  >
-                          <span class="glyphicon glyphicon-credit-card" style="transform: rotate(0deg); display: inline-block; margin-left: 8px; " ></span>
+                        <a data-toggle="tab" href="#menu_comprar_criptos" >
+                          <span class="glyphicon glyphicon-credit-card" style="transform: rotate(0deg); display: inline-block; margin-left: 8px;  margin-right: 16px; " ></span>
                           
                           <span>Recargar con tarjeta</span>
                           </a>      
@@ -401,14 +401,7 @@
                       </li>
                      -->
 
-                       <li>
-                        <a data-toggle="tab" href="#menu_comprar_criptos" >
-
-                          <font color="dodgerblue"><span class="glyphicon glyphicon-usd" style="margin-left: 8px; margin-right: 16px;"></span></font>
-                          
-                          <span>Comprar SOCK/POL </span>
-                          </a>
-                      </li>
+                      
     
 
                      
@@ -1922,7 +1915,7 @@ async function obtenerSaldo_SOCK() {
    // Mostrar el saldo en la página web
    const saldoElement = document.getElementById('saldo_CAW');
    saldoElement.innerText = truncatedBalance;
-   saldoElement.style.color = 'lime';
+   saldoElement.style.color = 'black';
 
    console.log("Saldo Sock SOCK()." + truncatedBalance);    
    return truncatedBalance;

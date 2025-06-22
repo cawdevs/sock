@@ -1944,7 +1944,7 @@ async function obtenerSaldo_POL() {
    // Mostrar el saldo en la página web
    const saldoElementETH = document.getElementById('saldo_ETH');
    saldoElementETH.innerText = truncatedBalanceEther;
-   saldoElementETH.style.color = 'white';
+   saldoElementETH.style.color = 'purple';
 
    // Obtener el precio de MATIC en USD desde CoinGecko
    fetch('https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd')
@@ -1957,7 +1957,7 @@ async function obtenerSaldo_POL() {
            // Mostrar el valor en USD
            const saldoElementUSD = document.getElementById('saldo_USD');
            saldoElementUSD.innerText = " $" + balanceInUsd;
-           saldoElementUSD.style.color = 'white';
+           saldoElementUSD.style.color = 'green';
        })
        .catch(error => console.error("Error al obtener el precio de MATIC:", error));
 

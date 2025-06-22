@@ -359,7 +359,7 @@
                                            
                         </a>
                       </li>
-                    -->
+                   
 
 
                       <li>                      
@@ -372,7 +372,7 @@
                       </li>         
 
                                       
-                      <!--
+                    
                        <li>
                         <a href="#" id="btn-obtener-saldo" onclick="obtenerSaldo_POL_SOCK()" >
                           <span class="glyphicon glyphicon-refresh" style="transform: rotate(0deg); display: inline-block; margin-left: 20px; " ></span>
@@ -473,24 +473,7 @@
     <div style="margin-right: 10px; margin-left: 10px;">
       <font color="dodgerblue"><em>thesocks</em></font>
     </div>
-  </h3>
-
-                        
-    <a href="#">
-       <img src="images/icons/matic_coin.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">
-       <div style="display:inline-block;" id="saldo_ETH"><font color="purple "></font></div>
-       <div style="display:inline-block;" id="saldo_USD"><font color="green "></font></div>
-                                           
-   </a>
-
-   
-   <a href="#" id="btn-obtener-saldo" onclick="obtenerSaldo_POL_SOCK()" >
-      <span class="glyphicon glyphicon-refresh" style="transform: rotate(0deg); display: inline-block; margin-left: 20px; " ></span>
-   </a>
-                    
-
-
-
+  </h3>     
 
 
   <a data-toggle="tab" href="#menu_buscar" style="margin-left: 15px;">
@@ -550,7 +533,7 @@
        
        
 </ul>
- 
+
 
 
  <style>
@@ -575,6 +558,31 @@ span.hashtag {
 
 
 <div id="estado-servidor_msg"></div>
+
+<div style="display: flex; align-items: center; justify-content: space-around;  padding: 0px; border-radius: 0px;">
+
+  <!-- Saldo MATIC -->
+  <div style="display: flex; align-items: center;">
+    <div id="saldo_ETH" style="color: white; margin-right: 5px;">0</div>
+    <img src="images/icons/matic_coin.SVG" alt="MATIC" width="20" style="margin-right: 8px;">    
+    <div id="saldo_USD" style="color: white;">$0.00</div>
+  </div>
+
+  <!-- Saldo SOCK -->
+  <div style="display: flex; align-items: center;">
+    <img src="images/icons/sock_coin.SVG" alt="SOCK" width="20" style="margin-right: 8px;">
+    <div id="saldo_CAW" style="color: lime;">0</div>
+  </div>
+
+  <!-- Botón de actualización -->
+  <div>
+    <a href="#" id="btn-obtener-saldo" onclick="obtenerSaldo_POL_SOCK()" style="color: black; text-decoration: none;">
+      <span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>
+      <span>Actualizar</span>
+    </a>
+  </div>
+
+</div>
 
  <div class="tab-content" style="border: 0px solid lime; border-radius: 20px; background:white;">
  

@@ -348,7 +348,7 @@
                         </a>
                       </li>                
     
-   
+                   <!--
                       <li>                      
                         <a href="#">
                           <img src="images/icons/matic_coin.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">
@@ -359,7 +359,7 @@
                                            
                         </a>
                       </li>
-
+                    -->
 
 
                       <li>                      
@@ -372,7 +372,7 @@
                       </li>         
 
                                       
-                 
+                      <!--
                        <li>
                         <a href="#" id="btn-obtener-saldo" onclick="obtenerSaldo_POL_SOCK()" >
                           <span class="glyphicon glyphicon-refresh" style="transform: rotate(0deg); display: inline-block; margin-left: 20px; " ></span>
@@ -380,10 +380,10 @@
                           <span>Actualizar Balance</span>
                           </a>
                       </li>
-
+                     -->
 
                        <li>
-                        <a data-toggle="tab" href="#menu_comprar_criptos" style="margin-left: 15px;" >
+                        <a data-toggle="tab" href="#menu_comprar_criptos" >
 
                           <font color="dodgerblue"><span class="glyphicon glyphicon-usd" style="margin-left: 8px; margin-right: 16px;"></span></font>
                           
@@ -475,9 +475,32 @@
     </div>
   </h3>
 
+                        
+    <a href="#">
+       <img src="images/icons/matic_coin.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">
+       <div style="display:inline-block;" id="saldo_ETH"><font color="purple "></font></div>
+       <div style="display:inline-block;" id="saldo_USD"><font color="green "></font></div>
+                                           
+   </a>
+
+   
+   <a href="#" id="btn-obtener-saldo" onclick="obtenerSaldo_POL_SOCK()" >
+      <span class="glyphicon glyphicon-refresh" style="transform: rotate(0deg); display: inline-block; margin-left: 20px; " ></span>
+   </a>
+                    
+
+
+
+
+
   <a data-toggle="tab" href="#menu_buscar" style="margin-left: 15px;">
     <img id="image-home" src="images/icons/buscar_icon.SVG" alt="home" width="35">
   </a>  
+
+
+
+
+
 
   
  <div id="estado-servidor" onclick="verificarServidor()" style="cursor: pointer; margin-left: 10px;"></div>
@@ -488,7 +511,7 @@
 </div>
 
 
-  <ul class="gallery_toolbar" style="background-color: dodgerblue; border: 2px solid blue; border-radius: 10px; margin-right: 15;">     
+  <ul class="gallery_toolbar" style="background-color: dodgerblue; border: 2px solid blue; border-radius: 0px; margin-right: 15;">     
            
 
        
@@ -796,7 +819,29 @@ span.hashtag {
      
                 <br>
                 <center><h3><p>Recargar SOCKS</p></h3></center>
-                <br>       
+                <br>
+
+                <div class="input-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+
+                        <a href="#">
+                          <img src="images/icons/btc_icon.SVG" alt="My svg_logo" width="30"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">Recargar Usando Bitcoin
+
+                           <div style="display:inline-block;" id="saldo_CAW"><font color="lime"></font></div>   
+                                           
+                        </a>
+                           
+                                    
+                                       
+                        <a href="#" id="recargar-tarjeta-red"  >
+                          <span class="glyphicon glyphicon-credit-card" style="transform: rotate(0deg); display: inline-block; margin-left: 20px; " ></span>
+                          
+                          <span>Recargar usando tarjeta SOCK</span>
+                          </a>
+                    
+                </div>  
+
+
+
                 <div id="recargar-cripto"></div>  
                           
  </div>

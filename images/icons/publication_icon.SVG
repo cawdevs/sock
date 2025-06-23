@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Creator: CorelDRAW -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="190mm" height="190mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 190 190">
+<!-- Creator: CorelDRAW 2020 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="163.712mm" height="173.57mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 15083.73 15991.97"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
  <defs>
   <style type="text/css">
    <![CDATA[
-    .str0 {stroke:#1F1A17;stroke-width:0.0762}
-    .fil0 {fill:#0A0B0C}
-    .fil3 {fill:#838281}
-    .fil1 {fill:#DEDEDD}
-    .fil2 {fill:lime}
-    .fil5 {fill:#DA251D;fill-rule:nonzero}
-    .fil4 {fill:#DEDEDD;fill-rule:nonzero}
-    .fil6 {fill:lime;fill-rule:nonzero}
+    .str1 {stroke:#FEFEFE;stroke-width:780.09;stroke-miterlimit:22.9256}
+    .str0 {stroke:#373435;stroke-width:780.09;stroke-miterlimit:22.9256}
+    .fil2 {fill:none}
+    .fil0 {fill:#FEFEFE}
+    .fil1 {fill:#201E1E}
+    .fil3 {fill:lime}
+    .fil4 {fill:#FEFEFE;fill-rule:nonzero}
    ]]>
   </style>
  </defs>
  <g id="Capa_x0020_1">
   <metadata id="CorelCorpID_0Corel-Layer"/>
-  <rect class="fil0 str0" x="2.995" y="2.995" width="184.358" height="183.748"/>
-  <rect class="fil1" x="16.5318" y="64.9704" width="153.155" height="63.179" rx="9.4232" ry="9.4232"/>
-  <circle class="fil2 str0" cx="30.1444" cy="25.7482" r="19.5534"/>
-  <rect class="fil3 str0" x="154.908" y="17.0763" width="13.0822" height="6.40946"/>
-  <rect class="fil3 str0" x="67.5653" y="17.0763" width="62.2633" height="6.40946"/>
-  <path class="fil4" d="M119.948 167.116l0 -30.089 55.0196 0 0 30.089 -31.6362 0 -37.1383 12.8952 24.7587 -12.8952 -11.0038 0zm0 -15.0444m27.5095 -15.0446m27.5101 15.0446m-15.8182 15.0444m-34.3873 6.4477m-6.1895 0m6.8771 -6.4477"/>
-  <path class="fil5" d="M89.3368 147.589c2.9694,-4.8452 5.9391,-7.2678 11.8787,-7.2678 6.5568,0 11.8783,4.3413 11.8783,9.6904 0,9.6903 -11.8783,19.3808 -23.757,29.0711 -11.8786,-9.6903 -23.757,-19.3808 -23.757,-29.0711 0,-5.3491 5.3213,-9.6904 11.8784,-9.6904 5.9393,0 8.9091,2.4226 11.8786,7.2678zm4.8255 -5.4509m15.451 1.0224m-3.9436 21.3865m-32.6661 0m-3.9434 -21.3865m15.4509 -1.0224"/>
-  <path class="fil6" d="M56.6315 152.056l4.6318 4.6319 -2.3159 0 0 18.5273 -45.8803 0 0 -4.6318 41.2486 0 0 -13.8955 -2.3161 0 4.6319 -4.6319zm2.3159 2.3158m1.1579 2.3161m-1.1579 9.2635m-22.94 9.2638m-22.9403 -2.3162m20.6242 -2.3156m20.6244 -6.9479m-1.158 -6.9476m1.158 -2.3161"/>
-  <path class="fil6" d="M15.1765 162.604l-4.6316 -4.6318 2.3158 0 0 -18.5271 45.8801 0 0 4.6316 -41.2483 0 0 13.8955 2.3158 0 -4.6318 4.6318zm-2.3158 -2.3157m-1.1578 -2.3161m1.1578 -9.2634m22.94 -9.2637m22.9401 2.3158m-20.6242 2.3158m-20.6241 6.9479m1.158 6.9476m-1.158 2.3161"/>
-  <rect class="fil1" x="18.8953" y="49.2167" width="148.428" height="6.40946"/>
+  <path class="fil0 str0" d="M4571.16 1417.89l5791.78 0 4329.93 3871.45 -39.73 8400.82c-4.97,1051.44 -997.48,1911.77 -2216.6,1911.77l-7865.37 0c-1219.14,0 -2216.6,-860.29 -2216.6,-1911.77l0 -10360.51c0,-1051.47 997.46,-1911.76 2216.6,-1911.76z"/>
+  <path class="fil1" d="M5132.79 6744.56l6622.96 0c426.87,0 776.12,260.18 776.12,578.18l0 0c0,317.99 -349.25,578.16 -776.12,578.16l-6622.96 0c-426.87,0 -776.13,-260.17 -776.13,-578.16l0 0c0,-318 349.26,-578.18 776.13,-578.18z"/>
+  <path class="fil1" d="M5132.79 11508.21l6622.96 0c426.87,0 776.12,260.17 776.12,578.17l0 0c0,318.01 -349.25,578.18 -776.12,578.18l-6622.96 0c-426.87,0 -776.13,-260.17 -776.13,-578.18l0 0c0,-318 349.26,-578.17 776.13,-578.17z"/>
+  <path class="fil1" d="M5006.07 9022.83l5541.67 0c357.17,0 649.41,260.17 649.41,578.17l0 0c0,318 -292.24,578.17 -649.41,578.17l-5541.67 0c-357.18,0 -649.42,-260.17 -649.42,-578.17l0 0c0,-318 292.24,-578.17 649.42,-578.17z"/>
+  <path class="fil2 str0" d="M9850.26 1417.89l5.06 3418.45c-85.09,568.85 242.79,818.05 983.65,747.63l3852.05 96.48 1.85 -391.12 -4329.93 -3871.45 -512.68 0z"/>
+  <ellipse class="fil3 str1" cx="3365.64" cy="3351.65" rx="2975.59" ry="2961.6"/>
+  <path class="fil4" d="M2678.45 5237.4l1374.36 0 0 -1374.35 1374.35 0 0 -1022.78 -1374.35 0 0 -1374.35 -1374.36 0 0 1374.35 -1374.35 0 0 1022.78 1374.35 0 0 1374.35zm687.18 0m687.18 -687.18m687.18 -687.18m687.18 -511.39m-687.18 -511.39m-687.18 -687.18m-687.18 -687.18m-687.18 687.18m-687.18 687.18m-687.18 511.39m687.18 511.39m687.18 687.18"/>
  </g>
 </svg>

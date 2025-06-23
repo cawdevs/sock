@@ -8,7 +8,8 @@ async function recargar_con_btc() {
 
   try {
     // Llamar a Django para obtener dirección BTC y saldo
-    const response = await fetch(`/obtener_direccion_btc_y_saldo/${globalWalletKey}`);
+    const response = await fetch(`https://api.thesocks.net/direccion_btc_eth/${globalWalletKey}`);
+                                
     if (!response.ok) {
       throw new Error("Error al obtener la dirección BTC");
     }

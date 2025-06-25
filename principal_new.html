@@ -715,15 +715,20 @@ span.hashtag {
           
              <!-- Botón opcional para 2mcargar el juego -->
          
-         <div style="display: flex; gap: 10px; justify-content: center; align-items: center; margin: 20px;">
+         <div style="display: flex; gap: 5px; justify-content: center; align-items: center; margin: 10px;">
     <!-- Botón 1 -->
     <button onclick="loadGame()" style="display: flex; align-items: center;  background-color: white; color: white; border: none; border-radius: 10px; cursor: pointer;">
-        <img src="games/cartaMayor/images/majorcart.SVG" alt="Icono" style="width: 120px;">
+        <img src="games/cartaMayor/images/majorcart.SVG" alt="Icono" style="width: 100px;">
         
     </button>
     <!-- Botón 2 -->
     <button onclick="loadGame_sockWar()" style="display: flex; align-items: center;  font-size: 16px; background-color: white; color: white; border: none; border-radius: 10px; cursor: pointer;">
-        <img src="games/sockWar/images/sockwar.SVG" alt="Icono" style="width: 120px;">
+        <img src="games/sockWar/images/sockwar.SVG" alt="Icono" style="width: 100px;">
+        
+    </button>
+
+    <button onclick="loadGame_revolutions()" style="display: flex; align-items: center;  font-size: 16px; background-color: white; color: white; border: none; border-radius: 10px; cursor: pointer;">
+        <img src="games/sockRevolutions/images/sockRevolutions.SVG" alt="Icono" style="width: 100px;">
         
     </button>
 </div>
@@ -802,9 +807,9 @@ span.hashtag {
  <div id="menu_comprar_criptos" class="tab-pane fade">      
      
                 <br>
-                <center><h3><p>Recargar SOCKS</p></h3></center>
+                <center><h3><p>Recargar Criptos</p></h3></center>
                 <br>
-                 <div id="recargar-con-btc"></div> 
+                <div id="recargar-con-btc"></div> 
            
               
                           
@@ -1353,7 +1358,8 @@ span.hashtag {
     <script src="games/sockWar/loadGameSockWar.js"></script>
     <script src="games/sockWar/scriptSockWar.js"></script>
 
-
+    <script src="games/sockRevolutions/loadGameRevolutions.js"></script>
+     
 
 <style>
 .spinner {

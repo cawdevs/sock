@@ -4,7 +4,9 @@ function createPublicationElements() {
     const nftusername = document.getElementById('selector_NFTs').value;
    
 
-    const container = document.getElementById('publication-post-container');
+    
+   // const container = document.getElementById('publication-post-container');
+    const container = document.getElementById('menu-publicar');
     container.style.cssText = 'background-color:#fff;';
     container.style.width = '100%';
     container.style.borderRadius = '20px';
@@ -26,15 +28,17 @@ function createPublicationElements() {
     controlsDiv.appendChild(imageContainer);
 
     // Select de privacidad
-    const selectDiv = document.createElement('div');
+    /*const selectDiv = document.createElement('div');
     selectDiv.classList.add('form-group');
     const select = document.createElement('select');
     select.classList.add('form-control');
     select.id = 'filter-privacidad';
-    select.innerHTML = '<option>*</option><option>>12</option><option>>18</option>';
+    select.innerHTML = '<option>*</option><option>>Para todo publico</option><option>>18</option>';
     select.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 40px;';
     selectDiv.appendChild(select);
     controlsDiv.appendChild(selectDiv);
+*/
+
 
     // Crear contenedor del select de clasificación
     const selectClassDiv = document.createElement('div');
@@ -45,9 +49,10 @@ function createPublicationElements() {
     selectClass.classList.add('form-control');
     selectClass.id = 'filter-classification';
     selectClass.innerHTML = `
-        <option value="general">General</option>
-        <option value="personal">Personal</option>
-        <option value="profesional">Profesional</option>
+        <option value="para > 18">Para mayores de 18 años</option>
+        <option value="para > 21">Para mayores de 21 años</option>
+        <option value="para todos">Para todo publico</option>
+        
     `;
     selectClass.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 40px;';
 
@@ -74,11 +79,6 @@ function createPublicationElements() {
 
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 
 
 
@@ -434,7 +434,6 @@ async function publicar_main_post(){
            
             const jsonMetadata = {
                     media: link_to_media,
-                    privacidad: document.getElementById('filter-privacidad').value,
                     calsificacion: document.getElementById('filter-classification').value
                     
             };
@@ -514,7 +513,8 @@ async function publicar_main_post(){
     //$('.modal-backdrop').remove();
     //$('body').removeClass('modal-open');
 //});
-           $('#myModal_publication').modal('hide');
+          // $('#myModal_publication').modal('hide');
+          container.innerHTML = '';
 
 
            
@@ -689,8 +689,7 @@ async function get_publication(id_publication,principalContainerID) {
             publicationType: publicationData.publicationType,
             timestamp: new Date(publicationData.timestamp * 1000).toLocaleString(),
             media: jsonMetadata.media || '',
-            privacidad: jsonMetadata.privacidad || 'Pública',
-            clasificacion: jsonMetadata.clasificacion || 'General'
+            clasificacion: jsonMetadata.clasificacion || 'para > 18'
         };
         //alert('publicationObject.publicationType'+publicationObject.publicationType);
         //console.log(typeof publicationObject.publicationType);
@@ -789,7 +788,9 @@ async function get_publication(id_publication,principalContainerID) {
 
 
 async function createPublicationElement(publication) {
-    const { id, nftUsername, timestamp, content, media, privacidad, clasificacion, imageProfile, usernameProfile } = publication;
+    //const { id, nftUsername, timestamp, content, media, privacidad, clasificacion, imageProfile, usernameProfile } = publication;
+    const { id, nftUsername, timestamp, content, media, clasificacion, imageProfile, usernameProfile } = publication;
+  
     const selected_username = document.getElementById('selector_NFTs').value;
     
     // ---- Creación de contenedores ----
@@ -871,6 +872,8 @@ async function createPublicationElement(publication) {
 
     headerDiv.appendChild(profileImageContainer);
     headerDiv.appendChild(userInfoDiv);
+
+
 
 
     if (selected_username === nftUsername) {
@@ -1195,33 +1198,8 @@ async function enviarRespuestaADjango(publicationId, username, respuestaTexto) {
 }
 
 
-/*
-async function publicar_thread_post(){
-         alert('publicar_thread_post');
 
-        //textarea.id = 'publicacion';
-        //const nftusername = document.getElementById('selector_NFTs').value;
-        //mediaInput.id = 'media-publication';
-        //select.id = 'filter-privacidad';
-}
-async function publicar_response_post(){
-         alert('publicar_response_post');
 
-        //textarea.id = 'publicacion';
-        //const nftusername = document.getElementById('selector_NFTs').value;
-        //mediaInput.id = 'media-publication';
-        //select.id = 'filter-privacidad';
-}
-
-async function edit_post(){
-         alert('edit_post');
-
-        //textarea.id = 'publicacion';
-        //const nftusername = document.getElementById('selector_NFTs').value;
-        //mediaInput.id = 'media-publication';
-        //select.id = 'filter-privacidad';
-}
-*/
 async function delete_post(publicationId){
     
     try{        ////////////////////

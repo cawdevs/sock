@@ -3,14 +3,13 @@ function createPublicationElements() {
     // Obtener el nombre de usuario del selector
     const nftusername = document.getElementById('selector_NFTs').value;
    
-
     
    // const container = document.getElementById('publication-post-container');
     const container = document.getElementById('menu-publicar');
     container.style.cssText = 'background-color:#fff;';
     container.style.width = '100%';
     container.style.borderRadius = '20px';
-    container.innerHTML = '';
+    //container.innerHTML = '';
     
     const form = document.createElement('form');
 
@@ -131,8 +130,11 @@ setTimeout(() => {
 const MAX_VIDEO_DURATION = 60; // 60 segundos máximo
 
 const subirBtn = document.createElement('button');
+subirBtn.type = 'button'; // ← evita comportamiento submit
+
 subirBtn.textContent = 'Subir Foto/Video';
 subirBtn.style.cssText = 'font-size: 18px; border: 2px solid lime; border-radius: 20px; width: 100%; margin: 10px 0; height: 40px; cursor: pointer;';
+
 
 const inputArchivo = document.createElement('input');
 inputArchivo.type = 'file';

@@ -7,10 +7,10 @@ function createPublicationElements() {
    // const container = document.getElementById('publication-post-container');
     const container = document.getElementById('menu-publicar');
     container.style.cssText = 'background-color:#fff;';
-    container.style.width = '80%';
+    container.style.width = '90%';
     container.style.borderRadius = '20px';
-    container.innerHTML = '';
-    
+    container.innerHTML = '';   
+
     const form = document.createElement('form');
 
     ///////////////////////////////////////////////////////////////////

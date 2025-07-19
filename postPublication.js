@@ -7,9 +7,9 @@ function createPublicationElements() {
    // const container = document.getElementById('publication-post-container');
     const container = document.getElementById('menu-publicar');
     container.style.cssText = 'background-color:#fff;';
-    container.style.width = '100%';
+    container.style.width = '80%';
     container.style.borderRadius = '20px';
-    //container.innerHTML = '';
+    container.innerHTML = '';
     
     const form = document.createElement('form');
 
@@ -23,7 +23,7 @@ function createPublicationElements() {
     // Imagen
     const imageContainer = document.createElement('div');
     imageContainer.id = 'publication-NFT_image-container';
-    imageContainer.style.cssText = 'width: 80px; height: 80px; border-radius: 50%; ';
+    imageContainer.style.cssText = 'width: 60px; height: 60px; border-radius: 50%; ';
     controlsDiv.appendChild(imageContainer);
 
     // Select de privacidad
@@ -53,7 +53,7 @@ function createPublicationElements() {
         <option value="para todos">Para todo publico</option>
         
     `;
-    selectClass.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 40px;';
+    selectClass.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 35px;';
 
     // Agregar el select al contenedor y luego al `controlsDiv`
     selectClassDiv.appendChild(selectClass);
@@ -63,7 +63,7 @@ function createPublicationElements() {
     const submitLink = document.createElement('a');
     submitLink.href = '#';
     submitLink.id = 'btn-publication';
-    submitLink.style.cssText = 'padding: 10px 20px; font-size: 16px; background-color: black; color: white; border: 2px solid lime; border-radius: 20px; cursor: pointer;';
+    submitLink.style.cssText = 'padding: 10px 20px; font-size: 16px; background-color: dodgerblue; color: white; border: 4px solid blue; border-radius: 20px; cursor: pointer;';
     submitLink.innerHTML = 'Publicar';
 
     // Agregar evento de clic
@@ -126,7 +126,25 @@ setTimeout(() => {
     quill.container.parentNode.appendChild(contadorElement);
 
     
-    const MAX_SIZE_BYTES = 20 * 1024 * 1024; // 20MB máximo
+ /////////////////////////////////////////////////////////////////////////
+
+    // Segunda fila: Input para el link de la imagen
+    const mediaInputDiv = document.createElement('div');
+    mediaInputDiv.classList.add('form-group');
+     
+    const mediaInput = document.createElement('input');
+    mediaInput.type = 'text';
+    mediaInput.id = 'media-publication';
+    mediaInput.placeholder = 'Subir un Link o enlace a youtube, X, image, etc';
+    mediaInput.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px; width: 100%;';
+    mediaInputDiv.appendChild(mediaInput);
+            
+    form.appendChild(mediaInputDiv);
+    /////////////////////////////////////////////////////  
+
+
+
+const MAX_SIZE_BYTES = 20 * 1024 * 1024; // 20MB máximo
 const MAX_VIDEO_DURATION = 60; // 60 segundos máximo
 
 const subirBtn = document.createElement('button');
@@ -290,21 +308,7 @@ quill.container.parentNode.appendChild(previewContainer);
 
 
 
-    /////////////////////////////////////////////////////////////////////////
-
-    // Segunda fila: Input para el link de la imagen
-    const mediaInputDiv = document.createElement('div');
-    mediaInputDiv.classList.add('form-group');
-     
-    const mediaInput = document.createElement('input');
-    mediaInput.type = 'text';
-    mediaInput.id = 'media-publication';
-    mediaInput.placeholder = 'Subir un Link o enlace a youtube, X, image, etc';
-    mediaInput.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; margin-bottom: 10px; height: 40px; width: 100%;';
-    mediaInputDiv.appendChild(mediaInput);
-            
-    form.appendChild(mediaInputDiv);
-    /////////////////////////////////////////////////////  
+   
 
    
 

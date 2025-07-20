@@ -491,9 +491,9 @@ async function findNftWallet(value) {
             nameButton.textContent = username;
             
             if (is_profile && is_profile.nftUsername && is_profile.nftUsername.length > 0) {
-                 nameButton.style.color = "lime";
+                 nameButton.style.color = "dodgerblue";
             } else {
-                 nameButton.style.color = "white";
+                 nameButton.style.color = "black";
             } 
 
 

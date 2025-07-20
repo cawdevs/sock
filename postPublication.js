@@ -2,8 +2,7 @@
 function createPublicationElements() {
     // Obtener el nombre de usuario del selector
     const nftusername = document.getElementById('selector_NFTs').value;
-   
-    
+       
    // const container = document.getElementById('publication-post-container');
     const container = document.getElementById('menu-publicar');
     container.style.cssText = 'background-color:#fff;';
@@ -18,8 +17,9 @@ function createPublicationElements() {
 
     // Tercera fila: Contenedor con imagen, select y botón de enviar
     const controlsDiv = document.createElement('div');
-    controlsDiv.style.cssText = 'display: flex; align-items: center; gap: 10px; justify-content: space-between;';
-
+    controlsDiv.classList.add('form-group');
+    controlsDiv.style.cssText = 'display: flex; align-items: center; justify-content: center; gap: 10px; justify-content: space-between;';
+        
     // Imagen
     const imageContainer = document.createElement('div');
     imageContainer.id = 'publication-NFT_image-container';
@@ -63,7 +63,7 @@ function createPublicationElements() {
     const submitLink = document.createElement('a');
     submitLink.href = '#';
     submitLink.id = 'btn-publication';
-    submitLink.style.cssText = 'padding: 10px 20px; font-size: 16px; background-color: dodgerblue; color: white; border: 4px solid blue; border-radius: 20px; cursor: pointer;';
+    submitLink.style.cssText = 'padding: 5px 20px; font-size: 14px; align-items: center; justify-content: center; background-color: dodgerblue; color: white; border: 2px solid blue; border-radius: 20px; cursor: pointer;';
     submitLink.innerHTML = 'Publicar';
 
     // Agregar evento de clic
@@ -301,25 +301,16 @@ quill.container.parentNode.appendChild(previewContainer);
 
 
 
-
-
-
-
-
-
-
-   
-
-   
-
-
-
-
     container.appendChild(form);    
 
     getImageNFTUsername("publication-NFT_image-container");
 
 }
+
+
+
+
+
 
 async function obtenerCorrelativoDesdeBlockchain() {
     let total_publication;

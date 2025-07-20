@@ -335,7 +335,7 @@
 
                     <li> 
                             <center>
-                            <select id="selector_NFTs" class="form-control" placeholder="Username" style="border: 2px solid lime; border-radius: 10px; font-size: 20px; height: auto; width: 180px;"></select>
+                            <select id="selector_NFTs" class="form-control" placeholder="Username" style="border: 2px solid dodgerblue; border-radius: 20px; font-size: 20px; height: auto; width: 180px;"></select>
                             </center>
                       
                     </li> 
@@ -584,11 +584,12 @@ span.hashtag {
          <div class="user-following-publication-container"  >
          </div> 
         
+        <br>
          <button id="verMasBtn" class="btn" style="
             margin: 20px auto;
             display: block;
             font-size: 18px;
-            border-radius: 10px;
+            border-radius: 20px;
             background-color: dodgerblue;
             color: white;
             padding: 10px 20px;
@@ -597,6 +598,8 @@ span.hashtag {
         ">
     Ver más publicaciones
 </button>
+
+      <br>
 
     </div>
 <!--#################################################-->    
@@ -629,7 +632,25 @@ span.hashtag {
           
                      
            <center>
-           <button id="btn-mostrar-mis-publicaciones"  onclick="mostrar_mis_publicaciones()" style="background-color: green; color: white; border: 2px solid lime; border-radius: 20px; height: 100px;">Ver mis publicaciones</span></button> 
+          
+        
+            <button id="btn-mostrar-mis-publicaciones" onclick="mostrar_mis_publicaciones()" class="btn" style="
+            margin: 20px auto;
+            display: block;
+            font-size: 18px;
+            border-radius: 20px;
+            background-color: dodgerblue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            text-align: center;
+        ">
+    Ver mis publicaciones
+</button> 
+
+
+
+
             </center>
             <div id="my-publications-container"></div>
             
@@ -660,7 +681,8 @@ span.hashtag {
 
   <div id="menu_buscar" class="tab-pane fade">    
          <br>
-         <div class="input-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+         <center>
+         <div class="input-group" style="display: flex; width: 90%; align-items: center; gap: 10px; margin-bottom: 20px;">
           
                
                 <input type="text" id="text-address-wallet" class="form-control"
@@ -669,16 +691,27 @@ span.hashtag {
 
                 <button id="btn-find-nft" class="btn btn-default"
                         onclick="findNftWallet('user')"
-                        style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">
+                        style="background-color: dodgerblue; color: white; border: 2px solid blue; border-radius: 20px; height: 40px;">
                   <span class="glyphicon glyphicon-search"></span>
                 </button>              
          </div>
 
-         <button id="btn-find-followin"  onclick="findNftWallet('following')"style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">Siguiendo</button> 
+      
 
-           <button id="btn-find-followers"  onclick="findNftWallet('followers')"style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;">Seguidores</button> 
+       <div class="input-group" style="display: flex; width: 90%; align-items: center; gap: 10px; margin-bottom: 20px;">
+            
+            <button id="btn-find-followin"  onclick="findNftWallet('following')"style="background-color: dodgerblue ; color: white; border: 2px solid blue; border-radius: 20px; height: 40px;">Siguiendo</button> 
 
-           <button id="btn-find-messages"  onclick="findNftWallet('messages')"style="background-color: black; color: white; border: 2px solid lime; border-radius: 20px; height: 40px;"><span class="glyphicon glyphicon-envelope"></span></button> 
+           <button id="btn-find-followers"  onclick="findNftWallet('followers')"style="background-color: dodgerblue; color: white; border: 2px solid blue; border-radius: 20px; height: 40px;">Seguidores</button> 
+
+           <button id="btn-find-messages"  onclick="findNftWallet('messages')"style="background-color: dodgerblue; color: white; border: 2px solid blue; border-radius: 20px; height: 40px;"><span class="glyphicon glyphicon-envelope"></span></button> 
+
+       </div>
+
+
+       </center>
+
+          
 
          <h4><div id="nft-username-list" style="border: 2px solid white"></div></h4>
 
@@ -829,7 +862,14 @@ span.hashtag {
  <!--/////////////////////////////////////////////////////////////-->
  <div id="menu_hacer_publicacion" class="tab-pane fade">      
      
-             
+              <br>
+              <center>
+              <div id="loadingAnimation-post-publication" style="display: none;">
+                        <div class="spinner"></div>              
+              </div>
+            </center>
+              
+
               <center>  <div id="menu-publicar"></div></center> 
            
               
@@ -837,10 +877,6 @@ span.hashtag {
  </div>
  <!--/////////////////////////////////////////////////////////////-->
  <!--/////////////////////////////////////////////////////////////-->
-
-
-
-
     
 
   </div>
@@ -881,13 +917,13 @@ span.hashtag {
                
               <div id="view_log_details" class="collapse">                    
               
-                  <div class="well" style="border: 4px solid lime;  border-radius: 20px;">
+                  <div class="well" style="border: 4px solid dodgerblue;  border-radius: 20px;">
                    
                     <div id="success-message"></div>                  
                           
                   </div>
 
-                  <div class="well" style="border: 4px solid red;  border-radius: 20px;">
+                  <div class="well" style="border: 4px solid dodgerblue;  border-radius: 20px;">
                    
                     <div id="error-message"></div>  
                           
@@ -950,9 +986,9 @@ span.hashtag {
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <center>
-                 <div id="loadingAnimation-post-publication" style="display: none;">
+                <!-- <div id="loadingAnimation-post-publication" style="display: none;">
                         <div class="spinner"></div>              
-                 </div>  
+                 </div> --> 
             </center>    
             </div>
            
@@ -1385,7 +1421,7 @@ span.hashtag {
 <style>
 .spinner {
   border: 5px solid rgba(0, 0, 0, 0.1);
-  border-left: 5px solid green; /* Amarillo */
+  border-left: 5px solid dodgerblue; /* Amarillo */
   border-radius: 50%;
   width: 75px;
   height: 75px;

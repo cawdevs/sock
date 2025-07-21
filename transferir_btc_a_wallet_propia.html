@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Transferir Fondos BTC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background: #f8f8f8;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input {
+      padding: 8px;
+      width: 300px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #mensaje {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Transferir Fondos BTC</h2>
+
+  <label for="wallet_eth">Wallet ETH del usuario:</label>
+  <input type="text" id="wallet_eth" placeholder="0x..." />
+
+  <label for="destino">Dirección BTC destino:</label>
+  <input type="text" id="destino" placeholder="3LtQxpPR2W..." />
+
+  <button onclick="transferir()">Transferir</button>
+
+  <div id="mensaje"></div>
+
+  <script>
+    async function transferir() {
+      const walletEth = document.getElementById('wallet_eth').value;
+      const destino = document.getElementById('destino').value;
+      const mensaje = document.getElementById('mensaje');
+
+      mensaje.innerText = 'Procesando transferencia...';
+
+      try {
+        const response = await fetch('/transferir_fondos_btc/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken()
+          },
+          body: JSON.stringify({
+            direccion_eth: walletEth,
+            direccion_destino: destino
+          })
+        });
+
+        const resultado = await response.json();
+
+        if (resultado.error) {
+          mensaje.innerText = `❌ Error: ${resultado.error}`;
+        } else {
+          mensaje.innerText = `✅ Transferencia realizada.\nTXID: ${resultado.txid}`;
+        }
+      } catch (err) {
+        mensaje.innerText = `❌ Error de red o servidor: ${err}`;
+      }
+    }
+
+    // Para obtener CSRF token de la cookie (si estás usando Django)
+    function getCSRFToken() {
+      const name = 'csrftoken';
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        const [key, value] = cookie.trim().split('=');
+        if (key === name) return value;
+      }
+      return '';
+    }
+  </script>
+
+</body>
+</html>

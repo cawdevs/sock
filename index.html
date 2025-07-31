@@ -275,25 +275,30 @@
         //checkWallet();
     }
 
-    // Función para encriptar y almacenar la clave privada en un archivo
-    async function almacenarClaveEnArchivo(privateKey) {
-        const password = document.getElementById('password').value.trim(); // Asegúrate de eliminar espacios
-        if (!password) {
-                alert("Una contraseña es necesaria.");
+async function almacenarClaveEnArchivo(privateKey) {
+    const password = document.getElementById('password').value.trim(); // Asegúrate de eliminar espacios
+    if (!password) {
+        alert("Una contraseña es necesaria.");
         return;
     }
 
-        const encryptedKey = CryptoJS.AES.encrypt(privateKey, password).toString();
+    const encryptedKey = CryptoJS.AES.encrypt(privateKey, password).toString();
 
-        // Crear un archivo .key con la clave encriptada
+    // Detectar si estamos dentro de WebViewer de App Inventor
+    const isAppInventor = typeof AppInventor !== "undefined" && AppInventor.setWebViewString;
+
+    if (isAppInventor) {
+        // Si estamos dentro de AppInventor, enviamos el texto como WebViewString
+        AppInventor.setWebViewString(encryptedKey);
+    } else {
+        // Si estamos en un navegador normal, se descarga el archivo
         const blob = new Blob([encryptedKey], { type: 'text/plain' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'file.key';  // El nombre del archivo será 'file.key'
-        link.click();  // Simula un clic para descargar el archivo
-
-        //alert("Billetera creada y protegida exitosamente.");
+        link.download = 'file.key';
+        link.click();
     }
+}
 
 
 function updateButtonOnFileSelect() {

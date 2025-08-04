@@ -183,7 +183,7 @@ function compartir_en_redes_sociales(idPublicacion,media) {
     navigator.share({
       title: '¡Mira esta publicación!',
       text: 'Te comparto esta publicación de la red social descentralizada:',
-      media: media
+      media: media,
       url: enlace
     })
     .then(() => console.log('Enlace compartido con éxito'))

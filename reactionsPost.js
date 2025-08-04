@@ -178,6 +178,7 @@ async function showSendOptions(nftUsername_post, postId, container) {
 }
 
 function compartir_en_redes_sociales(idPublicacion,idmedia) {
+  console.log('Media',idmedia)
   const enlace = `${window.location.origin}/ver_post.html?id=${idPublicacion}`;
   if (navigator.share) {
     navigator.share({

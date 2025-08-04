@@ -177,13 +177,13 @@ async function showSendOptions(nftUsername_post, postId, container) {
   container.appendChild(optionsWrapper);
 }
 
-function compartir_en_redes_sociales(idPublicacion,media) {
+function compartir_en_redes_sociales(idPublicacion,idmedia) {
   const enlace = `${window.location.origin}/ver_post.html?id=${idPublicacion}`;
   if (navigator.share) {
     navigator.share({
       title: '¡Mira esta publicación!',
       text: 'Te comparto esta publicación de la red social descentralizada:',
-      media: media,
+      media: idmedia,
       url: enlace
     })
     .then(() => console.log('Enlace compartido con éxito'))

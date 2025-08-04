@@ -1094,7 +1094,7 @@ contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
     publicationReactionDiv.className = "icon-reaction-container";
     publicationReactionDiv.style.marginBottom = '20px';
 
-    await getReactions(selected_username,nftUsername, id , publicationReactionDiv);
+    await getReactions(selected_username,nftUsername, id , publicationReactionDiv,media);
 
 
 

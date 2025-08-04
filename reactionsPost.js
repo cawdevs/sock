@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==============================
   // 2) Tu función getReactions (sin cambios)
   // ==============================
-  function getReactions(username_selected, nftUsername_post, postId, container) {
+  function getReactions(username_selected, nftUsername_post, postId, container, media) {
     const icons = [
       { id: "comment", icon: "glyphicon-comment", color1: "gray", color2: "blue" },
       { id: "heart",   icon: "glyphicon-heart",   color1: "gray", color2: "red"  },
@@ -29,6 +29,9 @@ document.addEventListener("DOMContentLoaded", function () {
         likeCount.textContent = "0";
         span.appendChild(likeCount);
 
+
+
+
         fetch("https://api.thesocks.net/get-like-info/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -43,6 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
           span.style.color = data.user_like_status ? color2 : color1;
           likeCount.textContent = data.total_likes;
         });
+
+
       }
       else if (id === "send") {
         span.addEventListener("click", function () {
@@ -77,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
       else if (id === "share") {
         span.addEventListener("click", function () {
           toggleReaction(span);
-          compartir_en_redes_sociales(postId);
+          compartir_en_redes_sociales(postId,media);
         });
       }
 
@@ -172,12 +177,13 @@ async function showSendOptions(nftUsername_post, postId, container) {
   container.appendChild(optionsWrapper);
 }
 
-function compartir_en_redes_sociales(idPublicacion) {
+function compartir_en_redes_sociales(idPublicacion,media) {
   const enlace = `${window.location.origin}/ver_post.html?id=${idPublicacion}`;
   if (navigator.share) {
     navigator.share({
       title: '¡Mira esta publicación!',
       text: 'Te comparto esta publicación de la red social descentralizada:',
+      media: media
       url: enlace
     })
     .then(() => console.log('Enlace compartido con éxito'))

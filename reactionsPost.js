@@ -180,20 +180,33 @@ async function showSendOptions(nftUsername_post, postId, container) {
 function compartir_en_redes_sociales(idPublicacion,idmedia) {
   console.log('Media',idmedia)
   const enlace = `${window.location.origin}/ver_post.html?id=${idPublicacion}`;
-  if (navigator.share) {
-    navigator.share({
-      title: '¡Mira esta publicación!',
-      text: 'Te comparto esta publicación de la red social descentralizada:',
-      media: idmedia,
-      url: enlace
-    })
-    .then(() => console.log('Enlace compartido con éxito'))
-    .catch((error) => console.error('Error al compartir:', error));
-  } else {
-    navigator.clipboard.writeText(enlace)
-      .then(() => alert("Tu navegador no permite compartir directamente. El enlace fue copiado al portapapeles."))
-      .catch(err => console.error("Error al copiar el enlace:", err));
-  }
+
+   // Detectar si estamos dentro de WebViewer de App Inventor
+    const isAppInventor = typeof AppInventor !== "undefined" && AppInventor.setWebViewString;
+
+    if (isAppInventor) {
+        // Si estamos dentro de AppInventor, enviamos el texto como WebViewString
+       
+        AppInventor.setWebViewString("COMPARTIR" +" Mira esta publicación" + enlace);
+        
+    } else {
+
+            if (navigator.share) {
+              navigator.share({
+                title: '¡Mira esta publicación!',
+                text: 'Te comparto esta publicación de la red social descentralizada:',
+                media: idmedia,
+                url: enlace
+              })
+              .then(() => console.log('Enlace compartido con éxito'))
+              .catch((error) => console.error('Error al compartir:', error));
+            } else {
+              navigator.clipboard.writeText(enlace)
+                .then(() => alert("Tu navegador no permite compartir directamente. El enlace fue copiado al portapapeles."))
+                .catch(err => console.error("Error al copiar el enlace:", err));
+            }
+     }
+ 
 }
 
 // ==============================

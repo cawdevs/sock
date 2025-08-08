@@ -187,7 +187,7 @@ function compartir_en_redes_sociales(idPublicacion,idmedia) {
     if (isAppInventor) {
         // Si estamos dentro de AppInventor, enviamos el texto como WebViewString
        
-        AppInventor.setWebViewString("COMPARTIR" +" Mira esta publicación" + enlace);
+        AppInventor.setWebViewString("Compartir" +" Mira esta publicación" + enlace);
         
     } else {
 

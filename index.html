@@ -128,13 +128,14 @@
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
             <div class="wrapper fadeInDown">
-                <img src='images/logosock.SVG' alt="Logo Sock" width="300">
+                <img src='images/n_logo_sock.SVG' alt="Logo Sock" width="150">
                 <br><br>
                 <div id="formContent">
-                    <h4 class="underlineHover">Decentralized Finance Social Network</h4>
+                    <h4 class="underlineHover">Red Social de Finanzas Decentralizada</h4>
 
                    
-                    <button type="button" id="Modal_crer_cuenta" class="fadeIn fourth" data-toggle="modal" data-target="#Modal_crear_cuenta">Soy Nuevo,  Crear una cuenta</button> 
+                    <a  type="button" id="Modal_crer_cuenta" class="fadeIn fourth" data-toggle="modal" data-target="#Modal_crear_cuenta" >SOY NUEVO,  Crear una cuenta</a> 
+                 
 
 
                      <button type="button" id="entrar_red_social" class="fadeIn fourth" data-toggle="modal" data-target="#Modal_entrar_red_social">Tengo Cuenta, ENTRAR</button> 
@@ -290,6 +291,7 @@ async function almacenarClaveEnArchivo(privateKey) {
     if (isAppInventor) {
         // Si estamos dentro de AppInventor, enviamos el texto como WebViewString
         AppInventor.setWebViewString(encryptedKey);
+
     } else {
         // Si estamos en un navegador normal, se descarga el archivo
         const blob = new Blob([encryptedKey], { type: 'text/plain' });

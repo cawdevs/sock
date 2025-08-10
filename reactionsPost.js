@@ -243,46 +243,44 @@ async function showSendOptions(nftUsername_post, postId, container) {
   optionsWrapper.id = `send-options-${postId}`;
   optionsWrapper.style.display = "flex";
   optionsWrapper.style.flexDirection = "column";
-  optionsWrapper.style.gap = "8px";
+  optionsWrapper.style.width = "100%";
+  optionsWrapper.style.marginTop = "10px";
 
   const amounts = [
-    { amount: 10000, stars: 1, bgClass: "bg-lightblue" },
-    { amount: 20000, stars: 2, bgClass: "bg-dodgerblue" },
-    { amount: 50000, stars: 5, bgClass: "bg-darkblue" }
+    { amount: 10000, stars: 1, bgColor: "linear-gradient(to right, lightblue, white)" },
+    { amount: 20000, stars: 2, bgColor: "linear-gradient(to right, dodgerblue, white)" },
+    { amount: 50000, stars: 5, bgColor: "linear-gradient(to right, darkblue, white)" }
   ];
 
   amounts.forEach(item => {
     const option = document.createElement("div");
-    option.className = `reaction-option ${item.bgClass}`;
+    option.style.background = item.bgColor;
+    option.style.padding = "10px";
+    option.style.borderRadius = "8px";
+    option.style.display = "flex";
+    option.style.justifyContent = "space-between";
+    option.style.alignItems = "center";
+    option.style.width = "100%";
+    option.style.cursor = "pointer";
+    option.style.fontWeight = "bold";
+    option.style.color = "black";
 
-    // Icono de dólar
-    const usdIcon = document.createElement("span");
-    usdIcon.className = "glyphicon glyphicon-usd";
+    const label = document.createElement("span");
+    label.textContent = `Regalar ${item.amount.toLocaleString()} Tokens`;
 
-    // Texto de cantidad
-    const amountText = document.createElement("span");
-    amountText.textContent = item.amount;
-
-    // Contenedor de estrellas
     const starsContainer = document.createElement("span");
     for (let i = 0; i < item.stars; i++) {
       const star = document.createElement("span");
       star.className = "glyphicon glyphicon-star";
       starsContainer.appendChild(star);
-      if (i < item.stars - 1) {
-        starsContainer.appendChild(document.createTextNode(" ")); // espacio entre estrellas
-      }
     }
 
-    // Agregar todo al div
-    option.appendChild(usdIcon);
-    option.appendChild(amountText);
+    option.appendChild(label);
     option.appendChild(starsContainer);
 
-    // Click para enviar
     option.addEventListener("click", async () => {
       option.classList.add("grow");
-      console.log(`💸 Enviado $${item.amount} en la publicación ${postId}`);
+      console.log(`💸 Enviado ${item.amount} Tokens a post ${postId}`);
       await transferSockTokens(recipientAddress, item.amount);
       setTimeout(() => {
         option.classList.remove("grow");
@@ -293,7 +291,7 @@ async function showSendOptions(nftUsername_post, postId, container) {
     optionsWrapper.appendChild(option);
   });
 
-  container.appendChild(optionsWrapper);
+  container.parentNode.appendChild(optionsWrapper);
 }
 
 

@@ -203,13 +203,13 @@ style.textContent = `
   }
 
   .bg-lightblue {
-    background: linear-gradient(to right, lightblue, #87ceeb);
+    background: linear-gradient(to right, green, lime);
   }
   .bg-dodgerblue {
-    background: linear-gradient(to right, dodgerblue, #1e90ff);
+    background: linear-gradient(to right, dodgerblue, darkblue);
   }
   .bg-darkblue {
-    background: linear-gradient(to right, darkblue, #00008b);
+    background: linear-gradient(to right, red, yellow);
   }
 
   @keyframes fadeIn {
@@ -247,51 +247,58 @@ async function showSendOptions(nftUsername_post, postId, container) {
   optionsWrapper.style.marginTop = "10px";
 
   const amounts = [
-    { amount: 10000, stars: 1, bgColor: "linear-gradient(to right, lightblue, white)" },
-    { amount: 20000, stars: 2, bgColor: "linear-gradient(to right, dodgerblue, white)" },
-    { amount: 50000, stars: 5, bgColor: "linear-gradient(to right, darkblue, white)" }
+    { value: 10000, stars: 1 },
+    { value: 20000, stars: 2 },
+    { value: 50000, stars: 5 }
   ];
 
-  amounts.forEach(item => {
+  amounts.forEach(({ value, stars }, index) => {
     const option = document.createElement("div");
-    option.style.background = item.bgColor;
-    option.style.padding = "10px";
-    option.style.borderRadius = "8px";
-    option.style.display = "flex";
-    option.style.justifyContent = "space-between";
-    option.style.alignItems = "center";
-    option.style.width = "100%";
-    option.style.cursor = "pointer";
-    option.style.fontWeight = "bold";
-    option.style.color = "black";
-
-    const label = document.createElement("span");
-    label.textContent = `Regalar ${item.amount.toLocaleString()} Tokens`;
-
-    const starsContainer = document.createElement("span");
-    for (let i = 0; i < item.stars; i++) {
-      const star = document.createElement("span");
-      star.className = "glyphicon glyphicon-star";
-      starsContainer.appendChild(star);
-    }
-
-    option.appendChild(label);
-    option.appendChild(starsContainer);
+    option.className = "gift-option";
+    option.innerHTML = `
+      <span>🎁 Regalar ${value.toLocaleString()} Tokens</span>
+      <span style="margin-left: 10px;">${"⭐".repeat(stars)}</span>
+    `;
 
     option.addEventListener("click", async () => {
       option.classList.add("grow");
-      console.log(`💸 Enviado ${item.amount} Tokens a post ${postId}`);
-      await transferSockTokens(recipientAddress, item.amount);
+      console.log(`💸 Enviado $${value} en la publicación ${postId}`);
+      await transferSockTokens(recipientAddress, value);
       setTimeout(() => {
         option.classList.remove("grow");
         optionsWrapper.remove();
       }, 600);
     });
 
+    // Colores de fondo diferentes
+    const colors = ["#ADD8E6", "dodgerblue", "#00008B"];
+    option.style.background = colors[index];
+    option.style.backgroundImage = "linear-gradient(45deg, rgba(255,215,0,0.3), rgba(0,0,0,0))";
+    option.style.color = "white";
+    option.style.padding = "10px";
+    option.style.margin = "5px 0";
+    option.style.width = "100%";
+    option.style.textAlign = "center";
+    option.style.fontWeight = "bold";
+    option.style.fontSize = "16px";
+    option.style.cursor = "pointer";
+    option.style.transition = "transform 0.2s ease, box-shadow 0.2s ease";
+    option.style.borderRadius = "8px";
+
+    // Animación hover
+    option.addEventListener("mouseenter", () => {
+      option.style.transform = "scale(1.03)";
+      option.style.boxShadow = "0 0 15px gold, 0 0 30px gold";
+    });
+    option.addEventListener("mouseleave", () => {
+      option.style.transform = "scale(1)";
+      option.style.boxShadow = "none";
+    });
+
     optionsWrapper.appendChild(option);
   });
 
-  container.parentNode.appendChild(optionsWrapper);
+  container.appendChild(optionsWrapper);
 }
 
 

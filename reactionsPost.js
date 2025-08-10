@@ -108,9 +108,11 @@ document.addEventListener("DOMContentLoaded", function () {
       // Cambio de color
       icon.style.color = icon.style.color === originalColor ? newColor : originalColor;
 
-      // Efecto de zoom
-      icon.style.transition = "transform 0.2s ease";
+      // Efecto de zoom suave en ambas direcciones
+      icon.style.transition = "transform 0.4s ease-in-out, color 0.4s ease-in-out";
       icon.style.transform = "scale(2.0)";
+
+      // Regresa suavemente al tamaño original
       setTimeout(() => {
         icon.style.transform = "scale(1)";
       }, 400);
@@ -238,80 +240,81 @@ style.textContent = `
 document.head.appendChild(style);
 
 async function showSendOptions(nftUsername_post, postId, container) {
-  const existing = document.getElementById(`send-options-${postId}`);
-  if (existing) {
-    existing.remove();
-    return;
-  }
+      const existing = document.getElementById(`send-options-${postId}`);
+      if (existing) {
+        existing.remove();
+        return;
+      }
 
-  let recipientAddress;
-  if (nftUsernameContract.methods) {
-    recipientAddress = await nftUsernameContract.methods.getNFTOwner(nftUsername_post).call();
-  } else {
-    recipientAddress = await nftUsernameContract.getNFTOwner(nftUsername_post);
-  }
+      let recipientAddress;
+      if (nftUsernameContract.methods) {
+        recipientAddress = await nftUsernameContract.methods.getNFTOwner(nftUsername_post).call();
+      } else {
+        recipientAddress = await nftUsernameContract.getNFTOwner(nftUsername_post);
+      }
 
-  const optionsWrapper = document.createElement("div");
-  optionsWrapper.className = "reaction-group";
-  optionsWrapper.id = `send-options-${postId}`;
-  optionsWrapper.style.display = "flex";
-  optionsWrapper.style.flexDirection = "column";
-  optionsWrapper.style.width = "100%";
-  optionsWrapper.style.marginTop = "10px";
+      const optionsWrapper = document.createElement("div");
+      optionsWrapper.className = "reaction-group";
+      optionsWrapper.id = `send-options-${postId}`;
 
-  const amounts = [
-    { value: 10000, stars: 1 },
-    { value: 20000, stars: 2 },
-    { value: 50000, stars: 5 }
-  ];
+      // Estilo para que los regalos estén en fila nueva y ordenados
+      optionsWrapper.style.display = "flex";
+      optionsWrapper.style.flexWrap = "wrap";
+      optionsWrapper.style.gap = "10px";
+      optionsWrapper.style.marginTop = "10px";
+      optionsWrapper.style.width = "100%";
 
-  amounts.forEach(({ value, stars }, index) => {
-    const option = document.createElement("div");
-    option.className = "gift-option";
-    option.innerHTML = `
-      <span>🎁 Regalar ${value.toLocaleString()} Tokens</span>
-      <span style="margin-left: 10px;">${"⭐".repeat(stars)}</span>
-    `;
+      const amounts = [
+        { value: 10000, stars: 1 },
+        { value: 20000, stars: 2 },
+        { value: 50000, stars: 5 }
+      ];
 
-    option.addEventListener("click", async () => {
-      option.classList.add("grow");
-      console.log(`💸 Enviado $${value} en la publicación ${postId}`);
-      await transferSockTokens(recipientAddress, value);
-      setTimeout(() => {
-        option.classList.remove("grow");
-        optionsWrapper.remove();
-      }, 600);
-    });
+      amounts.forEach(({ value, stars }, index) => {
+        const option = document.createElement("div");
+        option.className = "gift-option";
+        option.innerHTML = `
+          <span>🎁 Regalar ${value.toLocaleString()} Tokens</span>
+          <span style="margin-left: 10px;">${"⭐".repeat(stars)}</span>
+        `;
 
-    // Colores de fondo diferentes
-    const colors = ["#ADD8E6", "dodgerblue", "#00008B"];
-    option.style.background = colors[index];
-    option.style.backgroundImage = "linear-gradient(45deg, rgba(255,215,0,0.3), rgba(0,0,0,0))";
-    option.style.color = "white";
-    option.style.padding = "10px";
-    option.style.margin = "5px 0";
-    option.style.width = "100%";
-    option.style.textAlign = "center";
-    option.style.fontWeight = "bold";
-    option.style.fontSize = "16px";
-    option.style.cursor = "pointer";
-    option.style.transition = "transform 0.2s ease, box-shadow 0.2s ease";
-    option.style.borderRadius = "8px";
+        option.addEventListener("click", async () => {
+          option.classList.add("grow");
+          console.log(`💸 Enviado $${value} en la publicación ${postId}`);
+          await transferSockTokens(recipientAddress, value);
+          setTimeout(() => {
+            option.classList.remove("grow");
+            optionsWrapper.remove();
+          }, 600);
+        });
 
-    // Animación hover
-    option.addEventListener("mouseenter", () => {
-      option.style.transform = "scale(1.03)";
-      option.style.boxShadow = "0 0 15px gold, 0 0 30px gold";
-    });
-    option.addEventListener("mouseleave", () => {
-      option.style.transform = "scale(1)";
-      option.style.boxShadow = "none";
-    });
+        const colors = ["#ADD8E6", "dodgerblue", "#00008B"];
+        option.style.background = colors[index];
+        option.style.backgroundImage = "linear-gradient(45deg, rgba(255,215,0,0.3), rgba(0,0,0,0))";
+        option.style.color = "white";
+        option.style.padding = "10px";
+        option.style.margin = "0"; // ya tienes gap en el contenedor
+        option.style.flex = "1 1 auto";  // para que se acomoden en fila
+        option.style.textAlign = "center";
+        option.style.fontWeight = "bold";
+        option.style.fontSize = "16px";
+        option.style.cursor = "pointer";
+        option.style.transition = "transform 0.2s ease, box-shadow 0.2s ease";
+        option.style.borderRadius = "8px";
 
-    optionsWrapper.appendChild(option);
-  });
+        option.addEventListener("mouseenter", () => {
+          option.style.transform = "scale(1.03)";
+          option.style.boxShadow = "0 0 15px gold, 0 0 30px gold";
+        });
+        option.addEventListener("mouseleave", () => {
+          option.style.transform = "scale(1)";
+          option.style.boxShadow = "none";
+        });
 
-  container.appendChild(optionsWrapper);
+        optionsWrapper.appendChild(option);
+      });
+
+      container.appendChild(optionsWrapper);
 }
 
 

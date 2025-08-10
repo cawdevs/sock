@@ -134,6 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // ==============================
 // 3) Función showSendOptions (sin cambios)
 // ==============================
+/*
 async function showSendOptions(nftUsername_post, postId, container) {
   const existing = document.getElementById(`send-options-${postId}`);
   if (existing) {
@@ -177,6 +178,126 @@ async function showSendOptions(nftUsername_post, postId, container) {
   container.appendChild(optionsWrapper);
 }
 
+*/
+
+// CSS para estilos y degradados
+const style = document.createElement("style");
+style.textContent = `
+  .reaction-group {
+    width: 100%;
+  }
+
+  .reaction-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+    animation: fadeIn 0.6s ease;
+    gap: 8px;
+  }
+
+  .bg-lightblue {
+    background: linear-gradient(to right, lightblue, #87ceeb);
+  }
+  .bg-dodgerblue {
+    background: linear-gradient(to right, dodgerblue, #1e90ff);
+  }
+  .bg-darkblue {
+    background: linear-gradient(to right, darkblue, #00008b);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .grow {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+  }
+`;
+document.head.appendChild(style);
+
+async function showSendOptions(nftUsername_post, postId, container) {
+  const existing = document.getElementById(`send-options-${postId}`);
+  if (existing) {
+    existing.remove();
+    return;
+  }
+
+  let recipientAddress;
+  if (nftUsernameContract.methods) {
+    recipientAddress = await nftUsernameContract.methods.getNFTOwner(nftUsername_post).call();
+  } else {
+    recipientAddress = await nftUsernameContract.getNFTOwner(nftUsername_post);
+  }
+
+  const optionsWrapper = document.createElement("div");
+  optionsWrapper.className = "reaction-group";
+  optionsWrapper.id = `send-options-${postId}`;
+  optionsWrapper.style.display = "flex";
+  optionsWrapper.style.flexDirection = "column";
+  optionsWrapper.style.gap = "8px";
+
+  const amounts = [
+    { amount: 10000, stars: 1, bgClass: "bg-lightblue" },
+    { amount: 20000, stars: 2, bgClass: "bg-dodgerblue" },
+    { amount: 50000, stars: 5, bgClass: "bg-darkblue" }
+  ];
+
+  amounts.forEach(item => {
+    const option = document.createElement("div");
+    option.className = `reaction-option ${item.bgClass}`;
+
+    // Icono de dólar
+    const usdIcon = document.createElement("span");
+    usdIcon.className = "glyphicon glyphicon-usd";
+
+    // Texto de cantidad
+    const amountText = document.createElement("span");
+    amountText.textContent = item.amount;
+
+    // Contenedor de estrellas
+    const starsContainer = document.createElement("span");
+    for (let i = 0; i < item.stars; i++) {
+      const star = document.createElement("span");
+      star.className = "glyphicon glyphicon-star";
+      starsContainer.appendChild(star);
+      if (i < item.stars - 1) {
+        starsContainer.appendChild(document.createTextNode(" ")); // espacio entre estrellas
+      }
+    }
+
+    // Agregar todo al div
+    option.appendChild(usdIcon);
+    option.appendChild(amountText);
+    option.appendChild(starsContainer);
+
+    // Click para enviar
+    option.addEventListener("click", async () => {
+      option.classList.add("grow");
+      console.log(`💸 Enviado $${item.amount} en la publicación ${postId}`);
+      await transferSockTokens(recipientAddress, item.amount);
+      setTimeout(() => {
+        option.classList.remove("grow");
+        optionsWrapper.remove();
+      }, 600);
+    });
+
+    optionsWrapper.appendChild(option);
+  });
+
+  container.appendChild(optionsWrapper);
+}
+
+
+
 function compartir_en_redes_sociales(idPublicacion,idmedia) {
   console.log('Media',idmedia)
   const enlace = `${window.location.origin}/ver_post.html?id=${idPublicacion}`;
@@ -187,7 +308,7 @@ function compartir_en_redes_sociales(idPublicacion,idmedia) {
     if (isAppInventor) {
         // Si estamos dentro de AppInventor, enviamos el texto como WebViewString
        
-        AppInventor.setWebViewString("Compartir" +" Mira esta publicación" + enlace);
+        AppInventor.setWebViewString("vamos a Compartir" +" esta publicación de la red social descentralizada: " + enlace);
         
     } else {
 

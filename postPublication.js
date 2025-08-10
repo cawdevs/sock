@@ -503,7 +503,7 @@ async function publicar_main_post(){
             }, 10000);
 
             console.log('iniciamos get_ultima_publication.'); 
-            await get_ultima_publication('recent-home-publications-container'); 
+            get_ultima_publication('recent-home-publications-container'); 
             console.log('regresamoss get_ultima_publication.'); 
 
            //$('#myModal_publication').on('hidden.bs.modal', function () {
@@ -539,6 +539,7 @@ let total_publication = null;
 async function get_all_publications_home(containerID, append = false) {
     try {
         const container = document.getElementById(containerID);
+
 
         if (!append) {
             container.innerHTML = '';
@@ -618,7 +619,7 @@ async function get_ultima_publication(containerID) {
 
 // Ejecutar al cargar la página
 document.addEventListener("DOMContentLoaded", async () => {
-    await get_all_publications_home("home-publications-container");
+        get_all_publications_home("home-publications-container");
 
     // Configurar el botón una vez que el DOM esté listo
     document.getElementById("verMasBtn").addEventListener("click", () => {

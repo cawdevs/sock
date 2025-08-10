@@ -540,6 +540,8 @@ async function get_all_publications_home(containerID, append = false) {
     try {
         const container = document.getElementById(containerID);
 
+         const loadingAnimation = document.getElementById('loadingAnimation-principal');
+
 
         if (!append) {
             container.innerHTML = '';
@@ -559,6 +561,12 @@ async function get_all_publications_home(containerID, append = false) {
 
         while (count < 5 && i >= 1) {
             let type_publication = await get_publication(i, containerID);
+
+
+            loadingAnimation.style.display = 'none';
+            
+
+           
 
             if (type_publication !== 3) {
                 count++;

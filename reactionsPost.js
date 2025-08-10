@@ -102,20 +102,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function toggleReaction(icon) {
-        const newColor = icon.getAttribute("data-color2");
-        const originalColor = icon.getAttribute("data-color1");
-        const isToggled = icon.dataset.toggled === 'true';
+      const newColor = icon.getAttribute("data-color2");
+      const originalColor = icon.getAttribute("data-color1");
 
-        // alternar color
-        icon.style.color = isToggled ? originalColor : newColor;
-        icon.dataset.toggled = isToggled ? 'false' : 'true';
+      // Cambio de color
+      icon.style.color = icon.style.color === originalColor ? newColor : originalColor;
 
-        // efecto "pop"
-        icon.classList.add('grow');
-        setTimeout(() => {
-          icon.classList.remove('grow');
-        }, 320); // coincide con la transición en CSS
-      }
+      // Efecto de zoom
+      icon.style.transition = "transform 0.2s ease";
+      icon.style.transform = "scale(1.5)";
+      setTimeout(() => {
+        icon.style.transform = "scale(1)";
+      }, 200);
+    }
 
   function likePost(username_selected, nftUsername_post, postId) {
     const heartIcon = document.getElementById(`icon-heart-${postId}`);

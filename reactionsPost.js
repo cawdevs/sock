@@ -4,104 +4,118 @@ document.addEventListener("DOMContentLoaded", function () {
   // 2) Tu función getReactions (sin cambios)
   // ==============================
   function getReactions(username_selected, nftUsername_post, postId, container, media) {
-    const icons = [
-      { id: "comment", icon: "glyphicon-comment", color1: "gray", color2: "blue" },
-      { id: "heart",   icon: "glyphicon-heart",   color1: "gray", color2: "red"  },
-      { id: "send",    icon: "glyphicon-send",    color1: "green", color2: "green" },
-      { id: "share",   icon: "glyphicon-share-alt",color1: "gray", color2: "black" },
-    ];
+        const icons = [
+          { id: "comment", icon: "glyphicon-comment", color1: "gray", color2: "blue" },
+          { id: "heart",   icon: "glyphicon-heart",   color1: "gray", color2: "red"  },
+          { id: "send",    icon: "glyphicon-send",    color1: "green", color2: "green" },
+          { id: "share",   icon: "glyphicon-share-alt",color1: "gray", color2: "black" },
+        ];
 
-    container.innerHTML = ""; // Limpiar contenido previo
+        container.innerHTML = ""; // Limpiar contenido previo
 
-    icons.forEach(({ id, icon, color1, color2 }) => {
-      const span = document.createElement("span");
-      span.className = `glyphicon ${icon}`;
-      span.id = `icon-${id}-${postId}`;
-      span.setAttribute("data-color1", color1);
-      span.setAttribute("data-color2", color2);
-      span.style.color = color1;
-      span.style.cursor = "pointer";
+        icons.forEach(({ id, icon, color1, color2 }) => {
+          const span = document.createElement("span");
 
-      if (id === "heart") {
-        const likeCount = document.createElement("span");
-        likeCount.id = `likes-count-${postId}`;
-        likeCount.style.marginLeft = "5px";
-        likeCount.textContent = "0";
-        span.appendChild(likeCount);
+          // añade clase para animaciones/transitions
+          span.className = `glyphicon ${icon} reaction-icon`;
+          span.id = `icon-${id}-${postId}`;
 
+          // inicializa estado toggle
+          span.dataset.toggled = 'false';
 
+          span.setAttribute("data-color1", color1);
+          span.setAttribute("data-color2", color2);
+          span.style.color = color1;
+          span.style.cursor = "pointer";
+          // (opcional) margin-right para separar iconos
+          span.style.marginRight = "8px";
 
+          // ... resto del código tal cual (likeCount etc.)
+          if (id === "heart") {
+            const likeCount = document.createElement("span");
+            likeCount.id = `likes-count-${postId}`;
+            likeCount.style.marginLeft = "5px";
+            likeCount.textContent = "0";
+            // Si quieres que el contador no escale con el icono, colócalo fuera:
+            // container.appendChild(likeCount) en lugar de span.appendChild
+            span.appendChild(likeCount);
 
-        fetch("https://api.thesocks.net/get-like-info/", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            nft_username: username_selected,
-            id_publication: postId.toNumber ? postId.toNumber() : postId,
-          })
-        })
-        .then(res => res.json())
-        .then(data => {
-          span.dataset.liked = data.user_like_status;
-          span.style.color = data.user_like_status ? color2 : color1;
-          likeCount.textContent = data.total_likes;
-        });
+            fetch("https://api.thesocks.net/get-like-info/", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                nft_username: username_selected,
+                id_publication: postId.toNumber ? postId.toNumber() : postId,
+              })
+            })
+            .then(res => res.json())
+            .then(data => {
+              span.dataset.liked = data.user_like_status;
+              span.style.color = data.user_like_status ? color2 : color1;
+              likeCount.textContent = data.total_likes;
+            });
+          }
+          else if (id === "send") {
+            span.addEventListener("click", function () {
+              toggleReaction(span);
+              showSendOptions(nftUsername_post, postId, container);
+            });
+          }
+          else if (id === "comment") {
+            const commentCount = document.createElement("span");
+            commentCount.id = `comments-count-${postId}`;
+            commentCount.style.marginLeft = "5px";
+            commentCount.textContent = "0";
+            span.appendChild(commentCount);
 
+            fetch(`https://api.thesocks.net/contar-comentarios/?id_publication=${postId.toNumber ? postId.toNumber() : postId}`)
+              .then(res => res.json())
+              .then(data => {
+                commentCount.textContent = data.total_comentarios;
+              })
+              .catch(err => {
+                console.error("Error al obtener cantidad de comentarios:", err);
+              });
 
-      }
-      else if (id === "send") {
-        span.addEventListener("click", function () {
-          toggleReaction(span);
-          showSendOptions(nftUsername_post, postId, container);
-        });
-      }
-      else if (id === "comment") {
-        // Crear el contador visualmente a la par del ícono
-        const commentCount = document.createElement("span");
-        commentCount.id = `comments-count-${postId}`;
-        commentCount.style.marginLeft = "5px";
-        commentCount.textContent = "0";
-        span.appendChild(commentCount);
+            span.addEventListener("click", async function () {
+              toggleReaction(span);
+              await mostrarMenuComentarios(postId, username_selected);
+            });
+          }
+          else if (id === "share") {
+            span.addEventListener("click", function () {
+              toggleReaction(span);
+              compartir_en_redes_sociales(postId,media);
+            });
+          }
 
-        // Obtener el número de comentarios desde el backend
-        fetch(`https://api.thesocks.net/contar-comentarios/?id_publication=${postId.toNumber ? postId.toNumber() : postId}`)
-          .then(res => res.json())
-          .then(data => {
-            commentCount.textContent = data.total_comentarios;
-          })
-          .catch(err => {
-            console.error("Error al obtener cantidad de comentarios:", err);
+          // Handler común para likes (si id === heart)
+          span.addEventListener("click", function (e) {
+            // evita doble ejecutar para casos donde ya manejas click en ramas superiores
+            if (id === "heart") {
+              likePost(username_selected, nftUsername_post, postId);
+            }
           });
 
-        // Agregar el evento para abrir el menú de comentarios
-        span.addEventListener("click", async function () {
-          toggleReaction(span);
-          await mostrarMenuComentarios(postId, username_selected);
+          container.appendChild(span);
         });
-      }
-      else if (id === "share") {
-        span.addEventListener("click", function () {
-          toggleReaction(span);
-          compartir_en_redes_sociales(postId,media);
-        });
-      }
-
-      span.addEventListener("click", function () {
-        toggleReaction(span);
-        if (id === "heart") {
-          likePost(username_selected, nftUsername_post, postId);
-        }
-      });
-
-      container.appendChild(span);
-    });
   }
 
   function toggleReaction(icon) {
-    const newColor = icon.getAttribute("data-color2");
-    const originalColor = icon.getAttribute("data-color1");
-    icon.style.color = icon.style.color === originalColor ? newColor : originalColor;
-  }
+        const newColor = icon.getAttribute("data-color2");
+        const originalColor = icon.getAttribute("data-color1");
+        const isToggled = icon.dataset.toggled === 'true';
+
+        // alternar color
+        icon.style.color = isToggled ? originalColor : newColor;
+        icon.dataset.toggled = isToggled ? 'false' : 'true';
+
+        // efecto "pop"
+        icon.classList.add('grow');
+        setTimeout(() => {
+          icon.classList.remove('grow');
+        }, 320); // coincide con la transición en CSS
+      }
 
   function likePost(username_selected, nftUsername_post, postId) {
     const heartIcon = document.getElementById(`icon-heart-${postId}`);

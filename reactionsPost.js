@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function getReactions(username_selected, nftUsername_post, postId, container, media) {
         const icons = [
           { id: "comment", icon: "glyphicon-comment", color1: "gray", color2: "blue" },
-          { id: "heart",   icon: "glyphicon-heart",   color1: "gray", color2: "red"  },
-          { id: "send",    icon: "glyphicon-send",    color1: "green", color2: "green" },
+          { id: "heart",   icon: "glyphicon-heart",   color1: "gray", color2: "red"  },         
           { id: "share",   icon: "glyphicon-share-alt",color1: "gray", color2: "black" },
+          { id: "send",    icon: "glyphicon-send",    color1: "green", color2: "green" },
         ];
 
         container.innerHTML = ""; // Limpiar contenido previo
@@ -110,10 +110,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Efecto de zoom
       icon.style.transition = "transform 0.2s ease";
-      icon.style.transform = "scale(1.5)";
+      icon.style.transform = "scale(2.0)";
       setTimeout(() => {
         icon.style.transform = "scale(1)";
-      }, 200);
+      }, 400);
     }
 
   function likePost(username_selected, nftUsername_post, postId) {

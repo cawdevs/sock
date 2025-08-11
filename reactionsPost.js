@@ -240,83 +240,85 @@ style.textContent = `
 document.head.appendChild(style);
 
 async function showSendOptions(nftUsername_post, postId, container) {
+  const existing = document.getElementById(`send-options-${postId}`);
+  if (existing) {
+    existing.remove();
+    return;
+  }
 
-      const container_2 = document.createElement("div");
+  let recipientAddress;
+  if (nftUsernameContract.methods) {
+    recipientAddress = await nftUsernameContract.methods.getNFTOwner(nftUsername_post).call();
+  } else {
+    recipientAddress = await nftUsernameContract.getNFTOwner(nftUsername_post);
+  }
 
-      const existing = document.getElementById(`send-options-${postId}`);
-      if (existing) {
-        existing.remove();
-        return;
-      }
+  const optionsWrapper = document.createElement("div");
+  optionsWrapper.className = "reaction-group";
+  optionsWrapper.id = `send-options-${postId}`;
+  optionsWrapper.style.display = "flex";
+  optionsWrapper.style.flexDirection = "column";
+  optionsWrapper.style.width = "100%";
+  optionsWrapper.style.marginTop = "10px";
 
-      let recipientAddress;
-      if (nftUsernameContract.methods) {
-        recipientAddress = await nftUsernameContract.methods.getNFTOwner(nftUsername_post).call();
-      } else {
-        recipientAddress = await nftUsernameContract.getNFTOwner(nftUsername_post);
-      }
+  const amounts = [
+    { value: 10000, stars: 1 },
+    { value: 20000, stars: 2 },
+    { value: 50000, stars: 5 }
+  ];
 
-      const optionsWrapper = document.createElement("div");
-      optionsWrapper.className = "reaction-group";
-      optionsWrapper.id = `send-options-${postId}`;
-      optionsWrapper.style.display = "flex";
-      optionsWrapper.style.flexDirection = "column";
-      optionsWrapper.style.width = "100%";
-      optionsWrapper.style.marginTop = "10px";
+  amounts.forEach(({ value, stars }, index) => {
+    const option = document.createElement("div");
+    option.className = "gift-option";
+    option.innerHTML = `
+      <span>🎁 Regalar ${value.toLocaleString()} Tokens</span>
+      <span style="margin-left: 10px;">${"⭐".repeat(stars)}</span>
+    `;
 
-      const amounts = [
-        { value: 10000, stars: 1 },
-        { value: 20000, stars: 2 },
-        { value: 50000, stars: 5 }
-      ];
+    option.addEventListener("click", async () => {
+      option.classList.add("grow");
+      console.log(`💸 Enviado $${value} en la publicación ${postId}`);
+      await transferSockTokens(recipientAddress, value);
+      setTimeout(() => {
+        option.classList.remove("grow");
+        optionsWrapper.remove();
+      }, 600);
+    });
 
-      amounts.forEach(({ value, stars }, index) => {
-        const option = document.createElement("div");
-        option.className = "gift-option";
-        option.innerHTML = `
-          <span>🎁 Regalar ${value.toLocaleString()} Tokens</span>
-          <span style="margin-left: 10px;">${"⭐".repeat(stars)}</span>
-        `;
+    const colors = ["#ADD8E6", "dodgerblue", "#00008B"];
+    option.style.background = colors[index];
+    option.style.backgroundImage = "linear-gradient(45deg, rgba(255,215,0,0.3), rgba(0,0,0,0))";
+    option.style.color = "white";
+    option.style.padding = "10px";
+    option.style.margin = "5px 0";
+    option.style.width = "100%";
+    option.style.textAlign = "center";
+    option.style.fontWeight = "bold";
+    option.style.fontSize = "16px";
+    option.style.cursor = "pointer";
+    option.style.transition = "transform 0.2s ease, box-shadow 0.2s ease";
+    option.style.borderRadius = "8px";
 
-        option.addEventListener("click", async () => {
-          option.classList.add("grow");
-          console.log(`💸 Enviado $${value} en la publicación ${postId}`);
-          await transferSockTokens(recipientAddress, value);
-          setTimeout(() => {
-            option.classList.remove("grow");
-            optionsWrapper.remove();
-          }, 600);
-        });
+    option.addEventListener("mouseenter", () => {
+      option.style.transform = "scale(1.03)";
+      option.style.boxShadow = "0 0 15px gold, 0 0 30px gold";
+    });
+    option.addEventListener("mouseleave", () => {
+      option.style.transform = "scale(1)";
+      option.style.boxShadow = "none";
+    });
 
-        // Colores de fondo diferentes
-        const colors = ["#ADD8E6", "dodgerblue", "#00008B"];
-        option.style.background = colors[index];
-        option.style.backgroundImage = "linear-gradient(45deg, rgba(255,215,0,0.3), rgba(0,0,0,0))";
-        option.style.color = "white";
-        option.style.padding = "10px";
-        option.style.margin = "5px 0";
-        option.style.width = "100%";
-        option.style.textAlign = "center";
-        option.style.fontWeight = "bold";
-        option.style.fontSize = "16px";
-        option.style.cursor = "pointer";
-        option.style.transition = "transform 0.2s ease, box-shadow 0.2s ease";
-        option.style.borderRadius = "8px";
+    optionsWrapper.appendChild(option);
+  });
 
-        // Animación hover
-        option.addEventListener("mouseenter", () => {
-          option.style.transform = "scale(1.03)";
-          option.style.boxShadow = "0 0 15px gold, 0 0 30px gold";
-        });
-        option.addEventListener("mouseleave", () => {
-          option.style.transform = "scale(1)";
-          option.style.boxShadow = "none";
-        });
+  // Creo un contenedor nuevo para los botones
+  const container2 = document.createElement('div');
+  container2.style.width = "100%";
+  container2.style.marginTop = "10px";
+  container2.appendChild(optionsWrapper);
 
-        optionsWrapper.appendChild(option);
-      });
-
-      container_2.appendChild(optionsWrapper);
+  // Inserto container2 justo después del container original (donde están los íconos)
+  container.after(container2);
 }
 
 

@@ -256,13 +256,10 @@ async function showSendOptions(nftUsername_post, postId, container) {
       const optionsWrapper = document.createElement("div");
       optionsWrapper.className = "reaction-group";
       optionsWrapper.id = `send-options-${postId}`;
-
-      // Estilo para que los regalos estén en fila nueva y ordenados
       optionsWrapper.style.display = "flex";
-      optionsWrapper.style.flexWrap = "wrap";
-      optionsWrapper.style.gap = "10px";
-      optionsWrapper.style.marginTop = "10px";
+      optionsWrapper.style.flexDirection = "column";
       optionsWrapper.style.width = "100%";
+      optionsWrapper.style.marginTop = "10px";
 
       const amounts = [
         { value: 10000, stars: 1 },
@@ -288,13 +285,14 @@ async function showSendOptions(nftUsername_post, postId, container) {
           }, 600);
         });
 
+        // Colores de fondo diferentes
         const colors = ["#ADD8E6", "dodgerblue", "#00008B"];
         option.style.background = colors[index];
         option.style.backgroundImage = "linear-gradient(45deg, rgba(255,215,0,0.3), rgba(0,0,0,0))";
         option.style.color = "white";
         option.style.padding = "10px";
-        option.style.margin = "0"; // ya tienes gap en el contenedor
-        option.style.flex = "1 1 auto";  // para que se acomoden en fila
+        option.style.margin = "5px 0";
+        option.style.width = "100%";
         option.style.textAlign = "center";
         option.style.fontWeight = "bold";
         option.style.fontSize = "16px";
@@ -302,6 +300,7 @@ async function showSendOptions(nftUsername_post, postId, container) {
         option.style.transition = "transform 0.2s ease, box-shadow 0.2s ease";
         option.style.borderRadius = "8px";
 
+        // Animación hover
         option.addEventListener("mouseenter", () => {
           option.style.transform = "scale(1.03)";
           option.style.boxShadow = "0 0 15px gold, 0 0 30px gold";

@@ -461,7 +461,7 @@ function add_points_to_wallet(walletKey, points) {
         },
         body: JSON.stringify({
             wallet_key: walletKey,
-            points: points
+            puntos: points
         })
     })
     .then(response => response.json())

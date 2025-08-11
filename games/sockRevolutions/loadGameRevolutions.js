@@ -9,9 +9,7 @@ function loadGame_revolutions() {
 
     <span id="modalOverlay">
       <div id="startGameModal" class="modalMessage">
-        <h3>Sock Sock Revolution!</h3>
-        <p>Un juego clasico!</p>
-        <p>Use la flechas de direccion para jugar. Pause, Reinicie y ponga en silencio la musica.</p>
+        <h3>Sock Sock Revolution!</h3>        
         <button id="redirectButton">Continuar</button>
       </div>
 
@@ -63,9 +61,7 @@ function loadGame_revolutions() {
         <img id="right" src="games/sockRevolutions/assets/staticRight.png">
       </div>
 
-      
-      <audio id="mainSong" src="games/sockRevolutions/assets/paranoia.mp3"></audio>
-
+     <audio id="mainSong" controls></audio>
 
       <audio id="endApplause" src="games/sockRevolutions/assets/applause.mp3"></audio>
     </section>

@@ -400,6 +400,15 @@
                         </a>
                       </li>
 
+                      <li>                       
+                        <a href="#">
+                          <span class="glyphicon glyphicon- glyphicon glyphicon-certificate" style="color: orange; margin-left: 8px; margin-right: 16px;"></span>                           
+                          <span>Reclamar</span>
+                          <span id="total_points_wallet">0</span>
+
+                        </a>
+                      </li>
+
 
                         <li><a href="conocer_mas.html">
                           <span class="glyphicon glyphicon-question-sign " style="color: white; margin-left: 8px; margin-right: 16px;"></span>                           
@@ -1816,6 +1825,7 @@ async function inicializarUI() {
     await obtenerSaldo_SOCK();
 
     get_total_liked();
+    get_total_points();
     //const nftusername = document.getElementById('selector_NFTs').value;
     //await get_NFTUsername_publication(nftusername,"my-publications-container");
 
@@ -1917,6 +1927,34 @@ function get_total_liked() {
         document.getElementById("total_like_username").textContent = "0";
     });
 }
+
+
+function get_total_points() {
+    console.log("Obteniendo puntos de:", globalWalletKey);
+
+    fetch("https://api.thesocks.net/get-points/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ wallet_key: globalWalletKey })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Puntos obtenidos:", globalWalletKey, data.total_points);
+
+        if (data && data.total_points !== undefined) {
+            document.getElementById("total_points_wallet").textContent = data.total_points;
+        } else {
+            document.getElementById("total_points_wallet").textContent = "0";
+        }
+    })
+    .catch(error => {
+        console.error("Error al obtener puntos:", error);
+        document.getElementById("total_points_wallet").textContent = "0";
+    });
+}
+
 
 /*async function obtenerSaldo_SOCK() {
 

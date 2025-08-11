@@ -1992,13 +1992,13 @@ async function obtenerSaldo_SOCK() {
     if (diferencia > 0) {
         diffElement.textContent = `+${diferencia}`;
         diffElement.style.color = "green";
-        diffElement.style.transform = "scale(0.5)";
+        diffElement.style.transform = "scale(2.5)";
         diffElement.style.opacity = "0.5";
         saldoElement.appendChild(diffElement);
 
         // Animar crecimiento
         requestAnimationFrame(() => {
-            diffElement.style.transform = "scale(1.5)";
+            diffElement.style.transform = "scale(2.5)";
             diffElement.style.opacity = "1";
         });
 
@@ -2007,26 +2007,26 @@ async function obtenerSaldo_SOCK() {
             diffElement.remove();
             saldoElement.innerText = truncatedBalance;
             saldoElement.style.color = "green";
-        }, 1000);
+        }, 3000);
 
     } else if (diferencia < 0) {
-        diffElement.textContent = `${diferencia}`;
+        diffElement.textContent = `-${diferencia}`;
         diffElement.style.color = "red";
-        diffElement.style.transform = "scale(1.5)";
-        diffElement.style.opacity = "1";
+        diffElement.style.transform = "scale(2.5)";
+        diffElement.style.opacity = "0.5";
         saldoElement.appendChild(diffElement);
 
         // Animar decrecimiento
         requestAnimationFrame(() => {
-            diffElement.style.transform = "scale(0.5)";
-            diffElement.style.opacity = "0.5";
+            diffElement.style.transform = "scale(2.5)";
+            diffElement.style.opacity = "1";
         });
 
         setTimeout(() => {
             diffElement.remove();
             saldoElement.innerText = truncatedBalance;
             saldoElement.style.color = "red";
-        }, 1000);
+        }, 3000);
 
     } else {
         // Si no hay cambio

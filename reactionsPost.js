@@ -241,7 +241,7 @@ document.head.appendChild(style);
 
 async function showSendOptions(nftUsername_post, postId, container) {
 
-      container_2 = const bottomRow = document.createElement("div");
+      const container_2 = document.createElement("div");
 
       const existing = document.getElementById(`send-options-${postId}`);
       if (existing) {

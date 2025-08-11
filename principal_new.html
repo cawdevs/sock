@@ -1918,7 +1918,7 @@ function get_total_liked() {
     });
 }
 
-async function obtenerSaldo_SOCK() {
+/*async function obtenerSaldo_SOCK() {
 
     let accountBalance;
     if (tokenContract.methods) {
@@ -1943,9 +1943,103 @@ async function obtenerSaldo_SOCK() {
    saldoElement.innerText = truncatedBalance;
    saldoElement.style.color = 'black';
 
-   console.log("Saldo Sock SOCK()." + truncatedBalance);    
+   console.log("Saldo Sock SOCK()." + truncatedBalance);
+
+   const saldo_anterior = localStorage.getItem("truncatedBalance");
+   localStorage.setItem("Saldo Sock", truncatedBalance);
+
+   if (saldo_anterior<truncatedBalance){
+      saldoElement.style.color = 'green';
+   }else{
+
+   }            
+        
+
+
    return truncatedBalance;
 }  
+*/
+
+async function obtenerSaldo_SOCK() {
+    let accountBalance;
+
+    if (tokenContract.methods) {
+        console.log("Con MetaMask obtenerSaldo_SOCK().");
+        accountBalance = await tokenContract.methods.balanceOf(globalWalletKey).call();
+    } else {
+        console.log("Con SockWallet obtenerSaldo_SOCK().");        
+        accountBalance = await tokenContract.balanceOf(globalWalletKey);
+    }
+
+    // Convertir a número sin decimales (18 decimales de un token ERC20)
+    const balanceString = accountBalance.toString();
+    const truncatedBalance = parseInt(balanceString.slice(0, -18) || "0", 10);
+
+    const saldoElement = document.getElementById('saldo_CAW');
+    const diffElement = document.createElement("span"); // Para mostrar la diferencia
+    diffElement.style.marginLeft = "5px";
+    diffElement.style.fontWeight = "bold";
+    diffElement.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+    diffElement.style.display = "inline-block";
+
+    // Mostrar primero el saldo anterior guardado
+    const saldoAnterior = parseInt(localStorage.getItem("SaldoSock") || "0", 10);
+    saldoElement.innerText = saldoAnterior;
+
+    // Calcular diferencia
+    const diferencia = truncatedBalance - saldoAnterior;
+
+    if (diferencia > 0) {
+        diffElement.textContent = `+${diferencia}`;
+        diffElement.style.color = "green";
+        diffElement.style.transform = "scale(0.5)";
+        diffElement.style.opacity = "0.5";
+        saldoElement.appendChild(diffElement);
+
+        // Animar crecimiento
+        requestAnimationFrame(() => {
+            diffElement.style.transform = "scale(1.5)";
+            diffElement.style.opacity = "1";
+        });
+
+        // Volver a tamaño normal y mostrar saldo final
+        setTimeout(() => {
+            diffElement.remove();
+            saldoElement.innerText = truncatedBalance;
+            saldoElement.style.color = "green";
+        }, 1000);
+
+    } else if (diferencia < 0) {
+        diffElement.textContent = `${diferencia}`;
+        diffElement.style.color = "red";
+        diffElement.style.transform = "scale(1.5)";
+        diffElement.style.opacity = "1";
+        saldoElement.appendChild(diffElement);
+
+        // Animar decrecimiento
+        requestAnimationFrame(() => {
+            diffElement.style.transform = "scale(0.5)";
+            diffElement.style.opacity = "0.5";
+        });
+
+        setTimeout(() => {
+            diffElement.remove();
+            saldoElement.innerText = truncatedBalance;
+            saldoElement.style.color = "red";
+        }, 1000);
+
+    } else {
+        // Si no hay cambio
+        saldoElement.innerText = truncatedBalance;
+        saldoElement.style.color = "black";
+    }
+
+    // Guardar el nuevo saldo
+    localStorage.setItem("SaldoSock", truncatedBalance);
+
+    return truncatedBalance;
+}
+
 
 
 // Función para obtener el saldo del token

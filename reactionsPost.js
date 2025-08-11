@@ -240,6 +240,9 @@ style.textContent = `
 document.head.appendChild(style);
 
 async function showSendOptions(nftUsername_post, postId, container) {
+
+      container_2 = const bottomRow = document.createElement("div");
+
       const existing = document.getElementById(`send-options-${postId}`);
       if (existing) {
         existing.remove();
@@ -313,7 +316,7 @@ async function showSendOptions(nftUsername_post, postId, container) {
         optionsWrapper.appendChild(option);
       });
 
-      container.appendChild(optionsWrapper);
+      container_2.appendChild(optionsWrapper);
 }
 
 

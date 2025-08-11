@@ -481,4 +481,6 @@ function add_points_to_wallet(walletKey, points) {
 
 function add_points(points) {
     add_points_to_wallet(globalWalletKey, points);
+    get_total_points();
+
 }

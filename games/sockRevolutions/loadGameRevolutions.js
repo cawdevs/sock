@@ -14,8 +14,8 @@ function loadGame_revolutions() {
       </div>
 
       <div id="endGameModal" class="modalMessage">
-        <h3>Gracias por Jugar!</h3>
-        <button id="playAgainButton">Play Again</button>
+        
+        <button id="playAgainButton">Jugar de Nuevo</button>
       </div>
     </span>
 

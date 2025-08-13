@@ -532,7 +532,7 @@ async function publicar_main_post(){
 
 
 
-
+/*
 let currentIndex = null;
 let total_publication = null;
 async function get_all_publications_home(containerID, append = false) {
@@ -561,11 +561,7 @@ async function get_all_publications_home(containerID, append = false) {
         while (count < 5 && i >= 1) {
             let type_publication = await get_publication(i, containerID);
 
-
-            loadingAnimation.style.display = 'none';
-            
-
-           
+            loadingAnimation.style.display = 'none';                      
 
             if (type_publication !== 3) {
                 count++;
@@ -583,6 +579,82 @@ async function get_all_publications_home(containerID, append = false) {
 
     } catch (error) {
        // alert('Error al intentar get_publications_home.');
+        console.error('Error completo:', error);
+    }
+}
+
+*/
+let currentIndex = null;
+let total_publication = null;
+let randomSeenIndexes = new Set(); // 📌 Guardará los índices ya usados en modo random
+
+async function get_all_publications_home(containerID, append = false, mode = "last") {
+    try {
+        const container = document.getElementById(containerID);
+        const loadingAnimation = document.getElementById('loadingAnimation-principal');
+
+        if (!append) {
+            container.innerHTML = '';
+
+            // Obtener total de publicaciones
+            if (publisherContract.methods) {
+                total_publication = await publisherContract.methods.publicationCount().call();
+            } else {
+                total_publication = await publisherContract.publicationCount();
+            }
+
+            currentIndex = total_publication;
+
+            // Si es modo random y no se está haciendo append, reiniciar el set
+            if (mode === "random") {
+                randomSeenIndexes.clear();
+            }
+        }
+
+        let count = 0;
+
+        if (mode === "last") {
+            // 📌 Últimas 5 publicaciones
+            let i = currentIndex;
+            while (count < 5 && i >= 1) {
+                let type_publication = await get_publication(i, containerID);
+                loadingAnimation.style.display = 'none';
+
+                if (type_publication !== 3) {
+                    count++;
+                }
+                i--;
+            }
+            currentIndex = i;
+
+        } else if (mode === "random") {
+            // 📌 5 publicaciones aleatorias sin repetir entre llamadas
+            while (count < 5 && randomSeenIndexes.size < total_publication) {
+                let randomIndex = Math.floor(Math.random() * total_publication) + 1;
+                if (!randomSeenIndexes.has(randomIndex)) {
+                    randomSeenIndexes.add(randomIndex);
+
+                    let type_publication = await get_publication(randomIndex, containerID);
+                    loadingAnimation.style.display = 'none';
+
+                    if (type_publication !== 3) {
+                        count++;
+                    }
+                }
+            }
+        }
+
+        // Si ya no hay más publicaciones en modo "last"
+        if (mode === "last" && currentIndex < 1) {
+            document.getElementById("verMasBtn").style.display = "none";
+        }
+
+        // Si ya no hay más publicaciones en modo "random"
+        if (mode === "random" && randomSeenIndexes.size >= total_publication) {
+            document.getElementById("verMasBtn").style.display = "none";
+        }
+
+    } catch (error) {
         console.error('Error completo:', error);
     }
 }
@@ -626,12 +698,20 @@ async function get_ultima_publication(containerID) {
 
 // Ejecutar al cargar la página
 document.addEventListener("DOMContentLoaded", async () => {
-        get_all_publications_home("home-publications-container");
+    //get_all_publications_home("home-publications-container");
 
     // Configurar el botón una vez que el DOM esté listo
     document.getElementById("verMasBtn").addEventListener("click", () => {
-        get_all_publications_home("home-publications-container", true);
+        get_all_publications_home("home-publications-container", true, "last");
     });
+
+    // Configurar el botón una vez que el DOM esté listo
+    document.getElementById("verMasBtnRand").addEventListener("click", () => {
+        get_all_publications_home("home-publications-container", true, "random");
+    });
+
+
+
 });
 
 

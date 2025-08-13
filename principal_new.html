@@ -587,6 +587,8 @@ span.hashtag {
                               
          </div>  </center> 
 
+
+
          <div id="recent-home-publications-container"></div> 
          <div id="home-publications-container"></div>       
           
@@ -605,7 +607,21 @@ span.hashtag {
             border: none;
             text-align: center;
         ">
-    Ver más publicaciones
+    Ver ultimas publicaciones
+</button>
+
+<button id="verMasBtnRand" class="btn" style="
+            margin: 20px auto;
+            display: block;
+            font-size: 18px;
+            border-radius: 20px;
+            background-color: dodgerblue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            text-align: center;
+        ">
+    Ver publicaciones aleatorias
 </button>
 
       <br>
@@ -1816,8 +1832,8 @@ async function inicializarUI() {
       
     await getmintedNFT();
    
-    await get_all_publications_home("home-publications-container");
-
+    //await get_all_publications_home("home-publications-container");
+    await get_all_publications_home('recent-home-publications-container', false, "last");
     await get_NFTUsername_profile();
 
     // Obtener y mostrar saldos

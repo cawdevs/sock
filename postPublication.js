@@ -511,14 +511,13 @@ async function publicar_main_post(){
     //$('body').removeClass('modal-open');
 //});
           // $('#myModal_publication').modal('hide');
-          container.innerHTML = '';
-
-
+         // createPublicationElements();
+           $('a[href="#home"]').tab('show');//me lleva al menu home
            
 
     } catch (error) {
           
-          // Cambia el color de la animación a rojo y lo mantiene 2 segundos
+// Cambia el color de la animación a rojo y lo mantiene 2 segundos
           loadingAnimation.style.borderLeftColor = 'red';                 
           setTimeout(() => { 
               loadingAnimation.style.display = 'none';

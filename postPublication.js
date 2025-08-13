@@ -486,7 +486,7 @@ async function publicar_main_post(){
                         showSuccess("Confirmado: Publicado Main Post", receipt);
                     } catch (error) {
                         showError("Sin confirmar: Publicado Main Post.", error);
-                        return; // ❌ No seguir si falló
+                        //return; // ❌ No seguir si falló
                     }
                            
 
@@ -500,7 +500,7 @@ async function publicar_main_post(){
             loadingAnimation.style.borderLeftColor = 'lime';                 
             setTimeout(() => { 
                 loadingAnimation.style.display = 'none';
-            }, 10000);
+            }, 5000);
 
             console.log('iniciamos get_ultima_publication.'); 
             get_ultima_publication('recent-home-publications-container'); 
@@ -522,7 +522,7 @@ async function publicar_main_post(){
           loadingAnimation.style.borderLeftColor = 'red';                 
           setTimeout(() => { 
               loadingAnimation.style.display = 'none';
-          }, 2000);
+          }, 5000);
           
           showError("Sin confirmar:Publicado Main Post.",error);
           

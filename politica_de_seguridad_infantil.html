@@ -1,81 +1,168 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Estándares de seguridad infantil – thesocks</title>
-<meta name="description" content="Estándares de seguridad infantil (EASI) de thesocks: políticas, procesos de denuncia, moderación y contacto para prevenir y responder a la explotación y el abuso sexual infantil." />
-<meta name="robots" content="index,follow" />
-<style>
-:root{
---bg:#0b132b;--card:#ffffff;--muted:#6b7280;--accent:#2563eb;--accent-2:#7c3aed;--good:#10b981;--warn:#f59e0b;--bad:#ef4444;
-}
-html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;line-height:1.6;background:#f3f4f6;color:#111827}
-header{background:linear-gradient(135deg,var(--bg) 0%, #1f2937 100%);color:#fff;padding:40px 20px;text-align:center}
-header h1{margin:0;font-size:clamp(26px,3.5vw,40px)}
-header p{margin:8px auto 0;max-width:900px;color:#d1d5db}
-nav{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:16px}
-nav a{color:#fff;border:1px solid rgba(255,255,255,.2);padding:8px 12px;border-radius:999px;text-decoration:none}
-main{max-width:980px;margin:24px auto;padding:0 16px}
-.card{background:var(--card);border-radius:16px;box-shadow:0 6px 24px rgba(0,0,0,.08);padding:22px;margin:18px 0}
-.pill{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600}
-.pill.good{background:rgba(16,185,129,.1);color:var(--good)}
-.pill.warn{background:rgba(245,158,11,.1);color:var(--warn)}
-.pill.bad{background:rgba(239,68,68,.1);color:var(--bad)}
-h2{font-size:clamp(20px,2.5vw,28px);margin:0 0 6px}
-h3{font-size:18px;margin:18px 0 8px}
-ul{padding-left:20px}
-code.inline{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6px}
-.meta{color:var(--muted);font-size:14px}
-a{color:var(--accent)}
-.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff !important;border-radius:10px;padding:10px 14px;text-decoration:none}
-.grid{display:grid;grid-template-columns:1fr;gap:14px}
-@media (min-width:900px){.grid{grid-template-columns:1fr 1fr}}
-footer{max-width:980px;margin:24px auto 60px;padding:0 16px;color:#6b7280}
-footer a{color:inherit}
-/* Print */
-@media print{
-header{background:#000;color:#fff}
-nav{display:none}
-.cta{display:none}
-body{background:#fff}
-.card{box-shadow:none;border:1px solid #e5e7eb}
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estándares de seguridad infantil – thesocks</title>
+  <meta name="description" content="Estándares de seguridad infantil (EASI) de thesocks: políticas, procesos de denuncia, moderación y contacto para prevenir y responder a la explotación y el abuso sexual infantil." />
+  <meta name="robots" content="index,follow" />
+  <style>
+    :root{
+      --bg:#0b132b;--card:#ffffff;--muted:#6b7280;--accent:#2563eb;--accent-2:#7c3aed;--good:#10b981;--warn:#f59e0b;--bad:#ef4444;
+    }
+    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;line-height:1.6;background:#f3f4f6;color:#111827}
+    header{background:linear-gradient(135deg,var(--bg) 0%, #1f2937 100%);color:#fff;padding:40px 20px;text-align:center}
+    header h1{margin:0;font-size:clamp(26px,3.5vw,40px)}
+    header p{margin:8px auto 0;max-width:900px;color:#d1d5db}
+    nav{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+    nav a{color:#fff;border:1px solid rgba(255,255,255,.2);padding:8px 12px;border-radius:999px;text-decoration:none}
+    main{max-width:980px;margin:24px auto;padding:0 16px}
+    .card{background:var(--card);border-radius:16px;box-shadow:0 6px 24px rgba(0,0,0,.08);padding:22px;margin:18px 0}
+    .pill{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600}
+    .pill.good{background:rgba(16,185,129,.1);color:var(--good)}
+    .pill.warn{background:rgba(245,158,11,.1);color:var(--warn)}
+    .pill.bad{background:rgba(239,68,68,.1);color:var(--bad)}
+    h2{font-size:clamp(20px,2.5vw,28px);margin:0 0 6px}
+    h3{font-size:18px;margin:18px 0 8px}
+    ul{padding-left:20px}
+    code.inline{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6px}
+    .meta{color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+    .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff !important;border-radius:10px;padding:10px 14px;text-decoration:none}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px}
+    @media (min-width:900px){.grid{grid-template-columns:1fr 1fr}}
+    footer{max-width:980px;margin:24px auto 60px;padding:0 16px;color:#6b7280}
+    footer a{color:inherit}
+    /* Print */
+    @media print{
+      header{background:#000;color:#fff}
+      nav{display:none}
+      .cta{display:none}
+      body{background:#fff}
+      .card{box-shadow:none;border:1px solid #e5e7eb}
+    }
+  </style>
 </head>
 <body>
-<header>
-<h1>Estándares de seguridad infantil (EASI)</h1>
-<p>thesocks mantiene una política de tolerancia cero frente a la explotación y el abuso sexual infantil. Esta página describe nuestros estándares, procesos de denuncia y la forma en que actuamos ante incidentes.</p>
-<nav>
-<a href="#alcance">Alcance</a>
-<a href="#politica">Política y conducta prohibida</a>
-<a href="#denuncia">Cómo denunciar</a>
-<a href="#respuesta">Moderación y respuesta</a>
-<a href="#autoridades">Cooperación con autoridades</a>
-<a href="#datos">Preservación y privacidad</a>
-<a href="#contacto">Contacto designado</a>
-</nav>
-<p class="meta">Última actualización: 23 de agosto de 2025</p>
-</header>
+  <header>
+    <h1>Estándares de seguridad infantil (EASI)</h1>
+    <p>thesocks mantiene una política de tolerancia cero frente a la explotación y el abuso sexual infantil. Esta página describe nuestros estándares, procesos de denuncia y la forma en que actuamos ante incidentes.</p>
+    <nav>
+      <a href="#alcance">Alcance</a>
+      <a href="#politica">Política y conducta prohibida</a>
+      <a href="#denuncia">Cómo denunciar</a>
+      <a href="#respuesta">Moderación y respuesta</a>
+      <a href="#autoridades">Cooperación con autoridades</a>
+      <a href="#datos">Preservación y privacidad</a>
+      <a href="#contacto">Contacto designado</a>
+    </nav>
+    <p class="meta">Última actualización: 23 de agosto de 2025</p>
+  </header>
 
+  <main>
+    <section id="resumen" class="card">
+      <h2>Resumen</h2>
+      <p>thesocks prohíbe estrictamente cualquier contenido, conducta o actividad que implique explotación o abuso sexual infantil (EASI), incluyendo pero no limitado a material de abuso sexual infantil, solicitación de menores, grooming, trata o cualquier intento de facilitar estas conductas. Nuestros sistemas de moderación, junto con revisiones humanas, priorizan la detección, la eliminación rápida y la notificación a las autoridades competentes, según las leyes aplicables.</p>
+      <p class="meta">Audiencia objetivo de la app: <strong>18 años o más</strong>.</p>
+    </section>
 
-<main>
-<section id="resumen" class="card">
-<h2>Resumen</h2>
-<p>thesocks prohíbe estrictamente cualquier contenido, conducta o actividad que implique explotación o abuso sexual infantil (EASI), incluyendo pero no limitado a material de abuso sexual infantil, solicitación de menores, grooming, trata o cualquier intento de facilitar estas conductas. Nuestros sistemas de moderación, junto con revisiones humanas, priorizan la detección, la eliminación rápida y la notificación a las autoridades competentes, según las leyes aplicables.</p>
-<p class="meta">Audiencia objetivo de la app: <strong>18 años o más</strong>.</p>
-</section>
+    <section id="alcance" class="card">
+      <h2>Alcance</h2>
+      <ul>
+        <li>Aplica a todas las superficies de thesocks: aplicación móvil (incluida cualquier implementación con WebView) y sitio web.</li>
+        <li>Vincula a todos los usuarios, creadores de contenido, administradores y a cualquier tercero que use nuestras APIs o integraciones.</li>
+      </ul>
+    </section>
 
+    <section id="politica" class="card">
+      <h2>Política y conducta prohibida</h2>
+      <div class="grid">
+        <div>
+          <h3>Está <span class="pill bad">terminantemente prohibido</span>:</h3>
+          <ul>
+            <li>Crear, solicitar, poseer, distribuir o enlazar material de abuso/explotación sexual infantil.</li>
+            <li>Intentar contactar, acosar, solicitar imágenes o información sexual de menores (grooming).</li>
+            <li>Compartir imágenes íntimas de menores, reales o simuladas, incluyendo deepfakes.</li>
+            <li>Organizar, promover o facilitar el intercambio de CSAM o encuentros ilícitos.</li>
+            <li>Suplantar a menores o utilizar identidades falsas para fines de explotación.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Medidas de cumplimiento</h3>
+          <ul>
+            <li>Eliminación inmediata del contenido y <strong>suspensión o terminación</strong> de cuentas involucradas.</li>
+            <li>Restricción de funciones, bloqueo de dispositivos e invalidación de sesiones cuando aplique.</li>
+            <li>Notificación a las autoridades competentes y colaboración en las investigaciones conforme a la ley.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-<section id="alcance" class="card">
-<h2>Alcance</h2>
-<ul>
-<li>Aplica a todas las superficies de thesocks: aplicación móvil (incluida cualquier implementación con WebView) y sitio web.</li>
-<li>Vincula a todos los usuarios, creadores de contenido, administradores y a cualquier tercero que use nuestras APIs o integraciones.</li>
-</ul>
-</section>
+    <section id="denuncia" class="card">
+      <h2>Cómo denunciar (reportes de usuarios y externos)</h2>
+      <p>Si detectas contenido, usuarios o actividades que puedan constituir EASI, denúncialo inmediatamente por cualquiera de estos medios:</p>
+      <ul>
+        <li>Dentro de la app: usa el botón <em>Denunciar</em> disponible en perfiles, publicaciones y mensajes.</li>
+        <li>Por correo: <a href="mailto:evvrivas@gmail.com">evvrivas@gmail.com</a>.</li>
+      </ul>
+      <p class="meta">Incluye, si es posible, enlaces, capturas y una descripción del riesgo. No descargues ni redistribuyas material ilegal.</p>
+      <p><span class="pill warn">Tiempos objetivo de respuesta</span>:
+        <br>— Reportes de <strong>alto riesgo</strong> (posible daño inminente): evaluación inicial &lt; 24 h.
+        <br>— Otros reportes: evaluación inicial habitual &lt; 72 h.</p>
+      <a class="cta" href="#contacto">Contactar al responsable</a>
+    </section>
 
+    <section id="respuesta" class="card">
+      <h2>Moderación y respuesta</h2>
+      <ul>
+        <li>Combinamos <strong>revisión humana</strong> con sistemas automatizados para priorizar y filtrar reportes.</li>
+        <li>Ante indicios razonables de EASI, <strong>retenemos</strong> datos mínimos necesarios (metadatos, registros y hashes) y <strong>eliminamos</strong> el contenido de la vista pública sin demora.</li>
+        <li>La reiteración o gravedad conlleva <strong>bloqueos de cuenta</strong>, <strong>bloqueo por dispositivo</strong> y otras acciones preventivas.</li>
+        <li>Proporcionamos canales de <strong>apelación</strong> cuando legalmente procede y no entorpece una investigación.</li>
+      </ul>
+    </section>
 
-<section id="politica" class="card">
-<h2>Política y conducta prohibida</h2>
+    <section id="autoridades" class="card">
+      <h2>Cooperación con autoridades</h2>
+      <ul>
+        <li>thesocks cumple las leyes y colaborará con las <strong>autoridades competentes</strong> de la jurisdicción aplicable cuando reciba solicitudes válidas de información.</li>
+        <li>En presencia de riesgo grave e inminente, podemos realizar una <strong>notificación proactiva</strong> a las autoridades conforme a derecho.</li>
+        <li>Conservamos registros pertinentes por el tiempo mínimo necesario y de acuerdo con la legislación vigente y nuestras políticas de retención.</li>
+      </ul>
+    </section>
+
+    <section id="datos" class="card">
+      <h2>Preservación de evidencia y privacidad</h2>
+      <ul>
+        <li>Minimizamos la exposición del personal a material sensible y evitamos copias innecesarias.</li>
+        <li>Al preservar evidencia, utilizamos <strong>técnicas de minimización</strong> (por ejemplo, metadatos, comprobantes criptográficos/hashes) siempre que sea posible.</li>
+        <li>El tratamiento de datos se realiza según nuestra <a href="https://thesocks.net/politica_de_privacidad" rel="noopener">Política de Privacidad</a> y la normativa aplicable.</li>
+      </ul>
+    </section>
+
+    <section id="edad" class="card">
+      <h2>Límites de edad</h2>
+      <p>La audiencia objetivo de la aplicación es de <strong>18 años o más</strong>. Las cuentas que aparenten pertenecer a menores pueden ser restringidas o eliminadas mientras se verifica la edad, para proteger su seguridad.</p>
+    </section>
+
+    <section id="contacto" class="card">
+      <h2>Contacto del responsable designado</h2>
+      <p>Para consultas relacionadas con estos estándares o para seguimiento de un caso reportado, contacta a nuestro responsable:</p>
+      <ul>
+        <li><strong>Responsable de Cumplimiento de Seguridad Infantil</strong></li>
+        <li>Correo: <a href="mailto:evvrivas@gmail.com">evvrivas@gmail.com y/o artetronica@gmail.com</a></li>
+      </ul>
+      <p class="meta">Este contacto está preparado para tratar temas de cumplimiento y prácticas de prevención de EASI en la plataforma.</p>
+    </section>
+
+    <section id="vigencia" class="card">
+      <h2>Entrada en vigor y cambios</h2>
+      <p>Estos estándares entran en vigor el <strong>23 de agosto de 2025</strong>. Publicaremos las actualizaciones en esta misma página. El uso continuado de nuestros servicios implica la aceptación de los cambios.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 thesocks. Esta página constituye los <strong>Estándares de seguridad infantil (EASI)</strong> exigidos por Google Play para apps de categoría Social/Citas.</p>
+  </footer>
+</body>
+</html>

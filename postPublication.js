@@ -5,7 +5,7 @@ function createPublicationElements() {
        
    // const container = document.getElementById('publication-post-container');
     const container = document.getElementById('menu-publicar');
-    container.style.cssText = 'background-color:#fff;';
+    container.style.cssText = 'background-color:var(--basic);';
     container.style.width = '90%';
     container.style.borderRadius = '20px';
     container.innerHTML = '';   
@@ -826,7 +826,7 @@ async function get_publication(id_publication,principalContainerID) {
                 const principalContainer = document.getElementById(principalContainerID);
                 // Estilos para centrar el div y darle fondo blanco
                 // Estilos para centrar el div y darle fondo blanco
-                principalContainer.style.backgroundColor = "white"; // Fondo blanco
+                principalContainer.style.backgroundColor = "var(--basic)"; // Fondo blanco
                 principalContainer.style.margin = "0 auto"; // Centrar horizontalmente
                 principalContainer.style.display = "flex"; // Usa flexbox
                 principalContainer.style.flexDirection = "column"; // Coloca los elementos en columna

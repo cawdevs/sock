@@ -1142,14 +1142,15 @@ contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
             mediaVideo.appendChild(source);
             mediaDiv.appendChild(mediaVideo);
         }*/
-        else if (media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
-    const mediaVideo = document.createElement('video');
-    mediaVideo.controls = true;
-    mediaVideo.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
 
-    mediaVideo.src = media; // 🔹 Asigna directamente el src al video
 
-    mediaDiv.appendChild(mediaVideo);
+// Uso:
+else if (media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
+    const video = document.createElement('video');
+    video.controls = true;
+    video.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+    video.src = ipfsToSubdomain(media); // 🔥 URL directa, sin redirección
+    mediaDiv.appendChild(video);
 }
 
              
@@ -1213,6 +1214,19 @@ contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
 
     return publicationDiv;
 }
+
+
+function ipfsToSubdomain(url) {
+  const match = url.match(/https?:\/\/w3s\.link\/ipfs\/([^/]+)\/(.*)/);
+  if (match) {
+    const cid = match[1];
+    const path = match[2];
+    return `https://${cid}.ipfs.w3s.link/${path}`;
+  }
+  return url;
+}
+
+
 
 
 function crearDivRespuesta(id, username) {

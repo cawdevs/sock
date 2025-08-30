@@ -1122,7 +1122,7 @@ contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
             mediaDiv.appendChild(mediaImage);
         }
 
-        else if (media.endsWith('.mp4') || media.endsWith('.webm') || media.endsWith('.ogg')) {
+        /*else if (media.endsWith('.mp4') || media.endsWith('.webm') || media.endsWith('.ogg')) {
             const mediaVideo = document.createElement('video');
             mediaVideo.controls = true;
             mediaVideo.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
@@ -1141,7 +1141,21 @@ contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
 
             mediaVideo.appendChild(source);
             mediaDiv.appendChild(mediaVideo);
-        }
+        }*/
+
+        else if (/\.(mp4|webm|ogg)$/i.test(media)) {
+  const mediaVideo = document.createElement('video');
+  mediaVideo.controls = true;
+  // mediaVideo.crossOrigin = "anonymous"; // activa si el servidor CORS lo permite
+  mediaVideo.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+
+  const source = document.createElement('source');
+  source.src = media; // asegúrate que esta ruta ya sea totalmente accesible.
+  source.type = 'video/mp4'; // ajusta si es webm u otro formato.
+
+  mediaVideo.appendChild(source);
+  mediaDiv.appendChild(mediaVideo);
+}
         
         // Si es una URL válida a una imagen, aunque no tenga extensión visible
         else {

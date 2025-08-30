@@ -1149,10 +1149,25 @@ else if (media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
     const video = document.createElement('video');
     video.controls = true;
     video.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
-    video.src = ipfsToSubdomain(media); // 🔥 URL directa, sin redirección
-    mediaDiv.appendChild(video);
-}
+    const videoUrl = ipfsToSubdomain(media);
+    console.log('Video URL final:', videoUrl);
+    video.src = videoUrl;
 
+    // Fallback para Chrome si falla
+    video.addEventListener('error', async () => {
+        try {
+            const res = await fetch(videoUrl, { mode: 'cors' });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const blob = await res.blob();
+            video.src = URL.createObjectURL(blob);
+        } catch(e) {
+            console.error('Error cargando video:', e);
+        }
+    });
+
+    mediaDiv.appendChild(video);
+    publicationDiv.appendChild(mediaDiv); // 🔹 muy importante
+}
              
         // Si es una URL válida a una imagen, aunque no tenga extensión visible
         else {

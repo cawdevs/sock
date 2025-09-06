@@ -1870,6 +1870,7 @@ async function inicializarUI() {
     await verificarServidor(); 
       
     await getmintedNFT();
+
    
     //await get_all_publications_home("home-publications-container");
     await get_all_publications_home('recent-home-publications-container', false, "last");
@@ -2340,29 +2341,21 @@ async function getmintedNFT() {
                  total_minted_username = await nftUsernameContract.getTotalMintedNFTs();                                    
               }
 
-              /*
-              if (total_minted_username===0) {
+              //oculta el boton publicar si no hay nft_usuario
+              if (total_minted_username === 0) {
+                    const link = document.querySelector('a[data-toggle="tab"][href="#menu_hacer_publicacion"]');
+                    if (link) {
+                        link.style.display = 'none';
+                    }
+                }
 
-                    await loadImagesFromHex(globalWalletKey, "NFT_image-container");  
-                    console.log("loadImagesFromHex(globalWalletKey ",globalWalletKey);
-
-
-                    selector.innerHTML = '';
-
-                    // Crear una opción única
-                    const option = document.createElement('option');
-                    option.text = 'globalkey';
-                    option.value = 'globalkey'; // opcional, si quieres que el value sea igual
-                    selector.add(option);
-
-                    return; // Aquí termina la función
-
-              }
-
-              */               
+                           
               const total_nft_Username = document.getElementById('NFTUsernames-count');
               total_nft_Username.style.color = 'black';
               total_nft_Username.innerHTML =`${total_minted_username}`; 
+
+
+              
 
 
 

@@ -1223,14 +1223,15 @@ else if (media.includes("facebook.com") || media.includes("fb.watch")) {
         wrapper.appendChild(fbVideo);
         mediaDiv.appendChild(wrapper);
 
-        // Renderizar usando el SDK
-        if (window.FB) {
-            FB.XFBML.parse(wrapper);
-        } else {
-            setTimeout(() => {
-                if (window.FB) FB.XFBML.parse(wrapper);
-            }, 500);
+        // Función para parsear dinámicamente cuando FB esté listo
+        function parseFB() {
+            if (window.FB) {
+                FB.XFBML.parse(wrapper);
+            } else {
+                setTimeout(parseFB, 200); // intenta de nuevo cada 200ms
+            }
         }
+        parseFB();
 
         // Fallback si no se genera el iframe
         setTimeout(() => {
@@ -1248,13 +1249,15 @@ else if (media.includes("facebook.com") || media.includes("fb.watch")) {
         wrapper.appendChild(fbPost);
         mediaDiv.appendChild(wrapper);
 
-        if (window.FB) {
-            FB.XFBML.parse(wrapper);
-        } else {
-            setTimeout(() => {
-                if (window.FB) FB.XFBML.parse(wrapper);
-            }, 500);
+        // Función para parsear dinámicamente
+        function parseFBPost() {
+            if (window.FB) {
+                FB.XFBML.parse(wrapper);
+            } else {
+                setTimeout(parseFBPost, 200);
+            }
         }
+        parseFBPost();
     }
 }
 

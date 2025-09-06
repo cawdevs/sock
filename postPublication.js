@@ -1205,36 +1205,18 @@ mediaDiv.appendChild(wrapper);
 
 // Uso:
 else if (media.includes("facebook.com") || media.includes("fb.watch")) {
-    // Función para cargar el SDK dinámicamente
-    function loadFacebookSDK(callback) {
-        if (document.getElementById("facebook-jssdk")) {
-            if (callback) callback();
-            return;
-        }
-
-        const script = document.createElement("script");
-        script.id = "facebook-jssdk";
-        script.async = true;
-        script.defer = true;
-        script.crossOrigin = "anonymous";
-        script.src = "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v17.0";
-        script.onload = () => {
-            if (callback) callback();
-        };
-
-        if (!document.getElementById("fb-root")) {
-            const fbRoot = document.createElement("div");
-            fbRoot.id = "fb-root";
-            document.body.appendChild(fbRoot);
-        }
-
-        document.body.appendChild(script);
-    }
-
     const wrapper = document.createElement("div");
     wrapper.className = "fb-wrapper";
     mediaDiv.appendChild(wrapper);
 
+    // Agregar el script de Twitter para que cargue el embed
+                const script = document.createElement("script");
+                script.async = true;
+                script.src = "https://platform.twitter.com/widgets.js";
+                script.charset = "utf-8";
+                document.body.appendChild(script);
+
+    // Detectar videos, reels, fb.watch o watch?v
     const isVideo =
         media.includes("/videos/") ||
         media.includes("/reel/") ||
@@ -1249,7 +1231,7 @@ else if (media.includes("facebook.com") || media.includes("fb.watch")) {
 
     wrapper.appendChild(fbElement);
 
-    // Intentar parsear los elementos de Facebook
+    // Reintentos para asegurar que el iframe se genere
     let attempts = 0;
     const maxAttempts = 5;
 
@@ -1260,20 +1242,17 @@ else if (media.includes("facebook.com") || media.includes("fb.watch")) {
         setTimeout(() => {
             const iframe = wrapper.querySelector("iframe");
             if (!iframe && attempts < maxAttempts) {
-                tryParse();
+                tryParse(); // Reintentar
             } else if (!iframe) {
+                // Fallback seguro a enlace
                 wrapper.innerHTML = `<a href="${media}" target="_blank">Ver en Facebook</a>`;
             }
         }, 500);
     }
 
-    // Cargar SDK y luego parsear
-    loadFacebookSDK(() => {
-        tryParse();
-    });
-
-    return;
+    tryParse();
 }
+
 
 
 

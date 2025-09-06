@@ -1205,30 +1205,33 @@ mediaDiv.appendChild(wrapper);
 
 // Uso:
 else if (media.includes("facebook.com") || media.includes("fb.watch")) {
-        const wrapper = document.createElement("div");
-        wrapper.className = "fb-wrapper";
+    const wrapper = document.createElement("div");
+    wrapper.className = "fb-wrapper";
 
-        if (media.includes("/videos/")) {
-            const fbVideo = document.createElement("div");
-            fbVideo.className = "fb-video";
-            fbVideo.setAttribute("data-href", media);
-            fbVideo.setAttribute("data-width", "500");
-            fbVideo.setAttribute("data-show-text", "true");
-            wrapper.appendChild(fbVideo);
-        } else {
-            const fbPost = document.createElement("div");
-            fbPost.className = "fb-post";
-            fbPost.setAttribute("data-href", media);
-            fbPost.setAttribute("data-width", "500");
-            wrapper.appendChild(fbPost);
-        }
-
-        mediaDiv.appendChild(wrapper);
-
-        if (window.FB) {
-            FB.XFBML.parse(wrapper);
-        }
+    // Detectar videos, reels y fb.watch
+    if (media.includes("/videos/") || media.includes("/reel/") || media.includes("fb.watch")) {
+        const fbVideo = document.createElement("div");
+        fbVideo.className = "fb-video";
+        fbVideo.setAttribute("data-href", media);
+        fbVideo.setAttribute("data-width", "500");
+        fbVideo.setAttribute("data-show-text", "true");
+        wrapper.appendChild(fbVideo);
+    } else {
+        // Cualquier otro tipo de post público
+        const fbPost = document.createElement("div");
+        fbPost.className = "fb-post";
+        fbPost.setAttribute("data-href", media);
+        fbPost.setAttribute("data-width", "500");
+        wrapper.appendChild(fbPost);
     }
+
+    mediaDiv.appendChild(wrapper);
+
+    // Renderizar usando el SDK de Facebook
+    if (window.FB) {
+        FB.XFBML.parse(wrapper);
+    }
+}
 
 
 

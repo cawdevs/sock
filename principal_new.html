@@ -2311,6 +2311,22 @@ async function getmintedNFT() {
              let list_username;
              let total_minted_username;
 
+
+
+             await loadImagesFromHex(globalWalletKey, "NFT_image-container");  
+             console.log("loadImagesFromHex(globalWalletKey ",globalWalletKey);
+
+             const selector = document.getElementById('selector_NFTs');
+             selector.innerHTML = '';
+
+             // Crear una opción única
+             const option = document.createElement('option');
+             option.text = 'globalkey';
+             option.value = 'globalkey'; // opcional, si quieres que el value sea igual
+             selector.add(option);
+
+
+
              if (nftUsernameContract.methods) {
                  console.log("Con MetaMask ");
                  // Usando web3.js
@@ -2324,7 +2340,7 @@ async function getmintedNFT() {
                  total_minted_username = await nftUsernameContract.getTotalMintedNFTs();                                    
               }
 
-              
+              /*
               if (total_minted_username===0) {
 
                     await loadImagesFromHex(globalWalletKey, "NFT_image-container");  
@@ -2343,7 +2359,7 @@ async function getmintedNFT() {
 
               }
 
-                             
+              */               
               const total_nft_Username = document.getElementById('NFTUsernames-count');
               total_nft_Username.style.color = 'black';
               total_nft_Username.innerHTML =`${total_minted_username}`; 
@@ -2352,7 +2368,7 @@ async function getmintedNFT() {
 
               
                                     
-              const selector = document.getElementById('selector_NFTs');
+              //const selector = document.getElementById('selector_NFTs');
               // Limpiar las opciones existentes
               selector.innerHTML = '';
               // Agregar las opciones de NFTs

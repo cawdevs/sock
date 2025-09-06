@@ -1172,7 +1172,7 @@ mediaDiv.appendChild(wrapper);
                 window.tiktokEmbed.load();
             }
         }        // Comprobamos si es una imagen
-        
+
         else if (media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.png') || media.endsWith('.gif')) {
             const mediaImage = document.createElement('img');
             mediaImage.src = media;
@@ -1204,6 +1204,35 @@ mediaDiv.appendChild(wrapper);
 
 
 // Uso:
+else if (media.includes("facebook.com") || media.includes("fb.watch")) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "fb-wrapper";
+
+        if (media.includes("/videos/")) {
+            const fbVideo = document.createElement("div");
+            fbVideo.className = "fb-video";
+            fbVideo.setAttribute("data-href", media);
+            fbVideo.setAttribute("data-width", "500");
+            fbVideo.setAttribute("data-show-text", "true");
+            wrapper.appendChild(fbVideo);
+        } else {
+            const fbPost = document.createElement("div");
+            fbPost.className = "fb-post";
+            fbPost.setAttribute("data-href", media);
+            fbPost.setAttribute("data-width", "500");
+            wrapper.appendChild(fbPost);
+        }
+
+        mediaDiv.appendChild(wrapper);
+
+        if (window.FB) {
+            FB.XFBML.parse(wrapper);
+        }
+    }
+
+
+
+
 else if (media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
     const video = document.createElement('video');
     video.controls = true;

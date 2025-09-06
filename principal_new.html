@@ -527,7 +527,7 @@
                 <img  id="image-post" src="images/icons/post_icon.SVG" alt="post" width="35">
        </a>
    -->    
-       <a data-toggle="tab" href="#menu_hacer_publicacion" onclick="abrirModalPublicacion()" style="margin-left: 15px;">
+       <a data-toggle="tab" href="#menu_hacer_publicacion" onclick="abrirModalPublicacion()" style="margin-left: 15px; display:none">
           <img id="image-post" src="images/icons/publication_icon.SVG" alt="post" width="35">
        </a>
 
@@ -2342,13 +2342,15 @@ async function getmintedNFT() {
               }
 
               //oculta el boton publicar si no hay nft_usuario
-              if (total_minted_username === 0) {
+
+              if (total_minted_username !== 0) {
                     const link = document.querySelector('a[data-toggle="tab"][href="#menu_hacer_publicacion"]');
                     if (link) {
-                        link.style.display = 'none';
+                        link.style.display = 'block';
                     }
-                }
+              }
 
+            
                            
               const total_nft_Username = document.getElementById('NFTUsernames-count');
               total_nft_Username.style.color = 'black';

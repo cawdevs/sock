@@ -1208,41 +1208,43 @@ else if (media.includes("facebook.com") || media.includes("fb.watch")) {
     const wrapper = document.createElement("div");
     wrapper.className = "fb-wrapper";
 
-    // Detectar videos, reels y fb.watch
-    if (media.includes("/videos/") || media.includes("/reel/") || media.includes("fb.watch")) {
+    // Detectar videos, reels, fb.watch o watch?v
+    if (
+        media.includes("/videos/") ||
+        media.includes("/reel/") ||
+        media.includes("fb.watch") ||
+        media.includes("/watch?v=")
+    ) {
         const fbVideo = document.createElement("div");
         fbVideo.className = "fb-video";
         fbVideo.setAttribute("data-href", media);
         fbVideo.setAttribute("data-width", "500");
         fbVideo.setAttribute("data-show-text", "true");
-
         wrapper.appendChild(fbVideo);
         mediaDiv.appendChild(wrapper);
 
-        // Intentar renderizar con el SDK
+        // Renderizar usando el SDK
         if (window.FB) {
             FB.XFBML.parse(wrapper);
         } else {
-            // Esperar un poco si el SDK aún no cargó
             setTimeout(() => {
                 if (window.FB) FB.XFBML.parse(wrapper);
             }, 500);
         }
 
-        // En algunos Reels, Facebook no renderiza el embed
-        // Detectamos si quedó vacío y agregamos un enlace como fallback
+        // Fallback si no se genera el iframe
         setTimeout(() => {
             if (!wrapper.querySelector("iframe")) {
-                wrapper.innerHTML = `<a href="${media}" target="_blank">Ver Reel en Facebook</a>`;
+                wrapper.innerHTML = `<a href="${media}" target="_blank">Ver video en Facebook</a>`;
             }
         }, 1500);
+
     } else {
-        // Cualquier otro tipo de post público
+        // Cualquier otro post público
         const fbPost = document.createElement("div");
         fbPost.className = "fb-post";
         fbPost.setAttribute("data-href", media);
         fbPost.setAttribute("data-width", "500");
-
         wrapper.appendChild(fbPost);
         mediaDiv.appendChild(wrapper);
 

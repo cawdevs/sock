@@ -1204,19 +1204,30 @@ mediaDiv.appendChild(wrapper);
 
 
 // Uso:
+Te lo ajusto para que funcione solo con Facebook:
+
 else if (media.includes("facebook.com") || media.includes("fb.watch")) {
     const wrapper = document.createElement("div");
     wrapper.className = "fb-wrapper";
     mediaDiv.appendChild(wrapper);
 
-    // Agregar el script de Twitter para que cargue el embed
-                const script = document.createElement("script");
-                script.async = true;
-                script.src = "https://platform.twitter.com/widgets.js";
-                script.charset = "utf-8";
-                document.body.appendChild(script);
+    // Cargar SDK de Facebook si no existe
+    if (!document.getElementById("facebook-jssdk")) {
+        const script = document.createElement("script");
+        script.id = "facebook-jssdk";
+        script.async = true;
+        script.defer = true;
+        script.crossOrigin = "anonymous";
+        script.src = "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v17.0";
 
-    // Detectar videos, reels, fb.watch o watch?v
+        const fbRoot = document.createElement("div");
+        fbRoot.id = "fb-root";
+        document.body.appendChild(fbRoot);
+
+        document.body.appendChild(script);
+    }
+
+    // Detectar si es video, reel, fb.watch o watch?v
     const isVideo =
         media.includes("/videos/") ||
         media.includes("/reel/") ||

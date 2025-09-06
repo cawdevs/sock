@@ -1112,8 +1112,53 @@ contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
                 script.charset = "utf-8";
                 document.body.appendChild(script);
             }
-        }
-        // Comprobamos si es una imagen
+        }else if (media.includes("tiktok.com")) {
+    let tiktokUrl = media;
+
+    // Detectar link corto
+    if (media.includes("vm.tiktok.com")) {
+        // En producción: el servidor debería devolver la URL larga
+        // En navegador local mostramos alerta
+        alert("Para ver este video, usa el link largo de TikTok (www.tiktok.com/@usuario/video/ID).");
+        return;
+    }
+
+    // Extraer usuario y ID del video (link largo)
+    const match = tiktokUrl.match(/tiktok\.com\/@([\w.-]+)\/video\/(\d+)/);
+    if (!match) {
+        console.error("No se pudo extraer el ID del video de TikTok.");
+        return;
+    }
+
+    const usuario = match[1];
+    const videoID = match[2];
+
+    // Crear blockquote para TikTok
+    const blockquote = document.createElement("blockquote");
+    blockquote.className = "tiktok-embed";
+    blockquote.setAttribute("data-video-id", videoID);
+    blockquote.setAttribute("style", "max-width: 100%; min-width: 200px;");
+
+    const section = document.createElement("section");
+    const link = document.createElement("a");
+    link.href = tiktokUrl;
+    link.target = "_blank";
+    link.textContent = `@${usuario}`;
+    section.appendChild(link);
+    blockquote.appendChild(section);
+
+    mediaDiv.appendChild(blockquote);
+
+    // Agregar script de TikTok si no existe
+    if (!window.tiktokEmbed) {
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.tiktok.com/embed.js";
+        document.body.appendChild(script);
+    } else {
+        window.tiktokEmbed.load();
+    }
+}        // Comprobamos si es una imagen
         else if (media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.png') || media.endsWith('.gif')) {
             const mediaImage = document.createElement('img');
             mediaImage.src = media;

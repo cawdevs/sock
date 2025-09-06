@@ -210,6 +210,138 @@
                       document.body.appendChild(script);
                   }
               }
+
+
+              else if (media.includes("tiktok.com")) {
+                      let tiktokUrl = media;
+
+                      // Detectar link corto
+                      if (media.includes("vm.tiktok.com")) {
+                          // En producción: el servidor debería devolver la URL larga
+                          // En navegador local mostramos alerta
+                          alert("Para ver este video, usa el link largo de TikTok (www.tiktok.com/@usuario/video/ID).");
+                          return;
+                      }
+
+                      // Extraer usuario y ID del video (link largo)
+                      const match = tiktokUrl.match(/tiktok\.com\/@([\w.-]+)\/video\/(\d+)/);
+                      if (!match) {
+                          console.error("No se pudo extraer el ID del video de TikTok.");
+                          return;
+                      }
+
+                      const usuario = match[1];
+                      const videoID = match[2];
+
+                      // Crear contenedor para el blockquote (opcional, ayuda con responsive)
+                      const wrapper = document.createElement("div");
+                      wrapper.className = "tiktok-wrapper";
+                      wrapper.style.width = "100%";
+                      wrapper.style.maxWidth = "400px"; // Ajusta al tamaño máximo que quieras
+                      wrapper.style.aspectRatio = "9/16"; // Mantiene proporción vertical
+                      wrapper.style.overflow = "hidden"; // Evita espacio sobrante
+                      wrapper.style.display = "block";
+                      wrapper.style.display = "flex";
+                      wrapper.style.justifyContent = "center";
+                      wrapper.style.alignItems = "center";
+
+                      // Crear blockquote para TikTok
+                      const blockquote = document.createElement("blockquote");
+                      blockquote.className = "tiktok-embed";
+                      blockquote.setAttribute("data-video-id", videoID);
+                      blockquote.style.width = "100%";
+                      blockquote.style.height = "100%"; // Ocupa toda la altura del wrapper
+                      blockquote.style.display = "block";
+
+                      const section = document.createElement("section");
+                      const link = document.createElement("a");
+                      link.href = tiktokUrl;
+                      link.target = "_blank";
+                      link.textContent = `@${usuario}`;
+                      section.appendChild(link);
+                      blockquote.appendChild(section);
+
+                      // Agregar blockquote dentro del wrapper
+                      wrapper.appendChild(blockquote);
+                      mediaDiv.appendChild(wrapper);
+
+                      // Agregar script de TikTok si no existe
+                      if (!window.tiktokEmbed) {
+                          const script = document.createElement("script");
+                          script.async = true;
+                          script.src = "https://www.tiktok.com/embed.js";
+                          document.body.appendChild(script);
+                      } else {
+                          window.tiktokEmbed.load();
+                      }
+                  }        // Comprobamos si es una imagen
+
+                  else if (media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.png') || media.endsWith('.gif')) {
+                      const mediaImage = document.createElement('img');
+                      mediaImage.src = media;
+                      mediaImage.alt = 'Publicación';
+                      mediaImage.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
+                      mediaDiv.appendChild(mediaImage);
+                  }
+
+                  
+          // Uso:
+          else if (media.includes("facebook.com") || media.includes("fb.watch")) {
+              const wrapper = document.createElement("div");
+              wrapper.className = "fb-wrapper";
+              wrapper.style.display = "flex";
+              wrapper.style.justifyContent = "center";
+              wrapper.style.alignItems = "center";
+
+              mediaDiv.appendChild(wrapper);
+
+              // Agregar el script de Twitter para que cargue el embed
+                          
+
+                          const script = document.createElement("script");
+          script.id = "facebook-jssdk";
+          script.async = true;
+          script.defer = true;
+          script.crossOrigin = "anonymous";
+          script.src = "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v17.0";
+          document.body.appendChild(script);
+
+              // Detectar videos, reels, fb.watch o watch?v
+              const isVideo =
+                  media.includes("/videos/") ||
+                  media.includes("/reel/") ||
+                  media.includes("fb.watch") ||
+                  media.includes("/watch?v=");
+
+              const fbElement = document.createElement("div");
+              fbElement.className = isVideo ? "fb-video" : "fb-post";
+              fbElement.setAttribute("data-href", media);
+              fbElement.setAttribute("data-width", "500");
+              if (isVideo) fbElement.setAttribute("data-show-text", "true");
+
+              wrapper.appendChild(fbElement);
+
+              // Reintentos para asegurar que el iframe se genere
+              let attempts = 0;
+              const maxAttempts = 5;
+
+              function tryParse() {
+                  if (window.FB) FB.XFBML.parse(wrapper);
+
+                  attempts++;
+                  setTimeout(() => {
+                      const iframe = wrapper.querySelector("iframe");
+                      if (!iframe && attempts < maxAttempts) {
+                          tryParse(); // Reintentar
+                      } else if (!iframe) {
+                          // Fallback seguro a enlace
+                          wrapper.innerHTML = `<a href="${media}" target="_blank">Ver en Facebook</a>`;
+                      }
+                  }, 500);
+              }
+
+              tryParse();
+          }
               // Comprobamos si es una imagen
               else if (media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.png') || media.endsWith('.gif')) {
                   const mediaImage = document.createElement('img');

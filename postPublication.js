@@ -1204,7 +1204,7 @@ mediaDiv.appendChild(wrapper);
 
 
 // Uso:
-Te lo ajusto para que funcione solo con Facebook:
+
 
 else if (media.includes("facebook.com") || media.includes("fb.watch")) {
     const wrapper = document.createElement("div");

@@ -1205,46 +1205,45 @@ mediaDiv.appendChild(wrapper);
 
 // Uso:
 else if (media.includes("facebook.com") || media.includes("fb.watch")) {
-    const wrapper = document.createElement("div");
-    wrapper.className = "fb-wrapper";
-    mediaDiv.appendChild(wrapper);
+        const wrapper = document.createElement("div");
+        wrapper.className = "fb-wrapper";
+        mediaDiv.appendChild(wrapper);
 
-    // Detectar videos, reels, fb.watch o watch?v
-    const isVideo =
-        media.includes("/videos/") ||
-        media.includes("/reel/") ||
-        media.includes("fb.watch") ||
-        media.includes("/watch?v=");
+        const isVideo =
+            media.includes("/videos/") ||
+            media.includes("/reel/") ||
+            media.includes("fb.watch") ||
+            media.includes("/watch?v=");
 
-    const fbElement = document.createElement("div");
-    fbElement.className = isVideo ? "fb-video" : "fb-post";
-    fbElement.setAttribute("data-href", media);
-    fbElement.setAttribute("data-width", "500");
-    if (isVideo) fbElement.setAttribute("data-show-text", "true");
+        const fbElement = document.createElement("div");
+        fbElement.className = isVideo ? "fb-video" : "fb-post";
+        fbElement.setAttribute("data-href", media);
+        fbElement.setAttribute("data-width", "500");
+        if (isVideo) fbElement.setAttribute("data-show-text", "true");
 
-    wrapper.appendChild(fbElement);
+        wrapper.appendChild(fbElement);
 
-    // Reintentos para asegurar que el iframe se genere
-    let attempts = 0;
-    const maxAttempts = 5;
+        // Reintentos para asegurarnos que FB.XFBML.parse funcione
+        let attempts = 0;
+        const maxAttempts = 5;
 
-    function tryParse() {
-        if (window.FB) FB.XFBML.parse(wrapper);
+        function tryParse() {
+            if (window.FB) FB.XFBML.parse(wrapper);
 
-        attempts++;
-        setTimeout(() => {
-            const iframe = wrapper.querySelector("iframe");
-            if (!iframe && attempts < maxAttempts) {
-                tryParse(); // Reintentar
-            } else if (!iframe) {
-                // Fallback seguro a enlace
-                wrapper.innerHTML = `<a href="${media}" target="_blank">Ver en Facebook</a>`;
-            }
-        }, 500);
+            attempts++;
+            setTimeout(() => {
+                const iframe = wrapper.querySelector("iframe");
+                if (!iframe && attempts < maxAttempts) {
+                    tryParse();
+                } else if (!iframe) {
+                    wrapper.innerHTML = `<a href="${media}" target="_blank">Ver en Facebook</a>`;
+                }
+            }, 500);
+        }
+
+        tryParse();
+        return;
     }
-
-    tryParse();
-}
 
 
 

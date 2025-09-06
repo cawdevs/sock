@@ -1204,30 +1204,23 @@ mediaDiv.appendChild(wrapper);
 
 
 // Uso:
-
-
 else if (media.includes("facebook.com") || media.includes("fb.watch")) {
     const wrapper = document.createElement("div");
     wrapper.className = "fb-wrapper";
     mediaDiv.appendChild(wrapper);
 
-    // Cargar SDK de Facebook si no existe
-    if (!document.getElementById("facebook-jssdk")) {
-        const script = document.createElement("script");
-        script.id = "facebook-jssdk";
-        script.async = true;
-        script.defer = true;
-        script.crossOrigin = "anonymous";
-        script.src = "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v17.0";
+    // Agregar el script de Twitter para que cargue el embed
+                
 
-        const fbRoot = document.createElement("div");
-        fbRoot.id = "fb-root";
-        document.body.appendChild(fbRoot);
+                const script = document.createElement("script");
+script.id = "facebook-jssdk";
+script.async = true;
+script.defer = true;
+script.crossOrigin = "anonymous";
+script.src = "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v17.0";
+document.body.appendChild(script);
 
-        document.body.appendChild(script);
-    }
-
-    // Detectar si es video, reel, fb.watch o watch?v
+    // Detectar videos, reels, fb.watch o watch?v
     const isVideo =
         media.includes("/videos/") ||
         media.includes("/reel/") ||

@@ -1205,46 +1205,75 @@ mediaDiv.appendChild(wrapper);
 
 // Uso:
 else if (media.includes("facebook.com") || media.includes("fb.watch")) {
-        const wrapper = document.createElement("div");
-        wrapper.className = "fb-wrapper";
-        mediaDiv.appendChild(wrapper);
-
-        const isVideo =
-            media.includes("/videos/") ||
-            media.includes("/reel/") ||
-            media.includes("fb.watch") ||
-            media.includes("/watch?v=");
-
-        const fbElement = document.createElement("div");
-        fbElement.className = isVideo ? "fb-video" : "fb-post";
-        fbElement.setAttribute("data-href", media);
-        fbElement.setAttribute("data-width", "500");
-        if (isVideo) fbElement.setAttribute("data-show-text", "true");
-
-        wrapper.appendChild(fbElement);
-
-        // Reintentos para asegurarnos que FB.XFBML.parse funcione
-        let attempts = 0;
-        const maxAttempts = 5;
-
-        function tryParse() {
-            if (window.FB) FB.XFBML.parse(wrapper);
-
-            attempts++;
-            setTimeout(() => {
-                const iframe = wrapper.querySelector("iframe");
-                if (!iframe && attempts < maxAttempts) {
-                    tryParse();
-                } else if (!iframe) {
-                    wrapper.innerHTML = `<a href="${media}" target="_blank">Ver en Facebook</a>`;
-                }
-            }, 500);
+    // Función para cargar el SDK dinámicamente
+    function loadFacebookSDK(callback) {
+        if (document.getElementById("facebook-jssdk")) {
+            if (callback) callback();
+            return;
         }
 
-        tryParse();
-        return;
+        const script = document.createElement("script");
+        script.id = "facebook-jssdk";
+        script.async = true;
+        script.defer = true;
+        script.crossOrigin = "anonymous";
+        script.src = "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v17.0";
+        script.onload = () => {
+            if (callback) callback();
+        };
+
+        if (!document.getElementById("fb-root")) {
+            const fbRoot = document.createElement("div");
+            fbRoot.id = "fb-root";
+            document.body.appendChild(fbRoot);
+        }
+
+        document.body.appendChild(script);
     }
 
+    const wrapper = document.createElement("div");
+    wrapper.className = "fb-wrapper";
+    mediaDiv.appendChild(wrapper);
+
+    const isVideo =
+        media.includes("/videos/") ||
+        media.includes("/reel/") ||
+        media.includes("fb.watch") ||
+        media.includes("/watch?v=");
+
+    const fbElement = document.createElement("div");
+    fbElement.className = isVideo ? "fb-video" : "fb-post";
+    fbElement.setAttribute("data-href", media);
+    fbElement.setAttribute("data-width", "500");
+    if (isVideo) fbElement.setAttribute("data-show-text", "true");
+
+    wrapper.appendChild(fbElement);
+
+    // Intentar parsear los elementos de Facebook
+    let attempts = 0;
+    const maxAttempts = 5;
+
+    function tryParse() {
+        if (window.FB) FB.XFBML.parse(wrapper);
+
+        attempts++;
+        setTimeout(() => {
+            const iframe = wrapper.querySelector("iframe");
+            if (!iframe && attempts < maxAttempts) {
+                tryParse();
+            } else if (!iframe) {
+                wrapper.innerHTML = `<a href="${media}" target="_blank">Ver en Facebook</a>`;
+            }
+        }, 500);
+    }
+
+    // Cargar SDK y luego parsear
+    loadFacebookSDK(() => {
+        tryParse();
+    });
+
+    return;
+}
 
 
 

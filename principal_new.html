@@ -38,8 +38,8 @@
      --fondo: dodgerblue;
       --texto: white;
 
-     --principal: gray;
-      --basic: lightgray;  
+     --principal: lightblue;
+      --basic: gray;  
     }
    
         .container {
@@ -2300,6 +2300,16 @@ async function mintearNFT() {
           }
 
 
+
+async function no_username_exist(){       
+
+        await loadImagesFromHex(globalWalletKey, "NFT_image-container");    
+
+}
+
+
+
+
           // Función para mintear un NFT
 async function getmintedNFT() {
                                          
@@ -2321,10 +2331,30 @@ async function getmintedNFT() {
                  total_minted_username = await nftUsernameContract.getTotalMintedNFTs();                                    
               }
 
+              
+              if (total_minted_username===0) {
+
+                    await no_username_exist();
+
+                    selector.innerHTML = '';
+
+                    // Crear una opción única
+                    const option = document.createElement('option');
+                    option.text = 'globalkey';
+                    option.value = 'globalkey'; // opcional, si quieres que el value sea igual
+                    selector.add(option);
+
+                    return; // Aquí termina la función
+
+              }
+
                              
               const total_nft_Username = document.getElementById('NFTUsernames-count');
               total_nft_Username.style.color = 'black';
               total_nft_Username.innerHTML =`${total_minted_username}`; 
+
+
+
               
                                     
               const selector = document.getElementById('selector_NFTs');
@@ -2349,6 +2379,9 @@ async function getmintedNFT() {
                // Mostrar mensaje de éxito
  //             showSuccess('Funcion list NFTs OK.');
         } catch (error) {
+
+
+              //aqui debo de poner la wallet y crear el esername
               showSuccess('No List NFT username.');
               //alert('Error list NFT');
               console.error('Error list NFT:', error);

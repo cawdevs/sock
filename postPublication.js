@@ -1207,58 +1207,43 @@ mediaDiv.appendChild(wrapper);
 else if (media.includes("facebook.com") || media.includes("fb.watch")) {
     const wrapper = document.createElement("div");
     wrapper.className = "fb-wrapper";
+    mediaDiv.appendChild(wrapper);
 
     // Detectar videos, reels, fb.watch o watch?v
-    if (
+    const isVideo =
         media.includes("/videos/") ||
         media.includes("/reel/") ||
         media.includes("fb.watch") ||
-        media.includes("/watch?v=")
-    ) {
-        const fbVideo = document.createElement("div");
-        fbVideo.className = "fb-video";
-        fbVideo.setAttribute("data-href", media);
-        fbVideo.setAttribute("data-width", "500");
-        fbVideo.setAttribute("data-show-text", "true");
-        wrapper.appendChild(fbVideo);
-        mediaDiv.appendChild(wrapper);
+        media.includes("/watch?v=");
 
-        // Función para parsear dinámicamente cuando FB esté listo
-        function parseFB() {
-            if (window.FB) {
-                FB.XFBML.parse(wrapper);
-            } else {
-                setTimeout(parseFB, 200); // intenta de nuevo cada 200ms
-            }
-        }
-        parseFB();
+    const fbElement = document.createElement("div");
+    fbElement.className = isVideo ? "fb-video" : "fb-post";
+    fbElement.setAttribute("data-href", media);
+    fbElement.setAttribute("data-width", "500");
+    if (isVideo) fbElement.setAttribute("data-show-text", "true");
 
-        // Fallback si no se genera el iframe
+    wrapper.appendChild(fbElement);
+
+    // Reintentos para asegurar que el iframe se genere
+    let attempts = 0;
+    const maxAttempts = 5;
+
+    function tryParse() {
+        if (window.FB) FB.XFBML.parse(wrapper);
+
+        attempts++;
         setTimeout(() => {
-            if (!wrapper.querySelector("iframe")) {
-                wrapper.innerHTML = `<a href="${media}" target="_blank">Ver video en Facebook</a>`;
+            const iframe = wrapper.querySelector("iframe");
+            if (!iframe && attempts < maxAttempts) {
+                tryParse(); // Reintentar
+            } else if (!iframe) {
+                // Fallback seguro a enlace
+                wrapper.innerHTML = `<a href="${media}" target="_blank">Ver en Facebook</a>`;
             }
-        }, 1500);
-
-    } else {
-        // Cualquier otro post público
-        const fbPost = document.createElement("div");
-        fbPost.className = "fb-post";
-        fbPost.setAttribute("data-href", media);
-        fbPost.setAttribute("data-width", "500");
-        wrapper.appendChild(fbPost);
-        mediaDiv.appendChild(wrapper);
-
-        // Función para parsear dinámicamente
-        function parseFBPost() {
-            if (window.FB) {
-                FB.XFBML.parse(wrapper);
-            } else {
-                setTimeout(parseFBPost, 200);
-            }
-        }
-        parseFBPost();
+        }, 500);
     }
+
+    tryParse();
 }
 
 

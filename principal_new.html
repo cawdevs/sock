@@ -2301,13 +2301,6 @@ async function mintearNFT() {
 
 
 
-async function no_username_exist(){       
-
-        await loadImagesFromHex(globalWalletKey, "NFT_image-container");    
-
-}
-
-
 
 
           // Función para mintear un NFT
@@ -2334,7 +2327,9 @@ async function getmintedNFT() {
               
               if (total_minted_username===0) {
 
-                    await no_username_exist();
+                    await loadImagesFromHex(globalWalletKey, "NFT_image-container");  
+                    console.log("loadImagesFromHex(globalWalletKey ",globalWalletKey);
+
 
                     selector.innerHTML = '';
 

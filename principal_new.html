@@ -2342,9 +2342,9 @@ async function getmintedNFT() {
               }
 
               //oculta el boton publicar si no hay nft_usuario
-
-              if (total_minted_username !== 0) {
+              if (list_username.length !== 0) {
                     const link = document.querySelector('a[data-toggle="tab"][href="#menu_hacer_publicacion"]');
+                  
                     if (link) {
                         link.style.display = 'block';
                     }

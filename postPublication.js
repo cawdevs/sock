@@ -1215,21 +1215,44 @@ else if (media.includes("facebook.com") || media.includes("fb.watch")) {
         fbVideo.setAttribute("data-href", media);
         fbVideo.setAttribute("data-width", "500");
         fbVideo.setAttribute("data-show-text", "true");
+
         wrapper.appendChild(fbVideo);
+        mediaDiv.appendChild(wrapper);
+
+        // Intentar renderizar con el SDK
+        if (window.FB) {
+            FB.XFBML.parse(wrapper);
+        } else {
+            // Esperar un poco si el SDK aún no cargó
+            setTimeout(() => {
+                if (window.FB) FB.XFBML.parse(wrapper);
+            }, 500);
+        }
+
+        // En algunos Reels, Facebook no renderiza el embed
+        // Detectamos si quedó vacío y agregamos un enlace como fallback
+        setTimeout(() => {
+            if (!wrapper.querySelector("iframe")) {
+                wrapper.innerHTML = `<a href="${media}" target="_blank">Ver Reel en Facebook</a>`;
+            }
+        }, 1500);
     } else {
         // Cualquier otro tipo de post público
         const fbPost = document.createElement("div");
         fbPost.className = "fb-post";
         fbPost.setAttribute("data-href", media);
         fbPost.setAttribute("data-width", "500");
+
         wrapper.appendChild(fbPost);
-    }
+        mediaDiv.appendChild(wrapper);
 
-    mediaDiv.appendChild(wrapper);
-
-    // Renderizar usando el SDK de Facebook
-    if (window.FB) {
-        FB.XFBML.parse(wrapper);
+        if (window.FB) {
+            FB.XFBML.parse(wrapper);
+        } else {
+            setTimeout(() => {
+                if (window.FB) FB.XFBML.parse(wrapper);
+            }, 500);
+        }
     }
 }
 

@@ -1141,6 +1141,9 @@ wrapper.style.maxWidth = "400px"; // Ajusta al tamaño máximo que quieras
 wrapper.style.aspectRatio = "9/16"; // Mantiene proporción vertical
 wrapper.style.overflow = "hidden"; // Evita espacio sobrante
 wrapper.style.display = "block";
+wrapper.style.display = "flex";
+wrapper.style.justifyContent = "center";
+wrapper.style.alignItems = "center";
 
 // Crear blockquote para TikTok
 const blockquote = document.createElement("blockquote");
@@ -1207,6 +1210,10 @@ mediaDiv.appendChild(wrapper);
 else if (media.includes("facebook.com") || media.includes("fb.watch")) {
     const wrapper = document.createElement("div");
     wrapper.className = "fb-wrapper";
+    wrapper.style.display = "flex";
+    wrapper.style.justifyContent = "center";
+    wrapper.style.alignItems = "center";
+
     mediaDiv.appendChild(wrapper);
 
     // Agregar el script de Twitter para que cargue el embed

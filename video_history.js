@@ -63,9 +63,7 @@ async function get_video_stories(containerID, append = false) {
         const container = document.getElementById(containerID);
         if (!container) return;
 
-        const loadingAnimation = document.getElementById('loadingAnimation-principal');
-        if (loadingAnimation) loadingAnimation.style.display = 'block';
-
+        
         if (!append) container.innerHTML = '';
 
         // Obtener total de publicaciones si no está definido

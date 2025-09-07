@@ -1,98 +1,89 @@
 
-async function createVideoStory(publication) {
-    const { id, nftUsername, media, imageProfile } = publication;
+  async function createVideoStory(publication) {
+      const { id, nftUsername, media, imageProfile } = publication;
 
-    if (!media || !media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
-        return null; // Ignorar si no es un video válido
-    }
+      if (!media || !media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) return null;
 
-    // Contenedor principal estilo historia
-    const storyDiv = document.createElement('div');
-    storyDiv.classList.add('video-story');
+      const storyDiv = document.createElement('div');
+      storyDiv.classList.add('video-story');
 
-    // Video
-    const video = document.createElement('video');
-    video.controls = true;
-    video.src = ipfsToSubdomain(media);
-    video.setAttribute("playsinline", "true");
-    video.setAttribute("webkit-playsinline", "true");
+      const video = document.createElement('video');
+      video.controls = true;
+      video.src = ipfsToSubdomain(media);
+      video.setAttribute("playsinline", "true");
+      video.setAttribute("webkit-playsinline", "true");
 
-    // fallback si falla la carga
-    video.addEventListener('error', async () => {
-        try {
-            const res = await fetch(ipfsToSubdomain(media), { mode: 'cors' });
-            if (res.ok) {
-                const blob = await res.blob();
-                video.src = URL.createObjectURL(blob);
-            }
-        } catch (e) {
-            console.error("Error cargando video:", e);
-        }
-    });
+      video.addEventListener('error', async () => {
+          try {
+              const res = await fetch(ipfsToSubdomain(media), { mode: 'cors' });
+              if (res.ok) {
+                  const blob = await res.blob();
+                  video.src = URL.createObjectURL(blob);
+              }
+          } catch (e) {
+              console.error("Error cargando video:", e);
+          }
+      });
 
-    // Foto circular del NFTUsername
-    if (imageProfile) {
-        const circleDiv = document.createElement('div');
-        circleDiv.classList.add('nft-profile-circle');
+      if (imageProfile) {
+          const circleDiv = document.createElement('div');
+          circleDiv.classList.add('nft-profile-circle');
 
-        const img = document.createElement('img');
-        img.src = imageProfile;
-        img.alt = nftUsername;
+          const img = document.createElement('img');
+          img.src = imageProfile;
+          img.alt = nftUsername;
 
-        img.addEventListener("click", async function () {
-            await get_NFTUsername_profile(nftUsername);
-            await get_NFTUsername_publication(nftUsername, "modal_publication-nftusername");
-            $('#UsernameProfileModal').modal('show');
-        });
+          img.addEventListener("click", async function () {
+              await get_NFTUsername_profile(nftUsername);
+              await get_NFTUsername_publication(nftUsername, "modal_publication-nftusername");
+              $('#UsernameProfileModal').modal('show');
+          });
 
-        circleDiv.appendChild(img);
-        storyDiv.appendChild(circleDiv);
-    }
+          circleDiv.appendChild(img);
+          storyDiv.appendChild(circleDiv);
+      }
 
-    storyDiv.appendChild(video);
+      storyDiv.appendChild(video);
+      return storyDiv;
+  }
 
-    return storyDiv;
-}
+  // Función para cargar las historias
+  async function get_video_stories(containerID, append = false) {
+      try {
+          const container = document.getElementById(containerID);
+          const loadingAnimation = document.getElementById('loadingAnimation-principal');
+          loadingAnimation.style.display = 'block';
+
+          if (!append) container.innerHTML = '';
+
+          let total_publication;
+          if (publisherContract.methods) {
+              total_publication = await publisherContract.methods.publicationCount().call();
+          } else {
+              total_publication = await publisherContract.publicationCount();
+          }
+
+          let currentIndex = total_publication;
+          let count = 0;
+          let i = currentIndex;
+
+          while (count < 5 && i >= 1) {
+              let publication = await get_publication_data(i);
+              const story = await createVideoStory(publication);
+              if (story) {
+                  container.appendChild(story);
+                  count++;
+              }
+              i--;
+          }
+
+          currentIndex = i;
+          loadingAnimation.style.display = 'none';
+
+          if (currentIndex < 1) document.getElementById("verMasBtn").style.display = "none";
+      } catch (error) {
+          console.error('Error cargando historias de video:', error);
+      }
+  }
 
 
-async function get_video_stories(containerID, append = false) {
-    try {
-        const container = document.getElementById(containerID);
-        const loadingAnimation = document.getElementById('loadingAnimation-principal');
-
-        if (!append) {
-            container.innerHTML = '';
-
-            if (publisherContract.methods) {
-                total_publication = await publisherContract.methods.publicationCount().call();
-            } else {
-                total_publication = await publisherContract.publicationCount();
-            }
-            currentIndex = total_publication;
-        }
-
-        let count = 0;
-        let i = currentIndex;
-
-        while (count < 5 && i >= 1) {
-            let publication = await get_publication_data(i); // 🔹 función que devuelve el objeto publication completo
-            const story = await createVideoStory(publication);
-
-            if (story) {
-                container.appendChild(story);
-                count++;
-            }
-
-            i--;
-        }
-        currentIndex = i;
-
-        loadingAnimation.style.display = 'none';
-
-        if (currentIndex < 1) {
-            document.getElementById("verMasBtn").style.display = "none";
-        }
-    } catch (error) {
-        console.error('Error cargando historias de video:', error);
-    }
-}

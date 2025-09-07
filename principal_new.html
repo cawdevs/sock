@@ -111,44 +111,46 @@
 </style>
 
 <style>
-      .video-story {
-          position: relative;
-          width: 90vw;
-          max-width: 400px;
-          height: 70vh;
-          margin: 0 auto;
-          border-radius: 15px;
-          overflow: hidden;
-          background: black;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
+  .video-story {
+    position: relative;
+    width: 90vw;
+    max-width: 400px;
+    height: 70vh;
+    margin: 20px auto;
+    border-radius: 15px;
+    overflow: hidden;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+  }
 
-        .video-story video {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
+  .video-story video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-        .nft-profile-circle {
-          position: absolute;
-          top: 10px;
-          left: 10px;
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-          border: 3px solid white;
-          overflow: hidden;
-          box-shadow: 0px 2px 8px rgba(0,0,0,0.5);
-        }
+  .nft-profile-circle {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid white;
+    overflow: hidden;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.5);
+  }
 
-        .nft-profile-circle img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-</style>  
+  .nft-profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+</style>
 
 
 <style>
@@ -669,7 +671,9 @@ span.hashtag {
          </div>  </center> 
 
 
-         <ul id="videoStoriesGallery" class="video_stories_gallery"></ul>
+         <div id="videoStoriesContainer"></div>
+         <button id="verMasBtn" onclick="get_video_stories('videoStoriesContainer', true)">Ver más</button>
+
          <div id="recent-home-publications-container"></div> 
          <div id="home-publications-container"></div>       
           

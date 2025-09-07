@@ -49,41 +49,40 @@
 
   // Función para cargar las historias
   async function get_video_stories(containerID, append = false) {
-      try {
-          const container = document.getElementById(containerID);
-          const loadingAnimation = document.getElementById('loadingAnimation-principal');
-          loadingAnimation.style.display = 'block';
+    try {
+        const container = document.getElementById(containerID);
+        if (!container) return;
 
-          if (!append) container.innerHTML = '';
+        if (!append) container.innerHTML = '';
 
-          let total_publication;
-          if (publisherContract.methods) {
-              total_publication = await publisherContract.methods.publicationCount().call();
-          } else {
-              total_publication = await publisherContract.publicationCount();
-          }
+        let count = 0;
+        let i = currentIndex;
 
-          let currentIndex = total_publication;
-          let count = 0;
-          let i = currentIndex;
+        while (count < 5 && i >= 1) {
+            // ✅ Llamada corregida con dos argumentos
+            let publication = await get_publication(i, containerID);
 
-          while (count < 5 && i >= 1) {
-              let publication = await get_publication_data(i);
-              const story = await createVideoStory(publication);
-              if (story) {
-                  container.appendChild(story);
-                  count++;
-              }
-              i--;
-          }
+            // Solo videos válidos
+            if (publication && publication.media && publication.media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
+                const story = await createVideoStory(publication);
+                if (story) {
+                    container.appendChild(story);
+                    count++;
+                }
+            }
+            i--;
+        }
+        currentIndex = i;
 
-          currentIndex = i;
-          loadingAnimation.style.display = 'none';
+        const loadingAnimation = document.getElementById('loadingAnimation-principal');
+        if (loadingAnimation) loadingAnimation.style.display = 'none';
 
-          if (currentIndex < 1) document.getElementById("verMasBtn").style.display = "none";
-      } catch (error) {
-          console.error('Error cargando historias de video:', error);
-      }
-  }
+        const verMasBtn = document.getElementById("verMasBtn");
+        if (currentIndex < 1 && verMasBtn) verMasBtn.style.display = "none";
+
+    } catch (error) {
+        console.error('Error cargando historias de video:', error);
+    }
+}
 
 

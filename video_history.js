@@ -106,7 +106,3 @@ async function get_video_stories(containerID, append = false) {
     }
 }
 
-// Inicializar la primera carga al abrir la página
-document.addEventListener('DOMContentLoaded', () => {
-    get_video_stories('videoStoriesContainer', false);
-});

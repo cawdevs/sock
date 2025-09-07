@@ -2,8 +2,8 @@
   // video_story.js
 
 // Variables globales para seguimiento de publicaciones
-let currentIndex = 0;        // índice de la última publicación revisada
-let total_publication = 0;   // total de publicaciones
+let currentIndex_history = 0;        // índice de la última publicación revisada
+let total_publication_history = 0;   // total de publicaciones
 
 // Función para crear la historia de un video
 async function createVideoStory(publication) {
@@ -69,17 +69,17 @@ async function get_video_stories(containerID, append = false) {
         if (!append) container.innerHTML = '';
 
         // Obtener total de publicaciones si no está definido
-        if (!total_publication) {
+        if (!total_publication_history) {
             if (publisherContract.methods) {
-                total_publication = await publisherContract.methods.publicationCount().call();
+                total_publication_history = await publisherContract.methods.publicationCount().call();
             } else {
-                total_publication = await publisherContract.publicationCount();
+                total_publication_history = await publisherContract.publicationCount();
             }
-            currentIndex = total_publication;
+            currentIndex_history = total_publication_history;
         }
 
         let count = 0;
-        let i = currentIndex;
+        let i = currentIndex_history;
 
         while (count < 5 && i >= 1) {
             const publication = await get_publication(i, containerID);
@@ -95,13 +95,13 @@ async function get_video_stories(containerID, append = false) {
             i--;
         }
 
-        currentIndex = i;
+        currentIndex_history = i;
 
         if (loadingAnimation) loadingAnimation.style.display = 'none';
 
         // Ocultar botón si ya no hay publicaciones
         const verMasBtn = document.getElementById("verMasBtn");
-        if (currentIndex < 1 && verMasBtn) verMasBtn.style.display = "none";
+        if (currentIndex_history < 1 && verMasBtn) verMasBtn.style.display = "none";
 
     } catch (error) {
         console.error('Error cargando historias de video:', error);

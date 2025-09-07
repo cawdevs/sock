@@ -48,21 +48,36 @@
   }
 
   // Función para cargar las historias
-  async function get_video_stories(containerID, append = false) {
+  let currentIndex = 0; // índice de la última publicación revisada
+let total_publication = 0;
+
+// Función principal para cargar los próximos 5 videos
+async function get_video_stories(containerID, append = false) {
     try {
         const container = document.getElementById(containerID);
         if (!container) return;
 
+        const loadingAnimation = document.getElementById('loadingAnimation-principal');
+        if (loadingAnimation) loadingAnimation.style.display = 'block';
+
         if (!append) container.innerHTML = '';
+
+        // Si no tenemos total_publication, obtenerlo
+        if (!total_publication) {
+            if (publisherContract.methods) {
+                total_publication = await publisherContract.methods.publicationCount().call();
+            } else {
+                total_publication = await publisherContract.publicationCount();
+            }
+            currentIndex = total_publication;
+        }
 
         let count = 0;
         let i = currentIndex;
 
         while (count < 5 && i >= 1) {
-            // ✅ Llamada corregida con dos argumentos
             let publication = await get_publication(i, containerID);
 
-            // Solo videos válidos
             if (publication && publication.media && publication.media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
                 const story = await createVideoStory(publication);
                 if (story) {
@@ -72,11 +87,12 @@
             }
             i--;
         }
+
         currentIndex = i;
 
-        const loadingAnimation = document.getElementById('loadingAnimation-principal');
         if (loadingAnimation) loadingAnimation.style.display = 'none';
 
+        // Ocultar botón si ya no hay publicaciones
         const verMasBtn = document.getElementById("verMasBtn");
         if (currentIndex < 1 && verMasBtn) verMasBtn.style.display = "none";
 

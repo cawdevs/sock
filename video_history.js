@@ -98,7 +98,7 @@ async function get_video_stories(containerID, append = false) {
         if (loadingAnimation) loadingAnimation.style.display = 'none';
 
         // Ocultar botón si ya no hay publicaciones
-        const verMasBtn = document.getElementById("verMasBtn");
+        const verMasBtn = document.getElementById("verMasBtnVideos");
         if (currentIndex_history < 1 && verMasBtn) verMasBtn.style.display = "none";
 
     } catch (error) {

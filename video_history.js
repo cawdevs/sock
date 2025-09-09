@@ -78,15 +78,17 @@ async function get_video_stories(containerID, append = false) {
 
         let count = 0;
         let i = currentIndex_history;
-
+        console.log("Que esta pasando aqui");
         while (count < 5 && i >= 1) {
             const publication = await get_publication(i, containerID);
-
+             console.log("pos no se");
             if (publication && publication.media && publication.media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
                 const story = await createVideoStory(publication);
+                console.log("pues si que");
                 if (story) {
                     container.appendChild(story);
                     count++;
+                    console.log("pues si");
                 }
             }
 

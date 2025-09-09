@@ -54,6 +54,7 @@ async function createVideoStory(publicationObject) {
 }
 
 // 🔹 Obtener publicaciones de video
+// 🔹 Obtener publicaciones de video
 async function get_video_stories(containerID, append = false) {
     try {
         const container = document.getElementById(containerID);
@@ -75,9 +76,9 @@ async function get_video_stories(containerID, append = false) {
         let i = currentIndex_history;
 
         while (count < 5 && i >= 1) {
-            const publicationObject = await get_publication_object(i); // 🔹 Ahora solo datos
+            const publicationObject = await get_publication(i, containerID);
 
-            // 🔹 Verificar que la publicación no esté eliminada
+            // 🔹 Verificar que la publicación no esté eliminada y que sea video
             if (publicationObject && publicationObject.publicationType != 3) {
                 if (publicationObject.media && publicationObject.media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
                     const story = await createVideoStory(publicationObject);
@@ -92,9 +93,30 @@ async function get_video_stories(containerID, append = false) {
 
         currentIndex_history = i;
 
-        // Ocultar botón si ya no hay publicaciones
-        const verMasBtn = document.getElementById("verMasBtnVideos");
-        if (currentIndex_history < 1 && verMasBtn) verMasBtn.style.display = "none";
+        // 🔹 Crear botón dinámicamente SOLO si hay más videos
+        const oldBtn = document.getElementById("verMasBtnVideos");
+        if (oldBtn) oldBtn.remove(); // eliminar botón anterior
+
+        if (currentIndex_history >= 1) {
+            const verMasBtn = document.createElement("button");
+            verMasBtn.id = "verMasBtnVideos";
+            verMasBtn.innerText = "Ver más";
+            verMasBtn.onclick = () => get_video_stories(containerID, true);
+
+            // 🔹 Estilos para que sea igual de ancho que los videos
+            verMasBtn.style.backgroundColor = "dodgerblue";
+            verMasBtn.style.color = "white";
+            verMasBtn.style.border = "none";
+            verMasBtn.style.padding = "10px";
+            verMasBtn.style.cursor = "pointer";
+            verMasBtn.style.fontSize = "16px";
+            verMasBtn.style.borderRadius = "8px";
+            verMasBtn.style.height = "200px"; // igual altura que videos
+            verMasBtn.style.width = "auto";
+            verMasBtn.style.alignSelf = "center";
+
+            container.appendChild(verMasBtn);
+        }
 
     } catch (error) {
         console.error('Error cargando historias de video:', error);

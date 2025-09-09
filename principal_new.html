@@ -111,7 +111,7 @@
 </style>
 
 <style>
-/* 🔹 Contenedor de videos en fila horizontal */
+/* Contenedor de videos + botón */
 #videoStoriesContainer {
   display: flex;
   flex-direction: row;
@@ -123,37 +123,60 @@
   scrollbar-width: thin;
 }
 
-/* 🔹 Cada historia de video */
+/* Cada video */
 .video-story {
-  position: relative;       /* Para colocar imagen sobre el video */
+  position: relative;
   flex: 0 0 auto;
-  height: 180px;            /* 🔥 Altura fija para todos los videos */
+  height: 180px; 
 }
 
-/* 🔹 Video */
 .video-story video {
   height: 100%;
-  width: auto;              /* Ajusta el ancho automáticamente */
+  width: auto;
   border-radius: 10px;
   display: block;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* 🔹 Imagen de perfil circular sobrepuesta */
+/* Imagen circular */
 .nft-profile-circle {
   position: absolute;
-  top: 8px;                 /* Distancia desde arriba */
-  left: 8px;                /* Distancia desde la izquierda */
+  top: 8px;
+  left: 8px;
   z-index: 10;
 }
 
 .nft-profile-circle img {
-  width: 40px;              /* 🔥 Tamaño pequeño */
+  width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 2px solid #fff;   /* Borde blanco para destacar */
+  border: 2px solid #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+}
+
+/* 🔹 Botón Ver Más estilo tarjeta */
+#verMasBtnVideos {
+  flex: 0 0 auto;
+  height: 180px; 
+  width: 100px; /* Se ajusta al tamaño de los videos */
+  border: none;
+  background-color: dodgerblue;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+#verMasBtnVideos:hover {
+  transform: scale(1.05);
+  background-color: #1e90ff;
 }
 </style>
 

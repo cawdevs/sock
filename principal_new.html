@@ -111,42 +111,49 @@
 </style>
 
 <style>
- /* 🔹 Contenedor de videos */
+/* 🔹 Contenedor de videos en fila horizontal */
 #videoStoriesContainer {
   display: flex;
   flex-direction: row;
-  gap: 10px;               /* Espacio entre videos */
-  overflow-x: auto;        /* Scroll horizontal */
+  gap: 10px;
+  overflow-x: auto;
   padding: 10px;
-  background-color: var(--basic); /* Ajusta según tu tema */
+  background-color: var(--basic);
   border-radius: 10px;
-  scrollbar-width: thin;   /* Scroll fino */
+  scrollbar-width: thin;
 }
 
-/* 🔹 Cada video-story */
+/* 🔹 Cada historia de video */
 .video-story {
-  flex: 0 0 auto;          /* Mantener tamaño fijo */
-  width: 200px;            /* Ajusta tamaño de video */
-  text-align: center;
+  position: relative;       /* Para colocar imagen sobre el video */
+  flex: 0 0 auto;
+  height: 180px;            /* 🔥 Altura fija para todos los videos */
 }
 
-/* 🔹 Videos */
+/* 🔹 Video */
 .video-story video {
-  width: 100%;
-  height: auto;
+  height: 100%;
+  width: auto;              /* Ajusta el ancho automáticamente */
   border-radius: 10px;
+  display: block;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* 🔹 Imagen de perfil circular */
+/* 🔹 Imagen de perfil circular sobrepuesta */
+.nft-profile-circle {
+  position: absolute;
+  top: 8px;                 /* Distancia desde arriba */
+  left: 8px;                /* Distancia desde la izquierda */
+  z-index: 10;
+}
+
 .nft-profile-circle img {
-  width: 50px;
-  height: 50px;
+  width: 40px;              /* 🔥 Tamaño pequeño */
+  height: 40px;
   border-radius: 50%;
-  margin-bottom: 5px;
+  border: 2px solid #fff;   /* Borde blanco para destacar */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  border: 2px solid #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 </style>
 

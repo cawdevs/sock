@@ -1952,11 +1952,9 @@ async function inicializarUI() {
    
     //await get_all_publications_home("home-publications-container");
 
-
-     await get_video_stories('videoStoriesContainer');
-     //await get_all_publications_home('recent-home-publications-container', false, "last");
+    await get_all_publications_home('recent-home-publications-container', false, "last");
     
-    
+    await get_video_stories('videoStoriesContainer');
    
     await get_NFTUsername_profile();
 

@@ -54,7 +54,6 @@ async function createVideoStory(publicationObject) {
 }
 
 // 🔹 Obtener publicaciones de video
-// 🔹 Obtener publicaciones de video
 async function get_video_stories(containerID, append = false) {
     try {
         const container = document.getElementById(containerID);
@@ -76,9 +75,9 @@ async function get_video_stories(containerID, append = false) {
         let i = currentIndex_history;
 
         while (count < 5 && i >= 1) {
-            const publicationObject = await get_publication(i, containerID);
+            const publicationObject = await get_publication_object(i); // 🔹 Ahora solo datos
 
-            // 🔹 Verificar que la publicación no esté eliminada y que sea video
+            // 🔹 Verificar que la publicación no esté eliminada
             if (publicationObject && publicationObject.publicationType != 3) {
                 if (publicationObject.media && publicationObject.media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
                     const story = await createVideoStory(publicationObject);
@@ -92,6 +91,8 @@ async function get_video_stories(containerID, append = false) {
         }
 
         currentIndex_history = i;
+
+        
 
         // 🔹 Crear botón dinámicamente SOLO si hay más videos
         const oldBtn = document.getElementById("verMasBtnVideos");

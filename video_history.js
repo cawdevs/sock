@@ -1,13 +1,10 @@
-
-  // video_story.js
-
 // Variables globales para seguimiento de publicaciones
 let currentIndex_history = 0;        // índice de la última publicación revisada
 let total_publication_history = 0;   // total de publicaciones
 
-// Función para crear la historia de un video
-async function createVideoStory(publication) {
-    const { id, nftUsername, media, imageProfile } = publication;
+// 🔹 Crear el elemento de historia de video
+async function createVideoStory(publicationObject) {
+    const { id, nftUsername, media, imageProfile } = publicationObject;
 
     if (!media || !media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) return null;
 
@@ -21,7 +18,6 @@ async function createVideoStory(publication) {
     video.setAttribute("playsinline", "true");
     video.setAttribute("webkit-playsinline", "true");
 
-    // Fallback si falla la carga
     video.addEventListener('error', async () => {
         try {
             const res = await fetch(ipfsToSubdomain(media), { mode: 'cors' });
@@ -57,13 +53,12 @@ async function createVideoStory(publication) {
     return storyDiv;
 }
 
-// Función principal para cargar los próximos 5 videos
+// 🔹 Obtener publicaciones de video
 async function get_video_stories(containerID, append = false) {
     try {
         const container = document.getElementById(containerID);
         if (!container) return;
 
-        
         if (!append) container.innerHTML = '';
 
         // Obtener total de publicaciones si no está definido
@@ -78,26 +73,24 @@ async function get_video_stories(containerID, append = false) {
 
         let count = 0;
         let i = currentIndex_history;
-        console.log("Que esta pasando aqui");
+
         while (count < 5 && i >= 1) {
-            const publication = await get_publication(i, containerID);
-             console.log("pos no se");
-            if (publication && publication.media && publication.media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
-                const story = await createVideoStory(publication);
-                console.log("pues si que");
-                if (story) {
-                    container.appendChild(story);
-                    count++;
-                    console.log("pues si");
+            const publicationObject = await get_publication_object(i); // 🔹 Ahora solo datos
+
+            // 🔹 Verificar que la publicación no esté eliminada
+            if (publicationObject && publicationObject.publicationType != 3) {
+                if (publicationObject.media && publicationObject.media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
+                    const story = await createVideoStory(publicationObject);
+                    if (story) {
+                        container.appendChild(story);
+                        count++;
+                    }
                 }
             }
-
             i--;
         }
 
         currentIndex_history = i;
-
-        if (loadingAnimation) loadingAnimation.style.display = 'none';
 
         // Ocultar botón si ya no hay publicaciones
         const verMasBtn = document.getElementById("verMasBtnVideos");
@@ -108,3 +101,59 @@ async function get_video_stories(containerID, append = false) {
     }
 }
 
+
+
+// 🔹 Nueva función: obtener el objeto completo de publicación sin renderizar
+async function get_publication_object(id_publication) {
+    try {
+        let publication = [];
+
+        // Obtener publicación desde contrato
+        if (publisherContract.methods) {
+            publication = await publisherContract.methods.getPublication(id_publication).call();
+        } else {
+            publication = await publisherContract.getPublication(id_publication);
+        }
+
+        const publicationData = publication[0];
+        const jsonMetadata = JSON.parse(publicationData.jsonMetadata);
+
+        // Construir objeto
+        const publicationObject = {
+            id: publicationData.id,
+            content: publicationData.content,
+            nftUsername: publicationData.nftUsername,
+            publicationType: publicationData.publicationType,
+            timestamp: new Date(publicationData.timestamp * 1000).toLocaleString(),
+            media: jsonMetadata.media || '',
+            clasificacion: jsonMetadata.clasificacion || 'para > 18'
+        };
+
+        // Obtener info de perfil
+        try {
+            let profileText;
+            if (profileContract.methods) {
+                profileText = await profileContract.methods.getProfileByUsername(publicationObject.nftUsername).call();
+            } else {
+                profileText = await profileContract.getProfileByUsername(publicationObject.nftUsername);
+            }
+
+            let jsonProfile = {};
+            if (profileText && profileText[1]) {
+                jsonProfile = JSON.parse(profileText[1]);
+            }
+
+            publicationObject.imageProfile = jsonProfile.fotoPerfil || '';
+            publicationObject.usernameProfile = jsonProfile.nombre || '';
+        } catch (error) {
+            console.error("Error al obtener el perfil:", error);
+            publicationObject.imageProfile = '';
+            publicationObject.usernameProfile = '';
+        }
+
+        return publicationObject;
+    } catch (error) {
+        console.error('Error en get_publication_object:', error);
+        return null;
+    }
+}

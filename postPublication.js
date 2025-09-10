@@ -367,7 +367,16 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
             // 2) Recorta espacios en los extremos:
             cidRaw = cidRaw.trim();
 
+
+
             // 3) Si el backend ya devuelve la URL completa, úsala tal cual:
+            //se almacenara en la BD django si es un video
+            if (cidRaw && cidRaw.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
+                                
+                                addVideoPublication(correlativo)
+                                console.log(`🎥 Es un video. Guardando ID: ${correlativo}`);
+            }
+            
             return cidRaw;
            
 
@@ -379,6 +388,28 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
     }   
 
 
+}
+
+
+function addVideoPublication(publicationId) {
+    console.log(`📥 Guardando publicación de video ID: ${publicationId}`);
+
+    fetch("https://api.thesocks.net/add-video-publication/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            publication_id: publicationId
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("✅ Respuesta servidor:", data);
+    })
+    .catch(error => {
+        console.error("❌ Error al guardar publicación:", error);
+    });
 }
 
 
@@ -411,7 +442,9 @@ async function publicar_main_post(){
                            //si se pudo subir la imagem    
                            //content += `<br><a href="${link_to_media}" target="_blank" rel="noopener noreferrer">Ver link adjunto</a>`;
                            link_to_media=url_ipsf;
+                           //se almacena el id en servidor si es un video
                            
+
 
                     }else{
                            //no se pudo subir la imagen
@@ -494,9 +527,8 @@ async function publicar_main_post(){
 
                
             //const recent_publication = document.getElementById('recent-home-publications-container');
-                 
+               
             
-
             loadingAnimation.style.borderLeftColor = 'lime';                 
             setTimeout(() => { 
                 loadingAnimation.style.display = 'none';
@@ -935,7 +967,7 @@ async function createPublicationElement(publication) {
             }
 
             const usernameSpan = document.createElement('span');
-            usernameSpan.textContent = `${nftUsername}@sock`;
+            usernameSpan.textContent = `${nftUsername}@sock${id}`;
             usernameSpan.style.cssText = 'font-weight: bold; font-size: 18px; margin-left: 10px;';
             userInfoDiv.appendChild(usernameSpan);
 

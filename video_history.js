@@ -53,8 +53,86 @@ async function createVideoStory(publicationObject) {
     return storyDiv;
 }
 
-// 🔹 Obtener publicaciones de video
+
+
+//////////////////////////////////////////////////////////////////////////////////
+let currentStart = 0; // 🔹 Para controlar paginación
+const limit = 5;      // 🔹 Videos por carga
+
 async function get_video_stories(containerID, append = false) {
+    try {
+        const container = document.getElementById(containerID);
+        if (!container) return;
+
+        if (!append) {
+            container.innerHTML = '';
+            currentStart = 0;
+        }
+
+        // 🔹 Obtener IDs de videos desde Django
+        const videoIds = await getVideoPublications(currentStart, limit);
+
+        // 🔹 Mostrar videos
+        for (const videoId of videoIds) {
+            const publicationObject = await get_publication_object(videoId);
+
+            if (publicationObject && publicationObject.publicationType != 3) {
+                if (publicationObject.media && publicationObject.media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
+                    const story = await createVideoStory(publicationObject);
+                    if (story) container.appendChild(story);
+                }
+            }
+        }
+
+        currentStart += videoIds.length;
+
+        // 🔹 Eliminar botón viejo si existe
+        const oldBtn = document.getElementById("verMasBtnVideos");
+        if (oldBtn) oldBtn.remove();
+
+        // 🔹 Agregar botón solo si hay más videos
+        if (videoIds.length === limit) {
+            const btnWrapper = document.createElement("div");
+            btnWrapper.id = "verMasBtnVideos";
+            btnWrapper.style.display = "flex";
+            btnWrapper.style.alignItems = "center";
+            btnWrapper.style.justifyContent = "center";
+            btnWrapper.style.height = "200px"; // Igual que videos
+            btnWrapper.style.width = "auto";
+
+            const verMasBtn = document.createElement("button");
+            verMasBtn.innerText = "Ver más";
+            verMasBtn.onclick = () => get_video_stories(containerID, true);
+
+            // 🔹 Estilos botón
+            verMasBtn.style.backgroundColor = "dodgerblue";
+            verMasBtn.style.color = "white";
+            verMasBtn.style.border = "none";
+            verMasBtn.style.padding = "10px 20px";
+            verMasBtn.style.cursor = "pointer";
+            verMasBtn.style.fontSize = "16px";
+            verMasBtn.style.borderRadius = "8px";
+            verMasBtn.style.height = "100%"; // Ocupa toda la altura del wrapper
+            verMasBtn.style.width = "100%"; // Ocupa todo el ancho del wrapper
+
+            btnWrapper.appendChild(verMasBtn);
+            container.appendChild(btnWrapper);
+        }
+
+    } catch (error) {
+        console.error('Error cargando historias de video:', error);
+    }
+}
+/////////////////////////////////////////////
+
+
+
+
+
+
+
+// 🔹 Obtener publicaciones de video
+async function get_video_storiesX(containerID, append = false) {
     try {
         const container = document.getElementById(containerID);
         if (!container) return;
@@ -180,3 +258,38 @@ async function get_publication_object(id_publication) {
         return null;
     }
 }
+
+
+
+function getVideoPublications(start = 0, limit = 5) {
+    console.log(`📤 Solicitando ${limit} videos desde índice ${start}`);
+
+    return fetch("https://api.thesocks.net/get-video-publications/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            start: start,
+            limit: limit
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "ok") {
+            console.log(`🎥 Videos obtenidos:`, data.videos);
+            return data.videos; // Devuelve lista de IDs
+        } else {
+            console.warn("⚠ No se pudieron obtener videos:", data.error);
+            return [];
+        }
+    })
+    .catch(error => {
+        console.error("❌ Error al obtener videos:", error);
+        return [];
+    });
+}
+
+
+
+

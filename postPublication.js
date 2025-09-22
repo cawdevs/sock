@@ -371,11 +371,11 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
 
             // 3) Si el backend ya devuelve la URL completa, úsala tal cual:
             //se almacenara en la BD django si es un video
-            if (cidRaw && cidRaw.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
+            /*if (cidRaw && cidRaw.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
                                 
                                 addVideoPublication(correlativo)
                                 console.log(`🎥 Es un video. Guardando ID: ${correlativo}`);
-            }
+            }*/
             
             return cidRaw;
            
@@ -390,7 +390,7 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
 
 }
 
-
+/*
 function addVideoPublication(publicationId) {
     console.log(`📥 Guardando publicación de video ID: ${publicationId}`);
 
@@ -412,7 +412,7 @@ function addVideoPublication(publicationId) {
     });
 }
 
-
+*/
 
 
 async function publicar_main_post(){

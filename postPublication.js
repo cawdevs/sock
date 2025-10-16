@@ -21,10 +21,10 @@ function createPublicationElements() {
     controlsDiv.style.cssText = 'display: flex; align-items: center; justify-content: center; gap: 10px; justify-content: space-between;';
         
     // Imagen
-    const imageContainer = document.createElement('div');
-    imageContainer.id = 'publication-NFT_image-container';
-    imageContainer.style.cssText = 'width: 60px; height: 60px; border-radius: 50%; ';
-    controlsDiv.appendChild(imageContainer);
+//    const imageContainer = document.createElement('div');
+//    imageContainer.id = 'publication-NFT_image-container';
+//    imageContainer.style.cssText = 'width: 60px; height: 60px; border-radius: 50%; ';
+//    controlsDiv.appendChild(imageContainer);
 
     // Select de privacidad
     /*const selectDiv = document.createElement('div');
@@ -39,46 +39,29 @@ function createPublicationElements() {
 */
 
 
-    // Crear contenedor del select de clasificación
-    const selectClassDiv = document.createElement('div');
-    selectClassDiv.classList.add('form-group');
-
-    // Crear el select de clasificación
-    const selectClass = document.createElement('select');
-    selectClass.classList.add('form-control');
-    selectClass.id = 'filter-classification';
-    selectClass.innerHTML = `
-        <option value="para > 18">Para mayores de 18 años</option>
-        <option value="para > 21">Para mayores de 21 años</option>
-        <option value="para todos">Para todo publico</option>
-        
-    `;
-    selectClass.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 35px;';
-
-    // Agregar el select al contenedor y luego al `controlsDiv`
-    selectClassDiv.appendChild(selectClass);
-    controlsDiv.appendChild(selectClassDiv);
     
     // Botón de enviar publicación
-    const submitLink = document.createElement('a');
-    submitLink.href = '#';
-    submitLink.id = 'btn-publication';
-    submitLink.style.cssText = 'padding: 5px 20px; font-size: 14px; align-items: center; justify-content: center; background-color: dodgerblue; color: white; border: 2px solid blue; border-radius: 20px; cursor: pointer;';
-    submitLink.innerHTML = 'Publicar';
+//    const submitLink = document.createElement('button');
+//    submitLink.type ='button'; // ← evita comportamiento submit
+    //submitLink.href = '#';
+//    submitLink.id = 'btn-publication';
+    //submitLink.style.cssText = 'padding: 5px 20px; font-size: 14px; align-items: center; justify-content: center; background-color: dodgerblue; color: white; border: 2px solid blue; border-radius: 20px; cursor: pointer;';
+//    submitLink.style.cssText = 'font-size: 18px; border: 2px solid blue; border-radius: 20px; width: 100%; margin: 10px 0; height: 40px; cursor: pointer; background-color: dodgerblue; color: white;';
+
+//    submitLink.textContent = 'Hacer Publicación';
 
     // Agregar evento de clic
-    submitLink.addEventListener('click', async function(event) {
-        event.preventDefault(); // Evita que el enlace navegue a otra página
-        await publicar_main_post(); // Llama a la función asíncrona
+//    submitLink.addEventListener('click', async function(event) {
+//        event.preventDefault(); // Evita que el enlace navegue a otra página
+//        await publicar_main_post(); // Llama a la función asíncrona
         
-    });
+//    });
 
-    controlsDiv.appendChild(submitLink);
-    form.appendChild(controlsDiv);
+//    controlsDiv.appendChild(submitLink);
+//    form.appendChild(controlsDiv);
 
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
-
 
 
 
@@ -92,7 +75,7 @@ textareaDiv.classList.add('form-group');
 
 const editorContainer = document.createElement('div');
 editorContainer.id = 'miContenedorEditor'; // Este es el nuevo editor dinámico
-editorContainer.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; height: 220px; margin-bottom: 10px; font-size: 18px;';
+editorContainer.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; height: 100px; margin-bottom: 10px; font-size: 18px;';
 textareaDiv.appendChild(editorContainer);
 form.appendChild(textareaDiv);
 
@@ -143,6 +126,73 @@ setTimeout(() => {
     /////////////////////////////////////////////////////  
 
 
+ 
+
+ // Crear contenedor del select de clasificación
+    const selectClassDiv = document.createElement('div');
+    selectClassDiv.classList.add('form-group');
+
+    // Crear el select de clasificación
+    const selectClass = document.createElement('select');
+    selectClass.classList.add('form-control');
+    selectClass.id = 'filter-classification';
+    selectClass.innerHTML = `
+        <option value="para > 18">Para mayores de 18 años</option>
+        <option value="para > 21">Para mayores de 21 años</option>
+        <option value="para todos">Para todo publico</option>
+        
+    `;
+    selectClass.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 35px;';
+
+    // Agregar el select al contenedor y luego al `controlsDiv`
+    selectClassDiv.appendChild(selectClass);
+
+    form.appendChild(selectClassDiv);
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Segunda fila: Input para el link de la imagen
+    const publicarButtomDiv = document.createElement('div');
+    
+   // Botón de enviar publicación
+    const submitLink = document.createElement('button');
+    submitLink.type ='button'; // ← evita comportamiento submit
+    //submitLink.href = '#';
+    submitLink.id = 'btn-publication';
+    //submitLink.style.cssText = 'padding: 5px 20px; font-size: 14px; align-items: center; justify-content: center; background-color: dodgerblue; color: white; border: 2px solid blue; border-radius: 20px; cursor: pointer;';
+    submitLink.style.cssText = 'font-size: 18px; border: 2px solid blue; border-radius: 20px; width: 100%; margin: 10px 0; height: 40px; cursor: pointer; background-color: dodgerblue; color: white;';
+
+    submitLink.textContent = 'Hacer Publicación';
+
+
+    // Agregar evento de clic
+    submitLink.addEventListener('click', async function(event) {
+        event.preventDefault(); // Evita que el enlace navegue a otra página
+        await publicar_main_post(); // Llama a la función asíncrona
+        
+    });
+
+    publicarButtomDiv.appendChild(submitLink);
+
+    form.appendChild(publicarButtomDiv);
+
+
+
+
+
+
+
 
 const MAX_SIZE_BYTES = 20 * 1024 * 1024; // 20MB máximo
 const MAX_VIDEO_DURATION = 60; // 60 segundos máximo
@@ -151,7 +201,7 @@ const subirBtn = document.createElement('button');
 subirBtn.type = 'button'; // ← evita comportamiento submit
 
 subirBtn.textContent = 'Subir Foto/Video';
-subirBtn.style.cssText = 'font-size: 18px; border: 2px solid lime; border-radius: 20px; width: 100%; margin: 10px 0; height: 40px; cursor: pointer;';
+subirBtn.style.cssText = 'font-size: 18px; border: 2px solid dodgerblue; border-radius: 20px; width: 100%; margin: 10px 0; height: 40px; cursor: pointer;';
 
 
 const inputArchivo = document.createElement('input');

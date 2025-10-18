@@ -6,7 +6,7 @@
     <title>SOCK PUPPETS</title>
 
 
-    <style>
+   <style>
   :root {
     --fondo: dodgerblue;
     --texto: white;
@@ -27,26 +27,28 @@
     grid-template-rows: auto auto;
     align-items: center;
     padding: 8px 12px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
+    /* ❌ antes tenía position: fixed — la quitamos */
+    width: 100%;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    border-radius: 12px;
   }
 
-  /* 🔹 Logo con rowspan = 2 filas */
-  .logo {
+  /* 🔹 Contenedor NFT */
+  #NFT_image-container {
     grid-row: span 2;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    object-fit: cover;
     border: 2px solid white;
+    overflow: hidden;
     margin-right: 12px;
+    background-color: #ffffff33;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* 🔹 Fila 1: título + iconos */
+  /* 🔹 Fila 1 */
   .top-row {
     display: flex;
     align-items: center;
@@ -75,7 +77,7 @@
     transform: scale(1.2);
   }
 
-  /* 🔹 Fila 2: iconos desplazables */
+  /* 🔹 Fila 2 (iconos desplazables) */
   .icon-scroll {
     display: flex;
     align-items: center;
@@ -107,41 +109,19 @@
     transform: scale(2.0);
   }
 
-  /* 🔹 Fila de precios */
-  .wallet-info {
-    background: white;
-    color: #333;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 8px 0;
-    position: fixed;
-    top: 100px; /* justo debajo de la barra azul */
-    left: 0;
-    right: 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    z-index: 999;
-  }
-
-  /* Espaciador */
-  .spacer {
-    height: 95px;
-  }
-
-</style>
-
-<style>
+  /* 🔹 Bloque de saldos */
   .wallet-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(90deg, var(--fondo), darkblue);
     padding: 10px 20px;
-    border-radius: 0 0 12px 12px;
+    border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     color: white;
     font-family: 'Segoe UI', Arial, sans-serif;
     font-size: 16px;
+    margin-top: 15px;
   }
 
   .wallet-item {
@@ -190,6 +170,7 @@
     background: rgba(255,255,255,0.35);
     transform: rotate(90deg);
   }
+
 </style>
 
      <style>
@@ -872,7 +853,7 @@
 </div>
 
 
-  <div class="spacer"></div>
+ 
   
 
 

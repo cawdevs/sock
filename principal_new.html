@@ -29,12 +29,17 @@
     padding: 8px 12px;
     /* ❌ antes tenía position: fixed — la quitamos */
     width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     border-radius: 12px;
   }
 
+ 
   /* 🔹 Contenedor NFT */
-  #NFT_image-container {
+  /*#NFT_image-container {
     grid-row: span 2;
     width: 60px;
     height: 60px;
@@ -46,7 +51,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  }*/
 
   /* 🔹 Fila 1 */
   .top-row {
@@ -169,6 +174,11 @@
   .refresh-btn:hover {
     background: rgba(255,255,255,0.35);
     transform: rotate(90deg);
+  }
+
+  /* Espaciador */
+  .spacer {
+    height: 150px;
   }
 
 </style>
@@ -509,65 +519,7 @@
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
 
-<!--
- <center>  <div>
-    <img src="images/sock_logo.SVG" alt="My svg_logo" width="45" class="img-circle" style="transform: rotate(0deg); display: inline-block; margin-left: 10px;border: 2px solid white;">
    
-    <h3 style="display: inline-block; margin: 0; vertical-align: middle; margin-left: 10px;"><font color="white"><i> SockPuppets </i></font> </h3>
-<i class="fa-brands fa-github" style="color: #FFD43B;"></i>
-
-     <a  href="whiteDocument.html" target="_blank" ><img src="images/icons/document_icon.SVG" alt="My svg_logo" width="25"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; "></a>
-
-    
-
-     <a href="https://github.com/cawdevs" target="_blank" rel="noopener noreferrer"> <img src="images/logoG.SVG" alt="My svg_logo" width="25"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">
-     </a>
-
-     <a href="https://x.com/puppets_token" target="_blank" rel="noopener noreferrer"> <img src="images/logoX.svg" alt="My svg_logo" width="25"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">
-     </a>
-
-      	
-    <button class="boton-conectar" id="btn-conectar" onclick="conectarMetaMask()" style="display: inline-block; margin-left: 20px;">Conect</button>
-
-
-
- </div></center>
-
-
--->
-
-
-
-
-
-<!--
-    <center>
-
-    
-
-  <h4>
-
-<div style="display: flex; justify-content: center; align-items: center; gap: 30px;">
-       
-    <div id="addres-wallet" style="color: white;"></div>
-    
-    <a href="#" data-toggle="modal" data-target="#myModalQR" onclick="generarCodigoQR()">
-        <span class="glyphicon glyphicon-qrcode" style="color: white;"></span>
-    </a>
-
-    <a href="#" id="btn-copy-key" onclick="myFunctionbtc()">
-        <span class="glyphicon glyphicon-duplicate" style="color: white;"></span>
-    </a>
-   
-    <a href="#" onclick="logout()" style="color: white;">
-        <span class="glyphicon glyphicon-off"  title="Salir"> </span>
-    </a>
-  
-</div>
- </h4>
-  </center> 
--->
-       
 
  
 
@@ -748,8 +700,7 @@
 
   <ul class="gallery_toolbar" style="background: linear-gradient(0deg, var(--fondo) ,darkblue); border: 2px solid blue; border-radius: 0px; margin-right: 15;">     
            
-
-       
+     
    
 
        <a data-toggle="tab" href="#menu_hacer_publicacion" onclick="abrirModalPublicacion()" style="margin-left: 15px; display:none">
@@ -776,6 +727,8 @@
        
 </ul>
 -->
+
+<div class="input-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
 <!-- 🔹 Barra azul superior -->
 <div class="top-bar">
 

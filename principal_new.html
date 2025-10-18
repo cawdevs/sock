@@ -798,47 +798,82 @@
 <!-- 🔹 Barra azul superior -->
 <div class="top-bar">
 
-  <!-- Logo (ocupa 2 filas) -->
-  <!--<img src="images/logoSocks.png" alt="Logo" class="logo"> -->
-  <div id="NFT_image-container" style=" width:60px;  height: 60px;"> </div>
-
+  <!-- 🔸 NFT dinámico (reemplaza logo) -->
+  <div id="NFT_image-container"></div>
 
   <!-- 🔸 Fila 1 -->
   <div class="top-row">
     <div class="title"><em>thesocks</em></div>
     <div class="top-icons">
-      
       <img src="images/icons/buscar_icon.SVG" alt="Buscar">
-       <a id="menuBtn" style="margin-left: auto; margin-right: 15px; font-size: 24px;">☰</a>  
+      <a id="menuBtn" style="margin-left: auto; margin-right: 15px; font-size: 24px;">☰</a>  
     </div>
   </div>
 
-  <!-- 🔸 Fila 2 -->
+  <!-- 🔸 Fila 2 (iconos con enlaces personalizados) -->
   <div class="icon-scroll">
     <a data-toggle="tab" href="#menu_hacer_publicacion" onclick="abrirModalPublicacion()" style="margin-left: 15px; display:none">
-          <img id="image-post" src="images/icons/publication_icon.SVG" alt="post" width="35">
-       </a>
-    
-       <a data-toggle="tab" href="#home" style=" margin-left: 15px;">  <img  id="image-home" src="images/icons/home_icon.SVG" alt="home" width="35"></a> 
-       
-       <a data-toggle="tab" href="#menu1" style=" margin-left: 15px;">  <img  id="image-home" src="images/icons/profile_icon.SVG" alt="home" width="35"> </a>
-    
-       <a data-toggle="tab" href="#menu_play" style=" margin-left: 15px;">  <img  id="image-market" src="images/icons/gamefi_icon.SVG" alt="home" width="35"> </a>
-       
-     
-       <a data-toggle="tab" href="#menu_transfer" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/swap_icon.SVG" alt="home" width="35"> </a>
+      <img id="image-post" src="images/icons/publication_icon.SVG" alt="post" width="35">
+    </a>
 
-        <a data-toggle="tab" href="#menu_staking" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/staking_icon.SVG" alt="home" width="35"> </a>
+    <a data-toggle="tab" href="#home" style="margin-left: 15px;">
+      <img id="image-home" src="images/icons/home_icon.SVG" alt="home" width="35">
+    </a> 
 
-       <a data-toggle="tab" href="#menu_info_sock" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/config_icon.SVG" alt="home" width="35"> </a>
-             
-       <p id ="NFTUsernames-count" style=" margin-left: 15px;  font-size: 24px;"> </p>  
-   
+    <a data-toggle="tab" href="#menu1" style="margin-left: 15px;">
+      <img id="image-profile" src="images/icons/profile_icon.SVG" alt="profile" width="35">
+    </a>
+
+    <a data-toggle="tab" href="#menu_play" style="margin-left: 15px;">
+      <img id="image-market" src="images/icons/gamefi_icon.SVG" alt="game" width="35">
+    </a>
+
+    <a data-toggle="tab" href="#menu_transfer" style="margin-left: 15px;">
+      <img id="image-swap" src="images/icons/swap_icon.SVG" alt="swap" width="35">
+    </a>
+
+    <a data-toggle="tab" href="#menu_staking" style="margin-left: 15px;">
+      <img id="image-staking" src="images/icons/staking_icon.SVG" alt="stake" width="35">
+    </a>
+
+    <a data-toggle="tab" href="#menu_info_sock" style="margin-left: 15px;">
+      <img id="image-config" src="images/icons/config_icon.SVG" alt="config" width="35">
+    </a>
+
+    <p id="NFTUsernames-count" style="margin-left: 15px; font-size: 24px;"></p>
   </div>
 
+</div>
 
+<!-- 🔹 Espaciador -->
+<div class="spacer"></div>
+
+<!-- 💰 Bloque de saldos -->
+<div class="wallet-container">
+  <div class="wallet-item">
+    <img src="images/icons/matic_coin.SVG" alt="MATIC">
+    <div class="wallet-values">
+      <span id="saldo_ETH">0</span>
+      <span id="saldo_USD" class="usd">$0.00</span>
+    </div>
+  </div>
+
+  <div class="wallet-item">
+    <img src="images/icons/sock_coin.SVG" alt="SOCK">
+    <div class="wallet-values">
+      <span id="saldo_CAW">0</span>
+      <span class="symbol">SOCK</span>
+    </div>
+  </div>
+
+  <button id="btn-obtener-saldo" onclick="obtenerSaldo_POL_SOCK()" class="refresh-btn">
+    ⟳
+  </button>
+</div>
+
+
+  <div class="spacer"></div>
   
-
 
 
 
@@ -870,22 +905,23 @@ span.hashtag {
 
 <div id="estado-servidor_msg"></div>
 
+<!--
 <div style="display: flex; align-items: center; justify-content: space-around;  padding: 0px; border-radius: 0px;">
 
-  <!-- Saldo MATIC -->
+ 
   <div style="display: flex; align-items: center;">
     <div id="saldo_ETH" style="color: white; margin-right: 5px;">0</div>
     <img src="images/icons/matic_coin.SVG" alt="MATIC" width="20" style="margin-right: 8px;">    
     <div id="saldo_USD" style="color: white;">$0.00</div>
   </div>
 
-  <!-- Saldo SOCK -->
+  
   <div style="display: flex; align-items: center;">
     <img src="images/icons/sock_coin.SVG" alt="SOCK" width="20" style="margin-right: 8px;">
     <div id="saldo_CAW" style="color: black;">0</div>
   </div>
 
-  <!-- Botón de actualización -->
+
   <div>
     <a href="#" id="btn-obtener-saldo" onclick="obtenerSaldo_POL_SOCK()" style="color: black; text-decoration: none;">
       <span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>
@@ -894,6 +930,8 @@ span.hashtag {
   </div>
 
 </div>
+
+-->
 
  <div class="tab-content" style="border: 0px solid var(--fondo); border-radius: 20px; background:var(--principal);">
  

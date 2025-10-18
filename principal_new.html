@@ -60,9 +60,46 @@
     justify-content: space-between;
   }
 
+  
+  /* 🔹 Mantén el estilo de tu barra superior */
   .title {
     font-size: 22px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 🔹 Select con apariencia de texto */
+  .select-texto {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 22px;
+    font-family: inherit;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 4px 24px 4px 4px;
+    transition: color 0.2s ease;
+  }
+
+  .select-texto:hover {
+    color: #cce6ff;
+  }
+
+  /* 🔹 Estilo del menú desplegable */
+  .select-texto option {
+    background: #0d47a1;
+    color: white;
+  }
+
+  /* 🔹 Quitar flecha nativa en algunos navegadores */
+  .select-texto::-ms-expand {
+    display: none;
   }
 
   .top-icons {
@@ -176,10 +213,7 @@
     transform: rotate(90deg);
   }
 
-  /* Espaciador */
-  .spacer {
-    height: 150px;
-  }
+  
 
 </style>
 
@@ -461,7 +495,40 @@
 </style>
 
 
+<style>
+  .select-texto {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-family: inherit;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    appearance: none; /* quita el estilo nativo */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 4px 24px 4px 4px;
+    transition: color 0.2s ease;
+  }
 
+  .select-texto:hover {
+    color: #cce6ff;
+  }
+
+  .select-texto option {
+    background: #0d47a1;  /* fondo del menú desplegable */
+    color: white;
+  }
+
+  /* Opcional: agrega un pequeño ícono ▼ al lado */
+  .select-texto {
+    position: relative;
+  }
+  .select-texto::-ms-expand {
+    display: none; /* quita flecha de IE */
+  }
+</style>
 
 
 <!--
@@ -539,18 +606,7 @@
       <div id="menu" class="menu">
                
                 <ul>    
-                    <li>                         
-                          
-                        
-                    </li>   
-
-                    <li> 
-                            <center>
-                            <select id="selector_NFTs" class="form-control" placeholder="Username" style="border: 2px solid var(--fondo); border-radius: 20px; font-size: 20px; height: auto; width: 180px;"></select>
-                            </center>
-                      
-                    </li> 
-  
+                   
 
                                                      
                       <!-- Dirección de la billetera -->
@@ -736,7 +792,11 @@
 
   <!-- 🔸 Fila 1 -->
   <div class="top-row">
-    <div class="title"><em>thesocks</em></div>
+    <div class="title">
+          <select id="selector_NFTs" class="select-texto">           
+          </select>
+    </div>
+    
     <div class="top-icons">
       <img src="images/icons/buscar_icon.SVG" alt="Buscar">
       <a id="menuBtn" style="margin-left: auto; margin-right: 15px; font-size: 24px;">☰</a>  

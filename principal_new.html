@@ -5,27 +5,202 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOCK PUPPETS</title>
 
+
+    <style>
+  :root {
+    --fondo: dodgerblue;
+    --texto: white;
+  }
+
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f6f6f6;
+  }
+
+  /* 🔹 Barra superior azul con 2 filas */
+  .top-bar {
+    background: linear-gradient(90deg, var(--fondo), darkblue);
+    color: var(--texto);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    align-items: center;
+    padding: 8px 12px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  /* 🔹 Logo con rowspan = 2 filas */
+  .logo {
+    grid-row: span 2;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    margin-right: 12px;
+  }
+
+  /* 🔹 Fila 1: título + iconos */
+  .top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .title {
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .top-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .top-icons img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .top-icons img:hover {
+    transform: scale(1.2);
+  }
+
+  /* 🔹 Fila 2: iconos desplazables */
+  .icon-scroll {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    padding: 6px 0;
+  }
+
+  .icon-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .icon-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 3px;
+  }
+
+  .icon-scroll img {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .icon-scroll img:hover {
+    transform: scale(2.0);
+  }
+
+  /* 🔹 Fila de precios */
+  .wallet-info {
+    background: white;
+    color: #333;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 8px 0;
+    position: fixed;
+    top: 100px; /* justo debajo de la barra azul */
+    left: 0;
+    right: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 999;
+  }
+
+  /* Espaciador */
+  .spacer {
+    height: 95px;
+  }
+
+</style>
+
+<style>
+  .wallet-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, var(--fondo), darkblue);
+    padding: 10px 20px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    color: white;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+  }
+
+  .wallet-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .wallet-item img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    padding: 3px;
+  }
+
+  .wallet-values {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  #saldo_ETH, #saldo_CAW {
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .usd, .symbol {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .refresh-btn {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .refresh-btn:hover {
+    background: rgba(255,255,255,0.35);
+    transform: rotate(90deg);
+  }
+</style>
+
      <style>
 
-       :root {
-          
-          --fondo: dodgerblue;
-          --texto: white;
       
-          --principal: white;
-          --basic: white;  
-          }
-
 
 
       html {
            background: linear-gradient(0deg, var(--fondo) ,white);
              }
-      body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(0deg, var(--fondo),lightgray);
-        }
-
+    
          .noche {
       --fondo: dodgerblue;
       --texto: white;
@@ -557,11 +732,10 @@
    
         
             
-
+<!--
 <div class="input-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
   
-  <!--<h3><div id="NFTUsernames-count"><em>thesocks</em>:</div></h3>-->
-  <h3>
+  
     <div style="margin-right: 10px; margin-left: 10px;">
       <font color="var(--fondo)"><em>thesocks</em></font>
     </div>
@@ -596,10 +770,7 @@
 
        
    
-  <!--    <a href="#" data-toggle="modal" data-target="#myModal_publication" onclick="createPublicationElements() " style=" margin-left: 15px;">
-                <img  id="image-post" src="images/icons/post_icon.SVG" alt="post" width="35">
-       </a>
-   -->    
+
        <a data-toggle="tab" href="#menu_hacer_publicacion" onclick="abrirModalPublicacion()" style="margin-left: 15px; display:none">
           <img id="image-post" src="images/icons/publication_icon.SVG" alt="post" width="35">
        </a>
@@ -611,16 +782,10 @@
        <a data-toggle="tab" href="#home" style=" margin-left: 15px;">  <img  id="image-home" src="images/icons/home_icon.SVG" alt="home" width="35"></a> 
        
        <a data-toggle="tab" href="#menu1" style=" margin-left: 15px;">  <img  id="image-home" src="images/icons/profile_icon.SVG" alt="home" width="35"> </a>
-       <!--   
-       <a data-toggle="tab" href="#menu2" style=" margin-left: 15px;">  <img  id="image-cars" src="images/icons/publication_icon.SVG" alt="home" width="45"> </a>
-       
-       <a data-toggle="tab" href="#menu_mensaje" style=" margin-left: 15px;">  <img  id="image-food" src="images/icons/message_icon.SVG" alt="home" width="45"> </a>
-       -->
+    
        <a data-toggle="tab" href="#menu_play" style=" margin-left: 15px;">  <img  id="image-market" src="images/icons/gamefi_icon.SVG" alt="home" width="35"> </a>
        
-       <!--                   
-       <a data-toggle="tab" href="#menu_play_to_earn" style=" margin-left: 15px;">  <img  id="image-mymarket" src="images/icons/gamefi_icon.SVG" alt="mymarket" width="45"> </a>
-       -->
+     
        <a data-toggle="tab" href="#menu_transfer" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/swap_icon.SVG" alt="home" width="35"> </a>
 
         <a data-toggle="tab" href="#menu_staking" style=" margin-left: 15px;">  <img  id="image-service" src="images/icons/staking_icon.SVG" alt="home" width="35"> </a>
@@ -633,8 +798,53 @@
        
        
 </ul>
+-->
+<!-- 🔹 Barra azul superior -->
+<div class="top-bar">
+
+  <!-- Logo (ocupa 2 filas) -->
+  <!--<img src="images/logoSocks.png" alt="Logo" class="logo"> -->
+<div id="NFT_image-container" style=" width:80px;  height: 80px; grid-row: span 2; width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    margin-right: 12px;"> </div>
 
 
+  <!-- 🔸 Fila 1 -->
+  <div class="top-row">
+    <div class="title"><em>thesocks</em></div>
+    <div class="top-icons">
+      
+      <img src="images/icons/buscar_icon.SVG" alt="Buscar">
+       <a id="menuBtn" style="margin-left: auto; margin-right: 15px; font-size: 24px;">☰</a>  
+    </div>
+  </div>
+
+  <!-- 🔸 Fila 2 -->
+  <div class="icon-scroll">
+    <img src="images/icons/publication_icon.SVG" alt="Post">
+    <img src="images/icons/home_icon.SVG" alt="Home">
+    <img src="images/icons/profile_icon.SVG" alt="Profile">
+    <img src="images/icons/gamefi_icon.SVG" alt="Game">
+    <img src="images/icons/swap_icon.SVG" alt="Swap">
+    <img src="images/icons/staking_icon.SVG" alt="Stake">
+    <img src="images/icons/config_icon.SVG" alt="Config">
+    <img src="images/icons/message_icon.SVG" alt="Message">
+   
+  </div>
+
+
+  
+
+
+
+
+
+
+
+</div>
 
  <style>
   /* Estilos para los caracteres @ y # */

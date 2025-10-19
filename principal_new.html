@@ -528,9 +528,13 @@
 
  <style>
     /* Aquí puedes poner tu CSS personalizado */
+    
+
     .ql-editor span.emoji {
-      font-size: 4rem; /* Hace los emojis grandes */
-    }
+  font-size: 2.5rem !important;   /* 👈 aumenta el tamaño */
+  line-height: 1.2;
+  vertical-align: middle;
+}
 
     .ql-editor {
       font-size: 18px;
@@ -542,6 +546,16 @@
       background: white;
       border-radius: 10px;
     }
+
+
+
+    ql-emoji-picker {
+        z-index: 9999 !important;
+        position: absolute !important;
+      }
+
+      
+
   </style>
 </head>
 

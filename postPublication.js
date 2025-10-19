@@ -89,14 +89,14 @@ setTimeout(() => {
                 ['emoji'], // <-- botón de emoji
                 //[{ 'size': ['small', false, 'large', 'huge'] }],
                 ['bold', 'italic', 'underline'],
-                [{ 'color': [] }, { 'background': [] }], // <-- aquí añadimos color y fondo
+                [{ 'color': [] }], // <-- aquí añadimos color y fondo
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 //[{ 'align': [] }],
-                ['link']
+                //['link']
 
             ],
              'emoji-toolbar': true,
-             'emoji-textarea': false,
+             'emoji-textarea': true,
              'emoji-shortname': true
         }
     });

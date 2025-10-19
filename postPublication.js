@@ -87,11 +87,11 @@ setTimeout(() => {
         modules: {
             toolbar: [
                 ['emoji'], // <-- botón de emoji
-                [{ 'size': ['small', false, 'large', 'huge'] }],
+                //[{ 'size': ['small', false, 'large', 'huge'] }],
                 ['bold', 'italic', 'underline'],
                 [{ 'color': [] }, { 'background': [] }], // <-- aquí añadimos color y fondo
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                [{ 'align': [] }],
+                //[{ 'align': [] }],
                 ['link']
 
             ],

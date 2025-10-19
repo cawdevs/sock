@@ -88,14 +88,14 @@ setTimeout(() => {
             toolbar: [
                 ['emoji'], // <-- botón de emoji
                 //[{ 'size': ['small', false, 'large', 'huge'] }],
-                ['bold', 'italic', 'underline'],
+                ['bold', 'italic'],
                 [{ 'color': [] }], // <-- aquí añadimos color y fondo
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 //[{ 'align': [] }],
                 //['link']
 
             ],
-             'emoji-toolbar': true,
+             'emoji-toolbar': false,
              'emoji-textarea': true,
              'emoji-shortname': true
         }

@@ -86,7 +86,7 @@ setTimeout(() => {
         placeholder: `${nftusername} ¿Qué quieres publicar hoy?`,
         modules: {
             toolbar: [
-                
+                ['emoji'], // <-- botón de emoji
                 [{ 'size': ['small', false, 'large', 'huge'] }],
                 ['bold', 'italic', 'underline'],
                 [{ 'color': [] }, { 'background': [] }], // <-- aquí añadimos color y fondo
@@ -94,7 +94,10 @@ setTimeout(() => {
                 [{ 'align': [] }],
                 ['link']
 
-            ]
+            ],
+             'emoji-toolbar': true,
+             'emoji-textarea': false,
+             'emoji-shortname': true
         }
     });
 

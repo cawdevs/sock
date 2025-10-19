@@ -198,8 +198,7 @@
                                                                  
                </div>      
  
-            </div> 
-                                       
+            </div>                                        
 
             <div class="modal-footer">
                 <center><button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button></center>>
@@ -270,10 +269,13 @@
         }
         
         const wallet = ethers.Wallet.createRandom();
-        await almacenarClaveEnArchivo(wallet.privateKey); // Cambiado para guardar la clave en archivo
-        //alert(`Nueva billetera creada:\n ${wallet.address}`);
-        //alert(`Nueva billetera creada:\nDirección: ${wallet.address}\nClave privada guardada en el archivo.`);
-        //checkWallet();
+        await almacenarClaveEnArchivo(wallet.privateKey); 
+
+        alert("Cuenta creada con EXITO");
+
+        const modal = bootstrap.Modal.getInstance(document.getElementById('Modal_crear_cuenta'));
+        modal.hide();
+        
     }
 
 async function almacenarClaveEnArchivo(privateKey) {

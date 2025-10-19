@@ -1,153 +1,198 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>White Document SOCK TOKEN COIN</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOCK TOKEN | TheSocks.net</title>
 
-     <style>
-      html {
-           background: linear-gradient(45deg, lime,darkgreen);
-             }
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(0deg, lime,darkgreen);
-        }
-   
-        .container {
+  <!-- Fuente y Bootstrap -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 30px;
-        }
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top, #030b20, #000010 70%);
+      color: white;
+      overflow-x: hidden;
+    }
 
-               
+    /* HEADER */
+    header {
+      text-align: center;
+      padding: 40px 0;
+      background: linear-gradient(90deg, #0b0b18, #030b20);
+      border-bottom: 2px solid dodgerblue;
+      box-shadow: 0 0 30px rgba(30, 144, 255, 0.3);
+    }
 
-    </style>
+    header img {
+      width: 70px;
+      border-radius: 50%;
+      background: transparent;
+      padding: 5px;
+      box-shadow: 0 0 25px rgba(30, 144, 255, 0.4);
+    }
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    header h1 {
+      display: inline-block;
+      margin-left: 15px;
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 0 15px rgba(30, 144, 255, 0.4);
+    }
 
-<!-- Agrega el siguiente script para cargar la biblioteca desde un CDN -->
-<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+    /* Redes sociales */
+    .social-links img {
+      width: 35px;
+      margin: 0 15px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.3s, filter 0.3s;
+    }
 
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    .social-links img:hover {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 10px dodgerblue);
+    }
+
+    /* SECCIONES */
+    .section {
+      background: rgba(10, 20, 40, 0.7);
+      border: 1px solid rgba(30, 144, 255, 0.3);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(30, 144, 255, 0.15);
+      padding: 30px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(10px);
+    }
+
+    .section h1, .section h2, .section h3, .section h4 {
+      text-align: center;
+    }
+
+    .section h1 i {
+      color: dodgerblue;
+      text-shadow: 0 0 15px rgba(30, 144, 255, 0.6);
+    }
+
+    /* MONEDA */
+    .coin-container {
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle at 30% 30%, #1e90ff, #003366, #0a74da);
+      border-radius: 50%;
+      border: 4px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 35px rgba(30, 144, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.2);
+      margin: 20px auto;
+    }
+
+    .coin-image {
+      width: 100px;
+      height: auto;
+    }
+
+    /* TOKEN INFO */
+    .token-info {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .token-info div {
+      width: 48%;
+    }
+
+    .token-info p {
+      margin: 8px 0;
+    }
+
+    /* ROADMAP */
+    .roadmap p {
+      margin: 10px 0;
+      padding-left: 10px;
+      border-left: 3px solid dodgerblue;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(90deg, #030b20, #0b0b18);
+      border-top: 2px solid dodgerblue;
+      color: lightgray;
+      box-shadow: 0 0 20px rgba(30, 144, 255, 0.3);
+    }
+
+    footer a {
+      color: dodgerblue;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <header>
+    <div>
+      <img src="images/n_logo_socks.SVG" alt="Sock Coin Logo">
+      <h1><i>theSocks.net</i></h1>
+    </div>
+    <div class="social-links mt-4">
+      <a href="https://github.com/cawdevs" target="_blank"><img src="images/logoG.SVG" alt="GitHub"></a>
+      <a href="https://x.com/puppets_token" target="_blank"><img src="images/logoX.svg" alt="X"></a>
+      <a href="https://t.me/TheSockCoin" target="_blank"><img src="images/logoT.SVG" alt="Telegram"></a>
+    </div>
+  </header>
 
-<br>
- 
- <center>  <div>
-    <img src="images/sock_logo.SVG" alt="My svg_logo" width="45" class="img-circle" style="transform: rotate(0deg); display: inline-block; margin-left: 10px;border: 2px solid white;">
-   
-    <h1 style="display: inline-block; margin: 0; vertical-align: middle; margin-left: 10px;"><font color="white"><i> TheSocks.net </i></font> </h1>
-<i class="fa-brands fa-github" style="color: #FFD43B;"></i>
+  <main class="container mt-5">
+    <section class="section">
+      <h1><i>What is Sock Coin?</i></h1>
+      <div class="coin-container">
+        <img src="images/n_logo_socks.SVG" alt="Sock Coin Logo" class="coin-image">
+      </div>
+      <p class="text-center text-muted mt-3">
+        TheSocks.net is a Decentralized Social Network, where you receive rewards for the quality of your publications. With theSocks.net you can bet, play and win in our wide variety of play-to-earn games.
+      </p>
+      <p class="text-center text-light">
+        The SOCK token is a cryptocurrency — the core part of the decentralized social network thesocks.net.
+      </p>
+      <h3 class="text-center mt-4" style="color: dodgerblue;"><i>“A Decentralized Social Finance Network”</i></h3>
+      <p class="text-center text-info mt-3">We selected the Polygon Network for its low transaction fees.</p>
+    </section>
 
-     
+    <section class="section">
+      <h1><i>Token Information</i></h1>
+      <div class="token-info mt-4">
+        <div>
+          <p><strong>Token Name:</strong></p>
+          <p><strong>Supply:</strong></p>
+          <p><strong>Digits:</strong></p>
+          <p><strong>Network:</strong></p>
+          <p><strong>Contract:</strong></p>
+        </div>
+        <div>
+          <p>SOCK “Sock Puppets Token”</p>
+          <p>666,666,666,666,666 SOCK Tokens</p>
+          <p>9</p>
+          <p>Polygon (Matic)</p>
+          <p>0x8f78976a0FDF8F66Ad81bb7D7c9b8D4A695022E3</p>
+        </div>
+      </div>
 
-     <a href="https://github.com/cawdevs" target="_blank" rel="noopener noreferrer"> <img src="images/logoG.SVG" alt="My svg_logo" width="25"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">
-     </a>
-
-     <a href="https://x.com/puppets_token" target="_blank" rel="noopener noreferrer"> <img src="images/logoX.svg" alt="My svg_logo" width="25"  style="transform: rotate(0deg); display: inline-block; margin-left: 20px; ">
-
-     </a>
-
-     <a href="https://t.me/TheSockCoin" target="_blank" rel="noopener noreferrer">
-            <img src="images/logoT.SVG" alt="X Logo" width="25" style="margin-left: 20px;">
-     </a>
-
- </div></center>
-
-<br>
-<br>
-   
-
-<div class="container-fluid">
-<div class="row">
-
-   <div class="col-sm-1"> 
-   </div>
-          
- <div class="col-sm-6">   
-
-          <div class="well" style="border: 2px solid green; background: black; border-radius: 20px;">
-
-          <center><font color="white"><h1>
-          <p><i>What is Sock Coin ? </i></p>
-          </h1></font></center>
-
-
-          <br>
-
-          <font color="white"><h3>
-          <p>TheSocks.net is a Decentralized Social Network, where you receive rewards for the quality of your publications. With theSocks.net you can bet, play and win in our wide variety of play to earn games</p> </h3></font>
-          
-          
-          <br>
-          <font color="lime">
-          <p><h2><i>TheSocks.net is a Decentralized Social Finance Network</i></h2></p>
-          </font>
-          <br>
-      
-          <font color="darkviolet"><h4>
-          <p>We selected the Polygon Network for its low transaction fees. </p>
-          <h4></font>
-         
-
-          </div>  
-
-
-       <!--  <div class="well" style="background: linear-gradient(45deg, black, yellow);">  -->
-       <div class="well" style="border: 2px solid green; background: black; border-radius: 20px;">
-                    <!--<div style="background: red; width:90px; height: 50px; display: inline-block; margin-top: 50px;"></div>  -->
-
-                    <center> <h1> <font color="white"><p><i>Token Information</i></p></font></h1></center>
-                    <br>
-
-                    <center><img src="images/coin_sockpuppets_white.SVG" alt="My svg_logo" width="200"  style="transform: rotate(0deg);  margin-left: 10px; "></center>
-                    <br>
-                    
-                    <br>
-                    <div style="display: inline-block;  display: flex; ">
-
-                       <div style="display: inline-block; margin-left: ">
-                          <h4><font color="white"><p>  Token Name : </p></font></h4>
-                          <h4><font color="white"><p>  Supply :</p></font></h4>
-                          <h4><font color="white"><p>  Digits :</p></font></h4>
-                          <h4><font color="darkviolet"><p>  Network : </p></font> </h4>
-                          <h4><font color="white"><p>  Contract : </p></font> </h4>
-                       </div>
-
-                       <div style="display: inline-block; margin-left: 10px;">
-                           <h4><font color="white"><p>  SOCK  "Sock Puppets Token" </p></font></h4>
-                           <h4><font color="white"><p>  666,666,666,666,666 SOCK Tokens </p></font></h4>
-                           <h4><font color="white"><p>  9</p></font></h4>
-                           <h4><font color="darkviolet"><p>  Polygon (Matic) </p></font> </h4>
-                           <h4><font color="white"><p>  0x8f78976a0FDF8F66Ad81bb7D7c9b8D4A695022E3 </p></font> </h4>
-                       </div>                       
-
-                </div>      
-
-
-
-<br>
-<br>
-
-
-
-  <h2>
-  <a href="#demo" data-toggle="collapse">Based on Manifesto CAW</a></h2>
-  <div id="demo" class="collapse">
-   
-  
-
-<pre>
-
+      <div class="mt-4">
+        <h3><a href="#manifesto" data-toggle="collapse" style="color: dodgerblue;">Based on Manifesto CAW</a></h3>
+        <div id="manifesto" class="collapse mt-2">
+          <pre style="color: lightgray;">
 The CAW Manifesto :
 See pristine here
 
@@ -306,114 +351,50 @@ Love, one who still dreams.
 P.S. There are no official socials, nor partner projects or further releases. 
 CAW is by design without design, and it is up the CAWMmunity to shape CAW. 
 Only by giving you the vision and seeing what cames next may we have a truly free and decentralized system.
-
-
-</pre>  
-   </div>
-
-              
-
-
-
-                </div>
-            </div>
-            
-<style>
-.col-sm-4 {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    height: 100vh; /* Establece la altura máxima del contenido pegajoso */
-    overflow-y: auto; /* Agrega un desplazamiento vertical si es necesario */
-    /* Otros estilos para la columna sm-3 */
-}
-
-</style>
-
-
-
-            <div class="col-sm-4">
-               
-               
-
-                   
-
-                   <div class="well" style="border: 2px solid green; background: black; border-radius: 20px;">
-                    
-                        <center><h1> <font color="white"><p><i>Token Distribution</i></p></font></h1>     </center>
-
-                    <br>
-                    <div style="display: inline-block;  display: flex; ">
-
-                       <div style="display: inline-block; margin-left: ">
-                          <h3><font color="darkviolet"><p>  60% Liquidity </p></font></h3>
-                          <h3><font color="gold"><p>  20% Deveploment</p></font></h3>
-                          <h3><font color="lime"><p>  10% Listing and Marketing</p></font></h3>
-                          <h3><font color="red"><p>  10% Rewards </p></font> </h3>
-                        </div>
-
-                        <div style="display: inline-block; margin-left: 10px;">
-                           <img src="images/distribution.SVG" alt="My svg_logo" width="150" class="img-circle" style="transform: rotate(0deg); display: inline-block; margin-left: 10px; border: 4px solid white;">
-                        </div>
-
-                       
-
-                    </div>                             
-                           
-                                         
-                </div>         
-
-
-                   <div class="well" style="border: 2px solid green; background: black; border-radius: 20px;">
-                        <center><h1> <font color="white"><p><i>Road Map</i></p></font></h1>     </center>
-                       <br>  
-                      <h4>
-                       <font color="lime"><p>  ◯ 1: Token creation in Polygon Network</p></font>
-                       <font color="lime"><p>  ◯ 2: First Contract Ready </p></font>
-                       <font color="lime"><p>  ◯ 3: Web page ready (Dapp)</p></font>
-                       <font color="lime"><p>  ◯ 4: NFTUsername, Profile, Games, GamesFi, Publications and Reactions Ready</p></font>
-                       <font color="cyan"><p>  ◯ 5: Free distribution Token Sock divulgation</p></font>
-                       <font color="white"><p> 6: Swapp ready</p></font>
-                       <font color="white"><p> 7: Direct Messages, Staking and other functions is ready</p></font>
-                       <font color="white"><p> 8: Launchpad and Marketing</p></font>
-                       <font color="white"><p> 9: Liquidity in Dex</p></font>
-                       <font color="white"><p> 10: Listing in Coin Marketcap and Coin Geko </p></font>
-                       <font color="white"><p> 11: Game FI is ready</p></font>
-                       <font color="white"><p> 12: Listing in Cex </p></font>
-                       <font color="white"><p> 13: Marketing</p></font>
-                       <font color="white"><p> 14: Other aplications</p></font>
-
-
-                    </h4>                            
-                           
-                                         
-                </div>            
-
-
-
-            </div>
-
-            <div class="col-sm-1"> 
-            </div>
-
-            
+          </pre>
         </div>
-    </div>
+      </div>
+    </section>
 
+    <section class="section">
+      <h1><i>Token Distribution</i></h1>
+      <ul style="list-style: none; padding-left: 0; margin-top: 20px;">
+         <li><h4><span style="color: violet;">◉</span> *60% Liquidity</h4></li>
+        <li><h4><span style="color: gold;">◉</span> *20% Development</h4></li>
+        <li><h4><span style="color: lime;">◉</span> *10% Listing & Marketing</h4></li>
+        <li><h4><span style="color: red;">◉</span> *10% Rewards</h4></li>
+        <li><h4><span style="color: gray;">◉</span> * Undefined</h4></li>
+      </ul>
+      </ul>
+    </section>
 
+    <section class="section">
+      <h1><i>Road Map</i></h1>
+      <div class="roadmap mt-4">
+        <p>1️⃣ Token creation in Polygon Network</p>
+        <p>2️⃣ First Contracts </p>
+        <p>3️⃣ Web page ready (Dapp)</p>
+        <p>4️⃣ NFTUsername, Profile, Games, Publications </p>
+        <p>5️⃣ Game ready, Free Token Distribution</p>
+        <p>6️⃣ PlayStore launch</p>
+        <p> Swapp, Direct Messages and Staking </p>
+        <p> Launchpad and Marketing</p>
+        <p> Liquidity in DEX</p>
+        <p> Listing in CoinMarketCap & CoinGecko</p>
+        <p> Listing in CEX</p>
+        <p> Marketing</p>
+        <p>  Other applications</p>
+      </div>
+    </section>
+  </main>
 
+  <footer>
+    <p>© 2023 TheSocks.net — A Decentralized Social Finance Network</p>
+    <p><a href="https://github.com/cawdevs" target="_blank">GitHub Project</a></p>
+  </footer>
 
-
-
-
-
-<script src="bootstrap/js/jquery.min.js" ></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

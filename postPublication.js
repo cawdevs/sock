@@ -20,50 +20,7 @@ function createPublicationElements() {
     controlsDiv.classList.add('form-group');
     controlsDiv.style.cssText = 'display: flex; align-items: center; justify-content: center; gap: 10px; justify-content: space-between;';
         
-    // Imagen
-//    const imageContainer = document.createElement('div');
-//    imageContainer.id = 'publication-NFT_image-container';
-//    imageContainer.style.cssText = 'width: 60px; height: 60px; border-radius: 50%; ';
-//    controlsDiv.appendChild(imageContainer);
-
-    // Select de privacidad
-    /*const selectDiv = document.createElement('div');
-    selectDiv.classList.add('form-group');
-    const select = document.createElement('select');
-    select.classList.add('form-control');
-    select.id = 'filter-privacidad';
-    select.innerHTML = '<option>*</option><option>>Para todo publico</option><option>>18</option>';
-    select.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 40px;';
-    selectDiv.appendChild(select);
-    controlsDiv.appendChild(selectDiv);
-*/
-
-
-    
-    // Botón de enviar publicación
-//    const submitLink = document.createElement('button');
-//    submitLink.type ='button'; // ← evita comportamiento submit
-    //submitLink.href = '#';
-//    submitLink.id = 'btn-publication';
-    //submitLink.style.cssText = 'padding: 5px 20px; font-size: 14px; align-items: center; justify-content: center; background-color: dodgerblue; color: white; border: 2px solid blue; border-radius: 20px; cursor: pointer;';
-//    submitLink.style.cssText = 'font-size: 18px; border: 2px solid blue; border-radius: 20px; width: 100%; margin: 10px 0; height: 40px; cursor: pointer; background-color: dodgerblue; color: white;';
-
-//    submitLink.textContent = 'Hacer Publicación';
-
-    // Agregar evento de clic
-//    submitLink.addEventListener('click', async function(event) {
-//        event.preventDefault(); // Evita que el enlace navegue a otra página
-//        await publicar_main_post(); // Llama a la función asíncrona
-        
-//    });
-
-//    controlsDiv.appendChild(submitLink);
-//    form.appendChild(controlsDiv);
-
-    ////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////
-
-
+   
 
 
     /////////////////////////////////////////////////////////////////////////
@@ -958,156 +915,157 @@ async function get_publication(id_publication,principalContainerID) {
 
 
 async function createPublicationElement(publication) {
-    //const { id, nftUsername, timestamp, content, media, privacidad, clasificacion, imageProfile, usernameProfile } = publication;
     const { id, nftUsername, timestamp, content, media, clasificacion, imageProfile, usernameProfile } = publication;
-  
     const selected_username = document.getElementById('selector_NFTs').value;
-    
-    // ---- Creación de contenedores ----
+
+    // 📦 CONTENEDOR GENERAL
     const publicationDiv = document.createElement('div');
-    publicationDiv.classList.add('publication-container');
-    publicationDiv.style.cssText = 'border: 1px solid gray; padding: 0px; border-radius: 10px; margin-bottom: 10px; width: 100%; max-width: 100%; overflow: hidden; box-sizing: border-box;';
+    publicationDiv.style.cssText = `
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 15px;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        transition: box-shadow 0.2s ease, transform 0.1s ease;
+    `;
+    publicationDiv.onmouseover = () => publicationDiv.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
+    publicationDiv.onmouseout = () => publicationDiv.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)";
 
-    // ---- Fila 1: NFTUsername, Nombre, Fecha y Select ----
+    // 🧩 ENCABEZADO: FOTO + INFO
     const headerDiv = document.createElement('div');
-    headerDiv.classList.add('publication-header');
-    headerDiv.style.cssText = 'display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;';
-    
+    headerDiv.style.cssText = `
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    `;
 
-
+    // Imagen circular del perfil
     const profileImageContainer = document.createElement('div');
-    profileImageContainer.id = `imageContainerId_${id}`;
-    profileImageContainer.style.width = "60px";
-    profileImageContainer.style.height = "60px";
-    profileImageContainer.style.display = "flex";
-    profileImageContainer.style.justifyContent = "center";
-    // Verificar si imageProfile está definido y no es una cadena vacía
+    profileImageContainer.style.cssText = `
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        flex-shrink: 0;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    `;
+
     if (imageProfile) {
         const profileImage = document.createElement('img');
         profileImage.src = imageProfile;
-        profileImage.alt = "Profile Image";
-        profileImage.style.width = "100%";  // Para que la imagen se ajuste al contenedor
-        //profileImage.style.height = "100%";
-        profileImage.style.borderRadius = "50%"; // Para que la imagen sea circular
-        profileImage.style.objectFit = "cover";  // Para que la imagen mantenga su aspecto
-
+        profileImage.alt = "Profile";
+        profileImage.style.cssText = `
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        `;
         profileImage.addEventListener("click", async function () {
-                await get_NFTUsername_profile(nftUsername);
-                await get_NFTUsername_publication(nftUsername,"modal_publication-nftusername");
-                $('#UsernameProfileModal').modal('show');
-            });
-
+            await get_NFTUsername_profile(nftUsername);
+            await get_NFTUsername_publication(nftUsername,"modal_publication-nftusername");
+            $('#UsernameProfileModal').modal('show');
+        });
         profileImageContainer.appendChild(profileImage);
-
-        
-
     }
 
-
+    // Info de usuario
     const userInfoDiv = document.createElement('div');
     userInfoDiv.style.cssText = `
-        display: flex; 
-        flex-direction: column; /* Colocar los elementos en tres filas */
-        gap: 5px; /* Espacio entre los elementos */
-        width: 100%; /* Asegurar que ocupe el ancho completo */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 10px;
+        flex-grow: 1;
     `;
 
-            if (usernameProfile) {
-                const profileUsernameSpan = document.createElement('span');
-                profileUsernameSpan.textContent = usernameProfile;
-                profileUsernameSpan.style.cssText = 'font-weight: bold; font-size: 20px; margin-left: 10px;';
-                userInfoDiv.appendChild(profileUsernameSpan);
-            }
+    if (usernameProfile) {
+        const displayName = document.createElement('span');
+        displayName.textContent = usernameProfile;
+        displayName.style.cssText = `
+            font-weight: 600;
+            font-size: 16px;
+            color: #000;
+        `;
+        userInfoDiv.appendChild(displayName);
+    }
 
-            const usernameSpan = document.createElement('span');
-            usernameSpan.textContent = `${nftUsername}@sock${id}`;
-            usernameSpan.style.cssText = 'font-weight: bold; font-size: 18px; margin-left: 10px;';
-            userInfoDiv.appendChild(usernameSpan);
+    const usernameSpan = document.createElement('span');
+    usernameSpan.textContent = `@${nftUsername}`;
+    usernameSpan.style.cssText = `
+        font-size: 14px;
+        color: #555;
+    `;
+    userInfoDiv.appendChild(usernameSpan);
 
-            // Contenedor para justificar dateSpan a la derecha
-            const dateContainer = document.createElement('div');
-            dateContainer.style.cssText = `
-                display: flex;
-                justify-content: flex-end; /* Alinear a la derecha */
-                width: 100%;
-            `;
-
-                    const dateSpan = document.createElement('span');
-                    dateSpan.textContent = timestamp;
-                    dateSpan.style.cssText = 'font-size: 12px; color: gray;';
-            dateContainer.appendChild(dateSpan);
-
-    // Agregar los elementos al headerDiv
-    userInfoDiv.appendChild(dateContainer);
+    const dateSpan = document.createElement('span');
+    dateSpan.textContent = timestamp;
+    dateSpan.style.cssText = `
+        font-size: 12px;
+        color: #888;
+    `;
+    userInfoDiv.appendChild(dateSpan);
 
     headerDiv.appendChild(profileImageContainer);
     headerDiv.appendChild(userInfoDiv);
 
-
-
-
+    // 🗑️ Eliminar publicación (si es del usuario)
     if (selected_username === nftUsername) {
         const deleteIcon = document.createElement('span');
         deleteIcon.className = 'glyphicon glyphicon-trash';
-        deleteIcon.style.cssText = 'cursor: pointer; font-size: 18px; color: gray; padding: 5px;';
-        deleteIcon.onclick = function() {
-            mostrarModal_si_no('¿Borrar publicación?', function () {
-                    
-                    delete_post(id); // Llama a la función para eliminar la publicación
-                }, hacer_nada);
-            };
-                 
-        // Agregarlo también a headerDiv si es necesario
+        deleteIcon.style.cssText = `
+            cursor: pointer;
+            font-size: 18px;
+            color: #888;
+            padding: 5px;
+        `;
+        deleteIcon.onmouseover = () => deleteIcon.style.color = "#e63946";
+        deleteIcon.onmouseout = () => deleteIcon.style.color = "#888";
+        deleteIcon.onclick = () => mostrarModal_si_no('¿Borrar publicación?', () => delete_post(id), () => {});
         headerDiv.appendChild(deleteIcon);
     }
-    
 
+    // 📄 CONTENIDO DE TEXTO
+    const contentDiv = document.createElement('div');
+    contentDiv.style.cssText = `
+        color: #111;
+        font-size: 15px;
+        line-height: 1.5;
+        margin-top: 10px;
+        word-wrap: break-word;
+    `;
 
-//const contentProcesado = resaltarPalabrasEspecialesHTML(content);
-///mostrar el texto de la publicacion, si es corto se muestra como tal, si es largo se muestra una parte
-const contentDiv = document.createElement('div');
-contentDiv.style.cssText = 'margin-bottom: 0px; font-size: 16px; padding: 0px;';
     if (content && content.trim() !== '') {
-            
-            contentDiv.classList.add('publication-content');
-
-            contentDiv.innerHTML = `
-              <div class="rich-text short-view" style="max-height: 150px; overflow: hidden; position: relative;">
+        contentDiv.innerHTML = `
+            <div class="rich-text short-view" style="max-height: 150px; overflow: hidden; position: relative;">
                 ${content}
-              </div>
-              <div class="rich-text full-view" style="display: none;">
+            </div>
+            <div class="rich-text full-view" style="display: none;">
                 ${content}
-              </div>
-              <span class="toggle-button" style="color: blue; cursor: pointer; display: inline-block; margin-top: 5px;">Mostrar más</span>
-            `;
+            </div>
+            <span class="toggle-button" style="color: #1d9bf0; cursor: pointer; display: inline-block; margin-top: 5px;">Mostrar más</span>
+        `;
 
-            document.body.appendChild(contentDiv); // O añádelo donde corresponda
+        const shortView = contentDiv.querySelector('.short-view');
+        const fullView = contentDiv.querySelector('.full-view');
+        const toggleButton = contentDiv.querySelector('.toggle-button');
 
-            const shortView = contentDiv.querySelector('.short-view');
-            const fullView = contentDiv.querySelector('.full-view');
-            const toggleButton = contentDiv.querySelector('.toggle-button');
+        setTimeout(() => {
+            if (shortView.scrollHeight <= 150) toggleButton.style.display = 'none';
+        }, 0);
 
-            // Evaluar si el contenido es más alto que el límite visible
-            // Esperamos a que el DOM lo renderice primero
-            setTimeout(() => {
-              if (shortView.scrollHeight <= 150) {
-                // Si no es más alto, no mostrar el botón
-                toggleButton.style.display = 'none';
-              }
-            }, 0);
+        toggleButton.addEventListener('click', () => {
+            const isShort = shortView.style.display !== 'none';
+            shortView.style.display = isShort ? 'none' : 'block';
+            fullView.style.display = isShort ? 'block' : 'none';
+            toggleButton.textContent = isShort ? 'Mostrar menos' : 'Mostrar más';
+        });
+    }
 
-            // Controlador del botón
-            toggleButton.addEventListener('click', () => {
-              if (shortView.style.display !== 'none') {
-                shortView.style.display = 'none';
-                fullView.style.display = 'block';
-                toggleButton.textContent = 'Mostrar menos';
-              } else {
-                shortView.style.display = 'block';
-                fullView.style.display = 'none';
-                toggleButton.textContent = 'Mostrar más';
-              }
-            });
                 
                 contentDiv.style.cssText = 'margin-bottom: 10px; font-size: 16px; padding: 10px;';
     }
@@ -1269,27 +1227,7 @@ mediaDiv.appendChild(wrapper);
             mediaDiv.appendChild(mediaImage);
         }
 
-        /*else if (media.endsWith('.mp4') || media.endsWith('.webm') || media.endsWith('.ogg')) {
-            const mediaVideo = document.createElement('video');
-            mediaVideo.controls = true;
-            mediaVideo.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
-
-            const source = document.createElement('source');
-            source.src = media;
-
-            // Determinar el tipo MIME correcto
-            if (media.endsWith('.mp4')) {
-                source.type = 'video/mp4';
-            } else if (media.endsWith('.webm')) {
-                source.type = 'video/webm';
-            } else if (media.endsWith('.ogg')) {
-                source.type = 'video/ogg';
-            }
-
-            mediaVideo.appendChild(source);
-            mediaDiv.appendChild(mediaVideo);
-        }*/
-
+       
 
 // Uso:
 else if (media.includes("facebook.com") || media.includes("fb.watch")) {
@@ -1501,6 +1439,9 @@ function crearDivRespuesta(id, username) {
 
   return respuestaDiv;
 }
+
+
+
 
 async function enviarRespuestaADjango(publicationId, username, respuestaTexto) {
   try {

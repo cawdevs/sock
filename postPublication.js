@@ -20,51 +20,7 @@ function createPublicationElements() {
     controlsDiv.classList.add('form-group');
     controlsDiv.style.cssText = 'display: flex; align-items: center; justify-content: center; gap: 10px; justify-content: space-between;';
         
-    // Imagen
-//    const imageContainer = document.createElement('div');
-//    imageContainer.id = 'publication-NFT_image-container';
-//    imageContainer.style.cssText = 'width: 60px; height: 60px; border-radius: 50%; ';
-//    controlsDiv.appendChild(imageContainer);
-
-    // Select de privacidad
-    /*const selectDiv = document.createElement('div');
-    selectDiv.classList.add('form-group');
-    const select = document.createElement('select');
-    select.classList.add('form-control');
-    select.id = 'filter-privacidad';
-    select.innerHTML = '<option>*</option><option>>Para todo publico</option><option>>18</option>';
-    select.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 40px;';
-    selectDiv.appendChild(select);
-    controlsDiv.appendChild(selectDiv);
-*/
-
-
     
-    // Botón de enviar publicación
-//    const submitLink = document.createElement('button');
-//    submitLink.type ='button'; // ← evita comportamiento submit
-    //submitLink.href = '#';
-//    submitLink.id = 'btn-publication';
-    //submitLink.style.cssText = 'padding: 5px 20px; font-size: 14px; align-items: center; justify-content: center; background-color: dodgerblue; color: white; border: 2px solid blue; border-radius: 20px; cursor: pointer;';
-//    submitLink.style.cssText = 'font-size: 18px; border: 2px solid blue; border-radius: 20px; width: 100%; margin: 10px 0; height: 40px; cursor: pointer; background-color: dodgerblue; color: white;';
-
-//    submitLink.textContent = 'Hacer Publicación';
-
-    // Agregar evento de clic
-//    submitLink.addEventListener('click', async function(event) {
-//        event.preventDefault(); // Evita que el enlace navegue a otra página
-//        await publicar_main_post(); // Llama a la función asíncrona
-        
-//    });
-
-//    controlsDiv.appendChild(submitLink);
-//    form.appendChild(controlsDiv);
-
-    ////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////
-
-
-
 
     /////////////////////////////////////////////////////////////////////////
     // NUEVO: contenedor para el editor
@@ -434,38 +390,16 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
            
 
     }else{
-        const respuesta = await fetch('https://api.thesocks.net/subirDj/', {
-            method: 'POST',
-            body: formData
-        });
+        //const respuesta = await fetch('https://api.thesocks.net/subirDj/', {
+        //    method: 'POST',
+        //    body: formData
+        //});
     }   
 
 
 }
 
-/*
-function addVideoPublication(publicationId) {
-    console.log(`📥 Guardando publicación de video ID: ${publicationId}`);
 
-    fetch("https://api.thesocks.net/add-video-publication/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            publication_id: publicationId
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("✅ Respuesta servidor:", data);
-    })
-    .catch(error => {
-        console.error("❌ Error al guardar publicación:", error);
-    });
-}
-
-*/
 
 
 async function publicar_main_post(){
@@ -614,61 +548,6 @@ async function publicar_main_post(){
 }
 
 
-
-
-
-/*
-let currentIndex = null;
-let total_publication = null;
-async function get_all_publications_home(containerID, append = false) {
-    try {
-        const container = document.getElementById(containerID);
-
-         const loadingAnimation = document.getElementById('loadingAnimation-principal');
-
-
-        if (!append) {
-            container.innerHTML = '';
-
-            // Obtener total de publicaciones
-            if (publisherContract.methods) {
-                total_publication = await publisherContract.methods.publicationCount().call();
-            } else {
-                total_publication = await publisherContract.publicationCount();
-            }
-
-            currentIndex = total_publication;
-        }
-
-        let count = 0;
-        let i = currentIndex;
-
-        while (count < 5 && i >= 1) {
-            let type_publication = await get_publication(i, containerID);
-
-            loadingAnimation.style.display = 'none';                      
-
-            if (type_publication !== 3) {
-                count++;
-            }
-
-            i--;
-        }
-
-        currentIndex = i;
-
-        // Si ya no hay más publicaciones, ocultar el botón
-        if (currentIndex < 1) {
-            document.getElementById("verMasBtn").style.display = "none";
-        }
-
-    } catch (error) {
-       // alert('Error al intentar get_publications_home.');
-        console.error('Error completo:', error);
-    }
-}
-
-*/
 let currentIndex = null;
 let total_publication = null;
 let randomSeenIndexes = new Set(); // 📌 Guardará los índices ya usados en modo random
@@ -1184,8 +1063,16 @@ async function createPublicationElement(publication) {
             if (tweetUrl) {
                 const blockquote = document.createElement("blockquote");
                 blockquote.className = "twitter-tweet";
-                blockquote.setAttribute("data-media-max-width", "500");
-
+                //blockquote.setAttribute("data-media-max-width", "500");
+                blockquote.setAttribute('style', `
+                    position: relative;
+                    padding-bottom: 56.25%;
+                    padding-top: 25px;
+                    height: 0;
+                    overflow: hidden;
+                    max-width: 100%;
+                    margin: auto;
+                  `);
                 const link = document.createElement("a");
                 link.href = tweetUrl;
 
@@ -1271,27 +1158,7 @@ mediaDiv.appendChild(wrapper);
             mediaDiv.appendChild(mediaImage);
         }
 
-        /*else if (media.endsWith('.mp4') || media.endsWith('.webm') || media.endsWith('.ogg')) {
-            const mediaVideo = document.createElement('video');
-            mediaVideo.controls = true;
-            mediaVideo.style.cssText = 'width: 100%; border-radius: 10px; object-fit: cover;';
-
-            const source = document.createElement('source');
-            source.src = media;
-
-            // Determinar el tipo MIME correcto
-            if (media.endsWith('.mp4')) {
-                source.type = 'video/mp4';
-            } else if (media.endsWith('.webm')) {
-                source.type = 'video/webm';
-            } else if (media.endsWith('.ogg')) {
-                source.type = 'video/ogg';
-            }
-
-            mediaVideo.appendChild(source);
-            mediaDiv.appendChild(mediaVideo);
-        }*/
-
+        
 
 // Uso:
 else if (media.includes("facebook.com") || media.includes("fb.watch")) {

@@ -556,6 +556,8 @@
 
       
 
+
+
   </style>
 </head>
 
@@ -818,7 +820,7 @@
     <img src="images/icons/matic_coin.SVG" alt="MATIC">
     <div class="wallet-values">
       <span id="saldo_ETH">0</span>
-      <span id="saldo_USD" class="usd">$0.00</span>
+      <span id="saldo_USD" class="usd">POL</span>
     </div>
   </div>
 
@@ -2427,7 +2429,7 @@ async function obtenerSaldo_POL() {
    saldoElementETH.style.color = 'white';
 
    // Obtener el precio de MATIC en USD desde CoinGecko
-   fetch('https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd')
+   /*fetch('https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd')
        .then(response => response.json())
        .then(data => {
            const maticPriceInUsd = data['matic-network'].usd;
@@ -2441,7 +2443,7 @@ async function obtenerSaldo_POL() {
            saldoElementUSD.style.color = 'white';
        })
        .catch(error => console.error("Error al obtener el precio de MATIC:", error));
-
+     */
     return truncatedBalanceEther;
            
 }

@@ -1048,45 +1048,54 @@ async function createPublicationElement(publication) {
 
 
         } else if (media.includes("x.com/")) {
-            let tweetUrl;
+    let tweetUrl;
 
-            // Si la URL es del tipo "https://x.com/usuario/status/..."
-            if (media.match(/x\.com\/([^\/]+)\/status\/(\d+)/)) {
-                tweetUrl = media.replace("x.com", "twitter.com");
-            }
-            // Si la URL es del tipo "https://x.com/i/status/..."
-            else if (media.match(/x\.com\/i\/status\/(\d+)/)) {
-                const tweetId = media.split("/").pop();
-                tweetUrl = `https://twitter.com/i/status/${tweetId}`;
-            }
+    // Si la URL es del tipo "https://x.com/usuario/status/..."
+    if (media.match(/x\.com\/([^\/]+)\/status\/(\d+)/)) {
+        tweetUrl = media.replace("x.com", "twitter.com");
+    }
+    // Si la URL es del tipo "https://x.com/i/status/..."
+    else if (media.match(/x\.com\/i\/status\/(\d+)/)) {
+        const tweetId = media.split("/").pop();
+        tweetUrl = `https://twitter.com/i/status/${tweetId}`;
+    }
 
-            if (tweetUrl) {
-                const blockquote = document.createElement("blockquote");
-                blockquote.className = "twitter-tweet";
-                //blockquote.setAttribute("data-media-max-width", "500");
-                blockquote.setAttribute('style', `
-                    position: relative;
-                    padding-bottom: 56.25%;
-                    padding-top: 25px;
-                    height: 0;
-                    overflow: hidden;
-                    max-width: 100%;
-                    margin: auto;
-                  `);
-                const link = document.createElement("a");
-                link.href = tweetUrl;
+    if (tweetUrl) {
+        // Contenedor visual centrado
+        mediaDiv.style.cssText = `
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        `;
 
-                blockquote.appendChild(link);
-                mediaDiv.appendChild(blockquote);
+        const blockquote = document.createElement("blockquote");
+        blockquote.className = "twitter-tweet";
+        blockquote.setAttribute("data-media-max-width", "500");
+        blockquote.style.cssText = `
+            margin: auto;
+            max-width: 500px;
+            width: 100%;
+        `;
 
-                // Agregar el script de Twitter para que cargue el embed
-                const script = document.createElement("script");
-                script.async = true;
-                script.src = "https://platform.twitter.com/widgets.js";
-                script.charset = "utf-8";
-                document.body.appendChild(script);
-            }
-        }else if (media.includes("tiktok.com")) {
+        const link = document.createElement("a");
+        link.href = tweetUrl;
+
+        blockquote.appendChild(link);
+        mediaDiv.appendChild(blockquote);
+
+        // Agregar el script de Twitter para renderizar el embed
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://platform.twitter.com/widgets.js";
+        script.charset = "utf-8";
+        document.body.appendChild(script);
+    }
+}
+
+        else if (media.includes("tiktok.com")) {
             let tiktokUrl = media;
 
             // Detectar link corto

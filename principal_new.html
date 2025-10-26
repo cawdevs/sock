@@ -2352,7 +2352,7 @@ async function obtenerSaldo_SOCK() {
 
     if (diferencia > 0) {
         diffElement.textContent = `+${diferencia}`;
-        diffElement.style.color = "green";
+        diffElement.style.color = "lime";
         diffElement.style.transform = "scale(2.5)";
         diffElement.style.opacity = "0.5";
         saldoElement.appendChild(diffElement);
@@ -2367,7 +2367,7 @@ async function obtenerSaldo_SOCK() {
         setTimeout(() => {
             diffElement.remove();
             saldoElement.innerText = truncatedBalance;
-            saldoElement.style.color = "green";
+            saldoElement.style.color = "lime";
         }, 3000);
 
     } else if (diferencia < 0) {

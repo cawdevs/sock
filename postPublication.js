@@ -405,6 +405,10 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
 async function publicar_main_post(){
    
     const loadingAnimation = document.getElementById('loadingAnimation-post-publication');
+
+    const container_publication = document.getElementById('menu-publicar');
+    container_publication.style.display = 'none';
+
     try{        ////////////////////
 
       
@@ -444,8 +448,7 @@ async function publicar_main_post(){
                     console.log("No se ha seleccionado ningún archivo.");
             }
           
-   
-             
+                
            
             
            
@@ -511,7 +514,6 @@ async function publicar_main_post(){
                            
 
             } 
-
                
             //const recent_publication = document.getElementById('recent-home-publications-container');
                
@@ -525,16 +527,13 @@ async function publicar_main_post(){
             get_ultima_publication('recent-home-publications-container'); 
             console.log('regresamoss get_ultima_publication.'); 
 
-           //$('#myModal_publication').on('hidden.bs.modal', function () {
-    //$('.modal-backdrop').remove();
-    //$('body').removeClass('modal-open');
-//});
-          // $('#myModal_publication').modal('hide');
-         // createPublicationElements();
+          
            $('a[href="#home"]').tab('show');//me lleva al menu home
            
 
     } catch (error) {
+
+          container_publication.style.display = 'block';
           
 // Cambia el color de la animación a rojo y lo mantiene 2 segundos
           loadingAnimation.style.borderLeftColor = 'red';                 

@@ -629,9 +629,9 @@ async function get_ultima_publication(containerID) {
 
         let currentIndex;
         if (publisherContract.methods) {
-            currentIndex = await publisherContract.methods.publicationCount().call();
+            currentIndex = await publisherContract.methods.publicationCount().call()-1;
         } else {
-            currentIndex = await publisherContract.publicationCount();
+            currentIndex = await publisherContract.publicationCount()-1;
         }
 
         currentIndex = currentIndex.toNumber();  // Solo si es BigNumber

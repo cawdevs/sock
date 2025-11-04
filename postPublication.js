@@ -139,6 +139,10 @@ setTimeout(() => {
     submitLink.addEventListener('click', async function(event) {
         event.preventDefault(); // Evita que el enlace navegue a otra página
         await publicar_main_post(); // Llama a la función asíncrona
+
+        console.log('iniciamos get_ultima_publication.'); 
+        get_ultima_publication('recent-home-publications-container'); 
+        
         
     });
 
@@ -523,9 +527,7 @@ async function publicar_main_post(){
                 loadingAnimation.style.display = 'none';
             }, 5000);
 
-            console.log('iniciamos get_ultima_publication.'); 
-            get_ultima_publication('recent-home-publications-container'); 
-            console.log('regresamoss get_ultima_publication.'); 
+            
 
           
            $('a[href="#home"]').tab('show');//me lleva al menu home
@@ -629,9 +631,9 @@ async function get_ultima_publication(containerID) {
 
         let currentIndex;
         if (publisherContract.methods) {
-            currentIndex = await publisherContract.methods.publicationCount().call()-1;
+            currentIndex = await publisherContract.methods.publicationCount().call();
         } else {
-            currentIndex = await publisherContract.publicationCount()-1;
+            currentIndex = await publisherContract.publicationCount();
         }
 
         currentIndex = currentIndex.toNumber();  // Solo si es BigNumber

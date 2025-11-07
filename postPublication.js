@@ -410,6 +410,9 @@ async function publicar_main_post(){
    
     const loadingAnimation = document.getElementById('loadingAnimation-post-publication');
 
+    const barra = inicializarBarra(3); // Indica el total de pasos
+
+
     const container_publication = document.getElementById('menu-publicar');
     container_publication.style.display = 'none';
 
@@ -426,30 +429,33 @@ async function publicar_main_post(){
             
             const inputArchivo = document.getElementById('input-media-publication');
             let  url_ipsf;
+            
             if (inputArchivo && inputArchivo.files.length > 0) {
                  
                     const archivo = inputArchivo.files[0];
                     url_ipsf = await subirArchivoAlServidorYRetornarURL(archivo);
+
                     // Este es el archivo que debes pasar al servidor o a IPFS
                     console.log("Archivo seleccionado:", archivo.name);
                     
                     if (url_ipsf != false){
-                           //si se pudo subir la imagem    
-                           //content += `<br><a href="${link_to_media}" target="_blank" rel="noopener noreferrer">Ver link adjunto</a>`;
+                           
                            link_to_media=url_ipsf;
                            //se almacena el id en servidor si es un video
+                           barra.avanzar("Archivo media subido con exito...");
                            
-
-
                     }else{
                            //no se pudo subir la imagen
                            console.log("No se pudo subir la imagen a IPSF"); 
+                           barra.avanzar("Archivo media no se pudo subir...");
                     }
 
                     
             } else {
-                    url_ipsf = await subirArchivoAlServidorYRetornarURL();
+                    //url_ipsf = await subirArchivoAlServidorYRetornarURL();
+                    url_ipsf = null;
                     console.log("No se ha seleccionado ningún archivo.");
+                    barra.avanzar("Publicación sin Archivo media......");
             }
           
                 
@@ -475,6 +481,7 @@ async function publicar_main_post(){
                                 from: globalWalletKey, 
                                 });
                             console.log('publicado Con MetaMask.');
+                            barra.avanzar("publicado con metamask Wallet...");
                                                                                 
 
             } else {
@@ -511,6 +518,7 @@ async function publicar_main_post(){
                     try {
                         const receipt = await tx.wait(); // 👈 Espera confirmación aquí
                         showSuccess("Confirmado: Publicado Main Post", receipt);
+                        barra.avanzar("publicado con Socks Wallet...");
                     } catch (error) {
                         showError("Sin confirmar: Publicado Main Post.", error);
                         //return; // ❌ No seguir si falló
@@ -528,7 +536,7 @@ async function publicar_main_post(){
             }, 5000);
 
             
-
+            barra.avanzar("Finalizado con excito..."); 
           
            $('a[href="#home"]').tab('show');//me lleva al menu home
            

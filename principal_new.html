@@ -554,11 +554,38 @@
         position: absolute !important;
       }
 
-      
-
-
-
+     
   </style>
+
+<style>
+  /* Estilo general de la barra */
+  .progress-container {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 25px;
+    margin-top: 10px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: dodgerblue;
+    transition: width 0.4s ease-in-out;
+  }
+
+  .progress-text {
+    margin-top: 8px;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 14px;
+  }
+</style>
+
+
+
+
 </head>
 
 
@@ -868,7 +895,7 @@ span.hashtag {
 
  <div id="estado-servidor_msg"></div>
 
-
+ <div id="barra-progreso-principal"></div>
 
  <div class="tab-content" style="border: 0px solid var(--fondo); border-radius: 20px; background:var(--principal);">
  
@@ -1762,6 +1789,43 @@ span.hashtag {
 </style>
 
 
+<script>
+// 🔧 Crear la barra dentro del contenedor principal
+function inicializarBarra(pasosTotales) {
+  const contenedor = document.getElementById("barra-progreso-principal");
+  contenedor.innerHTML = `
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-text" id="progressText">Iniciando...</div>
+  `;
+
+  const bar = contenedor.querySelector("#progressBar");
+  const text = contenedor.querySelector("#progressText");
+
+  return {
+    pasosTotales,
+    pasoActual: 0,
+    avanzar(texto = "") {
+      this.pasoActual++;
+      const porcentaje = Math.min((this.pasoActual / this.pasosTotales) * 100, 100);
+      bar.style.width = porcentaje + "%";
+      text.textContent = `${texto} (${Math.round(porcentaje)}%)`;
+    },
+    reiniciar() {
+      this.pasoActual = 0;
+      bar.style.width = "0%";
+      text.textContent = "Iniciando...";
+    }
+  };
+}
+
+
+
+
+
+
+
 
 <script>
 async function verificarServidor() {
@@ -2279,47 +2343,7 @@ function get_total_points() {
 }
 
 
-/*async function obtenerSaldo_SOCK() {
 
-    let accountBalance;
-    if (tokenContract.methods) {
-        console.log("Con MetaMask obtenerSaldo_SOCK().");
-        // Usando web3.js
-        accountBalance = await tokenContract.methods.balanceOf(globalWalletKey).call();
-        console.log("accountBalance SOCK()M." + accountBalance);    
-    } else {
-        // Usando ethers.js
-        console.log("Con SockWallet obtenerSaldo_SOCK().");        
-        accountBalance = await tokenContract.balanceOf(globalWalletKey);
-        console.log("accountBalance SOCK()." + accountBalance);    
-
-    }
-
-   // Convertir el saldo a una cadena
-   const balanceString = accountBalance.toString();
-   // Obtener los primeros dígitos (de 0 a longitud - 18)
-   const truncatedBalance = balanceString.slice(0, -18);
-   // Mostrar el saldo en la página web
-   const saldoElement = document.getElementById('saldo_CAW');
-   saldoElement.innerText = truncatedBalance;
-   saldoElement.style.color = 'black';
-
-   console.log("Saldo Sock SOCK()." + truncatedBalance);
-
-   const saldo_anterior = localStorage.getItem("truncatedBalance");
-   localStorage.setItem("Saldo Sock", truncatedBalance);
-
-   if (saldo_anterior<truncatedBalance){
-      saldoElement.style.color = 'green';
-   }else{
-
-   }            
-        
-
-
-   return truncatedBalance;
-}  
-*/
 
 async function obtenerSaldo_SOCK() {
     let accountBalance;

@@ -225,9 +225,7 @@
       
 
 
-      html {
-           background: linear-gradient(0deg, var(--fondo) ,white);
-             }
+    
     
     .tema-noche {
       --fondo: dodgerblue;
@@ -937,8 +935,17 @@ span.hashtag {
  <div id="barra-progreso-principal"></div>
 
  
- <div class="tab-content" style="border: 0px solid var(--fondo); border-radius: 20px; background:var(--fondo_base);">
- 
+ <!--<div class="tab-content" style="border: 0px solid var(--fondo); border-radius: 20px; background:var(--fondo_base);">-->
+ <div class="tab-content" 
+     style="
+       width: 100%;
+       height: 100%;
+       border: 0px solid var(--fondo);
+       border-radius: 20px;
+       background: var(--fondo_base);
+       box-sizing: border-box;
+     ">
+</div>
 
 
     <div id="home" class="tab-pane fade in active">

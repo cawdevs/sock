@@ -10,13 +10,21 @@
   :root {
     --fondo: dodgerblue;
     --texto: white;
-  }
 
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f6f6f6;
+    --fondo_html:white;
+    --fondo_base:white;
+    --fondo_post:white;
+
+
+
   }
+ 
+  html, body {
+            height: 100%;
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(45deg,var(--fondo_html), var(--fondo_html));
+        }
 
   /* 🔹 Barra superior azul con 2 filas */
   .top-bar {
@@ -221,21 +229,48 @@
            background: linear-gradient(0deg, var(--fondo) ,white);
              }
     
-         .noche {
+    .tema-noche {
       --fondo: dodgerblue;
       --texto: white;
 
      --principal: gray;
-      --basic: lightgray;  
+     --basic: lightgray;  
+
+     --fondo_html:black;
+     --fondo_base:gray;
+     --fondo_post:darkgray;
+
     }
 
     .tema-azul {
      --fondo: dodgerblue;
-      --texto: white;
+     --texto: white;
 
      --principal: lightblue;
-      --basic: gray;  
+     --basic: gray;  
+
+     --fondo_html:darkblue;
+     --fondo_base:pink;
+     --fondo_post:lightblue;
+
     }
+
+    .tema-dia {
+     --fondo: dodgerblue;
+     --texto: white;
+
+     --principal: lightblue;
+     --basic: gray;  
+
+     --fondo_html:white;
+     --fondo_base:white;
+     --fondo_post:white;
+
+    }
+
+
+
+
    
         .container {
 
@@ -793,6 +828,10 @@
     </div>
     
     <div class="top-icons">
+
+       <a id="btnTema" title="Cambiar tema">
+          <span class="glyphicon glyphicon-adjust"></span>
+       </a>
      
       <a data-toggle="tab" href="#menu_buscar" style="margin-left: 15px;">
             <img src="images/icons/buscar_icon.SVG" alt="Buscar">
@@ -897,12 +936,15 @@ span.hashtag {
 
  <div id="barra-progreso-principal"></div>
 
- <div class="tab-content" style="border: 0px solid var(--fondo); border-radius: 20px; background:var(--principal);">
+ 
+ <div class="tab-content" style="border: 0px solid var(--fondo); border-radius: 20px; background:var(--fondo_base);">
  
 
 
-    <div id="home" class="tab-pane fade in active"  style="background:var(--basic);">
-         <br>
+    <div id="home" class="tab-pane fade in active">
+
+       <br>
+       
                    
          <center><div id="loadingAnimation-principal" style="display: none;">
                     
@@ -913,11 +955,9 @@ span.hashtag {
          </div>  </center> 
 
 
-         <div id="videoStoriesContainer"></div>
-         
-         
-         
-                 
+         <div id="videoStoriesContainer"></div>        
+                
+                
 
          <div id="recent-home-publications-container"></div> 
          <div id="home-publications-container"></div>       
@@ -967,7 +1007,7 @@ span.hashtag {
    <!--****************************************************-->
    <!--****************************************************-->
                  
-                
+           <br>
           <div class="container-fluid" style="display: flex; justify-content: space-between; margin-top: 10px; margin-bottom: 10px">
                
                 
@@ -3026,34 +3066,29 @@ if (/\.(jpeg|jpg|gif|png)$/.test(linkToImage)) {
 <script>
     // Lista de temas en orden
     const temas = ["dia", "noche", "azul"];
-    let indiceTema = 0; // Empezamos en "día"
+    let indiceTema = 0;
 
-    // Cargar el tema guardado si existe
+    // Cargar tema guardado
     const temaGuardado = localStorage.getItem("tema");
-    if (temaGuardado) {
+    if (temaGuardado && temas.includes(temaGuardado)) {
       indiceTema = temas.indexOf(temaGuardado);
       aplicarTema(temaGuardado);
     } else {
-      aplicarTema("dia"); // Por defecto día
+      aplicarTema("dia");
     }
 
-    // Botón para cambiar tema
+    // Evento del botón
     document.getElementById("btnTema").addEventListener("click", () => {
-      indiceTema = (indiceTema + 1) % temas.length; // Avanza al siguiente tema
+      indiceTema = (indiceTema + 1) % temas.length;
       const nuevoTema = temas[indiceTema];
       aplicarTema(nuevoTema);
-      localStorage.setItem("tema", nuevoTema); // Guardar en cache
+      localStorage.setItem("tema", nuevoTema);
     });
 
     // Función para aplicar el tema
     function aplicarTema(tema) {
-      document.body.classList.remove("noche", "tema-azul");
-
-      if (tema === "noche") {
-        document.body.classList.add("noche");
-      } else if (tema === "azul") {
-        document.body.classList.add("tema-azul");
-      }
+      document.body.classList.remove("tema-dia", "tema-noche", "tema-azul");
+      document.body.classList.add("tema-" + tema);
     }
   </script>
 

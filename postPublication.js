@@ -5,7 +5,7 @@ function createPublicationElements() {
        
    // const container = document.getElementById('publication-post-container');
     const container = document.getElementById('menu-publicar');
-    container.style.cssText = 'background-color:var(--basic);';
+    container.style.cssText = 'background-color:var(--fondo_post);';
     container.style.width = '90%';
     container.style.borderRadius = '20px';
     container.innerHTML = '';   
@@ -851,7 +851,7 @@ async function createPublicationElement(publication) {
     const publicationDiv = document.createElement('div');
     publicationDiv.classList.add('publication-container');
     publicationDiv.style.cssText = `
-        background-color: #ffffff;
+        background-color: var(--fondo_post);
         border: 1px solid #ddd;
         border-radius: 12px;
         margin-bottom: 20px;

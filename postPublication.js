@@ -798,7 +798,7 @@ async function get_publication(id_publication,principalContainerID) {
                 const principalContainer = document.getElementById(principalContainerID);
                 // Estilos para centrar el div y darle fondo blanco
                 // Estilos para centrar el div y darle fondo blanco
-                principalContainer.style.backgroundColor = "var(--basic)"; // Fondo blanco
+                principalContainer.style.backgroundColor = "var(--fondo_base)"; // Fondo blanco
                 principalContainer.style.margin = "0 auto"; // Centrar horizontalmente
                 principalContainer.style.display = "flex"; // Usa flexbox
                 principalContainer.style.flexDirection = "column"; // Coloca los elementos en columna

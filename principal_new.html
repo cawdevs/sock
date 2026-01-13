@@ -839,7 +839,7 @@
 
   <!-- 🔸 Fila 2 (iconos con enlaces personalizados) -->
   <div class="icon-scroll">
-    <a data-toggle="tab" href="#menu_hacer_publicacion" onclick="abrirModalPublicacion()" style="margin-left: 15px; display:none">
+    <a data-toggle="tab" href="#menu_hacer_publicacion" onclick="abrirModalPublicacion()" style="margin-left: 15px; display:block">
       <img id="image-post" src="images/icons/publication_icon.SVG" alt="post" width="35">
     </a>
 
@@ -2246,7 +2246,7 @@ async function inicializarUI() {
                                                     
     }
 
-    //oculta el boton publicar si no hay nft_usuario
+ 
     if (list_username.length === 0) {
 
           //poner avatar de la cuenta en pantalla

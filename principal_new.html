@@ -2251,6 +2251,13 @@ async function inicializarUI() {
 
       //poner avatar de la cuenta en pantalla
       await loadImagesFromHex(globalWalletKey,"NFT_image-container");
+
+      const selector = document.getElementById('selector_NFTs');
+      selector.innerHTML = '';
+
+      const option = document.createElement('option');
+      option.text = globalWalletKey;
+      selector.add(option);
     
     }else{
 
@@ -2671,6 +2678,8 @@ async function getmintedNFT() {
 
              const selector = document.getElementById('selector_NFTs');
              selector.innerHTML = '';
+
+
 
              //Crear una opción única
              //const option = document.createElement('option');

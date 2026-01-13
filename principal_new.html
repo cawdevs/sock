@@ -2249,19 +2249,30 @@ async function inicializarUI() {
     //oculta el boton publicar si no hay nft_usuario
     if (list_username.length === 0) {
 
-      //poner avatar de la cuenta en pantalla
-      await loadImagesFromHex(globalWalletKey,"NFT_image-container");
+          //poner avatar de la cuenta en pantalla
+          await loadImagesFromHex(globalWalletKey,"NFT_image-container");
 
-      const selector = document.getElementById('selector_NFTs');
-      selector.innerHTML = '';
+          const selector = document.getElementById('selector_NFTs');
+          selector.innerHTML = '';
 
-      const option = document.createElement('option');
-      option.text = globalWalletKey;
-      selector.add(option);
+
+          const start = globalWalletKey.slice(0, 6);
+          const end = globalWalletKey.slice(-4);
+   
+          const option = document.createElement('option');
+          option.text = `${start}...${end}`;
+          selector.add(option);
+
+
+
+
+
+
+
     
     }else{
 
-       await getmintedNFT();
+          await getmintedNFT();
 
     }
 

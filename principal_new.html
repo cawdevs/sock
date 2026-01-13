@@ -2231,7 +2231,32 @@ async function inicializarUI() {
     //verificar si el servidor esta vivo o no 
     await verificarServidor(); 
       
-    await getmintedNFT();
+    let list_username;
+
+    if (nftUsernameContract.methods) {
+                 console.log("Con MetaMask ");
+                 // Usando web3.js
+                 list_username = await nftUsernameContract.methods.getMintedUsernames(globalWalletKey).call();
+                 
+
+    } else {
+                 // Usando ethers.js
+                 console.log("Con SockWallet "); 
+                 list_username = await nftUsernameContract.getMintedUsernames(globalWalletKey);
+                                                    
+    }
+
+    //oculta el boton publicar si no hay nft_usuario
+    if (list_username.length === 0) {
+
+      //poner avatar de la cuenta en pantalla
+      await getAvatarAcount(globalWalletKey,"NFT_image-container");
+    
+    }else{
+
+       await getmintedNFT();
+
+    }
 
    
     //await get_all_publications_home("home-publications-container");

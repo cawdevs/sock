@@ -142,7 +142,7 @@ async function obtenerSaldo_BTC() {
 
     const balanceBTC = datos.saldo_btc; // 👈 ojo con el nombre exacto
 
-    const truncatedBalanceBTC = parseFloat(balanceBTC).toFixed(2);
+    const truncatedBalanceBTC = parseFloat(balanceBTC).toFixed(7);
 
     saldoElementBTC.innerText = truncatedBalanceBTC;
     saldoElementBTC.style.color = 'orange';

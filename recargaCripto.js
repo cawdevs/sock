@@ -140,11 +140,11 @@ async function obtenerSaldo_BTC() {
     const datos = await response.json(); 
     // { direccion_btc: "...", saldo_btc: "..." }
 
-    const balanceBTC = datos.saldo_btc; // 👈 ojo con el nombre exacto
+    //const balanceBTC = datos.saldo_btc; // 👈 ojo con el nombre exacto
 
-    const truncatedBalanceBTC = parseFloat(balanceBTC).toFixed(7);
+    //const truncatedBalanceBTC = parseFloat(balanceBTC).toFixed(7);
 
-    saldoElementBTC.innerText = truncatedBalanceBTC;
+    saldoElementBTC.innerText = datos.saldo_btc;
     saldoElementBTC.style.color = 'orange';
 
   } catch (error) {

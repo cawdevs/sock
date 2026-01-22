@@ -904,7 +904,7 @@
     </div>
   </div>
 
-  <button id="btn-obtener-saldo" onclick="obtenerSaldo_POL_SOCK()" class="refresh-btn">
+  <button id="btn-obtener-saldo" onclick="obtenerSaldo_POL_SOCK_BTC()" class="refresh-btn">
     ⟳
   </button>
 </div>
@@ -2298,8 +2298,10 @@ async function inicializarUI() {
     
 
     // Obtener y mostrar saldos
+    await obtenerSaldo_BTC();
     await obtenerSaldo_POL();
     await obtenerSaldo_SOCK();
+
 
     get_total_liked();
     get_total_points();
@@ -2563,7 +2565,8 @@ async function obtenerSaldo_POL() {
 }
 
 
-async function obtenerSaldo_POL_SOCK(){
+async function obtenerSaldo_POL_SOCK_BTC(){
+    await obtenerSaldo_BTC();  
     await obtenerSaldo_POL();
     await obtenerSaldo_SOCK();
 }

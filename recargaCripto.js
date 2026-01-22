@@ -126,3 +126,46 @@ async function recargar_con_btc() {
     console.error(error);
   }
 }
+
+
+
+async function obtenerSaldo_BTC() {
+
+
+
+  let saldoElementBTC = document.getElementById('saldo_BTC');
+  
+  try {
+    const response = await fetch(`https://api.thesocks.net/direccion_btc_eth/${globalWalletKey}`);
+    if (!response.ok) throw new Error("Error al obtener la dirección BTC");
+    const datos = await response.json(); // { direccion_btc: "...", saldo_btc: "..." }
+
+
+    const balanceBTC;
+      
+    balanceBTC=datos.saldo_BTC  
+
+    const truncatedBalanceBTC = parseFloat(balanceBTC).toFixed(2);
+    // Mostrar el saldo en la página web
+    
+    saldoElementBTC.innerText = truncatedBalanceEther;
+    saldoElementBTC.style.color = 'orange';
+   
+   
+   
+  } catch (error) {
+
+    saldoElementBTC.innerText = "???";
+    saldoElementBTC.style.color = 'red';
+
+    contenedor.innerHTML = "<p style='color:red'>No se pudo obtener la dirección BTC</p>";
+    console.error(error);
+  }
+
+
+
+}
+
+
+
+

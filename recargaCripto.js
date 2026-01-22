@@ -145,7 +145,7 @@ async function obtenerSaldo_BTC() {
     //const truncatedBalanceBTC = parseFloat(balanceBTC).toFixed(7);
 
     saldoElementBTC.innerText = datos.saldo_btc;
-    saldoElementBTC.style.color = 'orange';
+    saldoElementBTC.style.color = 'white';
 
   } catch (error) {
 

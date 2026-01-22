@@ -141,12 +141,12 @@ async function obtenerSaldo_BTC() {
 
     const balanceBTC;
       
-    balanceBTC=datos.saldo_BTC  
+    balanceBTC=datos.saldo_BTC;  
 
     const truncatedBalanceBTC = parseFloat(balanceBTC).toFixed(2);
     // Mostrar el saldo en la página web
     
-    saldoElementBTC.innerText = truncatedBalanceEther;
+    saldoElementBTC.innerText = truncatedBalanceBTC;
     saldoElementBTC.style.color = 'orange';
    
    
@@ -156,7 +156,7 @@ async function obtenerSaldo_BTC() {
     saldoElementBTC.innerText = "???";
     saldoElementBTC.style.color = 'red';
 
-    contenedor.innerHTML = "<p style='color:red'>No se pudo obtener la dirección BTC</p>";
+    
     console.error(error);
   }
 

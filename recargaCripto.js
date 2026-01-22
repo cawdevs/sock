@@ -131,8 +131,6 @@ async function recargar_con_btc() {
 
 async function obtenerSaldo_BTC() {
 
-
-
   let saldoElementBTC = document.getElementById('saldo_BTC');
   
   try {

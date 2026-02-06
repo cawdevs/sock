@@ -1,4 +1,127 @@
 
+
+function createStakingElements() {
+
+    const parent = document.getElementById("menu_staking");
+    if (!parent) {
+        console.error("No existe el div #menu_staking");
+        return;
+    }
+
+    // Limpia contenido previo
+    parent.innerHTML = "";
+
+    const container = document.createElement("div");
+    container.style.maxWidth = "420px";
+    container.style.margin = "20px auto";
+    container.style.padding = "25px";
+    container.style.borderRadius = "20px";
+    container.style.background = "linear-gradient(135deg, #1e90ff, #4facfe)";
+    container.style.boxShadow = "0 10px 30px rgba(0,0,0,0.2)";
+    container.style.fontFamily = "Arial, sans-serif";
+    container.style.color = "white";
+    container.style.textAlign = "center";
+
+    // ===== TITLE =====
+    const title = document.createElement("h1");
+    title.innerText = "STAKING";
+    title.style.marginBottom = "5px";
+    title.style.fontSize = "36px";
+    title.style.letterSpacing = "2px";
+
+    const subtitle = document.createElement("p");
+    subtitle.innerText = "tus criptomonedas trabajando";
+    subtitle.style.fontSize = "14px";
+    subtitle.style.opacity = "0.9";
+    subtitle.style.marginBottom = "25px";
+
+    // ===== SELECT =====
+    const select = document.createElement("select");
+    select.style.width = "100%";
+    select.style.padding = "12px";
+    select.style.borderRadius = "12px";
+    select.style.border = "none";
+    select.style.marginBottom = "15px";
+    select.style.fontSize = "16px";
+
+    const options = [
+        { value: 30, label: "30 días — 6% APY" },
+        { value: 60, label: "60 días — 8% APY" },
+        { value: 90, label: "90 días — 10% APY" }
+    ];
+
+    options.forEach(opt => {
+        const option = document.createElement("option");
+        option.value = opt.value;
+        option.textContent = opt.label;
+        select.appendChild(option);
+    });
+
+    // ===== INPUT =====
+    const input = document.createElement("input");
+    input.type = "number";
+    input.placeholder = "Cantidad de SOCK";
+    input.style.width = "100%";
+    input.style.padding = "12px";
+    input.style.borderRadius = "12px";
+    input.style.border = "none";
+    input.style.marginBottom = "20px";
+    input.style.fontSize = "16px";
+
+    // ===== BUTTON STAKE =====
+    const stakeBtn = document.createElement("button");
+    stakeBtn.innerText = "STAKING";
+    stakeBtn.style.width = "100%";
+    stakeBtn.style.padding = "14px";
+    stakeBtn.style.borderRadius = "14px";
+    stakeBtn.style.border = "none";
+    stakeBtn.style.background = "#ffffff";
+    stakeBtn.style.color = "#1e90ff";
+    stakeBtn.style.fontSize = "16px";
+    stakeBtn.style.fontWeight = "bold";
+    stakeBtn.style.cursor = "pointer";
+    stakeBtn.style.marginBottom = "10px";
+
+    stakeBtn.onmouseover = () => stakeBtn.style.background = "#e6f2ff";
+    stakeBtn.onmouseout  = () => stakeBtn.style.background = "#ffffff";
+
+    // ===== BUTTON UNSTAKE =====
+    const unstakeBtn = document.createElement("button");
+    unstakeBtn.innerText = "DESTAKING";
+    unstakeBtn.style.width = "100%";
+    unstakeBtn.style.padding = "12px";
+    unstakeBtn.style.borderRadius = "14px";
+    unstakeBtn.style.border = "2px solid white";
+    unstakeBtn.style.background = "transparent";
+    unstakeBtn.style.color = "white";
+    unstakeBtn.style.fontSize = "14px";
+    unstakeBtn.style.cursor = "pointer";
+
+    unstakeBtn.onmouseover = () => unstakeBtn.style.background = "rgba(255,255,255,0.15)";
+    unstakeBtn.onmouseout  = () => unstakeBtn.style.background = "transparent";
+
+    // ===== APPEND =====
+    container.appendChild(title);
+    container.appendChild(subtitle);
+    container.appendChild(select);
+    container.appendChild(input);
+    container.appendChild(stakeBtn);
+    container.appendChild(unstakeBtn);
+
+    parent.appendChild(container);
+
+    // Retorna referencias para lógica Web3
+    return {
+        select,
+        input,
+        stakeBtn,
+        unstakeBtn
+    };
+}
+
+
+
+
 async function claimRewards(){
 
     const accounts = await web3.eth.getAccounts();

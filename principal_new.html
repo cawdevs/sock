@@ -859,7 +859,7 @@
       <img id="image-swap" src="images/icons/swap_icon.SVG" alt="swap" width="35">
     </a>
 
-    <a data-toggle="tab" href="#menu_staking" style="margin-left: 15px;">
+    <a data-toggle="tab" href="#menu_staking" onclick="createStakingElements()" style="margin-left: 15px;">
       <img id="image-staking" src="images/icons/staking_icon.SVG" alt="stake" width="35">
     </a>
 
@@ -1210,15 +1210,8 @@ span.hashtag {
 
     <div id="menu_staking" class="tab-pane fade" >
        
-         <div class="container-fluid" style = "width:80%; align-items: center;">
-                       </div>
-
-          <br>   
-              <center>  <h3>Staking Pool</h3> </center>                   
-                  <br>
-                 
-                 <br>  
-          
+         
+           
     </div> 
 
     
@@ -2074,11 +2067,19 @@ const DirectMessage_ContractABI=[{"constant":false,"inputs":[{"name":"senderNFTH
 const directMessageContractAddress = '0x721ae299de508da89b4f68e28098ff60fde98065'; //polygon
   
     
-      
+/*      
 const StakingPool_ContractABI = [{"constant":true,"inputs":[],"name":"getTotalStaked","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTotalRewards","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"stakers","outputs":[{"name":"amountStaked","type":"uint256"},{"name":"lastClaimTimestamp","type":"uint256"},{"name":"totalRewardsEarned","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"stake","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"unstake","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"claimRewards","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"staker","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Staked","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"staker","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Unstaked","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"staker","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"RewardsClaimed","type":"event"},{"constant":true,"inputs":[{"name":"stakerAddress","type":"address"}],"name":"calculatePendingRewards","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"stakerAddress","type":"address"}],"name":"getStaker","outputs":[{"name":"amountStaked","type":"uint256"},{"name":"lastClaimTimestamp","type":"uint256"},{"name":"totalRewardsEarned","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]; 
 
 
 const stakingPoolContractAddress = '0xC6284bBEA6E993Ccf60add9DB1F7AEC644f9aCEa';    //polygon  
+*/
+
+
+//new Stakin contract  0x43acf79bf69e3ee1844fc25b437e2d25f66c82da
+
+const Staking_ContractABI = [{"inputs":[{"internalType":"address","name":"sockToken","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"SafeERC20FailedOperation","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"duration","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"apy","type":"uint256"}],"name":"Staked","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"reward","type":"uint256"}],"name":"Withdrawn","type":"event"},{"inputs":[],"name":"SOCK","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"calculateReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"isStaking","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"rewardsAvailable","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint8","name":"option","type":"uint8"}],"name":"stake","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"totalStaked","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalStakers","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"userStake","outputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"startTime","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"apy","type":"uint256"},{"internalType":"bool","name":"active","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]; 
+
+const stakingContractAddress = '0x43acf79bf69e3ee1844fc25b437e2d25f66c82da';    //polygon 
 
 
 /*
@@ -2162,6 +2163,9 @@ async function conectarMetaMask() {
         
         publisherContract= new web3.eth.Contract(Publisher_ContractABI, publisherContractAddress);
 
+        stakingContract = new web3.eth.Contract(Staking_ContractABI, stakingContractAddress);
+
+
     } catch (error) {
         console.error("Error al conectar con MetaMask:", error);
     }
@@ -2202,6 +2206,8 @@ async function conectarWalletPropia() {
     followControlContract = new ethers.Contract(followControlContractAddress, FollowControl_ContractABI, signer);
 
     publisherContract = new ethers.Contract(publisherContractAddress, Publisher_ContractABI, signer);
+
+    stakingContract = new ethers.Contract( stakingContractAddress, Staking_ContractABI,  signer);
           
     console.log("Conectado usando wallet propia:", globalWalletKey);
   } catch (error) {
@@ -2298,6 +2304,7 @@ async function inicializarUI() {
     
 
     // Obtener y mostrar saldos
+          
     await obtenerSaldo_BTC();
     await obtenerSaldo_POL();
     await obtenerSaldo_SOCK();

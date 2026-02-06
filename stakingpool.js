@@ -121,7 +121,7 @@ function createStakingElements() {
 
 
 
-
+/*
 async function claimRewards(){
 
     const accounts = await web3.eth.getAccounts();
@@ -252,4 +252,4 @@ async function stake_unstake(value){
 }
 
 
-     
+     */

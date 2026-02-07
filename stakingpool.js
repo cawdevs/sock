@@ -113,7 +113,7 @@ function createStakingElements() {
 
 
 
-
+/*
 async function stakeSOCK(plazoDias) {
 
     if (!stakinMount || stakinMount.value <= 0) {
@@ -179,7 +179,7 @@ async function stakeSOCK(plazoDias) {
         }
     }
 }
-
+*/
 
 
 

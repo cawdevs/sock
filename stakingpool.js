@@ -1,125 +1,220 @@
 
-
 function createStakingElements() {
 
-    const parent = document.getElementById("menu_staking");
-    if (!parent) {
-        console.error("No existe el div #menu_staking");
-        return;
-    }
+    const container = document.getElementById("menu_staking");
+    container.innerHTML = "";
 
-    // Limpia contenido previo
-    parent.innerHTML = "";
-
-    const container = document.createElement("div");
-    container.style.maxWidth = "420px";
-    container.style.margin = "20px auto";
-    container.style.padding = "25px";
-    container.style.borderRadius = "20px";
-    container.style.background = "linear-gradient(135deg, #1e90ff, #4facfe)";
-    container.style.boxShadow = "0 10px 30px rgba(0,0,0,0.2)";
-    container.style.fontFamily = "Arial, sans-serif";
-    container.style.color = "black";
-    container.style.textAlign = "center";
-
-    // ===== TITLE =====
+    // ======================
+    // TÍTULOS
+    // ======================
     const title = document.createElement("h1");
     title.innerText = "STAKING";
-    title.style.marginBottom = "5px";
+    title.style.textAlign = "center";
+    title.style.color = "dodgerblue";
     title.style.fontSize = "36px";
-    title.style.letterSpacing = "2px";
 
     const subtitle = document.createElement("p");
     subtitle.innerText = "tus criptomonedas trabajando";
-    subtitle.style.fontSize = "14px";
-    subtitle.style.opacity = "0.9";
-    subtitle.style.marginBottom = "25px";
+    subtitle.style.textAlign = "center";
+    subtitle.style.color = "#555";
 
-    // ===== SELECT =====
+    // ======================
+    // SELECT PLAZO
+    // ======================
     const select = document.createElement("select");
     select.style.width = "100%";
-    select.style.padding = "12px";
+    select.style.padding = "10px";
     select.style.borderRadius = "12px";
-    select.style.border = "none";
-    select.style.marginBottom = "15px";
-    select.style.fontSize = "16px";
-    select.style.color = "#1e90ff";
+    select.style.border = "1px solid dodgerblue";
+    select.style.background = "white";
+    select.style.color = "#1e3a8a"; // 🔵 TEXTO AZUL
+    select.style.fontSize = "15px";   
 
-    const options = [
-        { value: 30, label: "30 días — 6% APY" },
-        { value: 60, label: "60 días — 8% APY" },
-        { value: 90, label: "90 días — 10% APY" }
-    ];
 
-    options.forEach(opt => {
-        const option = document.createElement("option");
-        option.value = opt.value;
-        option.textContent = opt.label;
-        select.appendChild(option);
-    });
+    select.innerHTML = `
+        <option value="30">30 días — 5%</option>
+        <option value="60">60 días — 8%</option>
+        <option value="90">90 días — 12%</option>
+    `;
 
-    // ===== INPUT =====
-    const input = document.createElement("input");
-    input.type = "number";
-    input.placeholder = "Cantidad de SOCK";
-    input.style.width = "100%";
-    input.style.padding = "12px";
-    input.style.borderRadius = "12px";
-    input.style.border = "none";
-    input.style.marginBottom = "20px";
-    input.style.fontSize = "16px";
-    input.style.color = "#1e90ff";
+    // ======================
+    // INPUT + MAX
+    // ======================
+    const inputWrapper = document.createElement("div");
+    inputWrapper.style.display = "flex";
+    inputWrapper.style.gap = "10px";
 
-    // ===== BUTTON STAKE =====
+    stakinMount = document.createElement("input");
+    stakinMount.type = "number";
+    stakinMount.placeholder = "Cantidad de SOCK";
+
+    stakinMount.style.flex = "1";
+    stakinMount.style.padding = "10px";
+    stakinMount.style.borderRadius = "12px";
+    stakinMount.style.border = "1px solid dodgerblue";
+    stakinMount.style.background = "white";
+    stakinMount.style.color = "#1e3a8a"; // 🔵 TEXTO AZUL
+    stakinMount.style.fontSize = "15px";
+
+    const maxBtn = document.createElement("button");
+    maxBtn.innerText = "MAX";
+    maxBtn.style.padding = "10px 16px";
+    maxBtn.style.borderRadius = "12px";
+    maxBtn.style.background = "dodgerblue";
+    maxBtn.style.color = "white";
+    maxBtn.style.border = "none";
+    maxBtn.style.cursor = "pointer";
+
+    maxBtn.onclick = maximaSock;
+
+    inputWrapper.appendChild(stakinMount);
+    inputWrapper.appendChild(maxBtn);
+
+    // ======================
+    // BOTONES
+    // ======================
     const stakeBtn = document.createElement("button");
     stakeBtn.innerText = "STAKING";
     stakeBtn.style.width = "100%";
-    stakeBtn.style.padding = "14px";
+    stakeBtn.style.padding = "12px";
     stakeBtn.style.borderRadius = "14px";
-    stakeBtn.style.border = "none";
-    stakeBtn.style.background = "#ffffff";
-    stakeBtn.style.color = "#1e90ff";
+    stakeBtn.style.background = "dodgerblue";
+    stakeBtn.style.color = "white";
     stakeBtn.style.fontSize = "16px";
-    stakeBtn.style.fontWeight = "bold";
+    stakeBtn.style.border = "none";
     stakeBtn.style.cursor = "pointer";
-    stakeBtn.style.marginBottom = "10px";
 
-    stakeBtn.onmouseover = () => stakeBtn.style.background = "#e6f2ff";
-    stakeBtn.onmouseout  = () => stakeBtn.style.background = "#ffffff";
+    stakeBtn.onclick = () => {
+        const plazoDias = select.value;
+        stakeSOCK(plazoDias);
+    };
 
-    // ===== BUTTON UNSTAKE =====
     const unstakeBtn = document.createElement("button");
-    unstakeBtn.innerText = "DESTAKING";
+    unstakeBtn.innerText = "DE-STAKING";
     unstakeBtn.style.width = "100%";
     unstakeBtn.style.padding = "12px";
     unstakeBtn.style.borderRadius = "14px";
-    unstakeBtn.style.border = "2px solid white";
-    unstakeBtn.style.background = "transparent";
-    unstakeBtn.style.color = "white";
-    unstakeBtn.style.fontSize = "14px";
+    unstakeBtn.style.background = "#ccc";
+    unstakeBtn.style.border = "none";
     unstakeBtn.style.cursor = "pointer";
 
-    unstakeBtn.onmouseover = () => unstakeBtn.style.background = "rgba(255,255,255,0.15)";
-    unstakeBtn.onmouseout  = () => unstakeBtn.style.background = "transparent";
+    unstakeBtn.onclick = unstakeSOCK;
 
-    // ===== APPEND =====
+    // ======================
+    // APPEND
+    // ======================
     container.appendChild(title);
     container.appendChild(subtitle);
     container.appendChild(select);
-    container.appendChild(input);
+    container.appendChild(inputWrapper);
     container.appendChild(stakeBtn);
     container.appendChild(unstakeBtn);
-
-    parent.appendChild(container);
-
-    // Retorna referencias para lógica Web3
-    return {
-        select,
-        input,
-        stakeBtn,
-        unstakeBtn
-    };
 }
+
+
+
+
+async function stakeSOCK(plazoDias) {
+
+    if (!stakinMount || stakinMount.value <= 0) {
+        alert("Ingresa una cantidad válida de SOCK");
+        return;
+    }
+
+    const amountToApprove = web3.utils.toWei(stakinMount.value, 'ether');
+    console.log("Staking:", amountToApprove, "Plazo:", plazoDias);
+
+    // ===============================
+    // 🦊 METAMASK (web3.js)
+    // ===============================
+    if (stakingContract.methods) {
+
+        console.log("Con MetaMask");
+
+        try {
+            // 1️⃣ APPROVE
+            await tokenContract.methods
+                .approve(stakingPoolContractAddress, amountToApprove)
+                .send({ from: globalWalletKey });
+
+            console.log("Approve exitoso");
+
+            // 2️⃣ STAKE
+            await stakingContract.methods
+                .stake(amountToApprove, plazoDias)
+                .send({ from: globalWalletKey });
+
+            console.log("Staking exitoso");
+
+        } catch (error) {
+            console.error("Error staking MetaMask:", error);
+            alert("Error al hacer staking");
+        }
+
+    } 
+    // ===============================
+    // 🔐 SOCK WALLET (ethers.js)
+    // ===============================
+    else {
+
+        console.log("Con SockWallet");
+
+        try {
+            // 1️⃣ APPROVE
+            const approveTx = await tokenContract.approve(stakingContractAddress, amountToApprove);
+
+            await approveTx.wait();
+            console.log("Approve exitoso");
+
+            // 2️⃣ STAKE
+            const stakeTx = await stakingContract
+                .stake(amountToApprove, plazoDias);
+
+            await stakeTx.wait();
+            console.log("Staking exitoso");
+
+        } catch (error) {
+            console.error("Error staking SockWallet:", error);
+            alert("Error al hacer staking");
+        }
+    }
+}
+
+
+
+
+function maximaSock() {
+    const saldoSpan = document.getElementById("saldo_CAW");
+    if (!saldoSpan) return;
+
+    const saldo = saldoSpan.innerText.trim();
+
+    if (Number(saldo) <= 0) {
+        alert("No tienes SOCK disponibles");
+        return;
+    }
+
+    stakinMount.value = saldo;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -114,70 +114,78 @@ function createStakingElements() {
 
 
 async function stakeSOCK(plazoDias) {
+    try {
+        const stakinMount = document.getElementById("input_staking");
+        const amount = stakinMount.value;
 
-    if (!stakinMount || stakinMount.value <= 0) {
-        alert("Ingresa una cantidad válida de SOCK");
-        return;
-    }
+        if (!amount || amount <= 0) {
+            alert("Cantidad inválida");
+            return;
+        }
 
-    plazoDias = Number(plazoDias);
+        // Detectar si es MetaMask o SockWallet
+        if (stakingContract.methods) {
+            console.log("Staking con MetaMask");
 
-    let amountToApprove;
+            // web3.js
+            const amountToApprove = web3.utils.toWei(amount, 'ether');
 
-    // ===============================
-    // 🦊 METAMASK (web3.js)
-    // ===============================
-    if (stakingContract.methods) {
-
-        console.log("Con MetaMask");
-
-        amountToApprove = web3.utils.toWei(stakinMount.value, 'ether');
-
-        try {
             await tokenContract.methods
-                .approve(stakingContractAddress, amountToApprove)
-                .send({ from: globalWalletKey });
-
-            console.log("Approve exitoso");
+                .approve(stakingPoolContractAddress, amountToApprove)
+                .send({ from: myAddress });
 
             await stakingContract.methods
-                .stake(amountToApprove, plazoDias)
-                .send({ from: globalWalletKey });
+                .stake(plazoDias, amountToApprove)
+                .send({ from: myAddress });
 
-            console.log("Staking exitoso");
+        } else {
+            console.log("Staking con SockWallet");
 
-        } catch (error) {
-            console.error("Error staking MetaMask:", error);
-        }
+            // ethers.js
+            const amountToStake = ethers.utils.parseUnits(amount, 18);
 
-    } 
-    // ===============================
-    // 🔐 SOCK WALLET (ethers.js)
-    // ===============================
-    else {
+            const adjustedGasPrice = await obtenerGasAjustado();
 
-        console.log("Con SockWallet");
+            // 1. Aprobar
+            const approveTx = await tokenContract.approve(
+                stakingPoolContractAddress,
+                amountToStake,
+                { gasPrice: adjustedGasPrice }
+            );
 
-        amountToApprove = ethers.utils.parseEther(stakinMount.value.toString());
-
-        try {
-            const approveTx = await tokenContract
-                .approve(stakingContractAddress, amountToApprove);
             await approveTx.wait();
 
-            console.log("Approve exitoso");
+            // 2. Estimar gas del staking
+            const estimatedGas = await stakingContract.estimateGas.stake(
+                plazoDias,
+                amountToStake
+            );
 
-            const stakeTx = await stakingContract
-                .stake(amountToApprove, plazoDias);
-            await stakeTx.wait();
+            const adjustedGasLimit = estimatedGas.mul(110).div(100);
 
-            console.log("Staking exitoso");
+            // 3. Ejecutar staking
+            const tx = await stakingContract.stake(
+                plazoDias,
+                amountToStake,
+                {
+                    gasLimit: adjustedGasLimit,
+                    gasPrice: adjustedGasPrice,
+                }
+            );
 
-        } catch (error) {
-            console.error("Error staking SockWallet:", error);
+            console.log("Transacción staking:", tx.hash);
+
+            await tx.wait();
+            alert("Staking confirmado");
+
         }
+
+    } catch (error) {
+        console.error("Error en staking:", error);
+        alert("Error al hacer staking");
     }
 }
+
 
 
 

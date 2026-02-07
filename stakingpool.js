@@ -19,7 +19,7 @@ function createStakingElements() {
     container.style.background = "linear-gradient(135deg, #1e90ff, #4facfe)";
     container.style.boxShadow = "0 10px 30px rgba(0,0,0,0.2)";
     container.style.fontFamily = "Arial, sans-serif";
-    container.style.color = "white";
+    container.style.color = "black";
     container.style.textAlign = "center";
 
     // ===== TITLE =====
@@ -43,6 +43,7 @@ function createStakingElements() {
     select.style.border = "none";
     select.style.marginBottom = "15px";
     select.style.fontSize = "16px";
+    select.style.color = "#1e90ff";
 
     const options = [
         { value: 30, label: "30 días — 6% APY" },
@@ -67,6 +68,7 @@ function createStakingElements() {
     input.style.border = "none";
     input.style.marginBottom = "20px";
     input.style.fontSize = "16px";
+    input.style.color = "#1e90ff";
 
     // ===== BUTTON STAKE =====
     const stakeBtn = document.createElement("button");

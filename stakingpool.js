@@ -113,7 +113,6 @@ function createStakingElements() {
 
 
 
-
 async function stakeSOCK(plazoDias) {
 
     if (!stakinMount || stakinMount.value <= 0) {
@@ -121,8 +120,9 @@ async function stakeSOCK(plazoDias) {
         return;
     }
 
-    const amountToApprove = web3.utils.toWei(stakinMount.value, 'ether');
-    console.log("Staking:", amountToApprove, "Plazo:", plazoDias);
+    plazoDias = Number(plazoDias);
+
+    let amountToApprove;
 
     // ===============================
     // 🦊 METAMASK (web3.js)
@@ -131,15 +131,15 @@ async function stakeSOCK(plazoDias) {
 
         console.log("Con MetaMask");
 
+        amountToApprove = web3.utils.toWei(stakinMount.value, 'ether');
+
         try {
-            // 1️⃣ APPROVE
             await tokenContract.methods
                 .approve(stakingContractAddress, amountToApprove)
                 .send({ from: globalWalletKey });
 
             console.log("Approve exitoso");
 
-            // 2️⃣ STAKE
             await stakingContract.methods
                 .stake(amountToApprove, plazoDias)
                 .send({ from: globalWalletKey });
@@ -148,7 +148,6 @@ async function stakeSOCK(plazoDias) {
 
         } catch (error) {
             console.error("Error staking MetaMask:", error);
-            alert("Error al hacer staking");
         }
 
     } 
@@ -159,23 +158,23 @@ async function stakeSOCK(plazoDias) {
 
         console.log("Con SockWallet");
 
-        try {
-            // 1️⃣ APPROVE
-            const approveTx = await tokenContract.approve(stakingContractAddress, amountToApprove);
+        amountToApprove = ethers.utils.parseEther(stakinMount.value.toString());
 
+        try {
+            const approveTx = await tokenContract
+                .approve(stakingContractAddress, amountToApprove);
             await approveTx.wait();
+
             console.log("Approve exitoso");
 
-            // 2️⃣ STAKE
             const stakeTx = await stakingContract
                 .stake(amountToApprove, plazoDias);
-
             await stakeTx.wait();
+
             console.log("Staking exitoso");
 
         } catch (error) {
             console.error("Error staking SockWallet:", error);
-            alert("Error al hacer staking");
         }
     }
 }

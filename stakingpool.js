@@ -134,7 +134,7 @@ async function stakeSOCK(plazoDias) {
         try {
             // 1️⃣ APPROVE
             await tokenContract.methods
-                .approve(stakingPoolContractAddress, amountToApprove)
+                .approve(stakingContractAddress, amountToApprove)
                 .send({ from: globalWalletKey });
 
             console.log("Approve exitoso");

@@ -144,11 +144,15 @@ async function stakeSOCK(plazoDias) {
             // ethers.js
             const amountToStake = ethers.utils.parseUnits(amount, 18);
 
+            console.log("amountToStake",  amountToStake);
+
             const adjustedGasPrice = await obtenerGasAjustado();
+
+            console.log("adjustedGasPrice",  adjustedGasPrice);
 
             // 1. Aprobar
             const approveTx = await tokenContract.approve(
-                stakingPoolContractAddress,
+                stakingContractAddress,
                 amountToStake,
                 { gasPrice: adjustedGasPrice }
             );
@@ -161,7 +165,11 @@ async function stakeSOCK(plazoDias) {
                 amountToStake
             );
 
+            console.log("estimatedGas",  estimatedGas);
+
             const adjustedGasLimit = estimatedGas.mul(110).div(100);
+
+            console.log("adjustedGasLimit",  adjustedGasLimit);
 
             // 3. Ejecutar staking
             const tx = await stakingContract.stake(

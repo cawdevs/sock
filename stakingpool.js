@@ -260,10 +260,10 @@ async function stakeSOCK(plazoDias) {
             console.log("🔐 Con SockWallet");
 
             const provider = stakingContract.provider;
-            console.log("🔐 provider")
+            console.log("🔐 provider");
             
             const { maxFeePerGas, maxPriorityFeePerGas } = await obtenerGasEIP1559(provider);
-            console.log("🔐 max fee y priority")
+            console.log("🔐 max fee y priority");
 
             const currentAllowance = await tokenContract.allowance(
                 globalWalletKey,
@@ -271,6 +271,8 @@ async function stakeSOCK(plazoDias) {
             );
 
             if (currentAllowance.lt(amountToApprove)) {
+
+                console.log("🔐 allowance");
 
                 const approveTx = await tokenContract.approve(
                     stakingContractAddress,
@@ -336,23 +338,37 @@ function maximaSock() {
 
 
 async function obtenerGasEIP1559(provider) {
-    const feeData = await provider.getFeeData();
 
-    // Aseguramos márgenes seguros
-    const maxPriorityFeePerGas = feeData.maxPriorityFeePerGas
-        ? feeData.maxPriorityFeePerGas.mul(120).div(100)
-        : ethers.utils.parseUnits("50", "gwei");
+    try {
 
-    const maxFeePerGas = feeData.maxFeePerGas
-        ? feeData.maxFeePerGas.mul(120).div(100)
-        : ethers.utils.parseUnits("800", "gwei");
+        const feeData = await provider.getFeeData();
 
-    console.log("⛽ Gas usado:", {
-        maxFeePerGas: ethers.utils.formatUnits(maxFeePerGas, "gwei"),
-        maxPriorityFeePerGas: ethers.utils.formatUnits(maxPriorityFeePerGas, "gwei"),
-    });
+        const minPriority = ethers.utils.parseUnits("30", "gwei"); // 🔥 mínimo seguro Polygon
+        const minMaxFee   = ethers.utils.parseUnits("80", "gwei"); // margen seguro
 
-    return { maxFeePerGas, maxPriorityFeePerGas };
+        let maxPriorityFeePerGas = feeData.maxPriorityFeePerGas;
+        let maxFeePerGas = feeData.maxFeePerGas;
+
+        // Si vienen muy bajos → usar mínimo seguro
+        if (!maxPriorityFeePerGas || maxPriorityFeePerGas.lt(minPriority)) {
+            maxPriorityFeePerGas = minPriority;
+        }
+
+        if (!maxFeePerGas || maxFeePerGas.lt(minMaxFee)) {
+            maxFeePerGas = minMaxFee;
+        }
+
+        console.log("⛽ Gas final usado:", {
+            maxFee: ethers.utils.formatUnits(maxFeePerGas, "gwei"),
+            priority: ethers.utils.formatUnits(maxPriorityFeePerGas, "gwei"),
+        });
+
+        return { maxFeePerGas, maxPriorityFeePerGas };
+
+    } catch (error) {
+        console.error("Error obteniendo gas:", error);
+        throw error;
+    }
 }
 
 

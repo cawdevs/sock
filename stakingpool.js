@@ -45,6 +45,7 @@ function createStakingElements() {
     inputWrapper.style.gap = "10px";
 
     stakinMount = document.createElement("input");
+    stakinMount.id="input_staking";
     stakinMount.type = "number";
     stakinMount.placeholder = "Cantidad de SOCK";
 

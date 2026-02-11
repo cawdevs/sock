@@ -113,7 +113,7 @@ function createStakingElements() {
 }
 
 
-
+/*
 async function stakeSOCK(plazoDias) {
     try {
         const stakinMount = document.getElementById("input_staking");
@@ -140,6 +140,9 @@ async function stakeSOCK(plazoDias) {
                 .send({ from: myAddress });
 
         } else {
+
+
+
             console.log("Staking con SockWallet");
 
             // ethers.js
@@ -195,7 +198,128 @@ async function stakeSOCK(plazoDias) {
     }
 }
 
+*/
 
+async function stakeSOCK(plazoDias) {
+
+    try {
+
+        const stakinMount = document.getElementById("input_staking");
+
+        if (!stakinMount) {
+            alert("Input no encontrado");
+            return;
+        }
+
+        const amount = stakinMount.value;
+
+        if (!amount || Number(amount) <= 0) {
+            alert("Ingresa una cantidad válida de SOCK");
+            return;
+        }
+
+        const amountToApprove = ethers.utils.parseUnits(amount, "ether");
+
+        console.log("📌 Staking:", amount, "SOCK");
+        console.log("📆 Plazo:", plazoDias, "días");
+
+        // =====================================================
+        // 🦊 METAMASK (web3.js)
+        // =====================================================
+        if (stakingContract.methods) {
+
+            console.log("🦊 Con MetaMask");
+
+            const amountWeb3 = web3.utils.toWei(amount, "ether");
+
+            const currentAllowance = await tokenContract.methods
+                .allowance(globalWalletKey, stakingContractAddress)
+                .call();
+
+            if (Number(currentAllowance) < Number(amountWeb3)) {
+
+                await tokenContract.methods
+                    .approve(stakingContractAddress, amountWeb3)
+                    .send({ from: globalWalletKey });
+
+                console.log("✅ Approve exitoso");
+            }
+
+            await stakingContract.methods
+                .stake(amountWeb3, plazoDias)
+                .send({ from: globalWalletKey });
+
+            console.log("✅ Staking exitoso");
+        }
+
+        // =====================================================
+        // 🔐 SOCK WALLET (ethers.js)
+        // =====================================================
+        else {
+
+            console.log("🔐 Con SockWallet");
+
+            const provider = stakingContract.provider;
+            const feeData = await provider.getFeeData();
+
+            const maxPriorityFeePerGas = feeData.maxPriorityFeePerGas
+                ? feeData.maxPriorityFeePerGas.mul(120).div(100)
+                : ethers.utils.parseUnits("50", "gwei");
+
+            const maxFeePerGas = feeData.maxFeePerGas
+                ? feeData.maxFeePerGas.mul(120).div(100)
+                : ethers.utils.parseUnits("800", "gwei");
+
+            const currentAllowance = await tokenContract.allowance(
+                globalWalletKey,
+                stakingContractAddress
+            );
+
+            if (currentAllowance.lt(amountToApprove)) {
+
+                const approveTx = await tokenContract.approve(
+                    stakingContractAddress,
+                    amountToApprove,
+                    {
+                        maxFeePerGas,
+                        maxPriorityFeePerGas,
+                    }
+                );
+
+                await approveTx.wait();
+                console.log("✅ Approve confirmado");
+            }
+
+            const estimatedGas = await stakingContract.estimateGas.stake(
+                amountToApprove,
+                plazoDias
+            );
+
+            const gasLimit = estimatedGas.mul(120).div(100);
+
+            const stakeTx = await stakingContract.stake(
+                amountToApprove,
+                plazoDias,
+                {
+                    gasLimit,
+                    maxFeePerGas,
+                    maxPriorityFeePerGas,
+                }
+            );
+
+            console.log("📡 Transacción enviada:", stakeTx.hash);
+
+            await stakeTx.wait();
+            console.log("✅ Staking confirmado");
+        }
+
+        alert("Staking realizado con éxito 🚀");
+
+    } catch (error) {
+        console.error("❌ Error en staking:", error);
+        alert("Error al hacer staking");
+    }
+}
 
 
 
@@ -216,7 +340,25 @@ function maximaSock() {
 
 
 
+async function obtenerGasEIP1559(provider) {
+    const feeData = await provider.getFeeData();
 
+    // Aseguramos márgenes seguros
+    const maxPriorityFeePerGas = feeData.maxPriorityFeePerGas
+        ? feeData.maxPriorityFeePerGas.mul(120).div(100)
+        : ethers.utils.parseUnits("50", "gwei");
+
+    const maxFeePerGas = feeData.maxFeePerGas
+        ? feeData.maxFeePerGas.mul(120).div(100)
+        : ethers.utils.parseUnits("800", "gwei");
+
+    console.log("⛽ Gas usado:", {
+        maxFeePerGas: ethers.utils.formatUnits(maxFeePerGas, "gwei"),
+        maxPriorityFeePerGas: ethers.utils.formatUnits(maxPriorityFeePerGas, "gwei"),
+    });
+
+    return { maxFeePerGas, maxPriorityFeePerGas };
+}
 
 
 

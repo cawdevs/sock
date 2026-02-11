@@ -260,15 +260,9 @@ async function stakeSOCK(plazoDias) {
             console.log("🔐 Con SockWallet");
 
             const provider = stakingContract.provider;
-            const feeData = await provider.getFeeData();
-
-            const maxPriorityFeePerGas = feeData.maxPriorityFeePerGas
-                ? feeData.maxPriorityFeePerGas.mul(120).div(100)
-                : ethers.utils.parseUnits("50", "gwei");
-
-            const maxFeePerGas = feeData.maxFeePerGas
-                ? feeData.maxFeePerGas.mul(120).div(100)
-                : ethers.utils.parseUnits("800", "gwei");
+            
+            const { maxFeePerGas, maxPriorityFeePerGas } = await obtenerGasEIP1559(provider);
+            
 
             const currentAllowance = await tokenContract.allowance(
                 globalWalletKey,

@@ -32,9 +32,9 @@ function createStakingElements() {
 
 
     select.innerHTML = `
-        <option value="30">30 días — 5%</option>
-        <option value="60">60 días — 8%</option>
-        <option value="90">90 días — 12%</option>
+      <option value="1">30 días — 5%</option>
+      <option value="2">60 días — 8%</option>
+      <option value="3">90 días — 12%</option>
     `;
 
     // ======================

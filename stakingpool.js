@@ -45,82 +45,100 @@ function createStakingElements() {
 
            
 
-    // ======================
-    // SELECT PLAZO
-    // ======================
-    const select = document.createElement("select");
-    select.style.width = "100%";
-    select.style.padding = "10px";
-    select.style.marginTop = "20px";
-    select.style.borderRadius = "12px";
-    select.style.border = "1px solid dodgerblue";
-    select.style.background = "white";
-    select.style.color = "#1e3a8a"; // 🔵 TEXTO AZUL
-    select.style.fontSize = "15px";   
+    let userData;
 
+    if (stakingContract.methods) {
+            userData = await stakingContract.methods.userStake(userAddress).call();
+    } else {
+            userData = await stakingContract.userStake(userAddress);
+    }
 
-    select.innerHTML = `
-      <option value="1">30 días — 5%</option>
-      <option value="2">60 días — 8%</option>
-      <option value="3">90 días — 12%</option>
-    `;
-
-    // ======================
-    // INPUT + MAX
-    // ======================
-    const inputWrapper = document.createElement("div");
-    inputWrapper.style.display = "flex";
-    inputWrapper.style.gap = "10px";
-    inputWrapper.style.marginTop = "20px";
-
-    stakinMount = document.createElement("input");
-    stakinMount.id="input_staking";
-    stakinMount.type = "number";
-    stakinMount.placeholder = "Cantidad de SOCK";
     
-    stakinMount.style.flex = "1";
-    stakinMount.style.padding = "10px";
-    stakinMount.style.borderRadius = "12px";
-    stakinMount.style.border = "1px solid dodgerblue";
-    stakinMount.style.background = "white";
-    stakinMount.style.color = "#1e3a8a"; // 🔵 TEXTO AZUL
-    stakinMount.style.fontSize = "15px";
 
-    const maxBtn = document.createElement("button");
-    maxBtn.innerText = "MAX";
-    maxBtn.style.padding = "10px 16px";
-    maxBtn.style.borderRadius = "12px";
-    maxBtn.style.background = "dodgerblue";
-    maxBtn.style.color = "white";
-    maxBtn.style.border = "none";
-    maxBtn.style.cursor = "pointer";
+    if (userData.active) {         
+  
+              // ======================
+              // SELECT PLAZO
+              // ======================
+              const select = document.createElement("select");
+              select.style.width = "100%";
+              select.style.padding = "10px";
+              select.style.marginTop = "20px";
+              select.style.borderRadius = "12px";
+              select.style.border = "1px solid dodgerblue";
+              select.style.background = "white";
+              select.style.color = "#1e3a8a"; // 🔵 TEXTO AZUL
+              select.style.fontSize = "15px";   
 
-    maxBtn.onclick = maximaSock;
 
-    inputWrapper.appendChild(stakinMount);
-    inputWrapper.appendChild(maxBtn);
+              select.innerHTML = `
+                <option value="1">30 días — 5%</option>
+                <option value="2">60 días — 8%</option>
+                <option value="3">90 días — 12%</option>
+              `;
 
-    // ======================
-    // BOTONES
-    // ======================
-    const stakeBtn = document.createElement("button");
-    stakeBtn.innerText = "STAKING";
-    stakeBtn.style.width = "100%";
-    stakeBtn.style.marginTop = "20px";
-    stakeBtn.style.padding = "12px";
-    stakeBtn.style.borderRadius = "14px";
-    stakeBtn.style.background = "dodgerblue";
-    stakeBtn.style.color = "white";
-    stakeBtn.style.fontSize = "16px";
-    stakeBtn.style.border = "none";
-    stakeBtn.style.cursor = "pointer";
+              // ======================
+              // INPUT + MAX
+              // ======================
+              const inputWrapper = document.createElement("div");
+              inputWrapper.style.display = "flex";
+              inputWrapper.style.gap = "10px";
+              inputWrapper.style.marginTop = "20px";
 
-    stakeBtn.onclick = () => {
-        const plazoDias = select.value;
-        stakeSOCK(plazoDias);
-    };
+              stakinMount = document.createElement("input");
+              stakinMount.id="input_staking";
+              stakinMount.type = "number";
+              stakinMount.placeholder = "Cantidad de SOCK";
+              
+              stakinMount.style.flex = "1";
+              stakinMount.style.padding = "10px";
+              stakinMount.style.borderRadius = "12px";
+              stakinMount.style.border = "1px solid dodgerblue";
+              stakinMount.style.background = "white";
+              stakinMount.style.color = "#1e3a8a"; // 🔵 TEXTO AZUL
+              stakinMount.style.fontSize = "15px";
 
+              const maxBtn = document.createElement("button");
+              maxBtn.innerText = "MAX";
+              maxBtn.style.padding = "10px 16px";
+              maxBtn.style.borderRadius = "12px";
+              maxBtn.style.background = "dodgerblue";
+              maxBtn.style.color = "white";
+              maxBtn.style.border = "none";
+              maxBtn.style.cursor = "pointer";
+
+              maxBtn.onclick = maximaSock;
+
+              inputWrapper.appendChild(stakinMount);
+              inputWrapper.appendChild(maxBtn);
+
+              // ======================
+              // BOTONES
+              // ======================
+              const stakeBtn = document.createElement("button");
+              stakeBtn.innerText = "STAKING";
+              stakeBtn.style.width = "100%";
+              stakeBtn.style.marginTop = "20px";
+              stakeBtn.style.padding = "12px";
+              stakeBtn.style.borderRadius = "14px";
+              stakeBtn.style.background = "dodgerblue";
+              stakeBtn.style.color = "white";
+              stakeBtn.style.fontSize = "16px";
+              stakeBtn.style.border = "none";
+              stakeBtn.style.cursor = "pointer";
+
+              stakeBtn.onclick = () => {
+                  const plazoDias = select.value;
+                  stakeSOCK(plazoDias);
+              };
+
+              container.appendChild(select);
+              container.appendChild(inputWrapper);
+              container.appendChild(stakeBtn);
+     }
    
+
+
     //unstakeBtn.onclick = unstakeSOCK;
 
     // ======================
@@ -130,9 +148,7 @@ function createStakingElements() {
     container.appendChild(subtitle);
     container.appendChild(globalInfo);
     container.appendChild(userInfo);
-    container.appendChild(select);
-    container.appendChild(inputWrapper);
-    container.appendChild(stakeBtn);
+    
 
     cargarInfoStaking();
 

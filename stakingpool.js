@@ -130,6 +130,9 @@ function createStakingElements() {
     container.appendChild(select);
     container.appendChild(inputWrapper);
     container.appendChild(stakeBtn);
+
+    cargarInfoStaking();
+
    
 }
 

@@ -17,6 +17,30 @@ function createStakingElements() {
     subtitle.innerText = "tus criptomonedas trabajando";
     subtitle.style.textAlign = "center";
     subtitle.style.color = "#555";
+     
+           // ======================
+            // INFO GLOBAL
+            // ======================
+
+            const globalInfo = document.createElement("div");
+            globalInfo.id = "staking_global_info";
+            globalInfo.style.marginTop = "20px";
+            globalInfo.style.padding = "15px";
+            globalInfo.style.background = "#f0f8ff";
+            globalInfo.style.borderRadius = "12px";
+
+            // ======================
+            // INFO USER
+            // ======================
+
+            const userInfo = document.createElement("div");
+            userInfo.id = "staking_user_info";
+            userInfo.style.marginTop = "20px";
+            userInfo.style.padding = "15px";
+            userInfo.style.background = "#eef2ff";
+            userInfo.style.borderRadius = "12px";
+
+           
 
     // ======================
     // SELECT PLAZO
@@ -24,6 +48,7 @@ function createStakingElements() {
     const select = document.createElement("select");
     select.style.width = "100%";
     select.style.padding = "10px";
+    select.style.marginTop = "20px";
     select.style.borderRadius = "12px";
     select.style.border = "1px solid dodgerblue";
     select.style.background = "white";
@@ -43,12 +68,13 @@ function createStakingElements() {
     const inputWrapper = document.createElement("div");
     inputWrapper.style.display = "flex";
     inputWrapper.style.gap = "10px";
+    imputWrapper.style.marginTop = "20px";
 
     stakinMount = document.createElement("input");
     stakinMount.id="input_staking";
     stakinMount.type = "number";
     stakinMount.placeholder = "Cantidad de SOCK";
-
+    
     stakinMount.style.flex = "1";
     stakinMount.style.padding = "10px";
     stakinMount.style.borderRadius = "12px";
@@ -77,6 +103,7 @@ function createStakingElements() {
     const stakeBtn = document.createElement("button");
     stakeBtn.innerText = "STAKING";
     stakeBtn.style.width = "100%";
+    stakeBtn.style.marginTop = "20px";
     stakeBtn.style.padding = "12px";
     stakeBtn.style.borderRadius = "14px";
     stakeBtn.style.background = "dodgerblue";
@@ -90,15 +117,7 @@ function createStakingElements() {
         stakeSOCK(plazoDias);
     };
 
-    const unstakeBtn = document.createElement("button");
-    unstakeBtn.innerText = "DE-STAKING";
-    unstakeBtn.style.width = "100%";
-    unstakeBtn.style.padding = "12px";
-    unstakeBtn.style.borderRadius = "14px";
-    unstakeBtn.style.background = "#ccc";
-    unstakeBtn.style.border = "none";
-    unstakeBtn.style.cursor = "pointer";
-
+   
     //unstakeBtn.onclick = unstakeSOCK;
 
     // ======================
@@ -106,99 +125,16 @@ function createStakingElements() {
     // ======================
     container.appendChild(title);
     container.appendChild(subtitle);
+    container.appendChild(globalInfo);
+    container.appendChild(userInfo);
     container.appendChild(select);
     container.appendChild(inputWrapper);
     container.appendChild(stakeBtn);
-    container.appendChild(unstakeBtn);
+   
 }
 
 
-/*
-async function stakeSOCK(plazoDias) {
-    try {
-        const stakinMount = document.getElementById("input_staking");
-        const amount = stakinMount.value;
 
-        if (!amount || amount <= 0) {
-            alert("Cantidad inválida");
-            return;
-        }
-
-        // Detectar si es MetaMask o SockWallet
-        if (stakingContract.methods) {
-            console.log("Staking con MetaMask");
-
-            // web3.js
-            const amountToApprove = web3.utils.toWei(amount, 'ether');
-
-            await tokenContract.methods
-                .approve(stakingPoolContractAddress, amountToApprove)
-                .send({ from: myAddress });
-
-            await stakingContract.methods
-                .stake(plazoDias, amountToApprove)
-                .send({ from: myAddress });
-
-        } else {
-
-
-
-            console.log("Staking con SockWallet");
-
-            // ethers.js
-            const amountToStake = ethers.utils.parseUnits(amount, 18);
-
-            console.log("amountToStake",  amountToStake);
-
-            const adjustedGasPrice = await obtenerGasAjustado();
-
-            console.log("adjustedGasPrice",  adjustedGasPrice);
-
-            // 1. Aprobar
-            const approveTx = await tokenContract.approve(
-                stakingContractAddress,
-                amountToStake,
-                { gasPrice: adjustedGasPrice }
-            );
-
-            await approveTx.wait();
-
-            // 2. Estimar gas del staking
-            const estimatedGas = await stakingContract.estimateGas.stake(
-                plazoDias,
-                amountToStake
-            );
-
-            console.log("estimatedGas",  estimatedGas);
-
-            const adjustedGasLimit = estimatedGas.mul(110).div(100);
-
-            console.log("adjustedGasLimit",  adjustedGasLimit);
-
-            // 3. Ejecutar staking
-            const tx = await stakingContract.stake(
-                plazoDias,
-                amountToStake,
-                {
-                    gasLimit: adjustedGasLimit,
-                    gasPrice: adjustedGasPrice,
-                }
-            );
-
-            console.log("Transacción staking:", tx.hash);
-
-            await tx.wait();
-            alert("Staking confirmado");
-
-        }
-
-    } catch (error) {
-        console.error("Error en staking:", error);
-        alert("Error al hacer staking");
-    }
-}
-
-*/
 
 async function stakeSOCK(plazoDias) {
 
@@ -374,148 +310,101 @@ async function obtenerGasEIP1559(provider) {
 
 
 
+// =====================================================
+// 📊 ACTUALIZAR INFORMACIÓN GLOBAL + USUARIO
+// =====================================================
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-async function claimRewards(){
-
-    const accounts = await web3.eth.getAccounts();
-    const myAddress = accounts[0];
-    const contractStakingPool = new web3.eth.Contract(StakingPool_ContractABI, stakingPoolContractAddress);
-    
-    try{
-
-      const rewards = await contractStakingPool.methods.claimRewards().call();
-      alert("rewards  "+ rewards);
-      updateStakingPool();
-    
-    }catch{
-
-       console.error("Error in contract:", error);
-
-    }
-    
-}
-
-async function updateStakingPool() {
-
-
-    const accounts = await web3.eth.getAccounts();
-    const myAddress = accounts[0];
-    
-    const contractStakingPool = new web3.eth.Contract(StakingPool_ContractABI, stakingPoolContractAddress);
-    
-
-    let totalStaked, totalRewards, stakerDetails; // Declarar las variables fuera del bloque try
+async function cargarInfoStaking() {
 
     try {
-        totalStaked = await contractStakingPool.methods.getTotalStaked().call();
-        totalRewards = await contractStakingPool.methods.getTotalRewards().call();
-        stakerDetails = await contractStakingPool.methods.getStaker(myAddress).call();
-        //alert("staker "+totalStaked+""+totalRewards+stakerDetails)
-        
+
+        let userAddress;
+
+        if (stakingContract.methods) {
+            userAddress = globalWalletKey;
+        } else {
+            userAddress = await stakingContract.signer.getAddress();
+        }
+
+        // =========================
+        // GLOBAL INFO
+        // =========================
+
+        let totalStaked;
+        let totalStakers;
+        let rewardsAvailable;
+        let contractBalance;
+
+        if (stakingContract.methods) {
+
+            totalStaked = await stakingContract.methods.totalStaked().call();
+            totalStakers = await stakingContract.methods.totalStakers().call();
+            rewardsAvailable = await stakingContract.methods.rewardsAvailable().call();
+            contractBalance = await tokenContract.methods.balanceOf(stakingContractAddress).call();
+
+        } else {
+
+            totalStaked = await stakingContract.totalStaked();
+            totalStakers = await stakingContract.totalStakers();
+            rewardsAvailable = await stakingContract.rewardsAvailable();
+            contractBalance = await tokenContract.balanceOf(stakingContractAddress);
+        }
+
+        document.getElementById("staking_global_info").innerHTML = `
+            <p><b>Contrato Balance:</b> ${ethers.utils.formatEther(contractBalance)} SOCK</p>
+            <p><b>Total Staked:</b> ${ethers.utils.formatEther(totalStaked)} SOCK</p>
+            <p><b>Rewards Disponibles:</b> ${ethers.utils.formatEther(rewardsAvailable)} SOCK</p>
+            <p><b>Total Stakers:</b> ${totalStakers}</p>
+        `;
+
+        // =========================
+        // USER INFO
+        // =========================
+
+        let userData;
+
+        if (stakingContract.methods) {
+            userData = await stakingContract.methods.userStake(userAddress).call();
+        } else {
+            userData = await stakingContract.userStake(userAddress);
+        }
+
+        if (!userData.active) {
+
+            document.getElementById("staking_user_info").innerHTML =
+                `<p>No tienes staking activo</p>`;
+
+            return;
+        }
+
+        let reward;
+
+        if (stakingContract.methods) {
+            reward = await stakingContract.methods.calculateReward(userAddress).call();
+        } else {
+            reward = await stakingContract.calculateReward(userAddress);
+        }
+
+        const finishTime =
+            Number(userData.startTime) + Number(userData.duration);
+
+        const now = Math.floor(Date.now() / 1000);
+        const finished = now >= finishTime;
+
+        document.getElementById("staking_user_info").innerHTML = `
+            <h3>Tu Staking</h3>
+            <p><b>Cantidad:</b> ${ethers.utils.formatEther(userData.amount)} SOCK</p>
+            <p><b>APY:</b> ${userData.apy}%</p>
+            <p><b>Reward actual:</b> ${ethers.utils.formatEther(reward)} SOCK</p>
+            <p><b>Finaliza:</b> ${new Date(finishTime * 1000).toLocaleString()}</p>
+            ${finished ? `<button onclick="withdrawSOCK()" style="margin-top:10px;padding:10px;border-radius:10px;background:dodgerblue;color:white;border:none;cursor:pointer;">Withdraw</button>` : `<p style="color:red;">Stake bloqueado</p>`}
+        `;
+
     } catch (error) {
-        console.error("Error in contract call:", error);
+        console.error("Error cargando info staking:", error);
     }
-
-
-    const elementuseramountstaked = document.getElementById("user-amount-staked");
-    const elementuserlastclaimrewards = document.getElementById("user-last-claim-rewards");
-    const elementusertotalrewardsearned = document.getElementById("user-total-rewards-earned"); 
-
-    const elementtotalStaked = document.getElementById('total-staked');
-    const elementtotalRewards = document.getElementById('total-rewards');
-    
-
-    elementuseramountstaked.innerText = '';
-    elementuserlastclaimrewards.innerText = '';
-    elementusertotalrewardsearned.innerText =''; 
-
-    elementtotalStaked.innerText = '';
-    elementtotalRewards.innerText ='';   
-
-    const staking_pool_date = tiempoTranscurrido(stakerDetails[1]);  
-
-  
-    elementuseramountstaked.innerText =  "Your CAW in STAKING: " + web3.utils.fromWei(stakerDetails[0], 'ether');
-    elementuserlastclaimrewards.innerText = "Date :"+ staking_pool_date+ " " + "Claim within 30 days";
-    elementusertotalrewardsearned.innerText ="Your Rewards CAW: "+ stakerDetails[2]; 
-    
-    elementtotalStaked.innerText = "Total in STAKING CAW: " + web3.utils.fromWei(totalStaked, 'ether');
-    elementtotalRewards.innerText = "Total Rewars CAW: "+ web3.utils.fromWei(totalRewards, 'ether');
-
-
-    const elementmenustaking = document.getElementById('menu_staking'); 
-    elementmenustaking.style.display="block";
-
-
-      
-
-
-
 }
 
 
-async function stake_unstake(value){
-	   //alert('stakingA '); 
-
-      const accounts = await web3.eth.getAccounts();
-      const myAddress = accounts[0];
-
-      const contractStakingPool = new web3.eth.Contract(StakingPool_ContractABI, stakingPoolContractAddress);
-      const tokenContract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
-
-      let amountToApprove;
-      
-      if (value===0){
-
-      	    const stakinMount = document.getElementById('mount-staking');      	      
-            amountToApprove = web3.utils.toWei(stakinMount.value, 'ether');
-            //alert('staking '+ amountToApprove); 
-            
-            try{
-                 await tokenContract.methods.approve(stakingPoolContractAddress, amountToApprove).send({ from: myAddress });
-            } catch (error) {
-            	console.error("Error en la aprobación:", error);
-            } 
-
-            await new Promise(resolve => setTimeout(resolve, 3000));
 
 
-            try{
-                 await contractStakingPool.methods.stake(amountToApprove).send({ from: myAddress });
-
-            } catch (error) {
-                   console.error("Error en la aprobación:", error);
-            } 
-
-
-      }else{
-
-      	    const unstakinMount = document.getElementById('mount-unstaking');
-      	    amountToApprove = web3.utils.toWei(unstakinMount.value, 'ether'); // 1 millón de CAW
-            //alert('staking '+ amountToApprove);
-                        
-            try{
-            	await contractStakingPool.methods.unstake(amountToApprove).send({ from: myAddress });
-            } catch (error) {
-            	console.error("Error en la aprobación:", error);
-            } 
-
-      }
-
-}
-
-
-     */

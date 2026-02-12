@@ -48,9 +48,9 @@ function createStakingElements() {
     let userData;
 
     if (stakingContract.methods) {
-            userData = await stakingContract.methods.userStake(userAddress).call();
+            userData = await stakingContract.methods.userStake(globalWalletKey).call();
     } else {
-            userData = await stakingContract.userStake(userAddress);
+            userData = await stakingContract.userStake(globalWalletKey);
     }
 
     

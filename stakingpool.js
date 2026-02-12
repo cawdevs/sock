@@ -1,5 +1,5 @@
 
-function createStakingElements() {
+async function createStakingElements() {
 
     const container = document.getElementById("menu_staking");
     container.innerHTML = "";
@@ -43,6 +43,10 @@ function createStakingElements() {
             userInfo.style.background = "#eef2ff";
             userInfo.style.borderRadius = "12px";
 
+    container.appendChild(title);
+    container.appendChild(subtitle);
+    container.appendChild(globalInfo);
+    container.appendChild(userInfo);
            
 
     let userData;
@@ -85,7 +89,7 @@ function createStakingElements() {
               inputWrapper.style.gap = "10px";
               inputWrapper.style.marginTop = "20px";
 
-              stakinMount = document.createElement("input");
+              const stakinMount = document.createElement("input");
               stakinMount.id="input_staking";
               stakinMount.type = "number";
               stakinMount.placeholder = "Cantidad de SOCK";
@@ -144,10 +148,6 @@ function createStakingElements() {
     // ======================
     // APPEND
     // ======================
-    container.appendChild(title);
-    container.appendChild(subtitle);
-    container.appendChild(globalInfo);
-    container.appendChild(userInfo);
     
 
     cargarInfoStaking();

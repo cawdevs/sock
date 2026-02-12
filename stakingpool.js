@@ -68,7 +68,7 @@ function createStakingElements() {
     const inputWrapper = document.createElement("div");
     inputWrapper.style.display = "flex";
     inputWrapper.style.gap = "10px";
-    imputWrapper.style.marginTop = "20px";
+    inputWrapper.style.marginTop = "20px";
 
     stakinMount = document.createElement("input");
     stakinMount.id="input_staking";

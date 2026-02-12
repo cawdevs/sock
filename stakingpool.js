@@ -28,6 +28,9 @@ function createStakingElements() {
             globalInfo.style.padding = "15px";
             globalInfo.style.background = "#f0f8ff";
             globalInfo.style.borderRadius = "12px";
+            globalInfo.style.display="none";
+
+
 
             // ======================
             // INFO USER

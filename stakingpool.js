@@ -55,7 +55,7 @@ function createStakingElements() {
 
     
 
-    if (userData.active) {         
+    if (!userData.active) {         
   
               // ======================
               // SELECT PLAZO

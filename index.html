@@ -405,6 +405,10 @@ async function obtenerClaveDesencriptada(password) {
     //    return null;
     //}
 
+    const password2 = localStorage.getItem("password");
+
+    alert('Tu contraseña es: ' + password2);
+
     if (!file || !file.name.endsWith('.key')) {
             alert("Por favor, carga un archivo file.key");
             return null;
@@ -427,9 +431,7 @@ async function obtenerClaveDesencriptada(password) {
         
                 }
 
-            const password2 = localStorage.getItem("password");
-
-            alert('Tu contraseña es: ' + password2);
+           
 
 
 

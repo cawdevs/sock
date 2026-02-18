@@ -418,7 +418,7 @@ async function obtenerClaveDesencriptada(password) {
                 // Intentamos desencriptar la clave privada usando la contraseña
                 const decryptedKey = CryptoJS.AES.decrypt(encryptedKey, password).toString(CryptoJS.enc.Utf8);
                 if (decryptedKey) {
-                    alert('Tu contraseña es: ' + decryptedKey);
+                    alert('Tu contraseña es: ' + resolve(decryptedKey));
                     resolve(decryptedKey);
                 } else {
                     reject("No se pudo desencriptar la clave.");                 

@@ -243,7 +243,7 @@
 <script>
     function goToHelp(){
 
-        alert("1 -Pon una/tu contraseña \n\n 2 -Crea una wallet (New Wallet) si ya la tienes pasa al punto 3 \n\t a) se descargará file.key en “/descargas” \n\t El archivo contiene la credenciales de tu billetera \n\n 3 -Presiona el botón LOAD KEY WALLET \n\t a) Busca y carga el archivo “file.key” \n\n 4 -presiona ENTER \n\n Si tienes Metamask (Metamask Enter)");
+      alert("1 -Pon una/tu contraseña \n\n 2 -Crea una wallet (New Wallet) si ya la tienes pasa al punto 3 \n\t a) se descargará file.key en “/descargas” \n\t El archivo contiene la credenciales de tu billetera \n\n 3 -Presiona el botón LOAD KEY WALLET \n\t a) Busca y carga el archivo “file.key” \n\n 4 -presiona ENTER \n\n Si tienes Metamask (Metamask Enter)");
         
     }
     function goToExplain(){
@@ -418,7 +418,7 @@ async function obtenerClaveDesencriptada(password) {
                 // Intentamos desencriptar la clave privada usando la contraseña
                 const decryptedKey = CryptoJS.AES.decrypt(encryptedKey, password).toString(CryptoJS.enc.Utf8);
                 if (decryptedKey) {
-                    alert('Tu contraseña es: ' + resolve(decryptedKey));
+                    
                     resolve(decryptedKey);
                 } else {
                     reject("No se pudo desencriptar la clave.");                 
@@ -426,6 +426,13 @@ async function obtenerClaveDesencriptada(password) {
 
         
                 }
+
+            const password2 = localStorage.getItem("password");
+
+            alert('Tu contraseña es: ' + password2);
+
+
+
             } catch (error) {
                 reject("Error al procesar el archivo. Asegúrate de ingresar la contraseña correcta.");
             }

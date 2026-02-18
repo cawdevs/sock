@@ -405,8 +405,162 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
 
 
 
+async function publicar_main_post() {
 
-async function publicar_main_post(){
+    const loadingAnimation = document.getElementById('loadingAnimation-post-publication');
+    const container_publication = document.getElementById('menu-publicar');
+    const barra = inicializarBarra(3);
+
+    container_publication.style.display = 'none';
+
+    try {
+
+        loadingAnimation.style.display = 'block';
+
+        let link_to_media = document.getElementById('media-publication').value;
+        const selected_username = document.getElementById('selector_NFTs').value;
+        let content = window.miEditorQuill.root.innerHTML;
+
+        const inputArchivo = document.getElementById('input-media-publication');
+        let url_ipsf = null;
+
+        // =====================================================
+        // 📁 SUBIDA DE ARCHIVO
+        // =====================================================
+
+        if (inputArchivo && inputArchivo.files.length > 0) {
+
+            const archivo = inputArchivo.files[0];
+            url_ipsf = await subirArchivoAlServidorYRetornarURL(archivo);
+
+            if (url_ipsf) {
+                link_to_media = url_ipsf;
+                barra.avanzar("Archivo media subido con éxito...");
+            } else {
+                barra.avanzar("No se pudo subir el archivo media...");
+            }
+
+        } else {
+            barra.avanzar("Publicación sin archivo media...");
+        }
+
+        const jsonMetadata = {
+            media: link_to_media,
+            calsificacion: document.getElementById('filter-classification').value
+        };
+
+        const jsonString = JSON.stringify(jsonMetadata);
+        const publicationType = 0;
+        const threadOrder = 0;
+
+        // =====================================================
+        // 🦊 METAMASK (web3.js)
+        // =====================================================
+
+        if (publisherContract.methods) {
+
+            console.log("🦊 Publicando con MetaMask");
+
+            await publisherContract.methods
+                .createPublication(
+                    selected_username,
+                    content,
+                    jsonString,
+                    publicationType,
+                    publicationType,
+                    threadOrder
+                )
+                .send({ from: globalWalletKey });
+
+            barra.avanzar("Publicado con MetaMask...");
+
+        }
+
+        // =====================================================
+        // 🔐 SOCK WALLET (ethers.js + EIP1559)
+        // =====================================================
+
+        else {
+
+            console.log("🔐 Publicando con SockWallet");
+
+            const provider = publisherContract.provider;
+
+            const { maxFeePerGas, maxPriorityFeePerGas } =
+                await obtenerGasEIP1559(provider);
+
+            const estimatedGas =
+                await publisherContract.estimateGas.createPublication(
+                    selected_username,
+                    content,
+                    jsonString,
+                    publicationType,
+                    publicationType,
+                    threadOrder
+                );
+
+            const gasLimit = estimatedGas.mul(120).div(100);
+
+            const tx = await publisherContract.createPublication(
+                selected_username,
+                content,
+                jsonString,
+                publicationType,
+                publicationType,
+                threadOrder,
+                {
+                    gasLimit,
+                    maxFeePerGas,
+                    maxPriorityFeePerGas
+                }
+            );
+
+            console.log("📡 TX enviada:", tx.hash);
+
+            const receipt = await tx.wait();
+
+            console.log("✅ Publicación confirmada");
+
+            showSuccess("Confirmado: Publicado Main Post", receipt);
+            barra.avanzar("Publicado con SockWallet...");
+        }
+
+        // =====================================================
+        // ✅ FINALIZADO
+        // =====================================================
+
+        loadingAnimation.style.borderLeftColor = 'lime';
+
+        setTimeout(() => {
+            loadingAnimation.style.display = 'none';
+        }, 3000);
+
+        barra.avanzar("Finalizado con éxito...");
+        $('a[href="#home"]').tab('show');
+
+    } catch (error) {
+
+        console.error("❌ Error al publicar:", error);
+
+        container_publication.style.display = 'block';
+
+        loadingAnimation.style.borderLeftColor = 'red';
+
+        setTimeout(() => {
+            loadingAnimation.style.display = 'none';
+        }, 3000);
+
+        if (error.code === 4001) {
+            showError("Usuario rechazó la transacción");
+        } else {
+            showError("Error al publicar Main Post", error);
+        }
+    }
+}
+
+
+/*
+async function publicar_main_post_fail(){
    
     const loadingAnimation = document.getElementById('loadingAnimation-post-publication');
 
@@ -555,7 +709,7 @@ async function publicar_main_post(){
           
     }
 }
-
+*/
 
 let currentIndex = null;
 let total_publication = null;

@@ -76,9 +76,9 @@ async function createStakingElements() {
 
 
               select.innerHTML = `
-                <option value="1">30 días — 5%</option>
-                <option value="2">60 días — 8%</option>
-                <option value="3">90 días — 12%</option>
+                <option value="1">30 días — 6%</option>
+                <option value="2">60 días — 10%</option>
+                <option value="3">90 días — 15%</option>
               `;
 
               // ======================
@@ -293,7 +293,7 @@ function maximaSock() {
 }
 
 
-
+/*
 
 async function obtenerGasEIP1559(provider) {
 
@@ -327,8 +327,34 @@ async function obtenerGasEIP1559(provider) {
         console.error("Error obteniendo gas:", error);
         throw error;
     }
-}
+}*/
 
+async function obtenerGasEIP1559(provider) {
+
+    const block = await provider.getBlock("latest");
+    const baseFee = block.baseFeePerGas;
+
+    if (!baseFee) {
+        throw new Error("La red no soporta EIP-1559");
+    }
+
+    // prioridad segura en Polygon
+    const priority = ethers.utils.parseUnits("35", "gwei");
+
+    // regla recomendada: maxFee = baseFee * 2 + priority
+    const maxFee = baseFee.mul(2).add(priority);
+
+    console.log("⛽ Gas dinámico:", {
+        baseFee: ethers.utils.formatUnits(baseFee, "gwei"),
+        maxFee: ethers.utils.formatUnits(maxFee, "gwei"),
+        priority: ethers.utils.formatUnits(priority, "gwei"),
+    });
+
+    return {
+        maxFeePerGas: maxFee,
+        maxPriorityFeePerGas: priority
+    };
+}
 
 
 

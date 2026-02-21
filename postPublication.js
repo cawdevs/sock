@@ -519,7 +519,7 @@ async function publicar_main_post() {
 
                          showSuccess('Se estimo el gas a gastar');
 
-                        const gasLimit = estimatedGas.mul(120).div(100);
+                        const gasLimit = estimatedGas.mul(140).div(100);
 
                         // 3️⃣ ENVIAR TRANSACCIÓN
                         let tx;

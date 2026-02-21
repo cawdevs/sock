@@ -2181,8 +2181,10 @@ async function conectarWalletPropia() {
         return;
     }
 
-    const alchemyUrl = "https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICShTvPFy3oUu_zsA";
-    provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
+    //const alchemyUrl = "https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICShTvPFy3oUu_zsA";
+    //provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
+
+    provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
 
     //const feeData = await provider.getGasPrice();
     //const gasPrice = feeData.gasPrice;
@@ -2208,6 +2210,7 @@ async function conectarWalletPropia() {
     publisherContract = new ethers.Contract(publisherContractAddress, Publisher_ContractABI, signer);
 
     stakingContract = new ethers.Contract( stakingContractAddress, Staking_ContractABI,  signer);
+    
           
     console.log("Conectado usando wallet propia:", globalWalletKey);
   } catch (error) {

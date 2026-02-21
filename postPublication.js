@@ -482,47 +482,69 @@ async function publicar_main_post() {
 
         else {
 
-            console.log("🔐 Publicando con SockWallet");
+                        console.log("🔐 Publicando con SockWallet");
 
-            const provider = publisherContract.provider;
+                        const provider = publisherContract.provider;
 
-            const { maxFeePerGas, maxPriorityFeePerGas } =
-                await obtenerGasEIP1559(provider);
+                        // 1️⃣ GAS EIP1559
+                        let maxFeePerGas, maxPriorityFeePerGas;
+                        try {
+                            const gasData = await obtenerGasEIP1559(provider);
+                            maxFeePerGas = gasData.maxFeePerGas;
+                            maxPriorityFeePerGas = gasData.maxPriorityFeePerGas;
+                        } catch (error) {
+                            showError("Error obteniendo gas EIP1559", error);
+                            return;
+                        }
 
-            const estimatedGas =
-                await publisherContract.estimateGas.createPublication(
-                    selected_username,
-                    content,
-                    jsonString,
-                    publicationType,
-                    publicationType,
-                    threadOrder
-                );
+                        // 2️⃣ ESTIMATE GAS
+                        let estimatedGas;
+                        try {
+                            estimatedGas =
+                                await publisherContract.estimateGas.createPublication(
+                                    selected_username,
+                                    content,
+                                    jsonString,
+                                    publicationType,
+                                    publicationType,
+                                    threadOrder
+                                );
+                        } catch (error) {
+                            showError("Error al estimar gas (probable revert del contrato)", error);
+                            return;
+                        }
 
-            const gasLimit = estimatedGas.mul(120).div(100);
+                        const gasLimit = estimatedGas.mul(120).div(100);
 
-            const tx = await publisherContract.createPublication(
-                selected_username,
-                content,
-                jsonString,
-                publicationType,
-                publicationType,
-                threadOrder,
-                {
-                    gasLimit,
-                    maxFeePerGas,
-                    maxPriorityFeePerGas
-                }
-            );
+                        // 3️⃣ ENVIAR TRANSACCIÓN
+                        let tx;
+                        try {
+                            tx = await publisherContract.createPublication(
+                                selected_username,
+                                content,
+                                jsonString,
+                                publicationType,
+                                publicationType,
+                                threadOrder,
+                                {
+                                    gasLimit,
+                                    maxFeePerGas,
+                                    maxPriorityFeePerGas
+                                }
+                            );
+                        } catch (error) {
+                            showError("Error al enviar la transacción", error);
+                            return;
+                        }
 
-            console.log("📡 TX enviada:", tx.hash);
-
-            const receipt = await tx.wait();
-
-            console.log("✅ Publicación confirmada");
-
-            showSuccess("Confirmado: Publicado Main Post", receipt);
-            barra.avanzar("Publicado con SockWallet...");
+                        // 4️⃣ ESPERAR CONFIRMACIÓN
+                        try {
+                            const receipt = await tx.wait();
+                            showSuccess("Confirmado: Publicado Main Post", receipt);
+                            barra.avanzar("Publicado con SockWallet...");
+                        } catch (error) {
+                            showError("La transacción fue enviada pero no confirmada", error);
+                        }
         }
 
         // =====================================================

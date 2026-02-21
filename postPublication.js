@@ -483,6 +483,7 @@ async function publicar_main_post() {
         else {
 
                         console.log("🔐 Publicando con SockWallet");
+                        showSuccess('🔐 Publicando con SockWallet');
 
                         const provider = publisherContract.provider;
 
@@ -496,6 +497,8 @@ async function publicar_main_post() {
                             showError("Error obteniendo gas EIP1559", error);
                             return;
                         }
+                         showSuccess('Se calculño el gas MAX');
+
 
                         // 2️⃣ ESTIMATE GAS
                         let estimatedGas;
@@ -513,6 +516,8 @@ async function publicar_main_post() {
                             showError("Error al estimar gas (probable revert del contrato)", error);
                             return;
                         }
+
+                         showSuccess('Se estimo el gas a gastar');
 
                         const gasLimit = estimatedGas.mul(120).div(100);
 
@@ -537,9 +542,13 @@ async function publicar_main_post() {
                             return;
                         }
 
+                         showSuccess('Se envio la transaccion de la publicacion');
+
                         // 4️⃣ ESPERAR CONFIRMACIÓN
                         try {
+                            showSuccess('se va a solicitar confirmacion');
                             const receipt = await tx.wait();
+                            showSuccess('se recibio la confirmacion');
                             showSuccess("Confirmado: Publicado Main Post", receipt);
                             barra.avanzar("Publicado con SockWallet...");
                         } catch (error) {

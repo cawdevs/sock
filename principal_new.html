@@ -789,6 +789,13 @@
                       </li>
 
                       
+                       <li><a href="#" onclick="desatascarPendientes()" style="color: redd;">
+                          <span  class="glyphicon glyphicon-remove"  title="Tx Desatascar" style="margin-left: 4px; margin-right: 16px; margin-top: 5px;"></span>
+
+                          <span>Tx Desbloqueo</span>
+                          </a>
+                      </li>
+
 
                       <!-- Cerrar sesión -->
                       <li><a href="#" onclick="logout()" style="color: white;">
@@ -2184,7 +2191,7 @@ async function conectarWalletPropia() {
     const alchemyUrl = "https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICShTvPFy3oUu_zsA";
     provider = new ethers.providers.JsonRpcProvider(alchemyUrl);
 
-    
+
 
     //const feeData = await provider.getGasPrice();
     //const gasPrice = feeData.gasPrice;
@@ -2217,6 +2224,58 @@ async function conectarWalletPropia() {
         console.error("Error al conectar con wallet propia:", error);
     }
 
+}
+
+
+
+async function desatascarPendientes() {
+
+  if (!wallet || !provider) {
+    console.log("Wallet o provider no inicializados.");
+    return;
+  }
+
+  const latest = await provider.getTransactionCount(wallet.address, "latest");
+  const pending = await provider.getTransactionCount(wallet.address, "pending");
+
+  if (pending <= latest) {
+    console.log("No hay transacciones pendientes.");
+    alert("No hay transacciones Pemdientes");
+    return false;
+  }
+
+  console.log(`Nonce bloqueado detectado: ${latest}`);
+
+  try {
+
+    const feeData = await provider.getFeeData();
+
+    const tx = await wallet.sendTransaction({
+      to: wallet.address,
+      value: 0,
+      nonce: latest,
+      gasLimit: 21000,
+      maxPriorityFeePerGas: feeData.maxPriorityFeePerGas.mul(2),
+      maxFeePerGas: feeData.maxFeePerGas.mul(2)
+    });
+
+    console.log("Reemplazando nonce:", latest);
+    console.log("Hash:", tx.hash);
+    alert("Desbloqueo en proceso");
+
+    await tx.wait();
+
+    console.log("Cuenta desbloqueada correctamente.");
+    alert("Desbloqueo Exitoso");
+    return true;
+
+  } catch (error) {
+
+    console.log("Error al desbloquear:", error.message);
+    alert("No se pudo desbloquear");
+    return false;
+
+  }
 }
 
 

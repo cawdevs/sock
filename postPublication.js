@@ -542,14 +542,13 @@ async function publicar_main_post() {
                             return;
                         }
 
-                         showSuccess('Se envio la transaccion de la publicacion');
+                         showSuccess('Se envio la transaccion de la publicacion', tx.hash);
 
                         // 4️⃣ ESPERAR CONFIRMACIÓN
                         try {
-                            showSuccess('se va a solicitar confirmacion');
+                           
                             const receipt = await tx.wait();
-                            showSuccess('se recibio la confirmacion');
-                            showSuccess("Confirmado: Publicado Main Post", receipt);
+                           
                             barra.avanzar("Publicado con SockWallet...");
                         } catch (error) {
                             showError("La transacción fue enviada pero no confirmada", error);

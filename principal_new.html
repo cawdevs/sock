@@ -2238,52 +2238,39 @@ async function desatascarPendientes() {
   const latest = await provider.getTransactionCount(wallet.address, "latest");
   const pending = await provider.getTransactionCount(wallet.address, "pending");
 
-  console.log("latest:", latest);
-  console.log("pending:", pending);
-
   if (pending <= latest) {
-    console.log("No hay transacciones pendientes.");
     alert("No hay transacciones pendientes");
     return false;
   }
 
-  console.log(`Nonce bloqueado detectado: ${latest}`);
+  console.log("Nonce bloqueado:", latest);
 
   try {
 
-    alert("Auto enviándonos 0 POL para desbloquear...");
-
-    const gasPrice = await provider.getGasPrice();
+    alert("Enviando reemplazo agresivo...");
 
     const tx = await wallet.sendTransaction({
       to: wallet.address,
-      value: ethers.constants.Zero,   // 🔥 corregido
+      value: ethers.constants.Zero,
       nonce: latest,
       gasLimit: 21000,
-      gasPrice: gasPrice.mul(3)       // 🔥 más seguro en Polygon
+      gasPrice: ethers.utils.parseUnits("600", "gwei") // 🔥 gas alto fijo
     });
 
-    console.log("Reemplazando nonce:", latest);
     console.log("Hash:", tx.hash);
-
-    alert("Desbloqueo en proceso...");
 
     await tx.wait();
 
-    console.log("Cuenta desbloqueada correctamente.");
     alert("Desbloqueo exitoso");
-
     return true;
 
   } catch (error) {
 
-    console.log("ERROR COMPLETO:", error);
-    alert("No se pudo desbloquear: " + (error?.message || error));
-
+    console.log("ERROR:", error);
+    alert("Error: " + error.message);
     return false;
   }
 }
-
 
 
 async function logout() {

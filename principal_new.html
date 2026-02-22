@@ -854,7 +854,7 @@
       <img id="image-home" src="images/icons/home_icon.SVG" alt="home" width="35">
     </a> 
 
-    <a data-toggle="tab" href="#menu1" style="margin-left: 15px;">
+    <a data-toggle="tab" href="#menu1" onclick= "get_NFTUsername_profile()"  style="margin-left: 15px;">
       <img id="image-profile" src="images/icons/profile_icon.SVG" alt="profile" width="35">
     </a>
 
@@ -2335,17 +2335,11 @@ async function inicializarUI() {
           option.text = `${start}...${end}`;
           selector.add(option);
 
-
-
-
-
-
-
     
     }else{
 
           await getmintedNFT();
-          await get_NFTUsername_profile();
+          //await get_NFTUsername_profile();
 
     }
 

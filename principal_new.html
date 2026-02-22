@@ -2250,6 +2250,8 @@ async function desatascarPendientes() {
 
     const feeData = await provider.getFeeData();
 
+    alert("Auto enviarnos 0 POL");
+
     const tx = await wallet.sendTransaction({
       to: wallet.address,
       value: 0,

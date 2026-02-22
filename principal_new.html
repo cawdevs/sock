@@ -2302,6 +2302,8 @@ async function inicializarUI() {
 
     //verificar si el servidor esta vivo o no 
     await verificarServidor(); 
+
+    await get_all_publications_home('recent-home-publications-container', false, "last");
       
     let list_username;
 
@@ -2346,7 +2348,7 @@ async function inicializarUI() {
    
     //await get_all_publications_home("home-publications-container");
 
-    await get_all_publications_home('recent-home-publications-container', false, "last");
+    
     
     await get_video_stories('videoStoriesContainer');
    

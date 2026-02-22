@@ -2243,6 +2243,14 @@ async function desatascarPendientes() {
     return false;
   }
 
+  if (window.ethereum && window.ethereum.isMetaMask) {
+
+        console.log("🦊 con MetaMask");
+        alert(" 🦊 Tienes una transacción pendiente. Si está bloqueada, usa 'Speed Up' o 'Cancel' en MetaMask.");
+        return false; 
+  }   
+   
+
   console.log("Nonce bloqueado:", latest);
 
   try {
@@ -2254,8 +2262,9 @@ async function desatascarPendientes() {
       value: ethers.constants.Zero,
       nonce: latest,
       gasLimit: 21000,
-      gasPrice: ethers.utils.parseUnits("1200", "gwei") // 🔥 gas alto fijo
+      gasPrice: ethers.utils.parseUnits("600", "gwei") // 🔥 gas alto fijo
     });
+    //aumentar a 1200 para mas agresividad  total a gastar=0.025 pol
 
     console.log("Hash:", tx.hash);
 
@@ -2371,6 +2380,22 @@ async function inicializarUI() {
     // Registrar eventos de botones
     document.getElementById("btn-mintear-nft").addEventListener("click", mintearNFT);
     //document.getElementById("btn-verify-nft").addEventListener("click", verifymintearNFT);
+
+
+
+    //se detecta si hay transacciones pendientes
+    const latest = await provider.getTransactionCount(wallet.address, "latest");
+    const pending = await provider.getTransactionCount(wallet.address, "pending");
+
+   if (pending > latest) {
+       alert("⚠️ Tienes alguna transacción bloqueada. Desbloqueala !");
+     
+   }
+
+
+
+
+
 }
 
 

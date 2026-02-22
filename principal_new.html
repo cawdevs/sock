@@ -2238,9 +2238,12 @@ async function desatascarPendientes() {
   const latest = await provider.getTransactionCount(wallet.address, "latest");
   const pending = await provider.getTransactionCount(wallet.address, "pending");
 
+  console.log("latest:", latest);
+  console.log("pending:", pending);
+
   if (pending <= latest) {
     console.log("No hay transacciones pendientes.");
-    alert("No hay transacciones Pemdientes");
+    alert("No hay transacciones pendientes");
     return false;
   }
 
@@ -2248,35 +2251,36 @@ async function desatascarPendientes() {
 
   try {
 
-    const feeData = await provider.getFeeData();
+    alert("Auto enviándonos 0 POL para desbloquear...");
 
-    alert("Auto enviarnos 0 POL");
+    const gasPrice = await provider.getGasPrice();
 
     const tx = await wallet.sendTransaction({
       to: wallet.address,
-      value: 0,
+      value: ethers.constants.Zero,   // 🔥 corregido
       nonce: latest,
       gasLimit: 21000,
-      maxPriorityFeePerGas: feeData.maxPriorityFeePerGas.mul(2),
-      maxFeePerGas: feeData.maxFeePerGas.mul(2)
+      gasPrice: gasPrice.mul(3)       // 🔥 más seguro en Polygon
     });
 
     console.log("Reemplazando nonce:", latest);
     console.log("Hash:", tx.hash);
-    alert("Desbloqueo en proceso");
+
+    alert("Desbloqueo en proceso...");
 
     await tx.wait();
 
     console.log("Cuenta desbloqueada correctamente.");
-    alert("Desbloqueo Exitoso");
+    alert("Desbloqueo exitoso");
+
     return true;
 
   } catch (error) {
 
-    console.log("Error al desbloquear:", error.message);
-    alert("No se pudo desbloquear");
-    return false;
+    console.log("ERROR COMPLETO:", error);
+    alert("No se pudo desbloquear: " + (error?.message || error));
 
+    return false;
   }
 }
 

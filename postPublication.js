@@ -409,7 +409,7 @@ async function publicar_main_post() {
 
     const loadingAnimation = document.getElementById('loadingAnimation-post-publication');
     const container_publication = document.getElementById('menu-publicar');
-    const barra = inicializarBarra(3);
+    const barra = inicializarBarra(5);
 
     container_publication.style.display = 'none';
 
@@ -427,7 +427,7 @@ async function publicar_main_post() {
         // =====================================================
         // 📁 SUBIDA DE ARCHIVO
         // =====================================================
-
+        barra.avanzar("Inicia proceso..."); 
         if (inputArchivo && inputArchivo.files.length > 0) {
 
             const archivo = inputArchivo.files[0];
@@ -456,7 +456,7 @@ async function publicar_main_post() {
         // =====================================================
         // 🦊 METAMASK (web3.js)
         // =====================================================
-
+        barra.avanzar("publicando en blockchain...");
         if (publisherContract.methods) {
 
             console.log("🦊 Publicando con MetaMask");

@@ -525,16 +525,7 @@ async function publicar_main_post() {
                         let tx;
                         try {
 
-                            
-                            const nonceNetwork = await provider.getTransactionCount(globalWalletKey, "latest");
-                            const noncePending = await provider.getTransactionCount(globalWalletKey, "pending");
-
-                            console.log("Nonce latest:", nonceNetwork);
-                            console.log("Nonce pending:", noncePending);
-
-                            alert("Nonce latest:" + nonceNetwork);
-                            alert("Nonce pending:" + noncePending);
-
+                                                        
 
                             tx = await publisherContract.createPublication(
                                 selected_username,

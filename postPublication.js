@@ -428,7 +428,21 @@ async function publicar_main_post() {
         // 📁 SUBIDA DE ARCHIVO
         // =====================================================
 
+        if (inputArchivo && inputArchivo.files.length > 0) {
 
+            const archivo = inputArchivo.files[0];
+            url_ipsf = await subirArchivoAlServidorYRetornarURL(archivo);
+
+            if (url_ipsf) {
+                link_to_media = url_ipsf;
+                barra.avanzar("Archivo media subido con éxito...");
+            } else {
+                barra.avanzar("No se pudo subir el archivo media...");
+            }
+
+        } else {
+            barra.avanzar("Publicación sin archivo media...");
+        }
 
         const jsonMetadata = {
             media: link_to_media,
@@ -556,28 +570,6 @@ async function publicar_main_post() {
         // =====================================================
         // ✅ FINALIZADO
         // =====================================================
-
-
-        if (inputArchivo && inputArchivo.files.length > 0) {
-
-            const archivo = inputArchivo.files[0];
-            url_ipsf = await subirArchivoAlServidorYRetornarURL(archivo);
-                             
-
-            if (url_ipsf) {
-                link_to_media = url_ipsf;
-                barra.avanzar("Archivo media subido con éxito...");
-            } else {
-                barra.avanzar("No se pudo subir el archivo media...");
-            }
-
-        } else {
-            barra.avanzar("Publicación sin archivo media...");
-        }
-
-
-
-        
 
         loadingAnimation.style.borderLeftColor = 'lime';
 

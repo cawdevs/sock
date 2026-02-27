@@ -953,7 +953,6 @@ span.hashtag {
  <div class="tab-content" >
 
 
-
     <div id="home" class="tab-pane fade in active">
 
        <br>
@@ -976,8 +975,12 @@ span.hashtag {
          <div id="home-publications-container"></div>       
           
          <div class="user-following-publication-container"  >
-         </div> 
-        
+         </div>
+
+         <!-- 🔥 Trigger del scroll infinito -->
+         <div id="scrollTrigger" style="height: 1px;"></div>
+
+
         <br>
          <button id="verMasBtn" class="btn" style="
             margin: 20px auto;
@@ -1870,30 +1873,52 @@ function inicializarBarra(pasosTotales) {
 
 
 
-
-
-
 <script>
-async function verificarServidor() {
-  fetch('https://api.thesocks.net/is-alive/')
-    .then(response => {
-      if (!response.ok) throw new Error("Respuesta no OK");
-      return response.json();
-    })
-    .then(data => {
-      if (data.alive !== true) throw new Error("Servidor no respondió true");
-      // Servidor está vivo, no hacer nada o puedes actualizar el estado visualmente
-    })
-    .catch(error => {
-      const estadoDiv = document.getElementById('estado-servidor');
-      estadoDiv.innerHTML = '<img src="images/icons/disconnect_icon.svg" alt="Algunas funciones están temporalmente fuera de servicio " width="55px"/>';
+          const trigger = document.getElementById("scrollTrigger");
 
-      const estadoDiv2 = document.getElementById('estado-servidor_msg');
-      estadoDiv2.innerHTML = '<center><h5><p><font color="red">Algunas funciones están temporalmente fuera de servicio </font></p></h5></center>';
+          const observer = new IntersectionObserver(async (entries) => {
+
+              if (entries[0].isIntersecting && !cargando) {
+
+                  cargando = true;
+
+                  console.log("📡 Cargando más...");
+
+                  await cargarPublicacionesAleatorias();
+
+                  cargando = false;
+              }
+
+          }, {
+              root: null,
+              threshold: 1.0
+          });
+
+          observer.observe(trigger);
+          </script>
 
 
-    });
-}
+          <script>
+          async function verificarServidor() {
+            fetch('https://api.thesocks.net/is-alive/')
+              .then(response => {
+                if (!response.ok) throw new Error("Respuesta no OK");
+                return response.json();
+              })
+              .then(data => {
+                if (data.alive !== true) throw new Error("Servidor no respondió true");
+                // Servidor está vivo, no hacer nada o puedes actualizar el estado visualmente
+              })
+              .catch(error => {
+                const estadoDiv = document.getElementById('estado-servidor');
+                estadoDiv.innerHTML = '<img src="images/icons/disconnect_icon.svg" alt="Algunas funciones están temporalmente fuera de servicio " width="55px"/>';
+
+                const estadoDiv2 = document.getElementById('estado-servidor_msg');
+                estadoDiv2.innerHTML = '<center><h5><p><font color="red">Algunas funciones están temporalmente fuera de servicio </font></p></h5></center>';
+
+
+              });
+          }
 
 </script>
 
@@ -2312,6 +2337,10 @@ async function inicializarUI() {
     //verificar si el servidor esta vivo o no 
     await verificarServidor(); 
 
+
+    await get_all_publications_home('recent-home-publications-container', false, "random");
+
+
     
       
     let list_username;
@@ -2357,7 +2386,6 @@ async function inicializarUI() {
    
     //await get_all_publications_home("home-publications-container");
 
-    await get_all_publications_home('recent-home-publications-container', false, "last");
     
     await get_video_stories('videoStoriesContainer');
    

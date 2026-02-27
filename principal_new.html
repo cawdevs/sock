@@ -953,6 +953,7 @@ span.hashtag {
  <div class="tab-content" >
 
 
+
     <div id="home" class="tab-pane fade in active">
 
        <br>
@@ -975,9 +976,8 @@ span.hashtag {
          <div id="home-publications-container"></div>       
           
          <div class="user-following-publication-container"  >
-         </div>
-
-
+         </div> 
+        
         <br>
          <button id="verMasBtn" class="btn" style="
             margin: 20px auto;
@@ -1008,11 +1008,6 @@ span.hashtag {
 </button>
 
       <br>
-
-
-         <!-- 🔥 Trigger del scroll infinito -->
-         <div id="scrollTrigger" style="height: 1px;"></div>
-
 
     </div>
 <!--#################################################-->    
@@ -1877,6 +1872,31 @@ function inicializarBarra(pasosTotales) {
 
 
 
+
+<script>
+async function verificarServidor() {
+  fetch('https://api.thesocks.net/is-alive/')
+    .then(response => {
+      if (!response.ok) throw new Error("Respuesta no OK");
+      return response.json();
+    })
+    .then(data => {
+      if (data.alive !== true) throw new Error("Servidor no respondió true");
+      // Servidor está vivo, no hacer nada o puedes actualizar el estado visualmente
+    })
+    .catch(error => {
+      const estadoDiv = document.getElementById('estado-servidor');
+      estadoDiv.innerHTML = '<img src="images/icons/disconnect_icon.svg" alt="Algunas funciones están temporalmente fuera de servicio " width="55px"/>';
+
+      const estadoDiv2 = document.getElementById('estado-servidor_msg');
+      estadoDiv2.innerHTML = '<center><h5><p><font color="red">Algunas funciones están temporalmente fuera de servicio </font></p></h5></center>';
+
+
+    });
+}
+
+</script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         let menu = document.getElementById("menu");
@@ -2292,8 +2312,7 @@ async function inicializarUI() {
     //verificar si el servidor esta vivo o no 
     await verificarServidor(); 
 
-
-    await get_all_publications_home('recent-home-publications-container', false, "random");
+    await get_all_publications_home('recent-home-publications-container', false, "last");
 
 
     
@@ -3212,9 +3231,6 @@ if (/\.(jpeg|jpg|gif|png)$/.test(linkToImage)) {
       document.body.classList.add("tema-" + tema);
     }
   </script>
-
-
-  
 
 <script src="bootstrap/js/jquery.min.js" ></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>

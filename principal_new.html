@@ -3213,33 +3213,8 @@ if (/\.(jpeg|jpg|gif|png)$/.test(linkToImage)) {
     }
   </script>
 
-<script>
-  let cargando = false;
 
-window.addEventListener("scroll", function () {
-
-    if (cargando) return;
-
-    const scrollTop = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const fullHeight = document.documentElement.scrollHeight;
-
-    // Cuando esté a 200px del final
-    if (scrollTop + windowHeight >= fullHeight - 200) {
-
-        cargando = true;
-
-        console.log("Cargando más publicaciones...");
-
-        get_all_publications_home("home-publications-container", true, "last");
-
-        setTimeout(() => {
-            cargando = false;
-        }, 1500);
-    }
-});
-
-</script>
+  
 
 <script src="bootstrap/js/jquery.min.js" ></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>

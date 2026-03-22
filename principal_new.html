@@ -2585,7 +2585,7 @@ async function obtenerSaldo_SOCK() {
         // Volver a tamaño normal y mostrar saldo final
         setTimeout(() => {
             diffElement.remove();
-            saldoElement.innerText = truncatedBalance;
+            saldoElement.innerText = truncatedBalance + " SOCK";
             saldoElement.style.color = "lime";
         }, 3000);
 
@@ -2604,13 +2604,13 @@ async function obtenerSaldo_SOCK() {
 
         setTimeout(() => {
             diffElement.remove();
-            saldoElement.innerText = truncatedBalance;
+            saldoElement.innerText = truncatedBalance+ " SOCK";
             saldoElement.style.color = "red";
         }, 3000);
 
     } else {
         // Si no hay cambio
-        saldoElement.innerText = truncatedBalance;
+        saldoElement.innerText = truncatedBalance+ "SOCK";
         saldoElement.style.color = "white";
     }
 

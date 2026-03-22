@@ -900,6 +900,8 @@
     <div class="wallet-values">
       <span id="saldo_ETH">0</span>
       <span id="saldo_USD" class="usd">POL</span>
+      
+      
     </div>
   </div>
 
@@ -908,6 +910,8 @@
     <div class="wallet-values">
       <span id="saldo_CAW">0</span>
       <span class="symbol">SOCK</span>
+      <span id="saldo_USD_CAW">$</span>
+
     </div>
   </div>
 
@@ -2547,12 +2551,13 @@ async function obtenerSaldo_SOCK() {
     /////////////calcula el precio de de socks
     const res = await fetch("https://api.dexscreener.com/latest/dex/tokens/0x8f78976a0fdf8f66ad81bb7d7c9b8d4a695022e3");
     const data = await res.json();
-    console.log("Precio:", data); 
-    const priceUSD = data.pairs[0].priceUsd;
-    console.log("Precio USD:", priceUSD);
+    const priceUSD = data.pairs[0].priceUsd;   
     /////////////////////////////////////////////////
 
-
+    
+    const saldoUSDElement = document.getElementById('saldo_USD_CAW');
+    saldoUSDElement.innerText = priceUSD ;
+    saldoUSDElement.style.color = "white";
 
 
     // Mostrar primero el saldo anterior guardado

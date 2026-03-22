@@ -885,7 +885,7 @@
 <!-- 💰 Bloque de saldos -->
 <div class="wallet-container">
   
-  <div class="wallet-item">
+  <div class="wallet-item"  style=" display: block;">
     <img src="images/icons/btc_icon.SVG" alt="BTC">
     <div class="wallet-values">
       <span id="saldo_BTC">0</span>
@@ -909,7 +909,7 @@
     <img src="images/icons/sock_coin.SVG" alt="SOCK">
     <div class="wallet-values">
       <span id="saldo_CAW">0</span>
-      <span class="symbol">SOCK</span>
+      <!-- <span class="symbol">SOCK</span>  -->
       <span id="saldo_USD_CAW">$</span>
 
     </div>
@@ -2558,13 +2558,13 @@ async function obtenerSaldo_SOCK() {
 
     
     const saldoUSDElement = document.getElementById('saldo_USD_CAW');
-    saldoUSDElement.innerText = total_USD;
+    saldoUSDElement.innerText = "$ " + total_USD;
     saldoUSDElement.style.color = "white";
 
 
     // Mostrar primero el saldo anterior guardado
     const saldoAnterior = parseInt(localStorage.getItem("SaldoSock") || "0", 10);
-    saldoElement.innerText = saldoAnterior;
+    saldoElement.innerText = saldoAnterior +" SOCK";
 
     // Calcular diferencia
     const diferencia = truncatedBalance - saldoAnterior;

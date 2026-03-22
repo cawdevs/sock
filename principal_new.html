@@ -2544,6 +2544,16 @@ async function obtenerSaldo_SOCK() {
     diffElement.style.transition = "transform 0.5s ease, opacity 0.5s ease";
     diffElement.style.display = "inline-block";
 
+    /////////////calcula el precio de de socks
+    const res = await fetch("https://api.dexscreener.com/latest/dex/tokens/0x8f78976a0fdf8f66ad81bb7d7c9b8d4a695022e3");
+    const data = await res.json(); 
+    const priceUSD = data.pairs[0].priceUsd;
+    console.log("Precio USD:", priceUSD);
+    /////////////////////////////////////////////////
+
+
+
+
     // Mostrar primero el saldo anterior guardado
     const saldoAnterior = parseInt(localStorage.getItem("SaldoSock") || "0", 10);
     saldoElement.innerText = saldoAnterior;

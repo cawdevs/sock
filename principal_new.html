@@ -2567,14 +2567,12 @@ async function obtenerSaldo_SOCK() {
 
 
     
-    fetch("https://api.thesocks.net/precio-sock/")
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        const price = data.price; // ✅ correcto
-        const total_USD = price * truncatedBalance;
-        console.log("Total en POL:", total); 
-    });
+    const res = await fetch("https://api.thesocks.net/precio-sock/");
+    const data = await res.json();
+    const price = data.price;
+    const total_USD = price * truncatedBalance;
+    console.log(total_USD);
+
 
     
     const saldoUSDElement = document.getElementById('saldo_USD_CAW');

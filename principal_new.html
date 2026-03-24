@@ -862,7 +862,7 @@
       <img id="image-market" src="images/icons/gamefi_icon.SVG" alt="game" width="35">
     </a>
 
-    <a data-toggle="tab" href="#menu_transfer" style="margin-left: 15px;">
+    <a data-toggle="tab" href="#menu_transfer" onclick="single_swapp()" style="margin-left: 15px;">
       <img id="image-swap" src="images/icons/swap_icon.SVG" alt="swap" width="35">
     </a>
 
@@ -899,11 +899,21 @@
     <img src="images/icons/matic_coin.SVG" alt="MATIC">
     <div class="wallet-values">
       <span id="saldo_ETH">0</span>
-      <span id="saldo_USD" class="usd">POL</span>
-      
-      
+      <span id="saldo_USD" class="usd">POL</span>     
     </div>
   </div>
+
+
+ <div class="wallet-item">
+   
+  
+   <a data-toggle="tab" href="#menu_transfer" onclick="single_swapp()" style="color: white; font-size: 24px">
+      <span class="glyphicon glyphicon-resize-horizontal"></span>
+   </a>
+
+
+ </div>
+
 
   <div class="wallet-item">
     <img src="images/icons/sock_coin.SVG" alt="SOCK">
@@ -959,7 +969,6 @@ span.hashtag {
 
 
     <div id="home" class="tab-pane fade in active">
-
      
        
                    
@@ -1209,9 +1218,10 @@ span.hashtag {
     <div id="menu_transfer" class="tab-pane fade">
           
           <br>
-          <center><h3><p>Swap and transfer token</p></h3></center> 
+          <center><h3><p>SWAPP - INTERCAMBIO  </p></h3></center> 
           
           <br>
+          <center><h5><p>Intercambia tus criptomonedas de forma Facil </p></h5></center>
           <br>
            
     
@@ -2549,12 +2559,22 @@ async function obtenerSaldo_SOCK() {
     diffElement.style.display = "inline-block";
 
     /////////////calcula el precio de de socks
-    const res = await fetch("https://api.dexscreener.com/latest/dex/tokens/0x8f78976a0fdf8f66ad81bb7d7c9b8d4a695022e3");
-    const data = await res.json();
-    const priceUSD = data.pairs[0].priceUsd; 
-
-    const total_USD=  priceUSD*truncatedBalance;
+    //const res = await fetch("https://api.dexscreener.com/latest/dex/tokens/0x8f78976a0fdf8f66ad81bb7d7c9b8d4a695022e3");
+    //const data = await res.json();
+    //const priceUSD = data.pairs[0].priceUsd; 
+    //const total_USD=  priceUSD*truncatedBalance;
     /////////////////////////////////////////////////
+
+
+    fetch("https://api.thesocks.net/
+    fetch("https://api.thesocks.net/precio-sock/")
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        const price = data.price; // ✅ correcto
+        const total_USD = price * truncatedBalance;
+        console.log("Total en POL:", total); 
+    });
 
     
     const saldoUSDElement = document.getElementById('saldo_USD_CAW');

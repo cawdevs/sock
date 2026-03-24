@@ -2568,8 +2568,11 @@ async function obtenerSaldo_SOCK() {
 
     
     const res = await fetch("https://api.thesocks.net/precio-sock/");
+    console.log(res);
     const data = await res.json();
-    const price = data.price;
+    console.log(data);
+    const price = data.price
+    console.log(price);
     const total_USD = price * truncatedBalance;
     console.log(total_USD);
 

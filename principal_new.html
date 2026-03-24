@@ -2571,18 +2571,20 @@ async function obtenerSaldo_SOCK() {
     console.log(res);
     const data = await res.json();
     console.log(data);
-    const price = data.price;
+
+    const price = Number(data.price);
     console.log(price);
-    const total_USD = price * truncatedBalance;
-    
-    total_USD = total_USD.toFixed(2);
 
-    console.log(total_USD);
+    const total_USD = price * Number(truncatedBalance);
 
+    // 🔥 nueva variable
+    const total_USD_rounded = total_USD.toFixed(2);
+
+    console.log(total_USD_rounded);
 
     
     const saldoUSDElement = document.getElementById('saldo_USD_CAW');
-    saldoUSDElement.innerText = "$ " + total_USD;
+    saldoUSDElement.innerText = "$ " + total_USD_rounded;
     saldoUSDElement.style.color = "white";
 
 

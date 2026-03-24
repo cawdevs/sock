@@ -2573,7 +2573,10 @@ async function obtenerSaldo_SOCK() {
     console.log(data);
     const price = data.price
     console.log(price);
-    const total_USD = price * truncatedBalance;
+    const total_USD_fixed = price * truncatedBalance
+
+    const totalRounded = total_USD_fixed.toFixed(2);
+
     console.log(total_USD);
 
 

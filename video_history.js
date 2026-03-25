@@ -59,65 +59,6 @@ async function createVideoStory(publicationObject) {
 let currentStart = 0; // 🔹 Para controlar paginación
 const limit = 5;      // 🔹 Videos por carga
 
-// 🎨 Fallback (cuadro de color aleatorio)
-function crearFallbackStory() {
-    const div = document.createElement("div");
-
-    const colores = [
-        "#ff6b6b", "#6bcB77", "#4d96ff",
-        "#f7b801", "#9d4edd", "#ff9f1c"
-    ];
-
-    const color = colores[Math.floor(Math.random() * colores.length)];
-
-    div.style.width = "120px";
-    div.style.height = "200px";
-    div.style.borderRadius = "12px";
-    div.style.background = color;
-    div.style.display = "flex";
-    div.style.alignItems = "center";
-    div.style.justifyContent = "center";
-    div.style.color = "white";
-    div.style.fontSize = "12px";
-
-    div.textContent = "Story";
-
-    return div;
-}
-
-// 🎥 Crear historia segura (con fallback si el video falla)
-async function createVideoStorySafe(publicationObject) {
-    try {
-        const story = await createVideoStory(publicationObject);
-
-        if (!story) throw new Error("Story null");
-
-        const video = story.querySelector("video");
-
-        if (video) {
-            // ❌ Si el video falla
-            video.onerror = () => {
-                console.warn("Video falló:", publicationObject.media);
-                story.replaceWith(crearFallbackStory());
-            };
-
-            // ⏳ Si tarda demasiado en cargar
-            setTimeout(() => {
-                if (video.readyState === 0) {
-                    story.replaceWith(crearFallbackStory());
-                }
-            }, 5000);
-        }
-
-        return story;
-
-    } catch (err) {
-        console.error("Error creando story:", err);
-        return crearFallbackStory();
-    }
-}
-
-// 🔥 FUNCIÓN PRINCIPAL
 async function get_video_stories(containerID, append = false) {
     try {
         const container = document.getElementById(containerID);
@@ -128,62 +69,52 @@ async function get_video_stories(containerID, append = false) {
             currentStart = 0;
         }
 
-        // 🔹 Obtener IDs
+        // 🔹 Obtener IDs de videos desde Django
         const videoIds = await getVideoPublications(currentStart, limit);
 
+        // 🔹 Mostrar videos
         for (const videoId of videoIds) {
-            try {
-                const publicationObject = await get_publication_object(videoId);
-
-                if (
-                    publicationObject &&
-                    publicationObject.publicationType != 3 &&
-                    publicationObject.media &&
-                    publicationObject.media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)
-                ) {
-                    const story = await createVideoStorySafe(publicationObject);
-                    container.appendChild(story);
-                } else {
-                    // ❗ No válido → fallback
-                    container.appendChild(crearFallbackStory());
+            const publicationObject = await get_publication_object(videoId);
+            
+            if (publicationObject && publicationObject.publicationType != 3) {
+                
+                if (publicationObject.media && publicationObject.media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
+                    const story = await createVideoStory(publicationObject);
+                    if (story) container.appendChild(story);
                 }
-
-            } catch (err) {
-                console.error("Error con videoId:", videoId, err);
-                container.appendChild(crearFallbackStory());
             }
         }
 
         currentStart += videoIds.length;
 
-        // 🔹 Eliminar botón viejo
+        // 🔹 Eliminar botón viejo si existe
         const oldBtn = document.getElementById("verMasBtnVideos");
         if (oldBtn) oldBtn.remove();
 
-        // 🔹 Botón "Ver más"
+        // 🔹 Agregar botón solo si hay más videos
         if (videoIds.length === limit) {
             const btnWrapper = document.createElement("div");
             btnWrapper.id = "verMasBtnVideos";
             btnWrapper.style.display = "flex";
             btnWrapper.style.alignItems = "center";
             btnWrapper.style.justifyContent = "center";
-            btnWrapper.style.height = "200px";
-            btnWrapper.style.width = "120px";
+            btnWrapper.style.height = "200px"; // Igual que videos
+            btnWrapper.style.width = "auto";
 
             const verMasBtn = document.createElement("button");
             verMasBtn.innerText = "Ver más";
             verMasBtn.onclick = () => get_video_stories(containerID, true);
 
-            // 🎨 Estilos botón
+            // 🔹 Estilos botón
             verMasBtn.style.backgroundColor = "dodgerblue";
             verMasBtn.style.color = "white";
             verMasBtn.style.border = "none";
-            verMasBtn.style.padding = "10px";
+            verMasBtn.style.padding = "10px 20px";
             verMasBtn.style.cursor = "pointer";
-            verMasBtn.style.fontSize = "14px";
+            verMasBtn.style.fontSize = "16px";
             verMasBtn.style.borderRadius = "8px";
-            verMasBtn.style.width = "100%";
-            verMasBtn.style.height = "100%";
+            verMasBtn.style.height = "100%"; // Ocupa toda la altura del wrapper
+            verMasBtn.style.width = "100%"; // Ocupa todo el ancho del wrapper
 
             btnWrapper.appendChild(verMasBtn);
             container.appendChild(btnWrapper);
@@ -191,17 +122,9 @@ async function get_video_stories(containerID, append = false) {
 
     } catch (error) {
         console.error('Error cargando historias de video:', error);
-
-        // 💥 Fallback global (por si todo falla)
-        const container = document.getElementById(containerID);
-        if (container) {
-            for (let i = 0; i < limit; i++) {
-                container.appendChild(crearFallbackStory());
-            }
-        }
     }
 }
-//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////
 
 
 

@@ -262,7 +262,7 @@ async function ejecutarSwap(fromToken, toToken, amount) {
 
         const router = new ethers.Contract(ROUTER, ROUTER_ABI, signer);
 
-        const SOCK = "TU_TOKEN_SOCK"; // ⚠️ pon tu contrato
+        const SOCK = "0x8f78976a0FDF8F66Ad81bb7D7c9b8D4A695022E3"; // ⚠️ pon tu contrato
         const WPOL = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
 
         const deadline = Math.floor(Date.now() / 1000) + 60 * 10;

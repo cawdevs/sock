@@ -15,7 +15,7 @@ function crearSwapUI() {
 
     // 🔥 TITULO
     const title = document.createElement("h1");
-    title.innerText = "SWAPP-INTERCAMBIO";
+    title.innerText = "INTERCAMBIO";
     title.style.textAlign = "center";
     title.style.color = "dodgerblue";
     title.style.fontSize = "36px";
@@ -39,7 +39,7 @@ function crearSwapUI() {
 
     function crearInput(label, token) {
         const wrapper = document.createElement("div");
-        wrapper.style.marginBottom = "18px";
+        wrapper.style.marginBottom = "10px";
 
         // 🔥 FROM / TO MÁS GRANDES
         const title = document.createElement("div");

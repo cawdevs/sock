@@ -239,31 +239,89 @@ async function obtenerPrecio() {
 }
 
 
+
+const ROUTER = "0xf5b509bB0909a69B1c207E495f687a596C168E12";
+
+const ROUTER_ABI = [
+    "function exactInputSingle(tuple(address tokenIn,address tokenOut,address recipient,uint256 deadline,uint256 amountIn,uint256 amountOutMinimum,uint160 limitSqrtPrice)) payable returns (uint256 amountOut)"
+];
+
+const ERC20_ABI = [
+    "function approve(address spender, uint amount) external returns (bool)",
+    "function allowance(address owner, address spender) view returns (uint)"
+];
+
+
 async function ejecutarSwap(fromToken, toToken, amount) {
     try {
         console.log("Swapping:", amount, fromToken, "→", toToken);
 
-        // aquí iría tu contrato
-        // usando ethers.js
-
-        // ejemplo base:
-        /*
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
+        const user = await signer.getAddress();
 
-        const contract = new ethers.Contract(
-            ROUTER_ADDRESS,
-            ROUTER_ABI,
-            signer
-        );
+        const router = new ethers.Contract(ROUTER, ROUTER_ABI, signer);
 
-        await contract.swapExactTokensForTokens(...);
-        */
+        const SOCK = "TU_TOKEN_SOCK"; // ⚠️ pon tu contrato
+        const WPOL = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
 
-        alert("Swap ejecutado (simulado)");
+        const deadline = Math.floor(Date.now() / 1000) + 60 * 10;
+        const amountIn = ethers.utils.parseUnits(amount.toString(), 18);
+
+        let tokenIn, tokenOut;
+        let value = 0;
+
+        // 🔁 definir tokens
+        if (fromToken === "SOCK" && toToken === "POL") {
+            tokenIn = SOCK;
+            tokenOut = WPOL;
+        } 
+        else if (fromToken === "POL" && toToken === "SOCK") {
+            tokenIn = WPOL;
+            tokenOut = SOCK;
+            value = amountIn; // 🔥 POL se envía como value
+        } 
+        else {
+            throw new Error("Par no soportado");
+        }
+
+        // 🔥 APPROVE si es ERC20
+        if (fromToken === "SOCK") {
+            const token = new ethers.Contract(SOCK, ERC20_ABI, signer);
+            const allowance = await token.allowance(user, ROUTER);
+
+            if (allowance.lt(amountIn)) {
+                const txApprove = await token.approve(ROUTER, amountIn);
+                await txApprove.wait();
+                console.log("Approve listo");
+            }
+        }
+
+        // 🔥 PARAMS V3
+        const params = {
+            tokenIn: tokenIn,
+            tokenOut: tokenOut,
+            recipient: user,
+            deadline: deadline,
+            amountIn: amountIn,
+            amountOutMinimum: 0, // ⚠️ luego agregamos slippage
+            limitSqrtPrice: 0
+        };
+
+        // 🚀 EJECUTAR
+        const tx = await router.exactInputSingle(params, {
+            value: value
+        });
+
+        console.log("TX:", tx.hash);
+
+        await tx.wait();
+
+        alert("✅ Swap completado");
 
     } catch (err) {
-        console.error(err);
-        alert("Error en swap");
+        console.error("Error en swap:", err);
+        alert("❌ Error en swap");
     }
 }
 

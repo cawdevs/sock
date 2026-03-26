@@ -2581,13 +2581,13 @@ async function obtenerSaldo_SOCK() {
     const total_USD = price * Number(truncatedBalance);
 
     // 🔥 nueva variable
-    const total_USD_rounded = total_USD.toFixed(2);
+    const total_USD_rounded = total_USD.toFixed(4);
 
     console.log(total_USD_rounded);
 
     
     const saldoUSDElement = document.getElementById('saldo_USD_CAW');
-    saldoUSDElement.innerText = "$ " + total_USD_rounded;
+    saldoUSDElement.innerText = "POL " + total_USD_rounded;
     saldoUSDElement.style.color = "white";
 
 

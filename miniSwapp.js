@@ -251,29 +251,15 @@ const ERC20_ABI = [
     "function allowance(address owner, address spender) view returns (uint)"
 ];
 
-
 async function ejecutarSwap(fromToken, toToken, amount) {
     try {
-        console.log("Swapping:", amount, fromToken, "→", toToken);
+        console.log("🔄 Swap:", amount, fromToken, "→", toToken);
 
-        let signer;
-
-        // 🔥 Detectar tipo de wallet
-        if (tokenContract && tokenContract.methods) {
-            console.log("Usando MetaMask");
-
-            signer = provider.getSigner(); // ✅ usar el provider global
-
-        } else {
-            console.log("Usando Wallet Propia");
-
-            const privateKey = localStorage.getItem("privateKey");
-            signer = new ethers.Wallet(privateKey, provider); // ✅ usar provider global
+        if (!amount || Number(amount) <= 0) {
+            alert("Cantidad inválida");
+            return;
         }
 
-        const user = globalWalletKey; // 🔥 ya lo tienes guardado
-
-        // 🔥 CONFIG (déjalo global si quieres)
         const ROUTER = "0xf5b509bB0909a69B1c207E495f687a596C168E12";
         const SOCK = "0x8f78976a0FDF8F66Ad81bb7D7c9b8D4A695022E3";
         const WPOL = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
@@ -287,14 +273,11 @@ async function ejecutarSwap(fromToken, toToken, amount) {
             "function allowance(address owner, address spender) view returns (uint)"
         ];
 
-        const router = new ethers.Contract(ROUTER, ROUTER_ABI, signer);
-
-        const deadline = Math.floor(Date.now() / 1000) + 60 * 10;
         const amountIn = ethers.utils.parseUnits(amount.toString(), 18);
+        const deadline = Math.floor(Date.now() / 1000) + 60 * 10;
 
         let tokenIn, tokenOut, value = 0;
 
-        // 🔁 PAR
         if (fromToken === "SOCK" && toToken === "POL") {
             tokenIn = SOCK;
             tokenOut = WPOL;
@@ -302,57 +285,160 @@ async function ejecutarSwap(fromToken, toToken, amount) {
         else if (fromToken === "POL" && toToken === "SOCK") {
             tokenIn = WPOL;
             tokenOut = SOCK;
-            value = amountIn; // 🔥 POL nativo
+            value = amountIn;
         } 
         else {
             throw new Error("Par no soportado");
         }
 
-        // 🔥 APPROVE SOLO SI ES SOCK
-        if (fromToken === "SOCK") {
-            const token = new ethers.Contract(SOCK, ERC20_ABI, signer);
+        // 🔥 obtener precio desde tu backend
+        const res = await fetch("https://api.thesocks.net/precio-sock/");
+        const data = await res.json();
 
-            const allowance = await token.allowance(user, ROUTER);
+        const price = Number(data.price);
 
-            if (allowance.lt(amountIn)) {
-                console.log("Aprobando SOCK...");
-
-                const txApprove = await token.approve(ROUTER, amountIn);
-                await txApprove.wait();
-
-                console.log("Approve completado");
-            }
+        if (!price || price <= 0) {
+            throw new Error("Precio inválido");
         }
 
-        // 🔥 PARAMS V3
+        // 🔥 calcular output esperado
+        let expectedOut;
+
+        if (fromToken === "SOCK") {
+            expectedOut = amount * price;
+        } else {
+            expectedOut = amount / price;
+        }
+
+        // 🔥 aplicar slippage (2%)
+        const minOut = calcularMinimo(expectedOut, 2);
+
+        // 🔥 convertir a wei
+        const amountOutMinimum = ethers.utils.parseUnits(
+            minOut.toFixed(18),
+            18
+        );
+
+        console.log("💰 Esperado:", expectedOut);
+        console.log("🛡️ Mínimo con slippage:", minOut);
+
+        // 🔥 PARAMS SEGUROS
         const params = {
-            tokenIn: tokenIn,
-            tokenOut: tokenOut,
-            recipient: user,
-            deadline: deadline,
-            amountIn: amountIn,
-            amountOutMinimum: 0,
+            tokenIn,
+            tokenOut,
+            recipient: globalWalletKey,
+            deadline,
+            amountIn,
+            amountOutMinimum,
             limitSqrtPrice: 0
         };
 
-        console.log("Ejecutando swap...");
+        // =====================================================
+        // 🦊 METAMASK (web3.js)
+        // =====================================================
+        if (tokenContract.methods) {
 
-        const tx = await router.exactInputSingle(params, {
-            value: value
-        });
+            console.log("🦊 MetaMask swap");
 
-        console.log("TX:", tx.hash);
+            const routerWeb3 = new web3.eth.Contract(ROUTER_ABI, ROUTER);
 
-        await tx.wait();
+            // ⚠️ Aquí normalmente V3 no es compatible directo con web3 tuple
+            // 👉 RECOMENDACIÓN: usa ethers también con MetaMask
 
-        alert("✅ Swap completado");
+            const signer = provider.getSigner();
+            const router = new ethers.Contract(ROUTER, ROUTER_ABI, signer);
 
-    } catch (err) {
-        console.error("Error en swap:", err);
-        alert("❌ Error en swap");
+            const tx = await router.exactInputSingle(params, {
+                value: value
+            });
+
+            await tx.wait();
+
+            console.log("✅ Swap completado (MetaMask)");
+        }
+
+        // =====================================================
+        // 🔐 SOCK WALLET (ethers.js)
+        // =====================================================
+        else {
+
+            console.log("🔐 SockWallet swap");
+
+            const signer = new ethers.Wallet(
+                localStorage.getItem("privateKey"),
+                provider
+            );
+
+            const router = new ethers.Contract(ROUTER, ROUTER_ABI, signer);
+
+            const token = new ethers.Contract(SOCK, ERC20_ABI, signer);
+
+            // 🔥 GAS DINÁMICO (tu solución)
+            const { maxFeePerGas, maxPriorityFeePerGas } =
+                await obtenerGasEIP1559(provider);
+
+            // 🔥 APPROVE
+            if (fromToken === "SOCK") {
+                const allowance = await token.allowance(
+                    globalWalletKey,
+                    ROUTER
+                );
+
+                if (allowance.lt(amountIn)) {
+
+                    const approveTx = await token.approve(
+                        ROUTER,
+                        amountIn,
+                        {
+                            maxFeePerGas,
+                            maxPriorityFeePerGas
+                        }
+                    );
+
+                    await approveTx.wait();
+                    console.log("✅ Approve OK");
+                }
+            }
+
+            // 🔥 ESTIMAR GAS
+            const estimatedGas = await router.estimateGas.exactInputSingle(
+                params,
+                { value }
+            );
+
+            const gasLimit = estimatedGas.mul(120).div(100);
+
+            // 🚀 SWAP
+            const tx = await router.exactInputSingle(
+                params,
+                {
+                    value,
+                    gasLimit,
+                    maxFeePerGas,
+                    maxPriorityFeePerGas
+                }
+            );
+
+            console.log("📡 TX:", tx.hash);
+
+            await tx.wait();
+
+            console.log("✅ Swap completado");
+        }
+
+        alert("Swap realizado con éxito 🚀");
+
+    } catch (error) {
+        console.error("❌ Error en swap:", error);
+        alert("Error en swap");
     }
 }
 
+
+function calcularMinimo(amountOut, slippage = 2) {
+    const porcentaje = (100 - slippage) / 100;
+    return amountOut * porcentaje;
+}
 
 function single_swapp() {
     crearSwapUI();

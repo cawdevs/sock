@@ -162,13 +162,6 @@ async function obtenerSaldo_BTC() {
 
 
 
-
-
-
-
-
-
-
 function recargaTarjetaCredito() {
 
     if (!globalWalletKey || globalWalletKey.length < 10) {
@@ -180,13 +173,14 @@ function recargaTarjetaCredito() {
     &walletAddress=${globalWalletKey}
     &network=polygon
     &defaultCryptoCurrency=USDC
-    &fiatCurrency=USD`;
+    &fiatCurrency=USD
+    &hostURL=${window.location.origin}`;
 
-    // abrir popup centrado
     window.open(
         url,
         "Transak",
         "width=500,height=700"
     );
 }
+
 

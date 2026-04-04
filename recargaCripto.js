@@ -169,18 +169,12 @@ function recargaTarjetaCredito() {
         return;
     }
 
-    const url = `https://global-stg.transak.com?apiKey=3e8ffa58-d5be-4fb4-a3eb-aa006f3fcc1e
-    &walletAddress=${globalWalletKey}
-    &network=polygon
-    &defaultCryptoCurrency=USDC
-    &fiatCurrency=USD
-    &hostURL=${window.location.origin}`;
+    const url = "https://global-stg.transak.com?apiKey=3e8ffa58-d5be-4fb4-a3eb-aa006f3fcc1e"
+        + "&walletAddress=" + globalWalletKey
+        + "&network=polygon"
+        + "&defaultCryptoCurrency=USDC"
+        + "&fiatCurrency=USD"
+        + "&hostURL=" + encodeURIComponent(window.location.origin);
 
-    window.open(
-        url,
-        "Transak",
-        "width=500,height=700"
-    );
+    window.open(url, "Transak", "width=500,height=700");
 }
-
-

@@ -169,7 +169,7 @@ function recargaTarjetaCredito() {
         return;
     }
 
-    const url = "https://global-stg.transak.com?apiKey=3e8ffa58-d5be-4fb4-a3eb-aa006f3fcc1e"
+    const url = "https://global.transak.com?apiKey=3e8ffa58-d5be-4fb4-a3eb-aa006f3fcc1e"
         + "&walletAddress=" + globalWalletKey
         + "&network=polygon"
         + "&defaultCryptoCurrency=USDC"

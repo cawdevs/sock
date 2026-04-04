@@ -3,6 +3,11 @@
 
 
 async function recargar_con_btc() {
+
+
+  const containerTC = document.getElementById("recargar-con-tarjeta");
+  contenedorTC.innerHTML = ""; // Limpiar contenido previo
+    
   const contenedor = document.getElementById("recargar-con-btc");
   contenedor.innerHTML = ""; // Limpiar contenido previo
 
@@ -158,3 +163,35 @@ async function obtenerSaldo_BTC() {
 
 
 
+function recargaTarjetaCredito() {
+
+
+    const contenedorBTC = document.getElementById("recargar-con-btc");
+    contenedorBTC.innerHTML = ""; // Limpiar contenido previo
+
+
+    const container = document.getElementById("recargar-con-tarjeta");
+
+    // Validación básica
+    if (!globalWalletKey || globalWalletKey.length < 10) {
+        alert("Wallet no válida");
+        return;
+    }
+
+    // URL de Transak (modo prueba)
+    const url = `https://global-stg.transak.com?apiKey=3e8ffa58-d5be-4fb4-a3eb-aa006f3fcc1e
+    &walletAddress=${globalWalletKey}
+    &network=polygon
+    &defaultCryptoCurrency=USDC
+    &fiatCurrency=USD`;
+
+    // Insertar iframe
+    container.innerHTML = `
+        <iframe 
+            src="${url}" 
+            width="100%" 
+            height="600px" 
+            style="border:none; border-radius:10px;">
+        </iframe>
+    `;
+}

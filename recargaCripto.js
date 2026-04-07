@@ -162,7 +162,6 @@ async function obtenerSaldo_BTC() {
 
 
 
-
 async function recargaTarjetaCredito() {
 
     if (!globalWalletKey || globalWalletKey.length < 10) {
@@ -173,11 +172,25 @@ async function recargaTarjetaCredito() {
     try {
 
         const response = await fetch(`https://api.thesocks.net/transak/session/?walletAddress=${globalWalletKey}`);
-
         const data = await response.json();
 
-        const parsed = JSON.parse(data.data);
-        const sessionId = parsed.sessionId;
+        console.log("Respuesta backend:", data);
+
+        let sessionId;
+
+        if (data.sessionId) {
+            // 🟢 caso limpio
+            sessionId = data.sessionId;
+        } else if (data.data) {
+            // 🔵 caso string
+            const parsed = typeof data.data === "string" ? JSON.parse(data.data) : data.data;
+            sessionId = parsed.sessionId;
+        }
+
+        if (!sessionId) {
+            alert("No se pudo obtener sessionId");
+            return;
+        }
 
         const url = `https://global-stg.transak.com?sessionId=${sessionId}`;
 

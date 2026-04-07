@@ -173,10 +173,12 @@ async function recargaTarjetaCredito() {
     try {
 
         const response = await fetch(`/transak/session/?walletAddress=${globalWalletKey}`);
-
+         
+        console.log("response2 ",response);  
+           
         const data = await response.json();
 
-        console.log(data); 
+        console.log("data2  ",data); 
 
         const sessionId = data.sessionId;
 

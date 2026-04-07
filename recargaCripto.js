@@ -182,7 +182,8 @@ async function recargaTarjetaCredito() {
 
         const sessionId = data.sessionId;
 
-        const url = `https://global-stg.transak.com?sessionId=${sessionId}`;
+        
+        const url = `https://global-stg.transak.com?apiKey=418bdc30-015c-4593-ab2f-8e348dc3cb2c&sessionId=${sessionId}`;
 
         window.open(url, "Transak", "width=500,height=700");
 

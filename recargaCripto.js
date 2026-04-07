@@ -6,7 +6,7 @@ async function recargar_con_btc() {
 
 
   const containerTC = document.getElementById("recargar-con-tarjeta");
-  contenedorTC.innerHTML = ""; // Limpiar contenido previo
+  containerTC.innerHTML = ""; // Limpiar contenido previo
     
   const contenedor = document.getElementById("recargar-con-btc");
   contenedor.innerHTML = ""; // Limpiar contenido previo

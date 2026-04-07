@@ -162,19 +162,27 @@ async function obtenerSaldo_BTC() {
 
 
 
-function recargaTarjetaCredito() {
+
+async function recargaTarjetaCredito() {
 
     if (!globalWalletKey || globalWalletKey.length < 10) {
         alert("Wallet no válida");
         return;
     }
 
-    const url = "https://global.transak.com?apiKey=3e8ffa58-d5be-4fb4-a3eb-aa006f3fcc1e"
-        + "&walletAddress=" + globalWalletKey
-        + "&network=polygon"
-        + "&defaultCryptoCurrency=USDC"
-        + "&fiatCurrency=USD"
-        + "&hostURL=" + encodeURIComponent(window.location.origin);
+    try {
 
-    window.open(url, "Transak", "width=500,height=700");
+        const response = await fetch(`/transak/session/?walletAddress=${globalWalletKey}`);
+        const data = await response.json();
+
+        const sessionId = data.sessionId;
+
+        const url = `https://global-stg.transak.com?sessionId=${sessionId}`;
+
+        window.open(url, "Transak", "width=500,height=700");
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Error creando sesión de pago");
+    }
 }

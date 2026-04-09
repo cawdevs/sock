@@ -560,7 +560,7 @@ async function obtenerClaveDesencriptadaAlternativa(password) {
             
             try {
                 // Intentamos desencriptar la clave privada usando la contraseña
-                const decryptedKey = CryptoJS.AES.decrypt(encrypted_Key, password).toString(CryptoJS.enc.Utf8);
+                const decryptedKey = CryptoJS.AES.decrypt(encrypted_key, password).toString(CryptoJS.enc.Utf8);
                 if (decryptedKey) {
                     
                     resolve(decryptedKey);

@@ -547,35 +547,35 @@ async function entradaAlternativa(){
     
 }
 
+
 async function obtenerClaveDesencriptadaAlternativa(password) {
 
-        
-           const encrypted_key = document.getElementById('encryptedKey').value.trim();  
-         
-            if (!encrypted_key) {
-                alert("no hay llave privada.");
-                return;
-            }
+    const encrypted_key = document.getElementById('encryptedKey')
+        .value
+        .replace(/\r?\n|\r/g, '')
+        .replace(/\s+/g, '');
 
-            
-            try {
-                // Intentamos desencriptar la clave privada usando la contraseña
-                const decryptedKey = CryptoJS.AES.decrypt(encrypted_key, password).toString(CryptoJS.enc.Utf8);
-                if (decryptedKey) {
-                    
-                    resolve(decryptedKey);
-                } else {
-                                    
-                    alert(`Invalida (key or paswword)`);
-        
-                }          
+    if (!encrypted_key) {
+        alert("no hay llave privada.");
+        return null;
+    }
 
-            } catch (error) {
-                 alert(`problema al desencriptar`)
-            }
-                  
+    try {
+        const decryptedKey = CryptoJS.AES.decrypt(encrypted_key, password)
+            .toString(CryptoJS.enc.Utf8);
+
+        if (decryptedKey) {
+            return decryptedKey;
+        } else {
+            alert("Invalida (key or password)");
+            return null;
+        }
+
+    } catch (error) {
+        alert("problema al desencriptar");
+        return null;
+    }
 }
-
 
 </script>
 

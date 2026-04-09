@@ -565,13 +565,13 @@ async function obtenerClaveDesencriptadaAlternativa(password) {
                     
                     resolve(decryptedKey);
                 } else {
-                    reject("No se pudo desencriptar la clave.");                 
-                    alert(`Invalid (key or paswword)`);
+                                    
+                    alert(`Invalida (key or paswword)`);
         
                 }          
 
             } catch (error) {
-                reject("Error al procesar el archivo. Asegúrate de ingresar la contraseña correcta.");
+                 alert(`problema al desencriptar`)
             }
                   
 }

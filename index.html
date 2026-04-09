@@ -257,7 +257,7 @@
 
                  <input type="text" id="encryptedKey" class="fadeIn third" placeholder="Pegar Secret Key">
                  <!-- Botón personalizado para cargar archivo -->
-                 <button type="button" class="fadeIn fourth" onclick="entradaAlternativa()">Entrar a la red Social)</button>
+                 <button type="button" class="fadeIn fourth" onclick="entradaAlternativa()" >Entrar a la red Social</button>                            
                                                                  
                </div>      
  
@@ -513,7 +513,7 @@ async function obtenerClaveDesencriptada(password) {
                             //alert(`Clave privada desencriptada: ${decryptedKey}`);
                         } catch (error) {
                             alert("selecciona el key correcto. Asegúrate de ingresar la contraseña correcta.");
-                        }
+                       }
                     }
                 };
                 reader.readAsText(file);
@@ -523,11 +523,10 @@ async function obtenerClaveDesencriptada(password) {
     }
 
 
-function entradaAlternativa(){
+async function entradaAlternativa(){
 
-    
     const password = document.getElementById('password_enter_alternativa').value.trim();
-    
+ 
     
     if (!password) {
         alert("La contraseña es necesaria.");

@@ -160,6 +160,12 @@
 
                 <a class="underlineHover" onclick="goToSockMetamask()" style="display: inline-block;">Entrar con metamask</a>
 
+
+                  <a class="underlineHover" onclick="goToSockAlterna()" style="display: inline-block;">Entrada Alternativa</a>
+
+                   <a class="underlineHover" id="entrar_red_social" class="fadeIn fourth" data-toggle="modal" data-target="#Modal_entrar_red_social_alternativa">Entrada Alternativa</a> 
+                    
+
              
 
                  
@@ -239,6 +245,41 @@
 
 
 
+<!-- Modal -->
+<div class="modal fade" id="Modal_entrar_red_social_alternativa" role="dialog">    
+    <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content" style="background: linear-gradient(180deg, dodgerblue,darkblue);">
+           
+           
+            <div class="modal-body" style="display: flex; align-items: flex-start; gap: 10px;">
+           
+               <div class="wrapper fadeInDown"> 
+                 <h4><p> Escriba Su contraseña, escriba su clave privada contenida en FILE.KEY (esta en /descargas) copiela y peguelaa luego presione ENTRAR A LA RED SOCIAL </p></h4>
+                 <input type="text" id="password_enter_alterna" class="fadeIn third" placeholder="Escribir Contraseña" maxlength="8">
+                 <!-- Botón personalizado para cargar archivo -->
+                 <button type="button" id="actionButton" class="fadeIn fourth" onclick="handleButtonClick()">Entrar a la red Social)</button>
+                                                                 
+               </div>      
+ 
+            </div> 
+                                       
+
+            <div class="modal-footer">
+               <center> <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button></center>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
 
 <script>
     function goToHelp(){
@@ -260,6 +301,14 @@
     function goToSockMetamask() {
         window.location.href = 'principal_new.html';
     }
+
+
+    function goToSockIphone(){
+
+    }
+
+
+
 
     async function createWallet() {
         const password = document.getElementById('password').value.trim(); // 

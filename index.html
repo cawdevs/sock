@@ -152,23 +152,20 @@
                  
            <div style="display: flex; justify-content: space-between; margin-top: 20px">
                 
-            <!--
-                <a class="underlineHover" onclick="goToHelp()" style="display: inline-block;"> <span class="glyphicon glyphicon-question-sign" style="color: black; font-size: 24px;"></a>
-
-                <a class="underlineHover" onclick="goToExplain()" style="display: inline-block;"><span class="glyphicon glyphicon-info-sign" style="color: black; font-size: 24px;"></a>
-       -->
-
+          
                 <a class="underlineHover" onclick="goToSockMetamask()" style="display: inline-block;">Entrar con metamask</a>
 
-
-                  <a class="underlineHover" onclick="goToSockAlterna()" style="display: inline-block;">Entrada Alternativa</a>
-
-                   <a class="underlineHover" id="entrar_red_social" class="fadeIn fourth" data-toggle="modal" data-target="#Modal_entrar_red_social_alternativa">Entrada Alternativa</a> 
-                    
-
-             
-
                  
+              
+            
+
+           </div>
+
+             <div style="display: flex; justify-content: space-between; margin-top: 20px">
+             
+                          
+                <a class="underlineHover"  data-toggle="modal" data-target="#Modal_entrar_red_social_alternativa">Entrada Alternativa</a> 
+                           
 
            </div>
            
@@ -255,10 +252,12 @@
             <div class="modal-body" style="display: flex; align-items: flex-start; gap: 10px;">
            
                <div class="wrapper fadeInDown"> 
-                 <h4><p> Escriba Su contraseña, escriba su clave privada contenida en FILE.KEY (esta en /descargas) copiela y peguelaa luego presione ENTRAR A LA RED SOCIAL </p></h4>
-                 <input type="text" id="password_enter_alterna" class="fadeIn third" placeholder="Escribir Contraseña" maxlength="8">
+                 <h4><p> Escriba Su contraseña, escriba su clave privada contenida en FILE.KEY (esta en /descargas) copiela y peguela luego presione ENTRAR A LA RED SOCIAL </p></h4>
+                 <input type="text" id="password_enter_alternativa" class="fadeIn third" placeholder="Escribir Contraseña" maxlength="8">
+
+                 <input type="text" id="encryptedKey" class="fadeIn third" placeholder="Pegar Secret Key" maxlength="8">
                  <!-- Botón personalizado para cargar archivo -->
-                 <button type="button" id="actionButton" class="fadeIn fourth" onclick="handleButtonClick()">Entrar a la red Social)</button>
+                 <button type="button" class="fadeIn fourth" onclick="entradaAlternativa()">Entrar a la red Social)</button>
                                                                  
                </div>      
  
@@ -303,11 +302,7 @@
     }
 
 
-    function goToSockIphone(){
-
-    }
-
-
+   
 
 
     async function createWallet() {
@@ -526,7 +521,68 @@ async function obtenerClaveDesencriptada(password) {
         };
         inputFile.click();  // Simula el clic para abrir el selector de archivos
     }
+
+
+function entradaAlternativa(){
+
+    
+    const password = document.getElementById('password_enter_alternativa').value.trim();
+    
+    
+    if (!password) {
+        alert("La contraseña es necesaria.");
+        return;
+    }
+
+    
+    // Desencripta la clave privada del archivo cargado
+    const privateKey = await obtenerClaveDesencriptadaAlternativa(password);
+    if (privateKey) {
+            //alert(`Billetera cargada exitosamente. Clave privada: ${privateKey}`);
+            //sessionStorage.setItem('privateKey', privateKey);
+            localStorage.setItem("privateKey", privateKey);
+            localStorage.setItem("password", password);
+
+            goToMainPage();
+    }
+    
+}
+
+async function obtenerClaveDesencriptadaAlternativa(password) {
+
+        
+           const encripted_key = document.getElementById('encryptedKey').value.trim();  
+         
+            if (!encripted_key) {
+                alert("no hay llave privada.");
+                return;
+            }
+
+            
+            try {
+                // Intentamos desencriptar la clave privada usando la contraseña
+                const decryptedKey = CryptoJS.AES.decrypt(encrypted_Key, password).toString(CryptoJS.enc.Utf8);
+                if (decryptedKey) {
+                    
+                    resolve(decryptedKey);
+                } else {
+                    reject("No se pudo desencriptar la clave.");                 
+                    alert(`Invalid (key or paswword)`);
+        
+                }          
+
+            } catch (error) {
+                reject("Error al procesar el archivo. Asegúrate de ingresar la contraseña correcta.");
+            }
+                  
+}
+
+
 </script>
+
+
+
+
 
 </body>
 </html>

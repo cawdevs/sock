@@ -147,6 +147,8 @@ async function transferSockTokens(recipientAddress, amount) {
         const amountInWei = ethers.utils.parseUnits(amount.toString(), 18);                
         // Transferir los tokens SOCK
         let tx;
+        
+
         if (tokenContract.methods) {
             // Usando MetaMask (Web3.js)
             tx = await tokenContract.methods.transfer(recipientAddress, amountInWei).send({
@@ -194,7 +196,7 @@ async function transferMatic(recipientAddress, amount) {
        
         // Transferir MATIC
         let tx;
-        if (window.ethereum) {
+        if (tokenContract.methods) {
             // Usando MetaMask
             tx = await ethereum.request({
                 method: "eth_sendTransaction",

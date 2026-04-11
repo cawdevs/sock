@@ -2341,6 +2341,10 @@ async function inicializarUI() {
     //verificar si el servidor esta vivo o no 
     await verificarServidor(); 
 
+    await obtenerSaldo_BTC();
+    await obtenerSaldo_POL();
+    await obtenerSaldo_SOCK();
+
     await get_all_publications_home('recent-home-publications-container', false, "last");
 
 
@@ -2396,9 +2400,7 @@ async function inicializarUI() {
 
     // Obtener y mostrar saldos
           
-    await obtenerSaldo_BTC();
-    await obtenerSaldo_POL();
-    await obtenerSaldo_SOCK();
+   
 
 
     get_total_liked();

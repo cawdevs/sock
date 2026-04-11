@@ -163,7 +163,7 @@ async function obtenerSaldo_BTC() {
 
 async function recargaTarjetaCredito() {
 
-    const response = await fetch(`/transak/session/?walletAddress=${globalWalletKey}`);
+    const response = await fetch(`https://api.thesocks.net/transak/session/?walletAddress=${globalWalletKey}`);
     const data = await response.json();
 
     const widgetUrl = data.data.widgetUrl;

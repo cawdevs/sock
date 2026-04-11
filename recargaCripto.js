@@ -158,9 +158,34 @@ async function obtenerSaldo_BTC() {
 }
 
 
+async function recargaTarjetaCredito() {
 
+    if (!globalWalletKey || globalWalletKey.length < 10) {
+        alert("Wallet no válida");
+        return;
+    }
 
+    try {
 
+        alert("Se abrirá la ventana de pago 💳");
+
+        const response = await fetch(`https://api.thesocks.net/transak/session/?walletAddress=${globalWalletKey}`);
+        const data = await response.json();
+
+        console.log("DATA:", data);
+
+        const widgetUrl = data.data.widgetUrl;
+
+        // 🔥 abrir popup
+        window.open(widgetUrl, "Transak", "width=500,height=700");
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Error creando sesión de pago");
+    }
+}
+
+/*
 async function recargaTarjetaCredito() {
 
     const response = await fetch("https://api.thesocks.net/transak/session/?walletAddress=${globalWalletKey}");
@@ -169,4 +194,30 @@ async function recargaTarjetaCredito() {
     const widgetUrl = data.data.widgetUrl;
 
     window.open(widgetUrl, "_blank");
-}
+}*/
+
+window.addEventListener("message", (event) => {
+
+    // 🔐 seguridad básica
+    if (!event.origin.includes("transak.com")) return;
+
+    const data = event.data;
+
+    console.log("Evento Transak:", data);
+
+    // ✅ pago exitoso
+    if (data.eventName === "TRANSAK_ORDER_SUCCESSFUL") {
+
+        alert("✅ Pago completado");
+
+        // 🔥 actualizar saldo
+        obtenerSaldo(globalWalletKey);
+    }
+
+    // ❌ pago fallido
+    if (data.eventName === "TRANSAK_ORDER_FAILED") {
+
+        alert("❌ El pago falló");
+    }
+
+});

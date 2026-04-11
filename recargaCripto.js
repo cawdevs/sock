@@ -4,9 +4,6 @@
 
 async function recargar_con_btc() {
 
-
-  const containerTC = document.getElementById("recargar-con-tarjeta");
-  containerTC.innerHTML = ""; // Limpiar contenido previo
     
   const contenedor = document.getElementById("recargar-con-btc");
   contenedor.innerHTML = ""; // Limpiar contenido previo
@@ -163,32 +160,13 @@ async function obtenerSaldo_BTC() {
 
 
 
+
 async function recargaTarjetaCredito() {
 
-    if (!globalWalletKey || globalWalletKey.length < 10) {
-        alert("Wallet no válida");
-        return;
-    }
+    const response = await fetch(`/transak/session/?walletAddress=${globalWalletKey}`);
+    const data = await response.json();
 
-    try {
+    const widgetUrl = data.data.widgetUrl;
 
-        const response = await fetch(`/transak/session/?walletAddress=${globalWalletKey}`);
-         
-        console.log("response2 ",response);  
-           
-        const data = await response.json();
-
-        console.log("data2  ",data); 
-
-        const sessionId = data.sessionId;
-
-        
-        const url = `https://global-stg.transak.com?apiKey=418bdc30-015c-4593-ab2f-8e348dc3cb2c&sessionId=${sessionId}`;
-
-        window.open(url, "Transak", "width=500,height=700");
-
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Error creando sesión de pago");
-    }
+    window.open(widgetUrl, "_blank");
 }

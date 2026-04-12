@@ -279,7 +279,7 @@ function getVideoPublications(start = 0, limit = 5) {
     .then(data => {
         if (data.status === "ok") {
             console.log(`🎥 Videos obtenidos:`, data.videos);
-            consoelog("videos",data.videos);
+            console.log("videos",data.videos);
             return data.videos; // Devuelve lista de IDs
         } else {
             console.warn("⚠ No se pudieron obtener videos:", data.error);

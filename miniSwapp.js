@@ -253,10 +253,14 @@ const ERC20_ABI = [
 ];
 
 async function ejecutarSwap(fromToken, toToken, amount) {
+
+
+    const loadingAnimation = document.getElementById('loadingAnimation-swapp');
+        loadingAnimation.style.display = 'block';
+        
     try {
 
-        const loadingAnimation = document.getElementById('loadingAnimation-swapp');
-        loadingAnimation.style.display = 'block';
+        
 
 
         console.log("🔄 Swap:", amount, fromToken, "→", toToken);

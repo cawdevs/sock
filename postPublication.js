@@ -525,8 +525,8 @@ async function publicar_main_post() {
                         let tx;
                         try {
 
-                                                        
-
+                            
+                            
                             tx = await publisherContract.createPublication(
                                 selected_username,
                                 content,
@@ -1113,7 +1113,7 @@ async function createPublicationElement(publication) {
     }
 
     const usernameSpan = document.createElement('span');
-    usernameSpan.textContent = `@${nftUsername}`;
+    usernameSpan.textContent = `@${nftUsername}_${id}`;
     usernameSpan.style.cssText = `
         font-size: 14px;
         color: #555;

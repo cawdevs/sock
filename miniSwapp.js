@@ -161,7 +161,13 @@ function crearSwapUI() {
         const amount = Number(from.input.value);
         if (!amount) return;
 
-        const price = await obtenerPrecio();
+
+        const data = await obtenerPrecio();
+        console.log("SOCK en POL:", data.price_pol);
+        console.log("SOCK en USD:", data.price_usd);
+        console.log("POL en USD:", data.pol_usd);
+
+        const price = data.price_pol;
         if (!price) return;
 
         let result;
@@ -232,13 +238,17 @@ async function obtenerBalance(token) {
 }
 
 
+
 async function obtenerPrecio() {
-    const res = await fetch("https://api.thesocks.net/precio-sock/");
-    const data = await res.json();
-
-    return Number(data.price);
+    try {
+        const res = await fetch("https://api.thesocks.net/precio-sock/");
+        const data = await res.json();
+        return data;
+    } catch (e) {
+        console.error("Error obteniendo precio:", e);
+        return null;
+    }
 }
-
 
 
 const ROUTER = "0xf5b509bB0909a69B1c207E495f687a596C168E12";

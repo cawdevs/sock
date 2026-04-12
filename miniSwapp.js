@@ -1,5 +1,5 @@
 function crearSwapUI() {
-    const container = document.getElementById("menu_transfer");
+    const container = document.getElementById("menu_swapp");
     if (!container) return;
 
     container.innerHTML = "";
@@ -256,8 +256,8 @@ async function ejecutarSwap(fromToken, toToken, amount) {
 
 
     const loadingAnimation = document.getElementById('loadingAnimation-swapp');
-        loadingAnimation.style.display = 'block';
-        
+    loadingAnimation.style.display = 'block';
+
     try {
 
         

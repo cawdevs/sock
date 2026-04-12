@@ -77,7 +77,7 @@ async function get_video_stories(containerID, append = false) {
             const publicationObject = await get_publication_object(videoId);
             
             if (publicationObject && publicationObject.publicationType != 3) {
-                
+                console.log("media", publicationObject.media);
                 if (publicationObject.media && publicationObject.media.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
                     const story = await createVideoStory(publicationObject);
                     if (story) container.appendChild(story);

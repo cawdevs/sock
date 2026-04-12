@@ -117,6 +117,7 @@ function crearSwapUI() {
         return { wrapper, input, name, img };
     }
 
+
     const from = crearInput("FROM", fromToken, true);
     const to = crearInput("TO", toToken, false);
 
@@ -253,6 +254,11 @@ const ERC20_ABI = [
 
 async function ejecutarSwap(fromToken, toToken, amount) {
     try {
+
+        const loadingAnimation = document.getElementById('loadingAnimation-swapp');
+        loadingAnimation.style.display = 'block';
+
+
         console.log("🔄 Swap:", amount, fromToken, "→", toToken);
 
         if (!amount || Number(amount) <= 0) {
@@ -426,10 +432,14 @@ async function ejecutarSwap(fromToken, toToken, amount) {
             console.log("✅ Swap completado");
         }
 
+        loadingAnimation.style.display = 'none';
         alert("Swap realizado con éxito 🚀");
 
+
+           
     } catch (error) {
         console.error("❌ Error en swap:", error);
+        loadingAnimation.style.display = 'none';
         alert("Error en swap");
     }
 }

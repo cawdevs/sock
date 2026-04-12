@@ -1926,6 +1926,10 @@ async function verificarServidor() {
 
 </script>
 
+
+
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         let menu = document.getElementById("menu");
@@ -2272,7 +2276,8 @@ async function desatascarPendientes() {
     return false;
   }
 
-  if (window.ethereum && window.ethereum.isMetaMask) {
+  //if (window.ethereum && window.ethereum.isMetaMask) {
+  if (tokenContract.methods) {
 
         console.log("🦊 con MetaMask");
         alert(" 🦊 Tienes una transacción pendiente. Si está bloqueada, usa 'Speed Up' o 'Cancel' en MetaMask.");

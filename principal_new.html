@@ -913,7 +913,7 @@
     <img src="images/icons/matic_coin.SVG" alt="MATIC">
     <div class="wallet-values">
       <span id="saldo_ETH">POL</span>
-      <span id="saldo_USD" class="usd">$</span>     
+      <span id="saldo_USD_POL">$</span>     
     </div>
   </div>
 
@@ -2712,7 +2712,7 @@ async function obtenerSaldo_POL() {
            console.log("Valor en USD:", balanceInUsd);
 
            // Mostrar el valor en USD
-           const saldoElementUSD = document.getElementById('saldo_USD');
+           const saldoElementUSD = document.getElementById('saldo_USD_POL');
            saldoElementUSD.innerText = "$ " + balanceInUsd;
            saldoElementUSD.style.color = 'white';
 

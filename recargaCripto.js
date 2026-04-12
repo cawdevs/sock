@@ -177,7 +177,8 @@ async function recargaTarjetaCredito() {
         const widgetUrl = data.data.widgetUrl;
 
         // 🔥 abrir popup
-        window.open(widgetUrl, "Transak", "width=500,height=700");
+        //window.open(widgetUrl, "Transak", "width=500,height=700");
+        window.location.href = widgetUrl;
 
     } catch (error) {
         console.error("Error:", error);

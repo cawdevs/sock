@@ -912,8 +912,8 @@
   <div class="wallet-item">
     <img src="images/icons/matic_coin.SVG" alt="MATIC">
     <div class="wallet-values">
-      <span id="saldo_ETH">0</span>
-      <span id="saldo_USD" class="usd">POL</span>     
+      <span id="saldo_ETH">POL</span>
+      <span id="saldo_USD" class="usd">$</span>     
     </div>
   </div>
 
@@ -932,9 +932,9 @@
   <div class="wallet-item">
     <img src="images/icons/sock_coin.SVG" alt="SOCK">
     <div class="wallet-values">
-      <span id="saldo_CAW">0</span>
+      <span id="saldo_CAW">SOCK</span>
       <!-- <span class="symbol">SOCK</span>  -->
-      <span id="saldo_USD_CAW">POL</span>
+      <span id="saldo_USD_CAW">$</span>
 
     </div>
   </div>
@@ -2609,7 +2609,7 @@ async function obtenerSaldo_SOCK() {
 
     
     const saldoUSDElement = document.getElementById('saldo_USD_CAW');
-    saldoUSDElement.innerText = "POL " + total_USD_rounded;
+    saldoUSDElement.innerText = "$ " + total_USD_rounded;
     saldoUSDElement.style.color = "white";
 
 
@@ -2697,6 +2697,24 @@ async function obtenerSaldo_POL() {
    const saldoElementETH = document.getElementById('saldo_ETH');
    saldoElementETH.innerText = truncatedBalanceEther;
    saldoElementETH.style.color = 'white';
+
+
+     const data = await obtenerPrecio();
+     console.log("SOCK en POL:", data.price_pol);
+     console.log("SOCK en USD:", data.price_usd);
+     console.log("POL en USD:", data.pol_usd);
+
+    
+    //calcula el precio en usdt
+    const maticPriceInUsd = Number(data.pol_usd);
+    console.log("maticPriceInUsd:", maticPriceInUsd);
+      const balanceInUsd = (parseFloat(balanceEther) * maticPriceInUsd).toFixed(2);
+           console.log("Valor en USD:", balanceInUsd);
+
+           // Mostrar el valor en USD
+           const saldoElementUSD = document.getElementById('saldo_USD');
+           saldoElementUSD.innerText = "$ " + balanceInUsd;
+           saldoElementUSD.style.color = 'white';
 
    // Obtener el precio de MATIC en USD desde CoinGecko
    /*fetch('https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd')

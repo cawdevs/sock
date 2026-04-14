@@ -315,7 +315,7 @@ async function ejecutarSwap(fromToken, toToken, amount) {
         const res = await fetch("https://api.thesocks.net/precio-sock/");
         const data = await res.json();
 
-        const price = Number(data.price);
+        const price = Number(data.price_pol);
 
         if (!price || price <= 0) {
             throw new Error("Precio inválido");

@@ -316,7 +316,7 @@ async function ejecutarSwap(fromToken, toToken, amount) {
         const data = await res.json();
 
         const price = Number(data.price_pol);
-
+        console.log("precio POL", price);
         if (!price || price <= 0) {
             throw new Error("Precio inválido");
         }

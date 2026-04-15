@@ -1048,8 +1048,12 @@ span.hashtag {
     <div id="menu1" class="tab-pane fade">
    <!--****************************************************-->
    <!--****************************************************-->
-   <button onclick="mostrarAyuda('SWAPP')" class="btn btn-info">?</button>
-   <button onclick="mostrarAyuda('PROFILE')" class="btn btn-info">?</button>
+   
+
+   <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('SWAPP')">
+                          <span class="glyphicon glyphicon-question-sign" style="color: dodgerblue; margin-left: 8px; margin-right: 16px;"></span>
+                          <span>Ayuda</span>
+                          </a>
                  
            <br>
           <div class="container-fluid" style="display: flex; justify-content: space-between; margin-top: 10px; margin-bottom: 10px">
@@ -2015,8 +2019,7 @@ function mostrarAyuda(tipo) {
 
   contenedor.innerHTML = contenido;
 
-  // Mostrar modal (Bootstrap)
-  $("#myModal_Help").modal("show");
+ 
 }
 
 

@@ -1048,6 +1048,8 @@ span.hashtag {
     <div id="menu1" class="tab-pane fade">
    <!--****************************************************-->
    <!--****************************************************-->
+   <button onclick="mostrarAyuda('SWAPP')" class="btn btn-info">?</button>
+   <button onclick="mostrarAyuda('PROFILE')" class="btn btn-info">?</button>
                  
            <br>
           <div class="container-fluid" style="display: flex; justify-content: space-between; margin-top: 10px; margin-bottom: 10px">
@@ -1832,6 +1834,33 @@ span.hashtag {
 <!-- #################################################################################-->
 
 
+<!-- ############## ventana emergente AYUDA HELP ###########################-->
+
+  <div class="modal fade" id="myModal_Help" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content -->
+      <div class="modal-content" style="background: linear-gradient(180deg, white, white);">
+        <div class="modal-body" style="display: flex; align-items: flex-start; gap: 10px;">
+          
+          <div id="display-full-publication" style="flex: 1; padding: 10px; border-radius: 10px;"></div> 
+
+                   
+          </div>      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="modal-btn-cerrar" data-dismiss="modal">Cerrar</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- #################################################################################-->
+<!-- #################################################################################-->
+  
+
+
+
+
+
 
 
 
@@ -1901,7 +1930,99 @@ function inicializarBarra(pasosTotales) {
 
 </script>
 
+<script>
 
+function mostrarAyuda(tipo) {
+  const contenedor = document.getElementById("display-full-publication");
+  let contenido = "";
+
+  switch(tipo) {
+    case "STAKING":
+      contenido = `
+        <h3>Staking</h3>
+        <p>Permite bloquear tus tokens para generar recompensas.</p>
+        <ul>
+          <li>Deposita tokens</li>
+          <li>Gana intereses</li>
+          <li>Retira cuando quieras (según reglas)</li>
+        </ul>
+      `;
+      break;
+
+    case "SWAPP":
+      contenido = `
+        <h3>Swap</h3>
+        <p>Intercambia tokens de forma rápida.</p>
+        <ul>
+          <li>Selecciona token origen</li>
+          <li>Selecciona token destino</li>
+          <li>Confirma la transacción</li>
+        </ul>
+      `;
+      break;
+
+    case "PUBLICATIONS":
+      contenido = `
+        <h3>Publicaciones</h3>
+        <p>Comparte contenido con otros usuarios.</p>
+        <ul>
+          <li>Crear publicaciones</li>
+          <li>Interactuar (likes/comentarios)</li>
+          <li>Explorar contenido</li>
+        </ul>
+      `;
+      break;
+
+    case "PROFILE":
+      contenido = `
+        <h3>Perfil</h3>
+        <p>Gestiona tu identidad dentro de la app.</p>
+        <ul>
+          <li>Editar información</li>
+          <li>Ver tus NFTs</li>
+          <li>Consultar estadísticas</li>
+        </ul>
+      `;
+      break;
+
+    case "GAMES":
+      contenido = `
+        <h3>Juegos</h3>
+        <p>Participa en juegos y gana recompensas.</p>
+        <ul>
+          <li>Haz apuestas</li>
+          <li>Compite con otros usuarios</li>
+          <li>Gana tokens</li>
+        </ul>
+      `;
+      break;
+
+    case "INFO":
+      contenido = `
+        <h3>Información</h3>
+        <p>Detalles generales del sistema.</p>
+        <ul>
+          <li>Cómo funciona la plataforma</li>
+          <li>Seguridad</li>
+          <li>Actualizaciones</li>
+        </ul>
+      `;
+      break;
+
+    default:
+      contenido = `<p>No hay información disponible.</p>`;
+  }
+
+  contenedor.innerHTML = contenido;
+
+  // Mostrar modal (Bootstrap)
+  $("#myModal_Help").modal("show");
+}
+
+
+
+
+</script>  
 
 
 

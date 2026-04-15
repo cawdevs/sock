@@ -1049,11 +1049,12 @@ span.hashtag {
    <!--****************************************************-->
    <!--****************************************************-->
    
+   <br>
+   <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('PROFILE')">
+                          <span class="glyphicon glyphicon-question-sign" style="color: blue; margin-left: 8px; margin-right: 16px;"></span>
+   </a>
 
-   <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('SWAPP')">
-                          <span class="glyphicon glyphicon-question-sign" style="color: dodgerblue; margin-left: 8px; margin-right: 16px;"></span>
-                          <span>Ayuda</span>
-                          </a>
+
                  
            <br>
           <div class="container-fluid" style="display: flex; justify-content: space-between; margin-top: 10px; margin-bottom: 10px">
@@ -1239,7 +1240,11 @@ span.hashtag {
     <!--/////////////////////////////////////////////////////////////-->
     <div id="menu_transfer" class="tab-pane fade">
                    
-
+          <br>
+   <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('SWAPP')">
+                          <span class="glyphicon glyphicon-question-sign" style="color: blue; margin-left: 8px; margin-right: 16px;"></span>
+   </a>  
+   
           <div id="menu_swapp"></div>    
           <br>        
           <center>
@@ -1254,6 +1259,11 @@ span.hashtag {
     <!--/////////////////////////////////////////////////////////////-->
 
     <div id="menu_staking" class="tab-pane fade" >
+
+    <br>
+    <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('STAKING')">
+                          <span class="glyphicon glyphicon-question-sign" style="color: blue; margin-left: 8px; margin-right: 16px;"></span>
+   </a>    
        
          
            
@@ -1851,7 +1861,7 @@ span.hashtag {
                    
           </div>      
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="modal-btn-cerrar" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-info" id="modal-btn-cerrar" data-dismiss="modal">Cerrar</button>
          
         </div>
       </div>
@@ -1943,24 +1953,25 @@ function mostrarAyuda(tipo) {
   switch(tipo) {
     case "STAKING":
       contenido = `
-        <h3>Staking</h3>
-        <p>Permite bloquear tus tokens para generar recompensas.</p>
+        <h3>Staking o Bloqueo</h3>
+        <p>Permite bloquear tus tokens para generar recompensas o intereses.</p>
         <ul>
-          <li>Deposita tokens</li>
-          <li>Gana intereses</li>
-          <li>Retira cuando quieras (según reglas)</li>
+          <li>Ingresa la cantidad de SOCK a bloquear</li>
+          <li>Selecciona el tiempo de bloqueo</li>
+          <li>Retira o reclama tus tokens cuando se cumpla el tiempo</li>
         </ul>
       `;
       break;
 
     case "SWAPP":
       contenido = `
-        <h3>Swap</h3>
+        <h3>Swap o Intercambio</h3>
         <p>Intercambia tokens de forma rápida.</p>
         <ul>
-          <li>Selecciona token origen</li>
-          <li>Selecciona token destino</li>
-          <li>Confirma la transacción</li>
+          <li>Selecciona token origen y la cantidad a intercambiar</li>
+          <li>Selecciona el token que quieres obtener</li>
+          <li>Calcula la cantidad de tokens a recibir</li>
+          <li>Confirma el intercambio</li>
         </ul>
       `;
       break;

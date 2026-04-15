@@ -1,7 +1,7 @@
 
 async function createStakingElements() {
 
-    const container = document.getElementById("menu_staking");
+    const container = document.getElementById("staking");
     container.innerHTML = "";
 
     // ======================

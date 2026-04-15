@@ -1051,7 +1051,7 @@ span.hashtag {
    
    <br>
    <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('PROFILE')">
-                          <span class="glyphicon glyphicon-question-sign" style="color: blue; margin-left: 8px; margin-right: 16px;"></span>
+                          <span class="glyphicon glyphicon-question-sign" style="color: blue;margin-right: 16px;"></span>
    </a>
 
 
@@ -1242,7 +1242,7 @@ span.hashtag {
                    
           <br>
    <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('SWAPP')">
-                          <span class="glyphicon glyphicon-question-sign" style="color: blue; margin-left: 8px; margin-right: 16px;"></span>
+                          <span class="glyphicon glyphicon-question-sign" style="color: blue;  margin-right: 16px;"></span>
    </a>  
    
           <div id="menu_swapp"></div>    
@@ -1262,10 +1262,10 @@ span.hashtag {
 
     <br>
     <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('STAKING')">
-                          <span class="glyphicon glyphicon-question-sign" style="color: blue; margin-left: 8px; margin-right: 16px;"></span>
+                          <span class="glyphicon glyphicon-question-sign" style="color: blue;  margin-right: 16px;"></span>
    </a>    
        
-         
+    <div id="staking">     
            
     </div> 
 
@@ -2832,7 +2832,7 @@ async function obtenerSaldo_POL() {
    const truncatedBalanceEther = parseFloat(balanceEther).toFixed(2);
    // Mostrar el saldo en la página web
    const saldoElementETH = document.getElementById('saldo_ETH');
-   saldoElementETH.innerText = truncatedBalanceEther;
+   saldoElementETH.innerText = truncatedBalanceEther + " POL";
    saldoElementETH.style.color = 'white';
 
 

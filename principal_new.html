@@ -985,6 +985,9 @@ span.hashtag {
 
 
     <div id="home" class="tab-pane fade in active">
+
+       
+       
      
        
                    
@@ -999,7 +1002,10 @@ span.hashtag {
 
          <div id="videoStoriesContainer"></div>        
                 
-                
+        <div style="display: flex; justify-content: flex-end;">
+        <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('PUBLICACIONES')"><span class="glyphicon glyphicon-question-sign" style="color: blue;  margin-right: 20px;"></span>
+        </a>    
+        </div>       
 
          <div id="recent-home-publications-container"></div> 
          <div id="home-publications-container"></div>       
@@ -1126,7 +1132,13 @@ span.hashtag {
     </div>
 
   <div id="menu_buscar" class="tab-pane fade">    
-         <br>
+        <br>
+        <div style="display: flex; justify-content: flex-end;">
+        <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('BUSCAR')"><span class="glyphicon glyphicon-question-sign" style="color: blue;  margin-right: 20px;"></span>
+        </a>    
+        </div>
+
+
          <center>
          <div class="input-group" style="display: flex; width: 90%; align-items: center; gap: 10px; margin-bottom: 20px;">
           
@@ -1191,6 +1203,14 @@ span.hashtag {
      <!--/////////////////////////////////////////////////////////////-->
     <!--/////////////////////////////////////////////////////////////-->
     <div id="menu_play" class="tab-pane fade">
+
+       <br>
+        <div style="display: flex; justify-content: flex-end;">
+        <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('GAMES')"><span class="glyphicon glyphicon-question-sign" style="color: blue;  margin-right: 20px;"></span>
+        </a>    
+        </div>
+
+
       
       <div class="container-fluid"> 
           <h4><div id="nft-username-list-direct-message"></div></h4>   
@@ -1281,9 +1301,14 @@ span.hashtag {
    
  <!--/////////////////////////////////////////////////////////////-->
  <!--/////////////////////////////////////////////////////////////-->
- <div id="menu_info_sock" class="tab-pane fade">      
+ <div id="menu_info_sock" class="tab-pane fade">  
+  <br>
+        <div style="display: flex; justify-content: flex-end;">
+        <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('INFO')"><span class="glyphicon glyphicon-question-sign" style="color: blue;  margin-right: 20px;"></span>
+        </a>    
+        </div>    
      
-                <br>
+               
                 <center><h3><p>Info Sock Puppet</p></h3></center>
                 <br>       
                 <div id="info-sock"></div>  
@@ -1298,6 +1323,12 @@ span.hashtag {
  <div id="menu_comprar_criptos" class="tab-pane fade">      
      
                 <br>
+        
+                 <div style="display: flex; justify-content: flex-end;">
+        <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('USARBTC')"><span class="glyphicon glyphicon-question-sign" style="color: blue;  margin-right: 20px;"></span>
+        </a>    
+        </div>
+
                 <center><h3><p>Usar Bitcoin para obtener SOCK</p></h3></center>
                 <br>
                 <p>Envia Bitcoin a esta direccion para que sean transformados en SOCK</p>
@@ -1318,7 +1349,10 @@ span.hashtag {
  <!--/////////////////////////////////////////////////////////////-->
  <div id="menu_hacer_publicacion" class="tab-pane fade">      
      
-              <br>
+               <div style="display: flex; justify-content: flex-end;">
+        <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('PUBLICATIONS')"><span class="glyphicon glyphicon-question-sign" style="color: blue;  margin-right: 20px;"></span>
+        </a>    
+        </div>
                          
 
               <center>  <div id="menu-publicar"></div></center> 
@@ -1959,27 +1993,18 @@ function mostrarAyuda(tipo) {
   switch(tipo) {
     case "STAKING":
       contenido = `
-        <p><strong>STAKING</strong></p>
-
-<p>Staking (bloqueo) es muy similar a un ahorro a plazo en la banca tradicional. Puedes bloquear una cantidad de tokens SOCK por cierto tiempo y recibir un porcentaje (6%, 10%, 12%) de acuerdo al tiempo seleccionado.</p>
-
-<p>Siempre eres dueño de tus monedas bloqueadas, pero no podrás operar (vender) con ellas durante el tiempo que dure el bloqueo.</p>
-
-<p>Coloca la cantidad de monedas a bloquear, selecciona el tiempo y confirma la operación.</p>
-
+        <p><strong>STAKING o BLOQUEO</strong></p>
+        <p>Staking (bloqueo) es muy similar al ahorro a plazo en la banca tradicional. Puedes bloquear una cantidad de tokens SOCK por cierto tiempo y recibir un porcentaje de ganancia (6%, 10%, 12%) de acuerdo al tiempo seleccionado.</p>
+        <p>Siempre eres dueño de tus monedas bloqueadas, pero no podrás operar (venderlas) mientras dure  el tiempo de bloqueo.</p>
+        <p>Coloca la cantidad de monedas a bloquear, selecciona el tiempo y confirma la operación.</p>
       `;
       break;
 
     case "SWAPP":
       contenido = `
-        <h3>Swap o Intercambio</h3>
-        <p>Intercambia tokens de forma rápida.</p>
-        <ul>
-          <li>Selecciona token origen y la cantidad a intercambiar</li>
-          <li>Selecciona el token que quieres obtener</li>
-          <li>Calcula la cantidad de tokens a recibir</li>
-          <li>Confirma el intercambio</li>
-        </ul>
+        <p><strong>SWAPP O INTERCAMBIO</strong></p>
+        <p>Esta función permite intercambiar criptomonedas POL por SOCK y viceversa.</p>
+        <p>Selecciona POL-SOCK o SOCK-POL, ingresa la cantidad, calcula lo que recibirás y confirma el intercambio.</p>
       `;
       break;
 
@@ -1997,39 +2022,80 @@ function mostrarAyuda(tipo) {
 
     case "PROFILE":
       contenido = `
-        <h3>Perfil</h3>
-        <p>Gestiona tu identidad dentro de la app.</p>
-        <ul>
-          <li>Editar información</li>
-          <li>Ver tus NFTs</li>
-          <li>Consultar estadísticas</li>
-        </ul>
+       <p><strong>PERFIL DE USUARIO</strong></p>
+       <p>Permite asignar un nombre de usuario único y anónimo que te identificará dentro del sistema. También puedes elegir un avatar.</p>
+       <p>Opcionalmente puedes agregar foto, nombre completo e información adicional.</p>
+       <p>Crear un perfil tiene un costo en SOCK según la longitud del nombre:</p>
+       <p>1 carácter - 20M SOCK<br>
+       2 caracteres - 15M SOCK<br>
+       3 caracteres - 11M SOCK<br>
+       4 caracteres - 8M SOCK<br>
+       5 caracteres - 6M SOCK<br>
+       6 caracteres - 4M SOCK<br>
+       7 caracteres - 3M SOCK<br>
+       8 caracteres - 2M SOCK</p>
+       <p>Los SOCK recaudados se utilizan para recompensas en STAKING y el sistema deflacionario (quemas).</p>
       `;
       break;
 
     case "GAMES":
       contenido = `
-        <h3>Juegos</h3>
-        <p>Participa en juegos y gana recompensas.</p>
-        <ul>
-          <li>Haz apuestas</li>
-          <li>Compite con otros usuarios</li>
-          <li>Gana tokens</li>
-        </ul>
+        <p><strong>JUEGOS PLAY TO EARN</strong></p> 
+        <p>Incluye juegos diseñados para entretener y generar ganancias dentro del ecosistema.</p>
+        <p>Los juegos de apuestas permiten ganar o perder criptomonedas. En caso de empate, los fondos se queman (deflación).</p>
+        <p>Los juegos de puntos permiten acumular y canjear puntos por SOCK.</p>
+
       `;
       break;
 
     case "INFO":
       contenido = `
-        <h3>Información</h3>
-        <p>Detalles generales del sistema.</p>
-        <ul>
-          <li>Cómo funciona la plataforma</li>
-          <li>Seguridad</li>
-          <li>Actualizaciones</li>
-        </ul>
+        <p><strong>INFORMACIÓN</strong></p>
+        <p>Aquí se muestra información importante de tu cuenta y tu NFT_USERNAME.</p>
+        <p>Puedes asignar valor a tu nombre y ponerlo en venta. La plataforma también funciona como mercado de NFTs.</p>
+        <p>Esta información es extremadamente sensible. Si alguien accede a ella, podrías perder tu cuenta y fondos.</p>
+        <p>Se muestran claves públicas y privadas desencriptadas.</p>
+        <p><strong>CUIDA, GUARDA Y NO COMPARTAS ESTA INFORMACIÓN CON NADIE.</strong></p>
       `;
       break;
+
+
+      case "BUSCAR":
+      contenido = `
+        <p><strong>BUSCAR</strong></p>
+        <p>Permite encontrar usuarios por nombre o número de cuenta.</p>
+        <p>Puedes ver seguidores y seguidos, y acceder a sus perfiles.</p>
+        <p>También puedes comprar perfiles en venta, seguir/dejar de seguir y transferir fondos.</p>
+      `;
+      break;
+
+
+    case "PUBLICACIONES":
+      contenido = `
+        <p><strong>PUBLICACIONES</strong></p>
+        <p>Para publicar necesitas al menos 0.001 POL, ya que cada publicación es una transacción en la blockchain.</p>
+        <p>Las publicaciones se almacenan en la blockchain, mientras que imágenes y videos se guardan en sistemas descentralizados.</p>
+        <p>Esto brinda resistencia a la censura, ya que no pueden eliminarse.</p>
+        <p>Las publicaciones pueden recibir likes, comentarios, compartidos y propinas, permitiendo monetización desde el inicio.</p>
+        <p>Los likes son acumulables y pueden convertirse en tokens SOCK.</p>
+        <p>Los usuarios ayudan a filtrar contenido bueno o malo y reciben recompensas por ello.</p>
+        <p>Escribe tu contenido, agrega imagen o video, selecciona el tipo y confirma. Verás una barra de progreso.</p>
+      `;
+      break;  
+
+      
+      case "USARBTC":
+      contenido = `
+        <p><strong>Usar BITCOIN para invertir en SOCK</strong></p>
+        <p>Transfiere la cantidad de Bitcoin que desees a ala direccion mostrada aqui.</p>
+        <p>Los Bitcoin recibidos estan en tu billetera Bitcoin asociada a tu cuenta en thesocks.net.</p>
+        <p>Estos bitcoin pueden ser transformados a lacriptomoneda SOCKS.</p>
+        <p>Presiona el valor calcular obtendras la cantidad de SOCKS a recibir.</p>
+        <p>Si estas de acuerdo presiona el boton convertir y los tokens SOCKS seran acreditados a tu cuenta.</p>
+       
+        <p>Este proceso requiere paciencia ya que algunas transacciones pueden tardar.</p>
+      `;
+      break;  
 
     default:
       contenido = `<p>No hay información disponible.</p>`;

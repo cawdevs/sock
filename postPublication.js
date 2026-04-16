@@ -316,7 +316,7 @@ quill.container.parentNode.appendChild(previewContainer);
 
     container.appendChild(form);    
 
-    getImageNFTUsername("publication-NFT_image-container");
+    //getImageNFTUsername("publication-NFT_image-container");
 
 }
 

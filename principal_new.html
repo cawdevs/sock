@@ -862,9 +862,13 @@
 
   <!-- 🔸 Fila 2 (iconos con enlaces personalizados) -->
   <div class="icon-scroll">
-    <a data-toggle="tab" href="#menu_hacer_publicacion" onclick="abrirModalPublicacion()" style="margin-left: 15px; display:block">
+    <!--<a data-toggle="tab" href="#menu_hacer_publicacion" onclick="abrirModalPublicacion()" style="margin-left: 15px; display:block">
       <img id="image-post" src="images/icons/publication_icon.SVG" alt="post" width="35">
-    </a>
+    </a>-->
+
+    <a data-toggle="tab" href="#menu_hacer_publicacion" style="margin-left: 15px;">
+      <img id="image-post" src="images/icons/publication_icon.SVG" alt="post" width="35">
+    </a> 
 
     <a data-toggle="tab" href="#home" style="margin-left: 15px;">
       <img id="image-home" src="images/icons/home_icon.SVG" alt="home" width="35">
@@ -1003,7 +1007,7 @@ span.hashtag {
          <div id="videoStoriesContainer"></div>        
                 
         <div style="display: flex; justify-content: flex-end;">
-        <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('PUBLICACIONES')"><span class="glyphicon glyphicon-question-sign" style="color: blue;  margin-right: 20px;"></span>
+        <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('PUBLICATIONS')"><span class="glyphicon glyphicon-question-sign" style="color: blue;  margin-right: 20px;"></span>
         </a>    
         </div>       
 
@@ -1347,10 +1351,9 @@ span.hashtag {
 
 <!--/////////////////////////////////////////////////////////////-->
  <!--/////////////////////////////////////////////////////////////-->
- <div id="menu_hacer_publicacion" class="tab-pane fade">      
+ <div id="menu_hacer_publicacion" class="tab-pane fade">     
      
-                              
-
+                            
               <center>  <div id="menu-publicar"></div></center> 
               <center>
               <div id="loadingAnimation-post-publication" style="display: none;">

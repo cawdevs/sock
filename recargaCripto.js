@@ -175,7 +175,7 @@ async function obtenerSaldo_BTC() {
 
  async function convertBTC_to_SOCK(){
     
-    const saldoBTC=obtenerSaldo_BTC();
+    const saldoBTC= await obtenerSaldo_BTC();
     console.error(saldoBTC);
     console.error("precio SOCK");
     console.error("transferir BTC");

@@ -173,18 +173,25 @@ async function obtenerSaldo_BTC() {
 }
 
 
- async function convertBTC_to_SOCK(){
-    
-    const saldoBTC;
-    saldoBTC = await obtenerSaldo_BTC();
-    console.log(saldoBTC);
-    console.log("precio SOCK");
-    console.log("transferir BTC");
-    console.log("verifica y confirma BTC");    
-    console.log("transferir SOCK");
+async function convertBTC_to_SOCK() {
+    try {
+        const saldoBTC = await obtenerSaldo_BTC();
+        console.log("Saldo BTC:", saldoBTC);
 
+        const cantidadBTC = 0.001; // ejemplo
 
- }
+        if (saldoBTC < cantidadBTC) {
+            console.log("Saldo insuficiente");
+            return;
+        }
+
+        
+
+        console.log("Conversión completada");
+    } catch (error) {
+        console.error("Error en conversión:", error);
+    }
+}
 
 
 

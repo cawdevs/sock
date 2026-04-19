@@ -92,6 +92,18 @@ async function recargar_con_btc() {
     botonConvertir.style.cursor = "pointer";
     contenedor.appendChild(botonConvertir);
 
+     // Agregar evento de clic
+    botonConvertir.addEventListener('click', async function(event) {
+        event.preventDefault(); // Evita que el enlace navegue a otra página
+        
+        await convertBTC_to_SOCK(); // Llama a la función asíncrona
+        console.log('Conversión BTC a SOCK '); 
+         
+        
+        
+    });
+
+
     // ======== SLIDER con etiquetas a los lados ========
     const sliderContainer = document.createElement("div");
     sliderContainer.style.display = "flex";
@@ -148,14 +160,56 @@ async function obtenerSaldo_BTC() {
 
     saldoElementBTC.innerText = datos.saldo_btc;
     saldoElementBTC.style.color = 'white';
+    return datos.saldo_btc; 
+
 
   } catch (error) {
 
     saldoElementBTC.innerText = "???";
     saldoElementBTC.style.color = 'red';
     console.error(error);
+    return false;
   }
 }
+
+
+ async function convertBTC_to_SOCK(){
+    
+    const saldoBTC=obtenerSaldo_BTC();
+    console.error(saldoBTC);
+    console.error("precio SOCK");
+    console.error("transferir BTC");
+    console.error("verifica y confirma BTC");    
+    console.error("transferir SOCK");
+
+
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 async function recargaTarjetaCredito() {

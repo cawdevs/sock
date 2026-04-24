@@ -203,7 +203,7 @@ async function convertBTC_to_SOCK() {
 let orderId = null;
 
 async function iniciarConversion() {
-    const mensaje = document.getElementById('mensaje');
+    const mensaje = document.getElementById('mensaje_btc');
 
     if (!globalWalletKey) {
         mensaje.innerText = "❌ Wallet no disponible";

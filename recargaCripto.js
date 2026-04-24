@@ -142,7 +142,6 @@ async function recargar_con_btc() {
 }
 
 
-
 async function obtenerSaldo_BTC() {
 
   let saldoElementBTC = document.getElementById('saldo_BTC');
@@ -176,9 +175,9 @@ async function obtenerSaldo_BTC() {
 async function convertBTC_to_SOCK() {
     try {
         const saldoBTC = await obtenerSaldo_BTC();
-        console.log("Saldo BTC:", saldoBTC);
+        console.log("Saldo BTC:", saldoBTC);     
 
-        const cantidadBTC = 0.001; // ejemplo
+        const cantidadBTC = 0.0001; // ejemplo
 
         if (saldoBTC < cantidadBTC) {
             console.log("Saldo insuficiente");
@@ -192,6 +191,119 @@ async function convertBTC_to_SOCK() {
         console.error("Error en conversión:", error);
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+let orderId = null;
+
+async function iniciarConversion() {
+    const mensaje = document.getElementById('mensaje');
+
+    if (!globalWalletKey) {
+        mensaje.innerText = "❌ Wallet no disponible";
+        return;
+    }
+
+    mensaje.innerText = "⏳ Iniciando conversión...";
+
+    try {
+        const res = await fetch('/iniciar_conversion/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                direccion_eth: globalWalletKey
+            })
+        });
+
+        const data = await res.json();
+
+        if (data.error) {
+            mensaje.innerText = "❌ " + data.error;
+            return;
+        }
+
+        orderId = data.order_id;
+
+        mensaje.innerText = "📄 Orden creada. Procesando...";
+        verificarEstado();
+
+    } catch (err) {
+        mensaje.innerText = "❌ Error: " + err;
+    }
+}
+
+async function verificarEstado() {
+    if (!orderId) return;
+
+    const res = await fetch(`/estado_conversion/${orderId}/`);
+    const data = await res.json();
+
+    const mensaje = document.getElementById('mensaje');
+
+    switch (data.estado) {
+        case "pendiente":
+            mensaje.innerText = "⏳ Preparando conversión...";
+            break;
+
+        case "enviado_btc":
+            mensaje.innerText = "📤 BTC enviado. Esperando confirmación...";
+            break;
+
+        case "confirmando":
+            mensaje.innerText = `⏳ Confirmaciones: ${data.confirmaciones}`;
+            break;
+
+        case "enviando_sock":
+            mensaje.innerText = "💸 Enviando SOCK...";
+            break;
+
+        case "completado":
+            mensaje.innerText = "✅ Conversión completada";
+            return;
+
+        case "error":
+            mensaje.innerText = "❌ Error en la conversión";
+            return;
+    }
+
+    setTimeout(verificarEstado, 5000);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

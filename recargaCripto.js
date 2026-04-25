@@ -213,7 +213,7 @@ async function iniciarConversion() {
     mensaje.innerText = "⏳ Iniciando conversión...";
 
     try {
-        const res = await fetch('https://api.thesocks.net/iniciar_conversion_BTC_SOCK/', {
+        const res = await fetch('https://api.thesocks.net/iniciar_conversion/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -4,12 +4,7 @@
 
 async function recargar_con_btc() {
 
-  const savedOrder = localStorage.getItem("orderId");
-  if (savedOrder) {
-        orderId = savedOrder;
-        verificarEstado();
-  } 
-
+    
   const contenedor = document.getElementById("recargar-con-btc");
   contenedor.innerHTML = ""; // Limpiar contenido previo
 
@@ -236,9 +231,6 @@ async function iniciarConversion() {
         }
 
         orderId = data.order_id;
-        
-        // 🔥 GUARDAR
-        localStorage.setItem("orderId", orderId);
 
         mensaje.innerText = "📄 Orden creada. Procesando...";
         verificarEstado();
@@ -275,14 +267,10 @@ async function verificarEstado() {
 
         case "completado":
             mensaje.innerText = "✅ Conversión completada";
-            localStorage.removeItem("orderId");  // 🔥 aquí
-            orderId = null;
             return;
 
         case "error":
             mensaje.innerText = "❌ Error en la conversión";
-            localStorage.removeItem("orderId");  // 🔥 aquí
-            orderId = null;
             return;
     }
 

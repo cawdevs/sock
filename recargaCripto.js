@@ -246,7 +246,7 @@ async function verificarEstado() {
     const res = await fetch(`https://api.thesocks.net/estado_conversion/${orderId}/`);
     const data = await res.json();
 
-    const mensaje = document.getElementById('mensaje');
+    const mensaje = document.getElementById('mensaje_btc');
 
     switch (data.estado) {
         case "pendiente":

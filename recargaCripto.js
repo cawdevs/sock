@@ -135,6 +135,10 @@ async function recargar_con_btc() {
     sliderContainer.appendChild(slider);
     sliderContainer.appendChild(labelDerecha);
     contenedor.appendChild(sliderContainer);
+
+    cargarEstado(); //carga el estado de las transacciones BTC del usuario
+
+
   } catch (error) {
     contenedor.innerHTML = "<p style='color:red'>No se pudo obtener la dirección BTC</p>";
     console.error(error);
@@ -201,22 +205,17 @@ async function convertBTC_to_SOCK() {
 
 
 let orderId = null;
-
 async function iniciarConversion() {
-    const mensaje = document.getElementById('mensaje_btc');
 
-    if (!globalWalletKey) {
-        mensaje.innerText = "❌ Wallet no disponible";
-        return;
-    }
+    const mensaje = document.getElementById("mensaje_btc");
 
-    mensaje.innerText = "⏳ Iniciando conversión...";
+    mensaje.innerText = "⏳ Enviando BTC...";
 
     try {
-        const res = await fetch('https://api.thesocks.net/iniciar_conversion/', {
-            method: 'POST',
+        const res = await fetch("https://api.thesocks.net/iniciar_conversion_BTC_SOCK/", {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 direccion_eth: globalWalletKey
@@ -230,60 +229,117 @@ async function iniciarConversion() {
             return;
         }
 
-        orderId = data.order_id;
+        // 🔥 guardar ID
+        localStorage.setItem("conversion_id", data.order_id);
 
-        mensaje.innerText = "📄 Orden creada. Procesando...";
-        verificarEstado();
+        mensaje.innerText = "✅ BTC enviado\nTXID: " + data.txid;
 
-    } catch (err) {
-        mensaje.innerText = "❌ Error: " + err;
+        mostrarBotonConsultar(data.order_id);
+
+    } catch (e) {
+        mensaje.innerText = "❌ Error de red";
     }
 }
 
-async function verificarEstado() {
-    if (!orderId) return;
-                    
-    const res = await fetch(`https://api.thesocks.net/estado_conversion/${orderId}/`);
+async function consultarEstado(id) {
+
+    const mensaje = document.getElementById("mensaje_btc");
+
+    mensaje.innerText = "🔍 Consultando confirmaciones...";
+
+    const res = await fetch(`https://api.thesocks.net/consultar_estado/${id}/`);
     const data = await res.json();
 
-    const mensaje = document.getElementById('mensaje_btc');
-
-    switch (data.estado) {
-        case "pendiente":
-            mensaje.innerText = "⏳ Preparando conversión...";
-            break;
-
-        case "enviado_btc":
-            mensaje.innerText = "📤 BTC enviado. Esperando confirmación...";
-            break;
-
-        case "confirmando":
-            mensaje.innerText = `⏳ Confirmaciones: ${data.confirmaciones}`;
-            break;
-
-        case "enviando_sock":
-            mensaje.innerText = "💸 Enviando SOCK...";
-            break;
-
-        case "completado":
-            mensaje.innerText = "✅ Conversión completada";
-            return;
-
-        case "error":
-            mensaje.innerText = "❌ Error en la conversión";
-            return;
+    if (data.error) {
+        mensaje.innerText = "❌ " + data.error;
+        return;
     }
 
-    setTimeout(verificarEstado, 5000);
+    mensaje.innerText =
+        "Confirmaciones: " + data.confirmaciones;
+
+    if (data.estado === "confirmado") {
+        mensaje.innerText += "\n✅ Confirmado";
+        mostrarBotonReclamar(id);
+    }
+}
+
+
+async function reclamarSock(id) {
+
+    const mensaje = document.getElementById("mensaje_btc");
+
+    mensaje.innerText = "💰 Enviando SOCK...";
+
+    const res = await fetch(`/reclamar_sock/${id}/`);
+    const data = await res.json();
+
+    if (data.error) {
+        mensaje.innerText = "❌ " + data.error;
+        return;
+    }
+
+    mensaje.innerText =
+        "✅ SOCK enviados\nTX: " + data.tx_sock;
+
+    // limpiar ID
+    localStorage.removeItem("conversion_id");
 }
 
 
 
+async function cargarEstado() {
+
+    const id = localStorage.getItem("conversion_id");
+
+    if (!id) return;
+
+    const mensaje = document.getElementById("mensaje_btc");
+
+    mensaje.innerText = "🔄 Recuperando estado...";
+
+    const res = await fetch(`https://api.thesocks.net/consultar_estado/${id}/`);
+    const data = await res.json();
+
+    if (data.error) return;
+
+    if (data.estado === "btc_enviado") {
+        mostrarBotonConsultar(id);
+    }
+
+    if (data.estado === "confirmado") {
+        mostrarBotonReclamar(id);
+    }
+
+    if (data.estado === "completado") {
+        mensaje.innerText = "✅ Conversión completada";
+        localStorage.removeItem("conversion_id");
+    }
+}
 
 
+function mostrarBotonConsultar(id) {
+
+    const contenedor = document.getElementById("acciones");
+
+    contenedor.innerHTML = `
+        <button onclick="consultarEstado(${id})">
+            Consultar confirmaciones
+        </button>
+    `;
+}
 
 
+function mostrarBotonReclamar(id) {
 
+    const contenedor = document.getElementById("acciones");
+
+    contenedor.innerHTML = `
+        <button onclick="reclamarSock(${id})">
+            Reclamar SOCK
+        </button>
+    `;
+}
 
 
 

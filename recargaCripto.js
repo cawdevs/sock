@@ -271,7 +271,7 @@ async function reclamarSock(id) {
 
     mensaje.innerText = "💰 Enviando SOCK...";
 
-    const res = await fetch(`/reclamar_sock/${id}/`);
+    const res = await fetch(`https://api.thesocks.net/reclamar_sock/${id}/`);
     const data = await res.json();
 
     if (data.error) {

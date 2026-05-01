@@ -89,9 +89,7 @@ async function recargar_con_btc() {
 
         // 🔹 botón refresh
         const botonRefresh = document.createElement("button");
-        botonRefresh.id = "btn-obtener-saldo";
-        botonRefresh.className = "refresh-btn";
-        botonRefresh.textContent = "⟳";
+        botonRefresh.textContent = "⟳ Actualizar";
         botonRefresh.onclick = obtenerSaldo_POL_SOCK_BTC;
 
 

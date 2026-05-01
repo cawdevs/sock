@@ -138,6 +138,19 @@ async function recargar_con_btc() {
     contenedor.appendChild(sliderContainer);
     */
 
+    //si el saldo btc es cero o muy minimo que no paresca el boton
+
+   
+    const saldo = parseFloat(datos.saldo_btc || 0);
+
+    boton_convertir_BTC_SOCK = document.getElementById('boton-convertir-BTC-SOCK');
+
+    if (saldo > 0) {
+        boton_convertir_BTC_SOCK.style.display = "block";
+    } else {
+        boton_convertir_BTC_SOCK.style.display = "none";
+    }
+
     cargarEstado(); //carga el estado de las transacciones BTC del usuario
 
 
@@ -324,6 +337,10 @@ async function cargarEstado() {
 
 function mostrarBotonConsultar(id) {
 
+    //ocultar boton de convertir BTC-SOCK
+    boton_convertir_BTC_SOCK = document.getElementById('boton-convertir-BTC-SOCK');
+    boton_convertir_BTC_SOCK.style.display = "none";
+
     const contenedor = document.getElementById("acciones");
 
     contenedor.innerHTML = `
@@ -345,6 +362,10 @@ function mostrarBotonConsultar(id) {
 
 
 function mostrarBotonReclamar(id) {
+
+    //ocultar boton de convertir BTC-SOCK
+    boton_convertir_BTC_SOCK = document.getElementById('boton-convertir-BTC-SOCK');
+    boton_convertir_BTC_SOCK.style.display = "none";
 
     const contenedor = document.getElementById("acciones");
 

@@ -327,7 +327,17 @@ function mostrarBotonConsultar(id) {
     const contenedor = document.getElementById("acciones");
 
     contenedor.innerHTML = `
-        <button onclick="consultarEstado(${id})">
+        <button onclick="consultarEstado(${id})" class="btn" style="
+            margin: 20px auto;
+            display: block;
+            font-size: 18px;
+            border-radius: 20px;
+            background-color: var(--fondo);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            text-align: center;
+        ">
             Consultar confirmaciones
         </button>
     `;
@@ -339,7 +349,17 @@ function mostrarBotonReclamar(id) {
     const contenedor = document.getElementById("acciones");
 
     contenedor.innerHTML = `
-        <button onclick="reclamarSock(${id})">
+        <button onclick="reclamarSock(${id})"class="btn" style="
+            margin: 20px auto;
+            display: block;
+            font-size: 18px;
+            border-radius: 20px;
+            background-color: lime;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            text-align: center;
+        " >
             Reclamar SOCK
         </button>
     `;

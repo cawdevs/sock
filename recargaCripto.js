@@ -73,12 +73,35 @@ async function recargar_con_btc() {
     });
 
     // Saldo
-    const saldo = document.createElement("div");
-    saldo.textContent = `Saldo: ${datos.saldo_btc} BTC`;
-    saldo.style.marginTop = "12px";
-    saldo.style.fontSize = "18px";
-    saldo.style.fontWeight = "bold";
-    contenedor.appendChild(saldo);
+    const filaSaldo = document.createElement("div");
+    filaSaldo.style.display = "flex";
+    filaSaldo.style.alignItems = "center";
+    filaSaldo.style.gap = "10px";
+    filaSaldo.style.marginTop = "12px";
+
+
+        // 🔹 texto saldo
+        const saldo = document.createElement("div");
+        saldo.textContent = `Saldo: ${datos.saldo_btc} BTC`;
+        saldo.style.fontSize = "18px";
+        saldo.style.fontWeight = "bold";
+
+
+        // 🔹 botón refresh
+        const botonRefresh = document.createElement("button");
+        botonRefresh.id = "btn-obtener-saldo";
+        botonRefresh.className = "refresh-btn";
+        botonRefresh.textContent = "⟳";
+        botonRefresh.onclick = obtenerSaldo_POL_SOCK_BTC;
+
+
+        // 🔹 agregar ambos
+        filaSaldo.appendChild(saldo);
+        filaSaldo.appendChild(botonRefresh);
+
+
+    // 🔹 agregar al contenedor principal
+    contenedor.appendChild(filaSaldo);
 
     // Botón Convertir
     /*

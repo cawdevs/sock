@@ -1,7 +1,4 @@
 
-
-
-
 async function recargar_con_btc() {
 
     
@@ -84,6 +81,7 @@ async function recargar_con_btc() {
     contenedor.appendChild(saldo);
 
     // Botón Convertir
+    /*
     const botonConvertir = document.createElement("button");
     botonConvertir.textContent = "Convertir";
     botonConvertir.style.marginTop = "16px";
@@ -102,7 +100,10 @@ async function recargar_con_btc() {
         
         
     });
+    */
 
+
+    /*
 
     // ======== SLIDER con etiquetas a los lados ========
     const sliderContainer = document.createElement("div");
@@ -135,6 +136,7 @@ async function recargar_con_btc() {
     sliderContainer.appendChild(slider);
     sliderContainer.appendChild(labelDerecha);
     contenedor.appendChild(sliderContainer);
+    */
 
     cargarEstado(); //carga el estado de las transacciones BTC del usuario
 
@@ -176,6 +178,7 @@ async function obtenerSaldo_BTC() {
 }
 
 
+/*
 async function convertBTC_to_SOCK() {
     try {
         const saldoBTC = await obtenerSaldo_BTC();
@@ -187,7 +190,6 @@ async function convertBTC_to_SOCK() {
             console.log("Saldo insuficiente");
             return;
         }
-
         
 
         console.log("Conversión completada");
@@ -195,6 +197,8 @@ async function convertBTC_to_SOCK() {
         console.error("Error en conversión:", error);
     }
 }
+
+*/
 
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////

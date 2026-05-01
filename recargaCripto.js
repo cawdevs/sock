@@ -141,11 +141,11 @@ async function recargar_con_btc() {
     //si el saldo btc es cero o muy minimo que no paresca el boton
 
    
-    const saldo = parseFloat(datos.saldo_btc || 0);
+    const saldoBTC = parseFloat(datos.saldo_btc || 0);
 
     boton_convertir_BTC_SOCK = document.getElementById('boton-convertir-BTC-SOCK');
 
-    if (saldo > 0) {
+    if (saldoBTC > 0) {
         boton_convertir_BTC_SOCK.style.display = "block";
     } else {
         boton_convertir_BTC_SOCK.style.display = "none";

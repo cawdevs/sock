@@ -322,6 +322,12 @@ async function reclamarSock(id) {
 
     // limpiar ID
     localStorage.removeItem("conversion_id");
+
+    
+    boton_reclamar = document.getElementById("acciones");
+    boton_reclamar.style.display="none";  
+
+
 }
 
 

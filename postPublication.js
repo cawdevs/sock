@@ -776,7 +776,7 @@ async function get_all_publications_home(containerID, append = false, mode = "la
         if (mode === "last") {
             // 📌 Últimas 5 publicaciones
             let i = currentIndex;
-            while (count < 5 && i >= 1) {
+            while (count < 2 && i >= 1) {
                 let type_publication = await get_publication(i, containerID);
                 loadingAnimation.style.display = 'none';
 
@@ -789,7 +789,7 @@ async function get_all_publications_home(containerID, append = false, mode = "la
 
         } else if (mode === "random") {
             // 📌 5 publicaciones aleatorias sin repetir entre llamadas
-            while (count < 5 && randomSeenIndexes.size < total_publication) {
+            while (count < 2 && randomSeenIndexes.size < total_publication) {
                 let randomIndex = Math.floor(Math.random() * total_publication) + 1;
                 if (!randomSeenIndexes.has(randomIndex)) {
                     randomSeenIndexes.add(randomIndex);

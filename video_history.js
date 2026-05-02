@@ -57,7 +57,7 @@ async function createVideoStory(publicationObject) {
 
 //////////////////////////////////////////////////////////////////////////////////
 let currentStart = 0; // 🔹 Para controlar paginación
-const limit = 5;      // 🔹 Videos por carga
+const limit = 3;      // 🔹 Videos por carga
 
 async function get_video_stories(containerID, append = false) {
     try {

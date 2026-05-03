@@ -2566,10 +2566,28 @@ async function inicializarUI() {
 
     //verificar si el servidor esta vivo o no 
     await verificarServidor(); 
+    
+    
+    try{
+         await obtenerSaldo_BTC();
+    }catch(error){
+         console.error('Error completo:', error);
+    }
+ 
 
-    await obtenerSaldo_BTC();
-    await obtenerSaldo_POL();
-    await obtenerSaldo_SOCK();
+    try{
+       await obtenerSaldo_POL();
+    }catch(error){
+         console.error('Error completo:', error);
+    } 
+
+
+    try{
+       await obtenerSaldo_SOCK();
+    }catch(error){
+         console.error('Error completo:', error);
+    }
+
 
     await get_all_publications_home('recent-home-publications-container', false, "last");
 
@@ -2777,9 +2795,11 @@ function get_total_points() {
 }
 
 
-
+   
 
 async function obtenerSaldo_SOCK() {
+    
+  
     let accountBalance;
 
     if (tokenContract.methods) {
@@ -2801,14 +2821,7 @@ async function obtenerSaldo_SOCK() {
     diffElement.style.transition = "transform 0.5s ease, opacity 0.5s ease";
     diffElement.style.display = "inline-block";
 
-    /////////////calcula el precio de de socks
-    //const res = await fetch("https://api.dexscreener.com/latest/dex/tokens/0x8f78976a0fdf8f66ad81bb7d7c9b8d4a695022e3");
-    //const data = await res.json();
-    //const priceUSD = data.pairs[0].priceUsd; 
-    //const total_USD=  priceUSD*truncatedBalance;
-    /////////////////////////////////////////////////
-
-
+    
      const data = await obtenerPrecio();
      console.log("SOCK en POL:", data.price_pol);
      console.log("SOCK en USD:", data.price_usd);

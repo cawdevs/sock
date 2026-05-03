@@ -39,12 +39,12 @@ document.addEventListener("DOMContentLoaded", function () {
             // Si quieres que el contador no escale con el icono, colócalo fuera:
             // container.appendChild(likeCount) en lugar de span.appendChild
             span.appendChild(likeCount);
-
+            //cambie   username_selected por nftUsername_post
             fetch("https://api.thesocks.net/get-like-info/", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
-                nft_username: username_selected,
+                nft_username: nftUsername_post,
                 id_publication: postId.toNumber ? postId.toNumber() : postId,
               })
             })

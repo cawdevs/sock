@@ -141,7 +141,7 @@ setTimeout(() => {
         await publicar_main_post(); // Llama a la función asíncrona
 
         console.log('iniciamos get_ultima_publication.'); 
-        get_ultima_publication('recent-home-publications-container'); 
+        await get_ultima_publication('recent-home-publications-container'); 
         
         
     });

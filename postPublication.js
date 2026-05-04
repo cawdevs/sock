@@ -748,6 +748,19 @@ let currentIndex = null;
 let total_publication = null;
 let randomSeenIndexes = new Set(); // 📌 Guardará los índices ya usados en modo random
 
+async function button_get_all_publications_home() {
+    try {
+        await get_all_publications_home(
+            'home-publications-container',
+            false,
+            "last"
+        );
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+
 async function get_all_publications_home(containerID, append = false, mode = "last") {
     try {
         const container = document.getElementById(containerID);

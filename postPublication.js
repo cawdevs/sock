@@ -750,11 +750,16 @@ let randomSeenIndexes = new Set(); // 📌 Guardará los índices ya usados en m
 
 async function button_get_all_publications_home() {
     try {
+
+        await get_video_stories('videoStoriesContainer');
+
         await get_all_publications_home(
             'home-publications-container',
             false,
             "last"
         );
+        
+    
     } catch(error) {
         console.error(error);
     }

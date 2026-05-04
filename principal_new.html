@@ -999,19 +999,24 @@ span.hashtag {
          </div>  </center> 
 
 
-         <div id="videoStoriesContainer"></div>        
+        <div id="videoStoriesContainer"></div>        
                 
-        <div style="display: flex; justify-content: flex-end;">
-        
-        <a href="#" onclick="button_get_all_publications_home(); return false;">
-            <span class="glyphicon glyphicon-repeat" style="color: blue; margin-left: 20px;"></span>
-        </a>
+        <div style="display: flex; justify-content: space-between; width: 100%;">
 
-        <a href="#" data-toggle="modal" data-target="#myModal_Help" onclick="mostrarAyuda('PUBLICATIONS')"><span class="glyphicon glyphicon-question-sign" style="color: blue;  margin-right: 20px;"></span>
-        </a>  
+            <a href="#" onclick="button_get_all_publications_home(); return false;">
+                <span class="glyphicon glyphicon-repeat"
+                      style="color: blue; margin-left: 20px;"></span>
+            </a>
 
+            <a href="#"
+               data-toggle="modal"
+               data-target="#myModal_Help"
+               onclick="mostrarAyuda('PUBLICATIONS'); return false;">
+                <span class="glyphicon glyphicon-question-sign"
+                      style="color: blue; margin-right: 20px;"></span>
+            </a>
 
-        </div>       
+        </div>    
 
          <div id="recent-home-publications-container"></div> 
          <div id="home-publications-container"></div>       

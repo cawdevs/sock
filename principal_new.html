@@ -654,7 +654,7 @@
 
 
 <body>
-<script src="messageDirect.js"></script>
+<!--  <script src="messageDirect.js"></script> -->
 <script src="stakingpool.js"></script>
 <script src="responses.js"></script>
 
@@ -1960,7 +1960,7 @@ span.hashtag {
     <script src="games/cartaMayor/loadGameCartas.js"></script>
     <script src="games/cartaMayor/scriptCartas.js"></script>
     
-    <script src="games/sockWar/loadGameSockWar.js"></script>
+    <!-- script src="games/sockWar/loadGameSockWar.js"></script> -->
     <script src="games/sockWar/scriptSockWar.js"></script>
 
     <script src="games/sockRevolutions/loadGameRevolutions.js"></script>
@@ -3425,27 +3425,20 @@ textArea.addEventListener('input', function() {
     // Obtener el conteo de caracteres restantes
     const maxLength = 420;
     const remaining = maxLength - textArea.value.length;
-
   
-    
-
     // Mostrar el conteo solo cuando sea 21 o menos, o si se ha superado el límite
     if (remaining <= 31 || remaining < 0) {
         charCount.textContent = remaining < 0 ? '0' : remaining;
     } else {
         charCount.textContent = ''; // Si hay más de 21 caracteres restantes, oculta el conteo
-    }
-
-    
+    }    
 
     if (remaining < 0){
         butonPublication.style.display='none';
     }else{
         butonPublication.style.display='block';
     }
-    
-
-    
+        
 });
 
 </script>  

@@ -215,10 +215,8 @@ async function stakeSOCK(plazoDias) {
         // =====================================================
         else {
 
-            console.log("🔐 Con SockWallet");
-
-            const provider = stakingContract.provider;
-            console.log("🔐 provider");
+            console.log("🔐 Con SockWallet");          
+            
             
             const { maxFeePerGas, maxPriorityFeePerGas } = await obtenerGasEIP1559(provider);
             console.log("🔐 max fee y priority");
@@ -454,5 +452,76 @@ async function cargarInfoStaking() {
 }
 
 
+async function withdrawSOCK() {
 
+    try {
 
+        // =====================================================
+        // 🦊 METAMASK (web3.js)
+        // =====================================================
+        if (stakingContract.methods) {
+
+            console.log("🦊 Retirando con MetaMask");
+
+            await stakingContract.methods
+                .withdraw()
+                .send({ from: globalWalletKey });
+
+            console.log("✅ Withdraw exitoso");
+        }
+
+        // =====================================================
+        // 🔐 SOCK WALLET (ethers.js)
+        // =====================================================
+        else {
+
+            console.log("🔐 Retirando con SockWallet");
+
+           
+            const { maxFeePerGas, maxPriorityFeePerGas } =
+                await obtenerGasEIP1559(provider);
+
+            // Estimar gas
+            const estimatedGas =
+                await stakingContract.estimateGas.withdraw();
+
+            // Agregar margen de seguridad
+            const gasLimit = estimatedGas.mul(120).div(100);
+
+            // Ejecutar withdraw
+            const withdrawTx = await stakingContract.withdraw({
+                gasLimit,
+                maxFeePerGas,
+                maxPriorityFeePerGas,
+            });
+
+            console.log("📡 TX enviada:", withdrawTx.hash);
+
+            await withdrawTx.wait();
+
+            console.log("✅ Withdraw confirmado");
+        }
+
+        alert("Reward y staking reclamados 🚀");
+
+        // Opcional:
+        // await cargarInfoStaking();
+
+    } catch (error) {
+
+        console.error("❌ Error withdraw:", error);
+
+        if (error?.data?.message) {
+            alert(error.data.message);
+        }
+        else if (error?.reason) {
+            alert(error.reason);
+        }
+        else if (error?.message) {
+            alert(error.message);
+        }
+        else {
+            alert("Error al reclamar staking");
+        }
+    }
+}

@@ -8,7 +8,7 @@ async function createStakingElements() {
     // TÍTULOS
     // ======================
     const title = document.createElement("h1");
-    title.innerText = "STAKING";
+    title.innerText = "BLOQUEO";
     title.style.textAlign = "center";
     title.style.color = "dodgerblue";
     title.style.fontSize = "36px";
@@ -120,7 +120,7 @@ async function createStakingElements() {
               // BOTONES
               // ======================
               const stakeBtn = document.createElement("button");
-              stakeBtn.innerText = "STAKING";
+              stakeBtn.innerText = "Bloquear Criptomonedas";
               stakeBtn.style.width = "100%";
               stakeBtn.style.marginTop = "20px";
               stakeBtn.style.padding = "12px";
@@ -159,6 +159,10 @@ async function createStakingElements() {
 
 
 async function stakeSOCK(plazoDias) {
+
+
+     const loadingAnimation = document.getElementById('loadingAnimation-staking');  
+     loadingAnimation.style.display = 'block';   
 
     try {
 
@@ -264,6 +268,8 @@ async function stakeSOCK(plazoDias) {
 
             await stakeTx.wait();
             console.log("✅ Staking confirmado");
+
+            loadingAnimation.style.display = 'none';  
         }
 
         alert("Staking realizado con éxito 🚀");
@@ -271,6 +277,7 @@ async function stakeSOCK(plazoDias) {
     } catch (error) {
         console.error("❌ Error en staking:", error);
         alert("Error al hacer staking");
+        loadingAnimation.style.display = 'none'; 
     }
 }
 
@@ -284,11 +291,13 @@ function maximaSock() {
             alert("Input no encontrado");
             return;
         }
-        
+
     const saldoSpan = document.getElementById("saldo_CAW");
     if (!saldoSpan) return;
 
-    const saldo = saldoSpan.innerText.trim();
+    //const saldo = saldoSpan.innerText.trim();
+    // Elimina todo excepto números y punto decimal
+    const saldo = saldoSpan.innerText.replace(/[^\d.]/g, "").trim();
 
     if (Number(saldo) <= 0) {
         alert("No tienes SOCK disponibles");
@@ -406,9 +415,9 @@ async function cargarInfoStaking() {
 
         document.getElementById("staking_global_info").innerHTML = `
             <p><b>Contrato Balance:</b> ${ethers.utils.formatEther(contractBalance)} SOCK</p>
-            <p><b>Total Staked:</b> ${ethers.utils.formatEther(totalStaked)} SOCK</p>
-            <p><b>Rewards Disponibles:</b> ${ethers.utils.formatEther(rewardsAvailable)} SOCK</p>
-            <p><b>Total Stakers:</b> ${totalStakers}</p>
+            <p><b>Total Bloqueado:</b> ${ethers.utils.formatEther(totalStaked)} SOCK</p>
+            <p><b>Recompensa Disponibles:</b> ${ethers.utils.formatEther(rewardsAvailable)} SOCK</p>
+            <p><b>Total de Usuarios:</b> ${totalStakers}</p>
         `;
 
         // =========================
@@ -426,7 +435,7 @@ async function cargarInfoStaking() {
         if (!userData.active) {
 
             document.getElementById("staking_user_info").innerHTML =
-                `<p>No tienes staking activo</p>`;
+                `<p>No tienes Bloqueos activo</p>`;
 
             return;
         }
@@ -446,12 +455,12 @@ async function cargarInfoStaking() {
         const finished = now >= finishTime;
 
         document.getElementById("staking_user_info").innerHTML = `
-            <h3>Tu Staking</h3>
+            <h3>Tu Bloqueo</h3>
             <p><b>Cantidad:</b> ${ethers.utils.formatEther(userData.amount)} SOCK</p>
-            <p><b>APY:</b> ${userData.apy}%</p>
-            <p><b>Reward actual:</b> ${ethers.utils.formatEther(reward)} SOCK</p>
+            <p><b>Recompensa (%interes):</b> ${userData.apy}%</p>
+            <p><b>Recompensa actual:</b> ${ethers.utils.formatEther(reward)} SOCK</p>
             <p><b>Finaliza:</b> ${new Date(finishTime * 1000).toLocaleString()}</p>
-            ${finished ? `<button onclick="withdrawSOCK()" style="margin-top:10px;padding:10px;border-radius:10px;background:dodgerblue;color:white;border:none;cursor:pointer;">Withdraw</button>` : `<p style="color:red;">Stake bloqueado</p>`}
+            ${finished ? `<button onclick="withdrawSOCK()" style="margin-top:10px;padding:10px;border-radius:10px;background:dodgerblue;color:white;border:none;cursor:pointer;">Withdraw</button>` : `<p style="color:red;">Estdo: bloqueado</p>`}
         `;
 
     } catch (error) {
@@ -462,7 +471,13 @@ async function cargarInfoStaking() {
 
 async function withdrawSOCK() {
 
+
+     const loadingAnimation = document.getElementById('loadingAnimation-staking');  
+     loadingAnimation.style.display = 'block';     
+
     try {
+
+
 
         // =====================================================
         // 🦊 METAMASK (web3.js)
@@ -512,12 +527,19 @@ async function withdrawSOCK() {
 
         alert("Reward y staking reclamados 🚀");
 
+        await obtenerSaldo_SOCK();
+
+        loadingAnimation.style.display = 'none';
+
+
+
         // Opcional:
         // await cargarInfoStaking();
 
     } catch (error) {
 
         console.error("❌ Error withdraw:", error);
+        loadingAnimation.style.display = 'none';
 
         if (error?.data?.message) {
             alert(error.data.message);

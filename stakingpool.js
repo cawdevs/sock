@@ -277,6 +277,14 @@ async function stakeSOCK(plazoDias) {
 
 
 function maximaSock() {
+
+    const stakinMount = document.getElementById("input_staking");
+
+        if (!stakinMount) {
+            alert("Input no encontrado");
+            return;
+        }
+        
     const saldoSpan = document.getElementById("saldo_CAW");
     if (!saldoSpan) return;
 

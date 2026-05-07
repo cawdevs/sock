@@ -2390,16 +2390,16 @@ async function iniciarApp() {
     try {
         // Primero, intenta conectar usando la wallet propia si hay una clave privada almacenada
         const privateKey = localStorage.getItem("privateKey");
-        console.log("privateKey" + privateKey ); 
+        //console.log("privateKey" + privateKey ); 
 
         if (localStorage.getItem("privateKey")) {
-            console.log("Conectando usando la wallet propia...");
+            //console.log("Conectando usando la wallet propia...");
             conectarWalletPropia(); // Conexión con wallet propia
         } 
            
         // Luego, si no hay wallet propia, intenta conectar con MetaMask
         else if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask ) {
-            console.log("MetaMask detectado. Intentando conectar...");
+            //console.log("MetaMask detectado. Intentando conectar...");
             await conectarMetaMask(); // Conexión con MetaMask
         } 
         // Si no hay MetaMask ni una clave privada, muestra un error
@@ -2434,7 +2434,7 @@ async function conectarMetaMask() {
         globalWalletKey = accounts[0]; // Guardar la dirección de la wallet
         // Inicializar ethers.js provider y tokenContract
         provider = new ethers.providers.Web3Provider(window.ethereum);
-        console.log("Conectado con MetaMask:", globalWalletKey);
+        //console.log("Conectado con MetaMask:", globalWalletKey);
 
         tokenContract = new web3.eth.Contract(CAW_tokenABI, tokenContractAddress);
         nftUsernameContract= new web3.eth.Contract(NFT_ContractABI, nftContractAddress);
@@ -2496,7 +2496,7 @@ async function conectarWalletPropia() {
     stakingContract = new ethers.Contract( stakingContractAddress, Staking_ContractABI,  signer);
     
           
-    console.log("Conectado usando wallet propia:", globalWalletKey);
+    //console.log("Conectado usando wallet propia:", globalWalletKey);
   } catch (error) {
         console.error("Error al conectar con wallet propia:", error);
     }
@@ -2508,7 +2508,7 @@ async function conectarWalletPropia() {
 async function desatascarPendientes() {
 
   if (!wallet || !provider) {
-    console.log("Wallet o provider no inicializados.");
+    //console.log("Wallet o provider no inicializados.");
     return;
   }
 
@@ -2529,7 +2529,7 @@ async function desatascarPendientes() {
   }   
    
 
-  console.log("Nonce bloqueado:", latest);
+  //console.log("Nonce bloqueado:", latest);
 
   try {
 
@@ -2544,7 +2544,7 @@ async function desatascarPendientes() {
     });
     //aumentar a 1200 para mas agresividad  total a gastar=0.025 pol
 
-    console.log("Hash:", tx.hash);
+    //console.log("Hash:", tx.hash);
 
     await tx.wait();
 
@@ -2620,14 +2620,14 @@ async function inicializarUI() {
     let list_username;
 
     if (nftUsernameContract.methods) {
-                 console.log("Con MetaMask ");
+                 //console.log("Con MetaMask ");
                  // Usando web3.js
                  list_username = await nftUsernameContract.methods.getMintedUsernames(globalWalletKey).call();
                  
 
     } else {
                  // Usando ethers.js
-                 console.log("Con SockWallet "); 
+                 //console.log("Con SockWallet "); 
                  list_username = await nftUsernameContract.getMintedUsernames(globalWalletKey);
                                                     
     }
@@ -2766,7 +2766,7 @@ async function obtenerGasAjustado() {
 
 function get_total_liked() {
     const nftusername = document.getElementById('selector_NFTs').value;
-    console.log("total likes user.",nftusername);
+    //console.log("total likes user.",nftusername);
     fetch("https://api.thesocks.net/total-likes-user/", {
         method: "POST",
         headers: {
@@ -2777,7 +2777,7 @@ function get_total_liked() {
     .then(response => response.json())
     .then(data => {
 
-        console.log("total likes user.",nftusername,data.total_likes);
+        //console.log("total likes user.",nftusername,data.total_likes);
         if (data && data.total_likes !== undefined) {
             document.getElementById("total_like_username").textContent = data.total_likes;
         } else {
@@ -2792,7 +2792,7 @@ function get_total_liked() {
 
 
 function get_total_points() {
-    console.log("Obteniendo puntos de:", globalWalletKey);
+    //console.log("Obteniendo puntos de:", globalWalletKey);
 
     fetch("https://api.thesocks.net/get-points/", {
         method: "POST",
@@ -2803,7 +2803,7 @@ function get_total_points() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log("Puntos obtenidos:", globalWalletKey, data.total_points);
+        //console.log("Puntos obtenidos:", globalWalletKey, data.total_points);
 
         if (data && data.total_points !== undefined) {
             document.getElementById("total_points_wallet").textContent = data.total_points;
@@ -2826,10 +2826,10 @@ async function obtenerSaldo_SOCK() {
     let accountBalance;
 
     if (tokenContract.methods) {
-        console.log("Con MetaMask obtenerSaldo_SOCK().");
+        //console.log("Con MetaMask obtenerSaldo_SOCK().");
         accountBalance = await tokenContract.methods.balanceOf(globalWalletKey).call();
     } else {
-        console.log("Con SockWallet obtenerSaldo_SOCK().");        
+        //console.log("Con SockWallet obtenerSaldo_SOCK().");        
         accountBalance = await tokenContract.balanceOf(globalWalletKey);
     }
 
@@ -2846,21 +2846,21 @@ async function obtenerSaldo_SOCK() {
 
     
      const data = await obtenerPrecio();
-     console.log("SOCK en POL:", data.price_pol);
-     console.log("SOCK en USD:", data.price_usd);
-     console.log("POL en USD:", data.pol_usd);
+     //console.log("SOCK en POL:", data.price_pol);
+     //console.log("SOCK en USD:", data.price_usd);
+     //console.log("POL en USD:", data.pol_usd);
 
     
     //calcula el precio en usdt
     const price = Number(data.price_usd);
-    console.log(price);
+    //console.log(price);
 
     const total_USD = price * Number(truncatedBalance);
 
     // 🔥 nueva variable
     const total_USD_rounded = total_USD.toFixed(2);
 
-    console.log(total_USD_rounded);
+    //console.log(total_USD_rounded);
 
     
     const saldoUSDElement = document.getElementById('saldo_USD_CAW');
@@ -2934,14 +2934,14 @@ async function obtenerSaldo_POL() {
 
    let balanceEther;
    if (tokenContract.methods) {
-       console.log("Con MetaMask obtenerSaldo_POL().");
+       //console.log("Con MetaMask obtenerSaldo_POL().");
        // Obtener el saldo en Wei (la unidad más pequeña de Ethereum)
        const balanceWei = await web3.eth.getBalance(globalWalletKey);       
        balanceEther = web3.utils.fromWei(balanceWei, 'ether');       
        
     
    } else {
-        console.log("Con SockWallet obtenerSaldo_POL().");
+        //console.log("Con SockWallet obtenerSaldo_POL().");
        // Obtener el saldo de MATIC
         const balanceWei = await provider.getBalance(globalWalletKey);
         balanceEther = ethers.utils.formatEther(balanceWei);
@@ -2955,16 +2955,16 @@ async function obtenerSaldo_POL() {
 
 
      const data = await obtenerPrecio();
-     console.log("SOCK en POL:", data.price_pol);
-     console.log("SOCK en USD:", data.price_usd);
-     console.log("POL en USD:", data.pol_usd);
+     //console.log("SOCK en POL:", data.price_pol);
+     //console.log("SOCK en USD:", data.price_usd);
+     //console.log("POL en USD:", data.pol_usd);
 
     
     //calcula el precio en usdt
     const maticPriceInUsd = Number(data.pol_usd);
-    console.log("maticPriceInUsd:", maticPriceInUsd);
+    //console.log("maticPriceInUsd:", maticPriceInUsd);
       const balanceInUsd = (parseFloat(balanceEther) * maticPriceInUsd).toFixed(2);
-           console.log("Valor en USD:", balanceInUsd);
+           //console.log("Valor en USD:", balanceInUsd);
 
            // Mostrar el valor en USD
            const saldoElementUSD = document.getElementById('saldo_USD_POL');
@@ -3018,12 +3018,12 @@ async function mintearNFT() {
 
                       let isMintedNFT;            
                       if (nftUsernameContract.methods) {
-                                   console.log("Con MetaMask ");
+                                   //console.log("Con MetaMask ");
                                    // Usando web3.js
                                    isMintedNFT = await nftUsernameContract.methods.isMinted(nftusername).call();
                       } else {
                                    // Usando ethers.js
-                                  console.log("Con SockWallet "); 
+                                  //console.log("Con SockWallet "); 
                                   isMintedNFT = await nftUsernameContract.isMinted(nftusername); 
                       }  
 
@@ -3041,7 +3041,7 @@ async function mintearNFT() {
 
                             let maticAmount;
                             if (nftUsernameContract.methods) {
-                                  console.log("Con MetaMask");
+                                  //console.log("Con MetaMask");
                                   maticAmount = web3.utils.toWei(maticrequired, 'ether'); 
                                 
                                     // Ejecutar la función mintNFT
@@ -3053,7 +3053,7 @@ async function mintearNFT() {
                                   });
                                     // Lógica específica para contratos instanciados con web3.js
                             } else {
-                                    console.log("Con SockWallet.");
+                                    //console.log("Con SockWallet.");
                                   
                                     maticAmount = ethers.utils.parseEther(maticrequired); //
                                     
@@ -3063,11 +3063,11 @@ async function mintearNFT() {
                                       value: maticAmount // Especificar el valor en Wei
                                       });
 
-                                      console.log("Transacción enviada:", tx.hash);
+                                      //console.log("Transacción enviada:", tx.hash);
 
                                       // Esperar confirmación
                                       const receipt = await tx.wait();
-                                      console.log("Transacción confirmada:", receipt);
+                                      //console.log("Transacción confirmada:", receipt);
                                       alert('Transaction ok :)');
                                    // Lógica específica para contratos instanciados con ethers.js
                             }
@@ -3143,14 +3143,14 @@ async function getmintedNFT() {
 
 
              if (nftUsernameContract.methods) {
-                 console.log("Con MetaMask ");
+                 //console.log("Con MetaMask ");
                  // Usando web3.js
                  list_username = await nftUsernameContract.methods.getMintedUsernames(globalWalletKey).call();
                  total_minted_username = await nftUsernameContract.methods.getTotalMintedNFTs().call();
 
              } else {
                  // Usando ethers.js
-                 console.log("Con SockWallet "); 
+                 //console.log("Con SockWallet "); 
                  list_username = await nftUsernameContract.getMintedUsernames(globalWalletKey);
                  total_minted_username = await nftUsernameContract.getTotalMintedNFTs();                                    
               }
@@ -3276,7 +3276,7 @@ function hacer_nada() {
               successElement.innerText = message;
 
               if (details) {
-                  console.log('Detalles de éxito:', details); // Mostrar en consola
+                  //console.log('Detalles de éxito:', details); // Mostrar en consola
                   successElement.innerText += `\nDetalles: ${details}`;
               }
           }
@@ -3415,8 +3415,12 @@ inputField.addEventListener('input', function() {
 });
 
 </script>
-  
+ 
+
+
+
 <script>
+  /*
 const textArea = document.getElementById('publicacion');
 const charCount = document.getElementById('char-count');
 const butonPublication=document.getElementById('btn-publication')
@@ -3440,11 +3444,13 @@ textArea.addEventListener('input', function() {
     }
         
 });
-
+*/
 </script>  
 
 
 <script>
+
+  /*
   // Busca y colorea los caracteres @ y #
 const postText = document.getElementById('postText');
 const text = postText.innerHTML;
@@ -3472,6 +3478,7 @@ if (/\.(jpeg|jpg|gif|png)$/.test(linkToImage)) {
     // Muestra el video
 //    mediaContent.innerHTML = `<video controls><source src="${linkToVideo}" type="video/mp4"></video>`;
 //}
+*/
 </script>
 
  <script>

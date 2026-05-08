@@ -150,7 +150,7 @@ async function createStakingElements() {
     // ======================
     
 
-    cargarInfoStaking();
+    await cargarInfoStaking();
 
    
 }
@@ -273,6 +273,8 @@ async function stakeSOCK(plazoDias) {
         }
 
         alert("Staking realizado con éxito 🚀");
+        // Opcional:
+        await cargarInfoStaking();
 
     } catch (error) {
         console.error("❌ Error en staking:", error);

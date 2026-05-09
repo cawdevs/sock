@@ -7,7 +7,7 @@
     try {
         // Primero, intenta conectar usando la wallet propia si hay una clave privada almacenada
         const privateKey = localStorage.getItem("privateKey");
-        console.log("privateKey" + privateKey ); 
+        //console.log("privateKey" + privateKey ); 
 
         if (localStorage.getItem("privateKey")) {
              window.location.href = 'principal_new.html';
@@ -372,7 +372,7 @@ function handleButtonClick() {
 async function handleWalletAction() {
     const actionButton = document.getElementById('actionButton');
     const password = document.getElementById('password_enter').value.trim();
-    console.log("Pasword_enter",password)
+    //console.log("Pasword_enter",password)
     
     if (!password) {
         alert("La contraseña es necesaria.");
@@ -451,7 +451,7 @@ async function obtenerClaveDesencriptada(password) {
 
     const password2 = localStorage.getItem("password");
 
-    alert('Tu contraseña es: ' + password2);
+    //alert('Tu contraseña es: ' + password2);
 
     if (!file || !file.name.endsWith('.key')) {
             alert("Por favor, carga un archivo file.key");

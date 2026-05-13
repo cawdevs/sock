@@ -245,6 +245,15 @@ async function convertBTC_to_SOCK() {
 let orderId = null;
 async function iniciarConversion() {
 
+
+    const boton_enviar_btc = document.getElementById("boton-convertir-BTC-SOCK");
+    // Deshabilitar inmediatamente
+    boton_enviar_btc.disabled = true;
+    // Mantener visible
+    boton_enviar_btc.style.opacity = "0.6";
+    boton_enviar_btc.style.cursor = "not-allowed";
+
+
     const mensaje = document.getElementById("mensaje_btc");
 
     mensaje.innerText = "⏳ Enviando BTC...";
@@ -274,8 +283,14 @@ async function iniciarConversion() {
 
         mostrarBotonConsultar(data.order_id);
 
+
+
     } catch (e) {
         mensaje.innerText = "❌ Error de red";
+        boton_enviar_btc.disabled = false;
+        boton_enviar_btc.style.opacity = "1";
+        boton_enviar_btc.style.cursor = "pointer";
+
     }
 }
 

@@ -250,7 +250,7 @@ async function iniciarConversion() {
     // Deshabilitar inmediatamente
     boton_enviar_btc.disabled = true;
     // Mantener visible
-    boton_enviar_btc.style.opacity = "0.6";
+    boton_enviar_btc.style.opacity = "0.3";
     boton_enviar_btc.style.cursor = "not-allowed";
 
 

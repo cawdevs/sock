@@ -1149,8 +1149,31 @@ async function createPublicationElement(publication) {
     headerDiv.appendChild(profileImageContainer);
     headerDiv.appendChild(userInfoDiv);
 
+
+
+
+
     // 🗑️ Botón de eliminar (si es del usuario)
     if (selected_username === nftUsername) {
+        
+        const threadIcon = document.createElement('span');
+        threadIcon.className = 'glyphicon glyphicon-add';
+        threadIcon.style.cssText = `
+            cursor: pointer;
+            font-size: 18px;
+            color: dodgerblue;
+            margin-left: 10px;
+            padding: 5px;
+        `;
+        threadIcon.onmouseover = () => threadIcon.style.color = "#e63946";
+        threadIcon.onmouseout = () => threadIcon.style.color = "dodgerblue";
+        threadIcon.onclick = function() {
+            
+
+        };
+
+
+
         const deleteIcon = document.createElement('span');
         deleteIcon.className = 'glyphicon glyphicon-trash';
         deleteIcon.style.cssText = `

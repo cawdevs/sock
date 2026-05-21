@@ -1171,7 +1171,7 @@ async function createPublicationElement(publication) {
             
 
         };
-
+        headerDiv.appendChild(threadIcon);
 
 
         const deleteIcon = document.createElement('span');

@@ -1157,7 +1157,7 @@ async function createPublicationElement(publication) {
     if (selected_username === nftUsername) {
         
         const threadIcon = document.createElement('span');
-        threadIcon.className = 'glyphicon glyphicon-plus-sing';
+        threadIcon.className = 'glyphicon glyphicon-plus-sign';
         threadIcon.style.cssText = `
             cursor: pointer;
             font-size: 18px;

@@ -210,14 +210,78 @@ async function transferMatic(recipientAddress, amount) {
             });
         } else {
             // Usando SockWallet (Ethers.js)
-            tx = await wallet.sendTransaction({
-                to: recipientAddress,
-                value: amountInWei,
-                gasLimit: 300000,
-                gasPrice: ethers.utils.parseUnits('90', 'gwei'),
-            });
-            console.log("Transacción enviada con SockWallet:", tx.hash);
-            await tx.wait(); // Confirmar la transacción.
+           
+            // 1️⃣ Obtener gas EIP1559
+            let maxFeePerGas;
+            let maxPriorityFeePerGas;
+
+            try {
+
+                const gasData = await obtenerGasEIP1559(provider);
+                maxFeePerGas = gasData.maxFeePerGas;
+                maxPriorityFeePerGas = gasData.maxPriorityFeePerGas;
+                console.log("Gas EIP1559 calculado");
+
+            } catch (error) {
+
+                console.error("Error obteniendo gas:", error);
+                throw error;
+            }
+
+            // 2️⃣ Estimar gas para transferencia nativa
+            let estimatedGas;
+
+            try {
+
+                estimatedGas =
+                    await wallet.estimateGas({
+                        to: recipientAddress,
+                        value: amountInWei
+                    });
+
+                console.log(
+                    "Gas estimado:",
+                    estimatedGas.toString()
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Error estimando gas:",
+                    error
+                );
+
+                throw error;
+            }
+
+            // Margen de seguridad 40%
+            const gasLimit = estimatedGas.mul(140).div(100);
+
+            console.log("Gas limit final:",  gasLimit.toString() );
+
+            // 3️⃣ Enviar transacción
+            tx =
+                await wallet.sendTransaction({
+                    to: recipientAddress,
+                    value: amountInWei,
+                    gasLimit,
+                    maxFeePerGas,
+                    maxPriorityFeePerGas
+                });
+
+            console.log(
+                "Transacción enviada:",
+                tx.hash
+            );
+
+            // 4️⃣ Esperar confirmación
+            const receipt = await tx.wait();
+
+            console.log(
+                "Confirmada:",
+                receipt.transactionHash
+            );       
+
         }
 
         alert("Transferencia de MATIC exitosa.");
@@ -229,4 +293,7 @@ async function transferMatic(recipientAddress, amount) {
         alert("Error en la transferencia de MATIC.");
     }
 }
+
+
+
 

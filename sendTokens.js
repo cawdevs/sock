@@ -5,7 +5,7 @@
 
 async function modal_enviarTokens(nftusername = undefined, key_wallet= undefined){
 
-	alert("enviarTokens() sock"); 
+	alert("enviarTokens()"); 
 	$('#myModalEnviarTokens').modal('show');
     
     const modal = document.getElementById("modal-enviar-tokens");

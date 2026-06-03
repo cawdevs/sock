@@ -138,46 +138,206 @@ async function modal_enviarTokens(nftusername = undefined, key_wallet= undefined
 
 
 // Transferencia de SOCK tokens
+// Transferencia de SOCK tokens
 async function transferSockTokens(recipientAddress, amount) {
-	alert("eSock"+  recipientAddress +amount); 
-    const loadingAnimation = document.getElementById('loadingAnimation-sendSocks');
-    loadingAnimation.style.display = 'block'; // Mostrar la animación de carga.
-    try {
-        // Convertir la cantidad a Wei según los decimales del contrato (18 decimales en ERC20)
-        const amountInWei = ethers.utils.parseUnits(amount.toString(), 18);                
-        // Transferir los tokens SOCK
-        let tx;
-        
 
-        if (tokenContract.methods) {
-            // Usando MetaMask (Web3.js)
-            tx = await tokenContract.methods.transfer(recipientAddress, amountInWei).send({
-                from: globalWalletKey,
-                gasLimit: 300000,
-                gasPrice: web3.utils.toWei('60', 'gwei'),
-            });
-        } else {
-            // Usando SockWallet (Ethers.js)
-            tx = await tokenContract.transfer(recipientAddress, amountInWei, {
-                gasLimit: 300000,
-                gasPrice: ethers.utils.parseUnits('90', 'gwei'),
-            });
-            console.log("Transacción enviada con SockWallet:", tx.hash);
-            await tx.wait(); // Confirmar la transacción.
+    alert("eSock " + recipientAddress + " " + amount);
+
+    const loadingAnimation = document.getElementById('loadingAnimation-sendSocks');
+
+    loadingAnimation.style.display = 'block';
+
+    try {
+
+        // Validar dirección
+        if (!ethers.utils.isAddress(recipientAddress)) {
+            throw new Error("Dirección inválida");
         }
 
+        // Validar monto
+        if (!amount || Number(amount) <= 0) {
+            throw new Error("Monto inválido");
+        }
+
+        // Convertir a unidades del token
+        const amountInWei = ethers.utils.parseUnits(amount.toString(), 18);
+
+        let tx;
+
+        if (tokenContract.methods) {
+
+            //------------------------------------------------
+            // MetaMask (Web3.js)
+            //------------------------------------------------
+
+            tx = await tokenContract.methods
+                .transfer(
+                    recipientAddress,
+                    amountInWei.toString()
+                )
+                .send({
+                    from: globalWalletKey
+                });
+
+        } else {
+
+            
+            //------------------------------------------------
+            // 1️⃣ Verificar saldo SOCK
+            //------------------------------------------------
+
+            const walletAddress = await wallet.getAddress();
+
+            const sockBalance = await tokenContract.balanceOf(walletAddress);
+
+            if (sockBalance.lt(amountInWei)) {
+
+                loadingAnimation.style.display = 'none';
+
+                alert(
+                    "Saldo SOCK insuficiente.\n\n" +
+                    "Disponible: " +
+                    ethers.utils.formatUnits(sockBalance, 18) +
+                    " SOCK\n\n" +
+                    "Intentas enviar: " +
+                    ethers.utils.formatUnits(amountInWei, 18) +
+                    " SOCK"
+                );
+
+                return;
+            }
+
+            //------------------------------------------------
+            // 2️⃣ Obtener gas EIP1559
+            //------------------------------------------------
+
+            let maxFeePerGas;
+            let maxPriorityFeePerGas;
+
+            try {
+
+                const gasData = await obtenerGasEIP1559(provider);
+                maxFeePerGas = gasData.maxFeePerGas;
+                maxPriorityFeePerGas = gasData.maxPriorityFeePerGas;
+                console.log( "Gas EIP1559 calculado" );
+
+            } catch (error) {
+
+                console.error( "Error obteniendo gas:", error );
+                throw error;
+            }
+
+            //------------------------------------------------
+            // 3️⃣ Estimar gas
+            //------------------------------------------------
+
+            let estimatedGas;
+
+            try {
+
+                estimatedGas =
+                    await tokenContract.estimateGas.transfer(
+                        recipientAddress,
+                        amountInWei
+                    );
+
+                console.log(
+                    "Gas estimado:",
+                    estimatedGas.toString()
+                );
+
+            } catch (error) {
+
+                console.error("Error estimando gas:", error);
+                throw error;
+            }
+
+            //------------------------------------------------
+            // 4️⃣ Aplicar margen de seguridad
+            //------------------------------------------------
+
+            const gasLimit = estimatedGas.mul(140).div(100);
+
+            console.log( "Gas limit final:", gasLimit.toString() );
+
+            //------------------------------------------------
+            // 5️⃣ Verificar saldo MATIC para gas
+            //------------------------------------------------
+
+            const estimatedGasCost = gasLimit.mul(maxFeePerGas);
+
+            const maticBalance = await wallet.getBalance();
+
+            if (maticBalance.lt(estimatedGasCost)) {
+
+                loadingAnimation.style.display = 'none';
+
+                alert(
+                    "Saldo MATIC insuficiente para pagar el gas.\n\n" +
+                    "Disponible: " +
+                    ethers.utils.formatEther(maticBalance) +
+                    " MATIC\n\n" +
+                    "Necesario aprox: " +
+                    ethers.utils.formatEther(estimatedGasCost) +
+                    " MATIC"
+                );
+
+                return;
+            }
+
+            //------------------------------------------------
+            // 6️⃣ Enviar transacción
+            //------------------------------------------------
+
+            tx = await tokenContract.transfer(
+                recipientAddress,
+                amountInWei,
+                {
+                    gasLimit,
+                    maxFeePerGas,
+                    maxPriorityFeePerGas
+                }
+            );
+
+            console.log(
+                "Transacción enviada:",
+                tx.hash
+            );
+
+            //------------------------------------------------
+            // 7️⃣ Esperar confirmación
+            //------------------------------------------------
+
+            const receipt = await tx.wait();
+
+            console.log(
+                "Transacción confirmada:",
+                receipt.transactionHash
+            );
+        }
 
         alert("Transferencia de SOCK exitosa.");
 
         loadingAnimation.style.display = 'none';
+
         $('#myModalEnviarTokens').modal('hide');
 
     } catch (error) {
 
-    	loadingAnimation.style.display = 'none';
-        
-        console.error("Error en la transferencia de SOCK:", error);
-        alert("Error en la transferencia de SOCK.");
+        loadingAnimation.style.display = 'none';
+
+        console.error(
+            "Error en la transferencia de SOCK:",
+            error
+        );
+
+        alert(
+            "Error en la transferencia de SOCK.\n\n" +
+            (error.reason ||
+             error.data?.message ||
+             error.message ||
+             "Error desconocido")
+        );
     }
 }
 
@@ -185,18 +345,22 @@ async function transferSockTokens(recipientAddress, amount) {
 
 
 // Transferencia de MATIC
+// Transferencia de MATIC
 async function transferMatic(recipientAddress, amount) {
-	alert("Matic"+  recipientAddress +amount); 
+
+    alert("Matic " + recipientAddress + amount);
+
     const loadingAnimation = document.getElementById('loadingAnimation-sendPol');
-    loadingAnimation.style.display = 'block'; // Mostrar la animación de carga.
+    loadingAnimation.style.display = 'block';
 
     try {
-        const amountInWei = ethers.utils.parseEther(amount.toString());
 
-       
-        // Transferir MATIC
+        const amountInWei =  ethers.utils.parseEther(amount.toString());
+
         let tx;
+
         if (tokenContract.methods) {
+
             // Usando MetaMask
             tx = await ethereum.request({
                 method: "eth_sendTransaction",
@@ -208,9 +372,13 @@ async function transferMatic(recipientAddress, amount) {
                     },
                 ],
             });
+
         } else {
-            // Usando SockWallet (Ethers.js)
-           
+
+            //------------------------------------------------
+            // SockWallet (Ethers.js)
+            //------------------------------------------------
+
             // 1️⃣ Obtener gas EIP1559
             let maxFeePerGas;
             let maxPriorityFeePerGas;
@@ -219,8 +387,10 @@ async function transferMatic(recipientAddress, amount) {
 
                 const gasData = await obtenerGasEIP1559(provider);
                 maxFeePerGas = gasData.maxFeePerGas;
+
                 maxPriorityFeePerGas = gasData.maxPriorityFeePerGas;
-                console.log("Gas EIP1559 calculado");
+
+                console.log("Gas EIP1559 calculado" );
 
             } catch (error) {
 
@@ -228,7 +398,10 @@ async function transferMatic(recipientAddress, amount) {
                 throw error;
             }
 
-            // 2️⃣ Estimar gas para transferencia nativa
+            //------------------------------------------------
+            // 2️⃣ Estimar gas
+            //------------------------------------------------
+
             let estimatedGas;
 
             try {
@@ -239,27 +412,67 @@ async function transferMatic(recipientAddress, amount) {
                         value: amountInWei
                     });
 
-                console.log(
-                    "Gas estimado:",
-                    estimatedGas.toString()
-                );
+                console.log("Gas estimado:", estimatedGas.toString());
 
             } catch (error) {
 
-                console.error(
-                    "Error estimando gas:",
-                    error
-                );
-
+                console.error( "Error estimando gas:", error );
                 throw error;
             }
 
-            // Margen de seguridad 40%
+            //------------------------------------------------
+            // 3️⃣ Margen de seguridad
+            //------------------------------------------------
+
             const gasLimit = estimatedGas.mul(140).div(100);
 
-            console.log("Gas limit final:",  gasLimit.toString() );
+            console.log( "Gas limit final:", gasLimit.toString() );
 
-            // 3️⃣ Enviar transacción
+            //------------------------------------------------
+            // 4️⃣ Calcular costo máximo del gas
+            //------------------------------------------------
+
+            const estimatedGasCost = gasLimit.mul(maxFeePerGas);
+
+            //------------------------------------------------
+            // 5️⃣ Obtener saldo MATIC
+            //------------------------------------------------
+
+            const maticBalance = await wallet.getBalance();
+
+            //------------------------------------------------
+            // 6️⃣ Verificar saldo suficiente
+            //------------------------------------------------
+
+            const totalNeeded = amountInWei.add(estimatedGasCost);
+
+            if (maticBalance.lt(totalNeeded)) {
+
+                loadingAnimation.style.display = 'none';
+
+                alert(
+                    "Saldo MATIC insuficiente.\n\n" +
+                    "Disponible: " +
+                    ethers.utils.formatEther(maticBalance) +
+                    " MATIC\n\n" +
+                    "Intentas enviar: " +
+                    ethers.utils.formatEther(amountInWei) +
+                    " MATIC\n\n" +
+                    "Gas estimado: " +
+                    ethers.utils.formatEther(estimatedGasCost) +
+                    " MATIC\n\n" +
+                    "Necesitas aproximadamente: " +
+                    ethers.utils.formatEther(totalNeeded) +
+                    " MATIC"
+                );
+
+                return;
+            }
+
+            //------------------------------------------------
+            // 7️⃣ Enviar transacción
+            //------------------------------------------------
+
             tx =
                 await wallet.sendTransaction({
                     to: recipientAddress,
@@ -274,26 +487,41 @@ async function transferMatic(recipientAddress, amount) {
                 tx.hash
             );
 
-            // 4️⃣ Esperar confirmación
-            const receipt = await tx.wait();
+            //------------------------------------------------
+            // 8️⃣ Esperar confirmación
+            //------------------------------------------------
+
+            const receipt =
+                await tx.wait();
 
             console.log(
                 "Confirmada:",
                 receipt.transactionHash
-            );       
-
+            );
         }
 
         alert("Transferencia de MATIC exitosa.");
+
         loadingAnimation.style.display = 'none';
+
         $('#myModalEnviarTokens').modal('hide');
 
     } catch (error) {
-        console.error("Error en la transferencia de MATIC:", error);
-        alert("Error en la transferencia de MATIC.");
+
+        loadingAnimation.style.display = 'none';
+
+        console.error(
+            "Error en la transferencia de MATIC:",
+            error
+        );
+
+        alert(
+            "Error en la transferencia de MATIC.\n\n" +
+            (error.reason ||
+             error.data?.message ||
+             error.message ||
+             "Error desconocido")
+        );
     }
 }
-
-
-
 

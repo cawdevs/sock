@@ -109,7 +109,7 @@ let weapon;
     canvas = document.createElement("canvas");
     canvas.id = "canvas";
     canvas.width = 300;
-    canvas.height = 600;
+    canvas.height = 500;
 
     canvas.tabIndex = 0;
     contCanvas.appendChild(canvas);
@@ -118,7 +118,7 @@ let weapon;
     
     ctx = canvas.getContext("2d");
     ctx.fillStyle="red";
-    ctx.fillRect(0,0,300,600);
+    ctx.fillRect(0,0,300,500);
     console.log(canvas); 
 
 
@@ -586,10 +586,7 @@ bloques.onload = ()=>{
 }
 
 function iniciarJuego(){
-    console.log(canvas);
-    ctx.fillStyle="blue";
-    ctx.fillRect(0,0,300,600);
-    console.log(canvas); 
+    
 
     //if(spriteNaveCargado && spriteBloquesCargado){
 
@@ -744,7 +741,7 @@ function update(){
 function draw(){
    
     ctx.fillStyle="black";
-    ctx.fillRect(0,0,300,600);
+    ctx.fillRect(0,0,300,500);
 
 
 

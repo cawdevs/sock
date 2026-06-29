@@ -240,6 +240,11 @@ let weapon;
 
     };
 
+    // Libera todas las teclas si el dedo se levanta fuera del botón
+    window.addEventListener("pointerup", soltarTodo);
+    window.addEventListener("pointercancel", soltarTodo);
+    window.addEventListener("blur", soltarTodo);
+
     //=========================
     // INICIAR EL JUEGO
     //=========================
@@ -680,7 +685,7 @@ function update(){
 
     if(hero.y<40) hero.y=40;
 
-    if(hero.y>560) hero.y=560;
+    if(hero.y>460) hero.y=460;
 
     //-------------------------
 
@@ -1817,7 +1822,7 @@ function reiniciarJuego(){
 
     // Nave
     hero.x = 150;
-    hero.y = 500;
+    hero.y = 450;
    
     hero.angle = 0;
     hero.targetAngle = 0;
@@ -1855,6 +1860,11 @@ function reiniciarJuego(){
 
 }
 
-
+function soltarTodo(){
+    release("left");
+    release("right");
+    release("up");
+    release("down");
+}
 
 }

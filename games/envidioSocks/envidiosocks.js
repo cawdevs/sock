@@ -1836,6 +1836,7 @@ function reiniciarJuego(){
     nivelActual = 0;
     hero.vida = niveles[nivelActual].vidaHero;
     hero.vidaMax = niveles[nivelActual].vidaHero;
+    niveles = JSON.parse(JSON.stringify(nivelesOriginales));
 
     // Reiniciar contadores
     totalSock = 0;

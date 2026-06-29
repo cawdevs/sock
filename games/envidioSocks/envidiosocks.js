@@ -254,11 +254,11 @@ let weapon;
 //const ctx=canvas.getContext("2d");
 
 const sprite=new Image();
-sprite.src="games/envidioSocks/imagenes/naves_socks.PNG";
+sprite.src="games/envidioSocks/imagenes/naves_socks.png";
 
 ////////////////////////////////////////
 const bloques = new Image();
-bloques.src = "games/envidioSocks/imagenes/elemento.PNG";
+bloques.src = "games/envidioSocks/imagenes/elemento.png";
 
 const TAM = 50;
 
@@ -537,7 +537,7 @@ for(let i=1;i<=12;i++){
 
     const img = new Image();
 
-    img.src = "games/envidioSocks/imagenes/espacio" + i + ".JFIF";
+    img.src = "games/envidioSocks/imagenes/espacio" + i + ".jfif";
 
     fondos.push(img);
 

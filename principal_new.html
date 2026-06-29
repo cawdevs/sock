@@ -1246,8 +1246,23 @@ span.hashtag {
         <img src="games/sockRevolutions/images/sockRevolutions.svg" alt="Icono" style="width: 100px;">
         
     </button>
+
+                    
+    
+
+
 </div>
 
+ <div style="display: flex; gap: 5px; justify-content: center; align-items: center; margin: 10px;">
+
+
+<button onclick="envidiosocks_game()" style="display: flex; align-items: center;  font-size: 16px; background-color: white; color: white; border: none; border-radius: 10px; cursor: pointer;">
+        <img src="games/envidioSocks/imagenes/envidiosocks_logo.svg" alt="Icono" style="width: 100px;">
+        
+    </button>
+
+
+</div>
         
           <div id="gameContainer"></div>        
               
@@ -1964,6 +1979,8 @@ span.hashtag {
     <script src="games/sockWar/scriptSockWar.js"></script>
 
     <script src="games/sockRevolutions/loadGameRevolutions.js"></script>
+
+    <script src="games/envidiosocks/envidiosocks.js"></script>
      
 
 <style>
@@ -2236,7 +2253,9 @@ async function verificarServidor() {
     // Definir las palabras clave
 
     function abrirModalPublicacion() {
-    createPublicationElements();
+
+
+    createPublicationElements(0,0);//0 indica que es un post principal , 0: Nadie es padre de esta publicacion
         //('#myModal_publication').modal('show');
 }
      

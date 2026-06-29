@@ -18,12 +18,12 @@ function envidiosocks_game(){
             display:flex;
             justify-content:space-between;
             align-items:flex-end;
-            padding:10px;
-            gap:20px;
+            padding:5px;
+            gap:5px;
         }
 
         #joystick{
-            width:150px;
+            width:200px;
         }
 
         .joyRow{
@@ -34,7 +34,7 @@ function envidiosocks_game(){
         }
 
         #joystick button{
-            width:46px;
+            width:80px;
             height:46px;
             border-radius:10px;
         }
@@ -151,7 +151,7 @@ let weapon;
 
     up=document.createElement("button");
     up.id="up";
-    up.innerHTML="▲";
+    //up.innerHTML="▲";
     fila1.appendChild(up);
 
     const vacio2=document.createElement("div");
@@ -165,7 +165,7 @@ let weapon;
 
     left=document.createElement("button");
     left.id="left";
-    left.innerHTML="◀";
+    //left.innerHTML="◀";
     fila2.appendChild(left);
 
     const centro=document.createElement("div");
@@ -174,7 +174,7 @@ let weapon;
 
     right=document.createElement("button");
     right.id="right";
-    right.innerHTML="▶";
+    //right.innerHTML="▶";
     fila2.appendChild(right);
 
     // Tercera fila
@@ -188,7 +188,7 @@ let weapon;
 
     down=document.createElement("button");
     down.id="down";
-    down.innerHTML="▼";
+    //down.innerHTML="▼";
     fila3.appendChild(down);
 
     const vacio4=document.createElement("div");

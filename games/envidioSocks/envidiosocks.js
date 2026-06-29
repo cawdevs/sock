@@ -254,11 +254,11 @@ let weapon;
 //const ctx=canvas.getContext("2d");
 
 const sprite=new Image();
-sprite.src="games/envidiosocks/imagenes/naves_socks.PNG";
+sprite.src="games/envidioSocks/imagenes/naves_socks.PNG";
 
 ////////////////////////////////////////
 const bloques = new Image();
-bloques.src = "games/envidiosocks/imagenes/elemento.PNG";
+bloques.src = "games/envidioSocks/imagenes/elemento.PNG";
 
 const TAM = 50;
 
@@ -512,12 +512,12 @@ let mostrarVictoria = false;
 let tiempoVictoria = 0;
 
 
-const sonidoApareceMalo = new Audio("games/envidiosocks/sonidos/aparece_jefe.mp3");
-const sonidoShotHero = new Audio("games/envidiosocks/sonidos/shot.mp3");
-const explosionJefe = new Audio("games/envidiosocks/sonidos/explosion_jefe.mp3");
-const explosionHero = new Audio("games/envidiosocks/sonidos/explosion_hero.mp3");
-const coinHero = new Audio("games/envidiosocks/sonidos/coin.mp3");
-const soundBox = new Audio("games/envidiosocks/sonidos/box.mp3");
+const sonidoApareceMalo = new Audio("games/envidioSocks/sonidos/aparece_jefe.mp3");
+const sonidoShotHero = new Audio("games/envidioSocks/sonidos/shot.mp3");
+const explosionJefe = new Audio("games/envidioSocks/sonidos/explosion_jefe.mp3");
+const explosionHero = new Audio("games/envidioSocks/sonidos/explosion_hero.mp3");
+const coinHero = new Audio("games/envidioSocks/sonidos/coin.mp3");
+const soundBox = new Audio("games/envidioSocks/sonidos/box.mp3");
 
 let gameOver = false;
 let heroMuerto = false;
@@ -537,7 +537,7 @@ for(let i=1;i<=12;i++){
 
     const img = new Image();
 
-    img.src = "games/envidiosocks/imagenes/espacio" + i + ".JFIF";
+    img.src = "games/envidioSocks/imagenes/espacio" + i + ".JFIF";
 
     fondos.push(img);
 
@@ -1749,13 +1749,13 @@ function siguienteNivel(){
 
 
 function reproducirDisparo(){
-    const s = new Audio("games/envidiosocks/sonidos/shot.mp3");
+    const s = new Audio("games/envidioSocks/sonidos/shot.mp3");
     s.volume = 0.3;
     s.play();
 }
 
 function reproducirCoin(){
-    const s = new Audio("games/envidiosocks/sonidos/coin.mp3");
+    const s = new Audio("games/envidioSocks/sonidos/coin.mp3");
     //s.volume = 0.3;
     s.play();
 }
@@ -1768,19 +1768,19 @@ function reproducirBox(){
 
 
 function reproducirExplosionHero(){
-    const s = new Audio("games/envidiosocks/sonidos/explosion_hero.mp3");
+    const s = new Audio("games/envidioSocks/sonidos/explosion_hero.mp3");
     //s.volume = 0.3;
     s.play();
 }
 
 function reproducirApareceMalo(){
-    const s = new Audio("games/envidiosocks/sonidos/aparece_jefe.mp3");
+    const s = new Audio("games/envidioSocks/sonidos/aparece_jefe.mp3");
     //s.volume = 0.3;
     s.play();
 }
 
 function reproducirExplosionJefeHero(){
-    const s = new Audio("games/envidiosocks/sonidos/explosion_jefe.mp3");
+    const s = new Audio("games/envidioSocks/sonidos/explosion_jefe.mp3");
     //s.volume = 0.3;
     s.play();
 }

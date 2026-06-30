@@ -8,22 +8,11 @@ function envidiosocks_game(){
 
         style.innerHTML = `
 
-        #game{
-
-    position:relative;
-
-    width:100%;
-    max-width:420px;
-
-}
 
 #canvas{
-
     width:100%;
     height:auto;
-
     display:block;
-
 }
 
 /*==================================
@@ -75,73 +64,52 @@ JOYSTICK
 
 }
 
-#joystick button{
 
-    width:72px;
-
-    height:48px;
-
-    background:rgba(255,255,255,.08);
-
-    border:2px solid rgba(255,255,255,.45);
-
-    border-radius:12px;
-
-    backdrop-filter:blur(2px);
-
-    color:white;
-
-    font-size:22px;
-
-}
 
 /*==================================
 BOTONES DERECHA
 ==================================*/
 
+
+
 #acciones{
+
+    position:absolute;
+
+    left:0;
+
+    bottom:10px;
+
+    width:100%;
 
     display:flex;
 
-    flex-direction:column;
+    padding:0 10px;
 
-    gap:12px;
-
-    pointer-events:auto;
+    gap:8px;
 
 }
 
-#fire{
+#left,
+#right{
 
-    width:72px;
+    flex:1;
 
-    height:72px;
+    height:70px;
 
-    border-radius:50%;
-
-    background:rgba(255,0,0,.15);
-
-    border:3px solid rgba(255,80,80,.8);
-
-    color:white;
-
-    font-size:28px;
+    border-radius:15px;
 
 }
+
+
 
 #weapon{
 
-    width:46px;
+    width:70px;
 
-    height:46px;
+    height:70px;
 
     border-radius:50%;
-
-    background:rgba(255,255,255,.08);
-
-    border:2px solid rgba(255,255,255,.45);
-
-    color:white;
 
 }
 
@@ -189,19 +157,16 @@ let weapon;
     //=========================
     // GAME
     //=========================
-
     const game = document.createElement("div");
     game.id = "game";
-
     principal.appendChild(game);
 
     //=========================
     // CONTENEDOR CANVAS
-    //=========================
-    
+    //=========================    
 
-    //const contCanvas = document.createElement("div");
-    //game.appendChild(contCanvas);
+    const contCanvas = document.createElement("div");
+    game.appendChild(contCanvas);
 
     //=========================
     // CANVAS
@@ -213,7 +178,7 @@ let weapon;
     game.appendChild(canvas);
     
     canvas.tabIndex = 0;
-    //contCanvas.appendChild(canvas);
+    contCanvas.appendChild(canvas);
     canvas.focus();
 
     
@@ -243,96 +208,42 @@ let weapon;
 
     // Primera fila
 
-    const fila1=document.createElement("div");
-    fila1.className="joyRow";
-    joystick.appendChild(fila1);
-
-    const vacio1=document.createElement("div");
-    fila1.appendChild(vacio1);
-
-    up=document.createElement("button");
-    up.id="up";
-    //up.innerHTML="▲";
-    fila1.appendChild(up);
-
-    const vacio2=document.createElement("div");
-    fila1.appendChild(vacio2);
-
-    // Segunda fila
-
-    const fila2=document.createElement("div");
-    fila2.className="joyRow";
-    joystick.appendChild(fila2);
-
-    left=document.createElement("button");
-    left.id="left";
-    //left.innerHTML="◀";
-    fila2.appendChild(left);
-
-    const centro=document.createElement("div");
-    centro.id="joyCenter";
-    fila2.appendChild(centro);
-
-    right=document.createElement("button");
-    right.id="right";
-    //right.innerHTML="▶";
-    fila2.appendChild(right);
-
-    // Tercera fila
-
-    const fila3=document.createElement("div");
-    fila3.className="joyRow";
-    joystick.appendChild(fila3);
-
-    const vacio3=document.createElement("div");
-    fila3.appendChild(vacio3);
-
-    down=document.createElement("button");
-    down.id="down";
-    //down.innerHTML="▼";
-    fila3.appendChild(down);
-
-    const vacio4=document.createElement("div");
-    fila3.appendChild(vacio4);
-
-    //=========================
+        //=========================
     // ACCIONES
     //=========================
 
-    const acciones=document.createElement("div");
-    acciones.id="acciones";
+const acciones = document.createElement("div");
+acciones.id = "acciones";
 
-    hud.appendChild(acciones);
+game.appendChild(acciones);
 
-    fire=document.createElement("button");
-    fire.id="fire";
-    fire.innerHTML="●";
+left = document.createElement("button");
+left.id = "left";
+left.innerHTML = "◀";
 
-    acciones.appendChild(fire);
+weapon = document.createElement("button");
+weapon.id = "weapon";
+weapon.innerHTML = "↻";
 
-    weapon=document.createElement("button");
-    weapon.id="weapon";
-    weapon.innerHTML="↻";
+right = document.createElement("button");
+right.id = "right";
+right.innerHTML = "▶";
 
-    acciones.appendChild(weapon);
+acciones.appendChild(left);
+acciones.appendChild(weapon);
+acciones.appendChild(right);
 
     //=========================
     // EVENTOS
     //=========================
 
-    left.onpointerdown = ()=>press("left");
-    left.onpointerup = ()=>release("left");
+   left.onpointerdown = ()=>press("left");
+left.onpointerup   = ()=>release("left");
 
-    right.onpointerdown = ()=>press("right");
-    right.onpointerup = ()=>release("right");
+right.onpointerdown = ()=>press("right");
+right.onpointerup   = ()=>release("right");
 
-    up.onpointerdown = ()=>press("up");
-    up.onpointerup = ()=>release("up");
-
-    down.onpointerdown = ()=>press("down");
-    down.onpointerup = ()=>release("down");
-
-    fire.onpointerdown = ()=>disparar();
+weapon.onpointerdown = ()=>cambiarArma();
 
     weapon.onpointerdown = ()=>{
 
@@ -593,6 +504,8 @@ const HERO_H = 35;
 const HERO_SPRITE_W = 100;
 const HERO_SPRITE_H = 120;
 
+let tiempoUltimoDisparo = 0;
+const intervaloDisparo = 500; // milisegundos
 
 //const HERO_W = 30;//tamaño de a nave para las colisiones
 //const HERO_H = 30;//tamaño de a nave para las colisiones
@@ -742,13 +655,13 @@ function update(){
 
     if(keys.up){
 
-        dy = -hero.speed;
+        //dy = -hero.speed;
 
     }
 
     if(keys.down){
 
-        dy = hero.speed;
+        //dy = hero.speed;
 
     }
 
@@ -838,6 +751,13 @@ function update(){
 
    if(heroMuerto && explosiones.length == 0){
       gameOver = true;
+   }
+
+
+   const ahora = Date.now();
+   if(ahora - tiempoUltimoDisparo >= intervaloDisparo){
+        disparar();
+        tiempoUltimoDisparo = ahora;
    }
 
 }
@@ -1853,7 +1773,7 @@ function siguienteNivel(){
 
 function reproducirDisparo(){
     const s = new Audio("games/envidioSocks/sonidos/shot.mp3");
-    s.volume = 0.3;
+    s.volume = 0.1;
     s.play();
 }
 

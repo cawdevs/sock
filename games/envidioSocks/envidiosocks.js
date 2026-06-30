@@ -9,54 +9,155 @@ function envidiosocks_game(){
         style.innerHTML = `
 
         #game{
-            width:100%;
-            max-width:420px;
-            background:#111;
-        }
 
-        #hud{
-            display:flex;
-            justify-content:space-between;
-            align-items:flex-end;
-            padding:5px;
-            gap:5px;
-        }
+    position:relative;
 
-        #joystick{
-            width:200px;
-        }
+    width:100%;
+    max-width:420px;
 
-        .joyRow{
-            display:flex;
-            justify-content:center;
-            gap:8px;
-            margin:4px 0;
-        }
+}
 
-        #joystick button{
-            width:80px;
-            height:46px;
-            border-radius:10px;
-        }
+#canvas{
 
-        #acciones{
-            display:flex;
-            flex-direction:column;
-            gap:12px;
-        }
+    width:100%;
+    height:auto;
 
-        #fire{
-            width:90px;
-            height:90px;
-            border-radius:50%;
-            background:red;
-        }
+    display:block;
 
-        #weapon{
-            width:50px;
-            height:50px;
-            border-radius:50%;
-        }
+}
+
+/*==================================
+HUD SOBRE EL CANVAS
+==================================*/
+
+#hud{
+
+    position:absolute;
+
+    left:0;
+    bottom:15px;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-end;
+
+    padding:0 15px;
+
+    pointer-events:none;
+
+}
+
+/*==================================
+JOYSTICK
+==================================*/
+
+#joystick{
+
+    width:250px;
+    pointer-events:auto;
+
+
+}
+
+.joyRow{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:6px;
+
+    margin:4px 0;
+
+}
+
+#joystick button{
+
+    width:72px;
+
+    height:48px;
+
+    background:rgba(255,255,255,.08);
+
+    border:2px solid rgba(255,255,255,.45);
+
+    border-radius:12px;
+
+    backdrop-filter:blur(2px);
+
+    color:white;
+
+    font-size:22px;
+
+}
+
+/*==================================
+BOTONES DERECHA
+==================================*/
+
+#acciones{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+    pointer-events:auto;
+
+}
+
+#fire{
+
+    width:72px;
+
+    height:72px;
+
+    border-radius:50%;
+
+    background:rgba(255,0,0,.15);
+
+    border:3px solid rgba(255,80,80,.8);
+
+    color:white;
+
+    font-size:28px;
+
+}
+
+#weapon{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    border:2px solid rgba(255,255,255,.45);
+
+    color:white;
+
+}
+
+button{
+
+    transition:.1s;
+
+}
+
+button:active{
+
+    transform:scale(.92);
+
+    background:rgba(255,255,255,.25);
+
+}
 
         `;
 
@@ -97,28 +198,28 @@ let weapon;
     //=========================
     // CONTENEDOR CANVAS
     //=========================
+    
 
-    const contCanvas = document.createElement("div");
-
-    game.appendChild(contCanvas);
+    //const contCanvas = document.createElement("div");
+    //game.appendChild(contCanvas);
 
     //=========================
     // CANVAS
     //=========================
-
     canvas = document.createElement("canvas");
     canvas.id = "canvas";
     canvas.width = 300;
-    canvas.height = 500;
-
+    canvas.height = 600;
+    game.appendChild(canvas);
+    
     canvas.tabIndex = 0;
-    contCanvas.appendChild(canvas);
+    //contCanvas.appendChild(canvas);
     canvas.focus();
 
     
     ctx = canvas.getContext("2d");
     ctx.fillStyle="red";
-    ctx.fillRect(0,0,300,500);
+    ctx.fillRect(0,0,300,600);
     console.log(canvas); 
 
 
@@ -291,8 +392,8 @@ let niveles = [
         [2,2,2,5,3,2],
         
     ],
-    vidaJefe:10,
-    vidaHero:10,
+    vidaJefe:20,
+    vidaHero:20,
     spriteJefe:1
 },
 
@@ -681,11 +782,11 @@ function update(){
 
     if(hero.x<30) hero.x=30;
 
-    if(hero.x>310) hero.x=310;
+    if(hero.x>300) hero.x=300;
 
     if(hero.y<40) hero.y=40;
 
-    if(hero.y>460) hero.y=460;
+    if(hero.y>460) hero.y=560;
 
     //-------------------------
 
@@ -746,7 +847,7 @@ function update(){
 function draw(){
    
     ctx.fillStyle="black";
-    ctx.fillRect(0,0,300,500);
+    ctx.fillRect(0,0,300,600);
 
 
 
@@ -1715,6 +1816,7 @@ function siguienteNivel(){
     if(nivelActual >= niveles.length){
         nivelActual = 0;
         hero.vida =niveles[nivelActual].vidaHero;
+        hero.vidaMax = niveles[nivelActual].vidaHero;
         niveles = JSON.parse(JSON.stringify(nivelesOriginales));
     }
 
@@ -1736,8 +1838,7 @@ function siguienteNivel(){
 
      // Cambiar sprite del jefe según el nivel
     jefe.frame =niveles[nivelActual].spriteJefe;
-    jefe.vida =niveles[nivelActual].vidaJefe;
-    
+    jefe.vida =niveles[nivelActual].vidaJefe;    
     jefe.vidaMax = niveles[nivelActual].vidaJefe;
 
 
@@ -1763,7 +1864,7 @@ function reproducirCoin(){
 }
 
 function reproducirBox(){
-    const s = new Audio("games/envidiosocks/sonidos/box.mp3");
+    const s = new Audio("games/envidioSocks/sonidos/box.mp3");
     //s.volume = 0.3;
     s.play();
 }
@@ -1822,7 +1923,7 @@ function reiniciarJuego(){
 
     // Nave
     hero.x = 150;
-    hero.y = 450;
+    hero.y = 550;
    
     hero.angle = 0;
     hero.targetAngle = 0;

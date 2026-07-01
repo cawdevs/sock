@@ -1313,6 +1313,7 @@ function detectarImpactoBalas(){
         if(jefe.vida<=0 && !jefe.muriendo){
             jefe.muriendo = true;
             jefe.tiempoExplosion = 120;
+            puntos+=1000;
         }
 
         if(jefe.activo){
@@ -1685,6 +1686,8 @@ function siguienteNivel(){
         hero.vida =niveles[nivelActual].vidaHero;
         hero.vidaMax = niveles[nivelActual].vidaHero;
         niveles = JSON.parse(JSON.stringify(nivelesOriginales));
+
+        add_points(puntos);
     }
 
     // Limpiar barras viejas
@@ -1834,5 +1837,43 @@ function soltarTodo(){
     release("right");
     release("fire");
 }
+
+function add_points_to_wallet(walletKey, points) {
+    console.log(`Agregando ${points} puntos a:`, walletKey);
+
+    fetch("https://api.thesocks.net/add-points/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            wallet_key: walletKey,
+            puntos: points
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Respuesta del servidor:", data);
+
+        if (data.status === "success") {
+            console.log(`✅ Puntos agregados correctamente a ${walletKey}`);
+        } else {
+            console.warn("⚠ No se pudieron agregar puntos:", data.error || "Error desconocido");
+        }
+    })
+    .catch(error => {
+        console.error("❌ Error al agregar puntos:", error);
+    });
+}
+
+function add_points(points) {
+    add_points_to_wallet(globalWalletKey, points);
+    get_total_points();
+
+}
+
+
+
+
 
 }

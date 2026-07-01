@@ -408,7 +408,7 @@ let puntos=0;
 //let barraY = -TAM;
 //let velocidadMapa = 4;
 
-const TIEMPO_ENTRE_BARRAS = 1000; // milisegundos
+const TIEMPO_ENTRE_BARRAS = 1250; // milisegundos
 const VELOCIDAD_BARRAS = 6;
 
 //const SPRITE_W = 64;

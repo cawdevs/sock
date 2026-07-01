@@ -26,7 +26,7 @@ function envidiosocks_game(){
 #acciones{
     display:flex;
     width:100%;
-    gap:6px;
+    gap:16px;
     margin-top:8px;
 
 }
@@ -49,9 +49,9 @@ right:active{
 
 
 
-#weapon{
-    width:70px;
-    height:70px;
+#fire{
+    width:60px;
+    height:60px;
     flex:none;
     font-size:28px;
     border-radius:50%;
@@ -59,11 +59,11 @@ right:active{
     color:white;
     border:2px solid #ffffff;
     cursor:pointer;
-}
 
-#weapon:active{
+#fire:active{
     transform:scale(0.92);
     background:#1e90ffcc;
+}
 }
 
         `;
@@ -85,7 +85,7 @@ let down;
 let left;
 let right;
 let fire;
-let weapon;
+//
 
 
 
@@ -141,8 +141,8 @@ left.id = "left";
 // BOTÓN WEAPON
 //=========================
 
-weapon = document.createElement("button");
-weapon.id = "weapon";
+fire = document.createElement("button");
+fire.id = "fire";
 //weapon.innerHTML = "↻";
 
 //=========================
@@ -158,7 +158,7 @@ right.id = "right";
 //=========================
 
 acciones.appendChild(left);
-acciones.appendChild(weapon);
+acciones.appendChild(fire);
 acciones.appendChild(right)
 
     //=========================
@@ -171,19 +171,20 @@ left.onpointerup   = ()=>release("left");
 right.onpointerdown = ()=>press("right");
 right.onpointerup   = ()=>release("right");
 
-weapon.onpointerdown = ()=>cambiarArma();
+fire.onpointerdown = ()=>press("fire");
+fire.onpointerup   = ()=>release("fire");
 
+
+/*weapon.onpointerdown = ()=>cambiarArma();
     weapon.onpointerdown = ()=>{
-
         if(gameOver)
             reiniciarJuego();
-
     };
-
+*/
     // Libera todas las teclas si el dedo se levanta fuera del botón
-    window.addEventListener("pointerup", soltarTodo);
-    window.addEventListener("pointercancel", soltarTodo);
-    window.addEventListener("blur", soltarTodo);
+window.addEventListener("pointerup", soltarTodo);
+window.addEventListener("pointercancel", soltarTodo);
+window.addEventListener("blur", soltarTodo);
 
     //=========================
     // INICIAR EL JUEGO
@@ -850,8 +851,13 @@ fire.onpointerdown = ()=>{
     disparar();
 };
 */
-weapon.onpointerdown = ()=>{
+fire.onpointerdown = ()=>{
+    
+    if(gameOver)
+      reiniciarJuego();
+    
     disparar();
+
 };
 
 

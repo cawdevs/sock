@@ -9,84 +9,29 @@ function envidiosocks_game(){
         style.innerHTML = `
 
 
+#game{
+
+    width:100%;
+    max-width:420px;
+
+}
+
 #canvas{
+
     width:100%;
-    height:auto;
     display:block;
-}
-
-/*==================================
-HUD SOBRE EL CANVAS
-==================================*/
-
-#hud{
-
-    position:absolute;
-
-    left:0;
-    bottom:15px;
-
-    width:100%;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-end;
-
-    padding:0 15px;
-
-    pointer-events:none;
 
 }
-
-/*==================================
-JOYSTICK
-==================================*/
-
-#joystick{
-
-    width:250px;
-    pointer-events:auto;
-
-
-}
-
-.joyRow{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:6px;
-
-    margin:4px 0;
-
-}
-
-
-
-/*==================================
-BOTONES DERECHA
-==================================*/
-
-
 
 #acciones{
 
-    position:absolute;
-
-    left:0;
-
-    bottom:10px;
+    display:flex;
 
     width:100%;
 
-    display:flex;
+    gap:6px;
 
-    padding:0 10px;
-
-    gap:8px;
+    margin-top:8px;
 
 }
 
@@ -97,34 +42,15 @@ BOTONES DERECHA
 
     height:70px;
 
-    border-radius:15px;
+    font-size:32px;
 
 }
-
-
 
 #weapon{
-
     width:70px;
-
     height:70px;
-
-    border-radius:50%;
-
-}
-
-button{
-
-    transition:.1s;
-
-}
-
-button:active{
-
-    transform:scale(.92);
-
-    background:rgba(255,255,255,.25);
-
+    flex:none;
+    font-size:28px;
 }
 
         `;
@@ -151,93 +77,82 @@ let weapon;
 
 
     
-    const principal = document.getElementById("gameContainer");
-    principal.innerHTML = "";
+const principal = document.getElementById("gameContainer");
+principal.innerHTML = "";
 
-    //=========================
-    // GAME
-    //=========================
-    const game = document.createElement("div");
-    game.id = "game";
-    principal.appendChild(game);
+//=========================
+// GAME
+//=========================
 
-    //=========================
-    // CONTENEDOR CANVAS
-    //=========================    
+const game = document.createElement("div");
+game.id = "game";
+principal.appendChild(game);
 
-    const contCanvas = document.createElement("div");
-    game.appendChild(contCanvas);
+//=========================
+// CANVAS
+//=========================
 
-    //=========================
-    // CANVAS
-    //=========================
-    canvas = document.createElement("canvas");
-    canvas.id = "canvas";
-    canvas.width = 300;
-    canvas.height = 600;
-    game.appendChild(canvas);
-    
-    canvas.tabIndex = 0;
-    contCanvas.appendChild(canvas);
-    canvas.focus();
+canvas = document.createElement("canvas");
+canvas.id = "canvas";
+canvas.width = 300;
+canvas.height = 600;
+canvas.tabIndex = 0;
 
-    
-    ctx = canvas.getContext("2d");
-    ctx.fillStyle="red";
-    ctx.fillRect(0,0,300,600);
-    console.log(canvas); 
+game.appendChild(canvas);
 
+canvas.focus();
 
-    //=========================
-    // HUD
-    //=========================
+ctx = canvas.getContext("2d");
 
-    const hud = document.createElement("div");
-    hud.id = "hud";
+ctx.fillStyle = "red";
+ctx.fillRect(0,0,300,600);
 
-    game.appendChild(hud);
-
-    //=========================
-    // JOYSTICK
-    //=========================
-
-    const joystick = document.createElement("div");
-    joystick.id = "joystick";
-
-    hud.appendChild(joystick);
-
-    // Primera fila
-
-        //=========================
-    // ACCIONES
-    //=========================
+//=========================
+// CONTROLES
+//=========================
 
 const acciones = document.createElement("div");
 acciones.id = "acciones";
 
 game.appendChild(acciones);
 
+//=========================
+// BOTÓN IZQUIERDA
+//=========================
+
 left = document.createElement("button");
 left.id = "left";
 left.innerHTML = "◀";
+
+//=========================
+// BOTÓN WEAPON
+//=========================
 
 weapon = document.createElement("button");
 weapon.id = "weapon";
 weapon.innerHTML = "↻";
 
+//=========================
+// BOTÓN DERECHA
+//=========================
+
 right = document.createElement("button");
 right.id = "right";
 right.innerHTML = "▶";
 
+//=========================
+// AGREGAR BOTONES
+//=========================
+
 acciones.appendChild(left);
 acciones.appendChild(weapon);
-acciones.appendChild(right);
+acciones.appendChild(right)
 
     //=========================
     // EVENTOS
     //=========================
 
-   left.onpointerdown = ()=>press("left");
+left.onpointerdown = ()=>press("left");
 left.onpointerup   = ()=>release("left");
 
 right.onpointerdown = ()=>press("right");
@@ -504,8 +419,7 @@ const HERO_H = 35;
 const HERO_SPRITE_W = 100;
 const HERO_SPRITE_H = 120;
 
-let tiempoUltimoDisparo = 0;
-const intervaloDisparo = 500; // milisegundos
+
 
 //const HERO_W = 30;//tamaño de a nave para las colisiones
 //const HERO_H = 30;//tamaño de a nave para las colisiones
@@ -753,12 +667,7 @@ function update(){
       gameOver = true;
    }
 
-
-   const ahora = Date.now();
-   if(ahora - tiempoUltimoDisparo >= intervaloDisparo){
-        disparar();
-        tiempoUltimoDisparo = ahora;
-   }
+ 
 
 }
 
@@ -927,14 +836,12 @@ down.onpointerleave=()=>release("down");
 fire.onpointerdown = ()=>{
     disparar();
 };
-
+*/
 weapon.onpointerdown = ()=>{
-    if(gameOver){
-        reiniciarJuego();
-    }
+    disparar();
 };
 
-*/
+
 //===========================
 window.addEventListener("keydown",e=>{
     if(e.code=="Space"){
@@ -1884,8 +1791,6 @@ function reiniciarJuego(){
 
 function soltarTodo(){
     release("left");
-    release("right");
-    release("up");
     release("down");
 }
 

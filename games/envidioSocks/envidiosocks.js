@@ -210,7 +210,7 @@ sprite.src="games/envidioSocks/imagenes/naves_socks.png";
 const bloques = new Image();
 bloques.src = "games/envidioSocks/imagenes/elemento.png";
 
-const TAM = 50;
+const TAM = 60;
 
 
 const VACIO    = 0;
@@ -228,12 +228,10 @@ let niveles = [
 
 {
     barras:[
-        [1,5,1,5,5,1],
-        [1,2,2,5,3,2],
-        [0,1,1,5,5,0],
-        [1,2,1,5,3,3],
-        [0,5,1,1,1,4],
-        [2,2,2,5,3,2],
+        [1,5,1,5,5],
+        [0,1,1,5,5],        
+        [0,5,1,1,1],
+        [2,2,2,5,3],
         
     ],
     vidaJefe:20,
@@ -260,6 +258,7 @@ let niveles = [
         [4,5,3,3,2],
         [1,2,3,2,1],
         [0,2,0,5,1],
+        [1,4,1,3,1],
         
     ],
     vidaJefe:30,
@@ -273,6 +272,7 @@ let niveles = [
         [4,5,3,1,2],
         [1,0,1,0,1],
         [1,0,1,4,5],
+        [1,3,5,2,1],
         
     ],
     vidaJefe:40,
@@ -301,6 +301,7 @@ let niveles = [
         [1,0,4,1,3],
         [2,4,0,4,2],
         [1,1,1,0,1],
+        [1,2,4,5,3],
         
     ],
     vidaJefe:60,
@@ -315,6 +316,7 @@ let niveles = [
         [5,0,5,3,3],
         [3,3,3,1,2],
         [1,3,3,3,3],
+        [4,5,0,2,5],
        
     ],
     vidaJefe:80,
@@ -329,6 +331,7 @@ let niveles = [
         [5,1,5,1,5],
         [4,2,0,1,2],
         [1,4,4,4,1],
+        [1,0,5,3,1],
         
     ],
     vidaJefe:100,
@@ -344,6 +347,7 @@ let niveles = [
         [2,0,4,2,3],
         [4,2,0,1,2],
         [1,3,3,2,1],
+        [0,2,3,0,1],
         
     ],
     vidaJefe:120,
@@ -357,7 +361,6 @@ let niveles = [
         [4,3,0,1,2],
         [3,2,3,0,1],
         [3,0,3,3,3],
-        [3,5,3,1,3],
         [3,2,0,2,4],
         [3,3,3,3,3],
         [3,5,0,1,5],
@@ -377,7 +380,8 @@ let niveles = [
         [1,2,1,2,3],
         [2,1,2,1,3],
         [4,2,3,4,3],
-        
+        [3,0,3,2,3],
+        [3,5,1,1,3],
     ],
     vidaJefe:160,
     vidaHero:160,
@@ -529,7 +533,7 @@ setInterval(()=>{
 
 bloques.onload = ()=>{
 
-    console.log(canvas);
+    
     BLOQUE_W = bloques.width / 6;
     BLOQUE_H = bloques.height;
     spriteBloquesCargado = true;
@@ -831,15 +835,14 @@ function press(name){
 
     keys[name] = true;
 
-    console.log(name, "ON");
-
+    
 }
 
 function release(name){
 
     keys[name] = false;
 
-    console.log(name, "OFF");
+   
 
 }
 
@@ -1020,8 +1023,7 @@ function procesarColision(tipo, barra, indice){
 
             hero.vida-=10;
 
-            console.log("BOOM");
-            console.log("MINA");
+          
 
             reproducirExplosionHero();
 
@@ -1032,7 +1034,7 @@ function procesarColision(tipo, barra, indice){
 
         case ACERO:
 
-            console.log("ACERO");
+            
             
 
             // Después aquí impediremos que la nave avance
@@ -1041,7 +1043,7 @@ function procesarColision(tipo, barra, indice){
 
         case SOCK:
 
-            console.log("+100");
+            
             reproducirCoin();
             puntos+=10;
             barra.datos[indice]=VACIO;
@@ -1054,10 +1056,14 @@ function procesarColision(tipo, barra, indice){
 
         case POLYGON:
 
-            console.log("+500");
+            
             reproducirCoin();
 
-            //hero.vida+=2;
+            hero.vida+=5;
+            
+            if (hero.vida>=hero.vidaMax)
+               hero.vida= hero.vidaMax;        
+            
             puntos+=100;
 
             barra.datos[indice]=VACIO;
@@ -1070,7 +1076,7 @@ function procesarColision(tipo, barra, indice){
 
         case MADERA:
 
-            console.log("MADERA");
+            
            
 
             // Por ahora solo detiene la nave.
@@ -1459,7 +1465,7 @@ function revisarFinNivel(){
         jefeAparecio = true;
         jefe.activo = true;
         
-        console.log("APARECE EL TIEF");
+       
 
         jefe.y = -100;
         jefe.entrando = true;
@@ -1659,7 +1665,7 @@ function destruirJefe(){
 
     }
 
-    console.log("VICTORIA");
+    
 
 }
 
@@ -1707,7 +1713,7 @@ function siguienteNivel(){
     contarNivel();
 
 
-    console.log("NIVEL", nivelActual+1);
+    
 
 }
 

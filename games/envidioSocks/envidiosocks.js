@@ -108,7 +108,7 @@ principal.appendChild(game);
 canvas = document.createElement("canvas");
 canvas.id = "canvas";
 canvas.width = 300;
-canvas.height = 600;
+canvas.height = 500;
 canvas.tabIndex = 0;
 
 game.appendChild(canvas);
@@ -118,7 +118,7 @@ canvas.focus();
 ctx = canvas.getContext("2d");
 
 ctx.fillStyle = "red";
-ctx.fillRect(0,0,300,600);
+ctx.fillRect(0,0,300,500);
 
 //=========================
 // CONTROLES
@@ -439,7 +439,7 @@ const HERO_SPRITE_H = 120;
 //const HERO_H = 30;//tamaño de a nave para las colisiones
 let explosiones=[];//explosiones 
 const keys={ left:false, right:false, up:false, down:false };
-const hero={ x:150, y:500, speed:4, angle:0, targetAngle:0, vida:20, vidaMax:20, frame:0 };
+const hero={ x:150, y:400, speed:4, angle:0, targetAngle:0, vida:20, vidaMax:20, frame:0 };
 //const jefe = { activo:false, x:150, y:-100, vx:2, vida:100, entrando:true, vibracion:0 };
 //DESTRUIRconst jefe = { activo:false, x:150, y:-100, vx:2, vida:100, vidaMax:100, entrando:true, vibracion:0, herido:false };
 const jefe = { activo:false, x:150, y:-100, vx:2, vida:20, vidaMax:20, entrando:true, vibracion:0, muriendo:false, tiempoExplosion:0, frame:1};
@@ -627,7 +627,7 @@ function update(){
 
     if(hero.y<40) hero.y=40;
 
-    if(hero.y>460) hero.y=560;
+    if(hero.y>460) hero.y=460;
 
     //-------------------------
 
@@ -690,7 +690,7 @@ function update(){
 function draw(){
    
     ctx.fillStyle="black";
-    ctx.fillRect(0,0,300,600);
+    ctx.fillRect(0,0,300,500);
 
 
 

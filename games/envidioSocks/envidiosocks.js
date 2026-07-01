@@ -28,8 +28,11 @@ function envidiosocks_game(){
     width:100%;
     gap:16px;
     margin-top:8px;
+    touch-action:none;
 
 }
+
+
 
 #left,
 #right{
@@ -164,15 +167,16 @@ acciones.appendChild(right)
     //=========================
     // EVENTOS
     //=========================
+left.onpointerdown   = ()=>press("left");
+left.onpointerup     = ()=>release("left");
+left.onpointerleave  = ()=>release("left");
+left.onpointercancel = ()=>release("left");
 
-left.onpointerdown = ()=>press("left");
-left.onpointerup   = ()=>release("left");
+right.onpointerdown   = ()=>press("right");
+right.onpointerup     = ()=>release("right");
+right.onpointerleave  = ()=>release("right");
+right.onpointercancel = ()=>release("right");
 
-right.onpointerdown = ()=>press("right");
-right.onpointerup   = ()=>release("right");
-
-fire.onpointerdown = ()=>press("fire");
-fire.onpointerup   = ()=>release("fire");
 
 
 /*weapon.onpointerdown = ()=>cambiarArma();
@@ -438,8 +442,10 @@ const HERO_SPRITE_H = 120;
 //const HERO_W = 30;//tamaño de a nave para las colisiones
 //const HERO_H = 30;//tamaño de a nave para las colisiones
 let explosiones=[];//explosiones 
-const keys={ left:false, right:false, up:false, down:false };
-const hero={ x:150, y:400, speed:4, angle:0, targetAngle:0, vida:20, vidaMax:20, frame:0 };
+//const keys={ left:false, right:false, up:false, down:false };
+const keys = { left:false, right:false, fire:false };
+const hero={ x:150, y:400, speed:4, angle:0, targetAngle:0, vida:20, vidaMax:20, frame:0, cooldown:0 };
+
 //const jefe = { activo:false, x:150, y:-100, vx:2, vida:100, entrando:true, vibracion:0 };
 //DESTRUIRconst jefe = { activo:false, x:150, y:-100, vx:2, vida:100, vidaMax:100, entrando:true, vibracion:0, herido:false };
 const jefe = { activo:false, x:150, y:-100, vx:2, vida:20, vidaMax:20, entrando:true, vibracion:0, muriendo:false, tiempoExplosion:0, frame:1};
@@ -568,17 +574,13 @@ function update(){
 
 
     if(keys.left){
-
         dx = -hero.speed;
         hero.targetAngle = -10;
-
     }
 
     if(keys.right){
-
         dx = hero.speed;
         hero.targetAngle = 10;
-
     }
 
     if(keys.up){
@@ -596,9 +598,7 @@ function update(){
     //-------------------------
 
     if(!keys.left && !keys.right){
-
         hero.targetAngle = 0;
-
     }
 
     hero.angle += (hero.targetAngle - hero.angle) * 0.15;
@@ -606,6 +606,14 @@ function update(){
     //-------------------------
     // Movimiento X
     //-------------------------
+
+    if(hero.cooldown > 0)
+         hero.cooldown--;
+
+    if(keys.fire && hero.cooldown == 0){
+        disparar();
+        hero.cooldown = 10;
+    }
 
     hero.x += dx;
     corregirColisionX(dx);
@@ -819,13 +827,20 @@ function drawHero(){
 }
 
 //===========================
-
 function press(name){
-	keys[name]=true;
+
+    keys[name] = true;
+
+    console.log(name, "ON");
+
 }
 
 function release(name){
-	keys[name]=false;
+
+    keys[name] = false;
+
+    console.log(name, "OFF");
+
 }
 
 //===========================
@@ -852,44 +867,44 @@ fire.onpointerdown = ()=>{
 };
 */
 fire.onpointerdown = ()=>{
-    
-    if(gameOver)
-      reiniciarJuego();
-    
-    disparar();
-
+    if(gameOver){
+        reiniciarJuego();
+        return;
+    }
+    press("fire");
 };
 
+fire.onpointerup     = ()=>release("fire");
+fire.onpointerleave  = ()=>release("fire");
+fire.onpointercancel = ()=>release("fire");
 
-//===========================
-window.addEventListener("keydown",e=>{
-    if(e.code=="Space"){
-        disparar();
 
-    }
+
+window.addEventListener("keydown", e=>{
+
+    if(e.repeat) return; // evita repeticiones automáticas del teclado
+
+    if(e.key=="ArrowLeft")
+        press("left");
+
+    if(e.key=="ArrowRight")
+        press("right");
+
+    if(e.code=="Space")
+        press("fire");
+
 });
 
-window.addEventListener("keydown",e=>{
+window.addEventListener("keyup", e=>{
 
-	if(e.key=="ArrowLeft") keys.left=true;
+    if(e.key=="ArrowLeft")
+        release("left");
 
-	if(e.key=="ArrowRight") keys.right=true;
+    if(e.key=="ArrowRight")
+        release("right");
 
-	if(e.key=="ArrowUp") keys.up=true;
-
-	if(e.key=="ArrowDown") keys.down=true;
-
-});
-
-window.addEventListener("keyup",e=>{
-
-	if(e.key=="ArrowLeft") keys.left=false;
-
-	if(e.key=="ArrowRight") keys.right=false;
-
-	if(e.key=="ArrowUp") keys.up=false;
-
-	if(e.key=="ArrowDown") keys.down=false;
+    if(e.code=="Space")
+        release("fire");
 
 });
 
@@ -1810,7 +1825,8 @@ function reiniciarJuego(){
 
 function soltarTodo(){
     release("left");
-    release("down");
+    release("right");
+    release("fire");
 }
 
 }

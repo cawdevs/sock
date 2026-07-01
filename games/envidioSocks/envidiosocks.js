@@ -24,33 +24,46 @@ function envidiosocks_game(){
 }
 
 #acciones{
-
     display:flex;
-
     width:100%;
-
     gap:6px;
-
     margin-top:8px;
 
 }
 
 #left,
 #right{
-
     flex:1;
-
     height:70px;
-
     font-size:32px;
-
 }
+
+#left:active{
+    transform:scale(0.92);
+    background:#1e90ffcc;
+}
+right:active{
+    transform:scale(0.92);
+    background:#1e90ffcc;
+}
+
+
 
 #weapon{
     width:70px;
     height:70px;
     flex:none;
     font-size:28px;
+    border-radius:50%;
+    background:dodgerblue;
+    color:white;
+    border:2px solid #ffffff;
+    cursor:pointer;
+}
+
+#weapon:active{
+    transform:scale(0.92);
+    background:#1e90ffcc;
 }
 
         `;
@@ -122,7 +135,7 @@ game.appendChild(acciones);
 
 left = document.createElement("button");
 left.id = "left";
-left.innerHTML = "◀";
+//left.innerHTML = "◀";
 
 //=========================
 // BOTÓN WEAPON
@@ -130,7 +143,7 @@ left.innerHTML = "◀";
 
 weapon = document.createElement("button");
 weapon.id = "weapon";
-weapon.innerHTML = "↻";
+//weapon.innerHTML = "↻";
 
 //=========================
 // BOTÓN DERECHA
@@ -138,7 +151,7 @@ weapon.innerHTML = "↻";
 
 right = document.createElement("button");
 right.id = "right";
-right.innerHTML = "▶";
+//right.innerHTML = "▶";
 
 //=========================
 // AGREGAR BOTONES

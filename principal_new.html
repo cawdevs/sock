@@ -615,6 +615,66 @@
 
 
 
+<style>
+#avatarContainer{
+
+    position:relative;
+
+    width:300px;      /* mismo ancho del avatar */
+    height:300px;     /* mismo alto del avatar */
+
+    display:inline-block;
+}
+
+#NFT_image-container{
+
+    width:100%;
+    height:100%;
+}
+
+#btc_icon{
+
+    position:absolute;
+
+    right:8px;
+    bottom:8px;
+
+    width:65px;
+    height:65px;
+
+    border-radius:50%;
+
+    background:white;
+
+    padding:4px;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.35);
+
+    cursor:pointer;
+
+    transition:
+        transform .2s,
+        box-shadow .2s;
+
+    z-index:100;
+}
+
+#btc_icon:hover{
+
+    transform:scale(1.12);
+
+    box-shadow:
+        0 6px 16px rgba(0,0,0,.45);
+}
+
+#btc_icon:active{
+
+    transform:scale(.95);
+}
+</style>
+
+
 
 </head>
 
@@ -694,8 +754,6 @@
 
           
  <div class="col-sm-6" style="padding-left: 0; padding-right: 0;">   
- 
-
 
       <div id="menu" class="menu">
                
@@ -834,7 +892,19 @@
 <div class="top-bar">
 
   <!-- 🔸 NFT dinámico (reemplaza logo) -->
-  <div id="NFT_image-container"   ></div>
+  <div id="avatarContainer">
+       <div id="NFT_image-container"></div>
+
+       <img
+           id="btc_icon"
+           src="images/icons/sock_coin.svg"
+           alt="BTC"
+           onclick="funcionSaldo()">
+
+  </div>
+
+
+
 
   <!-- 🔸 Fila 1 -->
   <div class="top-row">

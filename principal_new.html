@@ -631,13 +631,14 @@
 
     width:80px;
     height:80px;
+    margin-left: 20px;
 }
 
 #btc_icon{
 
     position:absolute;
 
-    right:12px;
+    right:0px;
     bottom:24px;
 
     width:40px;
@@ -894,7 +895,14 @@
 
   <!-- 🔸 NFT dinámico (reemplaza logo) -->
   <div id="avatarContainer">
-     <div id="NFT_image-container"></div>
+
+     <a data-toggle="tab" href="#menu_info_sock" style="margin-left: 15px;">
+      <div id="NFT_image-container">    
+     </div>
+     </a>   
+     
+
+
 
      <a data-toggle="tab" href="#menu_saldo_criptos" onclick="obtenerSaldo_POL_SOCK_BTC()" style="margin-left: 45px;">
        <img id="btc_icon" src="images/icons/sock_coin.SVG" alt="BTC" >

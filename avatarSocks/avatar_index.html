@@ -270,22 +270,25 @@ body{
 
 
 <style>
-     #avatarGenerado{
-        width:300px;
-        height:300px;
+    #avatarGenerado{
+    width:100px;
+    height:100px;
 
-        position:relative;
+    border-radius:50%;
+    border:4px solid yellow;
 
-        margin:20px auto;
+    position:relative;
 
-        border:2px solid #888;
-        background:white;
+    margin:20px auto;
 
-        overflow:hidden;
+    background:black;
+
+    overflow:hidden;
 }
 
-.capaGenerada{
 
+/* Cada pieza del avatar */
+.capaGenerada{
     position:absolute;
 
     left:0;
@@ -295,10 +298,27 @@ body{
     height:100%;
 }
 
+
+/* SVG */
 .capaGenerada svg{
 
-    width:100%;
-    height:100%;
+    position:absolute;
+
+    /*
+    NO queremos que el SVG se adapte
+    al círculo.
+    */
+
+    width:500px;
+    height:500px;
+
+    max-width:none;
+    max-height:none;
+
+    left:50%;
+    top:-130px;
+
+    transform:translateX(-50%);
 
     display:block;
 }

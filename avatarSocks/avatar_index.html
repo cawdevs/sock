@@ -1019,7 +1019,8 @@ document.getElementById("crearCodigo")
 
 }
 
-    async function crearCapaDesdeCodigo(categoria, pieza){
+/*
+async function crearCapaDesdeCodigo(categoria, pieza){
 
     try{
 
@@ -1071,6 +1072,196 @@ document.getElementById("crearCodigo")
         );
 
     }
+}
+*/
+async function crearCapaDesdeCodigo(categoria, pieza){
+
+    try{
+
+        const ruta =
+            categoria + "/" +
+            pieza.archivo + ".svg";
+
+        const respuesta =
+            await fetch(ruta);
+
+        if(!respuesta.ok){
+
+            throw new Error(
+                "No se encontró: " + ruta
+            );
+
+        }
+
+        const textoSVG =
+            await respuesta.text();
+
+        const parser =
+            new DOMParser();
+
+        const doc =
+            parser.parseFromString(
+                textoSVG,
+                "image/svg+xml"
+            );
+
+
+        // =====================================
+        // IMPORTANTE:
+        // NO modificar avatar[categoria]
+        // =====================================
+
+        const prefijo =
+            categoria + "_";
+
+        const style =
+            doc.querySelector("style");
+
+
+        // =====================================
+        // CAMBIAR NOMBRES DE LAS CLASES
+        // =====================================
+
+        if(style){
+
+            let css =
+                style.textContent;
+
+            css = css.replace(
+                /\.fil0/g,
+                "." + prefijo + "fil0"
+            );
+
+            css = css.replace(
+                /\.fil1/g,
+                "." + prefijo + "fil1"
+            );
+
+            css = css.replace(
+                /\.fil2/g,
+                "." + prefijo + "fil2"
+            );
+
+            css = css.replace(
+                /\.fil3/g,
+                "." + prefijo + "fil3"
+            );
+
+            style.textContent = css;
+        }
+
+
+        // =====================================
+        // CAMBIAR LAS CLASES DE LOS ELEMENTOS
+        // =====================================
+
+        doc.querySelectorAll("[class]").forEach(el => {
+
+            let clases =
+                el.className.baseVal.split(" ");
+
+            clases =
+                clases.map(c =>
+                    prefijo + c
+                );
+
+            el.setAttribute(
+                "class",
+                clases.join(" ")
+            );
+
+        });
+
+
+        // =====================================
+        // APLICAR LOS 4 COLORES DEL CÓDIGO
+        // =====================================
+
+        if(style){
+
+            let css =
+                style.textContent;
+
+
+            for(let i = 0; i < 4; i++){
+
+                const color =
+                    pieza["color" + (i + 1)];
+
+
+                const regex =
+                    new RegExp(
+                        "\\." +
+                        categoria +
+                        "_fil" +
+                        i +
+                        "\\s*\\{[^}]*fill:[^}]*\\}",
+                        "i"
+                    );
+
+
+                css =
+                    css.replace(
+                        regex,
+
+                        "." +
+                        categoria +
+                        "_fil" +
+                        i +
+                        " {fill:" +
+                        color +
+                        "}"
+                    );
+
+            }
+
+
+            style.textContent =
+                css;
+        }
+
+
+        // =====================================
+        // CREAR LA CAPA DEL AVATAR GENERADO
+        // =====================================
+
+        const contenedor =
+            document.getElementById(
+                "avatarGenerado"
+            );
+
+
+        const capa =
+            document.createElement("div");
+
+
+        capa.className =
+            "capaGenerada";
+
+
+        capa.id =
+            "generado_" +
+            categoria;
+
+
+        capa.innerHTML =
+            doc.documentElement.outerHTML;
+
+
+        contenedor.appendChild(capa);
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Error cargando " +
+            categoria,
+            error
+        );
+
+    }
+
 }
 </script>
 

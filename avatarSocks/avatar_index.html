@@ -555,21 +555,25 @@ document.addEventListener("change", function(e){
 
 
 
-document.addEventListener("input",function(e){
 
-    if(e.target.classList.contains("color")){
 
-        let cat=e.target.dataset.categoria;
+document.addEventListener("input", function(e){
 
-        let tipo=e.target.dataset.tipo;
+    if(!e.target.classList.contains("color"))
+        return;
 
-        avatar[cat]["color"+tipo]=e.target.value;
+    const categoria =
+        e.target.dataset.categoria;
 
-        pintar(cat);
+    const tipo =
+        e.target.dataset.tipo;
 
-        
+    // Guardar color
+    avatar[categoria]["color" + tipo] =
+        e.target.value;
 
-    }
+    // Actualizar SOLO el avatar principal
+    pintar(categoria);
 
 });
 

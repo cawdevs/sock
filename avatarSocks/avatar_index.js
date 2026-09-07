@@ -288,8 +288,8 @@ async function cargarArchivoAutomatico(
         return;
 
 
-    const ruta =
-        nombre + "avatarSocks/" +
+    const ruta ="avatarSocks/"+
+        nombre + "/" +
         archivo + ".svg";
 
 
@@ -719,8 +719,8 @@ async function crearCapaDesdeCodigo(categoria, pieza){
 
     try{
 
-        const ruta =
-            categoria + "avatarSocks/" +
+        const ruta = "avatarSocks/"+
+            categoria + "/" +
             pieza.archivo + ".svg";
 
         const respuesta =

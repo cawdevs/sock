@@ -85,17 +85,30 @@ function crearCategoria(nombre){
     data-categoria="${nombre}"
     class="archivo">
 -->
+
+
 <div class="filaControles">
+   
 
-    <select
-        class="biblioteca"
-        data-categoria="${nombre}">
+        <span class="nombreCategoria">
+            ${nombre}
+        </span>
 
-        <option value="">
-            "${nombre}"
-        </option>
+        <select
+            class="biblioteca"
+            data-categoria="${nombre}">
 
-    </select>
+            <option value="">
+                Seleccionar
+            </option>
+
+        </select>
+
+    
+
+
+
+
 
     <div class="colores">
 

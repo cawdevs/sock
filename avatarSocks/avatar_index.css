@@ -125,7 +125,7 @@ body{
     width:500px;
     height:500px;
     */
-    width:min(90vw,300px);
+    width:min(90vw,200px);
     aspect-ratio:1/1;
 
     position:relative;
@@ -175,7 +175,7 @@ body{
 
     position:absolute;
 
-    width:100%;
+    width:200px;
     height:100%;
 
     left:0;

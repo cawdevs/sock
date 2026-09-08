@@ -43,6 +43,14 @@ body{
     box-sizing:border-box;
 }
 
+#panel{
+    overflow-y:auto;
+    overflow-x:hidden;
+
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+}
+
 
 /* Cada categoría */
 .categoria{
@@ -83,7 +91,7 @@ body{
 
 #avatar{
 
-    width:min(90vw,250px);
+    width:min(90vw,200px);
     aspect-ratio:1/1;
 
     position:relative;
@@ -236,7 +244,7 @@ body{
    .filaControles{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:5px;
     width:fit-content;
 }
 
@@ -257,12 +265,12 @@ body{
 .colores{
 
     display:flex;
-    gap:6px;
+    gap:5px;
 }
 
 .colores input[type=color]{
 
-    width:42px;
+    width:30px;
     height:42px;
 
     border:none;

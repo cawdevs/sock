@@ -63,7 +63,7 @@ function crearCategoria(nombre){
     color1:"#00FF01",
     color2:"#0000FE",
     color3:"#FE0000",
-    color4:"#FFFF01",
+    //color4:"#FFFF01",
     //color5:"#FF00FF"
 };
 
@@ -129,13 +129,13 @@ function crearCategoria(nombre){
                data-categoria="${nombre}"
                data-tipo="3"
                class="color">
-
+<!--
         <input type="color"
                value="#FFFF01"
                data-categoria="${nombre}"
                data-tipo="4"
                class="color">
-<!--
+
         <input type="color"
                value="#FF00FF"
                data-categoria="${nombre}"
@@ -410,48 +410,103 @@ function prepararSVG(nombre){
 
 
 function pintar(nombre){
-   
+
     if(!avatar[nombre].documento)
         return;
 
-    const doc=avatar[nombre].documento;
 
-    const style=doc.querySelector("style");
+    const doc =
+        avatar[nombre].documento;
 
-    let css=style.textContent;
+    const style =
+        doc.querySelector("style");
 
-    for(let i=0;i<5;i++){
 
-        css=css.replace(
+    if(!style)
+        return;
 
+
+    let css =
+        style.textContent;
+
+
+    // =================================
+    // APLICAR LOS 4 COLORES
+    // =================================
+
+    for(let i=0; i<4; i++){
+
+        const color =
+            avatar[nombre]["color" + (i+1)];
+
+
+        const regex =
             new RegExp(
-                "\\."+nombre+"_fil"+i+"\\s*\\{fill:[^}]+\\}"
-            ),
+                "\\." +
+                nombre +
+                "_fil" +
+                i +
+                "\\s*\\{[^}]*fill:[^}]*\\}",
+                "i"
+            );
 
-            "."+nombre+"_fil"+i+
-            " {fill:"+avatar[nombre]["color"+(i+1)]+"}"
 
-        );
+        css =
+            css.replace(
+                regex,
+
+                "." +
+                nombre +
+                "_fil" +
+                i +
+                " {fill:" +
+                color +
+                "}"
+            );
 
     }
 
-    style.textContent=css;
 
-    let capa=document.getElementById("capa_"+nombre);
+    style.textContent =
+        css;
+
+
+    // =================================
+    // BUSCAR CAPA
+    // =================================
+
+    let capa =
+        document.getElementById(
+            "capa_" + nombre
+        );
+
+
+    // =================================
+    // CREAR CAPA SOLO UNA VEZ
+    // =================================
 
     if(!capa){
 
-        capa=document.createElement("div");
+        capa =
+            document.createElement("div");
 
-        capa.id="capa_"+nombre;
+        capa.id =
+            "capa_" + nombre;
 
-        capa.className="capa";
+        capa.className =
+            "capa";
 
         avatarDiv.appendChild(capa);
 
     }
 
-    capa.innerHTML=doc.documentElement.outerHTML;
+
+    // =================================
+    // ACTUALIZAR SVG
+    // =================================
+
+    capa.innerHTML =
+        doc.documentElement.outerHTML;
 
 }
 

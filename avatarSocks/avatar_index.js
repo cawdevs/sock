@@ -78,12 +78,13 @@ function crearCategoria(nombre){
 
 
 
-<input
+<!--
+   <input
     type="file"
     accept=".svg"
     data-categoria="${nombre}"
     class="archivo">
-
+-->
 <div class="filaControles">
 
     <select

@@ -617,19 +617,19 @@ function generarCodigoAvatar(){
         avatar.cuerpo.color1.replace("#",""),
         avatar.cuerpo.color2.replace("#",""),
         avatar.cuerpo.color3.replace("#",""),
-        avatar.cuerpo.color4.replace("#",""),
+        //avatar.cuerpo.color4.replace("#",""),
 
         avatar.ojos.archivo || "00",
         avatar.ojos.color1.replace("#",""),
         avatar.ojos.color2.replace("#",""),
         avatar.ojos.color3.replace("#",""),
-        avatar.ojos.color4.replace("#",""),
+        //avatar.ojos.color4.replace("#",""),
 
         avatar.pelo.archivo || "00",
         avatar.pelo.color1.replace("#",""),
         avatar.pelo.color2.replace("#",""),
         avatar.pelo.color3.replace("#",""),
-        avatar.pelo.color4.replace("#","")
+        //avatar.pelo.color4.replace("#","")
 
     ].join("-");
 
@@ -671,7 +671,7 @@ document.getElementById("crearCodigo")
         color1: "#" + partes[1],
         color2: "#" + partes[2],
         color3: "#" + partes[3],
-        color4: "#" + partes[4]
+        //color4: "#" + partes[4]
 
     };
 
@@ -683,7 +683,7 @@ document.getElementById("crearCodigo")
         color1: "#" + partes[6],
         color2: "#" + partes[7],
         color3: "#" + partes[8],
-        color4: "#" + partes[9]
+        //color4: "#" + partes[9]
 
     };
 
@@ -695,7 +695,7 @@ document.getElementById("crearCodigo")
         color1: "#" + partes[11],
         color2: "#" + partes[12],
         color3: "#" + partes[13],
-        color4: "#" + partes[14]
+        //color4: "#" + partes[14]
 
     };
 
@@ -897,7 +897,7 @@ async function crearCapaDesdeCodigo(categoria, pieza){
                 style.textContent;
 
 
-            for(let i = 0; i < 4; i++){
+            for(let i = 0; i < 3; i++){
 
                 const color =
                     pieza["color" + (i + 1)];

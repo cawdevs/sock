@@ -508,6 +508,12 @@ function pintar(nombre){
     capa.innerHTML =
         doc.documentElement.outerHTML;
 
+   //escribe el codigo del avatar existente
+   document.getElementById("codeimageHexa").textContent =
+        generarCodigoAvatar();    
+
+   
+
 }
 
 function pintarAvatarGenerado(nombre){

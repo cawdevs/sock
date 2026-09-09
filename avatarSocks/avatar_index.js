@@ -509,10 +509,8 @@ function pintar(nombre){
         doc.documentElement.outerHTML;
 
    //escribe el codigo del avatar existente
-   document.getElementById("codeimageHexa").textContent =
-        generarCodigoAvatar();    
-
-   
+   document.getElementById("codigoAvatar").value =
+        generarCodigoAvatar();     
 
 }
 

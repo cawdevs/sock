@@ -3187,7 +3187,7 @@ async function mintearNFT() {
             const codeAvatarHexa = document.getElementById("codigoAvatar").value;
 
             console.log("auauau  " ,codeAvatarHexa);
-            return false;
+            
 
             const maticrequired = document.getElementById("mount-minteo").textContent;
 
@@ -3222,12 +3222,13 @@ async function mintearNFT() {
                       }else{  
 
                             let maticAmount;
+
                             if (nftUsernameContract.methods) {
                                   //console.log("Con MetaMask");
                                   maticAmount = web3.utils.toWei(maticrequired, 'ether'); 
                                 
                                     // Ejecutar la función mintNFT
-                                  await nftUsernameContract.methods.mintNFT(nftusername, codeimageHexa).send({
+                                  await nftUsernameContract.methods.mintNFT(nftusername, codeAvatarHexa).send({
                                       from: globalWalletKey,
                                       gas: 800000,
                                       gasPrice: web3.utils.toWei('60', 'gwei'),
@@ -3239,7 +3240,7 @@ async function mintearNFT() {
                                   
                                     maticAmount = ethers.utils.parseEther(maticrequired); //
                                     
-                                    const tx = await nftUsernameContract.mintNFT(nftusername, codeimageHexa, {
+                                    const tx = await nftUsernameContract.mintNFT(nftusername, codeAvatarHexa, {
                                       gasLimit: 800000,
                                       gasPrice: ethers.utils.parseUnits('60', 'gwei'), // Gas price en gwei
                                       value: maticAmount // Especificar el valor en Wei

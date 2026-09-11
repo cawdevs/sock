@@ -3184,9 +3184,19 @@ async function mintearNFT() {
             // Mintear el NFT
             const nftusername = document.getElementById('text-mintear-nft').value;
             const codeimageHexa = document.getElementById("codeimageHexa").textContent;
-            const codeAvatarHexa = document.getElementById("codigoAvatar").value;
+          
+             
+            ////////////////////////////////////////////////  
+            
+            generarCodigoAvatar();
+            const codigocolores256Avatar = document.getElementById(" codigoAvatar").value.trim();
 
-            console.log("auauau  " ,codeAvatarHexa);
+            const codigoHexaAvatar = ethers.utils.hexZeroPad("0x" + codigocolores256Avatar, 32 );
+            /////////////////////////////////////////////////
+
+
+
+            console.log("auauau  " ,codigoHexaAvatar);
             
 
             const maticrequired = document.getElementById("mount-minteo").textContent;
@@ -3228,7 +3238,7 @@ async function mintearNFT() {
                                   maticAmount = web3.utils.toWei(maticrequired, 'ether'); 
                                 
                                     // Ejecutar la función mintNFT
-                                  await nftUsernameContract.methods.mintNFT(nftusername, codeAvatarHexa).send({
+                                  await nftUsernameContract.methods.mintNFT(nftusername, codigoHexaAvatar).send({
                                       from: globalWalletKey,
                                       gas: 800000,
                                       gasPrice: web3.utils.toWei('60', 'gwei'),
@@ -3240,7 +3250,7 @@ async function mintearNFT() {
                                   
                                     maticAmount = ethers.utils.parseEther(maticrequired); //
                                     
-                                    const tx = await nftUsernameContract.mintNFT(nftusername, codeAvatarHexa, {
+                                    const tx = await nftUsernameContract.mintNFT(nftusername, codigoHexaAvatar, {
                                       gasLimit: 800000,
                                       gasPrice: ethers.utils.parseUnits('60', 'gwei'), // Gas price en gwei
                                       value: maticAmount // Especificar el valor en Wei

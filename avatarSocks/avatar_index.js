@@ -100,19 +100,47 @@ categorias.forEach(crearCategoria);
 
 function crearPaletaColor(selector){
 
-    const paleta =  document.createElement("div");
+    // Evitar varias paletas
+    document
+        .querySelectorAll(".paletaFlotante")
+        .forEach(p => p.remove());
 
-    paleta.className = "paletaFlotante";
 
-    paleta.style.display = "grid";
+    const paleta =
+        document.createElement("div");
 
-    paleta.style.gridTemplateColumns =
-        "repeat(16, 22px)";
+    paleta.className =
+        "paletaFlotante";
 
-    paleta.style.gap = "3px";
+
+    // =====================================
+    // CONFIGURACIÓN
+    // =====================================
+
+    const anchoPantalla =
+        window.innerWidth;
+
+    const margen = 10;
+
+    const anchoMaximo =
+        Math.min(
+            300,
+            anchoPantalla - (margen * 2)
+        );
+
 
     paleta.style.position =
-        "absolute";
+        "fixed";
+
+    paleta.style.width =
+        anchoMaximo + "px";
+
+    paleta.style.maxWidth =
+        "calc(100vw - 20px)";
+
+    paleta.style.boxSizing =
+        "border-box";
+
 
     paleta.style.background =
         "white";
@@ -130,21 +158,53 @@ function crearPaletaColor(selector){
         "10000";
 
 
+    // =====================================
+    // CUADRÍCULA
+    // =====================================
+
+    paleta.style.display =
+        "grid";
+
+    paleta.style.gridTemplateColumns =
+        "repeat(16, 1fr)";
+
+    paleta.style.gap =
+        "3px";
+
+
+    // =====================================
+    // COLORES
+    // =====================================
+
     paleta256.forEach((color, indice) => {
 
         const opcion =
             document.createElement("div");
 
-        opcion.style.width = "22px";
-        opcion.style.height = "22px";
-        opcion.style.background = color;
-        opcion.style.cursor = "pointer";
+
+        opcion.style.aspectRatio =
+            "1 / 1";
+
+        opcion.style.width =
+            "100%";
+
+        opcion.style.background =
+            color;
+
+        opcion.style.cursor =
+            "pointer";
+
+        opcion.style.borderRadius =
+            "2px";
+
 
         opcion.title =
-            indice.toString(16)
+            indice
+            .toString(16)
             .toUpperCase()
-            .padStart(2,"0") +
-            "  " +
+            .padStart(2,"0")
+            +
+            " " +
             color;
 
 
@@ -159,16 +219,17 @@ function crearPaletaColor(selector){
                     selector.dataset.tipo;
 
 
-                // Guardar índice del color
+                // Guardar código hexadecimal
                 avatar[categoria]
                     ["color" + tipo] =
+
                     indice
                     .toString(16)
                     .toUpperCase()
                     .padStart(2,"0");
 
 
-                // Mostrar color seleccionado
+                // Mostrar color elegido
                 selector.style.background =
                     color;
 
@@ -192,18 +253,78 @@ function crearPaletaColor(selector){
     document.body.appendChild(paleta);
 
 
+    // =====================================
+    // POSICIÓN
+    // =====================================
+
     const rect =
         selector.getBoundingClientRect();
 
 
+    let izquierda =
+        rect.left;
+
+
+    // No permitir que salga por la derecha
+    if(
+        izquierda + anchoMaximo >
+        window.innerWidth - margen
+    ){
+
+        izquierda =
+            window.innerWidth -
+            anchoMaximo -
+            margen;
+
+    }
+
+
+    // No permitir que salga por la izquierda
+    if(izquierda < margen){
+
+        izquierda = margen;
+
+    }
+
+
     paleta.style.left =
-        rect.left + "px";
+        izquierda + "px";
+
+
+    // Intentar colocar debajo
+    let arriba =
+        rect.bottom + 5;
+
+
+    // Si no hay espacio abajo,
+    // colocarla arriba
+    const alturaPaleta =
+        paleta.offsetHeight;
+
+
+    if(
+        arriba + alturaPaleta >
+        window.innerHeight - margen
+    ){
+
+        arriba =
+            rect.top -
+            alturaPaleta -
+            5;
+
+    }
+
+
+    if(arriba < margen){
+
+        arriba = margen;
+
+    }
+
 
     paleta.style.top =
-        (rect.bottom + 5) + "px";
+        arriba + "px";
 
-
-    return paleta;
 }
 
 function colorPaletaAHex(indiceHex){
@@ -256,17 +377,20 @@ function crearCategoria(nombre){
 
             <div class="selectorColor"
                  data-categoria="${nombre}"
-                 data-tipo="1">
+                 data-tipo="1"
+                 style="background:#39D51F;">
             </div>
 
             <div class="selectorColor"
                  data-categoria="${nombre}"
-                 data-tipo="2">
+                 data-tipo="2"
+                 style="background:#0097CD;">
             </div>
 
             <div class="selectorColor"
                  data-categoria="${nombre}"
-                 data-tipo="3">
+                 data-tipo="3"
+                 style="background:#FE2319;">
             </div>
 
     </div>
@@ -555,113 +679,6 @@ function prepararSVG(nombre){
 }
 
 
-
-
-/*
-function pintar(nombre){
-
-    if(!avatar[nombre].documento)
-        return;
-
-
-    const doc =
-        avatar[nombre].documento;
-
-    const style =
-        doc.querySelector("style");
-
-
-    if(!style)
-        return;
-
-
-    let css =
-        style.textContent;
-
-
-    // =================================
-    // APLICAR LOS 4 COLORES
-    // =================================
-
-    for(let i=0; i<4; i++){
-
-        const color =
-            avatar[nombre]["color" + (i+1)];
-
-
-        const regex =
-            new RegExp(
-                "\\." +
-                nombre +
-                "_fil" +
-                i +
-                "\\s*\\{[^}]*fill:[^}]*\\}",
-                "i"
-            );
-
-
-        css =
-            css.replace(
-                regex,
-
-                "." +
-                nombre +
-                "_fil" +
-                i +
-                " {fill:" +
-                color +
-                "}"
-            );
-
-    }
-
-
-    style.textContent =
-        css;
-
-
-    // =================================
-    // BUSCAR CAPA
-    // =================================
-
-    let capa =
-        document.getElementById(
-            "capa_" + nombre
-        );
-
-
-    // =================================
-    // CREAR CAPA SOLO UNA VEZ
-    // =================================
-
-    if(!capa){
-
-        capa =
-            document.createElement("div");
-
-        capa.id =
-            "capa_" + nombre;
-
-        capa.className =
-            "capa";
-
-        avatarDiv.appendChild(capa);
-
-    }
-
-
-    // =================================
-    // ACTUALIZAR SVG
-    // =================================
-
-    capa.innerHTML =
-        doc.documentElement.outerHTML;
-
-   //escribe el codigo del avatar existente
-   document.getElementById("codigoAvatar").value =
-        generarCodigoAvatar();     
-
-}*/
 function pintar(nombre){
 
     if(!avatar[nombre].documento)
@@ -899,9 +916,6 @@ function generarCodigoAvatar(){
 
 }
 
-//00-7a7a7a-040005-FE0000-FFFF01-00-000000-afa7a7-545454-FFFF01-00-ffffff-000000-ffffff-e2dcb1
-
-//00-8a0000-ff0000-FE0000-FFFF01-00-ffffff-ff0000-000000-810909-00-ff0000-ff0000-000000-e2dcb1
 
 
 document.getElementById("crearCodigo")
@@ -1034,61 +1048,7 @@ document.getElementById("crearCodigo")
 
 }
 
-/*
-async function crearCapaDesdeCodigo(categoria, pieza){
 
-    try{
-
-        const ruta =
-            categoria + "/" +
-            pieza.archivo + ".svg";
-
-        const respuesta = await fetch(ruta);
-
-        if(!respuesta.ok){
-
-            throw new Error(
-                "No se encontró: " + ruta
-            );
-
-        }
-
-        const textoSVG = await respuesta.text();
-
-        const parser = new DOMParser();
-
-        const doc = parser.parseFromString(
-            textoSVG,
-            "image/svg+xml"
-        );
-
-        // Guardamos temporalmente la pieza
-        avatar[categoria].documento = doc;
-
-        // Guardamos sus colores
-        avatar[categoria].color1 = pieza.color1;
-        avatar[categoria].color2 = pieza.color2;
-        avatar[categoria].color3 = pieza.color3;
-        avatar[categoria].color4 = pieza.color4;
-
-        // Preparar las clases fil0, fil1, fil2, fil3
-        prepararSVG(categoria);
-
-        // Pintar usando el mismo sistema
-        // que utiliza el avatar principal
-        pintarAvatarGenerado(categoria);
-
-    }
-    catch(error){
-
-        console.error(
-            "Error cargando " + categoria,
-            error
-        );
-
-    }
-}
-*/
 async function crearCapaDesdeCodigo(categoria, pieza){
 
     try{

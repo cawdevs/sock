@@ -48,13 +48,170 @@ const biblioteca = {
 
 };
 
+const paleta256 = [];
+
+for(let i = 0; i < 256; i++){
+
+    let r;
+    let g;
+    let b;
+
+    if(i < 216){
+
+        // Cubo RGB 6x6x6
+        const nivel = [0, 51, 102, 153, 204, 255];
+
+        r = nivel[Math.floor(i / 36)];
+        g = nivel[Math.floor((i % 36) / 6)];
+        b = nivel[i % 6];
+
+    }else{
+
+        // 40 tonos de gris
+        const gris =
+            Math.round(
+                ((i - 216) * 255) / 39
+            );
+
+        r = gris;
+        g = gris;
+        b = gris;
+    }
+
+    const hex =
+        "#" +
+        r.toString(16).padStart(2,"0") +
+        g.toString(16).padStart(2,"0") +
+        b.toString(16).padStart(2,"0");
+
+    paleta256.push(hex);
+}
+
+
+
 const avatar={};
-
 const panel=document.getElementById("panel");
-
 const avatarDiv=document.getElementById("avatar");
 
 categorias.forEach(crearCategoria);
+
+
+
+
+function crearPaletaColor(selector){
+
+    const paleta =  document.createElement("div");
+
+    paleta.className = "paletaFlotante";
+
+    paleta.style.display = "grid";
+
+    paleta.style.gridTemplateColumns =
+        "repeat(16, 22px)";
+
+    paleta.style.gap = "3px";
+
+    paleta.style.position =
+        "absolute";
+
+    paleta.style.background =
+        "white";
+
+    paleta.style.padding =
+        "8px";
+
+    paleta.style.borderRadius =
+        "8px";
+
+    paleta.style.boxShadow =
+        "0 3px 15px rgba(0,0,0,.4)";
+
+    paleta.style.zIndex =
+        "10000";
+
+
+    paleta256.forEach((color, indice) => {
+
+        const opcion =
+            document.createElement("div");
+
+        opcion.style.width = "22px";
+        opcion.style.height = "22px";
+        opcion.style.background = color;
+        opcion.style.cursor = "pointer";
+
+        opcion.title =
+            indice.toString(16)
+            .toUpperCase()
+            .padStart(2,"0") +
+            "  " +
+            color;
+
+
+        opcion.addEventListener(
+            "click",
+            function(){
+
+                const categoria =
+                    selector.dataset.categoria;
+
+                const tipo =
+                    selector.dataset.tipo;
+
+
+                // Guardar índice del color
+                avatar[categoria]
+                    ["color" + tipo] =
+                    indice
+                    .toString(16)
+                    .toUpperCase()
+                    .padStart(2,"0");
+
+
+                // Mostrar color seleccionado
+                selector.style.background =
+                    color;
+
+
+                // Cerrar paleta
+                paleta.remove();
+
+
+                // Actualizar avatar
+                pintar(categoria);
+
+            }
+        );
+
+
+        paleta.appendChild(opcion);
+
+    });
+
+
+    document.body.appendChild(paleta);
+
+
+    const rect =
+        selector.getBoundingClientRect();
+
+
+    paleta.style.left =
+        rect.left + "px";
+
+    paleta.style.top =
+        (rect.bottom + 5) + "px";
+
+
+    return paleta;
+}
+
+function colorPaletaAHex(indiceHex){
+    const indice = parseInt(indiceHex,16);
+    return paleta256[indice];
+}
+
+
 
 function crearCategoria(nombre){
 
@@ -78,18 +235,8 @@ function crearCategoria(nombre){
 
 
 
-<!--
-   <input
-    type="file"
-    accept=".svg"
-    data-categoria="${nombre}"
-    class="archivo">
--->
-
-
 <div class="filaControles">
    
-
         <span class="nombreCategoria">
             ${nombre}
         </span>
@@ -102,49 +249,30 @@ function crearCategoria(nombre){
                 Seleccionar
             </option>
 
-        </select>
-
-    
-
-
-
+        </select>  
 
 
     <div class="colores">
 
-        <input type="color"
-               value="#00FF01"
-               data-categoria="${nombre}"
-               data-tipo="1"
-               class="color">
+            <div class="selectorColor"
+                 data-categoria="${nombre}"
+                 data-tipo="1">
+            </div>
 
-        <input type="color"
-               value="#0000FE"
-               data-categoria="${nombre}"
-               data-tipo="2"
-               class="color">
+            <div class="selectorColor"
+                 data-categoria="${nombre}"
+                 data-tipo="2">
+            </div>
 
-        <input type="color"
-               value="#FE0000"
-               data-categoria="${nombre}"
-               data-tipo="3"
-               class="color">
-<!--
-        <input type="color"
-               value="#FFFF01"
-               data-categoria="${nombre}"
-               data-tipo="4"
-               class="color">
+            <div class="selectorColor"
+                 data-categoria="${nombre}"
+                 data-tipo="3">
+            </div>
 
-        <input type="color"
-               value="#FF00FF"
-               data-categoria="${nombre}"
-               data-tipo="5"
-               class="color">
---!>
     </div>
-
 </div>
+
+
 
 `;
 
@@ -168,7 +296,28 @@ if(biblioteca[nombre]){
 
 }
 
+document.addEventListener(
+    "click",
+    function(e){
 
+        const selector =
+            e.target.closest(".selectorColor");
+
+
+        if(!selector)
+            return;
+
+
+        // Evitar varias paletas abiertas
+        document
+            .querySelectorAll(".paletaFlotante")
+            .forEach(p => p.remove());
+
+
+        crearPaletaColor(selector);
+
+    }
+);
 
 document.addEventListener("change", function(e){
 
@@ -408,7 +557,7 @@ function prepararSVG(nombre){
 
 
 
-
+/*
 function pintar(nombre){
 
     if(!avatar[nombre].documento)
@@ -512,7 +661,97 @@ function pintar(nombre){
    document.getElementById("codigoAvatar").value =
         generarCodigoAvatar();     
 
+}*/
+function pintar(nombre){
+
+    if(!avatar[nombre].documento)
+        return;
+
+
+    const doc =
+        avatar[nombre].documento;
+
+
+    const style =
+        doc.querySelector("style");
+
+
+    if(!style)
+        return;
+
+
+    let css =
+        style.textContent;
+
+
+    for(let i=0; i<3; i++){
+
+        const color =
+            colorPaletaAHex(
+                avatar[nombre]
+                ["color"+(i+1)]
+            );
+
+
+        const regex =
+            new RegExp(
+                "\\." +
+                nombre +
+                "_fil" +
+                i +
+                "\\s*\\{[^}]*fill:[^}]*\\}",
+                "i"
+            );
+
+
+        css =
+            css.replace(
+                regex,
+
+                "." +
+                nombre +
+                "_fil" +
+                i +
+                " {fill:" +
+                color +
+                "}"
+            );
+
+    }
+
+
+    style.textContent =
+        css;
+
+
+    let capa =
+        document.getElementById(
+            "capa_" + nombre
+        );
+
+
+    if(!capa){
+
+        capa =
+            document.createElement("div");
+
+        capa.id =
+            "capa_" + nombre;
+
+        capa.className =
+            "capa";
+
+        avatarDiv.appendChild(capa);
+
+    }
+
+
+    capa.innerHTML =
+        doc.documentElement.outerHTML;
+
 }
+
+
 
 function pintarAvatarGenerado(nombre){
 
@@ -611,27 +850,52 @@ function pintarAvatarGenerado(nombre){
 
 
 function generarCodigoAvatar(){
-    return [
 
-        avatar.cuerpo.archivo || "00",
-        avatar.cuerpo.color1.replace("#",""),
-        avatar.cuerpo.color2.replace("#",""),
-        avatar.cuerpo.color3.replace("#",""),
-        //avatar.cuerpo.color4.replace("#",""),
+    return (
 
-        avatar.ojos.archivo || "00",
-        avatar.ojos.color1.replace("#",""),
-        avatar.ojos.color2.replace("#",""),
-        avatar.ojos.color3.replace("#",""),
-        //avatar.ojos.color4.replace("#",""),
+        // CUERPO
+        (avatar.cuerpo.archivo || "00")
+            .padStart(2,"0")
+        +
+        avatar.cuerpo.color1
+            .padStart(2,"0")
+        +
+        avatar.cuerpo.color2
+            .padStart(2,"0")
+        +
+        avatar.cuerpo.color3
+            .padStart(2,"0")
+        +
 
-        avatar.pelo.archivo || "00",
-        avatar.pelo.color1.replace("#",""),
-        avatar.pelo.color2.replace("#",""),
-        avatar.pelo.color3.replace("#",""),
-        //avatar.pelo.color4.replace("#","")
+        // OJOS
+        (avatar.ojos.archivo || "00")
+            .padStart(2,"0")
+        +
+        avatar.ojos.color1
+            .padStart(2,"0")
+        +
+        avatar.ojos.color2
+            .padStart(2,"0")
+        +
+        avatar.ojos.color3
+            .padStart(2,"0")
+        +
 
-    ].join("-");
+
+        // PELO
+        (avatar.pelo.archivo || "00")
+            .padStart(2,"0")
+        +
+        avatar.pelo.color1
+            .padStart(2,"0")
+        +
+        avatar.pelo.color2
+            .padStart(2,"0")
+        +
+        avatar.pelo.color3
+            .padStart(2,"0")
+
+    ).toUpperCase();
 
 }
 
@@ -652,79 +916,116 @@ document.getElementById("crearCodigo")
 
   async function generarAvatarDesdeCodigo(codigo){
 
-    const partes =
-        codigo.trim().split("-");
+    codigo =
+        codigo
+        .trim()
+        .toUpperCase();
 
 
-    if(partes.length !== 15){
+    // 12 datos × 2 caracteres
+    if(
+        !/^[0-9A-F]{24}$/.test(codigo)
+    ){
 
-        alert("Código de avatar inválido");
+        alert(
+            "Código de avatar inválido."
+        );
 
         return;
     }
 
 
+    // ==========================
+    // CUERPO
+    // ==========================
+
     const cuerpo = {
 
-        archivo: partes[0],
+        archivo:
+            codigo.substring(0,2),
 
-        color1: "#" + partes[1],
-        color2: "#" + partes[2],
-        color3: "#" + partes[3],
-        //color4: "#" + partes[4]
+        color1:
+            codigo.substring(2,4),
+
+        color2:
+            codigo.substring(4,6),
+
+        color3:
+            codigo.substring(6,8)
 
     };
 
+
+    // ==========================
+    // OJOS
+    // ==========================
 
     const ojos = {
 
-        archivo: partes[5],
+        archivo:
+            codigo.substring(8,10),
 
-        color1: "#" + partes[6],
-        color2: "#" + partes[7],
-        color3: "#" + partes[8],
-        //color4: "#" + partes[9]
+        color1:
+            codigo.substring(10,12),
+
+        color2:
+            codigo.substring(12,14),
+
+        color3:
+            codigo.substring(14,16)
 
     };
 
+
+    // ==========================
+    // PELO
+    // ==========================
 
     const pelo = {
 
-        archivo: partes[10],
+        archivo:
+            codigo.substring(16,18),
 
-        color1: "#" + partes[11],
-        color2: "#" + partes[12],
-        color3: "#" + partes[13],
-        //color4: "#" + partes[14]
+        color1:
+            codigo.substring(18,20),
+
+        color2:
+            codigo.substring(20,22),
+
+        color3:
+            codigo.substring(22,24)
 
     };
 
 
-    // =================================
-    // BORRAR TODO EL AVATAR ANTERIOR
-    // =================================
+    // ==========================
+    // BORRAR AVATAR GENERADO
+    // ==========================
 
     const contenedor =
         document.getElementById(
             "avatarGenerado"
         );
 
+
     contenedor.innerHTML = "";
 
 
-    // =================================
-    // GENERAR NUEVO AVATAR
-    // =================================
+    // ==========================
+    // CREAR NUEVO
+    // ==========================
 
     await crearCapaDesdeCodigo(
         "cuerpo",
         cuerpo
     );
 
+
     await crearCapaDesdeCodigo(
         "ojos",
         ojos
     );
+
 
     await crearCapaDesdeCodigo(
         "pelo",
@@ -900,7 +1201,9 @@ async function crearCapaDesdeCodigo(categoria, pieza){
             for(let i = 0; i < 3; i++){
 
                 const color =
-                    pieza["color" + (i + 1)];
+                    colorPaletaAHex(
+                        pieza["color" + (i + 1)]
+                    );
 
 
                 const regex =
@@ -930,9 +1233,9 @@ async function crearCapaDesdeCodigo(categoria, pieza){
             }
 
 
-            style.textContent =
-                css;
-        }
+                        style.textContent =
+                            css;
+                    }
 
 
         // =====================================

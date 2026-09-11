@@ -90,36 +90,7 @@ body{
     background: transparent;
 }
 
-/* ---------------- AVATAR ---------------- */
-/*
-#avatar{
 
-    width:min(90vw,200px);
-    aspect-ratio:1/1;
-
-    position:relative;
-
-    border:2px solid #888;
-    border-radius:15px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #ffffff 0%,
-            #f5f5f5 70%,
-            #e6e6e6 100%
-        );
-
-    perspective:1000px;
-
-    box-shadow:
-
-    overflow:hidden;
-        0px 10px 30px rgba(0,0,0,.15);
-
-    margin-bottom:20px;
-}
-*/
 #avatar{
     /*
     width:500px;
@@ -287,24 +258,6 @@ body{
 
 
 
-.colores{
-
-    display:flex;
-    gap:5px;
-}
-
-.colores input[type=color]{
-
-    width:30px;
-    height:40px;
-
-    border:none;
-
-    padding:0;
-    background:none;
-
-}
-
     #avatarGenerado{
     width:100px;
     height:100px;
@@ -358,6 +311,40 @@ body{
     display:block;
 }
 
+
+
+.colores{
+    display:flex;
+    gap:6px;
+    align-items:center;
+}
+
+.selectorColor{
+    width:32px;
+    height:32px;
+    border:2px solid white;
+    border-radius:5px;
+    cursor:pointer;
+    box-sizing:border-box;
+    box-shadow:0 0 2px rgba(0,0,0,.5);
+}
+
+.selectorColor:hover{
+    transform:scale(1.1);
+}
+
+
+.colores input[type=color]{
+
+    width:30px;
+    height:40px;
+
+    border:none;
+
+    padding:0;
+    background:none;
+
+}
 
 
 

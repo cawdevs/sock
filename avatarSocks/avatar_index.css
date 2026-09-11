@@ -320,8 +320,8 @@ body{
 }
 
 .selectorColor{
-    width:32px;
-    height:32px;
+    width:30px;
+    height:30px;
     border:2px solid white;
     border-radius:5px;
     cursor:pointer;
@@ -330,9 +330,8 @@ body{
 }
 
 .selectorColor:hover{
-    transform:scale(1.1);
+    transform:scale(1.08);
 }
-
 
 .colores input[type=color]{
 

@@ -3188,8 +3188,8 @@ async function mintearNFT() {
              
             ////////////////////////////////////////////////  
             
-            generarCodigoAvatar();
-            const codigocolores256Avatar = document.getElementById(" codigoAvatar").value.trim();
+            
+            const codigocolores256Avatar = document.getElementById(" codigoAvatar").value=generarCodigoAvatar();
 
             const codigoHexaAvatar = ethers.utils.hexZeroPad("0x" + codigocolores256Avatar, 32 );
             /////////////////////////////////////////////////
@@ -3197,7 +3197,7 @@ async function mintearNFT() {
 
 
             console.log("auauau  " ,codigoHexaAvatar);
-            
+            return false; 
 
             const maticrequired = document.getElementById("mount-minteo").textContent;
 

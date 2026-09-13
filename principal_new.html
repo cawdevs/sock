@@ -3184,15 +3184,17 @@ async function mintearNFT() {
             // Mintear el NFT
             const nftusername = document.getElementById('text-mintear-nft').value;
             const codeimageHexa = document.getElementById("codeimageHexa").textContent;
-          
-             
+                       
             ////////////////////////////////////////////////  
-            
+           
             
             const codigocolores256Avatar = document.getElementById("codigoAvatar").value=generarCodigoAvatar();
 
-            const codigoHexaAvatar = ethers.utils.hexZeroPad("0x" + codigocolores256Avatar, 32 );
+            //const codigoHexaAvatar = ethers.utils.hexZeroPad("0x" + codigocolores256Avatar, 32 );
+
+            const bytes32Avatar ="0x"+codigoAvatar.padEnd(64, "0");
             /////////////////////////////////////////////////
+
 
 
 

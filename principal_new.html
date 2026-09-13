@@ -3334,14 +3334,14 @@ async function getmintedNFT() {
 
 
              if (nftUsernameContract.methods) {
-                 //console.log("Con MetaMask ");
+                 console.log("getmintedNFT Con MetaMask ");
                  // Usando web3.js
                  list_username = await nftUsernameContract.methods.getMintedUsernames(globalWalletKey).call();
                  total_minted_username = await nftUsernameContract.methods.getTotalMintedNFTs().call();
 
              } else {
                  // Usando ethers.js
-                 //console.log("Con SockWallet "); 
+                 console.log("getmintedNFT Con SockWallet "); 
                  list_username = await nftUsernameContract.getMintedUsernames(globalWalletKey);
                  total_minted_username = await nftUsernameContract.getTotalMintedNFTs();                                    
               }

@@ -338,11 +338,10 @@ function crearCategoria(nombre){
 
     avatar[nombre]={
     documento:null,
-    color1:"#00FF01",
-    color2:"#0000FE",
-    color3:"#FE0000",
-    //color4:"#FFFF01",
-    //color5:"#FF00FF"
+    color1:"01",
+    color2:"02",
+    color3:"03",
+   
 };
 
 

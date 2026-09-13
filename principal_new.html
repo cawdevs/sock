@@ -3208,12 +3208,12 @@ async function mintearNFT() {
 
                       let isMintedNFT;            
                       if (nftUsernameContract.methods) {
-                                   //console.log("Con MetaMask ");
+                                   console.log("Esta minteado Con MetaMask ");
                                    // Usando web3.js
                                    isMintedNFT = await nftUsernameContract.methods.isMinted(nftusername).call();
                       } else {
                                    // Usando ethers.js
-                                  //console.log("Con SockWallet "); 
+                                  console.log("Esta minteado Con SockWallet "); 
                                   isMintedNFT = await nftUsernameContract.isMinted(nftusername); 
                       }  
 
@@ -3232,7 +3232,7 @@ async function mintearNFT() {
                             let maticAmount;
 
                             if (nftUsernameContract.methods) {
-                                  //console.log("Con MetaMask");
+                                  console.log("crear usuario Con MetaMask");
                                   maticAmount = web3.utils.toWei(maticrequired, 'ether'); 
                                 
                                     // Ejecutar la función mintNFT
@@ -3244,7 +3244,7 @@ async function mintearNFT() {
                                   });
                                     // Lógica específica para contratos instanciados con web3.js
                             } else {
-                                    //console.log("Con SockWallet.");
+                                    console.log("crear usuario Con SockWallet.");
                                   
                                     maticAmount = ethers.utils.parseEther(maticrequired); //
                                     

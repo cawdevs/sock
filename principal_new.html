@@ -3232,37 +3232,139 @@ async function mintearNFT() {
                       }else{  
 
                             let maticAmount;
+                            // =====================================================
+                            // 🦊 METAMASK
+                            // =====================================================
 
                             if (nftUsernameContract.methods) {
-                                  console.log("crear usuario Con MetaMask");
-                                  maticAmount = web3.utils.toWei(maticrequired, 'ether'); 
-                                
-                                    // Ejecutar la función mintNFT
-                                  await nftUsernameContract.methods.mintNFT(nftusername, codigoHexaAvatar).send({
-                                      from: globalWalletKey,
-                                      gas: 800000,
-                                      gasPrice: web3.utils.toWei('60', 'gwei'),
-                                      value: maticAmount // Especificar el valor de 10 MATIC
-                                  });
-                                    // Lógica específica para contratos instanciados con web3.js
-                            } else {
-                                    console.log("crear usuario Con SockWallet.");
-                                  
-                                    maticAmount = ethers.utils.parseEther(maticrequired); //
-                                    
-                                    const tx = await nftUsernameContract.mintNFT(nftusername, codigoHexaAvatar, {
-                                      gasLimit: 800000,
-                                      gasPrice: ethers.utils.parseUnits('60', 'gwei'), // Gas price en gwei
-                                      value: maticAmount // Especificar el valor en Wei
-                                      });
+                                console.log("🦊 Creando usuario con MetaMask");
+                                maticAmount = web3.utils.toWei(maticrequired.toString(),"ether");
+                                try {
+                                    await nftUsernameContract.methods
+                                        .mintNFT(
+                                            nftusername,
+                                            codigoHexaAvatar
+                                        )
+                                        .send({
+                                            from: globalWalletKey,
+                                            value: maticAmount
+                                        });
 
-                                      console.log("Transacción enviada:", tx.hash);
+                                    console.log("✅ NFT creado con MetaMask");
+                                    alert("Transaction ok :)");
+                                }
+                                catch(error) {
 
-                                      // Esperar confirmación
-                                      const receipt = await tx.wait();
-                                      console.log("Transacción confirmada:", receipt);
-                                      alert('Transaction ok :)');
-                                   // Lógica específica para contratos instanciados con ethers.js
+                                    console.error("Error creando NFT con MetaMask:",error);
+                                    showError("Error creando el NFT",error);
+                                    return;
+                                }
+
+                            }
+                            // =====================================================
+                            // 🔐 SOCK WALLET
+                            // =====================================================
+
+                            else {
+
+                                console.log("🔐 Creando usuario con SockWallet");
+                                showSuccess("🔐 Creando NFT con SockWallet");
+                                // ============================================
+                                // VALOR A PAGAR
+                                // ============================================
+                                maticAmount = ethers.utils.parseEther(maticrequired.toString());
+                                // ============================================
+                                // GAS EIP-1559
+                                // ============================================
+                                let maxFeePerGas;
+                                let maxPriorityFeePerGas;
+                                try {
+
+                                    const gasData = await obtenerGasEIP1559( nftUsernameContract.provider );
+                                    maxFeePerGas = gasData.maxFeePerGas;
+                                    maxPriorityFeePerGas = gasData.maxPriorityFeePerGas;
+
+                                }
+                                catch(error) {
+                                    showError("Error obteniendo gas EIP1559", error );
+                                    return;
+                                }
+
+                                showSuccess("Se calculó el gas máximo" );
+                                // ============================================
+                                // ESTIMAR GAS
+                                // ============================================
+                                let estimatedGas;
+                                try {
+
+                                    estimatedGas =
+                                        await nftUsernameContract.estimateGas.mintNFT(
+                                            nftusername,
+                                            codigoHexaAvatar,
+                                            {
+                                                value: maticAmount
+                                            }
+                                        );
+
+                                }
+                                catch(error) {
+
+                                    showError("Error estimando gas", error );
+                                    return;
+                                }
+
+
+                                // ============================================
+                                // MARGEN DE SEGURIDAD
+                                // ============================================
+
+                                const gasLimit = estimatedGas.mul(140).div(100);
+                                showSuccess("Se estimó el gas a gastar");
+                                // ============================================
+                                // ENVIAR TRANSACCIÓN
+                                // ============================================
+
+                                let tx;
+
+                                try {
+
+                                    tx = await nftUsernameContract.mintNFT(
+                                            nftusername,
+                                            codigoHexaAvatar,
+                                            {
+                                                gasLimit,
+                                                maxFeePerGas,
+                                                maxPriorityFeePerGas,
+                                                value: maticAmount
+                                            }
+                                        );
+
+                                }
+                                catch(error) {
+
+                                    showError("Error al enviar la transacción", error );
+                                    return;
+                                }
+
+
+                                console.log("🚀 Transacción enviada:", tx.hash );
+                                showSuccess("Se envió la transacción",tx.hash);
+                                // ============================================
+                                // ESPERAR CONFIRMACIÓN
+                                // ============================================
+
+                                try {
+
+                                    const receipt = await tx.wait();
+
+                                    console.log("✅ Transacción confirmada:", receipt );
+                                    showSuccess("NFT creado con SockWallet" );
+                                    alert("Transaction ok :)");
+
+                                }
+                                catch(error) {
+                                    showError("La transacción fue enviada pero no confirmada", error );
+                                }
                             }
 
                             alert('NFT Minteado exitosamente:');

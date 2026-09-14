@@ -2586,13 +2586,13 @@ async function iniciarApp() {
         //console.log("privateKey" + privateKey ); 
 
         if (localStorage.getItem("privateKey")) {
-            //console.log("Conectando usando la wallet propia...");
+            console.log("Conectando usando la wallet propia...");
             conectarWalletPropia(); // Conexión con wallet propia
         } 
            
         // Luego, si no hay wallet propia, intenta conectar con MetaMask
         else if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask ) {
-            //console.log("MetaMask detectado. Intentando conectar...");
+            console.log("MetaMask detectado. Intentando conectar...");
             await conectarMetaMask(); // Conexión con MetaMask
         } 
         // Si no hay MetaMask ni una clave privada, muestra un error
@@ -2641,8 +2641,8 @@ async function conectarMetaMask() {
         publisherContract= new web3.eth.Contract(Publisher_ContractABI, publisherContractAddress);
 
         stakingContract = new web3.eth.Contract(Staking_ContractABI, stakingContractAddress);
-
-
+         
+        console.log("se crearon instancias de contratos con METAMASK...");
     } catch (error) {
         console.error("Error al conectar con MetaMask:", error);
     }
@@ -2687,6 +2687,8 @@ async function conectarWalletPropia() {
     publisherContract = new ethers.Contract(publisherContractAddress, Publisher_ContractABI, signer);
 
     stakingContract = new ethers.Contract( stakingContractAddress, Staking_ContractABI,  signer);
+
+    console.log("se crearon instancias de contratos con WALLET PROPIA...")
     
           
     //console.log("Conectado usando wallet propia:", globalWalletKey);
@@ -2813,14 +2815,14 @@ async function inicializarUI() {
     let list_username;
 
     if (nftUsernameContract.methods) {
-                 //console.log("Con MetaMask ");
+                 console.log("Con MetaMask ");
                  // Usando web3.js
                  list_username = await nftUsernameContract.methods.getMintedUsernames(globalWalletKey).call();
                  
 
     } else {
                  // Usando ethers.js
-                 //console.log("Con SockWallet "); 
+                 console.log("Con SockWallet "); 
                  list_username = await nftUsernameContract.getMintedUsernames(globalWalletKey);
                                                     
     }

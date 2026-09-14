@@ -3256,16 +3256,16 @@ async function mintearNFT() {
                                       value: maticAmount // Especificar el valor en Wei
                                       });
 
-                                      //console.log("Transacción enviada:", tx.hash);
+                                      console.log("Transacción enviada:", tx.hash);
 
                                       // Esperar confirmación
                                       const receipt = await tx.wait();
-                                      //console.log("Transacción confirmada:", receipt);
+                                      console.log("Transacción confirmada:", receipt);
                                       alert('Transaction ok :)');
                                    // Lógica específica para contratos instanciados con ethers.js
                             }
 
-                            //alert('NFT Minteado exitosamente:');
+                            alert('NFT Minteado exitosamente:');
                             loadingAnimation.style.borderLeftColor = 'var(--fondo)';                 
                             setTimeout(() => { 
                                 loadingAnimation.style.display = 'none';

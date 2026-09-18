@@ -1709,12 +1709,9 @@ async function crearCapaAvatar_desde_codigo(
             "absolute";
 
 
-        capa.style.left =
-            "0";
+        capa.style.left =((ancho - anchoAvatar) / 2) + "px";
 
-
-        capa.style.top =
-            "0";
+        capa.style.top = posicionCara + "px";
 
 
         capa.style.width =

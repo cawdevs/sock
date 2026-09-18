@@ -1468,7 +1468,7 @@ async function generarAvatar_desde_codigo(
                 capa.style.top = posicionCara + "px";
 
                 capa.style.width =
-                    anchoAvatar + "px";
+                    anchoAvatar/2 + "px";
 
 
                 capa.style.height =

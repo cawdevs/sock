@@ -536,12 +536,8 @@ document
         generarAvatar_desde_codigo(codigo,div,"full",400,500);
 
         const div2 = document.getElementById("avatarGenerado_desde_codigo_round");
-        generarAvatar_desde_codigo(codigo,div2,"redondo",150,150);
-
-        
-
-
-
+        generarAvatar_desde_codigo(codigo,div2,"redondo",150,150,400,500,-80);
+     
     });
 
 
@@ -1256,28 +1252,21 @@ async function generarAvatar_desde_codigo(
     contenedor,
     tipo = "full",
     ancho = 300,
-    alto = 300
+    alto = 300,
+    anchoAvatar = null,
+    altoAvatar = null,
+    posicionCara = 0
 ){
 
     try{
 
-        // =====================================
-        // VALIDAR CÓDIGO
-        // =====================================
-
         if(!codigo){
-
-            console.error(
-                "No se recibió código de avatar"
-            );
-
+            console.error("No se recibió código de avatar");
             return;
-
         }
 
-
         // =====================================
-        // LIMPIAR AVATAR ANTERIOR
+        // LIMPIAR CONTENEDOR
         // =====================================
 
         contenedor.innerHTML = "";
@@ -1287,15 +1276,12 @@ async function generarAvatar_desde_codigo(
         // CONFIGURAR CONTENEDOR
         // =====================================
 
-        contenedor.style.position =
-            "relative";
-
-        contenedor.style.overflow =
-            "hidden";
+        contenedor.style.position = "relative";
+        contenedor.style.overflow = "hidden";
 
 
         // =====================================
-        // FULL
+        // AVATAR COMPLETO
         // =====================================
 
         if(tipo === "full"){
@@ -1309,11 +1295,13 @@ async function generarAvatar_desde_codigo(
             contenedor.style.borderRadius =
                 "0";
 
+            anchoAvatar = ancho;
+            altoAvatar = alto;
         }
 
 
         // =====================================
-        // REDONDO
+        // AVATAR REDONDO
         // =====================================
 
         if(tipo === "redondo"){
@@ -1327,11 +1315,20 @@ async function generarAvatar_desde_codigo(
             contenedor.style.borderRadius =
                 "50%";
 
+            // Si no se especifica el tamaño
+            // usamos el tamaño del contenedor
+
+            if(anchoAvatar === null)
+                anchoAvatar = ancho;
+
+            if(altoAvatar === null)
+                altoAvatar = alto;
+
         }
 
 
         // =====================================
-        // SEPARAR CÓDIGO
+        // LIMPIAR 0x
         // =====================================
 
         const partes =
@@ -1341,30 +1338,18 @@ async function generarAvatar_desde_codigo(
                 .toUpperCase();
 
 
-        /*
-         * Nuestro código actual utiliza:
-         *
-         * cuerpo
-         *   archivo + 3 colores
-         *
-         * ojos
-         *   archivo + 3 colores
-         *
-         * pelo
-         *   archivo + 3 colores
-         *
-         * Cada pieza ocupa 4 bytes.
-         */
-
+        // =====================================
+        // VALIDAR CÓDIGO
+        // =====================================
 
         if(partes.length < 24){
 
             console.error(
-                "Código de avatar demasiado corto"
+                "Código de avatar inválido:",
+                codigo
             );
 
             return;
-
         }
 
 
@@ -1375,16 +1360,16 @@ async function generarAvatar_desde_codigo(
         const cuerpo = {
 
             archivo:
-                partes.substring(0, 2),
+                partes.substring(0,2),
 
             color1:
-                partes.substring(2, 4),
+                partes.substring(2,4),
 
             color2:
-                partes.substring(4, 6),
+                partes.substring(4,6),
 
             color3:
-                partes.substring(6, 8)
+                partes.substring(6,8)
 
         };
 
@@ -1396,16 +1381,16 @@ async function generarAvatar_desde_codigo(
         const ojos = {
 
             archivo:
-                partes.substring(8, 10),
+                partes.substring(8,10),
 
             color1:
-                partes.substring(10, 12),
+                partes.substring(10,12),
 
             color2:
-                partes.substring(12, 14),
+                partes.substring(12,14),
 
             color3:
-                partes.substring(14, 16)
+                partes.substring(14,16)
 
         };
 
@@ -1417,16 +1402,16 @@ async function generarAvatar_desde_codigo(
         const pelo = {
 
             archivo:
-                partes.substring(16, 18),
+                partes.substring(16,18),
 
             color1:
-                partes.substring(18, 20),
+                partes.substring(18,20),
 
             color2:
-                partes.substring(20, 22),
+                partes.substring(20,22),
 
             color3:
-                partes.substring(22, 24)
+                partes.substring(22,24)
 
         };
 
@@ -1435,67 +1420,61 @@ async function generarAvatar_desde_codigo(
         // CREAR CAPAS
         // =====================================
 
-        await crearCapaAvatar_desde_codigo(
+        await crearCapaAvatar(
             "cuerpo",
             cuerpo,
             contenedor,
-            ancho,
-            alto
+            anchoAvatar,
+            altoAvatar
         );
 
 
-        await crearCapaAvatar_desde_codigo(
+        await crearCapaAvatar(
             "ojos",
             ojos,
             contenedor,
-            ancho,
-            alto
+            anchoAvatar,
+            altoAvatar
         );
 
 
-        await crearCapaAvatar_desde_codigo(
+        await crearCapaAvatar(
             "pelo",
             pelo,
             contenedor,
-            ancho,
-            alto
+            anchoAvatar,
+            altoAvatar
         );
 
 
         // =====================================
-        // AJUSTE DEL AVATAR
+        // POSICIONAR LA CARA
         // =====================================
 
         if(tipo === "redondo"){
 
-            /*
-             * Aquí podremos ajustar posteriormente
-             * la posición vertical para encuadrar
-             * perfectamente la cara.
-             */
-
             const capas =
                 contenedor.querySelectorAll(
-                    ".capaGenerada_desde_codigo"
+                    ".capaGenerada"
                 );
 
 
             capas.forEach(capa => {
 
-                capa.style.width =
-                    ancho + "px";
-
-                capa.style.height =
-                    alto + "px";
-
                 capa.style.position =
                     "absolute";
 
                 capa.style.left =
-                    "0";
+                    "0px";
 
                 capa.style.top =
-                    "0";
+                    posicionCara + "px";
+
+                capa.style.width =
+                    anchoAvatar + "px";
+
+                capa.style.height =
+                    altoAvatar + "px";
 
             });
 

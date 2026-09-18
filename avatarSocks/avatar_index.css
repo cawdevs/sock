@@ -347,3 +347,16 @@ body{
 
 
 
+.capaGenerada_desde_codigo{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+
+.capaGenerada_desde_codigo svg{
+    width:100%;
+    height:100%;
+    display:block;
+}

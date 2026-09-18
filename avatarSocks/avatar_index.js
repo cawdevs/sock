@@ -530,8 +530,15 @@ document
             return;
         }
 
+        
+        //generarAvatarDesdeCodigo(codigo);
+        const div = document.getElementById("avatarGenerado_desde_codigo_full");
+        generarAvatar_desde_codigo(codigo,div);
 
-        generarAvatarDesdeCodigo(codigo);
+        const div2 = document.getElementById("avatarGenerado_desde_codigo_round");
+        generarAvatar_desde_codigo(codigo,div2);
+
+
 
     });
 
@@ -926,7 +933,7 @@ document.getElementById("crearCodigo")
 });
 
 
-
+/*
   async function generarAvatarDesdeCodigo(codigo){
 
     codigo =
@@ -1233,6 +1240,530 @@ async function crearCapaDesdeCodigo(categoria, pieza){
         console.error(
             "Error cargando " +
             categoria,
+            error
+        );
+
+    }
+
+}
+*/
+
+
+async function generarAvatar_desde_codigo(
+    codigo,
+    contenedor,
+    tipo = "full",
+    ancho = 300,
+    alto = 300
+){
+
+    try{
+
+        // =====================================
+        // VALIDAR CÓDIGO
+        // =====================================
+
+        if(!codigo){
+
+            console.error(
+                "No se recibió código de avatar"
+            );
+
+            return;
+
+        }
+
+
+        // =====================================
+        // LIMPIAR AVATAR ANTERIOR
+        // =====================================
+
+        contenedor.innerHTML = "";
+
+
+        // =====================================
+        // CONFIGURAR CONTENEDOR
+        // =====================================
+
+        contenedor.style.position =
+            "relative";
+
+        contenedor.style.overflow =
+            "hidden";
+
+
+        // =====================================
+        // FULL
+        // =====================================
+
+        if(tipo === "full"){
+
+            contenedor.style.width =
+                ancho + "px";
+
+            contenedor.style.height =
+                alto + "px";
+
+            contenedor.style.borderRadius =
+                "0";
+
+        }
+
+
+        // =====================================
+        // REDONDO
+        // =====================================
+
+        if(tipo === "redondo"){
+
+            contenedor.style.width =
+                ancho + "px";
+
+            contenedor.style.height =
+                ancho + "px";
+
+            contenedor.style.borderRadius =
+                "50%";
+
+        }
+
+
+        // =====================================
+        // SEPARAR CÓDIGO
+        // =====================================
+
+        const partes =
+            codigo
+                .trim()
+                .replace(/^0x/, "")
+                .toUpperCase();
+
+
+        /*
+         * Nuestro código actual utiliza:
+         *
+         * cuerpo
+         *   archivo + 3 colores
+         *
+         * ojos
+         *   archivo + 3 colores
+         *
+         * pelo
+         *   archivo + 3 colores
+         *
+         * Cada pieza ocupa 4 bytes.
+         */
+
+
+        if(partes.length < 24){
+
+            console.error(
+                "Código de avatar demasiado corto"
+            );
+
+            return;
+
+        }
+
+
+        // =====================================
+        // CUERPO
+        // =====================================
+
+        const cuerpo = {
+
+            archivo:
+                partes.substring(0, 2),
+
+            color1:
+                partes.substring(2, 4),
+
+            color2:
+                partes.substring(4, 6),
+
+            color3:
+                partes.substring(6, 8)
+
+        };
+
+
+        // =====================================
+        // OJOS
+        // =====================================
+
+        const ojos = {
+
+            archivo:
+                partes.substring(8, 10),
+
+            color1:
+                partes.substring(10, 12),
+
+            color2:
+                partes.substring(12, 14),
+
+            color3:
+                partes.substring(14, 16)
+
+        };
+
+
+        // =====================================
+        // PELO
+        // =====================================
+
+        const pelo = {
+
+            archivo:
+                partes.substring(16, 18),
+
+            color1:
+                partes.substring(18, 20),
+
+            color2:
+                partes.substring(20, 22),
+
+            color3:
+                partes.substring(22, 24)
+
+        };
+
+
+        // =====================================
+        // CREAR CAPAS
+        // =====================================
+
+        await crearCapaAvatar_desde_codigo(
+            "cuerpo",
+            cuerpo,
+            contenedor,
+            ancho,
+            alto
+        );
+
+
+        await crearCapaAvatar_desde_codigo(
+            "ojos",
+            ojos,
+            contenedor,
+            ancho,
+            alto
+        );
+
+
+        await crearCapaAvatar_desde_codigo(
+            "pelo",
+            pelo,
+            contenedor,
+            ancho,
+            alto
+        );
+
+
+        // =====================================
+        // AJUSTE DEL AVATAR
+        // =====================================
+
+        if(tipo === "redondo"){
+
+            /*
+             * Aquí podremos ajustar posteriormente
+             * la posición vertical para encuadrar
+             * perfectamente la cara.
+             */
+
+            const capas =
+                contenedor.querySelectorAll(
+                    ".capaGenerada_desde_codigo"
+                );
+
+
+            capas.forEach(capa => {
+
+                capa.style.width =
+                    ancho + "px";
+
+                capa.style.height =
+                    alto + "px";
+
+                capa.style.position =
+                    "absolute";
+
+                capa.style.left =
+                    "0";
+
+                capa.style.top =
+                    "0";
+
+            });
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "Error generando avatar:",
+            error
+        );
+
+    }
+
+}
+
+async function crearCapaAvatar_desde_codigo(
+    categoria,
+    pieza,
+    contenedor,
+    ancho,
+    alto
+){
+
+    try{
+
+        // =====================================
+        // RUTA
+        // =====================================
+
+        const ruta =
+            "avatarSocks/" +
+            categoria +
+            "/" +
+            pieza.archivo +
+            ".svg";
+
+
+        const respuesta =
+            await fetch(ruta);
+
+
+        if(!respuesta.ok){
+
+            throw new Error(
+                "No se encontró: " +
+                ruta
+            );
+
+        }
+
+
+        const textoSVG =
+            await respuesta.text();
+
+
+        const parser =
+            new DOMParser();
+
+
+        const doc =
+            parser.parseFromString(
+                textoSVG,
+                "image/svg+xml"
+            );
+
+
+        // =====================================
+        // PREFIJO
+        // =====================================
+
+        const prefijo =
+            categoria + "_";
+
+
+        // =====================================
+        // STYLE
+        // =====================================
+
+        const style =
+            doc.querySelector("style");
+
+
+        if(style){
+
+            let css =
+                style.textContent;
+
+
+            css = css.replace(
+                /\.fil0/g,
+                "." +
+                prefijo +
+                "fil0"
+            );
+
+
+            css = css.replace(
+                /\.fil1/g,
+                "." +
+                prefijo +
+                "fil1"
+            );
+
+
+            css = css.replace(
+                /\.fil2/g,
+                "." +
+                prefijo +
+                "fil2"
+            );
+
+
+            css = css.replace(
+                /\.fil3/g,
+                "." +
+                prefijo +
+                "fil3"
+            );
+
+
+            style.textContent =
+                css;
+
+        }
+
+
+        // =====================================
+        // CAMBIAR CLASES
+        // =====================================
+
+        doc
+            .querySelectorAll("[class]")
+            .forEach(el => {
+
+                let clases =
+                    el.className
+                        .baseVal
+                        .split(" ");
+
+
+                clases =
+                    clases.map(
+                        c =>
+                            prefijo + c
+                    );
+
+
+                el.setAttribute(
+                    "class",
+                    clases.join(" ")
+                );
+
+            });
+
+
+        // =====================================
+        // APLICAR LOS 3 COLORES
+        // =====================================
+
+        if(style){
+
+            let css =
+                style.textContent;
+
+
+            for(let i = 0; i < 3; i++){
+
+                const color =
+                    colorPaletaAHex(
+                        pieza[
+                            "color" +
+                            (i + 1)
+                        ]
+                    );
+
+
+                const regex =
+                    new RegExp(
+                        "\\." +
+                        categoria +
+                        "_fil" +
+                        i +
+                        "\\s*\\{[^}]*fill:[^}]*\\}",
+                        "i"
+                    );
+
+
+                css =
+                    css.replace(
+                        regex,
+
+                        "." +
+                        categoria +
+                        "_fil" +
+                        i +
+                        " {fill:" +
+                        color +
+                        "}"
+                    );
+
+            }
+
+
+            style.textContent =
+                css;
+
+        }
+
+
+        // =====================================
+        // CREAR CAPA
+        // =====================================
+
+        const capa =
+            document.createElement(
+                "div"
+            );
+
+
+        capa.className =
+            "capaGenerada_desde_codigo";
+
+
+        capa.id =
+            "generado_" +
+            categoria;
+
+
+        capa.style.position =
+            "absolute";
+
+
+        capa.style.left =
+            "0";
+
+
+        capa.style.top =
+            "0";
+
+
+        capa.style.width =
+            ancho + "px";
+
+
+        capa.style.height =
+            alto + "px";
+
+
+        // =====================================
+        // INSERTAR SVG
+        // =====================================
+
+        capa.innerHTML =
+            doc.documentElement
+                .outerHTML;
+
+
+        contenedor.appendChild(
+            capa
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Error cargando " +
+            categoria +
+            ":",
             error
         );
 

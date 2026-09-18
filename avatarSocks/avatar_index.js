@@ -1420,7 +1420,7 @@ async function generarAvatar_desde_codigo(
         // CREAR CAPAS
         // =====================================
 
-        await crearCapaAvatar(
+        await crearCapaAvatar_desde_codigo(
             "cuerpo",
             cuerpo,
             contenedor,
@@ -1429,7 +1429,7 @@ async function generarAvatar_desde_codigo(
         );
 
 
-        await crearCapaAvatar(
+        await crearCapaAvatar_desde_codigo(
             "ojos",
             ojos,
             contenedor,
@@ -1438,7 +1438,7 @@ async function generarAvatar_desde_codigo(
         );
 
 
-        await crearCapaAvatar(
+        await crearCapaAvatar_desde_codigo(
             "pelo",
             pelo,
             contenedor,

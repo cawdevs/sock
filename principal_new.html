@@ -1806,6 +1806,13 @@ span.hashtag {
           </center>
 
 
+          <div id=avatarGenerado_desde_codigo_full> </div>
+          <br>
+          <div id=avatarGenerado_desde_codigo_round> </div>
+
+          
+
+
          <center>
              <div id="loadingAnimation-mint" style="display: none;">
                <div class="spinner"></div>              
@@ -3371,10 +3378,10 @@ async function mintearNFT() {
                             loadingAnimation.style.borderLeftColor = 'var(--fondo)';                 
                             setTimeout(() => { 
                                 loadingAnimation.style.display = 'none';
-                                $('#myModal').modal('hide'); 
+                                
                             }, 2000);
                             
-
+                            $('#myModal').modal('hide'); 
                             await get_NFTUsername_profile();
                             info_profile_sock();
 

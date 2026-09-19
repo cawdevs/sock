@@ -166,7 +166,11 @@ async function getImageNFTUsername(image_contenedor){
                                                              
         } 
 
-        await loadImagesFromHex(codeHexaImage, image_contenedor);        
+        await loadImagesFromHex(codeHexaImage, image_contenedor);
+        const div = document.getElementById("avatarGenerado_desde_codigo_round");
+        generarAvatar_desde_codigo(codeHexaImage,div,"redondo",80,80,150,150,0);  
+
+
 
 
     }catch (error) {

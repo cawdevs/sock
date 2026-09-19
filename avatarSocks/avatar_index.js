@@ -536,7 +536,7 @@ document
         generarAvatar_desde_codigo(codigo,div,"full",400,500);
 
         const div2 = document.getElementById("avatarGenerado_desde_codigo_round");
-        generarAvatar_desde_codigo(codigo,div2,"redondo",60,60,100,125,-150);
+        generarAvatar_desde_codigo(codigo,div2,"redondo",80,80,100,125,-80);
      
     });
 
@@ -1319,6 +1319,7 @@ async function generarAvatar_desde_codigo(
                 "50%";
             
             // Borde exterior rojo
+            contenedor.style.background="white";
             contenedor.style.border = "4px solid red";
 
             // Si no se especifica el tamaño

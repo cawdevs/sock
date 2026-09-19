@@ -536,7 +536,7 @@ document
         generarAvatar_desde_codigo(codigo,div,"full",400,500);
 
         const div2 = document.getElementById("avatarGenerado_desde_codigo_round");
-        generarAvatar_desde_codigo(codigo,div2,"redondo",150,150,200,250,0);
+        generarAvatar_desde_codigo(codigo,div2,"redondo",150,150,200,250,-80);
      
     });
 
@@ -1470,7 +1470,7 @@ async function generarAvatar_desde_codigo(
                 capa.style.position =
                     "absolute";
                 
-                capa.style.left = ((ancho - anchoAvatar)/2 ) -150+ "px";
+                capa.style.left = ((ancho - anchoAvatar)/2 ) + "px";
                 capa.style.top = posicionCara + "px";
 
                 capa.style.width =
@@ -1714,7 +1714,7 @@ async function crearCapaAvatar_desde_codigo(
 
 
         capa.style.left =
-            "0";
+            "-150";
 
 
         capa.style.top =

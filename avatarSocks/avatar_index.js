@@ -533,10 +533,11 @@ document
         
         //generarAvatarDesdeCodigo(codigo);
         const div = document.getElementById("avatarGenerado_desde_codigo_full");
-        generarAvatar_desde_codigo(codigo,div,"full",400,500);
+        generarAvatar_desde_codigo(codigo,div,"full",300,300);
 
         const div2 = document.getElementById("avatarGenerado_desde_codigo_round");
-        generarAvatar_desde_codigo(codigo,div2,"redondo",80,80,200,200,0);
+        generarAvatar_desde_codigo(codigo,div2,"redondo",80,80,150,150,0);
+
      
     });
 

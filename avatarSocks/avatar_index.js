@@ -1461,14 +1461,14 @@ async function generarAvatar_desde_codigo(
 
             const capas =
                 contenedor.querySelectorAll(
-                    ".capaGenerada"
+                    ".capaGenerada_desde_codigo"
                 );
 
 
             capas.forEach(capa => {
 
                 capa.style.position =
-                    "relative";
+                    "absolute";
                 
                 capa.style.left = ((ancho - anchoAvatar)/2 ) + "px";
                 capa.style.top = posicionCara + "px";

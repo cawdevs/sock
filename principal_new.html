@@ -898,7 +898,7 @@
   <!-- 🔸 NFT dinámico (reemplaza logo) -->
   <div id="avatarContainer">
      <div id="NFT_image-container" data-toggle="tab" href="#menu_info_sock"> 
-     <div id="avatarGenerado_desde_codigo_round"> </div>   
+     <div id="avatarGenerado_desde_codigo_round" data-toggle="tab" href="#menu_info_sock"> </div>   
         
      </div>
 
@@ -2855,10 +2855,9 @@ async function inicializarUI() {
     
     }else{
 
-          //await getmintedNFT();
-          
-          await get_NFTUsername_profile();
+          await getmintedNFT();
           await colocar_avatar_profile();
+          //await get_NFTUsername_profile();
 
     }
 

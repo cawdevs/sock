@@ -537,9 +537,42 @@ document
 
         const div2 = document.getElementById("avatarGenerado_desde_codigo_round");
         generarAvatar_desde_codigo(codigo,div2,"redondo",80,80,150,150,0);
-
      
     });
+
+
+
+async function colocar_avatar_profile(){
+
+    const selectorNFTs = document.getElementById('selector_NFTs').value;
+   
+    try {
+    
+        let codeHexaImage;
+        if (nftUsernameContract.methods) {
+                console.log("Con MetaMask ");
+                // Usando web3.js
+                codeHexaImage = await nftUsernameContract.methods.getimagecodeHexaFromUsername(selectorNFTs).call();     
+                   
+        } else {
+                 // Usando ethers.js
+                console.log("Con SockWallet "); 
+                codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(selectorNFTs);
+                // Usar la función para cargar la imagen con el código hexadecimal y el contenedor de imagen proporcionado
+                                                             
+        } 
+
+        
+        const div = document.getElementById("avatarGenerado_desde_codigo_round");
+        generarAvatar_desde_codigo(codeHexaImage,div,"redondo",80,80,150,150,0);       
+
+
+    }catch (error) {
+                
+            console.error('Error:', error);
+    }
+        
+}
 
 
 function leerArchivo(nombre,file){
@@ -1757,3 +1790,6 @@ async function crearCapaAvatar_desde_codigo(
     }
 
 }
+
+
+

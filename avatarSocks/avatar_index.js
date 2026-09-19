@@ -1468,7 +1468,7 @@ async function generarAvatar_desde_codigo(
             capas.forEach(capa => {
 
                 capa.style.position =
-                    "absolute";
+                    "relative";
                 
                 capa.style.left = ((ancho - anchoAvatar)/2 ) + "px";
                 capa.style.top = posicionCara + "px";
@@ -1714,7 +1714,7 @@ async function crearCapaAvatar_desde_codigo(
 
 
         capa.style.left =
-            "-150";
+            "0";
 
 
         capa.style.top =

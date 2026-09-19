@@ -699,8 +699,10 @@ infoContainer.classList.add("info-container"); // Clase para aplicar estilos
 // Agregar el contenedor al elemento principal
 containner_info_sock.appendChild(infoContainer);                                                
                              
-await loadImagesFromHex(codeHexaImage_info,imageUserContainer.id,"big"); // Cargar la imagen al iniciar
-              
+//await loadImagesFromHex(codeHexaImage_info,imageUserContainer.id,"big"); // Cargar la imagen al iniciar
+
+const div = document.getElementById("avatarGenerado_desde_codigo_full");
+generarAvatar_desde_codigo(codigo,div,"full",300,300);           
 
 
                     

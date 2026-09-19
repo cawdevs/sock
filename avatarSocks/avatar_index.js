@@ -1319,7 +1319,7 @@ async function generarAvatar_desde_codigo(
                 "50%";
             
             // Borde exterior rojo
-            contenedor.style.background="white";
+            contenedor.style.background="white";             
             contenedor.style.border = "4px solid red";
 
             // Si no se especifica el tamaño

@@ -1,7 +1,7 @@
 
 function createPublicationElements(postType,parentPublicationId) {
     
-    if postType === "0"{
+    if (postType === "0"){
         console.log('es un main post', postType); 
     }
     else{

@@ -533,7 +533,7 @@ document
         
         //generarAvatarDesdeCodigo(codigo);
         const div = document.getElementById("avatarGenerado_desde_codigo_full");
-        generarAvatar_desde_codigo(codigo,div,"full",300,300);
+        generarAvatar_desde_codigo(codigo,div,"full",300,500);
 
         const div2 = document.getElementById("avatarGenerado_desde_codigo_round");
         generarAvatar_desde_codigo(codigo,div2,"redondo",80,80,150,150,0);
@@ -1355,7 +1355,7 @@ async function generarAvatar_desde_codigo(
             // Borde exterior rojo
             contenedor.style.background="white";             
             //contenedor.style.border = "4px solid red";
-            contenedor.style.border = "4px dashed red";
+            contenedor.style.border = "4px dashed blue";
 
             // Si no se especifica el tamaño
             // usamos el tamaño del contenedor

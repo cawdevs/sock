@@ -43,7 +43,7 @@
     display: grid;
 
     /* Avatar | contenido */
-    grid-template-columns: 120px minmax(0, 1fr);
+    grid-template-columns: 85px minmax(0, 1fr);
 
     /* DOS FILAS */
     grid-template-rows: 42px 42px;
@@ -1107,7 +1107,7 @@
          data-toggle="tab"
          href="#menu_info_sock">
     </div>
-
+    <!--
     <a data-toggle="tab"
        href="#menu_saldo_criptos"
        onclick="obtenerSaldo_POL_SOCK_BTC()"
@@ -1118,7 +1118,7 @@
            alt="BTC">
 
     </a>
-
+    -->
   </div>
 
 
@@ -3030,7 +3030,7 @@ async function inicializarUI() {
     //verificar si el servidor esta vivo o no 
     await verificarServidor(); 
     
-/*
+
     try{
          await obtenerSaldo_BTC();
     }catch(error){
@@ -3050,7 +3050,7 @@ async function inicializarUI() {
     }catch(error){
          console.error('Error completo:', error);
     }
-*/
+
 
     await get_all_publications_home('home-publications-container', false, "last");
 

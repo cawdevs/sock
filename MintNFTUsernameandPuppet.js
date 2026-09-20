@@ -168,7 +168,7 @@ async function getImageNFTUsername(image_contenedor){
 
         //await loadImagesFromHex(codeHexaImage, image_contenedor);//
         const div = document.getElementById("avatarGenerado_desde_codigo_round");
-        generarAvatar_desde_codigo(codeHexaImage,div,"redondo",80,80,125,125,0);  
+        generarAvatar_desde_codigo(codeHexaImage,div,"redondo",80,80,125,125,-20);  
        
 
 
@@ -330,6 +330,7 @@ async function info_profile_sock(){
 
             try{
               // Crear un contenedor para la imagen
+              /*
               const imageUserContainer = document.createElement("div");
                   imageUserContainer.id = `imageContainerId`; // ID único por usuario
                   imageUserContainer.style.width = "200px"; // Ancho del contenedor
@@ -342,7 +343,7 @@ async function info_profile_sock(){
                   imageUserContainer.style.padding = "5px"; // Espacio interno para separar el contenido del borde
                
              containner_info_sock.appendChild(imageUserContainer);
-
+             */
 // Crear el contenedor principal
 const infoContainer = document.createElement("div");
 infoContainer.style.marginLeft = "10px"; // Margen izquierdo para el contenedor
@@ -702,7 +703,7 @@ containner_info_sock.appendChild(infoContainer);
 //await loadImagesFromHex(codeHexaImage_info,imageUserContainer.id,"big"); // Cargar la imagen al iniciar
 
 const div = document.getElementById("avatarGenerado_desde_codigo_full");
-generarAvatar_desde_codigo(codeHexaImage_info,div,"full",350,350);           
+generarAvatar_desde_codigo(codeHexaImage_info,div,"full",300,500);           
 
 
                     

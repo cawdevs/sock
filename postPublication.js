@@ -1047,7 +1047,7 @@ async function get_publication(id_publication,principalContainerID) {
                          //await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
                           
                         const div = document.getElementById(profileImageContainerId);
-                        generarAvatar_desde_codigo(codeHexaImage,div,"redondo",50,50,100,100,0);
+                        generarAvatar_desde_codigo(codeHexaImage,div,"redondo",50,50,100,250,-15);
 
    
                 }                      

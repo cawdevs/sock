@@ -1,5 +1,13 @@
 
-function createPublicationElements() {
+function createPublicationElements(postType,parentPublicationId) {
+    
+    if postType === "0"{
+        console.log('es un main post', postType); 
+    }
+    else{
+        console.log('es un tread', postType); 
+    }
+    
     // Obtener el nombre de usuario del selector
     const nftusername = document.getElementById('selector_NFTs').value;
        
@@ -138,7 +146,7 @@ setTimeout(() => {
     // Agregar evento de clic
     submitLink.addEventListener('click', async function(event) {
         event.preventDefault(); // Evita que el enlace navegue a otra página
-        await publicar_main_post(); // Llama a la función asíncrona
+        await publicar_main_post(postType,parentPublicationId); // Llama a la función asíncrona
 
         console.log('iniciamos get_ultima_publication.'); 
         await get_ultima_publication('recent-home-publications-container'); 
@@ -405,7 +413,7 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
 
 
 
-async function publicar_main_post() {
+async function publicar_main_post(postType,parentPublicationId,threadOrder) {
 
     const loadingAnimation = document.getElementById('loadingAnimation-post-publication');
     const container_publication = document.getElementById('menu-publicar');
@@ -450,7 +458,9 @@ async function publicar_main_post() {
         };
 
         const jsonString = JSON.stringify(jsonMetadata);
+        
         const publicationType = 0;
+        const parentPublicationId=0;
         const threadOrder = 0;
 
         // =====================================================
@@ -467,7 +477,7 @@ async function publicar_main_post() {
                     content,
                     jsonString,
                     publicationType,
-                    publicationType,
+                    parentPublicationId,
                     threadOrder
                 )
                 .send({ from: globalWalletKey });
@@ -509,9 +519,10 @@ async function publicar_main_post() {
                                     content,
                                     jsonString,
                                     publicationType,
-                                    publicationType,
+                                    parentPublicationId,
                                     threadOrder
                                 );
+
                         } catch (error) {
                             showError("Error al estimar gas (probable revert del contrato)", error);
                             return;
@@ -532,7 +543,7 @@ async function publicar_main_post() {
                                 content,
                                 jsonString,
                                 publicationType,
-                                publicationType,
+                                parentPublicationId,
                                 threadOrder,
                                 {
                                     gasLimit,
@@ -1033,9 +1044,12 @@ async function get_publication(id_publication,principalContainerID) {
                             codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(publicationObject.nftUsername);
                         }
 
-                         await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
 
+                         //await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
+                         const div = document.getElementById(`imageContainerId_${publicationObject.id}`);
+                         generarAvatar_desde_codigo(codeHexaImage,div,"redondo",50,50,100,100,0);
                 }                      
+                         
                         
         
         }
@@ -1168,8 +1182,8 @@ async function createPublicationElement(publication) {
         threadIcon.onmouseover = () => threadIcon.style.color = "#e63946";
         threadIcon.onmouseout = () => threadIcon.style.color = "dodgerblue";
         threadIcon.onclick = function() {
-            
-
+           createPublicationElements(1,id); //1 indica que es un publicacion del thread
+                                            //id= el numero de publicacion que sera la padre        
         };
         headerDiv.appendChild(threadIcon);
 

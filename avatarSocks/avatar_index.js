@@ -1355,7 +1355,7 @@ async function generarAvatar_desde_codigo(
             // Borde exterior rojo
             contenedor.style.background="white";             
             //contenedor.style.border = "4px solid red";
-            contenedor.style.border = "4px dashed blue";
+            //contenedor.style.border = "1px dashed blue";
 
             // Si no se especifica el tamaño
             // usamos el tamaño del contenedor

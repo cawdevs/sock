@@ -1044,8 +1044,8 @@ async function get_publication(id_publication,principalContainerID) {
                             codeHexaImage = await nftUsernameContract.getimagecodeHexaFromUsername(publicationObject.nftUsername);
                         }
 
-                         await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
-
+                         //await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
+      
                 }                      
                         
         
@@ -1103,6 +1103,7 @@ async function createPublicationElement(publication) {
         cursor: pointer;
     `;
 
+    
     if (imageProfile) {
         const profileImage = document.createElement('img');
         profileImage.src = imageProfile;
@@ -1119,7 +1120,11 @@ async function createPublicationElement(publication) {
         });
         profileImageContainer.appendChild(profileImage);
     }
+    else{
+        //const div2 = document.getElementById("avatarGenerado_desde_codigo_round");
+        generarAvatar_desde_codigo(codigo,profileImageContainer,"redondo",50,50,100,100,0);
 
+    }
     // Información de usuario
     const userInfoDiv = document.createElement('div');
     userInfoDiv.style.cssText = `

@@ -166,10 +166,10 @@ async function getImageNFTUsername(image_contenedor){
                                                              
         } 
 
-        await loadImagesFromHex(codeHexaImage, image_contenedor);
+        //await loadImagesFromHex(codeHexaImage, image_contenedor);//
         const div = document.getElementById("avatarGenerado_desde_codigo_round");
-        generarAvatar_desde_codigo(codeHexaImage,div,"redondo",80,80,150,150,0);  
-
+        generarAvatar_desde_codigo(codeHexaImage,div,"redondo",80,80,125,125,0);  
+       
 
 
 
@@ -702,7 +702,7 @@ containner_info_sock.appendChild(infoContainer);
 //await loadImagesFromHex(codeHexaImage_info,imageUserContainer.id,"big"); // Cargar la imagen al iniciar
 
 const div = document.getElementById("avatarGenerado_desde_codigo_full");
-generarAvatar_desde_codigo(codeHexaImage_info,div,"full",300,300);           
+generarAvatar_desde_codigo(codeHexaImage_info,div,"full",350,350);           
 
 
                     

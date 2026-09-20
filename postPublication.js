@@ -1045,7 +1045,11 @@ async function get_publication(id_publication,principalContainerID) {
                         }
 
                          //await loadImagesFromHex(codeHexaImage, profileImageContainerId, "small");
-      
+                          
+                        const div = document.getElementById(profileImageContainerId);
+                        generarAvatar_desde_codigo(codeHexaImage,div,"redondo",50,50,100,100,0);
+
+   
                 }                      
                         
         
@@ -1120,11 +1124,7 @@ async function createPublicationElement(publication) {
         });
         profileImageContainer.appendChild(profileImage);
     }
-    else{
-        //const div2 = document.getElementById("avatarGenerado_desde_codigo_round");
-        generarAvatar_desde_codigo(codigo,profileImageContainer,"redondo",50,50,100,100,0);
-
-    }
+   
     // Información de usuario
     const userInfoDiv = document.createElement('div');
     userInfoDiv.style.cssText = `

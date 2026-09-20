@@ -26,134 +26,340 @@
             background: linear-gradient(45deg,var(--fondo_html), var(--fondo_html));
         }
 
-  /* 🔹 Barra superior azul con 2 filas */
-  .top-bar {
-    background: linear-gradient(90deg, var(--fondo), darkblue);
+ /* =========================================
+   BARRA PRINCIPAL
+   ========================================= */
+
+.top-bar {
+
+    background: linear-gradient(
+        90deg,
+        var(--fondo),
+        darkblue
+    );
+
     color: var(--texto);
+
     display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto;
+
+    /* Avatar | contenido */
+    grid-template-columns: 120px minmax(0, 1fr);
+
+    /* DOS FILAS */
+    grid-template-rows: 42px 42px;
+
     align-items: center;
-    padding: 8px 8px;
-    /* ❌ antes tenía position: fixed — la quitamos */
+
     width: 100%;
-    top: 0;
 
-    left: 0;
-    right: 0;
-    z-index: 1000;
+    padding: 8px;
+
+    box-sizing: border-box;
+
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    border-radius: 0px;
-  }
 
- 
-  /* 🔹 Contenedor NFT */
-  #NFT_image-container {
-    grid-row: span 2;
+    border-radius: 0;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   AVATAR
+   ========================================= */
+
+#avatarContainer {
+
+    grid-column: 1;
+    grid-row: 1 / 3;
+
     width: 80px;
     height: 80px;
-    border-radius: 50%;
-    border: 2px solid white;
-    
-  }
 
-  /* 🔹 Fila 1 */
-  .top-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+    position: relative;
 
-  
-  /* 🔹 Mantén el estilo de tu barra superior */
-  .title {
-    font-size: 22px;
-    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
 
-  /* 🔹 Select con apariencia de texto */
-  .select-texto {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 22px;
-    font-family: inherit;
-    text-align: center;
-    outline: none;
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    padding: 4px 24px 4px 4px;
-    transition: color 0.2s ease;
-  }
 
-  .select-texto:hover {
-    color: #cce6ff;
-  }
+/* Imagen circular principal */
 
-  /* 🔹 Estilo del menú desplegable */
-  .select-texto option {
-    background: #0d47a1;
-    color: white;
-  }
+#avatarGenerado_desde_codigo_round {
 
-  /* 🔹 Quitar flecha nativa en algunos navegadores */
-  .select-texto::-ms-expand {
-    display: none;
-  }
+    width: 70px;
+    height: 70px;
 
-  .top-icons {
+    border-radius: 50%;
+
+    border: 2px solid white;
+
+    overflow: hidden;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* =========================================
+   CÍRCULO / ICONO ENCIMA DEL AVATAR
+   ========================================= */
+
+.avatar-coin {
+    position: absolute;
+    right: -2px;
+    bottom: 2px;
+
+    width: 28px;
+    height: 28px;
+
     display: flex;
     align-items: center;
-    gap: 15px;
-  }
+    justify-content: center;
 
-  .top-icons img {
+    z-index: 5;
+}
+
+
+.avatar-coin img {
+
+    width: 20px;
+    height: 20px;
+
+    object-fit: contain;
+}
+
+
+/* =========================================
+   FILA SUPERIOR
+   ========================================= */
+
+.top-row {
+
+    grid-column: 2;
+    grid-row: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    width: 100%;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   SELECT / TÍTULO
+   ========================================= */
+
+.title {
+
+    display: flex;
+
+    align-items: center;
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.select-texto {
+
+    background: transparent;
+
+    border: none;
+
+    color: white;
+
+    font-size: 22px;
+
+    font-family: inherit;
+
+    text-align: center;
+
+    outline: none;
+
+    cursor: pointer;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    -moz-appearance: none;
+
+    padding: 4px 24px 4px 4px;
+
+    max-width: 100%;
+}
+
+
+.select-texto:hover {
+
+    color: #cce6ff;
+}
+
+
+.select-texto option {
+
+    background: #0d47a1;
+
+    color: white;
+}
+
+
+/* =========================================
+   ICONOS DE LA FILA 1
+   ========================================= */
+
+.top-icons {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-shrink: 0;
+
+    white-space: nowrap;
+}
+
+
+.top-icons img {
+
     width: 24px;
     height: 24px;
+
     cursor: pointer;
+
     transition: transform 0.2s ease;
-  }
+}
 
-  .top-icons img:hover {
+
+.top-icons img:hover {
+
     transform: scale(1.1);
-  }
+}
 
-  /* 🔹 Fila 2 (iconos desplazables) */
-  .icon-scroll {
+
+#menuBtn {
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    margin-left: 5px;
+}
+
+
+/* =========================================
+   FILA 2
+   ========================================= */
+
+.icon-scroll {
+
+    grid-column: 2;
+    grid-row: 2;
+
+    min-width: 0;
+
+    width: 100%;
+
     display: flex;
+
     align-items: center;
+
     gap: 18px;
+
     overflow-x: auto;
+
+    overflow-y: hidden;
+
     scroll-behavior: smooth;
+
     scrollbar-width: thin;
-    padding: 6px 0;
-  }
 
-  .icon-scroll::-webkit-scrollbar {
-    height: 6px;
-  }
+    padding: 4px 0;
 
-  .icon-scroll::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 3px;
-  }
+    box-sizing: border-box;
+}
 
-  .icon-scroll img {
+
+/* Evita que los elementos se compriman */
+
+.icon-scroll a {
+
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* Iconos */
+
+.icon-scroll img {
+
     width: 30px;
     height: 30px;
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
 
-  .icon-scroll img:hover {
-    transform: scale(2.0);
-  }
+    object-fit: contain;
+
+    flex-shrink: 0;
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease;
+}
+
+
+.icon-scroll img:hover {
+
+    transform: scale(1.3);
+}
+
+
+/* Scrollbar */
+
+.icon-scroll::-webkit-scrollbar {
+
+    height: 6px;
+}
+
+
+.icon-scroll::-webkit-scrollbar-thumb {
+
+    background: rgba(255,255,255,0.4);
+
+    border-radius: 3px;
+}
+
+
+/* Contador */
+
+#NFTUsernames-count {
+
+    flex: 0 0 auto;
+
+    margin: 0;
+
+    font-size: 24px;
+}
+
+
+
+
 
   /* 🔹 Bloque de saldos */
   .wallet-container {
@@ -892,94 +1098,127 @@
             
 
 
-<!-- 🔹 Barra azul superior -->
 <div class="top-bar">
 
-  <!-- 🔸 NFT dinámico (reemplaza logo) -->
+  <!-- COLUMNA IZQUIERDA: AVATAR -->
   <div id="avatarContainer">
-     <!-- <div id="NFT_image-container" data-toggle="tab" href="#menu_info_sock">     
-     </div> -->
 
-     <div id="avatarGenerado_desde_codigo_round" data-toggle="tab" href="#menu_info_sock"> </div>   
+    <div id="avatarGenerado_desde_codigo_round"
+         data-toggle="tab"
+         href="#menu_info_sock">
+    </div>
 
+    <a data-toggle="tab"
+       href="#menu_saldo_criptos"
+       onclick="obtenerSaldo_POL_SOCK_BTC()"
+       >
 
-     <a data-toggle="tab" href="#menu_saldo_criptos" onclick="obtenerSaldo_POL_SOCK_BTC()" style="margin-left: 45px;">
-       <img id="btc_icon" src="images/icons/sock_coin.SVG" alt="BTC" >
-     </a>      
+      <img id="btc_icon"
+           src="images/icons/sock_coin.SVG"
+           alt="BTC">
+
+    </a>
+
   </div>
 
 
-
-
-
-
-  <!-- 🔸 Fila 1 -->
+  <!-- FILA SUPERIOR -->
   <div class="top-row">
+
     <div class="title">
-          <select id="selector_NFTs" class="select-texto">           
-          </select>
+
+      <select id="selector_NFTs" class="select-texto">
+      </select>
+
     </div>
-    
+
     <div class="top-icons">
 
-       <div id="estado-servidor"></div> 
+      <div id="estado-servidor"></div>
 
-       <a id="btnTema" title="Cambiar tema">
-          <span class="glyphicon glyphicon-adjust"></span>
-       </a>
-     
-      <a data-toggle="tab" href="#menu_buscar" style="margin-left: 15px;">
-            <img src="images/icons/buscar_icon.SVG" alt="Buscar">
+      <a id="btnTema" title="Cambiar tema">
+        <span class="glyphicon glyphicon-adjust"></span>
       </a>
-      
-      <a id="menuBtn" style="margin-left: auto; margin-right: 15px; font-size: 24px;">☰</a>  
-    
+
+      <a data-toggle="tab"
+         href="#menu_buscar">
+
+        <img src="images/icons/buscar_icon.SVG"
+             alt="Buscar">
+
+      </a>
+
+      <a id="menuBtn">☰</a>
+
     </div>
-
-
-
 
   </div>
 
-  <!-- 🔸 Fila 2 (iconos con enlaces personalizados) -->
 
- 
+  <!-- FILA INFERIOR -->
+  <div class="icon-scroll">
+
+    <a data-toggle="tab"
+       href="#menu_hacer_publicacion"
+       onclick="abrirModalPublicacion()">
+      <img id="image-post"
+           src="images/icons/publication_icon.SVG"
+           alt="post">
+    </a>
+
+    <a data-toggle="tab"
+       href="#home">
+      <img id="image-home"
+           src="images/icons/home_icon.SVG"
+           alt="home">
+    </a>
+
+    <a data-toggle="tab"
+       href="#menu1"
+       onclick="get_NFTUsername_profile()">
+      <img id="image-profile"
+           src="images/icons/profile_icon.SVG"
+           alt="profile">
+    </a>
+
+    <a data-toggle="tab"
+       href="#menu_play">
+      <img id="image-market"
+           src="images/icons/gamefi_icon.SVG"
+           alt="game">
+    </a>
+
+    <a data-toggle="tab"
+       href="#menu_transfer"
+       onclick="single_swapp()">
+      <img id="image-swap"
+           src="images/icons/swap_icon.SVG"
+           alt="swap">
+    </a>
+
+    <a data-toggle="tab"
+       href="#menu_staking"
+       onclick="createStakingElements()">
+      <img id="image-staking"
+           src="images/icons/staking_icon.SVG"
+           alt="stake">
+    </a>
+
+    <a data-toggle="tab"
+       href="#menu_info_sock">
+      <img id="image-config"
+           src="images/icons/config_icon.SVG"
+           alt="config">
+    </a>
+
+    <p id="NFTUsernames-count"></p>
+
+  </div>
 
 </div>
 
 
- <div class="icon-scroll">
-    
-    <a data-toggle="tab" href="#menu_hacer_publicacion" onclick="abrirModalPublicacion()" style="margin-left: 45px;">
-      <img id="image-post" src="images/icons/publication_icon.SVG" alt="post" width="35">
-    </a> 
 
-    <a data-toggle="tab" href="#home" style="margin-left: 15px;">
-      <img id="image-home" src="images/icons/home_icon.SVG" alt="home" width="35">
-    </a> 
-
-    <a data-toggle="tab" href="#menu1" onclick= "get_NFTUsername_profile()"  style="margin-left: 15px;">
-      <img id="image-profile" src="images/icons/profile_icon.SVG" alt="profile" width="35">
-    </a>
-
-    <a data-toggle="tab" href="#menu_play" style="margin-left: 15px;">
-      <img id="image-market" src="images/icons/gamefi_icon.SVG" alt="game" width="35">
-    </a>
-
-    <a data-toggle="tab" href="#menu_transfer" onclick="single_swapp()" style="margin-left: 15px;">
-      <img id="image-swap" src="images/icons/swap_icon.SVG" alt="swap" width="35">
-    </a>
-
-    <a data-toggle="tab" href="#menu_staking" onclick="createStakingElements()" style="margin-left: 15px;">
-      <img id="image-staking" src="images/icons/staking_icon.SVG" alt="stake" width="35">
-    </a>
-
-    <a data-toggle="tab" href="#menu_info_sock" style="margin-left: 15px;">
-      <img id="image-config" src="images/icons/config_icon.SVG" alt="config" width="35">
-    </a>
-
-    <p id="NFTUsernames-count" style="margin-left: 15px; font-size: 24px;"></p>
-  </div>
 
 
 

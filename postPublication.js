@@ -1014,19 +1014,21 @@ async function get_publication(id_publication,principalContainerID) {
                 const principalContainer = document.getElementById(principalContainerID);
                 // Estilos para centrar el div y darle fondo blanco
                 // Estilos para centrar el div y darle fondo blanco
-                principalContainer.style.backgroundColor = "var(--fondo_base)"; // Fondo blanco
-                principalContainer.style.margin = "0 auto"; // Centrar horizontalmente
-                principalContainer.style.display = "flex"; // Usa flexbox
-                principalContainer.style.flexDirection = "column"; // Coloca los elementos en columna
-                principalContainer.style.justifyContent = "center"; // Centrar si es necesario
-                principalContainer.style.alignItems = "center"; // Mantener el contenido alineado
-                principalContainer.style.width = "100%"; // Ajusta el ancho según necesites
-                principalContainer.style.borderRadius = "10px"; // Bordes redondeados opcional
-                principalContainer.style.padding = "10px"; // Espaciado interno opcional
+                principalContainer.style.backgroundColor = "var(--fondo_base)";
+                principalContainer.style.margin = "0";
+                principalContainer.style.display = "flex";
+                principalContainer.style.flexDirection = "column";
+                principalContainer.style.justifyContent = "flex-start";
+                principalContainer.style.alignItems = "stretch";
+                principalContainer.style.width = "100%";
+                principalContainer.style.maxWidth = "100%";
+                principalContainer.style.boxSizing = "border-box";
+                principalContainer.style.borderRadius = "10px";
+                principalContainer.style.padding = "0";
 
-                // Asegurar que los elementos hijos ocupen el máximo ancho permitido
-                publicationElement.style.width = "100%"; // Los elementos ocupan todo el ancho
-
+                publicationElement.style.width = "100%";
+                publicationElement.style.maxWidth = "100%";
+                publicationElement.style.boxSizing = "border-box";
                 principalContainer.appendChild(publicationElement);
                                        
                 // 🔥 Ahora podemos cargar la imagen porque el elemento ya está en el DOM

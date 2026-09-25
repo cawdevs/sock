@@ -2992,7 +2992,12 @@ async function conectarWalletPropia() {
     stakingContract = new ethers.Contract( stakingContractAddress, Staking_ContractABI,  signer);
 
     console.log("se crearon instancias de contratos con WALLET PROPIA...")
-    
+    console.log("ethers:", ethers.version);
+    console.log("signer:", signer.address);
+    console.log(
+        "signAuthorization:",
+        typeof signer._signTypedData
+    );
           
     //console.log("Conectado usando wallet propia:", globalWalletKey);
   } catch (error) {
@@ -3085,12 +3090,7 @@ async function inicializarUI() {
     document.getElementById("addres-wallet").style.color = "white";
 
 
-    console.log("ethers:", ethers.version);
-    console.log("signer:", signer.address);
-    console.log(
-        "signAuthorization:",
-        typeof signer._signTypedData
-    );
+    
 
 
 

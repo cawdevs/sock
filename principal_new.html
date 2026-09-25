@@ -478,7 +478,7 @@
 
    
         .container {
-          
+
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -2886,6 +2886,8 @@ async function iniciarApp() {
         const privateKey = localStorage.getItem("privateKey");
         //console.log("privateKey" + privateKey ); 
 
+        console.log(ethers.version);
+
         if (localStorage.getItem("privateKey")) {
             console.log("Conectando usando la wallet propia...");
             conectarWalletPropia(); // Conexión con wallet propia
@@ -2971,7 +2973,7 @@ async function conectarWalletPropia() {
 
     wallet = new ethers.Wallet(privateKey, provider);
     globalWalletKey = wallet.address;
-
+    
     // Configurar el proveedor general (puede ser para Alchemy o cualquier otro nodo)
     
     const signer = new ethers.Wallet(privateKey, provider);
@@ -3083,8 +3085,43 @@ async function inicializarUI() {
     document.getElementById("addres-wallet").style.color = "white";
 
 
+    console.log("ethers:", ethers.version);
+    console.log("signer:", signer.address);
+    console.log(
+        "signAuthorization:",
+        typeof signer._signTypedData
+    );
+
+
+
+        
     //verificar si el servidor esta vivo o no 
     await verificarServidor(); 
+
+    if (list_username.length === 0) {
+
+          //poner avatar de la cuenta en pantalla
+          await loadImagesFromHex(globalWalletKey,"NFT_image-container");
+
+          const selector = document.getElementById('selector_NFTs');
+          selector.innerHTML = '';
+
+
+          const start = globalWalletKey.slice(0, 6);
+          const end = globalWalletKey.slice(-4);
+   
+          const option = document.createElement('option');
+          option.text = `${start}...${end}`;
+          selector.add(option);
+
+    
+    }else{
+
+          await getmintedNFT();
+          //await colocar_avatar_profile();
+          //await get_NFTUsername_profile();
+
+    }
     
 
     try{
@@ -3129,44 +3166,17 @@ async function inicializarUI() {
     }
 
  
-    if (list_username.length === 0) {
-
-          //poner avatar de la cuenta en pantalla
-          await loadImagesFromHex(globalWalletKey,"NFT_image-container");
-
-          const selector = document.getElementById('selector_NFTs');
-          selector.innerHTML = '';
-
-
-          const start = globalWalletKey.slice(0, 6);
-          const end = globalWalletKey.slice(-4);
-   
-          const option = document.createElement('option');
-          option.text = `${start}...${end}`;
-          selector.add(option);
-
     
-    }else{
-
-          await getmintedNFT();
-          //await colocar_avatar_profile();
-          //await get_NFTUsername_profile();
-
-    }
 
    
     //await get_all_publications_home("home-publications-container");
 
     
-    await get_video_stories('videoStoriesContainer');
-   
+    await get_video_stories('videoStoriesContainer');   
     
-
     // Obtener y mostrar saldos
-          
+    
    
-
-
     get_total_liked();
     get_total_points();
     //const nftusername = document.getElementById('selector_NFTs').value;

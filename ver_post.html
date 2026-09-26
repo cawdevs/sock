@@ -72,8 +72,12 @@
         "type": "function"
       }
     ];
+     
+    const provider = new Web3.providers.HttpProvider(
+    "https://polygon-mainnet.g.alchemy.com/v2/8gJweGU1u8NB60FICShTvPFy3oUu_zsA"
 
-    const provider = new Web3.providers.HttpProvider("https://polygon-rpc.com");
+
+    //const provider = new Web3.providers.HttpProvider("https://polygon-rpc.com");
     const web3 = new Web3(provider);
     const publisherContract = new web3.eth.Contract(contractABI, contractAddress);
 

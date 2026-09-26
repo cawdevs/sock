@@ -3097,6 +3097,20 @@ async function inicializarUI() {
         
     //verificar si el servidor esta vivo o no 
     await verificarServidor(); 
+    let list_username;
+
+    if (nftUsernameContract.methods) {
+                 console.log("Con MetaMask ");
+                 // Usando web3.js
+                 list_username = await nftUsernameContract.methods.getMintedUsernames(globalWalletKey).call();
+                 
+
+    } else {
+                 // Usando ethers.js
+                 console.log("Con SockWallet "); 
+                 list_username = await nftUsernameContract.getMintedUsernames(globalWalletKey);
+                                                    
+    }
 
     if (list_username.length === 0) {
 
@@ -3147,23 +3161,8 @@ async function inicializarUI() {
 
     await get_all_publications_home('home-publications-container', false, "last");
 
-
     
-      
-    let list_username;
-
-    if (nftUsernameContract.methods) {
-                 console.log("Con MetaMask ");
-                 // Usando web3.js
-                 list_username = await nftUsernameContract.methods.getMintedUsernames(globalWalletKey).call();
-                 
-
-    } else {
-                 // Usando ethers.js
-                 console.log("Con SockWallet "); 
-                 list_username = await nftUsernameContract.getMintedUsernames(globalWalletKey);
-                                                    
-    }
+    
 
  
     

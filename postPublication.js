@@ -46,7 +46,7 @@ form.appendChild(textareaDiv);
 // Inicializa Quill después de que el contenedor está en el DOM
 setTimeout(() => {
     const quill = new Quill('#miContenedorEditor', {
-        theme: 'snow',
+        //theme: 'snow',
         placeholder: `${nftusername} ¿Qué quieres publicar hoy?`,
         modules: {
             //toolbar: [
@@ -59,7 +59,7 @@ setTimeout(() => {
                 //['link']
 
             //],
-             'emoji-toolbar': false,
+             'emoji-toolbar': true,
              'emoji-textarea': true,
              'emoji-shortname': true
         }

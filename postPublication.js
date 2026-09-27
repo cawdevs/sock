@@ -39,7 +39,7 @@ textareaDiv.classList.add('form-group');
 
 const editorContainer = document.createElement('div');
 editorContainer.id = 'miContenedorEditor'; // Este es el nuevo editor dinámico
-editorContainer.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; height: 100px; margin-bottom: 10px; font-size: 18px;';
+editorContainer.style.cssText = 'border: 2px solid black; border-radius: 20px; width: 100%; height: 250px; margin-bottom: 10px; font-size: 18px;';
 textareaDiv.appendChild(editorContainer);
 form.appendChild(textareaDiv);
 
@@ -52,9 +52,9 @@ setTimeout(() => {
             toolbar: [
                 ['emoji'], // <-- botón de emoji
                 //[{ 'size': ['small', false, 'large', 'huge'] }],
-                ['bold', 'italic'],
-                [{ 'color': [] }], // <-- aquí añadimos color y fondo
-                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                //['bold', 'italic'],
+                //[{ 'color': [] }], // <-- aquí añadimos color y fondo
+                //[{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 //[{ 'align': [] }],
                 //['link']
 
@@ -110,7 +110,7 @@ setTimeout(() => {
         
     `;
     selectClass.style.cssText = 'border: 2px solid black; border-radius: 20px; height: 35px;';
-
+    selectClass.style.display = "none";
     // Agregar el select al contenedor y luego al `controlsDiv`
     selectClassDiv.appendChild(selectClass);
 

@@ -7,7 +7,7 @@ async function probarGasSponsorship() {
 
     const chainId = "0x89"; // Polygon Mainnet
 
-    const walletAddress = signer.address;
+    const walletAddress = globalWalletKey;
 
     const response = await fetch(
         `https://api.g.alchemy.com/v2/${alchemyApiKey}`,

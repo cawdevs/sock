@@ -2883,6 +2883,7 @@ let wallet;
 //let web3;  // Definir web3 como global si necesitas usarlo en varias funciones
 let web3;  
 //let adjustedGasPrice
+let signer;
 
 
 // Iniciar la aplicación al cargar la página
@@ -2985,7 +2986,7 @@ async function conectarWalletPropia() {
     
     // Configurar el proveedor general (puede ser para Alchemy o cualquier otro nodo)
     
-    const signer = new ethers.Wallet(privateKey, provider);
+    signer = new ethers.Wallet(privateKey, provider);
     
     tokenContract = new ethers.Contract(tokenContractAddress, CAW_tokenABI, signer);
     nftUsernameContract = new ethers.Contract(nftContractAddress, NFT_ContractABI, signer);

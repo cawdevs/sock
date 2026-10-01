@@ -50,6 +50,51 @@ async function probarGasSponsorship() {
     console.log(result);
     console.log("DATA:", result.result.data);
     console.log("DETALLES:", result.result.details);
+    
+    const data = result.result.data;
+
+    console.log("Tipo de respuesta:", result.result.type);
+
+    if (Array.isArray(data) && data.length === 2) {
+
+            // ==========================================
+            // 1. FIRMA DE AUTORIZACIÓN EIP-7702
+            // ==========================================
+
+            const authRequest = data[0].signatureRequest;
+
+            console.log("🔐 Authorization request:", authRequest);
+
+            const authPayload = authRequest.rawPayload;
+
+            const authSignature = await signer.signMessage(
+                ethers.utils.arrayify(authPayload)
+            );
+
+            console.log("✅ Firma EIP-7702:");
+            console.log(authSignature);
+
+
+            // ==========================================
+            // 2. FIRMA DE USER OPERATION
+            // ==========================================
+
+            const userOpRequest = data[1].signatureRequest;
+
+            console.log("🔐 UserOperation request:", userOpRequest);
+
+            const userOpHash =
+                userOpRequest.data.raw;
+
+            const userOpSignature = await signer.signMessage(
+                ethers.utils.arrayify(userOpHash)
+            );
+
+            console.log("✅ Firma UserOperation:");
+            console.log(userOpSignature);
+
+    }
+
 
     return result;
 }

@@ -48,6 +48,8 @@ async function probarGasSponsorship() {
 
     console.log("Respuesta Alchemy:");
     console.log(result);
+    console.log("DATA:", result.result.data);
+    console.log("DETALLES:", result.result.details);
 
     return result;
 }

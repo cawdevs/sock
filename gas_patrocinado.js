@@ -27,7 +27,7 @@ async function probarGasSponsorship() {
 
                         calls: [
                             {
-                                to: walletAddress,
+                                to: "0x0000000000000000000000000000000000000000",
                                 value: "0x0",
                                 data: "0x"
                             }

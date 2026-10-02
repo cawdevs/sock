@@ -187,6 +187,34 @@ async function probarGasSponsorship() {
         console.log(
             "⏸️ Firmas preparadas. Todavía NO se ha enviado la operación."
         );
+
+        // ==========================================
+        // VERIFICAR OPERACIÓN ANTES DEL ENVÍO
+        // ==========================================
+
+        console.log("========== VERIFICACIÓN ==========");
+
+        console.log("Tipo de respuesta:", result.result.type);
+
+        console.log("Authorization type:", data[0].type);
+        console.log("Authorization chainId:", data[0].chainId);
+
+        console.log("UserOperation type:", data[1].type);
+        console.log("UserOperation chainId:", data[1].chainId);
+
+        console.log("Wallet:", walletAddress);
+        console.log("Red:", chainId);
+
+        console.log("Valor de la llamada:", data[1].data.calls);
+
+        console.log("Firma EIP-7702:", authSignature);
+        console.log("Firma UserOperation:", userOpSignature);
+
+        console.log("=================================="); 
+
+
+
+
     }
 
 

@@ -182,6 +182,35 @@ async function probarGasSponsorship() {
             userOpSignature.length
         );
 
+        window.signedPreparedCalls = {
+            type: "array",
+
+            data: [
+                {
+                    type: data[0].type,
+                    data: data[0].data,
+                    chainId: data[0].chainId,
+                    signature: {
+                        type: "secp256k1",
+                        data: authSignature
+                    }
+                },
+                {
+                    type: data[1].type,
+                    data: data[1].data,
+                    chainId: data[1].chainId,
+                    signature: {
+                        type: "secp256k1",
+                        data: userOpSignature
+                    }
+                }
+            ]
+        };
+
+        console.log(
+            "✅ Operación firmada almacenada en memoria."
+        );
+
 
         // NO ENVIAMOS TODAVÍA
         console.log(
@@ -223,6 +252,63 @@ async function probarGasSponsorship() {
 
 
 
+async function enviarGasSponsorship() {
+
+    const alchemyApiKey = "8gJweGU1u8NB60FICShTvPFy3oUu_zsA";
+
+    if (!window.signedPreparedCalls) {
+        console.error(
+            "❌ Primero debes preparar y firmar la operación."
+        );
+        return;
+    }
+
+    console.log("🚀 Enviando operación patrocinada...");
+
+    const response = await fetch(
+        `https://api.g.alchemy.com/v2/${alchemyApiKey}`,
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                jsonrpc: "2.0",
+                id: 2,
+                method: "wallet_sendPreparedCalls",
+
+                params: [
+                    window.signedPreparedCalls
+                ]
+            })
+        }
+    );
+
+    const result = await response.json();
+
+    console.log("📨 Respuesta wallet_sendPreparedCalls:");
+    console.log(result);
+
+    if (result.error) {
+
+        console.error(
+            "❌ Alchemy rechazó la operación:",
+            result.error
+        );
+
+        return;
+    }
+
+    console.log(
+        "✅ Operación enviada:",
+        result.result
+    );
+}
+
+
+
 
 document.getElementById("btnGasSponsorship").addEventListener("click", async () => {
     try {
@@ -230,4 +316,27 @@ document.getElementById("btnGasSponsorship").addEventListener("click", async () 
     } catch (error) {
         console.error("Error probando Gas Sponsorship:", error);
     }
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    document
+        .getElementById("btnEnviarGasSponsorship")
+        .addEventListener("click", async () => {
+
+            try {
+
+                await enviarGasSponsorship();
+
+            } catch (error) {
+
+                console.error(
+                    "❌ Error enviando operación:",
+                    error
+                );
+            }
+
+        });
+
 });

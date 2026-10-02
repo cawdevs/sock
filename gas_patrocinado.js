@@ -187,18 +187,17 @@ async function probarGasSponsorship() {
 
             data: [
                 {
-                    type: data[0].type,
-                    data: data[0].data,
-                    chainId: data[0].chainId,
+                    ...data[0],
+
                     signature: {
                         type: "secp256k1",
                         data: authSignature
                     }
                 },
+
                 {
-                    type: data[1].type,
-                    data: data[1].data,
-                    chainId: data[1].chainId,
+                    ...data[1],
+
                     signature: {
                         type: "secp256k1",
                         data: userOpSignature
@@ -206,6 +205,11 @@ async function probarGasSponsorship() {
                 }
             ]
         };
+
+        console.log(
+            "📦 SIGNED PREPARED CALLS:",
+            window.signedPreparedCalls
+        );
 
         console.log(
             "✅ Operación firmada almacenada en memoria."

@@ -9,20 +9,47 @@ async function probarGasSponsorship() {
 
     const walletAddress = globalWalletKey;
 
+
+    // ==========================================
+    // WALLET / SIGNER
+    // ==========================================
+
+    const privateKey = localStorage.getItem("privateKey");
+
+    if (!privateKey) {
+        throw new Error("No existe privateKey en localStorage");
+    }
+
+    //const signer = new ethers.Wallet(privateKey, provider);
+
+    console.log("🔐 Wallet:", signer.address);
+
+
+    // ==========================================
+    // PREPARAR OPERACIÓN
+    // ==========================================
+
     const response = await fetch(
         `https://api.g.alchemy.com/v2/${alchemyApiKey}`,
         {
             method: "POST",
+
             headers: {
                 "Content-Type": "application/json"
             },
+
             body: JSON.stringify({
+
                 jsonrpc: "2.0",
+
                 id: 1,
+
                 method: "wallet_prepareCalls",
+
                 params: [
                     {
                         from: walletAddress,
+
                         chainId: chainId,
 
                         calls: [
@@ -44,60 +71,128 @@ async function probarGasSponsorship() {
         }
     );
 
+
     const result = await response.json();
+
 
     console.log("Respuesta Alchemy:");
     console.log(result);
+
+
+    if (!result.result) {
+        console.error("❌ Alchemy devolvió un error:", result);
+        return result;
+    }
+
+
     console.log("DATA:", result.result.data);
     console.log("DETALLES:", result.result.details);
-    
+
     const data = result.result.data;
 
     console.log("Tipo de respuesta:", result.result.type);
 
+
+    // ==========================================
+    // PRIMERA OPERACIÓN EIP-7702
+    // ==========================================
+
     if (Array.isArray(data) && data.length === 2) {
 
-            // ==========================================
-            // 1. FIRMA DE AUTORIZACIÓN EIP-7702
-            // ==========================================
 
-            const authRequest = data[0].signatureRequest;
+        // ==========================================
+        // 1. FIRMA DE AUTORIZACIÓN EIP-7702
+        // ==========================================
 
-            console.log("🔐 Authorization request:", authRequest);
+        const authRequest =
+            data[0].signatureRequest;
 
-            const authPayload = authRequest.rawPayload;
+        console.log(
+            "🔐 Authorization request:",
+            authRequest
+        );
 
-            const authSignature = await signer.signMessage(
-                ethers.utils.arrayify(authPayload)
+
+        const authPayload =
+            authRequest.rawPayload;
+
+
+        // IMPORTANTE:
+        // EIP-7702 necesita firmar el digest directamente.
+        // NO usar signMessage() aquí.
+
+        const signingKey =
+            new ethers.utils.SigningKey(privateKey);
+
+
+        const authSignatureObject =
+            signingKey.signDigest(authPayload);
+
+
+        const authSignature =
+            ethers.utils.joinSignature(
+                authSignatureObject
             );
 
-            console.log("✅ Firma EIP-7702:");
-            console.log(authSignature);
+
+        console.log("✅ Firma EIP-7702:");
+        console.log(authSignature);
 
 
-            // ==========================================
-            // 2. FIRMA DE USER OPERATION
-            // ==========================================
+        // ==========================================
+        // 2. FIRMA DE USER OPERATION
+        // ==========================================
 
-            const userOpRequest = data[1].signatureRequest;
+        const userOpRequest =
+            data[1].signatureRequest;
 
-            console.log("🔐 UserOperation request:", userOpRequest);
 
-            const userOpHash =
-                userOpRequest.data.raw;
+        console.log(
+            "🔐 UserOperation request:",
+            userOpRequest
+        );
 
-            const userOpSignature = await signer.signMessage(
+
+        const userOpHash =
+            userOpRequest.data.raw;
+
+
+        // UserOperation usa personal_sign
+        const userOpSignature =
+            await signer.signMessage(
                 ethers.utils.arrayify(userOpHash)
             );
 
-            console.log("✅ Firma UserOperation:");
-            console.log(userOpSignature);
 
+        console.log("✅ Firma UserOperation:");
+        console.log(userOpSignature);
+
+
+        // ==========================================
+        // VALIDACIONES
+        // ==========================================
+
+        console.log(
+            "📏 Longitud firma EIP-7702:",
+            authSignature.length
+        );
+
+        console.log(
+            "📏 Longitud firma UserOperation:",
+            userOpSignature.length
+        );
+
+
+        // NO ENVIAMOS TODAVÍA
+        console.log(
+            "⏸️ Firmas preparadas. Todavía NO se ha enviado la operación."
+        );
     }
 
 
     return result;
 }
+
 
 
 

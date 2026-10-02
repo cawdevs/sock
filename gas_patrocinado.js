@@ -90,6 +90,10 @@ async function probarGasSponsorship() {
 
     const data = result.result.data;
 
+    console.log("========== USER OPERATION COMPLETA ==========");
+    console.log(JSON.stringify(data[1].data, null, 2));
+    console.log("==============================================");
+
     console.log("Tipo de respuesta:", result.result.type);
 
 

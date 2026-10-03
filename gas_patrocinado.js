@@ -305,6 +305,116 @@ async function enviarGasSponsorship() {
     console.log("📨 Respuesta wallet_sendPreparedCalls:");
     console.log(result);
 
+    // ==========================================
+    // CONSULTAR ESTADO DE LA OPERACIÓN
+    // ==========================================
+
+    const callId = result.id;
+
+    console.log("🔎 Call ID:", callId);
+    console.log("⏳ Consultando estado de la operación...");
+
+    let transactionHash = null;
+
+    for (let intento = 0; intento < 30; intento++) {
+
+        const statusResponse = await fetch(
+            `https://api.g.alchemy.com/v2/${alchemyApiKey}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    jsonrpc: "2.0",
+                    id: 3,
+                    method: "wallet_getCallsStatus",
+                    params: [callId]
+                })
+            }
+        );
+
+        const statusData = await statusResponse.json();
+
+        console.log("📊 Estado:", statusData);
+
+        if (statusData.error) {
+            console.error("❌ Error consultando estado:", statusData.error);
+            return;
+        }
+
+        const status = statusData.result.status;
+
+        console.log("🔢 Código de estado:", status);
+
+        // 100 = pendiente
+        if (status === 100) {
+
+            console.log("⏳ La operación sigue pendiente...");
+
+            // Esperar 2 segundos
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            continue;
+        }
+
+        // 200 = confirmada
+        if (status === 200) {
+
+            console.log("✅ OPERACIÓN CONFIRMADA");
+
+            if (
+                statusData.result.receipts &&
+                statusData.result.receipts.length > 0
+            ) {
+
+                transactionHash =
+                    statusData.result.receipts[0].transactionHash;
+
+                console.log(
+                    "🎉 Transaction Hash:",
+                    transactionHash
+                );
+
+                console.log(
+                    "🔗 PolygonScan:",
+                    "https://polygonscan.com/tx/" + transactionHash
+                );
+
+            } else {
+
+                console.warn(
+                    "⚠️ La operación está confirmada pero no se encontró receipt."
+                );
+            }
+
+            break;
+        }
+
+        // 400 / 500 / 600 = algún tipo de fallo
+        console.error(
+            "❌ La operación terminó con estado:",
+            status
+        );
+
+        console.error(
+            "Detalles:",
+            statusData.result
+        );
+
+        break;
+    }
+
+    if (!transactionHash) {
+        console.warn(
+            "⚠️ No se obtuvo transactionHash todavía."
+        );
+    }
+
+
+
+    
+
     if (result.error) {
 
         console.error(

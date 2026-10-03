@@ -203,28 +203,23 @@ async function enviarGasSponsorship() {
     const alchemyApiKey = "8gJweGU1u8NB60FICShTvPFy3oUu_zsA";
 
     if (!window.signedPreparedCalls) {
-        console.error(
-            "❌ Primero debes preparar y firmar la operación."
-        );
+        console.error("❌ Primero debes preparar y firmar la operación.");
         return;
     }
 
-    console.log("🚀 Enviando operación patrocinada...");
+    console.log("🚀 Enviando operación...");
 
     const response = await fetch(
         `https://api.g.alchemy.com/v2/${alchemyApiKey}`,
         {
             method: "POST",
-
             headers: {
                 "Content-Type": "application/json"
             },
-
             body: JSON.stringify({
                 jsonrpc: "2.0",
                 id: 2,
                 method: "wallet_sendPreparedCalls",
-
                 params: [
                     window.signedPreparedCalls
                 ]
@@ -234,18 +229,27 @@ async function enviarGasSponsorship() {
 
     const result = await response.json();
 
-    console.log("📨 Respuesta wallet_sendPreparedCalls:");
-    console.log(result);
+    console.log("📨 Respuesta:", result);
 
-    // ==========================================
-    // CONSULTAR ESTADO DE LA OPERACIÓN
-    // ==========================================
+    if (result.error) {
+        console.error("❌ Alchemy rechazó la operación:", result.error);
+        return;
+    }
 
-    const callId = result.id;
+    // ID correcto de la operación
+    const callId = result.result.id;
 
     console.log("🔎 Call ID:", callId);
-    console.log("⏳ Consultando estado de la operación...");
 
+    if (
+        typeof callId !== "string" ||
+        !callId.startsWith("0x")
+    ) {
+        console.error("❌ Call ID inválido:", callId);
+        return;
+    }
+
+    // Consultar estado
     let transactionHash = null;
 
     for (let intento = 0; intento < 30; intento++) {
@@ -271,29 +275,31 @@ async function enviarGasSponsorship() {
         console.log("📊 Estado:", statusData);
 
         if (statusData.error) {
-            console.error("❌ Error consultando estado:", statusData.error);
+            console.error(
+                "❌ Error consultando estado:",
+                statusData.error
+            );
             return;
         }
 
         const status = statusData.result.status;
 
-        console.log("🔢 Código de estado:", status);
+        // Pendiente
+        if (status >= 100 && status < 200) {
 
-        // 100 = pendiente
-        if (status === 100) {
+            console.log("⏳ Pendiente...");
 
-            console.log("⏳ La operación sigue pendiente...");
-
-            // Esperar 2 segundos
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve =>
+                setTimeout(resolve, 2000)
+            );
 
             continue;
         }
 
-        // 200 = confirmada
+        // Confirmada
         if (status === 200) {
 
-            console.log("✅ OPERACIÓN CONFIRMADA");
+            console.log("✅ Operación confirmada.");
 
             if (
                 statusData.result.receipts &&
@@ -309,23 +315,23 @@ async function enviarGasSponsorship() {
                 );
 
                 console.log(
-                    "🔗 PolygonScan:",
-                    "https://polygonscan.com/tx/" + transactionHash
+                    "🔗 https://polygonscan.com/tx/" +
+                    transactionHash
                 );
 
             } else {
 
                 console.warn(
-                    "⚠️ La operación está confirmada pero no se encontró receipt."
+                    "⚠️ Confirmada pero sin receipt."
                 );
             }
 
             break;
         }
 
-        // 400 / 500 / 600 = algún tipo de fallo
+        // Fallo
         console.error(
-            "❌ La operación terminó con estado:",
+            "❌ Operación terminó con estado:",
             status
         );
 
@@ -339,28 +345,9 @@ async function enviarGasSponsorship() {
 
     if (!transactionHash) {
         console.warn(
-            "⚠️ No se obtuvo transactionHash todavía."
+            "⚠️ No se obtuvo transactionHash."
         );
     }
-
-
-
-
-
-    if (result.error) {
-
-        console.error(
-            "❌ Alchemy rechazó la operación:",
-            result.error
-        );
-
-        return;
-    }
-
-    console.log(
-        "✅ Operación enviada:",
-        result.result
-    );
 }
 
 

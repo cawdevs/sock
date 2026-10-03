@@ -207,7 +207,13 @@ async function probarGasSponsorship() {
                         data: userOpSignature
                     }
                 }
-            ]
+            ],
+
+            capabilities: {
+                paymasterService: {
+                    policyId: policyId
+                }
+            }
         };
 
         console.log(

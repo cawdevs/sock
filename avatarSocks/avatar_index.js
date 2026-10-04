@@ -1279,10 +1279,10 @@ async function crearCapaAvatar_desde_codigo(
         // PREFIJO
         // =====================================
 
-        //const prefijo =
-        //    categoria + "_";
+        const prefijo =
+            categoria + "_";
 
-        const prefijo = categoria + "_" + idAvatar + "_";
+
         // =====================================
         // STYLE
         // =====================================

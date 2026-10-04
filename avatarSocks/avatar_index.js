@@ -965,320 +965,7 @@ document.getElementById("crearCodigo")
 });
 
 
-/*
-  async function generarAvatarDesdeCodigo(codigo){
 
-    codigo =
-        codigo
-        .trim()
-        .toUpperCase();
-
-
-    // 12 datos × 2 caracteres
-    if(
-        !/^[0-9A-F]{24}$/.test(codigo)
-    ){
-
-        alert(
-            "Código de avatar inválido."
-        );
-
-        return;
-    }
-
-
-    // ==========================
-    // CUERPO
-    // ==========================
-
-    const cuerpo = {
-
-        archivo:
-            codigo.substring(0,2),
-
-        color1:
-            codigo.substring(2,4),
-
-        color2:
-            codigo.substring(4,6),
-
-        color3:
-            codigo.substring(6,8)
-
-    };
-
-
-    // ==========================
-    // OJOS
-    // ==========================
-
-    const ojos = {
-
-        archivo:
-            codigo.substring(8,10),
-
-        color1:
-            codigo.substring(10,12),
-
-        color2:
-            codigo.substring(12,14),
-
-        color3:
-            codigo.substring(14,16)
-
-    };
-
-
-    // ==========================
-    // PELO
-    // ==========================
-
-    const pelo = {
-
-        archivo:
-            codigo.substring(16,18),
-
-        color1:
-            codigo.substring(18,20),
-
-        color2:
-            codigo.substring(20,22),
-
-        color3:
-            codigo.substring(22,24)
-
-    };
-
-
-    // ==========================
-    // BORRAR AVATAR GENERADO
-    // ==========================
-
-    const contenedor =
-        document.getElementById(
-            "avatarGenerado"
-        );
-
-
-    contenedor.innerHTML = "";
-
-
-    // ==========================
-    // CREAR NUEVO
-    // ==========================
-
-    await crearCapaDesdeCodigo(
-        "cuerpo",
-        cuerpo
-    );
-
-
-    await crearCapaDesdeCodigo(
-        "ojos",
-        ojos
-    );
-
-
-    await crearCapaDesdeCodigo(
-        "pelo",
-        pelo
-    );
-
-}
-
-
-async function crearCapaDesdeCodigo(categoria, pieza){
-
-    try{
-
-        const ruta = "avatarSocks/"+
-            categoria + "/" +
-            pieza.archivo + ".svg";
-
-        const respuesta =
-            await fetch(ruta);
-
-        if(!respuesta.ok){
-
-            throw new Error(
-                "No se encontró: " + ruta
-            );
-
-        }
-
-        const textoSVG =
-            await respuesta.text();
-
-        const parser =
-            new DOMParser();
-
-        const doc =
-            parser.parseFromString(
-                textoSVG,
-                "image/svg+xml"
-            );
-
-
-        // =====================================
-        // IMPORTANTE:
-        // NO modificar avatar[categoria]
-        // =====================================
-
-        const prefijo =
-            categoria + "_";
-
-        const style =
-            doc.querySelector("style");
-
-
-        // =====================================
-        // CAMBIAR NOMBRES DE LAS CLASES
-        // =====================================
-
-        if(style){
-
-            let css =
-                style.textContent;
-
-            css = css.replace(
-                /\.fil0/g,
-                "." + prefijo + "fil0"
-            );
-
-            css = css.replace(
-                /\.fil1/g,
-                "." + prefijo + "fil1"
-            );
-
-            css = css.replace(
-                /\.fil2/g,
-                "." + prefijo + "fil2"
-            );
-
-            css = css.replace(
-                /\.fil3/g,
-                "." + prefijo + "fil3"
-            );
-
-            style.textContent = css;
-        }
-
-
-        // =====================================
-        // CAMBIAR LAS CLASES DE LOS ELEMENTOS
-        // =====================================
-
-        doc.querySelectorAll("[class]").forEach(el => {
-
-            let clases =
-                el.className.baseVal.split(" ");
-
-            clases =
-                clases.map(c =>
-                    prefijo + c
-                );
-
-            el.setAttribute(
-                "class",
-                clases.join(" ")
-            );
-
-        });
-
-
-        // =====================================
-        // APLICAR LOS 4 COLORES DEL CÓDIGO
-        // =====================================
-
-        if(style){
-
-            let css =
-                style.textContent;
-
-
-            for(let i = 0; i < 3; i++){
-
-                const color =
-                    colorPaletaAHex(
-                        pieza["color" + (i + 1)]
-                    );
-
-
-                const regex =
-                    new RegExp(
-                        "\\." +
-                        categoria +
-                        "_fil" +
-                        i +
-                        "\\s*\\{[^}]*fill:[^}]*\\}",
-                        "i"
-                    );
-
-
-                css =
-                    css.replace(
-                        regex,
-
-                        "." +
-                        categoria +
-                        "_fil" +
-                        i +
-                        " {fill:" +
-                        color +
-                        "}"
-                    );
-
-            }
-
-
-                        style.textContent =
-                            css;
-                    }
-
-
-        // =====================================
-        // CREAR LA CAPA DEL AVATAR GENERADO
-        // =====================================
-
-        const contenedor =
-            document.getElementById(
-                "avatarGenerado"
-            );
-
-
-        const capa =
-            document.createElement("div");
-
-
-        capa.className =
-            "capaGenerada";
-
-
-        capa.id =
-            "generado_" +
-            categoria;
-
-
-        capa.innerHTML =
-            doc.documentElement.outerHTML;
-
-
-        contenedor.appendChild(capa);
-
-    }
-
-    catch(error){
-
-        console.error(
-            "Error cargando " +
-            categoria,
-            error
-        );
-
-    }
-
-}
-*/
 
 
 async function generarAvatar_desde_codigo(
@@ -1461,13 +1148,15 @@ async function generarAvatar_desde_codigo(
         // =====================================
         // CREAR CAPAS
         // =====================================
+        const idAvatar ="avatar_" + Date.now() + "_" + Math.floor(Math.random() * 10000);
 
         await crearCapaAvatar_desde_codigo(
             "cuerpo",
             cuerpo,
             contenedor,
             anchoAvatar,
-            altoAvatar
+            altoAvatar,
+            idAvatar
         );
 
 
@@ -1476,7 +1165,8 @@ async function generarAvatar_desde_codigo(
             ojos,
             contenedor,
             anchoAvatar,
-            altoAvatar
+            altoAvatar,
+            idAvatar
         );
 
 
@@ -1485,7 +1175,8 @@ async function generarAvatar_desde_codigo(
             pelo,
             contenedor,
             anchoAvatar,
-            altoAvatar
+            altoAvatar,
+            idAvatar
         );
 
 
@@ -1537,7 +1228,8 @@ async function crearCapaAvatar_desde_codigo(
     pieza,
     contenedor,
     ancho,
-    alto
+    alto,
+    idAvatar
 ){
 
     try{
@@ -1742,7 +1434,7 @@ async function crearCapaAvatar_desde_codigo(
 
         capa.id =
             "generado_" +
-            categoria;
+            categoria+idAvatar;
 
 
         capa.style.position =

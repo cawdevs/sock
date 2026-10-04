@@ -1235,7 +1235,7 @@ async function crearCapaAvatar_desde_codigo(
     try{
 
         // =====================================
-        // RUTA
+        // RUTA DEL SVG
         // =====================================
 
         const ruta =
@@ -1260,6 +1260,10 @@ async function crearCapaAvatar_desde_codigo(
         }
 
 
+        // =====================================
+        // LEER SVG
+        // =====================================
+
         const textoSVG =
             await respuesta.text();
 
@@ -1276,15 +1280,28 @@ async function crearCapaAvatar_desde_codigo(
 
 
         // =====================================
-        // PREFIJO
+        // PREFIJO ÚNICO
+        // =====================================
+        //
+        // Ejemplo:
+        //
+        // cuerpo_123456_
+        // ojos_123456_
+        // pelo_123456_
+        //
+        // Cada avatar tendrá sus propias
+        // clases CSS.
         // =====================================
 
         const prefijo =
-            categoria + "_";
+            categoria +
+            "_" +
+            idAvatar +
+            "_";
 
 
         // =====================================
-        // STYLE
+        // STYLE DEL SVG
         // =====================================
 
         const style =
@@ -1297,82 +1314,61 @@ async function crearCapaAvatar_desde_codigo(
                 style.textContent;
 
 
-            css = css.replace(
-                /\.fil0/g,
-                "." +
-                prefijo +
-                "fil0"
-            );
+            // =================================
+            // RENOMBRAR FIL0
+            // =================================
 
-
-            css = css.replace(
-                /\.fil1/g,
-                "." +
-                prefijo +
-                "fil1"
-            );
-
-
-            css = css.replace(
-                /\.fil2/g,
-                "." +
-                prefijo +
-                "fil2"
-            );
-
-
-            css = css.replace(
-                /\.fil3/g,
-                "." +
-                prefijo +
-                "fil3"
-            );
-
-
-            style.textContent =
-                css;
-
-        }
-
-
-        // =====================================
-        // CAMBIAR CLASES
-        // =====================================
-
-        doc
-            .querySelectorAll("[class]")
-            .forEach(el => {
-
-                let clases =
-                    el.className
-                        .baseVal
-                        .split(" ");
-
-
-                clases =
-                    clases.map(
-                        c =>
-                            prefijo + c
-                    );
-
-
-                el.setAttribute(
-                    "class",
-                    clases.join(" ")
+            css =
+                css.replace(
+                    /\.fil0/g,
+                    "." +
+                    prefijo +
+                    "fil0"
                 );
 
-            });
+
+            // =================================
+            // RENOMBRAR FIL1
+            // =================================
+
+            css =
+                css.replace(
+                    /\.fil1/g,
+                    "." +
+                    prefijo +
+                    "fil1"
+                );
 
 
-        // =====================================
-        // APLICAR LOS 3 COLORES
-        // =====================================
+            // =================================
+            // RENOMBRAR FIL2
+            // =================================
 
-        if(style){
+            css =
+                css.replace(
+                    /\.fil2/g,
+                    "." +
+                    prefijo +
+                    "fil2"
+                );
 
-            let css =
-                style.textContent;
 
+            // =================================
+            // RENOMBRAR FIL3
+            // =================================
+
+            css =
+                css.replace(
+                    /\.fil3/g,
+                    "." +
+                    prefijo +
+                    "fil3"
+                );
+
+
+            // =================================
+            // APLICAR LOS 3 COLORES
+            // =================================
 
             for(let i = 0; i < 3; i++){
 
@@ -1385,13 +1381,26 @@ async function crearCapaAvatar_desde_codigo(
                     );
 
 
+                // Ejemplo:
+                //
+                // cuerpo_123456_fil0
+                // cuerpo_123456_fil1
+                // cuerpo_123456_fil2
+
+                const nombreClase =
+                    prefijo +
+                    "fil" +
+                    i;
+
+
+                // Buscar exactamente
+                // la clase de ESTE avatar
+
                 const regex =
                     new RegExp(
                         "\\." +
-                        categoria +
-                        "_fil" +
-                        i +
-                        "\\s*\\{[^}]*fill:[^}]*\\}",
+                        nombreClase +
+                        "\\s*\\{[^}]*\\}",
                         "i"
                     );
 
@@ -1401,10 +1410,9 @@ async function crearCapaAvatar_desde_codigo(
                         regex,
 
                         "." +
-                        categoria +
-                        "_fil" +
-                        i +
-                        " {fill:" +
+                        nombreClase +
+                        " {" +
+                        "fill:" +
                         color +
                         "}"
                     );
@@ -1412,10 +1420,51 @@ async function crearCapaAvatar_desde_codigo(
             }
 
 
+            // Guardar CSS modificado
+
             style.textContent =
                 css;
 
         }
+
+
+        // =====================================
+        // CAMBIAR LAS CLASES DE LOS ELEMENTOS
+        // SVG
+        // =====================================
+
+        doc
+            .querySelectorAll("[class]")
+            .forEach(el => {
+
+                const claseOriginal =
+                    el.getAttribute("class");
+
+
+                if(!claseOriginal){
+                    return;
+                }
+
+
+                const clases =
+                    claseOriginal
+                        .split(/\s+/)
+                        .filter(Boolean);
+
+
+                const nuevasClases =
+                    clases.map(
+                        clase =>
+                            prefijo + clase
+                    );
+
+
+                el.setAttribute(
+                    "class",
+                    nuevasClases.join(" ")
+                );
+
+            });
 
 
         // =====================================
@@ -1432,29 +1481,41 @@ async function crearCapaAvatar_desde_codigo(
             "capaGenerada_desde_codigo";
 
 
+        // =====================================
+        // ID ÚNICO DE LA CAPA
+        // =====================================
+
         capa.id =
             "generado_" +
-            categoria+idAvatar;
+            categoria +
+            "_" +
+            idAvatar;
 
+
+        // =====================================
+        // POSICIÓN
+        // =====================================
 
         capa.style.position =
             "absolute";
 
 
         capa.style.left =
-            "0";
+            "0px";
 
 
         capa.style.top =
-            "0";
+            "0px";
 
 
         capa.style.width =
-            ancho + "px";
+            ancho +
+            "px";
 
 
         capa.style.height =
-            alto + "px";
+            alto +
+            "px";
 
 
         // =====================================
@@ -1466,11 +1527,32 @@ async function crearCapaAvatar_desde_codigo(
                 .outerHTML;
 
 
+        // =====================================
+        // AGREGAR AL CONTENEDOR
+        // =====================================
+
         contenedor.appendChild(
             capa
         );
 
+
+        // =====================================
+        // INFORMACIÓN PARA DEPURACIÓN
+        // =====================================
+
+        console.log(
+            "Avatar generado:",
+            idAvatar,
+            "Categoría:",
+            categoria,
+            "Colores:",
+            pieza.color1,
+            pieza.color2,
+            pieza.color3
+        );
+
     }
+
     catch(error){
 
         console.error(

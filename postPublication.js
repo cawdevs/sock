@@ -1032,7 +1032,7 @@ async function get_publication(id_publication,principalContainerID) {
                 principalContainer.appendChild(publicationElement);
                                        
                 // 🔥 Ahora podemos cargar la imagen porque el elemento ya está en el DOM
-                const profileImageContainerId = `imageContainerIdd_${publicationObject.id}`;
+                const profileImageContainerId = `imageContainerId_${publicationObject.id}`;
             
                 //si existe una imagen para el perfil no se pone la imagen del NFTUsername
                 if (!publicationObject.imageProfile) {

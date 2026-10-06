@@ -703,18 +703,16 @@ containner_info_sock.appendChild(infoContainer);
 //await loadImagesFromHex(codeHexaImage_info,imageUserContainer.id,"big"); // Cargar la imagen al iniciar
 
 const div = document.getElementById("avatarGenerado_desde_codigo_full");
-generarAvatar_desde_codigo(codeHexaImage_info,div,"full",300,500);           
-
-
-                    
-              
+generarAvatar_desde_codigo(codeHexaImage_info,div,"full",250,250);           
+                 
+       
               
                
 
 
           } catch (error){
 
-            console.error("Error en find (images)  :", error);
+            console.error("Error en buscar (images)  :", error);
 
            
           }

@@ -1317,7 +1317,7 @@
 
 
   <div class="wallet-item">
-    <span id="saldo_USD_CAW">$</span>
+    <span id="saldo_USD_CAW" style="color: white; font-size: 24px;">$</span>
     <img src="images/icons/sock_coin.SVG" alt="SOCK">
     <div class="wallet-values">
       <span id="saldo_CAW">SOCK</span>     
@@ -3386,6 +3386,9 @@ async function obtenerSaldo_SOCK() {
     const saldoUSDElement = document.getElementById('saldo_USD_CAW');
     saldoUSDElement.innerText = "$ " + total_USD_rounded;
     saldoUSDElement.style.color = "white";
+    saldoUSDElement.style.fontSize = "24px"; // <-- Nueva línea agregada
+
+
 
 
     // Mostrar primero el saldo anterior guardado

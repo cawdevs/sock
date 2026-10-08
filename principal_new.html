@@ -230,6 +230,7 @@
     flex-shrink: 0;
 
     white-space: nowrap;
+    margin-right: 20px;
 }
 
 
@@ -364,16 +365,17 @@
   /* 🔹 Bloque de saldos */
   .wallet-container {
     display: flex;
+    height: 30px;
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(90deg, var(--fondo), darkblue);
-    padding: 10px 20px;
+    padding: 5px 5px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     color: white;
     font-family: 'Segoe UI', Arial, sans-serif;
     font-size: 16px;
-    margin-top: 15px;
+    margin-top: 5px;
   }
 
   .wallet-item {
@@ -1105,10 +1107,15 @@
 
                       
                       <!-- Copiar clave -->
-                      <li><a href="#">
-                          <span class="glyphicon glyphicon-cog" style="color: white; margin-left: 8px; margin-right: 16px;"></span>                           
-                          <span>Ajustes</span>
-                          </a>
+                      <li><a href="#" id="btnTema" title="Cambiar tema">
+                          <span class="glyphicon glyphicon-adjust" style="color: white; margin-left: 8px; margin-right: 16px;"></span> 
+                          <span>Tema color</span>
+                         <!-- <span class="glyphicon glyphicon-cog" style="color: white; margin-left: 8px; margin-right: 16px;"></span>                           
+                          <span>preferencias</span>   -->
+
+                          </a>   
+                       
+
                        </li>
 
 
@@ -1193,13 +1200,10 @@
 
       <div id="estado-servidor"></div>
 
-      <a id="btnTema" title="Cambiar tema">
-        <span class="glyphicon glyphicon-adjust"></span>
-      </a>
+      
 
       <a data-toggle="tab"
          href="#menu_buscar">
-
         <img src="images/icons/buscar_icon.SVG"
              alt="Buscar">
 
@@ -1354,9 +1358,9 @@ span.hashtag {
 }
 </style>
 
+ 
 
-
-<div class="container-fluid"  style="border: 0px solid var(--fondo); border-radius: 20px; background:var(--fondo_base);" >
+<div class="container-fluid"  style="border: 0px solid var(--fondo); border-radius: 20px; background:var(--fondo_base); margin-top: 5px" >
 
 
  <div id="estado-servidor_msg"></div>

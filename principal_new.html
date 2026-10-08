@@ -1840,21 +1840,23 @@ span.hashtag {
 
               <div class="wallet-container">
   
-  <div class="wallet-item"  style=" display: none;">
+  <div class="wallet-item"  style=" display: block;">
+    <span id="saldo_USD" class="usd">BTC</span>
     <img src="images/icons/btc_icon.SVG" alt="BTC">
     <div class="wallet-values">
       <span id="saldo_BTC">0</span>
-      <span id="saldo_USD" class="usd">BTC</span>
+      
     </div>
   </div>
 
 
 
   <div class="wallet-item">
+    <span id="saldo_USD_POL">$</span> 
     <img src="images/icons/matic_coin.SVG" alt="MATIC">
     <div class="wallet-values">
       <span id="saldo_ETH">POL</span>
-      <span id="saldo_USD_POL">$</span>     
+          
     </div>
   </div>
 
@@ -3487,6 +3489,7 @@ async function obtenerSaldo_POL() {
    const saldoElementETH = document.getElementById('saldo_ETH');
    saldoElementETH.innerText = truncatedBalanceEther + " POL";
    saldoElementETH.style.color = 'white';
+   saldoElementETH.style.fontSize = "24px";
 
 
      const data = await obtenerPrecio();

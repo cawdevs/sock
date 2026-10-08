@@ -199,6 +199,7 @@ async function obtenerSaldo_BTC() {
 
     saldoElementBTC.innerText = datos.saldo_btc;
     saldoElementBTC.style.color = 'white';
+    saldoElementBTC.style.fontSize = "24px";
     return datos.saldo_btc; 
 
 
@@ -206,6 +207,7 @@ async function obtenerSaldo_BTC() {
 
     saldoElementBTC.innerText = "???";
     saldoElementBTC.style.color = 'red';
+    saldoElementBTC.style.fontSize = "24px";
     console.error(error);
     return false;
   }

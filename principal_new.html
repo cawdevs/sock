@@ -364,19 +364,22 @@
 
   /* 🔹 Bloque de saldos */
   .wallet-container {
-    display: flex;
-    height: 30px;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(90deg, var(--fondo), darkblue);
-    padding: 5px 5px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    color: white;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    font-size: 16px;
-    margin-top: 5px;
-  }
+  display: flex;
+  align-items: center;       /* Centrado vertical */
+  justify-content: center;   /* Centrado horizontal */
+  gap: 10px;                 /* Separa los elementos dentro del contenedor */
+  box-sizing: border-box;    /* Evita que el padding rompa la altura total */
+  
+  height: 40px;              /* Un poco más de espacio para que respire el texto */
+  background: linear-gradient(90deg, var(--fondo), darkblue);
+  padding: 5px 15px;         /* Más padding a los lados para mejor estética */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  color: white;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 16px;
+  margin-top: 5px;
+}
 
   .wallet-item {
     display: flex;
@@ -398,7 +401,7 @@
     line-height: 1.1;
   }
 
-  #saldo_ETH, #saldo_CAW {
+  #saldo_ETH, #saldo_CAW #saldo_BTC{
     font-weight: bold;
     color: #fff;
   }

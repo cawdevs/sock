@@ -1836,62 +1836,30 @@ span.hashtag {
  <!--/////////////////////////////////////////////////////////////-->
  <div id="menu_saldo_criptos" class="tab-pane fade"  >    
                                      
-              <center>  <div id="menu_saldo"></div></center> 
+  <center>  <div id="menu_saldo"></div></center> 
 
-              <div class="wallet-container">
-  
-  <div class="wallet-item"  style=" display: block;">
-    <span id="saldo_USD" class="usd">BTC</span>
-    <img src="images/icons/btc_icon.SVG" alt="BTC">
-    <div class="wallet-values">
-      <span id="saldo_BTC">0</span>
-      
-    </div>
-  </div>
+  <div class="wallet-container">
 
-
-
-  <div class="wallet-item">
-    <span id="saldo_USD_POL">$</span> 
-    <img src="images/icons/matic_coin.SVG" alt="MATIC">
-    <div class="wallet-values">
-      <span id="saldo_ETH">POL</span>
-          
-    </div>
-  </div>
-
-
- <div class="wallet-item">
-   
-  
-   <a data-toggle="tab" href="#menu_transfer" onclick="single_swapp()" style="color: white; font-size: 24px">
-      <span class="glyphicon glyphicon-resize-horizontal"></span>
-   </a>
-
-
- </div>
-
-<!--
-  <div class="wallet-item">
-    <img src="images/icons/sock_coin.SVG" alt="SOCK">
-    <div class="wallet-values">
-      <span id="saldo_CAW">SOCK</span>
-
-      <span id="saldo_USD_CAW">$</span>
-
-    </div>
-  </div>
-
-  <button id="btn-obtener-saldo" onclick="obtenerSaldo_POL_SOCK_BTC()" class="refresh-btn">
-    ⟳
-  </button>
-</div>
-                -->       
-                         
+        <div class="wallet-item"  style=" display: block;">          
+          <span id="saldo_USD" class="usd">BTC</span>
+          <img src="images/icons/btc_icon.SVG" alt="BTC">
+          <div class="wallet-values"> 
+             <span id="saldo_BTC">0</span>           
+          </div>
+       </div>
+       <br>
+       <div class="wallet-item">
+          <span id="saldo_USD_POL">$</span> 
+          <img src="images/icons/matic_coin.SVG" alt="MATIC">
+          <div class="wallet-values">
+            <span id="saldo_ETH">POL</span>          
+          </div>
+       </div>
+         
+   </div>                        
  </div>
  <!--/////////////////////////////////////////////////////////////-->
-
-                    
+     
   
      
 
@@ -3489,7 +3457,7 @@ async function obtenerSaldo_POL() {
    const saldoElementETH = document.getElementById('saldo_ETH');
    saldoElementETH.innerText = truncatedBalanceEther + " POL";
    saldoElementETH.style.color = 'white';
-   saldoElementETH.style.fontSize = "24px";
+  
 
 
      const data = await obtenerPrecio();
@@ -3508,6 +3476,7 @@ async function obtenerSaldo_POL() {
            const saldoElementUSD = document.getElementById('saldo_USD_POL');
            saldoElementUSD.innerText = "$ " + balanceInUsd;
            saldoElementUSD.style.color = 'white';
+           saldoElementUSD.style.fontSize = "24px";
 
    
     return truncatedBalanceEther;

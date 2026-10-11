@@ -4182,21 +4182,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let cargandoPublicaciones = false;
 
-    const observador = new IntersectionObserver(
-        async function (entradas) {
+    const observer = new IntersectionObserver(
+        async function (entries) {
 
-            if (!entradas[0].isIntersecting) return;
+            if (!entries[0].isIntersecting) return;
 
-            // Evitar llamadas simultáneas
             if (cargandoPublicaciones) return;
 
             cargandoPublicaciones = true;
 
             try {
 
-                // Ejecutar la misma acción del botón
-                // "Ver últimas publicaciones"
-                button_get_all_publications_home();
+                await get_all_publications_home(
+                    "home-publications-container",
+                    true,
+                    "last"
+                );
 
             } catch (error) {
 
@@ -4207,11 +4208,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             } finally {
 
-                // Evitar llamadas repetidas continuamente.
-                // Ajusta este tiempo si es necesario.
-                setTimeout(function () {
-                    cargandoPublicaciones = false;
-                }, 1500);
+                cargandoPublicaciones = false;
 
             }
 
@@ -4223,7 +4220,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     );
 
-    observador.observe(trigger);
+    observer.observe(trigger);
 
 });
 </script>

@@ -1419,24 +1419,37 @@ span.hashtag {
                    
          <center><div id="loadingAnimation-principal" style="display: none;">
                     
-                    <br>
-                    <div class="spinner"></div> 
-                    <br>
+         <br>
+         <div class="spinner"></div> 
+         <br>
                               
          </div>  </center> 
 
 
-        <div id="videoStoriesContainer"></div>        
+         <div id="videoStoriesContainer"></div>        
                 
-          <br> 
+         <br> 
 
          <div id="recent-home-publications-container"></div> 
-         <div id="home-publications-container"></div>       
-          
+         <div id="home-publications-container"></div>      
          <div class="user-following-publication-container"  >
          </div> 
+
+         <!-- Aquí se cargarán automáticamente más publicaciones -->
+
+        <div id="scroll-publications-trigger"></div>
+
+        <center>
+            <div id="loadingMorePublications" style="display: none;">
+                <div class="spinner"></div>
+                <p>Cargando más publicaciones...</p>
+            </div>
+        </center>
         
+
+        <!--
         <br>
+         
          <button id="verMasBtn" class="btn" style="
             margin: 20px auto;
             display: block;
@@ -1466,7 +1479,7 @@ span.hashtag {
 </button>
 
       <br>
-
+-->
     </div>
 <!--#################################################-->    
 
@@ -4158,6 +4171,62 @@ if (/\.(jpeg|jpg|gif|png)$/.test(linkToImage)) {
 
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const trigger = document.getElementById(
+        "scroll-publications-trigger"
+    );
+
+    if (!trigger) return;
+
+    let cargandoPublicaciones = false;
+
+    const observador = new IntersectionObserver(
+        async function (entradas) {
+
+            if (!entradas[0].isIntersecting) return;
+
+            // Evitar llamadas simultáneas
+            if (cargandoPublicaciones) return;
+
+            cargandoPublicaciones = true;
+
+            try {
+
+                // Ejecutar la misma acción del botón
+                // "Ver últimas publicaciones"
+                button_get_all_publications_home();
+
+            } catch (error) {
+
+                console.error(
+                    "Error cargando publicaciones:",
+                    error
+                );
+
+            } finally {
+
+                // Evitar llamadas repetidas continuamente.
+                // Ajusta este tiempo si es necesario.
+                setTimeout(function () {
+                    cargandoPublicaciones = false;
+                }, 1500);
+
+            }
+
+        },
+        {
+            root: null,
+            rootMargin: "300px",
+            threshold: 0
+        }
+    );
+
+    observador.observe(trigger);
+
+});
+</script>
 
 <script>
     async function mostrar_mis_publicaciones(){ 

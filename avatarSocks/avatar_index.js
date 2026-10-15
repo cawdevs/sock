@@ -967,7 +967,6 @@ document.getElementById("crearCodigo")
 */
 
 
-
 async function generarAvatar_desde_codigo(
     codigo,
     contenedor,

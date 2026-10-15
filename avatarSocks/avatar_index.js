@@ -509,7 +509,7 @@ document.addEventListener("input", function(e){
 
 });
 
-
+/*
 document
     .getElementById("generarAvatar")
     .addEventListener("click", function(){
@@ -540,7 +540,7 @@ document
      
     });
 
-
+*/
 
 async function colocar_avatar_profile(){
 
@@ -955,7 +955,7 @@ function generarCodigoAvatar(){
 }
 
 
-
+/*
 document.getElementById("crearCodigo")
 .addEventListener("click",function(){
 
@@ -964,7 +964,7 @@ document.getElementById("crearCodigo")
 
 });
 
-
+*/
 
 
 

@@ -77,8 +77,8 @@ async function createStakingElements() {
 
               select.innerHTML = `
                 <option value="1">30 días — 6%</option>
-                <option value="2">60 días — 10%</option>
-                <option value="3">90 días — 15%</option>
+                <option value="2">90 días — 10%</option>
+                <option value="3">180 días — 15%</option>
               `;
 
               // ======================

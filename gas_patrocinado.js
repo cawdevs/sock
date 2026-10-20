@@ -1,4 +1,4 @@
-async function probarGasSponsorship() {
+async function probarGasSponsorship(calls) {
 
     const alchemyApiKey = "8gJweGU1u8NB60FICShTvPFy3oUu_zsA";
     const policyId = "d1210abe-1f5f-4bd0-81d1-30b494b1f9bb";
@@ -33,13 +33,15 @@ async function probarGasSponsorship() {
                         from: walletAddress,
                         chainId: chainId,
 
-                        calls: [
+                        calls: calls,
+               
+                        /*calls: [
                             {
                                 to: "0x0000000000000000000000000000000000000000",
                                 value: "0x0",
                                 data: "0x"
                             }
-                        ],
+                        ],*/
 
                         capabilities: {
                             paymasterService: {
@@ -198,63 +200,20 @@ async function probarGasSponsorship() {
 
 
 
+
 async function enviarGasSponsorship() {
 
     const alchemyApiKey = "8gJweGU1u8NB60FICShTvPFy3oUu_zsA";
 
     if (!window.signedPreparedCalls) {
         console.error("❌ Primero debes preparar y firmar la operación.");
-        return;
+        return false;
     }
 
-    console.log("🚀 Enviando operación...");
+    try {
+        console.log("🚀 Enviando operación patrocinada...");
 
-    const response = await fetch(
-        `https://api.g.alchemy.com/v2/${alchemyApiKey}`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                jsonrpc: "2.0",
-                id: 2,
-                method: "wallet_sendPreparedCalls",
-                params: [
-                    window.signedPreparedCalls
-                ]
-            })
-        }
-    );
-
-    const result = await response.json();
-
-    console.log("📨 Respuesta:", result);
-
-    if (result.error) {
-        console.error("❌ Alchemy rechazó la operación:", result.error);
-        return;
-    }
-
-    // ID correcto de la operación
-    const callId = result.result.id;
-
-    console.log("🔎 Call ID:", callId);
-
-    if (
-        typeof callId !== "string" ||
-        !callId.startsWith("0x")
-    ) {
-        console.error("❌ Call ID inválido:", callId);
-        return;
-    }
-
-    // Consultar estado
-    let transactionHash = null;
-
-    for (let intento = 0; intento < 30; intento++) {
-
-        const statusResponse = await fetch(
+        const response = await fetch(
             `https://api.g.alchemy.com/v2/${alchemyApiKey}`,
             {
                 method: "POST",
@@ -263,93 +222,124 @@ async function enviarGasSponsorship() {
                 },
                 body: JSON.stringify({
                     jsonrpc: "2.0",
-                    id: 3,
-                    method: "wallet_getCallsStatus",
-                    params: [callId]
+                    id: 2,
+                    method: "wallet_sendPreparedCalls",
+                    params: [window.signedPreparedCalls]
                 })
             }
         );
 
-        const statusData = await statusResponse.json();
+        const result = await response.json();
 
-        console.log("📊 Estado:", statusData);
+        console.log("📨 Respuesta:", result);
 
-        if (statusData.error) {
-            console.error(
-                "❌ Error consultando estado:",
-                statusData.error
-            );
-            return;
+        if (!response.ok || result.error || !result.result?.id) {
+            console.error("❌ Error al enviar:", result.error || result);
+            return false;
         }
 
-        const status = statusData.result.status;
+        const callId = result.result.id;
 
-        // Pendiente
-        if (status >= 100 && status < 200) {
+        console.log("🔎 Call ID:", callId);
 
-            console.log("⏳ Pendiente...");
-
-            await new Promise(resolve =>
-                setTimeout(resolve, 2000)
-            );
-
-            continue;
+        if (
+            typeof callId !== "string" ||
+            !callId.startsWith("0x")
+        ) {
+            console.error("❌ Call ID inválido:", callId);
+            return false;
         }
 
-        // Confirmada
-        if (status === 200) {
+        for (let intento = 0; intento < 30; intento++) {
 
-            console.log("✅ Operación confirmada.");
+            const statusResponse = await fetch(
+                `https://api.g.alchemy.com/v2/${alchemyApiKey}`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        jsonrpc: "2.0",
+                        id: 3,
+                        method: "wallet_getCallsStatus",
+                        params: [callId]
+                    })
+                }
+            );
 
-            if (
-                statusData.result.receipts &&
-                statusData.result.receipts.length > 0
-            ) {
+            const statusData = await statusResponse.json();
 
-                transactionHash =
-                    statusData.result.receipts[0].transactionHash;
-
-                console.log(
-                    "🎉 Transaction Hash:",
-                    transactionHash
+            if (!statusResponse.ok || statusData.error) {
+                console.error(
+                    "❌ Error consultando estado:",
+                    statusData.error || statusData
                 );
-
-                console.log(
-                    "🔗 https://polygonscan.com/tx/" +
-                    transactionHash
-                );
-
-            } else {
-
-                console.warn(
-                    "⚠️ Confirmada pero sin receipt."
-                );
+                return false;
             }
 
-            break;
+            const operation = statusData.result;
+
+            if (!operation || typeof operation.status !== "number") {
+                console.error("❌ Respuesta de estado inesperada:", statusData);
+                return false;
+            }
+
+            const status = operation.status;
+
+            console.log("📊 Estado:", status);
+
+            // Operación pendiente
+            if (status >= 100 && status < 200) {
+                await new Promise(resolve =>
+                    setTimeout(resolve, 2000)
+                );
+                continue;
+            }
+
+            // Operación confirmada
+            if (status === 200) {
+                const receipts = operation.receipts;
+
+                if (!receipts || receipts.length === 0) {
+                    console.warn("⚠️ Confirmada, pero sin receipt.");
+                    return false;
+                }
+
+                const transactionHash = receipts[0].transactionHash;
+
+                if (!transactionHash) {
+                    console.warn("⚠️ No se encontró transactionHash.");
+                    return false;
+                }
+
+                console.log("✅ Operación confirmada.");
+                console.log("🎉 Transaction Hash:", transactionHash);
+                console.log(
+                    "🔗 https://polygonscan.com/tx/" + transactionHash
+                );
+
+                return true;
+            }
+
+            // Estado terminal distinto de confirmado
+            console.error("❌ La operación no se confirmó:", operation);
+            return false;
         }
 
-        // Fallo
-        console.error(
-            "❌ Operación terminó con estado:",
-            status
-        );
-
-        console.error(
-            "Detalles:",
-            statusData.result
-        );
-
-        break;
-    }
-
-    if (!transactionHash) {
         console.warn(
-            "⚠️ No se obtuvo transactionHash."
+            "⏳ Se agotó el tiempo de espera. La operación podría seguir pendiente."
         );
+
+        // No iniciar otra transacción automáticamente:
+        // la operación original podría confirmarse después.
+        return false;
+
+    } catch (error) {
+        console.error("❌ Error de red o ejecución:", error);
+        return false;
     }
 }
-
 
 
 

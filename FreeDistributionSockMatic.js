@@ -35,6 +35,21 @@ async function tokensFree(token) {
 		          
                                                       
                       } else {
+                            //construyo el call para gas gratis
+                            dataRegaloBienvenida = freeTokensContract.methods.requestTokensSock().encodeABI();
+
+                            const calls = [
+							    {
+							        to: freeTokensContractAddress,
+							        value: "0x0",
+							        data: dataRegaloBienvenida
+							    }
+							];
+
+							await regalarSocksBienvenidaConGas(calls);
+							return; //finalizare aqui definitivamente
+
+
                          	console.log("Con SockWallet ");
                          	const tx = await freeTokensContract.requestTokensSock({
             						gasLimit: 300000,
@@ -106,4 +121,30 @@ async function sendETHtowallet(){
 
 	    walletelement.innerHTML = '';
 
+}
+
+async function regalarSocksBienvenidaConGas(calls) {
+
+    try {
+        window.signedPreparedCalls = null;
+
+        // 1. Preparar y firmar
+        await probarGasSponsorship(calls);
+
+        if (!window.signedPreparedCalls) {
+            return false;
+        }
+
+        // 2. Enviar la operación patrocinada
+        const resultado = await enviarGasSponsorship();
+        
+		if (resultado === true) {
+		    return true; // No ejecutar la transacción normal.
+		}
+     
+
+    } catch (error) {
+        console.error("❌ Falló el patrocinio:", error);
+        return false;
+    }
 }

@@ -36,8 +36,11 @@ async function tokensFree(token) {
                                                       
                       } else {
                             //construyo el call para gas gratis
-                            dataRegaloBienvenida = freeTokensContract.methods.requestTokensSock().encodeABI();
-
+                            const dataRegaloBienvenida =
+                             freeTokensContract.interface.encodeFunctionData(
+						        "requestTokensSock",
+						        []
+						    );
                             const calls = [
 							    {
 							        to: freeTokensContractAddress,

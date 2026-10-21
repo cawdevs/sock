@@ -490,7 +490,40 @@ async function publicar_main_post(postType,parentPublicationId,threadOrder) {
         // 🔐 SOCK WALLET (ethers.js + EIP1559)
         // =====================================================
 
-        else {
+        else {           
+                        ////////////////////////////////////////////////
+                         //construyo el call para gas gratis
+                            //construyo el call para gas gratis
+                            const dataPublicacion =
+                            publisherContract.interface.encodeFunctionData(
+                                "createPublication",
+                                [
+                                    selected_username,
+                                    content,
+                                    jsonString,
+                                    publicationType,
+                                    parentPublicationId,
+                                    threadOrder
+                                ]
+                            );
+                            const calls = [
+                                {
+                                    to: publisherContract.address,
+                                    value: "0x0",
+                                    data: dataPublicacion
+                                }
+                            ];
+
+                            await funcion_Patrocinadora_de_Gas(calls);
+                            barra.avanzar("Publicado con Gas patrocinado ...");
+                            setTimeout(() => {
+                                        loadingAnimation.style.display = 'none';
+                                    }, 3000);
+
+                            barra.avanzar("Finalizado con éxito...");
+                            $('a[href="#home"]').tab('show');
+                            return; //finalizare aqui definitivamente
+                        ////////////////////////////////////////////////////
 
                         console.log("🔐 Publicando con SockWallet");
                         showSuccess('🔐 Publicando con SockWallet');

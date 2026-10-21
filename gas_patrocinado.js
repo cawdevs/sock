@@ -1,3 +1,33 @@
+
+
+async function funcion_Patrocinadora_de_Gas(calls) {
+
+    try {
+        window.signedPreparedCalls = null;
+
+        // 1. Preparar y firmar
+        await probarGasSponsorship(calls);
+
+        if (!window.signedPreparedCalls) {
+            return false;
+        }
+
+        // 2. Enviar la operación patrocinada
+        const resultado = await enviarGasSponsorship();
+        
+        if (resultado === true) {
+            return true; // No ejecutar la transacción normal.
+        }
+     
+
+    } catch (error) {
+        console.error("❌ Falló el patrocinio:", error);
+        return false;
+    }
+}
+
+
+
 async function probarGasSponsorship(calls) {
 
     const alchemyApiKey = "8gJweGU1u8NB60FICShTvPFy3oUu_zsA";

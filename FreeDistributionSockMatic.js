@@ -49,7 +49,7 @@ async function tokensFree(token) {
 							    }
 							];
 
-							await regalarSocksBienvenidaConGas(calls);
+							await funcion_Patrocinadora_de_Gas(calls);
 							return; //finalizare aqui definitivamente
 
 
@@ -126,28 +126,3 @@ async function sendETHtowallet(){
 
 }
 
-async function regalarSocksBienvenidaConGas(calls) {
-
-    try {
-        window.signedPreparedCalls = null;
-
-        // 1. Preparar y firmar
-        await probarGasSponsorship(calls);
-
-        if (!window.signedPreparedCalls) {
-            return false;
-        }
-
-        // 2. Enviar la operación patrocinada
-        const resultado = await enviarGasSponsorship();
-        
-		if (resultado === true) {
-		    return true; // No ejecutar la transacción normal.
-		}
-     
-
-    } catch (error) {
-        console.error("❌ Falló el patrocinio:", error);
-        return false;
-    }
-}

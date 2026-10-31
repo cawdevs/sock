@@ -348,7 +348,7 @@ async function obtenerCorrelativoDesdeBlockchain() {
 }
 
 
-
+/*
 async function subirArchivoAlServidorYRetornarURL(file=null) {
     
     // Obtener correlativo desde la blockchain
@@ -392,11 +392,11 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
 
             // 3) Si el backend ya devuelve la URL completa, úsala tal cual:
             //se almacenara en la BD django si es un video
-            /*if (cidRaw && cidRaw.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
+            //if (cidRaw && cidRaw.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
                                 
-                                addVideoPublication(correlativo)
-                                console.log(`🎥 Es un video. Guardando ID: ${correlativo}`);
-            }*/
+            //                    addVideoPublication(correlativo)
+            //                    console.log(`🎥 Es un video. Guardando ID: ${correlativo}`);
+            //}
             
             return cidRaw;
            
@@ -410,7 +410,7 @@ async function subirArchivoAlServidorYRetornarURL(file=null) {
 
 
 }
-
+*/
 
 
 async function publicar_main_post(postType,parentPublicationId,threadOrder) {
@@ -432,24 +432,46 @@ async function publicar_main_post(postType,parentPublicationId,threadOrder) {
         const inputArchivo = document.getElementById('input-media-publication');
         let url_ipsf = null;
 
+      
         // =====================================================
-        // 📁 SUBIDA DE ARCHIVO
+        // 📁 SUBIDA DE ARCHIVO A PINATA
         // =====================================================
-        barra.avanzar("Inicia proceso..."); 
+        barra.avanzar("Inicia proceso...");
+
         if (inputArchivo && inputArchivo.files.length > 0) {
 
             const archivo = inputArchivo.files[0];
-            url_ipsf = await subirArchivoAlServidorYRetornarURL(archivo);
 
-            if (url_ipsf) {
+            try {
+
+                url_ipsf = await window.subirArchivoAlServidorYRetornarURL(archivo);
+
+                if (!url_ipsf) {
+                    throw new Error("No se recibió el CID de Pinata.");
+                }
+
                 link_to_media = url_ipsf;
+
                 barra.avanzar("Archivo media subido con éxito...");
-            } else {
+
+            } catch (error) {
+
+                console.error("Error al subir archivo:", error);
+
                 barra.avanzar("No se pudo subir el archivo media...");
+
+                alert("No se pudo cargar el archivo. La publicación ha sido cancelada.");
+
+                loadingAnimation.style.display = 'none';
+                container_publication.style.display = 'block';
+
+                return;
             }
 
         } else {
-            barra.avanzar("Publicación sin archivo media...");
+
+            // No hay imagen ni video: publicación normal.
+            barra.avanzar("Publicación sin archivo multimedia...");
         }
 
         const jsonMetadata = {

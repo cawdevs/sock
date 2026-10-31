@@ -995,6 +995,7 @@
 <script src="sendTokens.js"></script>
 <script src="followControl.js"></script>
 <script src="postPublication.js"></script>
+<script type="module" src="pinata-upload.js"></script>
 <script src="reactionsPost.js"></script>
 <script src="recargaCripto.js"></script>
 
@@ -1746,8 +1747,9 @@ span.hashtag {
                 <h3><p>Info Avatar Sock </p></h3>
                 <br>     
                 <div id=avatarGenerado_desde_codigo_full> </div>  
-                <div id="info-sock"></div>  
+                 
             </center>
+            <div id="info-sock"></div> 
                           
  </div>
  <!--/////////////////////////////////////////////////////////////-->
@@ -1765,7 +1767,7 @@ span.hashtag {
         </a>    
         </div>
 -->
-                <center><h3><p>Usar Bitcoin para obtener SOCK</p></h3></center>
+                <center><h3><p>Usar Bitcoin</p></h3></center>
                 <br>
                 <p>Envia Bitcoin a esta direccion para que sean transformados en SOCK</p>
 
@@ -1848,9 +1850,6 @@ span.hashtag {
        </div>
          
    </div> 
-
-
-
 
  </div>
  <!--/////////////////////////////////////////////////////////////-->
@@ -1966,14 +1965,10 @@ span.hashtag {
             </div>
            
             <div class="modal-body" style="display: flex; align-items: flex-start; gap: 10px;">
-
            
-                <div id="publication-post-container" style="flex: 1; padding: 10px; border-radius: 10px;"></div>                                     
-            
+                <div id="publication-post-container" style="flex: 1; padding: 10px; border-radius: 10px;"></div>                                   
             </div>      
-
-                   
-                          
+                            
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -1981,8 +1976,6 @@ span.hashtag {
         </div>
     </div>
 </div>
-
-
 
 
 
@@ -2020,8 +2013,6 @@ span.hashtag {
         <div class="modal-body">
 
 
-       
-
      <center>         
 
           <!--*******************************************************   -->
@@ -2047,7 +2038,7 @@ span.hashtag {
  
     <div class="img-circle" id="image-container" onclick="loadImages()" style ="display: none"> <font color="white" size="5">Presione / imagen de perfil</font></div>
     <p id="codeimageHexa" style ="display: none">    </p>
-    <br>
+   
 
 
     <div id="avatar">    

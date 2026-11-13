@@ -294,19 +294,19 @@ function monster_SOCKS_game() {
                 <div id="cardsContainer">
                     <button class="card-option" data-card="fuego"
                             type="button" aria-label="Seleccionar Fuego">
-                        <img src="monsterSocksCombat/imagenes/cartas/carta_fuego.png"
+                        <img src="games/monsterSocksCombat/imagenes/cartas/carta_fuego.png"
                              alt="Fuego">
                     </button>
 
                     <button class="card-option" data-card="agua"
                             type="button" aria-label="Seleccionar Agua">
-                        <img src="monsterSocksCombat/imagenes/cartas/carta_agua.png"
+                        <img src="games/monsterSocksCombat/imagenes/cartas/carta_agua.png"
                              alt="Agua">
                     </button>
 
                     <button class="card-option" data-card="rayo"
                             type="button" aria-label="Seleccionar Rayo">
-                        <img src="monsterSocksCombat/imagenes/cartas/carta_rayo.png"
+                        <img src="games/monsterSocksCombat/imagenes/cartas/carta_rayo.png"
                              alt="Rayo">
                     </button>
                 </div>
@@ -361,9 +361,9 @@ function monster_SOCKS_game() {
     };
 
     const cardImages = {
-        fuego: "monsterSocksCombat/imagenes/cartas/carta_fuego.png",
-        rayo: "monsterSocksCombat/imagenes/cartas/carta_rayo.png",
-        agua: "monsterSocksCombat/imagenes/cartas/carta_agua.png"
+        fuego: "games/monsterSocksCombat/imagenes/cartas/carta_fuego.png",
+        rayo: "games/monsterSocksCombat/imagenes/cartas/carta_rayo.png",
+        agua: "games/monsterSocksCombat/imagenes/cartas/carta_agua.png"
     };
 
     const advantages = {
@@ -618,18 +618,18 @@ class Hero {
         // SONIDOS
         //================================
 
-        this.soundWalk = new Audio("monsterSocksCombat/sonidos/aparece.mp3");
+        this.soundWalk = new Audio("games/monsterSocksCombat/sonidos/aparece.mp3");
         this.soundWalk.volume = 0.5;
         this.soundWalk.loop = true;
 
-        this.soundPunch = new Audio("monsterSocksCombat/sonidos/punch.mp3");
-        this.soundSlap = new Audio("monsterSocksCombat/sonidos/slap.mp3");
+        this.soundPunch = new Audio("games/monsterSocksCombat/sonidos/punch.mp3");
+        this.soundSlap = new Audio("games/monsterSocksCombat/sonidos/slap.mp3");
 
-        this.soundWins = new Audio("monsterSocksCombat/sonidos/you_wins.mp3");
-        this.soundLose = new Audio("monsterSocksCombat/sonidos/you_lose.mp3");
-        this.soundMareo = new Audio("monsterSocksCombat/sonidos/mareo.mp3");
+        this.soundWins = new Audio("games/monsterSocksCombat/sonidos/you_wins.mp3");
+        this.soundLose = new Audio("games/monsterSocksCombat/sonidos/you_lose.mp3");
+        this.soundMareo = new Audio("games/monsterSocksCombat/sonidos/mareo.mp3");
 
-        this.soundKill = new Audio("monsterSocksCombat/sonidos/kill.mp3");
+        this.soundKill = new Audio("games/monsterSocksCombat/sonidos/kill.mp3");
 
 
 
@@ -683,17 +683,17 @@ class Hero {
         // RUTAS
         //================================
 
-        this.walkSprite.src = "monsterSocksCombat/imagenes/hero.svg";
-        this.idleSprite.src = "monsterSocksCombat/imagenes/espera_hero.svg";
+        this.walkSprite.src = "games/monsterSocksCombat/imagenes/hero.svg";
+        this.idleSprite.src = "games/monsterSocksCombat/imagenes/espera_hero.svg";
 
-        this.attackSprite.src = "monsterSocksCombat/imagenes/ataque_hero.svg";
-        this.attackDowSprite.src = "monsterSocksCombat/imagenes/ataque_hero_dow.svg";
+        this.attackSprite.src = "games/monsterSocksCombat/imagenes/ataque_hero.svg";
+        this.attackDowSprite.src = "games/monsterSocksCombat/imagenes/ataque_hero_dow.svg";
 
-        this.defenseSprite.src = "monsterSocksCombat/imagenes/defensa_hero.svg";
-        this.winsSprite.src = "monsterSocksCombat/imagenes/wins_hero.svg";
+        this.defenseSprite.src = "games/monsterSocksCombat/imagenes/defensa_hero.svg";
+        this.winsSprite.src = "games/monsterSocksCombat/imagenes/wins_hero.svg";
 
-        this.killSprite.src = "monsterSocksCombat/imagenes/kill_hero.svg";
-        this.recibirSprite.src = "monsterSocksCombat/imagenes/mareado_hero.svg";
+        this.killSprite.src = "games/monsterSocksCombat/imagenes/kill_hero.svg";
+        this.recibirSprite.src = "games/monsterSocksCombat/imagenes/mareado_hero.svg";
     }
 
     //================================
@@ -1491,14 +1491,14 @@ class Tief {
         // SONIDOS
         //================================
 
-        this.soundPunch = new Audio("monsterSocksCombat/sonidos/punch.mp3");
-        this.soundSlap = new Audio("monsterSocksCombat/sonidos/slap.mp3");
+        this.soundPunch = new Audio("games/monsterSocksCombat/sonidos/punch.mp3");
+        this.soundSlap = new Audio("games/monsterSocksCombat/sonidos/slap.mp3");
 
-        this.soundWins = new Audio("monsterSocksCombat/sonidos/you_wins.mp3");
-        this.soundLose = new Audio("monsterSocksCombat/sonidos/you_lose.mp3");
-        this.soundMareo = new Audio("monsterSocksCombat/sonidos/mareo.mp3");
+        this.soundWins = new Audio("games/monsterSocksCombat/sonidos/you_wins.mp3");
+        this.soundLose = new Audio("games/monsterSocksCombat/sonidos/you_lose.mp3");
+        this.soundMareo = new Audio("games/monsterSocksCombat/sonidos/mareo.mp3");
 
-         this.soundKill = new Audio("monsterSocksCombat/sonidos/kill.mp3");
+         this.soundKill = new Audio("games/monsterSocksCombat/sonidos/kill.mp3");
       
 
         this.soundPunch.volume = 0.7;
@@ -1643,13 +1643,13 @@ class Tief {
         // RUTAS DE LOS SPRITESHEETS
         //================================
 
-        this.idleSprite.src = "monsterSocksCombat/imagenes/tief.svg";
-        this.attackSprite.src = "monsterSocksCombat/imagenes/ataque_tief.svg";
-        this.attackDowSprite.src = "monsterSocksCombat/imagenes/ataque_tief_dow.svg";
-        this.defenseSprite.src = "monsterSocksCombat/imagenes/defensa_tief.svg";
-        this.winsSprite.src = "monsterSocksCombat/imagenes/wins_tief.svg";
-        this.killSprite.src = "monsterSocksCombat/imagenes/kill_tief.svg";
-        this.recibirSprite.src = "monsterSocksCombat/imagenes/mareado_tief.svg";
+        this.idleSprite.src = "games/monsterSocksCombat/imagenes/tief.svg";
+        this.attackSprite.src = "games/monsterSocksCombat/imagenes/ataque_tief.svg";
+        this.attackDowSprite.src = "games/monsterSocksCombat/imagenes/ataque_tief_dow.svg";
+        this.defenseSprite.src = "games/monsterSocksCombat/imagenes/defensa_tief.svg";
+        this.winsSprite.src = "games/monsterSocksCombat/imagenes/wins_tief.svg";
+        this.killSprite.src = "games/monsterSocksCombat/imagenes/kill_tief.svg";
+        this.recibirSprite.src = "games/monsterSocksCombat/imagenes/mareado_tief.svg";
 
     }
 
@@ -2723,9 +2723,9 @@ class MonsterSocksGame {
             console.error("No se pudo cargar:", this.background.src);
         };
 
-        this.background.src = "monsterSocksCombat/imagenes/fondo.png";
+        this.background.src = "games/monsterSocksCombat/imagenes/fondo.png";
 
-        this.soundFight = new Audio("monsterSocksCombat/sonidos/ready_fight.mp3");
+        this.soundFight = new Audio("games/monsterSocksCombat/sonidos/ready_fight.mp3");
         this.soundFight.volume = 1.0;
         
         //================================

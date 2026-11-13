@@ -3361,3 +3361,5 @@ function showCombatResult(resultado) {
 }
 
 
+// Exponer la función globalmente
+window.monster_SOCKS_game = monster_SOCKS_game;
